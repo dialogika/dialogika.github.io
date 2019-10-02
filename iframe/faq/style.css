@@ -1,6 +1,6 @@
 body {
   font-family: "IBM Plex Sans", sans-serif;
-  background-color: #E5E5E5;
+  background: linear-gradient(to right, #1723b1,#58f0ff); /*#E5E5E5*/  /*background-color:; linear-gradient(to right, #1723b1,#58f0ff)*/
 }
 
 h2 {
@@ -10,6 +10,7 @@ h2 {
   text-align: center;
   letter-spacing: 2px;
   line-height: 1.5;
+  color: #ffffff;
 }
 
 details {
@@ -22,8 +23,10 @@ details {
   font-size: 22px;
   border: 1px solid rgba(0,0,0,.1);
   border-radius: 15px;
+  border-color: #fff;
   box-sizing: border-box;
   transition: all .3s;
+  color: #ffffff;
 }
 
 details + details {
@@ -32,8 +35,9 @@ details + details {
 
 details[open] {
   min-height: 50px;
-  background-color: #f6f7f8;
+  background-color: #f6f7f8; /*background-color: #f6f7f8*/
   box-shadow: 2px 2px 20px rgba(0,0,0,.2);
+  color: #000000;
 }
 
 details p {
@@ -62,6 +66,7 @@ summary::-webkit-details-marker {
   fill: rebeccapurple;
   transition: .3s ease;
   pointer-events: none;
+  
 }
 
 .control-icon-close {
