@@ -1,7 +1,7 @@
 # Dialogika
 
 ## Dialogika Public Speaking 
-Adalah sebuah lembaga belajar public speaking pertama dengan konsep komunitas di Indonesia. 
+Adalah sebuah lembaga belajar public speaking yogyakarta pertama dengan konsep komunitas di Indonesia. 
 
 Lembaga kursus public speaking Dialogika sudah beroperasi lebih dari dua tahun, berdiri tahun 2017 di Yogyakarta dengan nama Kelas Public Speaking Muni School. Saat ini alumni dan peserta Dialogika sudah lebih dari 100 peserta.
 
