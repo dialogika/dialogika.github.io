@@ -50,7 +50,7 @@
         <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Evolo</a> -->
 
         <!-- Image Logo -->
-        <a class="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"></a>
+        <a class="navbar-brand logo-image" href="index.php"><img src="images/logo.svg" alt="alternative"></a>
         
         <!-- Mobile Menu Toggle Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -544,7 +544,7 @@
 
                     <!-- Request Form -->
                     <div class="form-container">
-                        <form id="requestForm" data-toggle="validator" data-focus="false">
+                        <form id="requestForm" data-toggle="validator" data-focus="false" action="php/requestform-process.php">
                             <div class="form-group">
                                 <input type="text" class="form-control-input" id="rname" name="rname" required>
                                 <label class="label-control" for="rname">Full name</label>
@@ -831,7 +831,7 @@
                 <div class="col-lg-6">
                     
                     <!-- Contact Form -->
-                    <form id="contactForm" data-toggle="validator" data-focus="false">
+                    <form id="contactForm" data-toggle="validator" data-focus="false" action="php/contactform-process.php">
                         <div class="form-group">
                             <input type="text" class="form-control-input" id="cname" required>
                             <label class="label-control" for="cname">Name</label>
