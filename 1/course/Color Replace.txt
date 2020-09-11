@@ -1,3 +1,10 @@
+<div class="accordion_container">
+										<div class="accordion d-flex flex-row align-items-center"> Kapan kelas dibuka?</div>
+										<div class="accordion_panel">
+											<p>text.</p>
+										</div>
+									</div>
+
 Color Replace
 
 #ffb606 --> #3CA4DD
