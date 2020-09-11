@@ -4,8 +4,39 @@
 <title>Dialogika - Public Speaking & Softskill</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Course Project">
+<meta name="description" content="Dialoka Public Speaking">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- SEO Meta Tags -->
+    <meta name="description" content="Kursus Public Speaking Jogja.">
+    <meta name="description" content="Kelas Public Speaking Online.">
+    <meta name="description" content="Public Speaking Anak.">
+    <meta name="author" content="Dialogika">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="Kelas Public Speaking Jogja" /> <!-- website name -->
+	<meta property="og:site" content="dialogika.github.io" /> <!-- website link -->
+	<meta property="og:title" content="Dialogika Public Speaking"/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="Kursus Public Speaking Jogja" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148836422-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-148836422-2');
+    </script>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="images/favicon.png" type="image/gif" sizes="16x16">
+    <!-- /favicon -->
+
+
 <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
 <link href="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -15,6 +46,34 @@
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
 </head>
 <body>
+
+	<!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v8.0'
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/id_ID/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution=setup_tool
+        page_id="103513767948873"
+  			theme_color="#3CA4DD"
+  			logged_in_greeting="Halo, saya Ron dari Dialogika. Simpan kontak WA 082137760669 untuk fast response"
+  			logged_out_greeting="Halo, saya Ron dari Dialogika. Simpan kontak WA 082137760669 untuk fast response">
+      </div>
+    <!-- Close Load Facebook SDK for Javascript and Plugin -->
 
 <div class="super_container">
 
@@ -209,7 +268,7 @@
 							<div class="course_author_image">
 								<img src="images/comment_3.jpg" alt="https://unsplash.com/@mehdizadeh">
 							</div>
-							<div class="course_author_name">Zukhrofa Rizkia, <span>Mentor</span></div>
+							<a href="p_privateclass.html"><div class="course_author_name">Zukhrofa Rizkia, <span>Mentor</span></div></a>
 							<div class="course_price d-flex flex-column align-items-center justify-content-center"><span>◀︎◀︎</span></div>
 						</div>
 					</div>
@@ -227,7 +286,7 @@
 							<div class="course_author_image">
 								<img src="images/comment_2.jpg" alt="https://unsplash.com/@mehdizadeh">
 							</div>
-							<div class="course_author_name">Fanny Carolina, <span>Mentor</span></div>
+							<a href="p_offlineclass.html"><div class="course_author_name">Fanny Carolina, <span>Mentor</span></div></a>
 							<div class="course_price d-flex flex-column align-items-center justify-content-center"><span>◀︎◀︎</span></div>
 						</div>
 					</div>
@@ -245,7 +304,7 @@
 							<div class="course_author_image">
 								<img src="images/comment_1.jpg" alt="https://unsplash.com/@mehdizadeh">
 							</div>
-							<div class="course_author_name">Sarah Najmilah, <span>Mentor</span></div>
+							<a href="p_onlineclass.html"><div class="course_author_name">Sarah Najmilah, <span>Mentor</span></div></a>
 							<div class="course_price d-flex flex-column align-items-center justify-content-center"><span>◀︎◀︎</span></div>
 						</div>
 					</div>
@@ -271,7 +330,7 @@
 						<div class="register_content text-center">
 							<h1 class="register_title">Daftar sekarang dan dapatkan potongan hingga <span>30%</span> untuk 3 peserta pertama</h1>
 							<p class="register_text">Kami sangat mengontrol jumlah member kami disetiap pertemuan baik itu kelas offline, online dan private. Mengapa? sederhana. Karena untuk menjaga kualitas hasil dari member didikan kami. Ingin tahu lebih lanjut? <br> Klik tombol dibawah</p>
-							<div class="button button_1 register_button mx-auto trans_200"><a href="#">Kontak Kami</a></div>
+							<div class="button button_1 register_button mx-auto trans_200"><a href="https://wa.me/6282137760669" target="__blank">Kontak Kami</a></div>
 						</div>
 					</div>
 
