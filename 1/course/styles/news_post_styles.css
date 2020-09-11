@@ -1312,6 +1312,11 @@ section
 	margin-right: 0px;
 }
 
+.svg path
+{
+	fill: #3CA4DD;
+}
+
 /*********************************
 12 Accordions
 *********************************/
@@ -1398,7 +1403,3 @@ section
 	padding-top: 15px;
 }
 
-.svg path
-{
-	fill: #3CA4DD;
-}
