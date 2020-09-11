@@ -1397,3 +1397,8 @@ section
 {
 	padding-top: 15px;
 }
+
+.svg path
+{
+	fill: #3CA4DD;
+}
