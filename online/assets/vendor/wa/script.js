@@ -19,7 +19,8 @@ if("" != input_blanter.value){
 var input_select1 = $("#select :selected").text(), 
     input_name1 = $("#name").val(),
     input_email1 = $("#email").val(),
-    // input_subject1 = $("#subject").val(),
+    input_job1 = $("#job").val(),
+    input_domisili1 = $("#domisili").val(),
     input_message1 = $("#message").val();
 
 /* Final Whatsapp URL */
@@ -27,6 +28,8 @@ var blanter_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A
     '*Name* : ' + input_name1 + '%0A' +
     '*Email Address* : ' + input_email1 + '%0A' +
     '*Keperluan* : ' + input_select1 + '%0A' +
+    '*Job* : ' + input_job1 + '%0A' +
+    '*Domisili* : ' + input_domisili1 + '%0A' +
     '*Isi Message* : ' + input_message1 + '%0A';
 
 /* Whatsapp Window Open */
