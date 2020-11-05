@@ -4,7 +4,7 @@ var input_blanter = document.getElementById('email');
 /* Whatsapp Settings */
 var walink = 'https://web.whatsapp.com/send',
     phone = '6282137760669',
-    walink2 = 'Salam Hangat, Saya melihat landing page *Online Class* dan saya tertarik. Sebelumnya perkenalkan saya: ',
+    walink2 = 'Salam Hangat, Saya melihat landing page *Offline Class* dan saya tertarik. Sebelumnya perkenalkan saya: ',
     text_yes = 'Terkirim.',
     text_no = 'Isi semua Formulir lalu klik Send.';
 
