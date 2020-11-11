@@ -29,23 +29,35 @@
 
   <!-- Facebook Pixel Code -->
   <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-   fbq('init', '3541921825925200'); 
-  fbq('track', 'PageView');
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+     fbq('init', '3541921825925200'); 
+    fbq('track', 'PageView');
   </script>
   <noscript>
-   <img height="1" width="1" 
-  src="https://www.facebook.com/tr?id=3541921825925200&ev=PageView
-  &noscript=1"/>
+    <img height="1" width="1" 
+    src="https://www.facebook.com/tr?id=3541921825925200&ev=PageView
+    &noscript=1"/>
   </noscript>
   <!-- End Facebook Pixel Code -->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148836422-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-148836422-2');
+    </script>
+  <!-- End Google Analytics -->
+
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -69,10 +81,11 @@
     <nav class="nav-menu">
       <ul>
         <li class="active"><a href="#hero"><i class="bx bx-home"></i> <span>Home</span></a></li>
-        <li><a href="#about"><i class="bx bx-user"></i> <span>Fakta</span></a></li>
+        <!-- <li><a href="#about"><i class="bx bx-user"></i> <span>Fakta</span></a></li> -->
         <li><a href="#resume"><i class="bx bx-file-blank"></i> <span>Detail</span></a></li>
         <li><a href="#pricing"><i class="bx bx-money"></i> <span>Investasi</span></a></li>
-        <li><a href="#services"><i class="bx bx-server"></i> <span>Langkah</span></a></li>
+        <li><a href="#services"><i class="bx bx-user"></i> <span>Langkah</span></a></li>
+        <li><a data-toggle="modal" data-target="#faq1"><i class="bx bx-server"></i> <span>F.A.Q</span></a></li>
         <li><a href="#portfolio"><i class="bx bx-book-content"></i> <span>Galeri</span></a></li>
         <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Kontak</span></a></li>
       </ul>
@@ -225,17 +238,6 @@
 
         <div class="row">
           <div class="col-lg-6">
-            <h3 class="resume-title">Unique Quiz</h3>
-            <div class="resume-item pb-0">
-              <h4>Whatsapp Group</h4>
-              <p><em>Berbeda dengan quiz di kuliah. Quiz Di Dialogika <b>tidak menggunakan formulir dan tidak menulis</b>. Kamu akan mengerjakan quiz hanya dengan suara kamu! Unik 'kan?</em></p>
-              <ul>
-                <li><b>Pelaksanaan: </b> Seminggu Sekali</li>
-                <li><b>Waktu Pengumpulan: </b> Fleksibel</li>
-                <li><b>Ada Aturan Khusus: </b> Dijelaskan diawal pertemuan</li>
-                <li><b>Goal: </b> Melatih Persepsi Otak</li>
-              </ul>
-            </div>
 
             <h3 class="resume-title">Waktu &amp; Konsep</h3>
             <div class="resume-item">
@@ -250,8 +252,6 @@
                 <li><b>Catatan: </b> Waktu & Hari bisa berubah tergantung dengan kesepakatan para member dan mentor</li>
               </ul>
             </div>
-          </div>
-          <div class="col-lg-6">
             <div class="resume-item">
               <h4>Konsep Kelas</h4>
               <h5>Kelas berjalan selama <b>satu bulan</b></h5>
@@ -263,6 +263,10 @@
               </ul>
               <p>dan masih banyak lagi...</p>
             </div>
+
+          </div>
+          <div class="col-lg-6">
+            
             <h3 class="resume-title">Materi Dialogika</h3>
             <div class="resume-item">
               <h4>Impromptu Speech</h4>
@@ -280,6 +284,17 @@
               <p><em>Member akan belajar dan praktek untuk menyampaikan sebuah materi dengan lancar tanpa teks dan menghapal.</em></p>
             </div>
 
+            <h3 class="resume-title">Unique Quiz</h3>
+            <div class="resume-item pb-0">
+              <h4>Whatsapp Group</h4>
+              <p><em>Berbeda dengan quiz di kuliah. Quiz Di Dialogika <b>tidak menggunakan formulir dan tidak menulis</b>. Kamu akan mengerjakan quiz hanya dengan suara kamu! Unik 'kan?</em></p>
+              <ul>
+                <li><b>Pelaksanaan: </b> Seminggu Sekali</li>
+                <li><b>Waktu Pengumpulan: </b> Fleksibel</li>
+                <li><b>Ada Aturan Khusus: </b> Dijelaskan diawal pertemuan</li>
+                <li><b>Goal: </b> Melatih Persepsi Otak</li>
+              </ul>
+            </div>
 
           </div>
         </div>
@@ -433,133 +448,151 @@
           </div>
 
         </div>
-
       </div>
+
     </section><!-- End Services Section -->
 
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq section-bg">
-      <div class="container">
+    <!-- ======= Modal Frequently Asked Questions Section ======= -->
+    <div class="modal fade" id="faq1" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
 
-        <div class="section-title">
-          <h2>Frequently Asked Questions</h2>
-          <p>Informasi lengkapnya ada disini, namun faktanya hanya sedikit orang yang membaca FAQ secara lengkap. Anda?</p>
+          <!-- ======= Frequently Asked Questions Section ======= -->
+          <section id="faq" class="faq section-bg">
+            <div class="container">
+
+              <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Informasi lengkapnya ada disini, namun faktanya hanya sedikit orang yang membaca FAQ secara lengkap. Anda?</p>
+              </div>
+
+              <div class="faq-list">
+                <ul>
+                  <li data-aos="fade-up">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" class="collapse" href="#faq-list-1">Kelas Online Dialogika? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-1" class="collapse show" data-parent=".faq-list">
+                      <p>
+                        Sebuah kelas dan pembelajaran <i>softskill public speaking</i> dengan media online yaitu zoom dan instagram
+                      </p>
+                    </div>
+                  </li>
+
+                  <li data-aos="fade-up" data-aos-delay="100">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-2" class="collapsed">Oke, kelebihannya apa? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-2" class="collapse" data-parent=".faq-list">
+                      <p>
+                        Berbeda dengan kelas online yang lain. Dialogika bukan seperti pembelajaran video satu arah, melainkan dengan pembelajaran dua arah. Yaitu ada <b>interaksi langsung</b> antara member dan mentor selama kelas.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li data-aos="fade-up" data-aos-delay="200">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-3" class="collapsed">Wow, interaksinya member dan mentor seperti apa? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-3" class="collapse" data-parent=".faq-list">
+                      <p>
+                        Mentor akan memberikan koreksi penampilan <b>secara langsung dan detail</b> kepada masing-masing member yang join di kelas. Plus mentor juga akan memberikan contoh yang benar di dalam public speaking <i>based on</i> penampilan member. Plus member juga boleh <strong>berkonsultasi langsung</strong> kepada mentor secara private.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li data-aos="fade-up" data-aos-delay="300">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-4" class="collapsed">Wah jadi penasaran, sejak kapan nih kelasnya dimulai? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-4" class="collapse" data-parent=".faq-list">
+                      <p>
+                        Sejak bulan April 2020 ini, diawal masa pandemi. Dan saat ini sudah lebih dari <b>9 batch</b> <i>online class</i> Dialogika ini terlaksana dengan lebih dari 30 member saat ini.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li data-aos="fade-up" data-aos-delay="400">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-5" class="collapsed">Ngomong-ngomong, kalau member dikomentari per-orang maksimal peserta berapa orang?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-5" class="collapse" data-parent=".faq-list">
+                      <p>
+                        Untuk kuota satu kelas maksimal 9 member dan tidak bisa lebih. Mengapa? karena jika satu member menghabiskan waktu 7 menit untuk bicara dan dikomentari maka waktu yang digunakan sudah 60 menit lebih. Untuk itu peserta kami batasi. 
+                      </p>
+                    </div>
+                  </li>
+
+                  <li data-aos="fade-up" data-aos-delay="400">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-6" class="collapsed">Kalau begitu... satu kali pertemuan dengan zoom berapa menit?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-6" class="collapse" data-parent=".faq-list">
+                      <p>
+                        90 menit hingga 100 menit. 20 menit awal biasanya akan digunakan untuk pemberian materi. 70 menit sisanya akan diberikan kepada member waktu untuk praktek dan berlatih.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li data-aos="fade-up" data-aos-delay="400">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-7" class="collapsed">Wow, berapa lama program ini berlangsung?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-7" class="collapse" data-parent=".faq-list">
+                      <p>
+                        Selama satu bulan. Yang berarti ada empat kali pertemuan via zoom. Kemudian kami juga memberikan tiga kali quiz via whatsapp yang dikerjakan dan dikumpulkan sebelum kelas di mulai.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li data-aos="fade-up" data-aos-delay="400">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-8" class="collapsed">Untuk biayanya berapa?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-8" class="collapse" data-parent=".faq-list">
+                      <p>
+                        Untuk biaya diharga IDR 300.000 hingga IDR 600.000. 
+                        <ul>
+                          <li><b>3 Peserta Pertama: </b> IDR 300.000</li>
+                          <!-- <li><b>Peserta ke 4 & 5 : </b> IDR 400.000</li> -->
+                          <li><b>Peserta Selanjutnya : </b> IDR 500.000</li>
+                          <!-- <li><b>Peserta ke 8 lebih : </b> IDR 600.000</li> -->
+                        </ul>
+                        Yang berarti siapa yang <strong>paling cepat mendaftar</strong> akan mendapatkan harga yang paling murah.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li data-aos="fade-up" data-aos-delay="400">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-9" class="collapsed">Cara mendaftarnya bagaimana?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-9" class="collapse" data-parent=".faq-list">
+                      <p>
+                        <b>Pertama,</b> cukup transfer <i>downpayment</i> atau uang muka sejumlah IDR 100.000,00 ke rekening yang ada dibawah ini:<br><br>
+                        <blockquote>
+                          BTPN: 900 20 307 448 (Bank Tabungan Pensiun Nasional)<br>
+                          Kode: 213<br>
+                          Atas Nama: Muhammad Ghufran Asrofi<br>
+                          <br>
+                          atau via Aplikasi Jenius<br>
+                          cashtag: $dialogika<br><br>
+                        </blockquote>
+                        <b>Kedua,</b> kirimkan bukti pembayaran ke nomor <a href="https://wasap.at/5Huos6">whatsapp Dalogika: 0821-377-60-669</a> segera setelah itu tim admin akan mengkonfirmasi pembayaran dan kamu sudah resmi terdaftar.<br><br>
+                        <b>Ketiga,</b> admin akan mengirimkan formulir dan mohon untuk di isikan sebagai pendataan.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li data-aos="fade-up" data-aos-delay="400">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-10" class="collapsed">Intinya cukup DP aja kan? Apakah program ini terus dibuka?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-10" class="collapse" data-parent=".faq-list">
+                      <p>
+                        Betul, cukup DP aja, setiap bulan program ini akan selalu ada, namun <strong>ada kemungkinan harga naik</strong> disetiap tiga bulan. Jadi lebih baik daftar sekarang.
+                      </p>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+
+            </div>
+
+            <div class="container">
+              <div class="row">
+                <div class="col text-center">
+                  <button class="btn btn-primary" data-dismiss="modal">Close F.A.Q</button>
+                </div>
+              </div>
+            </div>
+
+          </section><!-- End Frequently Asked Questions Section -->
+
         </div>
-
-        <div class="faq-list">
-          <ul>
-            <li data-aos="fade-up">
-              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" class="collapse" href="#faq-list-1">Kelas Online Dialogika? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-1" class="collapse show" data-parent=".faq-list">
-                <p>
-                  Sebuah kelas dan pembelajaran <i>softskill public speaking</i> dengan media online yaitu zoom dan instagram
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-2" class="collapsed">Oke, kelebihannya apa? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-2" class="collapse" data-parent=".faq-list">
-                <p>
-                  Berbeda dengan kelas online yang lain. Dialogika bukan seperti pembelajaran video satu arah, melainkan dengan pembelajaran dua arah. Yaitu ada <b>interaksi langsung</b> antara member dan mentor selama kelas.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="200">
-              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-3" class="collapsed">Wow, interaksinya member dan mentor seperti apa? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-3" class="collapse" data-parent=".faq-list">
-                <p>
-                  Mentor akan memberikan koreksi penampilan <b>secara langsung dan detail</b> kepada masing-masing member yang join di kelas. Plus mentor juga akan memberikan contoh yang benar di dalam public speaking <i>based on</i> penampilan member. Plus member juga boleh <strong>berkonsultasi langsung</strong> kepada mentor secara private.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="300">
-              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-4" class="collapsed">Wah jadi penasaran, sejak kapan nih kelasnya dimulai? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-4" class="collapse" data-parent=".faq-list">
-                <p>
-                  Sejak bulan April 2020 ini, diawal masa pandemi. Dan saat ini sudah lebih dari <b>9 batch</b> <i>online class</i> Dialogika ini terlaksana dengan lebih dari 30 member saat ini.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-5" class="collapsed">Ngomong-ngomong, kalau member dikomentari per-orang maksimal peserta berapa orang?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-5" class="collapse" data-parent=".faq-list">
-                <p>
-                  Untuk kuota satu kelas maksimal 9 member dan tidak bisa lebih. Mengapa? karena jika satu member menghabiskan waktu 7 menit untuk bicara dan dikomentari maka waktu yang digunakan sudah 60 menit lebih. Untuk itu peserta kami batasi. 
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-6" class="collapsed">Kalau begitu... satu kali pertemuan dengan zoom berapa menit?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-6" class="collapse" data-parent=".faq-list">
-                <p>
-                  90 menit hingga 100 menit. 20 menit awal biasanya akan digunakan untuk pemberian materi. 70 menit sisanya akan diberikan kepada member waktu untuk praktek dan berlatih.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-7" class="collapsed">Wow, berapa lama program ini berlangsung?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-7" class="collapse" data-parent=".faq-list">
-                <p>
-                  Selama satu bulan. Yang berarti ada empat kali pertemuan via zoom. Kemudian kami juga memberikan tiga kali quiz via whatsapp yang dikerjakan dan dikumpulkan sebelum kelas di mulai.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-8" class="collapsed">Untuk biayanya berapa?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-8" class="collapse" data-parent=".faq-list">
-                <p>
-                  Untuk biaya diharga IDR 300.000 hingga IDR 600.000. 
-                  <ul>
-                    <li><b>3 Peserta Pertama: </b> IDR 300.000</li>
-                    <li><b>Peserta ke 4 & 5 : </b> IDR 400.000</li>
-                    <li><b>Peserta ke 6 & 7 : </b> IDR 500.000</li>
-                    <li><b>Peserta ke 8 lebih : </b> IDR 600.000</li>
-                  </ul>
-                  Yang berarti siapa yang <strong>paling cepat mendaftar</strong> akan mendapatkan harga yang paling murah.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-9" class="collapsed">Cara mendaftarnya bagaimana?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-9" class="collapse" data-parent=".faq-list">
-                <p>
-                  <b>Pertama,</b> cukup transfer <i>downpayment</i> atau uang muka sejumlah IDR 100.000,00 ke rekening yang ada dibawah ini:<br><br>
-                  <blockquote>
-                    BTPN: 900 20 307 448 (Bank Tabungan Pensiun Nasional)<br>
-                    Kode: 213<br>
-                    Atas Nama: Muhammad Ghufran Asrofi<br>
-                    <br>
-                    atau via Aplikasi Jenius<br>
-                    cashtag: $dialogika<br><br>
-                  </blockquote>
-                  <b>Kedua,</b> kirimkan bukti pembayaran ke nomor <a href="https://wasap.at/5Huos6">whatsapp Dalogika: 0821-377-60-669</a> segera setelah itu tim admin akan mengkonfirmasi pembayaran dan kamu sudah resmi terdaftar.<br><br>
-                  <b>Ketiga,</b> admin akan mengirimkan formulir dan mohon untuk di isikan sebagai pendataan.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-10" class="collapsed">Intinya cukup DP aja kan? Apakah program ini terus dibuka?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-10" class="collapse" data-parent=".faq-list">
-                <p>
-                  Betul, cukup DP aja, setiap bulan program ini akan selalu ada, namun <strong>ada kemungkinan harga naik</strong> disetiap tiga bulan. Jadi lebih baik daftar sekarang.
-                </p>
-              </div>
-            </li>
-
-          </ul>
-        </div>
-
       </div>
-    </section><!-- End Frequently Asked Questions Section -->
+    </div> <!-- End Modal Frequently Asked Questions Section -->
 
 
     <!-- ======= Portfolio Section ======= -->
