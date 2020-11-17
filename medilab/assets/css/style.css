@@ -1146,6 +1146,23 @@ section {
   }
 }
 
+.departments .more-btn {
+  display: inline-block;
+  background: #1977cc;
+  padding: 6px 30px 8px 30px;
+  color: #fff;
+  border-radius: 50px;
+  transition: all ease-in-out 0.4s;
+}
+
+.list-group .list-group-item .active {
+  display: inline-block;
+  background: #1977cc;
+}
+
+
+
+
 /*--------------------------------------------------------------
 # Doctors
 --------------------------------------------------------------*/
