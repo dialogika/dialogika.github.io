@@ -48,40 +48,40 @@ $(document).on('click','.send_form', function(){
 // yang contact
 
 $(document).on('click','.send_contact', function(){
-var input_blanter = document.getElementById('email');
+    var input_blanter = document.getElementById('emails');
 
-/* Whatsapp Settings */
-var walink = 'https://web.whatsapp.com/send',
-    phone = '6282137760669',
-    walink2 = 'Haloo, Saya melihat *Website Dialogika* dan saya tertarik untuk tahu lebih lanjut.' + '%0A %0A' 
-            + 'Sebelumnya perkenalkan saya: ',
-    text_yes = 'Terkirim.',
-    text_no = 'Isi semua Formulir lalu klik Send.';
+    /* Whatsapp Settings */
+    var walink = 'https://web.whatsapp.com/send',
+        phone = '6282137760669',
+        walink2 = 'Haloo, Saya melihat *Website Dialogika* dan saya tertarik untuk tahu lebih lanjut.' + '%0A %0A' 
+                + 'Sebelumnya perkenalkan saya: ',
+        text_yes = 'Terkirim.',
+        text_no = 'Isi semua Formulir lalu klik Send.';
 
-/* Smartphone Support */
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-var walink = 'whatsapp://send';
-}
+    /* Smartphone Support */
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    var walink = 'whatsapp://send';
+    }
 
-if("" != input_blanter.value){
+    if("" != input_blanter.value){
 
- /* Call Input Form */
-var input_name2 = $("#names").val(),
-    input_email2 = $("#emails").val(),
-    input_job2 = $("#jobs").val(),
-    input_message2 = $("#messages").val();
+     /* Call Input Form */
+    var input_name2 = $("#names").val(),
+        input_email2 = $("#emails").val(),
+        input_job2 = $("#jobs").val(),
+        input_message2 = $("#messages").val();
 
-/* Final Whatsapp URL */
-var blanter_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A' +
-    '*Name* : ' + input_name2 + '%0A' +
-    '*Email Address* : ' + input_email2 + '%0A' +
-    '*Job* : ' + input_job2 + '%0A' +
-    '*Isi Message* : ' + input_message2 + '%0A';
+    /* Final Whatsapp URL */
+    var blanter_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A' +
+        '*Name* : ' + input_name2 + '%0A' +
+        '*Email Address* : ' + input_email2 + '%0A' +
+        '*Job* : ' + input_job2 + '%0A' +
+        '*Isi Message* : ' + input_message2 + '%0A';
 
-/* Whatsapp Window Open */
-window.open(blanter_whatsapp,'_blank');
-document.getElementById("text-info").innerHTML = '<span class="yes">'+text_yes+'</span>';
-} else {
-document.getElementById("text-info").innerHTML = '<span class="no">'+text_no+'</span>';
-}
+    /* Whatsapp Window Open */
+    window.open(blanter_whatsapp,'_blank');
+    document.getElementById("text-info").innerHTML = '<span class="yes">'+text_yes+'</span>';
+    } else {
+    document.getElementById("text-info").innerHTML = '<span class="no">'+text_no+'</span>';
+    }
 });
