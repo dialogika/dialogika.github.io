@@ -4,8 +4,8 @@ $(document).on('click','.send_form', function(){
     /* Whatsapp Settings */
     var walink = 'https://web.whatsapp.com/send',
         phone = '6282137760669',
-        walink2 = 'Salam Hangat, Saya melihat *Info Internship Dialogika* dan saya tertarik untuk tahu lebih lanjut.' + '%0A %0A' 
-                + 'Sebelumnya perkenalkan saya: ',
+        walink2 = 'Halo Ka, Saya melihat *Info Internship Dialogika* dan saya tertarik untuk mendaftar .' + '%0A %0A' 
+                + 'Berikut Data Diri Saya: ',
         text_yes = 'Terkirim.',
         text_no = 'Isi semua Formulir lalu klik Send.';
 

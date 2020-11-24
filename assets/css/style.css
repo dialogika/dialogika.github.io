@@ -1353,6 +1353,11 @@ section {
   display: inline-block;
 }
 
+.faq .faq-list button:hover {
+  background: #3291e6;
+}
+
+
 @media (max-width: 1200px) {
   .faq .faq-list {
     padding: 0;
@@ -1727,7 +1732,7 @@ section {
   border: 1px solid #bfdcf7;
 }
 
-#footer .footer-newsletter form input[type="email"] {
+#footer .footer-newsletter form input[type="text"] {
   border: 0;
   padding: 4px 8px;
   width: calc(100% - 100px);
