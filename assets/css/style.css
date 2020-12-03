@@ -1853,3 +1853,17 @@ section {
   font-size: 18px;
   color: #657a6d;
 }
+
+.courses .course-content a[type="submit"] {
+  background: #1977cc;
+  border: 0;
+  padding: 10px 32px;
+  margin-bottom: 20px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+
+.courses .course-content a[type="submit"]:hover {
+  background: #76b5ee;
+}
