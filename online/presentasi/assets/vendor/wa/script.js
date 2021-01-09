@@ -1,5 +1,5 @@
 $(document).on('click','.send_form', function(){
-    var input_blanter = document.getElementById('email');
+    var input_blanter = document.getElementById('names');
 
     /* Whatsapp Settings */
     var walink = 'https://web.whatsapp.com/send',
@@ -48,7 +48,7 @@ $(document).on('click','.send_form', function(){
 // yang contact
 
 $(document).on('click','.send_contact', function(){
-    var input_blanter = document.getElementById('emails');
+    var input_blanter = document.getElementById('names');
 
     /* Whatsapp Settings */
     var walink = 'https://web.whatsapp.com/send',
@@ -65,16 +65,16 @@ $(document).on('click','.send_contact', function(){
 
     if("" != input_blanter.value){
 
-     /* Call Input Form */
+    /* Call Input Form */
     var input_name2 = $("#names").val(),
-        input_email2 = $("#emails").val(),
+        input_domisili2 = $("#domisilis").val(),
         input_job2 = $("#jobs").val(),
         input_message2 = $("#messages").val();
 
     /* Final Whatsapp URL */
     var blanter_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A' +
         '*Name* : ' + input_name2 + '%0A' +
-        '*Email Address* : ' + input_email2 + '%0A' +
+        '*Domisili* : ' + input_domisili2 + '%0A' +
         '*Job* : ' + input_job2 + '%0A' +
         '*Isi Message* : ' + input_message2 + '%0A';
 
