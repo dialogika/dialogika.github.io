@@ -1867,3 +1867,17 @@ section {
 .courses .course-content a[type="submit"]:hover {
   background: #76b5ee;
 }
+
+
+.courses .container .btn-primary {
+  margin-left: 25px;
+  background: #1977cc;
+  color: #fff;
+  border-radius: 50px;
+  padding: 8px 25px;
+  white-space: nowrap;
+  transition: 0.3s;
+  font-size: 14px;
+  display: inline-block;
+}
+
