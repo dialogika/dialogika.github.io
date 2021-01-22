@@ -3,7 +3,7 @@ $(document).on('click','.send_form', function(){
 
     /* Whatsapp Settings */
     var walink = 'https://web.whatsapp.com/send',
-        phone = '628385663240',
+        phone = '6283875663240',
         walink2 = 'Halo Ka, Saya melihat *Info Internship Dialogika* dan saya tertarik untuk mendaftar .' + '%0A %0A' 
                 + 'Berikut Data Diri Saya: ',
         text_yes = 'Terkirim.',
@@ -52,7 +52,7 @@ $(document).on('click','.send_contact', function(){
 
     /* Whatsapp Settings */
     var walink = 'https://web.whatsapp.com/send',
-        phone = '628385663240',
+        phone = '6283875663240',
         walink2 = 'Haloo, Saya melihat *Internship Dialogika* dan saya tertarik untuk tahu lebih lanjut.' + '%0A %0A' 
                 + 'Sebelumnya perkenalkan saya: ',
         text_yes = 'Terkirim.',
