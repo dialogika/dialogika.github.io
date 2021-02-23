@@ -1,5 +1,5 @@
 $(document).on('click','.send_form', function(){
-    var input_blanter = document.getElementById('email');
+    var input_blanter = document.getElementById('name');
 
     /* Whatsapp Settings */
     var walink = 'https://web.whatsapp.com/send',
@@ -29,11 +29,8 @@ $(document).on('click','.send_form', function(){
     /* Final Whatsapp URL */
     var blanter_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A' +
         '*Name* : ' + input_name1 + '%0A' +
-        '*Email Address* : ' + input_email1 + '%0A' +
-        '*Keperluan* : ' + input_select1 + '%0A' +
+        '*Program* : ' + input_select1 + '%0A' +
         '*Job* : ' + input_job1 + '%0A' +
-        '*Tanggal Lahir* : ' + input_umur1 + '%0A' +
-        '*Domisili* : ' + input_domisili1 + '%0A' +
         '*Isi Message* : ' + input_message1 + '%0A';
 
     /* Whatsapp Window Open */
@@ -48,12 +45,12 @@ $(document).on('click','.send_form', function(){
 // yang contact
 
 $(document).on('click','.send_contact', function(){
-    var input_blanter = document.getElementById('emails');
+    var input_blanter = document.getElementById('names');
 
     /* Whatsapp Settings */
     var walink = 'https://web.whatsapp.com/send',
         phone = '6282137760669',
-        walink2 = 'Haloo, Saya melihat *Website Dialogika* dan saya tertarik untuk tahu lebih lanjut.' + '%0A %0A' 
+        walink2 = 'Haloo, Saya melihat *Website Dialogika* dan ada yang ingin saya tanyakan.' + '%0A %0A' 
                 + 'Sebelumnya perkenalkan saya: ',
         text_yes = 'Terkirim.',
         text_no = 'Isi semua Formulir lalu klik Send.';
@@ -67,14 +64,14 @@ $(document).on('click','.send_contact', function(){
 
      /* Call Input Form */
     var input_name2 = $("#names").val(),
-        input_email2 = $("#emails").val(),
+        input_email2 = $("#domisilis").val(),
         input_job2 = $("#jobs").val(),
         input_message2 = $("#messages").val();
 
     /* Final Whatsapp URL */
     var blanter_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A' +
         '*Name* : ' + input_name2 + '%0A' +
-        '*Email Address* : ' + input_email2 + '%0A' +
+        '*Domisili* : ' + input_email2 + '%0A' +
         '*Job* : ' + input_job2 + '%0A' +
         '*Isi Message* : ' + input_message2 + '%0A';
 
