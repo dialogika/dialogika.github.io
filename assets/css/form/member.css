@@ -2584,6 +2584,10 @@ section {
   padding-bottom: 8px;
 }
 
+.contact .php-email-form .input-group {
+  padding-bottom: 8px;
+}
+
 .contact .php-email-form .validate {
   display: none;
   color: red;
