@@ -5,7 +5,7 @@ $(document).on('click','.send_form', function(){
     var walink = 'https://web.whatsapp.com/send',
         phone = '6282137760669',
         walink2 = '*Kelas Basic Level (Public Speaking):* saya tertarik untuk tahu lebih lanjut.' + '%0A %0A'
-                + 'Berikut Data Diri Saya: ',
+                + 'Kode: BASIC/FB' + '%0A' + 'Berikut Data Diri Saya: ',
         text_yes = 'Terkirim.',
         text_no = 'Isi semua Formulir lalu klik Send.';
 
@@ -54,7 +54,7 @@ $(document).on('click','.send_contact', function(){
     var walink = 'https://web.whatsapp.com/send',
         phone = '6282137760669',
         walink2 = '*Kelas Basic Level (Public Speaking):* untuk mendaftar.' + '%0A %0A' 
-                + 'Sebelumnya perkenalkan saya: ',
+                + 'Kode: BASIC/FB' + '%0A' '%0A' + 'Sebelumnya perkenalkan saya: ',
         text_yes = 'Terkirim.',
         text_no = 'Isi semua Formulir lalu klik Send.';
 

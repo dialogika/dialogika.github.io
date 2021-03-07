@@ -54,7 +54,7 @@ $(document).on('click','.send_contact', function(){
     var walink = 'https://web.whatsapp.com/send',
         phone = '6282137760669',
         walink2 = '*Basic Plus* : Saya tertarik untuk tahu lebih lanjut.' + '%0A %0A' 
-                + 'Sebelumnya perkenalkan saya: ',
+                + 'Kode: BASIC/GG' + '%0A' '%0A' + 'Sebelumnya perkenalkan saya: ',
         text_yes = 'Terkirim.',
         text_no = 'Isi semua Formulir lalu klik Send.';
 
