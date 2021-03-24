@@ -4,7 +4,7 @@ $(document).on('click','.send_form', function(){
     /* Whatsapp Settings */
     var walink = 'https://web.whatsapp.com/send',
         phone = '6282137760669',
-        walink2 = 'Saya tertarik untuk tahu lebih lanjut.' + '%0A %0A'
+        walink2 = '*Kelas High Impact Presentation:* saya tertarik untuk tahu lebih lanjut.' + '%0A%0A'
                 + 'Berikut Data Diri Saya: ',
         text_yes = 'Terkirim.',
         text_no = 'Isi semua Formulir lalu klik Send.';
@@ -53,8 +53,8 @@ $(document).on('click','.send_contact', function(){
     /* Whatsapp Settings */
     var walink = 'https://web.whatsapp.com/send',
         phone = '6282137760669',
-        walink2 = '*Basic Plus* : Saya tertarik untuk tahu lebih lanjut.' + '%0A %0A' 
-                + 'Kode: BASIC/GG' + '%0A' '%0A' + 'Sebelumnya perkenalkan saya: ',
+        walink2 = '*Kelas Presentation Plus:* saya tertarik untuk mendaftar.' + '%0A%0A' 
+                + 'Sebelumnya perkenalkan saya: ',
         text_yes = 'Terkirim.',
         text_no = 'Isi semua Formulir lalu klik Send.';
 
@@ -66,10 +66,10 @@ $(document).on('click','.send_contact', function(){
     if("" != input_blanter.value){
 
      /* Call Input Form */
-     var input_name2 = $("#names").val(),
-     input_domisili2 = $("#domisilis").val(),
-     input_job2 = $("#jobs").val(),
-     input_message2 = $("#messages").val();
+    var input_name2 = $("#names").val(),
+    input_domisili2 = $("#domisilis").val(),
+    input_job2 = $("#jobs").val(),
+    input_message2 = $("#messages").val();
 
     /* Final Whatsapp URL */
     var blanter_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A' +
