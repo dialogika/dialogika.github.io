@@ -94,7 +94,7 @@
   <script>
     function SubForm (){
       $.ajax({
-        url:"https://api.apispreadsheets.com/data/11004/",
+        url:"https://api.apispreadsheets.com/data/12065/",
         type:"post",
         data:$("#myForm").serializeArray(),
         success: function(){
@@ -420,13 +420,13 @@
               
                 <div class="form-group">
                   <label for="name">Nama Lengkap</label>
-                  <input type="text" name="Name" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" placeholder="Sesuai KTP" />
+                  <input type="text" name="Name" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" placeholder="Nama Lengkap" />
                   <div class="validate"></div>
                 </div>
               
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="name">Whatsapp</label>
+                  <label for="Whatsapp">Whatsapp</label>
                   <input type="text" name="Whatsapp" class="form-control" id="whatsapp" data-rule="minlen:4" data-msg="Please enter a correct number" placeholder="6282137760XXX" />
                     <div class="validate"></div>
                 </div>
@@ -442,8 +442,8 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="name">Penjelasan Mentor</label>
-                <select name="Penjelasan-Mentor" id="" class="custom-select form-control">
+                <label for="Mentor">Penjelasan Mentor</label>
+                <select name="Mentor" id="" class="custom-select form-control">
                   <option value="5">Diluar Ekspektasi</option>
                   <option value="4">Sangat Jelas</option>
                   <option value="3">Jelas</option>    
@@ -452,8 +452,8 @@
                 </select>
               </div>
               <div class="form-group col-md-6">
-                <label for="name">Kepuasan Materi</label>
-                <select name="Kepuasan-Materi" id="" class="custom-select form-control">
+                <label for="Puas">Kepuasan Materi</label>
+                <select name="Puas" id="" class="custom-select form-control">
                   <option value="5">Diluar Ekspektasi</option>
                   <option value="4">Sangat Puas</option>
                   <option value="3">Puas</option>
@@ -465,17 +465,17 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="Lanjut-Belajar">Ingin Belajar Public Speaking?</label>
-                <select name="Lanjut-Belajar" id="" class="custom-select form-control">
-                  <option value="Lanjut">Jelas Kak!!</option>
-                  <option value="Nanti">Nanti Dulu</option> 
+                <label for="Leads">Ingin Belajar Public Speaking?</label>
+                <select name="Leads" id="" class="custom-select form-control">
+                  <option value="Yes">Jelas Kak!!</option>
+                  <option value="No">Nanti Dulu</option> 
                 </select>
               </div>
               <div class="form-group col-md-6">
-                <label for="Lanjut-Belajar">Claim Voucher 50% OFF</label>
-                <select name="Lanjut-Belajar" id="" class="custom-select form-control">
-                  <option value="Nanti">Klaim Sekarang</option> 
-                  <option value="Lanjut">Tidak!!</option>
+                <label for="Prospect">Claim Voucher 50% OFF</label>
+                <select name="Prospect" id="" class="custom-select form-control">
+                  <option value="Hot">Klaim Sekarang</option> 
+                  <option value="Warm">Nanti Ya...</option>
                 </select>
               </div>
             </div>
@@ -505,9 +505,9 @@
               </div>
 
               <div class="form-group">
-                <label for="Social-Media">Your Favorit Sosial Media?</label>
+                <label for="Channel">Your Favorit Sosial Media?</label>
                 <!-- <input type="text" name="Channel" class="form-control" id="inputAddress" placeholder="Teman / Instagram / Searching" /> -->
-                <select name="Social-Media" id="" class="custom-select form-control">
+                <select name="Channel" id="" class="custom-select form-control">
                   <option value="0">--Choose One:--</option>
                   <optgroup label="Social Media">
                     <option value="Instagram">Instagram</option> 
@@ -527,19 +527,19 @@
 
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="job">Jurusan</label>
-                  <input type="text" class="form-control" name="Job" id="subject" data-rule="minlen:2" data-msg="Please enter at least 2 chars of subject" placeholder="Ilmu Komunikasi" />
+                  <label for="Jurusan">Jurusan</label>
+                  <input type="text" class="form-control" name="Jurusan" id="subject" data-rule="minlen:2" data-msg="Please enter at least 2 chars of subject" placeholder="Ilmu Komunikasi" />
                   <div class="validate"></div>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="select">Semester?</label>
-                  <input type="text" class="form-control" name="Job-Time" id="subject" data-rule="minlen:2" data-msg="Please enter at least 2 chars of subject" placeholder="5" />
+                  <label for="Semester">Semester?</label>
+                  <input type="text" class="form-control" name="Semester" id="subject" data-rule="minlen:2" data-msg="Please enter at least 2 chars of subject" placeholder="5" />
                   <div class="validate"></div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="name">Pernah Ada Kendala di Public Speaking?</label>
-                <textarea class="form-control" name="Reason" rows="10" data-rule="required" data-msg="Please write something for us" placeholder="Silahkan ceritakan mungkin kami bisa bantu memberikan konsultasi gratis via whatsapp"></textarea>
+                <textarea class="form-control" name="Kendala" rows="10" data-rule="required" data-msg="Please write something for us" placeholder="Silahkan ceritakan mungkin kami bisa bantu memberikan konsultasi gratis via whatsapp"></textarea>
                 <div class="validate"></div>
               </div>
 
