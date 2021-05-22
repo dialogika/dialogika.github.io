@@ -91,17 +91,18 @@
   <script>
     function SubForm (){
       $.ajax({
-        url:"https://api.apispreadsheets.com/data/12758/",
+        url:"https://api.apispreadsheets.com/data/12763/",
         type:"post",
         data:$("#myForm").serializeArray(),
         success: function(){
-          alert("Admin akan segera mengontak anda")
+          alert("Form Data Submitted :)")
         },
         error: function(){
-          alert("Ada yang SALAH")
+          alert("There was an error :(")
         }
       });
-    }</script>
+    }
+  </script>
 
     <!-- submit form 2 -->
   <script
@@ -111,7 +112,7 @@
   <script>
     function SubForm2 (){
       $.ajax({
-        url:"https://api.apispreadsheets.com/data/9088/",
+        url:"https://api.apispreadsheets.com/data/12763/",
         type:"post",
         data:$("#myForm2").serializeArray(),
         success: function(){
@@ -739,7 +740,9 @@
             <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
           </div>
           <!-- <div class="text-center"><button type="submit">Whatsapp Admin</button></div> -->
-          <div class="text-center"><a class="send_form btn" onclick='SubForm()' href="javascript:void" role="button" type="submit">Send Whatsapp</a></div>
+          <div class="text-center">
+            <a class="send_form btn" onclick='SubForm()' href="javascript:void" role="button" type="submit">Send Whatsapp</a>
+          </div>
         </form>
 
       </div>

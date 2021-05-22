@@ -2411,121 +2411,126 @@ section {
 # Pricing
 --------------------------------------------------------------*/
 .pricing .box {
-  padding: 40px 20px;
+  padding: 20px;
+  background: #fff;
   text-align: center;
-  border-radius: 8px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
   position: relative;
   overflow: hidden;
-  background: #fefefe;
-  box-shadow: 0px 5px 90px 0px rgba(110, 123, 131, 0.1);
 }
 
-.pricing .box h3 {
+.pricing h3 {
   font-weight: 400;
-  padding: 15px;
+  margin: -20px -20px 20px -20px;
+  padding: 20px 15px;
   font-size: 18px;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #124265;
+  font-weight: 700;
+  color: #05579e;
+  background: #f8f8f8;
 }
 
-.pricing .box h4 {
-  font-size: 42px;
-  color: #2487ce;
-  font-weight: 500;
-  font-family: "Open Sans", sans-serif;
+.pricing h4 {
+  font-size: 36px;
+  color: #2279C9;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
   margin-bottom: 20px;
 }
 
-.pricing .box h4 sup {
+.pricing h4 sup {
   font-size: 20px;
   top: -15px;
   left: -3px;
 }
 
-.pricing .box h4 span {
+.pricing h4 span {
   color: #bababa;
   font-size: 16px;
   font-weight: 300;
 }
 
-.pricing .box ul {
+.pricing ul {
   padding: 0;
   list-style: none;
-  color: #124265;
+  color: #444444;
   text-align: center;
   line-height: 20px;
   font-size: 14px;
 }
 
-.pricing .box ul li {
+.pricing ul li {
   padding-bottom: 16px;
 }
 
-.pricing .box ul .na {
+.pricing ul i {
+  color: #2279C9;
+  font-size: 18px;
+  padding-right: 4px;
+}
+
+.pricing ul .na {
   color: #ccc;
   text-decoration: line-through;
 }
 
-.pricing .box .btn-wrap {
-  padding: 15px;
+.pricing .btn-wrap {
+  margin: 20px -20px -20px -20px;
+  padding: 20px 15px;
+  background: #f8f8f8;
   text-align: center;
 }
 
-.pricing .box .btn-buy {
+.pricing .btn-buy {
+  background: #2279C9;
   display: inline-block;
-  padding: 10px 40px;
-  border-radius: 4px;
-  color: #2487ce;
+  padding: 8px 35px 10px 35px;
+  border-radius: 50px;
+  color: #fff;
   transition: none;
   font-size: 14px;
   font-weight: 400;
   font-family: "Raleway", sans-serif;
   font-weight: 600;
   transition: 0.3s;
-  border: 2px solid #2487ce;
 }
 
-.pricing .box .btn-buy:hover {
-  background: #2487ce;
+.pricing .btn-buy:hover {
+  background: #2b99f8;
+}
+
+.pricing .featured h3 {
   color: #fff;
+  background: #2279C9;
 }
 
-.pricing .featured {
-  background: #2487ce;
-}
-
-.pricing .featured h3, .pricing .featured h4, .pricing .featured h4 span, .pricing .featured ul, .pricing .featured ul .na {
-  color: #fff;
-}
-
-.pricing .featured .btn-wrap {
-  padding: 15px;
-  text-align: center;
-}
-
-.pricing .featured .btn-buy {
-  color: #fff;
-  border: 2px solid #fff;
-}
-
-.pricing .featured .btn-buy:hover {
-  background: #fff;
-  color: #2487ce;
-}
-
-.pricing .featured .recommended-badge {
+.pricing .advanced {
+  width: 200px;
   position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 18px;
+  right: -68px;
+  transform: rotate(45deg);
   z-index: 1;
-  font-size: 13px;
-  padding: 3px 25px 6px 25px;
-  background: #DCF2FE;
-  color: #2279C9;
-  border-radius: 50px;
+  font-size: 14px;
+  padding: 1px 0 3px 0;
+  background: #2279C9;
+  color: #fff;
 }
+
+.pricing .recommended {
+  width: 200px;
+  position: absolute;
+  top: 18px;
+  right: -68px;
+  transform: rotate(45deg);
+  z-index: 1;
+  font-size: 14px;
+  padding: 1px 0 3px 0;
+  background: #009961;
+  color: #fff;
+}
+
+
 
 /*--------------------------------------------------------------
 # bar-bottom
