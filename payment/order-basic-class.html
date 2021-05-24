@@ -89,26 +89,7 @@
       }
     </style>
 
-    <!-- submit form 1 -->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"></script>
-    <script>
-      function SubForm (){
-        $.ajax({
-          url:"https://api.apispreadsheets.com/data/12763/",
-          type:"post",
-          data:$("#myForm").serializeArray(),
-          success: function(){
-            alert("Form Data Submitted :)")
-          },
-          error: function(){
-            alert("There was an error :(")
-          }
-        });
-      }
-    </script>
+
   <!-- script spreadsheet -->  
     <script
       src="https://code.jquery.com/jquery-3.4.1.js"
@@ -117,7 +98,7 @@
     <script>
       function SubForm (){
         $.ajax({
-          url:"https://api.apispreadsheets.com/data/12763/",
+          url:"https://api.apispreadsheets.com/data/12873/",
           type:"post",
           data:$("#myForm").serializeArray(),
           success: function(){
@@ -211,7 +192,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Order Basic Class</h2>
+          <h2>
+            <span class="badge badge-pill" style="background-color: #009961;color: #fff;">Order</span> &nbsp;
+            <span class="badge badge-pill" style="background-color: #2279C9;color: #fff;">Basic Class</span>
+          </h2>
           <ol>
             <li><a href="../index.html">Home</a></li>
             <li><a href="../page/index.html">Program</a></li>
@@ -226,22 +210,15 @@
   <main id="main">
     
     <!-- ======= Alert Section ======= -->
-    <br><div class="container">
-      <!-- <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        <i class="bx bxs-error"></i>
-         Pastikan Nomor <b>Whatsapp-mu</b> benar!
-         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div> -->
+    <!-- <br><div class="container">
       <div class="alert alert-primary alert-dismissible fade show" role="alert">
         <i class="bx bxs-offer"></i>
-        <a href="#.html" target="__blank" class="alert-link">Lebih HEMAT!!</a> Sebulan 7x pertemuan dengan harga <a href="#.html" target="__blank" class="alert-link">terjangkau. Klik link ini!</a>.
+        <a href="#.html" target="__blank" class="alert-link">Dapatkan paket Lebih HEMAT!!</a> Sebulan 7x pertemuan dengan harga <a href="#.html" target="__blank" class="alert-link">terjangkau. <a href="#.html" target="__blank" class="alert-link">Klik link ini</a> untuk info lebih lanjut!</a>.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    </div>
+    </div> -->
 
     
     <!-- ======= Blog Section ======= -->
@@ -267,58 +244,62 @@
                         <span class="badge badge-primary badge-pill">Indonesia</span>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">e-Certficate</font>
-                        <span class="badge badge-success badge-pill">Yes</span>
-                      </li>
+                        <font size="2">Level</font>
+                        <span class="badge badge-success badge-pill">Pemula</span>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
                         <font size="2">Lama Program</font>
                         <span class="badge badge-primary badge-pill">1 Bulan</span>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">Total Pertemuan</font>
-                        <span class="badge badge-primary badge-pill">4 kali</span>
+                          <font size="2">Total Pertemuan</font>
+                          <span class="badge badge-primary badge-pill">4 kali</span>
+                        </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <font size="2">Certficate</font>
+                        <span class="badge badge-primary badge-pill">Electronic</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <font size="2">Garansi Mengulang</font>
+                        <span class="badge badge-danger badge-pill">No</span>
                       </li>
                     </ul>
 
-                    <ul class="list-group accordion collapse" id="basic-class-detail">
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">eBook Dialogika</font>
-                        <span class="badge badge-success badge-pill">Yes</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">Dapat eModule</font>
-                        <span class="badge badge-primary badge-pill">2 Jenis</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">Maksimal Member/Class</font>
-                        <span class="badge badge-primary badge-pill">10</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">Durasi Kelas</font>
-                        <span class="badge badge-primary badge-pill">90 menit</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">Penjadwalan</font>
-                        <span class="badge badge-primary badge-pill">Kesepakatan</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">Praktek Kelas</font>
-                        <span class="badge badge-success badge-pill">Yes</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">Sertifikat</font>
-                        <span class="badge badge-success badge-pill">Yes</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">Layanan Konsultasi</font>
-                        <span class="badge badge-success badge-pill">Yes</span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <font size="2">Garansi</font>
-                        <span class="badge badge-danger badge-pill">No</span>
-                      </li>
-                    </ul><br>
+                      <ul class="list-group accordion collapse" id="basic-class-detail">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <font size="2">eBook Dialogika</font>
+                          <span class="badge badge-success badge-pill">Yes</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <font size="2">Dapat eModule</font>
+                          <span class="badge badge-success badge-pill">Yes</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <font size="2">Maksimal Member/Class</font>
+                          <span class="badge badge-primary badge-pill">10</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <font size="2">Durasi Kelas</font>
+                          <span class="badge badge-primary badge-pill">90 menit</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <font size="2">Penjadwalan</font>
+                          <span class="badge badge-primary badge-pill">Kesepakatan</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <font size="2">Praktek Kelas</font>
+                          <span class="badge badge-success badge-pill">Yes</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <font size="2">Sertifikat</font>
+                          <span class="badge badge-success badge-pill">Yes</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <font size="2">Layanan Konsultasi</font>
+                          <span class="badge badge-success badge-pill">Yes</span>
+                        </li>
+                      </ul>
+                    <br>
 
                     <div class="read-more">
                       <a href="#basic-class-detail" data-toggle="collapse">Selengkapnya</a>
@@ -386,14 +367,14 @@
                           </select>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="gridCheck">
                         <label class="form-check-label" for="gridCheck">
                           Apabila seat penuh jadwal akan dialokasikan. <a href="https://wasap.at/D9qiSk">Tanya sales lebih lanjut.</a>
                         </label>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="read-more">
                       <a href="#metode-pembayaran" class="scrollto">Pilih Bank</a>
@@ -408,7 +389,7 @@
             <div class="col-lg-4">
               <div class="sidebar" id="metode-pembayaran">
 
-                <h3 class="sidebar-title">Pilih Bank</h3>
+                <h3 class="sidebar-title">Transfer ke</h3>
                 <table class="table accordion">
                   <thead>
                     <tr>
@@ -527,7 +508,7 @@
                     </div>
                   </ul>
                   <div class="btn-wrap">
-                    <a href="https://wasap.at/xf77Gc" onclick='SubForm()' class="btn-buy">Beli Sekarang</a>
+                    <a href="https://wasap.at/xf77Gc" onclick='SubForm()' class="btn-buy">Konfirmasi Transfer</a>
                   </div>
                 </div>
               </div>

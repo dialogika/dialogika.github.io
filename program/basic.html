@@ -94,7 +94,7 @@
   <script>
     function SubForm (){
       $.ajax({
-        url:"https://api.apispreadsheets.com/data/9088/",
+        url:"https://api.apispreadsheets.com/data/12873/",
         type:"post",
         data:$("#myForm").serializeArray(),
         success: function(){
@@ -180,7 +180,7 @@
         </ul>
       </nav><!-- .nav-menu -->
 
-      <a href="#materi" class="appointment-btn scrollto">Materi</a>
+      <a href="../page/basic-class.html" class="appointment-btn scrollto">Spesifikasi</a>
 
     </div>
   </header><!-- End Header -->
@@ -873,6 +873,9 @@
                 <input type="number" class="form-control" name="Whatsapp" id="" placeholder="Nomor Whatsapp, CONTOH: 082137760669" data-rule="minlen:2" data-msg="Please enter a correct phone number">
                 <div class="validate"></div>
               </div>
+              <select name="Program" class="d-none">
+                <option selected>Basic Class</option>
+              </select>
               <div class="form-group">
                 <textarea class="form-control" name="Ket" id="messages" rows="5" placeholder="Kesulitan yang dirasakan? / Pesan"></textarea>
                 <div class="validate"></div>
@@ -1004,11 +1007,15 @@
     <div class="price-wrap mr-auto">
       <small class="text-muted">
         <span class="price">
-          <b>IDR. 400.000</b>
+          <b>IDR. 399.000</b>
         </span><br>
-        <strike> IDR. 800.000</strike> 
-        <strong>Lebih Hemat IDR. 300.000</strong>
       </small>
+      <span class="badge badge-pill badge-danger">
+        <i class="bx bxs-purchase-tag"></i>
+        <strike>IDR 800.000</strike></span>
+      <span class="badge badge-pill badge-success">
+        <i class="bx bxs-offer"></i>
+        Diskon 50%</span>
     </div>
     <!-- <select name="" class="custom-select mr-2">
       <option value=""> 1 item</option>

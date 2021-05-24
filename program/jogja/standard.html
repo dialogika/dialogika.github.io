@@ -93,7 +93,7 @@
   <script>
     function SubForm (){
       $.ajax({
-        url:"https://api.apispreadsheets.com/data/9088/",
+        url:"https://api.apispreadsheets.com/data/12873/",
         type:"post",
         data:$("#myForm").serializeArray(),
         success: function(){
@@ -178,7 +178,7 @@
         </ul>
       </nav><!-- .nav-menu -->
 
-      <a href="#about-lists" class="appointment-btn scrollto">Syllabus</a>
+      <a href="../../page/jogja/first-class.html" class="appointment-btn scrollto">Spesifikasi</a>
 
     </div>
   </header><!-- End Header -->
@@ -822,6 +822,44 @@
         <div class="row" data-aos="fade-up" data-aos-delay="100">
 
           <div class="col-lg-6">
+            <form method="post" id="myForm" role="form" class="php-email-form" id="form-daftar">
+              <div class="row">
+                <div class="col form-group">
+                  <input type="text" name="Name" class="form-control" id="names" placeholder="Nama Lengkap" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                  <div class="validate"></div>
+                </div>
+                <div class="col form-group">
+                  <input type="text" class="form-control" name="Location" id="domisilis" placeholder="Domisili" data-rule="email" data-msg="Please enter a valid place">
+                  <div class="validate"></div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input type="text" class="form-control" name="Work" id="jobs" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Please enter at least 2 chars">
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control" name="Whatsapp" id="" placeholder="Nomor Whatsapp, CONTOH: 082137760669" data-rule="minlen:2" data-msg="Please enter a correct phone number">
+                <div class="validate"></div>
+              </div>
+              <select name="Program" class="d-none">
+                <option selected>First Class</option>
+              </select>
+              <div class="form-group">
+                <textarea class="form-control" name="Ket" id="messages" rows="5" placeholder="Kesulitan yang dirasakan? / Pesan"></textarea>
+                <div class="validate"></div>
+              </div>
+              <div class="mb-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <!-- <div class="text-center"><button type="submit">Send Whatsapp</button></div> -->
+              <div class="text-center"><a class="send_contact" onclick='SubForm()' href="javascript:void" role="button" type="submit">Send Whatsapp</a></div>
+            </form>
+          </div>
+
+          <div class="col-lg-6">
 
             <div class="row">
               <div class="col-md-12">
@@ -846,42 +884,6 @@
                 </div>
               </div>
             </div>
-
-          </div>
-
-          <div class="col-lg-6">
-            <form method="post" id="myForm" role="form" class="php-email-form" id="form-daftar">
-              <div class="row">
-                <div class="col form-group">
-                  <input type="text" name="Name" class="form-control" id="names" placeholder="Nama Lengkap" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                  <div class="validate"></div>
-                </div>
-                <div class="col form-group">
-                  <input type="text" class="form-control" name="Location" id="domisilis" placeholder="Domisili" data-rule="email" data-msg="Please enter a valid place">
-                  <div class="validate"></div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <input type="text" class="form-control" name="Work" id="jobs" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Please enter at least 2 chars">
-                <div class="validate"></div>
-              </div>
-              <div class="form-group">
-                <input type="number" class="form-control" name="Whatsapp" id="" placeholder="Nomor Whatsapp, CONTOH: 082137760669" data-rule="minlen:2" data-msg="Please enter a correct phone number">
-                <div class="validate"></div>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="Ket" id="messages" rows="5" placeholder="Kesulitan yang dirasakan? / Pesan"></textarea>
-                <div class="validate"></div>
-              </div>
-              <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <!-- <div class="text-center"><button type="submit">Send Whatsapp</button></div> -->
-              <div class="text-center"><a class="send_contact" onclick='SubForm()' href="javascript:void" role="button" type="submit">Send Whatsapp</a></div>
-            </form>
           </div>
 
         </div>

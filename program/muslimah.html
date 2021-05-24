@@ -94,7 +94,7 @@
   <script>
     function SubForm (){
       $.ajax({
-        url:"https://api.apispreadsheets.com/data/9088/",
+        url:"https://api.apispreadsheets.com/data/12873/",
         type:"post",
         data:$("#myForm").serializeArray(),
         success: function(){
@@ -873,6 +873,9 @@
                 <input type="number" class="form-control" name="Whatsapp" id="" placeholder="Nomor Whatsapp, CONTOH: 082137760669" data-rule="minlen:2" data-msg="Please enter a correct phone number">
                 <div class="validate"></div>
               </div>
+              <select name="Program" class="d-none">
+                <option selected>Kelas Muslimah</option>
+              </select>
               <div class="form-group">
                 <textarea class="form-control" name="Ket" id="messages" rows="5" placeholder="Kesulitan yang dirasakan? / Pesan"></textarea>
                 <div class="validate"></div>
