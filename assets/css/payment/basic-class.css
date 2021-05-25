@@ -2447,6 +2447,26 @@ section {
   font-size: 14px;
 }
 
+.blog .sidebar .read-more {
+  -moz-text-align-last: right;
+  text-align-last: right;
+}
+
+.blog .sidebar .read-more a {
+  display: inline-block;
+  background: #1977cc;
+  color: #fff;
+  padding: 6px 20px 8px 20px;
+  transition: 0.3s;
+  font-size: 14px;
+  border-radius: 50px;
+}
+
+.blog .sidebar .read-more a:hover {
+  background: #03183E;
+}
+
+
 /* pricing */
 .pricing-table-3{
   background-color:#FFF;
