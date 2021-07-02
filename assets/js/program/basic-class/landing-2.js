@@ -41,7 +41,7 @@
 
         if ($('body').hasClass('mobile-nav-active')) {
           $('body').removeClass('mobile-nav-active');
-          $('.mobile-nav-toggle i').toggleClass('bx bx-dots-vertical-rounded bx-x-circle');
+          $('.mobile-nav-toggle i').toggleClass('bx bx-dots-vertical-rounded icofont-close');
           $('.mobile-nav-overly').fadeOut();
         }
         return false;
@@ -96,7 +96,7 @@
 
     $(document).on('click', '.mobile-nav-toggle', function(e) {
       $('body').toggleClass('mobile-nav-active');
-      $('.mobile-nav-toggle i').toggleClass('bx bx-chevron-down-circle bx-x-circle');
+      $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
       $('.mobile-nav-overly').toggle();
     });
 
@@ -111,8 +111,7 @@
       if (!container.is(e.target) && container.has(e.target).length === 0) {
         if ($('body').hasClass('mobile-nav-active')) {
           $('body').removeClass('mobile-nav-active');
-          // $('.mobile-nav-toggle i').toggleClass('bx bx-envelope-open bx-envelope-open icon-show');
-          $('.mobile-nav-toggle i').toggleClass('bx bx-chevron-left-circle bx-x-circle');
+          $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
           $('.mobile-nav-overly').fadeOut();
         }
       }
@@ -151,6 +150,23 @@
     return false;
   });
 
+  // Menu list isotope and filter
+  $(window).on('load', function() {
+    var menuIsotope = $('.menu-container').isotope({
+      itemSelector: '.menu-item',
+      layoutMode: 'fitRows'
+    });
+
+    $('#menu-flters li').on('click', function() {
+      $("#menu-flters li").removeClass('filter-active');
+      $(this).addClass('filter-active');
+
+      menuIsotope.isotope({
+        filter: $(this).data('filter')
+      });
+    });
+  });
+
   // jQuery counterUp
   $('[data-toggle="counter-up"]').counterUp({
     delay: 10,
@@ -175,5 +191,16 @@
     }
   });
 
+  // Initiate the venobox plugin
+  $(document).ready(function() {
+    $('.venobox').venobox();
+  });
+
+  // Initiate the datepicker plugin
+  $(document).ready(function() {
+    $('.datepicker').datepicker({
+      autoclose: true
+    });
+  });
 
 })(jQuery);
