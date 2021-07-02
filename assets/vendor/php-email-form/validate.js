@@ -101,7 +101,7 @@
 
     if( ! action ) {
       this_form.find('.loading').slideUp();
-      this_form.find('.error-message').slideDown().html('Thank You, please download the eBook below');
+      this_form.find('.error-message').slideDown().html('The form action property is not set!');
       return false;
     }
     
