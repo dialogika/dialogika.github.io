@@ -1052,7 +1052,7 @@ section {
 .cta {
   /*background: #0563BB;*/
   /*background: linear-gradient(to left, #0563bb 0%, #ffffff 100%);*/
-  background: linear-gradient(rgba(66, 84, 81, 0.5), rgba(43, 56, 54, 0.5)), url("../img/hero-bg.jpg") fixed center center no-repeat;
+  background: linear-gradient(rgba(66, 84, 81, 0.5), rgba(43, 56, 54, 0.5)), url("../../../img/hero-bg.jpg") fixed center center no-repeat;
   background-size: cover;
   padding: 60px 0;
 }

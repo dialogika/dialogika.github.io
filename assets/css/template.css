@@ -1337,16 +1337,21 @@ section {
 }
 
 .contact .php-email-form a[type="submit"] {
-  background: #1977cc;
-  border: 0;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
   padding: 10px 32px;
+  border-radius: 50px;
+  transition: 0.5s;
   color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
+  background: #1977cc;
 }
 
 .contact .php-email-form a[type="submit"]:hover {
-  background: #76b5ee;
+  background: #3291e6;
 }
 
 @-webkit-keyframes animate-loading {
@@ -1436,13 +1441,18 @@ section {
 }
 
 .courses .course-content a[type="submit"] {
-  background: #1977cc;
-  border: 0;
-  padding: 10px 32px;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 7px 32px;
+  border-radius: 50px;
   margin-bottom: 20px;
+  transition: 0.5s;
   color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
+  background: #1977cc;
 }
 
 .courses .course-content a[type="submit"]:hover {
