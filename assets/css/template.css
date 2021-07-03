@@ -270,8 +270,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-menu .drop-down > a:after {
-  content:'▾';
-  font-family: "Poppins";
+  content: "\ea99";
+  font-family: IcoFont;
   padding-left: 5px;
 }
 
@@ -305,7 +305,7 @@ h1, h2, h3, h4, h5, h6 {
     left: -100%;
   }
   .nav-menu .drop-down .drop-down > a:after {
-    content: "◀︎";
+    content: "\ea9d";
   }
 }
 
@@ -391,7 +391,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-nav .drop-down > a:after {
-  content: "🔽";
+  content: "\ea99";
   font-family: IcoFont;
   padding-left: 10px;
   position: absolute;
@@ -399,7 +399,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-nav .active.drop-down > a:after {
-  content: "◀️";
+  content: "\eaa1";
 }
 
 .mobile-nav .drop-down > a {
@@ -440,7 +440,6 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-nav-active .mobile-nav-toggle i {
   color: #fff;
 }
-
 
 /*--------------------------------------------------------------
 # Sections General
