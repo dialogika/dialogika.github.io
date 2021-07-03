@@ -1,5 +1,5 @@
 /**
-* Template Name: Medilab - v2.0.0
+* Template Name: Medilab - v2.1.1
 * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
@@ -41,7 +41,7 @@
 
         if ($('body').hasClass('mobile-nav-active')) {
           $('body').removeClass('mobile-nav-active');
-          $('.mobile-nav-toggle i').toggleClass('bx bx-dots-vertical-rounded bx-x-circle');
+          $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
           $('.mobile-nav-overly').fadeOut();
         }
         return false;
@@ -91,12 +91,12 @@
       class: 'mobile-nav d-lg-none'
     });
     $('body').append($mobile_nav);
-    $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="bx bx-notification"></i></button>');
+    $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>');
     $('body').append('<div class="mobile-nav-overly"></div>');
 
     $(document).on('click', '.mobile-nav-toggle', function(e) {
       $('body').toggleClass('mobile-nav-active');
-      $('.mobile-nav-toggle i').toggleClass('bx bx-chevron-down-circle bx-x-circle');
+      $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close-circled');
       $('.mobile-nav-overly').toggle();
     });
 
@@ -111,8 +111,7 @@
       if (!container.is(e.target) && container.has(e.target).length === 0) {
         if ($('body').hasClass('mobile-nav-active')) {
           $('body').removeClass('mobile-nav-active');
-          // $('.mobile-nav-toggle i').toggleClass('bx bx-envelope-open bx-envelope-open icon-show');
-          $('.mobile-nav-toggle i').toggleClass('bx bx-chevron-left-circle bx-x-circle');
+          $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
           $('.mobile-nav-overly').fadeOut();
         }
       }
@@ -175,5 +174,16 @@
     }
   });
 
+  // Initiate the venobox plugin
+  $(document).ready(function() {
+    $('.venobox').venobox();
+  });
+
+  // Initiate the datepicker plugin
+  $(document).ready(function() {
+    $('.datepicker').datepicker({
+      autoclose: true
+    });
+  });
 
 })(jQuery);

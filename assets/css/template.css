@@ -270,8 +270,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-menu .drop-down > a:after {
-  content:'▾';
-  font-family: "Poppins";
+  content: "\ea99";
+  font-family: IcoFont;
   padding-left: 5px;
 }
 
@@ -305,7 +305,7 @@ h1, h2, h3, h4, h5, h6 {
     left: -100%;
   }
   .nav-menu .drop-down .drop-down > a:after {
-    content: "◀︎";
+    content: "\ea9d";
   }
 }
 
@@ -391,7 +391,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-nav .drop-down > a:after {
-  content: "🔽";
+  content: "\ea99";
   font-family: IcoFont;
   padding-left: 10px;
   position: absolute;
@@ -399,7 +399,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-nav .active.drop-down > a:after {
-  content: "◀️";
+  content: "\eaa1";
 }
 
 .mobile-nav .drop-down > a {
@@ -440,7 +440,6 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-nav-active .mobile-nav-toggle i {
   color: #fff;
 }
-
 
 /*--------------------------------------------------------------
 # Sections General
@@ -820,26 +819,18 @@ section {
   padding: 10px 12px;
 }
 
-.appointment .php-email-form button[type="submit"] {
-  background: #1977cc;
-  border: 0;
-  padding: 10px 35px;
-  color: #fff;
-  transition: 0.4s;
+.appointment .php-email-form a {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 32px;
   border-radius: 50px;
-}
-
-.appointment .php-email-form button[type="submit"]:hover {
-  background: #1c84e3;
-}
-
-.appointment .php-email-form a[type="submit"] {
-  background: #1977cc;
-  border: 0;
-  padding: 10px 35px;
+  transition: 0.5s;
   color: #fff;
-  transition: 0.4s;
-  border-radius: 50px;
+  background: #1977cc;
 }
 
 .appointment .php-email-form a[type="submit"]:hover {
@@ -1323,20 +1314,7 @@ section {
   padding: 12px 15px;
 }
 
-.contact .php-email-form button[type="submit"] {
-  background: #1977cc;
-  border: 0;
-  padding: 10px 32px;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
-}
-
-.contact .php-email-form button[type="submit"]:hover {
-  background: #e35052;
-}
-
-.contact .php-email-form a[type="submit"] {
+.contact .php-email-form a {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
@@ -1350,7 +1328,7 @@ section {
   background: #1977cc;
 }
 
-.contact .php-email-form a[type="submit"]:hover {
+.contact .php-email-form a:hover {
   background: #3291e6;
 }
 
@@ -1440,25 +1418,6 @@ section {
   color: #657a6d;
 }
 
-.courses .course-content .btn-course a {
-  font-family: "Raleway", sans-serif;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 7px 32px;
-  border-radius: 50px;
-  margin-bottom: 20px;
-  transition: 0.5s;
-  color: #fff;
-  background: #1977cc;
-}
-
-.courses .course-content .btn-course a:hover {
-  background: #76b5ee;
-}
-
 .courses .course-content .btn-primary {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
@@ -1468,6 +1427,7 @@ section {
   display: inline-block;
   padding: 7px 32px;
   border-radius: 50px;
+  margin-left: 0px;
   margin-bottom: 20px;
   transition: 0.5s;
   color: #fff;
@@ -1476,7 +1436,6 @@ section {
 
 
 .courses .container .btn-primary {
-  margin-left: 25px;
   background: #1977cc;
   color: #fff;
   border-radius: 50px;
