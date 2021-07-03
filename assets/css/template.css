@@ -1459,6 +1459,25 @@ section {
   background: #76b5ee;
 }
 
+.courses .course-content a[type="button"] {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 7px 32px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  transition: 0.5s;
+  color: #fff;
+  background: #1977cc;
+}
+
+.courses .course-content a[type="button"]:hover {
+  background: #76b5ee;
+}
+
 .courses .container .btn-primary {
   margin-left: 25px;
   background: #1977cc;
