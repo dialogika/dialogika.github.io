@@ -1440,7 +1440,7 @@ section {
   color: #657a6d;
 }
 
-.courses .course-content a[type="submit"] {
+.courses .course-content .btn-course a {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
@@ -1455,11 +1455,11 @@ section {
   background: #1977cc;
 }
 
-.courses .course-content a[type="submit"]:hover {
+.courses .course-content .btn-course a:hover {
   background: #76b5ee;
 }
 
-.courses .course-content a[type="button"] {
+.courses .course-content .btn-primary {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
@@ -1474,9 +1474,6 @@ section {
   background: #1977cc;
 }
 
-.courses .course-content a[type="button"]:hover {
-  background: #76b5ee;
-}
 
 .courses .container .btn-primary {
   margin-left: 25px;
@@ -1489,6 +1486,7 @@ section {
   font-size: 14px;
   display: inline-block;
 }
+
 
 /*--------------------------------------------------------------
 # Footer
