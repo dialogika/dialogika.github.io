@@ -20,6 +20,7 @@ $(document).on('click','.send_contact', function(){
     var input_name2 = $("#names").val(),
     input_domisili2 = $("#domisilis").val(),
     input_select2 = $("#select :selected").text(),
+    input_age2 = $("ages").text(),
     input_job2 = $("#jobs").val(),
     input_message2 = $("#messages").val();
 
@@ -28,6 +29,7 @@ $(document).on('click','.send_contact', function(){
         '*Name* : ' + input_name2 + '%0A' +
         '*Program* : ' + input_select2 + '%0A' +
         '*Job* : ' + input_job2 + '%0A' +
+        '*Anak Umur :* ' + input_age2 + '%0A' +
         '*Domisili* : ' + input_domisili2 + '%0A';
 
     /* Whatsapp Window Open */
