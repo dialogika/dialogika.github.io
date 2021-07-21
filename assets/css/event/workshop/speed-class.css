@@ -17,15 +17,15 @@
   }
 }
 
-/*#intro:before {
+#intro:before {
   content: "";
-  background: rgba(6, 12, 34, 0.8);
+  background: rgba(255, 255, 255, 0.77);
   position: absolute;
   bottom: 0;
   top: 0;
   left: 0;
   right: 0;
-}*/
+}
 
 #intro .intro-container {
   position: absolute;
@@ -50,6 +50,7 @@
 #intro h1 {
   color: #000;
   font-family: "Raleway", sans-serif;
+  text-shadow: 2px 2px 5px #000;
   font-size: 56px;
   font-weight: 1000;
   text-transform: uppercase;
@@ -414,7 +415,7 @@
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: linear-gradient(rgba(66, 84, 81, 7.5), rgba(43, 56, 54, 0.5)), url("../../../img/program/basic-class/landing/hero-3.jpg") fixed center center;
+  background: linear-gradient(rgba(66, 84, 81, 7.5), rgba(43, 56, 54, 0.5)), url("../../../img/event/workshop/speed-class/cta.jpg") fixed center center;
   background-size: cover;
   padding: 60px 0;
 }
