@@ -12,7 +12,7 @@
   margin-bottom: -200px;
 }
 
-#hero:before {
+/*#hero:before {
   content: "";
   background: rgba(255, 255, 255, 0.41);
   position: absolute;
@@ -20,7 +20,7 @@
   top: 0;
   left: 0;
   right: 0;
-}
+}*/
 
 #hero .container {
   position: relative;
@@ -33,12 +33,14 @@
   line-height: 56px;
   text-transform: uppercase;
   color: #2c4964;
+  text-shadow: 2px 2px 8px #fff;
 }
 
 #hero h2 {
   color: #2c4964;
   margin: 10px 0 0 0;
   font-size: 24px;
+  text-shadow: 0 0 3px #fff;
 }
 
 #hero .btn-get-started {
