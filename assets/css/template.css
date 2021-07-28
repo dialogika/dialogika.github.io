@@ -1086,6 +1086,13 @@ section {
   background: #3291e6;
 }
 
+.faq .faq-list .read-more button {
+  display: inline-block;
+}
+.faq .faq-list .less button {
+  display: none;
+}
+
 
 @media (max-width: 1200px) {
   .faq .faq-list {
