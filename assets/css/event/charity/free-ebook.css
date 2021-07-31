@@ -447,7 +447,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   width: 100%;
   height: 90vh;
-  background: url("../../img/form/bg-min.jpg") top center;
+  background: url("../../../img/event/charity/free-ebook/hero-v.1.jpg") top center;
   background-size: cover;
   position: relative;
   margin-bottom: -200px;
@@ -464,12 +464,14 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 56px;
   text-transform: uppercase;
   color: #2c4964;
+  text-shadow: 3px 3px 8px #fff;
 }
 
 #hero h2 {
   color: #2c4964;
   margin: 10px 0 0 0;
   font-size: 24px;
+  background: rgba(255,255,255, 0.7);
 }
 
 #hero .btn-get-started {
@@ -1258,7 +1260,7 @@ section {
 }
 
 .about .video-box {
-  background: url("../../img/about/sales.jpg") center center no-repeat;
+  background: url("../../../img/program/sales-class/about.jpg") center center no-repeat;
   background-size: cover;
   min-height: 500px;
 }
@@ -2490,7 +2492,9 @@ section {
 # Contact Us
 --------------------------------------------------------------*/
 .contact {
-  background: url("../../img/form/cta-bg.jpg") center top no-repeat fixed;
+  /*background: url("../../img/form/cta-bg.jpg") center top no-repeat fixed;*/
+  background: rgb(2,0,36);
+  background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
   background-size: cover;
   padding: 60px 0 40px 0;
   position: relative;
@@ -2917,3 +2921,22 @@ section {
 # modal-login
 --------------------------------------------------------------*/
 
+.modal .btn-download {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 30px;
+  margin-top: 5px;
+  border-radius: 22px;
+  transition: 0.5s;
+  color: #fff;
+  background: #1977cc;
+}
+
+.modal .modal-header {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
