@@ -11,15 +11,16 @@
   position: relative;
 }
 
-/*#intro:before {
+#intro:before {
   content: "";
-  background: rgba(255, 255, 255, 0.77);
+  background: rgb(2,0,36);
+background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(11,50,111,1) 35%, rgba(255,177,0,0.09707633053221287) 100%);
   position: absolute;
   bottom: 0;
   top: 0;
   left: 0;
   right: 0;
-}*/
+}
 
 @media (min-width: 1024px) {
   #intro {
@@ -1125,4 +1126,178 @@
   color: #fff;
 }
 
+/*--------------------------------------------------------------
+# abouts 
+--------------------------------------------------------------*/
+.abouts {
+  padding-bottom: 30px;
+}
 
+.abouts .container {
+  box-shadow: 0 5px 25px 0 rgba(214, 215, 216, 0.6);
+}
+
+.abouts .video-box img {
+  padding: 15px 0;
+}
+
+.abouts .section-title p {
+  text-align: left;
+  font-style: italic;
+  color: #666;
+}
+
+.abouts .about-content {
+  padding: 40px;
+}
+
+.abouts .icon-box + .icon-box {
+  margin-top: 40px;
+}
+
+.abouts .icon-box .icon {
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  background: #f1f7fb;
+  border-radius: 6px;
+  transition: 0.5s;
+}
+
+.abouts .icon-box .icon i {
+  color: #428bca;
+  font-size: 32px;
+}
+
+.abouts .icon-box:hover .icon {
+  background: #428bca;
+}
+
+.abouts .icon-box:hover .icon i {
+  color: #fff;
+}
+
+.abouts .icon-box .title {
+  margin-left: 95px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.abouts .icon-box .title a {
+  color: #343a40;
+  transition: 0.3s;
+}
+
+.abouts .icon-box .title a:hover {
+  color: #428bca;
+}
+
+.abouts .icon-box .description {
+  margin-left: 95px;
+  line-height: 24px;
+  font-size: 14px;
+}
+
+.abouts .video-box {
+  position: relative;
+}
+
+.abouts .play-btn {
+  width: 94px;
+  height: 94px;
+  background: radial-gradient(#428bca 50%, rgba(66, 139, 202, 0.4) 52%);
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  left: calc(50% - 47px);
+  top: calc(50% - 47px);
+  overflow: hidden;
+}
+
+.abouts .play-btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-40%) translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #fff;
+  z-index: 100;
+  transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.abouts .play-btn::before {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-animation: pulsate-btn 2s;
+  animation: pulsate-btn 2s;
+  -webkit-animation-direction: forwards;
+  animation-direction: forwards;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: steps;
+  animation-timing-function: steps;
+  opacity: 1;
+  border-radius: 50%;
+  border: 5px solid rgba(66, 139, 202, 0.7);
+  top: -15%;
+  left: -15%;
+  background: rgba(198, 16, 0, 0);
+}
+
+.abouts .play-btn:hover::after {
+  border-left: 15px solid #428bca;
+  transform: scale(20);
+}
+
+.abouts .play-btn:hover::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-40%) translateY(-50%);
+  width: 0;
+  height: 0;
+  border: none;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #fff;
+  z-index: 200;
+  -webkit-animation: none;
+  animation: none;
+  border-radius: 0;
+}
+
+@-webkit-keyframes pulsate-btn {
+  0% {
+    transform: scale(0.6, 0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 0;
+  }
+}
+
+@keyframes pulsate-btn {
+  0% {
+    transform: scale(0.6, 0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 0;
+  }
+}
