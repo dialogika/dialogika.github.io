@@ -745,26 +745,26 @@
         <div class="row" data-aos="fade-up" data-aos-delay="100">
   
           <div class="col-lg-6">
-            <form method="post" id="myForm" role="form" class="php-email-form">
+            <form method="post" id="myForm" role="form" class="php-email-form was-validated">
 
               <div class="form-group">
-                <input type="text" name="Name" class="form-control" id="names" placeholder="Nama Lengkap" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                <input type="text" name="Name" class="form-control" id="names" placeholder="Nama Lengkap" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
                 <div class="validate"></div>
               </div>
 
               <div class="row">
                 <div class="col form-group">
-                  <input type="text" class="form-control" name="Work" id="jobs" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Please enter at least 2 chars">
+                  <input type="text" class="form-control" name="Work" id="jobs" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Please enter at least 2 chars" required>
                   <div class="validate"></div>
                 </div>
                 <div class="col form-group">
-                  <input type="text" class="form-control" name="Location" id="domisilis" placeholder="Domisili Kota" data-rule="minlen:4" data-msg="Please enter a valid domicile">
+                  <input type="text" class="form-control" name="Location" id="domisilis" placeholder="Domisili Kota" data-rule="minlen:4" data-msg="Please enter a valid domicile" required>
                   <div class="validate"></div>
                 </div>
               </div>
 
               <div class="form-group">
-                <input type="number" class="form-control" name="Whatsapp" id="" placeholder="Nomor Whatsapp" data-rule="minlen:2" data-msg="Please enter a correct phone number">
+                <input type="number" class="form-control" name="Whatsapp" id="" placeholder="Nomor Whatsapp" data-rule="minlen:2" data-msg="Please enter a correct phone number" required>
                 <div class="validate"></div>
               </div>
 
@@ -783,7 +783,7 @@
               <div class="row">
                 
                 <div class="col">
-                   <div class="text-center"><a class="send_contact" onclick='SubForm()' href="javascript:void" role="button" >Daftar Sekarang</a></div>
+                   <div class="text-center"><a class="send_contact" onclick='SubForm()' href="javascript:void" role="button">Daftar Sekarang</a></div>
                 </div>
               </div>
             </form>
