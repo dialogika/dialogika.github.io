@@ -48,25 +48,47 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
+  <!-- Pixel Facebook -->
 
-  <!-- Facebook Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window,document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-     fbq('init', '2879951975556015'); 
-    fbq('track', 'PageView');
-    </script>
-    <noscript>
-     <img height="1" width="1" 
-    src="https://www.facebook.com/tr?id=2879951975556015&ev=PageView&noscript=1"/>
-    </noscript>
-  <!-- End Facebook Pixel Code -->
+    <!-- Facebook Pixel Code -->
+      <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window,document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+       fbq('init', '2879951975556015'); 
+      fbq('track', 'PageView');
+      </script>
+      <noscript>
+       <img height="1" width="1" 
+      src="https://www.facebook.com/tr?id=2879951975556015&ev=PageView&noscript=1"/>
+      </noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <!-- Facebook Pixel Code Adiran -->
+      <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window,document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+       fbq('init', '3541921825925200'); 
+      fbq('track', 'PageView');
+      </script>
+      <noscript>
+       <img height="1" width="1" 
+      src="https://www.facebook.com/tr?id=3541921825925200&ev=PageView&noscript=1"/>
+      </noscript>
+    <!-- End Facebook Pixel Code -->
+
+  <!-- End Pixel Facebook -->
   
   <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148836422-2"></script>
@@ -79,49 +101,53 @@
     </script>
   <!-- End Global site tag (gtag.js) - Google Analytics -->
 
-  <!-- Spreadsheet API Form Pendaftaran -->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"></script>
-    <script>
-      function SubForm (){
-        $.ajax({
-          url:"https://api.apispreadsheets.com/data/14030/",
-          type:"post",
-          data:$("#myForm").serializeArray(),
-          success: function(){
-            alert("Form Data Submitted :)")
-          },
-          error: function(){
-            alert("There was an error :(")
-          }
-        });
-      }
-    </script>
-  <!-- End Spreadsheet API Form Pendaftaran -->
+  <!-- Api Spreadsheet -->
 
-  <!-- Spreadsheet API Form Pertanyaan -->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"></script>
-    <script>
-      function SubForm2 (){
-        $.ajax({
-          url:"https://api.apispreadsheets.com/data/14030/",
-          type:"post",
-          data:$("#myForm2").serializeArray(),
-          success: function(){
-            alert("Admin akan segera mengontak anda")
-          },
-          error: function(){
-            alert("Ada yang SALAH")
-          }
-        });
-      }
-    </script>
-  <!-- End Spreadsheet API Form Pertanyaan -->
+    <!-- Spreadsheet API Form Pendaftaran -->
+      <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+      <script>
+        function SubForm (){
+          $.ajax({
+            url:"https://api.apispreadsheets.com/data/14030/",
+            type:"post",
+            data:$("#myForm").serializeArray(),
+            success: function(){
+              alert("Form Data Submitted :)")
+            },
+            error: function(){
+              alert("There was an error :(")
+            }
+          });
+        }
+      </script>
+    <!-- End Spreadsheet API Form Pendaftaran -->
+
+    <!-- Spreadsheet API Form Pertanyaan -->
+      <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+      <script>
+        function SubForm2 (){
+          $.ajax({
+            url:"https://api.apispreadsheets.com/data/14030/",
+            type:"post",
+            data:$("#myForm2").serializeArray(),
+            success: function(){
+              alert("Admin akan segera mengontak anda")
+            },
+            error: function(){
+              alert("Ada yang SALAH")
+            }
+          });
+        }
+      </script>
+    <!-- End Spreadsheet API Form Pertanyaan -->
+
+  <!-- End Spreadsheet -->
 
 </head>
 
