@@ -819,7 +819,7 @@ section {
   padding: 10px 12px;
 }
 
-.appointment .php-email-form a {
+.appointment .btn-send{
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
@@ -831,7 +831,10 @@ section {
   transition: 0.5s;
   color: #fff;
   background: #1977cc;
+  white-space: nowrap;
 }
+
+
 
 .appointment .php-email-form a[type="submit"]:hover {
   background: #1c84e3;

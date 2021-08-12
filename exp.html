@@ -31,50 +31,18 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous"></script>
       <script>
-        function ValidateLoginForm()
-        {
-            var names = document.sheet.names;
-            var domisilis = document.sheet.domisilis;
-            var wa = document.sheet.wa;
-
-              if (names.value == "")
-              {
-                  alert("Your username wasn't recognised.");
-                  names.focus();
-                  return false;
-              }
-
-              else if (domisilis.value == "")
-              {
-                  alert("Please enter a password.");
-                  domisilis.focus();
-                  return false;
-              }
-
-              else if (wa.value == "")
-              {
-                alert("Please enter your email address.");
-                // Focus the email rather than mypassword (which doesn't exist)
-                wa.focus();
-                return false;
-              }
-          // All's well if you got this far, return true
-          // return true;   
-              else {
-                function SubForm (){
+        function SubForm2 (){
           $.ajax({
             url:"https://api.apispreadsheets.com/data/14030/",
             type:"post",
             data:$("#myForm").serializeArray(),
             success: function(){
-              alert("Form Data Submitted :)")
+              alert("Admin akan segera mengontak anda")
             },
             error: function(){
-              alert("There was an error :(")
+              alert("Ada yang SALAH")
             }
           });
-        }
-              }
         }
       </script>
     <!-- End Spreadsheet API Form Pendaftaran -->
@@ -258,56 +226,80 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Formulir Pendaftaran</h2>
+          <h2>Form Pertanyaan</h2>
+          <p></p>
         </div>
 
         <div class="row" data-aos="fade-up" data-aos-delay="100">
-  
+
           <div class="col-lg-6">
-            <form action="javascript:void" id="myForm2" method="post" role="form" class="php-email-form">
-              <div class="form-row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="Name" class="form-control has-error" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
+            <form method="post" id="myForm2" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col form-group">
+                  <input type="text" name="Name" class="form-control" id="names" placeholder="Nama Lengkap" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
                   <div class="validate"></div>
                 </div>
-                <div class="col-md-6 form-group">
-                  <input type="text" class="form-control" name="Work" id="jobs" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Masukkan Perkerjaan Anda" required/>
+                <div class="col form-group">
+                  <input type="text" class="form-control" name="Location" id="domisilis" placeholder="Domisili Kota" data-rule="minlen:4" data-msg="Please enter a valid domicile">
                   <div class="validate"></div>
                 </div>
               </div>
+
               <div class="form-group">
-                <input type="text" class="form-control" name="Location" id="domisilis" placeholder="Kota" data-rule="minlen:4" data-msg="Silahkan input kota anda saat ini" required/>
+                <input type="number" class="form-control" name="Whatsapp" id="" placeholder="Nomor Whatsapp, CONTOH: 082137760669" data-rule="minlen:2" data-msg="Please enter a correct phone number">
                 <div class="validate"></div>
               </div>
 
               <div class="form-group">
-                <input type="tel" class="form-control" name="Whatsapp" id="" pattern="^\d{3}-\d{3}-\d{4}$" placeholder="Whatsapp" data-rule="minlen:4" data-msg="Contoh: 6282137760669" required/>
+                <input type="text" class="form-control" name="Work" id="jobs" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Please enter at least 2 chars">
                 <div class="validate"></div>
               </div>
-
               <div class="form-group">
-                <input readonly type="text" class="form-control" name="Program" value="Speed Class: 275K" />
+                <textarea class="form-control" name="Ket" id="messages" rows="5" placeholder="Yang ingin ditanyakan"></textarea>
                 <div class="validate"></div>
               </div>
-              
               <div class="mb-3">
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div class="text-center"><button type="submit" onclick='SubForm2()'>Send Message</button></div>
+              <!-- <div class="text-center"><button type="submit">Send Whatsapp</button></div> -->
+              <div class="text-center"><a class="send_contact" onclick='SubForm2()' href="javascript:void" role="button">Send Whatsapp</a></div>
             </form>
-
-          </div>
           </div>
 
-          
+          <div class="col-lg-6">
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="info-box">
+                  <i class="bx bx-map"></i>
+                  <h3>Our Address</h3>
+                  <p>Jatempanol, Tempel, Caturtunggal,<br> Depok Sub-District, Sleman Regency,<br> Special Region of Yogyakarta 55281</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box mt-4">
+                  <i class="bx bx-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>admin@dialogika.co<br></p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box mt-4">
+                  <i class="bx bx-phone-call"></i>
+                  <h3>Whatsapp Us</h3>
+                  <p>+62 821 377 60 669<br></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
 
         </div>
 
       </div>
-    </section>  
-  <!-- End Contact Section -->
+    </section><!-- End Contact Section -->
 
 
   </main><!-- End #main -->
