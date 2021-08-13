@@ -41,7 +41,7 @@ $(document).on('click','.send_contact', function(){
 });
 
 
-$(document).on('click','.send_admin', function(){
+$(document).on('submit','#myForm', function(){
     var input_blanter = document.getElementById('names');
 
     /* Whatsapp Settings */
@@ -62,7 +62,7 @@ $(document).on('click','.send_admin', function(){
      /* Call Input Form */
     var input_name2 = $("#names").val(),
     input_domisili2 = $("#domisilis").val(),
-    input_select2 = $("#select :selected").text(),
+    input_select2 = $("#programs").text(),
     input_job2 = $("#jobs").val(),
     input_message2 = $("#messages").val();
 

@@ -16,6 +16,10 @@
     <link href="assets/css/template-exp.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <style type="text/css">
+      /*#submit {
+        display: block;
+        margin: 20px 0;
+      }*/
     </style>
   <!-- End Template Main CSS File -->
 
@@ -35,21 +39,21 @@
 
               if (names.value == "")
               {
-                  alert("Your Names wasn't recognised.");
+                  alert("Your username wasn't recognised.");
                   names.focus();
                   return false;
               }
 
               else if (domisilis.value == "")
               {
-                  alert("Please enter your location.");
+                  alert("Please enter a password.");
                   domisilis.focus();
                   return false;
               }
 
               else if (wa.value == "")
               {
-                alert("Please enter your Phone Number .");
+                alert("Please enter your email address.");
                 // Focus the email rather than mypassword (which doesn't exist)
                 wa.focus();
                 return false;
@@ -58,18 +62,18 @@
           // return true;   
               else {
                 function SubForm (){
-                  $.ajax({
-                    url:"https://api.apispreadsheets.com/data/14030/",
-                    type:"post",
-                    data:$("#myForm").serializeArray(),
-                    success: function(){
-                      alert("Form Data Submitted :)")
-                    },
-                    error: function(){
-                      alert("There was an error :(")
-                    }
-                  });
-                }
+          $.ajax({
+            url:"https://api.apispreadsheets.com/data/14030/",
+            type:"post",
+            data:$("#myForm").serializeArray(),
+            success: function(){
+              alert("Form Data Submitted :)")
+            },
+            error: function(){
+              alert("There was an error :(")
+            }
+          });
+        }
               }
         }
       </script>
@@ -82,51 +86,20 @@
         crossorigin="anonymous"></script>
       <script>
         function SubForm2 (){
+          var dataForm = $("#myForm2").serializeArray();
+
+          for(var i = 0; i < dataForm.length - 1; i++){
+            if(dataForm[i].value == ''){
+              return false;
+            }
+          }
+
           $.ajax({
             url:"https://api.apispreadsheets.com/data/14030/",
             type:"post",
             data:$("#myForm2").serializeArray(),
             success: function(){
-              // alert("Admin akan segera mengontak anda")
-              var input_blanter = document.getElementById('names');
-
-              /* Whatsapp Settings */
-              var walink = 'https://web.whatsapp.com/send',
-                  phone = '6282137760669',
-                  walink2 = '*Formulir Pendaftaran:* saya mau tanya ka.' + '%0A%0A' 
-                          + 'Berikut data diri saya: ',
-                  text_yes = 'Terkirim.',
-                  text_no = 'Isi semua Formulir lalu klik Send.';
-
-              /* Smartphone Support */
-              if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-              var walink = 'whatsapp://send';
-              }
-
-              if("" != input_blanter.value){
-
-               /* Call Input Form */
-              var input_name2 = $("#names").val(),
-              input_domisili2 = $("#domisilis").val(),
-              input_select2 = $("#programs").text(),
-              input_job2 = $("#jobs").val(),
-              input_message2 = $("#messages").val();
-
-              /* Final Whatsapp URL */
-              var blanter_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A' +
-                  '*Name* : ' + input_name2 + '%0A' +
-                  '*Program* : ' + input_select2 + '%0A' +
-                  '*Job* : ' + input_job2 + '%0A' +
-                  '*Perkerjaan* : ' + input_job2 + '%0A' +
-                  '*Kesulitan* : ' + input_message2 + '%0A' +
-                  '*Domisili* : ' + input_domisili2 + '%0A';
-
-              /* Whatsapp Window Open */
-              window.open(blanter_whatsapp,'_blank');
-              document.getElementById("text-info").innerHTML = '<span class="yes">'+text_yes+'</span>';
-              } else {
-              document.getElementById("text-info").innerHTML = '<span class="no">'+text_no+'</span>';
-              } 
+              alert("Admin akan segera mengontak anda")
             },
             error: function(){
               alert("Ada yang SALAH")
@@ -299,39 +272,38 @@
         <div class="row" data-aos="fade-up" data-aos-delay="100">
   
           <div class="col-lg-6">
-            <form action="javascript:void" id="myForm2" method="post" role="form" class="php-email-form was-validated" onsubmit="SubForm2()">
+            <form action="javascript:void" id="myForm2" method="post" role="form" class="php-email-form">
               <div class="form-row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="Name" class="form-control has-error" id="names" placeholder="Your Name" pattern="[a-zA-Z\s]{3,100}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
+                  <input type="text" name="Name" class="form-control has-error" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
                   <div class="validate"></div>
                 </div>
                 <div class="col-md-6 form-group">
-                  <input type="text" class="form-control has-error" name="Work" id="jobs" placeholder="Perkerjaan" pattern="[a-zA-Z\s]{3,100}" data-rule="minlen:2" data-msg="Masukkan Perkerjaan Anda" required/>
+                  <input type="text" class="form-control" name="Work" id="jobs" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Masukkan Perkerjaan Anda" required/>
                   <div class="validate"></div>
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control has-error" name="Location" id="domisilis" placeholder="Kota" pattern="[a-zA-Z\s]{3,100}" data-rule="minlen:4" data-msg="Silahkan input kota anda saat ini" required/>
+                <input type="text" class="form-control" name="Location" id="domisilis" placeholder="Kota" data-rule="minlen:4" data-msg="Silahkan input kota anda saat ini" required/>
                 <div class="validate"></div>
               </div>
 
               <div class="form-group">
-                <input type="tel" class="form-control" name="Whatsapp" id="waDaftar" pattern="[0-9]{10,15}" placeholder="Whatsapp" data-rule="minlen:4" data-msg="Contoh: 6282137760669" required/>
+                <input type="tel" class="form-control" name="Whatsapp" id="" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" placeholder="Whatsapp" data-rule="minlen:4" data-msg="Contoh: 6282137760669" required/>
                 <div class="validate"></div>
               </div>
 
               <div class="form-group">
-                <input readonly type="text" class="form-control" name="Program" id="Programs" value="Speed Class: 275K" />
+                <input readonly type="text" class="form-control" name="Program" value="Speed Class: 275K" />
                 <div class="validate"></div>
               </div>
               
               <div class="mb-3">
                 <div class="loading">Loading</div>
+                <!-- <div class="error-message"></div> -->
+                <!-- <div class="sent-message">Your message has been sent. Thank you!</div> -->
               </div>
-              <div class="text-center">
-                <button id="" type="submit">Send Message</button>
-                <!-- <a href="https://wa.me/6282137760669" class="" role="button" type="submit">Daftar Sekarang</a> -->
-              </div>
+              <div class="text-center"><button id="btnPendaftaran" type="submit" onclick='SubForm2()'>Send Message</button></div>
             </form>
 
           </div>

@@ -102,7 +102,46 @@
           type:"post",
           data:$("#myForm").serializeArray(),
           success: function(){
-            alert("Admin segera menghubungi Anda")
+            // alert("Admin segera menghubungi Anda")
+            var input_blanter = document.getElementById('names');
+
+              /* Whatsapp Settings */
+              var walink = 'https://web.whatsapp.com/send',
+                  phone = '6282137760669',
+                  walink2 = '*Formulir Pendaftaran:* saya mau tanya ka.' + '%0A%0A' 
+                          + 'Berikut data diri saya: ',
+                  text_yes = 'Terkirim.',
+                  text_no = 'Isi semua Formulir lalu klik Send.';
+
+              /* Smartphone Support */
+              if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+              var walink = 'whatsapp://send';
+              }
+
+              if("" != input_blanter.value){
+
+               /* Call Input Form */
+              var input_name2 = $("#names").val(),
+              input_domisili2 = $("#domisilis").val(),
+              input_select2 = $("#programs").text(),
+              input_job2 = $("#jobs").val(),
+              input_message2 = $("#messages").val();
+
+              /* Final Whatsapp URL */
+              var blanter_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A' +
+                  '*Name* : ' + input_name2 + '%0A' +
+                  '*Program* : ' + input_select2 + '%0A' +
+                  '*Job* : ' + input_job2 + '%0A' +
+                  '*Perkerjaan* : ' + input_job2 + '%0A' +
+                  '*Kesulitan* : ' + input_message2 + '%0A' +
+                  '*Domisili* : ' + input_domisili2 + '%0A';
+
+              /* Whatsapp Window Open */
+              window.open(blanter_whatsapp,'_blank');
+              document.getElementById("text-info").innerHTML = '<span class="yes">'+text_yes+'</span>';
+              } else {
+              document.getElementById("text-info").innerHTML = '<span class="no">'+text_no+'</span>';
+              }
           },
           error: function(){
             alert("Ada yang SALAH")
@@ -744,46 +783,37 @@
         <div class="row" data-aos="fade-up" data-aos-delay="100">
   
           <div class="col-lg-6">
-            <form method="post" id="myForm" role="form" class="php-email-form was-validated">
-
-              <div class="form-group">
-                <input type="text" name="Name" class="form-control" id="names" placeholder="Nama Lengkap" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
-                <div class="validate"></div>
-              </div>
-
-              <div class="row">
-                <div class="col form-group">
-                  <input type="text" class="form-control" name="Work" id="jobs" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Please enter at least 2 chars" required>
+            <form action="javascript:void" id="myForm" method="post" role="form" class="php-email-form was-validated" onsubmit="SubForm()">
+              <div class="form-row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="Name" class="form-control has-error" id="names" placeholder="Your Name" pattern="[a-zA-Z\s]{3,100}" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
                   <div class="validate"></div>
                 </div>
-                <div class="col form-group">
-                  <input type="text" class="form-control" name="Location" id="domisilis" placeholder="Domisili Kota" data-rule="minlen:4" data-msg="Please enter a valid domicile" required>
+                <div class="col-md-6 form-group">
+                  <input type="text" class="form-control has-error" name="Work" id="jobs" placeholder="Perkerjaan" pattern="[a-zA-Z\s]{3,100}" data-rule="minlen:2" data-msg="Masukkan Perkerjaan Anda" required/>
                   <div class="validate"></div>
                 </div>
               </div>
+              <div class="form-group">
+                <input type="text" class="form-control has-error" name="Location" id="domisilis" placeholder="Kota" pattern="[a-zA-Z\s]{3,100}" data-rule="minlen:4" data-msg="Silahkan input kota anda saat ini" required/>
+                <div class="validate"></div>
+              </div>
 
               <div class="form-group">
-                <input type="number" class="form-control" name="Whatsapp" id="" placeholder="Nomor Whatsapp" data-rule="minlen:2" data-msg="Please enter a correct phone number" required>
+                <input type="tel" class="form-control" name="Whatsapp" id="waDaftar" pattern="[0-9]{10,15}" placeholder="Whatsapp" data-rule="minlen:4" data-msg="Contoh: 6282137760669" required/>
                 <div class="validate"></div>
               </div>
 
-              <div class="form-group d-none">
-                <select name="Program" id="select" class="form-control">
-                  <option value="Speed Class">Program: Speed Class</option>
-                </select>
+              <div class="form-group">
+                <input readonly type="text" class="form-control" name="Program" id="Programs" value="Speed Class: 275K" />
                 <div class="validate"></div>
               </div>
- 
+              
               <div class="mb-3">
                 <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div class="row">
-                
-                <div class="col">
-                   <div class="text-center"><a class="send_contact" onclick='SubForm()' href="javascript:void" role="button">Daftar Sekarang</a></div>
-                </div>
+              <div class="text-center">
+                <button id="" type="submit">Send Message</button>
               </div>
             </form>
           </div>
