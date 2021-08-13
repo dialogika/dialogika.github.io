@@ -949,6 +949,27 @@
     <div><a href="#contact" target="" class="btn btn-daftar-sekarang scrollto">Daftar</a></div>
   </nav>
 
+  <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="confirm" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"  style="width: 22rem;" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Data Telah Kami Terima</h5>
+              <p class="card-text">Apabila Anda Tidak Langsung Ter-Redirect Ke Whatsapp Klik Link Dibawah Ini .</p>
+              <a class="send_contact btn btn-primary float-right" href="javascript:void" role="button">Send Whatsapp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Vendor JS Files -->
   <script src="../../assets/vendor/jquery/jquery.min.js"></script>
   <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -964,6 +985,10 @@
   <!-- Template Main JS File -->
   <script src="../../assets/js/event/workshop/speed-class.js"></script>
   <script type="text/javascript">
+    $('#myForm').on('submit', function(e){
+      $('#confirm').modal('show');
+      e.preventDefault();
+    });
   </script>
 
 </body>

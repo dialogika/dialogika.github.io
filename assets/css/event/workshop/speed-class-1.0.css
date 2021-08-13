@@ -1116,3 +1116,26 @@
 }
 
 
+/*--------------------------------------------------------------
+# modal-login
+--------------------------------------------------------------*/
+
+.modal .btn-download {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 30px;
+  margin-top: 5px;
+  border-radius: 22px;
+  transition: 0.5s;
+  color: #fff;
+  background: #1977cc;
+}
+
+.modal .modal-header {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
