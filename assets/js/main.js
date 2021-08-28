@@ -174,6 +174,8 @@
     }
   });
 
+  
+
   // Initiate the venobox plugin
   $(document).ready(function() {
     $('.venobox').venobox();
