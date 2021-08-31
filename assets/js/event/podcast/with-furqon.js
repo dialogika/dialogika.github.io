@@ -1,11 +1,20 @@
 /**
-* Template Name: Medilab - v2.1.1
+* Template Name: Medilab - v2.0.0
 * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
 !(function($) {
   "use strict";
+
+  // Set the count down timer
+  if ($('.countdown').length) {
+    var count = $('.countdown').data('count');
+    var template = $('.countdown').html();
+    $('.countdown').countdown(count, function(event) {
+      $(this).html(event.strftime(template));
+    });
+  }
 
   // Preloader
   $(window).on('load', function() {
@@ -41,7 +50,7 @@
 
         if ($('body').hasClass('mobile-nav-active')) {
           $('body').removeClass('mobile-nav-active');
-          $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
+          $('.mobile-nav-toggle i').toggleClass('bx bx-dots-vertical-rounded icofont-close');
           $('.mobile-nav-overly').fadeOut();
         }
         return false;
@@ -91,12 +100,12 @@
       class: 'mobile-nav d-lg-none'
     });
     $('body').append($mobile_nav);
-    $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>');
+    $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="bx bx-dots-vertical-rounded"></i></button>');
     $('body').append('<div class="mobile-nav-overly"></div>');
 
     $(document).on('click', '.mobile-nav-toggle', function(e) {
       $('body').toggleClass('mobile-nav-active');
-      $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close-circled');
+      $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
       $('.mobile-nav-overly').toggle();
     });
 
@@ -150,11 +159,29 @@
     return false;
   });
 
+  // Menu list isotope and filter
+  $(window).on('load', function() {
+    var menuIsotope = $('.menu-container').isotope({
+      itemSelector: '.menu-item',
+      layoutMode: 'fitRows'
+    });
+
+    $('#menu-flters li').on('click', function() {
+      $("#menu-flters li").removeClass('filter-active');
+      $(this).addClass('filter-active');
+
+      menuIsotope.isotope({
+        filter: $(this).data('filter')
+      });
+    });
+  });
+
   // jQuery counterUp
   $('[data-toggle="counter-up"]').counterUp({
     delay: 10,
     time: 1000
   });
+
 
   // Testimonials carousel (uses the Owl Carousel library)
   $(".testimonials-carousel").owlCarousel({
@@ -187,47 +214,3 @@
   });
 
 })(jQuery);
-
-// $(function() {
-//   $("#form").validate({
-//     rules: {
-//       firstname: "required",
-//       lastname: "required",
-//       email: {
-//         required: true,
-//         email: true
-//       },
-//     },
-//     messages: {
-//       firstname: "Please enter your firstname",
-//       lastname: "Please enter your lastname",
-//       email: "Please enter a valid email address"
-//     },
-//     submitHandler: function(form) {
-//       form.submit();
-//     }
-//   });
-// });
-
-// Disable contact form without contact name
-var disable_form_submit = function () {
-
-  var contactNameField = '.required-contact-field';
-
-  $(contactNameField).keyup(function() {
-    var empty = false;
-    $(contactNameField).each(function() {
-      if ($(this).val() == '') {
-        empty = true;
-      }
-    });
-    if (empty) {
-      $('#submit').attr('disabled', 'disabled');
-    } else {
-      $('#submit').removeAttr('disabled').addClass('button--primary');
-      
-    }
-  });
-};
-
-$(disable_form_submit);
