@@ -39,9 +39,13 @@
 #hero h2 {
   color: #2c4964;
   margin: 10px 0 0 0;
-  font-size: 24px;
-  text-shadow: 0 0 3px #fff;
+  font-size: 25px;
+  font-weight: 500;
+  /*text-shadow: #fff 2px 0px 10px;*/
+  text-shadow: 2px 2px 4px #fff;
 }
+
+
 
 #hero .btn-get-started {
   font-family: "Raleway", sans-serif;

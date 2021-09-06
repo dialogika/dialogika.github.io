@@ -16,6 +16,19 @@
     }
   });
 
+  // Hero typed
+  if ($('.typed').length) {
+    var typed_strings = $(".typed").data('typed-items');
+    typed_strings = typed_strings.split(',')
+    new Typed('.typed', {
+      strings: typed_strings,
+      loop: true,
+      typeSpeed: 100,
+      backSpeed: 50,
+      backDelay: 2000
+    });
+  }
+
   // Smooth scroll for the navigation menu and links with .scrollto classes
   var scrolltoOffset = $('#header').outerHeight() - 1;
   $(document).on('click', '.nav-menu a, .mobile-nav a, .scrollto', function(e) {
