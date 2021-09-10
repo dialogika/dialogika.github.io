@@ -821,86 +821,92 @@
     </section><!-- End About Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
+      <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Form Pendaftaran</h2>
-          <p>Silahkan inputkan biodata anda!</p>
-        </div>
+          <div class="section-title">
+            <h2>Form Pendaftaran</h2>
+            <p>Silahkan inputkan biodata anda!</p>
+          </div>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="row" data-aos="fade-up" data-aos-delay="100">
 
-          <div class="col-lg-6">
+            <div class="col-lg-6">
+              <!-- <form method="post" id="myForm" role="form" class="php-email-form" id="form-daftar"> -->
+                <form action="javascript:void" id="myForm" method="post" role="form" class="php-email-form was-validated" onsubmit="SubForm()" >
+                
+                <div class="form-group">
+                  <input type="text" name="Name" pattern="[a-zA-Z\s]{3,100}" class="form-control" id="names" placeholder="Nama Lengkap" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                  <div class="validate"></div>
+                </div>
 
-            <div class="row">
-              <div class="col-md-12">
-                <div class="info-box">
-                  <i class="bx bx-map"></i>
-                  <h3>Our Address</h3>
-                  <p>Jatempanol, Tempel, Caturtunggal,<br> Depok Sub-District, Sleman Regency,<br> Special Region of Yogyakarta 55281</p>
+                <div class="row">
+                  <div class="col-md-4 form-group">
+                    <input type="text" class="form-control" name="Location" pattern="[a-zA-Z\s]{3,100}" id="domisilis" placeholder="Domisili" data-rule="email" data-msg="Please enter a valid place">
+                    <div class="validate"></div>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <input type="text" class="form-control" name="Work" id="jobs" pattern="[a-zA-Z\s]{3,100}" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Please enter at least 2 chars">
+                    <div class="validate"></div>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <input type="tel" class="form-control" name="Whatsapp" id="" pattern="[0-9]{10,15}" placeholder="Whatsapp" data-rule="minlen:2" data-msg="Please enter a correct phone number">
+                    <div class="validate"></div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Program: Basic Plus - Public Speaking" disabled>
+                  <div class="validate"></div>
+                </div>
+
+                <select name="Program" class="d-none">
+                  <option selected>Basic Plus</option>
+                </select>
+
+                <div class="form-group">
+                  <textarea class="form-control" name="Ket" id="messages" rows="5" placeholder="Kesulitan yang dirasakan? / Pesan"></textarea>
+                  <div class="validate"></div>
+                </div>
+                
+                <div class="text-center"><button class="send_contact" type="submit" role="button">Send Whatsapp</button></div>
+              </form>
+            </div>
+
+            <div class="col-lg-6">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="info-box">
+                    <i class="bx bx-map"></i>
+                    <h3>Our Address</h3>
+                    <p>Jatempanol, Tempel, Caturtunggal,<br> Depok Sub-District, Sleman Regency,<br> Special Region of Yogyakarta 55281</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box mt-4">
+                    <i class="bx bx-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>admin@dialogika.co<br></p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box mt-4">
+                    <i class="bx bx-phone-call"></i>
+                    <h3>Whatsapp Us</h3>
+                    <p>+62 821 377 60 669<br></p>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="info-box mt-4">
-                  <i class="bx bx-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>admin@dialogika.co<br></p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box mt-4">
-                  <i class="bx bx-phone-call"></i>
-                  <h3>Whatsapp Us</h3>
-                  <p>+62 821 377 60 669<br></p>
-                </div>
-              </div>
+
             </div>
 
           </div>
 
-          <div class="col-lg-6">
-            <form method="post" id="myForm" role="form" class="php-email-form" id="form-daftar">
-              <div class="row">
-                <div class="col form-group">
-                  <input type="text" name="Name" class="form-control" id="names" placeholder="Nama Lengkap" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                  <div class="validate"></div>
-                </div>
-                <div class="col form-group">
-                  <input type="text" class="form-control" name="Location" id="domisilis" placeholder="Domisili" data-rule="email" data-msg="Please enter a valid place">
-                  <div class="validate"></div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <input type="text" class="form-control" name="Work" id="jobs" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Please enter at least 2 chars">
-                <div class="validate"></div>
-              </div>
-              <div class="form-group">
-                <input type="number" class="form-control" name="Whatsapp" id="" placeholder="Nomor Whatsapp, CONTOH: 082137760669" data-rule="minlen:2" data-msg="Please enter a correct phone number">
-                <div class="validate"></div>
-              </div>
-              <select name="Program" class="d-none">
-                <option selected>Kelas Sales</option>
-              </select>
-              <div class="form-group">
-                <textarea class="form-control" name="Ket" id="messages" rows="5" placeholder="Kesulitan yang dirasakan? / Pesan"></textarea>
-                <div class="validate"></div>
-              </div>
-              <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <!-- <div class="text-center"><button type="submit">Send Whatsapp</button></div> -->
-              <div class="text-center"><a class="send_contact" onclick='SubForm()' href="javascript:void" role="button">Send Whatsapp</a></div>
-            </form>
-          </div>
-
         </div>
-
-      </div>
-    </section><!-- End Contact Section -->
+      </section>
+    <!-- End Contact Section -->
+    
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -979,6 +985,29 @@
 
   <!-- <div id="preloader"></div> -->
   <!-- <a href="#appointment" class="to-contact scrollto"><i class="icofont-whatsapp"></i></a> -->
+
+  <!-- ======= Modal ======= -->
+    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="confirm" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered"  style="width: 22rem;" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Data Telah Kami Terima</h5>
+                <p class="card-text">Apabila Anda Tidak Langsung Ter-Redirect Ke Whatsapp Klik Link Dibawah Ini .</p>
+                <a class="send_contact btn btn-primary float-right" href="javascript:void" role="button">Send Whatsapp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- End Modal -->
 
   <nav class="bar-bottom fixed-bottom">
     <div class="price-wrap mr-auto">
