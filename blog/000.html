@@ -20,6 +20,7 @@
         <link href="https://dialogika.co/assets/css/blog/style.css" rel="stylesheet">
         <link href="https://dialogika.co/assets/css/template.css" rel="stylesheet">
 
+    </head>
 
 <body>
 
@@ -84,13 +85,13 @@
     <section id="blog" class="blog">
       <div class="container">
 
-        <div class="row d-flex justify-content-between">
-          <div class="col-lg-7 entries">
+        <div class="row">
+          <div class="col-lg-8 entries">
             {block:Posts}
             <article class="entry">
                 {block:Photo} 
                     <div class="entry-img">
-                        <img src="{PhotoURL-1200}" alt="{PhotoAlt}" class="post img-fluid" style="object-fit: cover;">
+                        <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" class="post img-fluid" style="object-fit: cover;">
                     </div>
                 {/block:Photo}                    
                 {block:Text}
@@ -100,7 +101,7 @@
                         {/block:Title}
                     </h2>
                     <div class="entry-content accordion">
-                        <p>{Body}</p>
+                        <p class="text-justify">{Body}</p>
 
                         {block:Quote}
                             <blockquote class="blockquote post">
@@ -114,7 +115,9 @@
                         {/block:Quote}
 
                         {block:Photo}
-                            <img src="{PhotoURL-700}" class="post img-fluid" alt="{PhotoAlt}">
+                            {block:HighRes}
+                                <img src="{PhotoURL-500}" class="rounded img-fluid" alt="{PhotoAlt}">
+                            {/block:HighRes}
                                 {block:Caption}
                                     <div class="caption">{Caption}</div>
                                 {/block:Caption}
