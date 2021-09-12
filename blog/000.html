@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{Title}</title>
+        <link rel="shortcut icon" href="https://dialogika.co/assets/img/favicon.png">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        {block:Description}
+            <meta name="description" content="{MetaDescription}" />
+        {/block:Description}
+        
+        <!-- images -->
+        <meta name="image:background" content="" />
+         
+        <link href="https://dialogika.co/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://dialogika.co/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="https://dialogika.co/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+        
+        <!-- Template Main CSS File -->
+        <link href="https://dialogika.co/assets/css/blog/style.css" rel="stylesheet">
+        <link href="https://dialogika.co/assets/css/template.css" rel="stylesheet">
+
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+    <div class="container d-flex">
+      <div class="contact-info mr-auto">
+        <i class="bx bxs-envelope"></i> <a href="mailto:admin@dialogika.co">admin@dialogika.co</a>
+        <i class="bx bxs-phone-call"></i> +62 821 377 60 669
+        <i class="bx bxs-location-plus"></i> Special Region of Yogyakarta 
+      </div>
+      <div class="social-links">
+        <a href="https://instagram.com/dialogika.co" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="https://twitter.com/dialogika_co" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="https://facebook.com/dialogika.co" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#appointment" class="skype scrollto"><i class="bx bxl-whatsapp"></i></a>
+        <a href="https://linkedin.com/company/dialogika" class="linkedin"><i class="bx bxl-linkedin"></i></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <!-- <h1 class="logo mr-auto"><a href="index.html"><font color="1977cc">DIA</font>LOGIKA</a></h1> -->
+      <h1 class="logo mr-auto"><a href="https://dialogika.co/index.html">
+          <img src="https://dialogika.co/assets/img/icon.png"></a>
+      </h1>
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="#hero">Home</a></li>
+          <li><a href="https://dialogika.co/vacancy/mentor.html">Mentor</a></li>
+          <li><a href="https://dialogika.co/vacancy/team.html">Team</a></li>
+          <li><a href="https://dialogika.co/vacancy/intern.html">Intern</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+
+      <a href="../blog.html" class="appointment-btn scrollto">Blog</a>
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Breadcrumbs Section ======= -->
+  <section class="breadcrumbs">
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>&nbsp; </h2>
+        <ol>
+          <li><a href="#" onclick="return false;">Home</a></li>
+          <li><a href="#" onclick="return false;">Blog</a></li>
+        </ol>
+      </div>
+
+      </div>
+  </section><!-- End Breadcrumbs Section -->
+
+  <main id="main">
+
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-8 entries">
+            {block:Posts}
+            <article class="entry">
+                {block:Photo} 
+                    <div class="entry-img">
+                        <img src="{PhotoURL-1200}" alt="{PhotoAlt}" class="img-fluid" style="object-fit: cover;">
+                    </div>
+                {/block:Photo}                    
+                {block:Text}
+                    <h2 class="entry-title post text">
+                        {block:Title}
+                            <a href="{Permalink}">{Title}</a>
+                        {/block:Title}
+                    </h2>
+                    {block:Text} 
+                    <div class="entry-content accordion">
+                        <p>{Body}</p>
+
+                        {block:HasTags}
+                            <div class="entry-footer clearfix">
+                                <ul class="tags">
+                                    {block:Tags}
+                                    <li><a href="{TagURL}">{Tag}</a></li>
+                                    {/block:Tags}
+                                </ul>
+                            </div>
+                        {/block:HasTags}
+                    </div>
+                    {/block:Text}
+            </article><!-- End blog entry -->
+            {/block:Posts}
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+            <div class="sidebar">
+
+              <h3 class="sidebar-title">Our Posts</h3>
+              <div class="sidebar-item recent-posts">
+                <div class="post-item clearfix">
+                  <img src="https://dialogika.co/assets/img/blog/selflove-air/bg.jpg" alt="">
+                  <h4><a href="selflove-air.html">Selflove dengan A-I-R</a></h4>
+                  <time datetime="2020-01-01">Oct 20, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="https://dialogika.co/assets/img/blog/gratification/bg.jpg" alt="">
+                  <h4><a href="gratification.html">Instant Gratification: Bagaimana Cara Mengatasinya?</a></h4>
+                  <time datetime="2020-01-01">Oct 25, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="https://dialogika.co/assets/img/blog/anxiety/bg.jpg" alt="">
+                  <h4><a href="anxiety.html">Berdamai dengan “Anxiety”, Ini Tipsnya!</a></h4>
+                  <time datetime="2020-01-01">Oct 22, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="https://dialogika.co/assets/img/blog/kesalahan-bisnis/bg.jpg" alt="">
+                  <h4><a href="kesalahan-bisnis.html">Kesalahan Tujuan Di Dalam Bisnis.</a></h4>
+                  <time datetime="2020-01-01">Dec 19, 2020</time>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="https://dialogika.co/assets/img/blog/glossophobia/bg.jpg" alt="">
+                  <h4><a href="glossophobia.html">Mengalami Glossophobia? Ini Solusinya!</a></h4>
+                  <time datetime="2020-01-01">Oct 19, 2020</time>
+                </div>
+
+              </div><!-- End sidebar recent posts-->
+            </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->    
+
+  <!-- ======= Footer ======= -->
+      <footer id="footer">
+
+        <div class="footer-top">
+          <div class="container">
+            <div class="row">
+
+              <div class="col-lg-3 col-md-6 footer-contact">
+                <h3><b><font color="#2279C9">DIA</font>LOGIKA</b></h3>
+                <p>
+                  Lembaga dan wadah untuk belajar public speaking dengan fokus latihan dan membebaskan mindset takut salah, insecure, dan berani untuk mengembangkan diri.<br><br>
+                  <strong>Phone:</strong> +62 821 377 60 669<br>
+                  <strong>Email:</strong> admin@dialogika.co<br>
+                </p>
+              </div>
+
+              <div class="col-lg-2 col-md-6 footer-links">
+                <h4>Useful Links</h4>
+                <ul>
+                  <li><i class="bx bx-chevron-right"></i> <a href="../blog.html">Dialogika Blog</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="../vacancy/team.html">Our Team</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="../vacancy/mentor.html">Our Mentor</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="../vacancy/intern.html">Internship Program</a></li>
+                </ul>
+              </div>
+
+              <div class="col-lg-3 col-md-6 footer-links">
+                <h4>Favorite Choose</h4>
+                <ul>
+                  <li><i class="bx bx-chevron-right"></i> <a href="../program/basic.html">Basic Level</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="../program/basicplus.html">Basic Plus</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="../program/jogja/premium.html">Premium at Jogja</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="../program/muslimah.html">Muslimah Class</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="../program/sales.html">Sales Class</a></li>
+                </ul>
+              </div>
+
+              <div class="col-lg-4 col-md-6 footer-newsletter">
+                <h4>Subscribe Whatsapp Group</h4>
+                <p>Jangan lewatkan info mengenai Dialogika didalam group ini. Silahkan ketikkan "Saya join!" kemudian click subscribe!</p>
+                <form action="https://chat.whatsapp.com/GxcSTigPNsWFG4cTlbKgFv" method="post"> 
+                  <input type="text" name="subscribes"><input type="submit" value="Subscribe">
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container d-md-flex py-4">
+
+          <div class="mr-md-auto text-center text-md-left">
+            <div class="copyright">
+              &copy; Copyright <strong><span>Dialogika</span></strong>. All Rights Reserved
+            </div>
+          </div>
+          <div class="social-links text-center text-md-right pt-3 pt-md-0">
+            <a href="https://twitter.com/dialogika_co" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="https://facebook.com/dialogika.co" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="https://instagram.com/dialogika.co" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="bx bxl-whatsapp"></i></a>
+            <a href="https://linkedin.com/company/dialogika" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          </div>
+        </div>
+      </footer> 
+  <!-- End Footer -->
+
+  <!-- Vendor JS Files -->
+      <script src="https://dialogika.co/assets/vendor/jquery/jquery.min.js"></script>
+      <script src="https://dialogika.co/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="https://dialogika.co/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+      <script src="https://dialogika.co/assets/vendor/counterup/counterup.min.js"></script>
+      <script src="https://dialogika.co/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <!-- <script src="assets/vendor/wa/script.js"></script> -->
+
+
+  <!-- Template Main JS File -->
+    <script src="https://dialogika.co/assets/js/blog/blog.js"></script>
+
+</body>
+
+</html>
