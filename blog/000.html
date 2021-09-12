@@ -84,13 +84,13 @@
     <section id="blog" class="blog">
       <div class="container">
 
-        <div class="row">
-          <div class="col-lg-8 entries">
+        <div class="row d-flex justify-content-between">
+          <div class="col-lg-7 entries">
             {block:Posts}
             <article class="entry">
                 {block:Photo} 
                     <div class="entry-img">
-                        <img src="{PhotoURL-1200}" alt="{PhotoAlt}" class="img-fluid" style="object-fit: cover;">
+                        <img src="{PhotoURL-1200}" alt="{PhotoAlt}" class="post img-fluid" style="object-fit: cover;">
                     </div>
                 {/block:Photo}                    
                 {block:Text}
@@ -99,9 +99,26 @@
                             <a href="{Permalink}">{Title}</a>
                         {/block:Title}
                     </h2>
-                    {block:Text} 
                     <div class="entry-content accordion">
                         <p>{Body}</p>
+
+                        {block:Quote}
+                            <blockquote class="blockquote post">
+                                "{Quote}"
+                            </blockquote>
+                            {block:Source}
+                                <figcaption class="blockquote-footer">
+                                    {Source}
+                                </figcaption>
+                            {/block:Source}
+                        {/block:Quote}
+
+                        {block:Photo}
+                            <img src="{PhotoURL-700}" class="post img-fluid" alt="{PhotoAlt}">
+                                {block:Caption}
+                                    <div class="caption">{Caption}</div>
+                                {/block:Caption}
+                        {/block:Photo}
 
                         {block:HasTags}
                             <div class="entry-footer clearfix">
@@ -113,8 +130,8 @@
                             </div>
                         {/block:HasTags}
                     </div>
-                    {/block:Text}
-            </article><!-- End blog entry -->
+                {/block:Text}
+            </article>
             {/block:Posts}
 
           </div><!-- End blog entries list -->
