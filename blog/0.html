@@ -5,15 +5,15 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>{Title}</title>
+  <title>{Title}{block:PostSummary}, {PostSummary} {/block:PostSummary}</title>
   <link rel="shortcut icon" href="{Favicon}">
     <link rel="alternate" type="application/rss+xml" href="{RSS}">
     {block:Description}
       <meta name="description" content="{MetaDescription}" />
     {/block:Description}
 
+  <!-- Sharing  -->
     <meta content="" name="keywords">
-
     <meta property="og:site_name" content="" />
     <meta property="og:site" content="dialogika.co" /> 
     <meta property="og:title" content=""/> 
@@ -21,6 +21,27 @@
     <meta property="og:image" content="" /> 
     <meta property="og:url" content="" /> 
     <meta property="og:type" content="article" />
+
+  <!-- Sidebar -->
+    <meta name="color:Background" content="#fffff">
+    <meta name="color:Sidebar Background" content="" />
+    <meta name="color:Sidebar Foreground" content="" />
+    <meta name="color:Sidebar Title" content="" />
+    <meta name="color:Sidebar Link" content="" />
+    <meta name="color:Sidebar Hover" content="" />
+
+    <meta name="font:Sidebar Title" content="Raleway"/>
+    <meta name="font:Sidebar Text" content="Open Sans" />
+    <meta name="font:Books" content="Raleway" />
+
+    <meta name="image:Sidebar Background" content="" />
+
+    <meta name="text:Sidebar Width" content="" />
+    <meta name="text:Sidebar Title Size" content="" />
+    <meta name="text:Sidebar Text Size" content="" />
+    <meta name="text:Sidebar Link Size" content="" />
+    <meta name="text:Sidebar Desc opacity" content="" />
+
 
   <!-- Favicons -->
     <link href="https://dialogika.co/assets/img/favicon.png" rel="icon">
@@ -151,7 +172,7 @@
 
                         {block:Photo}
                             {block:HighRes}
-                                <img src="{PhotoURL-500}" class="img-fluid" alt="{PhotoAlt}">
+                                <img src="{PhotoURL-HighRes}" class="" alt="{PhotoAlt}">
                             {/block:HighRes}
                                 {block:Caption}
                                     <div class="caption">{Caption}</div>
@@ -217,6 +238,34 @@
                 {/block:Text}
             </article>
             {/block:Posts}
+
+            {block:Pagination}
+              <div class="blog-pagination">
+                <ul class="justify-content-center">
+                  {block:PreviousPage}
+                    <li>
+                      <a href="{PreviousPage}">
+                        <i class="bx bx-chevrons-left"></i>
+                      </a>
+                    </li>
+                  {/block:PreviousPage}
+
+                  {block:CurrentPage}
+                    <li class="active">
+                      <a>{PageNumber}</a>
+                    </li>
+                  {/block:CurrentPage}
+
+                  {block:NextPage}
+                    <li>
+                      <a href="{NextPage}">
+                        <i class="bx bx-chevrons-right"></i>
+                      </a>
+                    </li>
+                  {/block:NextPage}
+                </ul>
+              </div>
+            {/block:Pagination}
 
           </div><!-- End blog entries list -->
 
