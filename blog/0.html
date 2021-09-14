@@ -59,6 +59,12 @@
     <link href="https://dialogika.co/assets/css/blog/style.css" rel="stylesheet">
     <link href="https://dialogika.co/assets/css/template.css" rel="stylesheet">
    
+   <style type="text/css">
+     img {
+      border: 0;
+      max-width: 100%;
+      }
+   </style>
 </head>
 
 <body>
@@ -109,7 +115,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>&nbsp; </h2>
           <ol>
-            <li><a href="#" onclick="return false;">Home</a></li>
+            <li><a href="https://dialogika.tumblr.com">Home</a></li>
             <li><a href="#" onclick="return false;">Blog</a></li>
           </ol>
         </div>
@@ -138,92 +144,33 @@
           <div class="col-lg-8 entries">
             {block:Posts}
             <article class="entry">
-                {block:Photo} 
+                {block:HighRes} 
                     <div class="entry-img">
-                        <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" class="post img-fluid" style="object-fit: cover;">
+                        <img src="{PhotoWidth-HighRes}" alt="{PhotoAlt}" class="post img-fluid" style="object-fit: cover;">
                     </div>
-                {/block:Photo}                    
+                {/block:HighRes}
                 {block:Text}
-                    <h2 class="entry-title post text">
+                    <h2 class="entry-title">
                         {block:Title}
                             <a href="{Permalink}">{Title}</a>
                         {/block:Title}
                     </h2>
-                    <div class="entry-content accordion">
-                        <p class="text-justify">{Body}</p>
 
-                        {block:Quote}
-                            <blockquote class="blockquote post">
-                                "{Quote}"
-                            </blockquote>
-                            {block:Source}
-                                <figcaption class="blockquote-footer">
-                                    {Source}
-                                </figcaption>
-                            {/block:Source}
-                        {/block:Quote}
+                    <div class="entry-meta">
+                      <ul>
+                        <li class="d-flex align-items-center">
+                          <i class="bx bx-time"></i> <a href="{Permalink}">{block:Date}{lang:Posted TimeAgo}{/block:Date}</a>
+                        </li>
+                        <li class="d-flex align-items-center"><i class="bx bx-comment"></i> 
+                          <a href="#show-comment" data-toggle="accordion">{block:NoteCount} {NoteCountWithLabel}{/block:NoteCount}</a></li>
+                      </ul>
+                    </div>
 
-                        {block:Photoset}
-                          {Photoset-500}
-                          {block:Caption}
-                              <div class="caption">{Caption}</div>
-                          {/block:Caption}
-                        {/block:Photoset}
-
-                        {block:Photo}
-                            {block:HighRes}
-                                <img src="{PhotoURL-HighRes}" class="" alt="{PhotoAlt}">
-                            {/block:HighRes}
-                                {block:Caption}
-                                    <div class="caption">{Caption}</div>
-                                {/block:Caption}
-                        {/block:Photo}
-
-                        {block:Panorama}
-                            {LinkOpenTag}
-                                <img src="{PhotoURL-Panorama}" class="img-fluid" alt="{PhotoAlt}"/>
-                            {LinkCloseTag}
-                            {block:Caption}
-                                <div class="caption">{Caption}</div>
-                            {/block:Caption}
-                        {/block:Panorama}
-
-                        {block:Link}
-                          <a href="{URL}" class="link" {Target}>{Name}</a>
-                          {block:Description}
-                            <div class="description">{Description}</div>
-                          {/block:Description}
-                        {/block:Link}
-
-                        {block:Chat}
-                          {block:Title}
-                            <h3><a href="{Permalink}">{Title}</a></h3>
-                          {/block:Title}
-                            <ul class="chat">
-                              {block:Lines}
-                              <li class="{Alt} user_{UserNumber}">
-                                {block:Label}
-                                  <span class="label">{Label}</span>
-                                {/block:Label}
-                              {Line}
-                              </li>
-                              {/block:Lines}
-                              </ul>
-                          </li>
-                        {/block:Chat}
-
-                        {block:Video}
-                          {Video-500}{block:Caption}
-                            <div class="caption">{Caption}</div>
-                          {/block:Caption}
-                        {/block:Video}
-
-                        {block:Audio}
-                          {AudioEmbed}
-                          {block:Caption}
-                            <div class="caption">{Caption}</div>
-                          {/block:Caption}
-                        {/block:Audio}
+                    <div class="entry-content">
+                        <p class="">{Body}</p>
+                        {block:HighRes} 
+                          <img src="{PhotoWidth-HighRes}" class="img-fluid" alt="{PhotoAlt}">
+                        {/block:HighRes}
 
                         {block:HasTags}
                             <div class="entry-footer clearfix">
@@ -238,6 +185,23 @@
                 {/block:Text}
             </article>
             {/block:Posts}
+
+            <div class="blog-comments" id="show-comment">
+              {block:PostNotes}
+                <h4 class="comments-count"> {NoteCount}</h4>
+              {/block:PostNotes}
+
+              {block:PostNotes}
+              <div id="comment-1" class="comment clearfix">
+                <img src="assets/img/comments-1.jpg" class="comment-img  float-left" alt="">
+                <h5><a href="">Georgia Reader</a> <a href="#" class="reply"><i class="icofont-reply"></i> Reply</a></h5>
+                <time datetime="2020-01-01">01 Jan, 2020</time>
+                <p>
+                  {PostNotes}
+                </p>
+              </div><!-- End comment #1 -->
+              {/block:PostNotes}
+            </div>
 
             {block:Pagination}
               <div class="blog-pagination">
@@ -256,6 +220,20 @@
                     </li>
                   {/block:CurrentPage}
 
+                  {block:JumpPagination length="5"}
+                    {block:CurrentPage}
+                      <li class="active">
+                        <a>{PageNumber}</a>
+                      </li>
+                    {/block:CurrentPage}
+
+                    {block:JumpPage}
+                      <li>
+                        <a href="{URL}">{PageNumber}</a>
+                      </li>
+                    {/block:JumpPage}
+                  {/block:JumpPagination}
+
                   {block:NextPage}
                     <li>
                       <a href="{NextPage}">
@@ -266,49 +244,99 @@
                 </ul>
               </div>
             {/block:Pagination}
-
           </div><!-- End blog entries list -->
 
           <div class="col-lg-4">
-            <div class="sidebar">
+            <div class="sidebar" id="sidebar-buy">
+              <a type="button" class="btn btn-primary btn-lg btn-block" href="https://wasap.at/gP1mWH">
+                <font color="# "><i class="bx bxs-chat"></i>
+                Hubungi Admin</font>
+              </a>
+            </div><!-- End -->
 
-              <h3 class="sidebar-title">Our Posts</h3>
-              <div class="sidebar-item recent-posts">
-                <div class="post-item clearfix">
-                  <img src="https://dialogika.co/assets/img/blog/selflove-air/bg.jpg" alt="">
-                  <h4><a href="selflove-air.html">Selflove dengan A-I-R</a></h4>
-                  <time datetime="2020-01-01">Oct 20, 2020</time>
+            <div class="sidebar"> <!-- sidebar -->
+              <h3 class="sidebar-title"><font style="color: #2279C9;">Best</font> Buying Class</h3>
+                <div class="sidebar-item recent-posts">
+                  <div class="post-item clearfix">
+                    <img src="https://dialogika.co/assets/img/program/basic-plus/post.jpg" alt="">
+                    <h4><a href="https://dialogika.co/basic-plus.html">Basic Plus Class</a></h4>
+                    <time datetime="2020-01-01">
+                      <span class="badge badge-pill badge-danger">
+                        <i class="bx bxs-purchase-tag"></i>
+                        <strike>IDR 1.000.000</strike></span> &nbsp;
+                      <span class="badge badge-pill badge-success">
+                        <i class="bx bxs-offer"></i>
+                        50% OFF</span><br>
+                      <strong><font color="#2279C9">IDR 499.000</font></strong>
+                    </time>
+                  </div>
                 </div>
-
-                <div class="post-item clearfix">
-                  <img src="https://dialogika.co/assets/img/blog/gratification/bg.jpg" alt="">
-                  <h4><a href="gratification.html">Instant Gratification: Bagaimana Cara Mengatasinya?</a></h4>
-                  <time datetime="2020-01-01">Oct 25, 2020</time>
+                <div class="sidebar-item recent-posts">
+                  <div class="post-item clearfix">
+                    <img src="https://dialogika.co/assets/img/program/private-kids/post.jpg" alt="">
+                    <h4><a href="https://wasap.at/RMrOQY">Private Public Speaking Online Anak</a></h4>
+                    <time datetime="2020-01-01">
+                      <span class="badge badge-pill badge-danger">
+                        <i class="bx bxs-purchase-tag"></i>
+                        <strike>IDR 2.500.000</strike></span>&nbsp;
+                      <span class="badge badge-pill badge-success">
+                        <i class="bx bxs-offer"></i>
+                        60% OFF</span><br>
+                      <strong><font color="#2279C9">IDR 999.000</font></strong>
+                    </time>
+                  </div>
                 </div>
-
-                <div class="post-item clearfix">
-                  <img src="https://dialogika.co/assets/img/blog/anxiety/bg.jpg" alt="">
-                  <h4><a href="anxiety.html">Berdamai dengan “Anxiety”, Ini Tipsnya!</a></h4>
-                  <time datetime="2020-01-01">Oct 22, 2020</time>
+              <h3 class="sidebar-title">Paket <font style="color: #2279C9;">Hemat</font></h3>
+                <div class="sidebar-item recent-posts">
+                  <div class="post-item clearfix">
+                    <img src="https://dialogika.co/assets/img/program/presentation-class/post.jpg" alt="">
+                    <h4><a href="https://dialogika.co/presentation-class.html">Basic + Presentation</a></h4>
+                    <time datetime="2020-01-01">
+                      <span class="badge badge-pill badge-danger">
+                        <i class="bx bxs-purchase-tag"></i>
+                        <strike>IDR 3.400.000</strike></span>&nbsp;
+                      <span class="badge badge-pill badge-success">
+                        <i class="bx bxs-offer"></i>
+                        72% OFF</span><br>
+                      <strong><font color="#2279C9">IDR 999.000</font></strong>
+                    </time>
+                  </div>
                 </div>
-
-                <div class="post-item clearfix">
-                  <img src="https://dialogika.co/assets/img/blog/kesalahan-bisnis/bg.jpg" alt="">
-                  <h4><a href="kesalahan-bisnis.html">Kesalahan Tujuan Di Dalam Bisnis.</a></h4>
-                  <time datetime="2020-01-01">Dec 19, 2020</time>
+                <div class="sidebar-item recent-posts">
+                  <div class="post-item clearfix">
+                    <img src="https://dialogika.co/assets/img/program/private-kids/post.jpg" alt="">
+                    <h4><a href="#">Private Public Speaking Online Anak</a></h4>
+                    <time datetime="2020-01-01">
+                      <span class="badge badge-pill badge-warning">Daftar 2 Lebih Hemat</span><br>
+                      <span class="badge badge-pill badge-danger">
+                        <i class="bx bxs-purchase-tag"></i>
+                        <strike>IDR 5.000.000</strike></span>&nbsp;
+                      <span class="badge badge-pill badge-success">
+                        <i class="bx bxs-offer"></i>
+                        81% OFF</span><br>
+                      <strong><font color="#2279C9">IDR 999.000</font></strong>
+                    </time>
+                  </div>
                 </div>
-
-                <div class="post-item clearfix">
-                  <img src="https://dialogika.co/assets/img/blog/glossophobia/bg.jpg" alt="">
-                  <h4><a href="glossophobia.html">Mengalami Glossophobia? Ini Solusinya!</a></h4>
-                  <time datetime="2020-01-01">Oct 19, 2020</time>
+              <h3 class="sidebar-title">Jenis Kelas</h3>
+                <div class="sidebar-item categories">
+                  <ul>
+                    <li><a href="index.html#online-class">Online Class <span>(8)</span></a></li>
+                    <li><a href="index.html#offline-class">Offline Class <span>(4)</span></a></li>
+                  </ul>
                 </div>
-
-              </div><!-- End sidebar recent posts-->
-            </div><!-- End sidebar -->
-
-          </div><!-- End blog sidebar -->
-
+              <h3 class="sidebar-title">Tags</h3>
+                <div class="sidebar-item tags">
+                  <ul>
+                    <li><a href="#" onclick="return false;">Online</a></li>
+                    <li><a href="#" onclick="return false;">Public Speaking</a></li>
+                    <li><a href="#" onclick="return false;">Bahasa Indonesia</a></li>
+                    <li><a href="#" onclick="return false;">Basic</a></li>
+                    <li><a href="#" onclick="return false;">Mentor</a></li>
+                  </ul>
+                </div>
+            </div><!-- End blog sidebar -->
+          </div>
         </div>
 
       </div>
@@ -402,6 +430,9 @@
 
   <!-- Template Main JS File -->
     <script src="https://dialogika.co/assets/js/blog/blog.js"></script>
+    <script type="text/javascript">
+    $('.collapse').collapse()
+  </script>
 
 </body>
 
