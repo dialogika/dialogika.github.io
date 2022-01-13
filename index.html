@@ -1059,9 +1059,40 @@
   <!-- End Footer -->
 
   <!-- <div id="preloader"></div> -->
-    <a href="#appointment" class="back-to-top d-flex align-items-center justify-content-center">
+    <!-- <a href="#appointment" class="back-to-top d-flex align-items-center justify-content-center">
       <i class="bx bx-tada bxl-whatsapp"></i>
-    </a>
+    </a> -->
+
+    <!-- Messenger Chat Plugin Code -->
+      <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+      <div id="fb-customer-chat" class="fb-customerchat">
+      </div>
+
+      <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "103513767948873");
+        chatbox.setAttribute("attribution", "biz_inbox");
+      </script>
+
+    <!-- Your SDK code -->
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v12.0'
+          });
+        };
+
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/id_ID/sdk/xfbml.customerchat.js';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+      </script>
 
   <!-- ======= Offcanvas ======= -->
     <div class="offcanvas offcanvas-start section-bg" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="classes" >
