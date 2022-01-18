@@ -968,7 +968,7 @@
           <div class="row" data-aos="fade-up" data-aos-delay="100">
 
             <div class="col-lg-6">
-              <form action="javascript:void" method="post" id="myForm" role="form" onsubmit="SubForm()" class="php-email-form needs-validation">
+              <form action="javascript:void" method="post" id="myForm" enctype="text/plain" role="form" onsubmit="SubForm()" class="php-email-form needs-validation">
                 <div class="form-group">
                   <input type="text" name="Name" class="form-control" id="names" pattern="[a-zA-Z\s]{3,100}" placeholder="Nama Lengkap*" required>
                   <div class="validate"></div>
@@ -1001,6 +1001,9 @@
                 <select class="d-none" name="Timestamp">
                   <option id="timestamp"></option>
                 </select>
+                  <input type="hidden" name="UTM_Source" value="">
+                  <input type="hidden" name="UTM_Medium" value="">
+                  <input type="hidden" name="UTM_Campaign" value="">
                 <div class="form-group">
                   <textarea class="form-control" name="Ket" id="messages" rows="4" placeholder="Masalah didalam public speaking?"></textarea>
                   <div class="validate"></div>
@@ -1301,6 +1304,11 @@
       var dateTime = date+'    '+time;
       document.getElementById("timestamp").innerHTML = dateTime;
     </script>
+
+  <!-- UTM Parameter -->
+    <script src="https://cdn.jsdelivr.net/gh/gkogan/sup-save-url-parameters/sup.min.js"></script>
+
+
 
 </body>
 
