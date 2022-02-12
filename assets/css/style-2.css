@@ -239,7 +239,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow:inset 0px 1px 0px 0px #dcf2fe;
   background:linear-gradient(to bottom, #0f61a8 5%, #0b2b6a 100%);
   background-color:#0f61a8;
-  border-radius:50px;
+  border-radius:22px;
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
@@ -677,28 +677,14 @@ span.rounded-yellow {
   line-height: 56px;
   text-transform: uppercase;
   color: #fff;
-  /*text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);*/
-  text-shadow: 0px 0px 4px rgba(0,0,0,1);
-}
-
-#hero h1.uncommon {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 56px;
-  text-transform: uppercase;
-  color: rgb(255, 255, 255);
-  text-shadow: rgb(255, 255, 255) 0px -1px 4px, rgb(255, 255, 0) 0px -2px 10px, rgb(0, 0, 255) 0px -10px 20px, rgb(0, 0, 255) 0px -18px 40px;
-  --darkreader-inline-color: #e8e6e3;
-  --darkreader-inline-bgimage: initial;
-  --darkreader-inline-bgcolor: #262a2b;
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
 }
 
 #hero h2 {
   color: #fff;
   margin: 10px 0 0 0;
   font-size: 24px;
-  /*text-shadow: 0px 4px 8px rgba(44,73,100,0.6);*/
-  text-shadow: 0px 0px 4px rgba(0,0,0,1);
+  text-shadow: 0px 4px 8px rgba(44,73,100,0.6);
 }
 #hero h3 {
   background: rgba(255, 255, 255, 0.1);
@@ -1302,10 +1288,6 @@ section {
 /*--------------------------------------------------------------
 # About
 --------------------------------------------------------------*/
-.about img {
-
-}
-
 .about .icon-boxes h4 {
   font-size: 18px;
   color: #4b7dab;
@@ -1377,7 +1359,6 @@ section {
 .about .video-box {
   background-size: cover;
   min-height: 500px;
-  border-radius: 20px;
 }
 
 .about .play-btn {
@@ -1739,7 +1720,7 @@ section {
 }
 
 .appointment .php-email-form button[type="submit"] {
-  background-color:#009961;
+  background: #0B2B6A;
   border: 0;
   padding: 10px 35px;
   color: #fff;
@@ -1758,7 +1739,6 @@ section {
 .appointment .php-email-form button[type="submit"]:disabled {
   background-color: #cccccc;
   color: #666666;
-  box-shadow:inset 0px 0px 15px 3px #adadad;
 }
 
 /*--------------------------------------------------------------
@@ -1772,20 +1752,29 @@ section {
   padding: 30px 30px 0 30px;
   margin: 30px 15px;
   text-align: center;
-  min-height: 400px;
+  min-height: 350px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
-  -webkit-box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
-  -moz-box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
+  box-shadow: 0px 9px 16px -6px rgba(114,4,207,1);
+  -webkit-box-shadow: 0px 9px 16px -6px rgba(114,4,207,1);
+  -moz-box-shadow: 0px 9px 16px -6px rgba(114,4,207,1);
+}
+.mentors .testimonial-item .testimonial-img {
+  position: relative;
+  overflow: hidden;
 }
 
-.mentors .testimonial-item .testimonial-img {
-  width: 90px;
-  border-radius: 50%;
-  border: 4px solid #fff;
-  margin: 0 auto;
+.mentors .member .member-info {
+  padding: 25px 15px;
 }
+.mentors .member .member-info p {
+  font-style: italic;
+  font-size: 14px;
+  line-height: 26px;
+  color: #777777;
+}
+
+
 .mentors .testimonial-item h3 {
   font-size: 18px;
   font-weight: bold;
@@ -1927,8 +1916,8 @@ section {
 .mentors .swiper-pagination .swiper-pagination-bullet-active {
   background-color: #0B2B6A;
   box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
--webkit-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
--moz-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
+  -webkit-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
+  -moz-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
 }
 
 /*--------------------------------------------------------------
@@ -2106,14 +2095,6 @@ section {
 --------------------------------------------------------------*/
 .faq .faq-list {
   padding: 0 100px;
-}
-
-.faq h2 {
-  text-shadow: rgba(255, 255, 255, 0.2) 3px 2px 3px; 
-  --darkreader-inline-color: rgba(232, 230, 227, 0.6); 
-  --darkreader-inline-bgimage: initial; 
-  --darkreader-inline-bgcolor: #535a5d, 2px 2px 2px rgba(44,73,100,0);
-  color: #2C4964;
 }
 
 .faq .faq-list span.bg-blues {
@@ -3089,25 +3070,18 @@ section {
   right: 0;
   bottom: 0;
   border: 0;
-  font-family: "Raleway", sans-serif;
-  box-shadow:inset 0px 1px 0px 0px #0B2B6A;
-  background:linear-gradient(to bottom, #0f61a8 5%, #0b2b6a 100%);
-  background-color:#1c84e3;
-  border-radius:50px;
-  cursor:pointer;
-  color:#ffffff;
-  font-size:15px;
-  font-weight:bold;
-  padding:10px 24px;
-  text-decoration:none;
-  text-shadow:0px 1px 0px #283966;
+  background: none;
+  font-size: 16px;
+  padding: 0 20px;
+  background: #0B2B6A;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 50px;
 }
 
 
 #footer .footer-newsletter form input[type="submit"]:hover {
-  background:linear-gradient(to bottom, #0b2b6a 5%, #0f61a8 100%);
-  background-color:#0b2b6a;
-  color: #fff;
+  background: #1c84e3;
 }
 
 #footer .credits {
@@ -3388,7 +3362,6 @@ inner-page
   background: #fff;
   border-radius: 0 0 4px 4px;
   margin-bottom: 20px;
-  min-height: 435px;
   box-shadow: 0px 6px 5px -1px rgba(32,191,240,1);
 -webkit-box-shadow: 0px 6px 5px -1px rgba(32,191,240,1);
 -moz-box-shadow: 0px 6px 5px -1px rgba(32,191,240,1);
@@ -3587,6 +3560,7 @@ inner-page
   color: #0B2B6A;
 }
 
+
 .bar-bottom .btn-bottom {
   margin-left: 25px;
   font-family: "Raleway", sans-serif;
@@ -3604,17 +3578,12 @@ inner-page
 }
 
 .bar-bottom .btn-bottom:hover {
-  background:linear-gradient(to bottom, #006a4e 5%, #009961 100%);
-  background-color:#006a4e;
+  background:linear-gradient(to bottom, #0b2b6a 5%, #0f61a8 100%);
+  background-color:#0b2b6a;
   color: #fff;
   box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
   -webkit-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
   -moz-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);  
-}
-
-.bar-bottom .btn-bottom:active {
-  position:relative;
-  top:1px;
 }
 
 /*--------------------------------------------------------------
@@ -3960,108 +3929,4 @@ inner-page
   .prove .card h4.card-title::after {
     display: none;
   }
-}
-
-/*--------------------------------------------------------------
-# Offcanvas Bottom
---------------------------------------------------------------*/
-
-.offcanvas-bottom {
-  border-radius: 20px;
-  height: 87%;
-}
-
-/*--------------------------------------------------------------
-# progress
---------------------------------------------------------------*/
-.progress {
-  height: 100%;
-}
-
-.progress .testimonials-carousel, .progress .testimonials-slider {
-  overflow: hidden;
-}
-.progress .testimonial-item {
-  margin: 30px 15px;
-  min-height: 400px;
-  border-radius: 10px;
-  box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
-  -webkit-box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
-  -moz-box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
-}
-
-.progress .testimonial-item .card {
-  min-height: 525px;
-}
-
-.progress .testimonial-item .card h4.card-title  {
-  font-size: 12px;
-  font-weight: 500;
-  padding: 0;
-  text-transform: uppercase;
-  color: #aaaaaa;
-  font-family: "Poppins", sans-serif; 
-}
-
-.progress .testimonial-item .card h4.card-title::after {
-  content: "";
-  width: 40px;
-  height: 1px;
-  display: inline-block;
-  background: #0B2B6A;
-  margin: 4px 10px;
-}
-
-.progress .testimonial-item .card h5.card-title {
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
-  color: #0f2f57;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 575.98px) { 
-  .progress .testimonial-item .card h4.card-title::after {
-    display: none;
-  }
-}
-
-
-.progress .testimonial-item .quote-icon-left, .progress .testimonial-item .quote-icon-right {
-  color: #00cc95;
-  font-size: 26px;
-}
-.progress .testimonial-item .quote-icon-left {
-  display: inline-block;
-  left: -5px;
-  position: relative;
-}
-.progress .testimonial-item .quote-icon-right {
-  display: inline-block;
-  right: -5px;
-  position: relative;
-  top: 10px;
-}
-.progress .testimonial-item p {
-  font-style: italic;
-  margin: 0 auto 15px auto;
-}
-
-.progress .swiper-pagination {
-  margin-top: 20px;
-  position: relative;
-}
-.progress .swiper-pagination .swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-  opacity: 1;
-  border: 1px solid #0B2B6A;
-}
-.progress .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #0B2B6A;
-  box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
--webkit-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
--moz-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
 }
