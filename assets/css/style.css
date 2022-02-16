@@ -1476,6 +1476,45 @@ section {
 }
 
 /*--------------------------------------------------------------
+# abouts
+--------------------------------------------------------------*/
+.abouts .content h3 {
+  font-weight: 600;
+  font-size: 26px;
+}
+.abouts .content ul {
+  list-style: none;
+  padding: 0;
+}
+.abouts .content ul li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 35px;
+}
+.abouts .content ul li:first-child {
+  margin-top: 35px;
+}
+.abouts .content ul i {
+  background: #fff;
+  box-shadow: 0px 6px 15px rgba(16, 110, 234, 0.12);
+  font-size: 24px;
+  padding: 20px;
+  margin-right: 15px;
+  color: #0B2B6A;
+  border-radius: 50px;
+}
+.abouts .content ul h5 {
+  font-size: 18px;
+  color: #555555;
+}
+.abouts .content ul p {
+  font-size: 15px;
+}
+.abouts .content p:last-child {
+  margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
 # Counts
 --------------------------------------------------------------*/
 .counts {
@@ -2198,6 +2237,107 @@ section {
 }
 
 /*--------------------------------------------------------------
+# faqs
+--------------------------------------------------------------*/
+.faqs {
+  padding: 0;
+}
+.faqs .content {
+  padding: 60px 100px 0 100px;
+}
+.faqs .content h3 {
+  font-weight: 400;
+  font-size: 34px;
+}
+.faqs .content h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 5px;
+}
+.faqs .content p {
+  font-size: 15px;
+  color: #848484;
+}
+.faqs .img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 400px;
+}
+.faqs .accordion-list {
+  padding: 0 100px 60px 100px;
+}
+.faqs .accordion-list ul {
+  padding: 0;
+  list-style: none;
+}
+.faqs .accordion-list li + li {
+  margin-top: 15px;
+}
+.faqs .accordion-list li {
+  padding: 20px;
+  background: #fefefe;
+  box-shadow: 0px 5px 90px 0px rgba(110, 123, 131, 0.1);
+  border-radius: 4px;
+}
+.faqs .accordion-list a {
+  display: block;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  padding-right: 30px;
+  outline: none;
+  cursor: pointer;
+}
+.faqs .accordion-list i {
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.faqs .accordion-list p {
+  margin-bottom: 0;
+  padding: 10px 0 0 0;
+}
+.faqs .accordion-list .icon-show {
+  display: none;
+}
+.faqs .accordion-list a.collapsed {
+  color: #343a40;
+}
+.faqs .accordion-list a.collapsed:hover {
+  color: #062487;
+}
+.faqs .accordion-list a.collapsed .icon-show {
+  display: inline-block;
+}
+.faqs .accordion-list a.collapsed .icon-close {
+  display: none;
+}
+@media (max-width: 1024px) {
+  .faqs .content, .faqs .accordion-list {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (max-width: 992px) {
+  .faqs {
+    /* img {
+      padding-top: 30px;
+    } */
+  }
+  .faqs .content {
+    padding-top: 30px;
+  }
+  .faqs .accordion-list {
+    padding-bottom: 30px;
+  }
+}
+
+
+/*--------------------------------------------------------------
 # Testimonials
 --------------------------------------------------------------*/
 .testimonials .testimonial-wrap {
@@ -2469,6 +2609,44 @@ section {
 
 .gallery .gallery-item:hover img {
   transform: scale(1.1);
+}
+
+/*--------------------------------------------------------------
+# galleries Section
+--------------------------------------------------------------*/
+#galleries {
+  padding: 60px;
+  overflow: hidden;
+}
+#galleries .swiper-pagination {
+  margin-top: 20px;
+  position: relative;
+}
+#galleries .swiper-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  opacity: 1;
+  border: 1px solid #0B2B6A;
+}
+#galleries .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #0B2B6A;
+}
+#galleries .swiper-slide-active {
+  text-align: center;
+}
+@media (min-width: 992px) {
+  #galleries .swiper-wrapper {
+    padding: 40px 0;
+  }
+  #galleries .swiper-slide-active {
+    border: 5px solid #0B2B6A;
+    padding: 4px;
+    background: #fff;
+    z-index: 1;
+    transform: scale(1.15);
+    margin-top: 6px;
+  }
 }
 
 /*--------------------------------------------------------------
