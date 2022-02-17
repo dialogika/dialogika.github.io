@@ -2698,6 +2698,12 @@ section {
   -moz-box-shadow: 0px 2px 5px 1px rgba(32,191,240,1);
 }
 
+@media (max-width: 575.98px) { 
+  .contact .php-email-form {
+    margin-bottom: 25px;
+  }
+}
+
 .contact .php-email-form .validate {
   display: none;
   color: red;
@@ -2785,11 +2791,9 @@ section {
   color: #fff;
   transition: 0.4s;
   border-radius: 50px;
-
 }
 
 .contact .php-email-form button[type="submit"]:hover {
-  background: #3291e6;
   box-shadow: 0px 2px 5px 1px rgba(32,191,240,1);
   -webkit-box-shadow: 0px 2px 5px 1px rgba(32,191,240,1);
   -moz-box-shadow: 0px 2px 5px 1px rgba(32,191,240,1);
@@ -2799,6 +2803,12 @@ section {
   background-color: #cccccc;
   color: #666666;
   box-shadow:inset 0px 0px 15px 3px #adadad;
+}
+
+.contact .php-email-form button[type="submit"]:active {
+  box-shadow:inset 0px 1px 0px 0px #006a4e;
+  background:linear-gradient(to bottom, #009961 5%, #006a4e 100%);
+  background-color:#009961;
 }
 
 .contact .php-email-form .form-text {
@@ -3167,6 +3177,7 @@ section {
 
 #footer .footer-top .footer-contact {
   margin-bottom: 30px;
+  font-family: "Nunito", sans-serif;
 }
 
 #footer .footer-top .footer-contact img{
@@ -3186,7 +3197,7 @@ section {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Raleway", sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #777777;
 }
 
@@ -3799,6 +3810,21 @@ inner-page
   top:1px;
 }
 
+.bar-bottom .btn-bottom:focus {
+  margin-left: 25px;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  background:linear-gradient(to bottom, #009961 5%, #006a4e 100%);
+  background-color:#009961;
+  border-radius:22px;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:10px 24px;
+}
 /*--------------------------------------------------------------
 # Call To Action Section
 --------------------------------------------------------------*/
