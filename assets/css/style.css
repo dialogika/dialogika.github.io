@@ -3827,7 +3827,7 @@ inner-page
 --------------------------------------------------------------*/
 .cta {
   padding: 0;
-  margin-bottom: 60px;
+  margin-bottom: 0px;
 }
 .cta .container {
   padding: 80px;
@@ -4174,6 +4174,15 @@ inner-page
 .offcanvas-bottom {
   border-radius: 20px;
   height: 86%;
+  display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: #FFFFFF;
+    -webkit-box-shadow: 0 2px 7px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 2px 7px 0 rgba(0,0,0,0.2);
+    box-sizing: border-box;
 }
 
 /*--------------------------------------------------------------
@@ -4504,4 +4513,65 @@ page-section & Timeline
 }
 #venue .venue-gallery:hover img {
   transform: scale(1.1);
+}
+
+/*--------------------------------------------------------------
+# Bar-top
+--------------------------------------------------------------*/
+.bar-top {
+    width: 100%;
+    z-index: 12;
+    padding: 16px;
+}
+
+.bar-top .price b{
+  font-family: "Open Sans", sans-serif;
+  font-size: 22px;
+  color: #0B2B6A;
+}
+
+.bar-top .btn-bottom {
+  margin-left: 25px;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  background:linear-gradient(to bottom, #009961 5%, #006a4e 100%);
+  background-color:#009961;
+  border-radius:22px;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:10px 24px;
+}
+
+.bar-top .btn-bottom:hover {
+  background:linear-gradient(to bottom, #006a4e 5%, #009961 100%);
+  background-color:#006a4e;
+  color: #fff;
+  box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
+  -webkit-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
+  -moz-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);  
+}
+
+.bar-top .btn-bottom:active {
+  position:relative;
+  top:1px;
+}
+
+.bar-top .btn-bottom:focus {
+  margin-left: 25px;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  background:linear-gradient(to bottom, #009961 5%, #006a4e 100%);
+  background-color:#009961;
+  border-radius:22px;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:10px 24px;
 }

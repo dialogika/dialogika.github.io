@@ -206,7 +206,13 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a href="#progress" class="blue-btn">Progress<span class="d-none d-md-inline"> Member</span></a>
+      <a href="#pricing" class="blue-btn position-relative">Claim<span class="d-none d-md-inline"> Offer</span>
+        <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
+          <i class='bx bxs-alarm-exclamation bx-tada'></i>
+          <em class="countdown" data-count="2025/12/2" data-template="&nbsp;%h:%m:%s" style="font-family: 'Nunito',sans-serif;font-style: normal;"></em>
+          <span class="visually-hidden">unread messages</span>
+        </span>
+      </a>
 
     </div>
   </header><!-- End Header -->
@@ -231,7 +237,7 @@
   <section id="hero" class="d-flex align-items-center" style="background: url('../assets/img/program/presentation-c/hero.jpg') top center; margin-bottom: 0px;">
     <div class="container">
       <span class="badge rounded-pill rounded-blue">Kelas Online: Presentation Class</span>
-      <h1>Presentasikan Value-mu Bukan PowerPoint-mu</h1>
+      <h1>Presentasikan <span style="color: #F9C72E;">Value-mu</span> Bukan PowerPoint-mu</h1>
       <h2>Dibimbing Dari Awal Hingga Akhir. Dan Kelas Ini Bertujuan Membantu Anda Bisa Menyampaikan Value dan Menceritakan <i>Story Behind</i> Dari Data Yang Anda Tampilkan.</h2>
       <a href="#inner-page" class="btn-get-started scrollto">Get Started</a>
     </div>
@@ -1418,12 +1424,15 @@
         <small class="text-muted">
           <span class="price">
             <b>IDR. 699.000</b>
-          </span><br>
+          </span>
+          <span class="badge rounded-pill bg-success">
+            <i class="bx bxs-check-shield"></i>Garansi</span>
+          <br>
         </small>
         <span class="badge rounded-pill bg-danger">
           <i class="bx bxs-purchase-tag"></i>
           <strike>IDR 1.500.000</strike></span>
-        <span class="badge rounded-pill bg-success">
+        <span class="badge rounded-pill bg-warning text-dark">
           <i class="bx bxs-offer"></i>
           Diskon 53%</span>
       </div>
@@ -1521,9 +1530,29 @@
   <!-- ======= Offcanvas Bottom ======= -->
     <div class="offcanvas offcanvas-bottom" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasBottom" >
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
-        </h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <nav class="navbar bar-top">
+          <div class="price-wrap mr-auto">
+            <small class="text-muted">
+              <span class="price">
+                <b>IDR. 699.000</b>
+              </span>
+              <span class="badge rounded-pill bg-success">
+                <i class="bx bxs-check-shield"></i>
+                Garansi
+              </span>
+            <br>
+            </small>
+            <span class="badge rounded-pill bg-danger">
+              <i class="bx bxs-purchase-tag"></i>
+              <strike>IDR 1.500.000</strike></span>
+            <span class="badge rounded-pill bg-warning text-dark">
+              <i class="bx bxs-offer"></i>
+              Diskon 53%</span>
+          </div>
+          <div>
+            <a href="#contact" data-bs-dismiss="offcanvas" class="btn-bottom scrollto">Daftar</a>
+          </div>
+        </nav>
       </div>
       <div class="offcanvas-body cta">
         <div class="container" data-aos="zoom-out">
