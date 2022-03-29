@@ -38,18 +38,33 @@
       crossorigin="anonymous"></script>
     <script>
       function SubForm (){
-      $.ajax({
-        url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
-        type:"post",
-        data:$("#myForm").serializeArray(),
-        success: function(){
-          alert("Form Data Submitted :)")
-        },
-        error: function(){
-          alert("There was an error :(")
-        }
-      });
-    }
+        $.ajax({
+          url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
+          type:"post",
+          data:$("#myForm").serializeArray(),
+          success: function(){
+            alert("Form Data Submitted :)")
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
+
+      function SubForm2 (){
+        $.ajax({
+          url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
+          type:"post",
+          data:$("#myForm").serializeArray(),
+          success: function(){
+            // alert("Form Data Submitted :)")
+            location.replace("https://wasap.at/R2SIA5")
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
 
       function Subcription (){
         $.ajax({
@@ -179,7 +194,7 @@
           </div>
           <h3 style="font-size:35px;"><em>Boosting Career</em> Dengan Public Speaking</h3>
           <p>Atasi Kesulitan Public Speaking Di Lingkungan Kerja</p>
-          <a href="#dearemployee" class="align-self-start green-btn" style="margin-top:10px;border-radius:6px;">Baca Penawarannya</a>
+          <a href="#inner-page" class="align-self-start green-btn" style="margin-top:10px;border-radius:6px;">Baca Penawarannya</a>
         </div>
 
         <div class="col-lg-4 col-md-6 order-first order-md-last d-flex align-items-center">
@@ -193,7 +208,7 @@
     </div>
   </section><!-- End Inner Page -->  
 
-  <section id="#inner-page" class="inner-page">
+  <section id="inner-page" class="inner-page">
     <div class="container">
       <div class="section-title">
         <h2 class="kiri text-start" id="#dearemployee">Dear Employee</h2>
@@ -810,9 +825,6 @@
               <select class="d-none" name="Timestamp">
                 <option id="timestamp"></option>
               </select>
-                <input type="hidden" name="UTM_Source" value="">
-                <input type="hidden" name="UTM_Medium" value="">
-                <input type="hidden" name="UTM_Campaign" value="">
               <div class="form-group">
                 <textarea class="form-control" name="Ket" id="messages" rows="4" placeholder="Masalah didalam public speaking?"></textarea>
                 <div class="validate"></div>
@@ -826,7 +838,7 @@
                     <button type="submit" id="submits" class="send_contact" data-bs-toggle="modal" data-bs-target="#notifications" onclick="SubForm()">Daftar</button>
                   </div>
                   <div class="col">
-                    <button type="submit" id="submits" class="send_contact" data-bs-toggle="modal" data-bs-target="#notifications" onclick="SubForm()">Telpon</button>
+                    <button type="submit" id="submitss" class="send_contact" onclick="SubForm2()">Telpon</button>
                   </div>
                 </div>
               </div>
@@ -869,9 +881,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" style="margin-bottom:20px">
-
-    
+  <footer id="footer" style="margin-bottom:20px">    
 
     <div class="container d-md-flex py-4">
 
@@ -1111,6 +1121,16 @@
                 $('#submits').attr('disabled', false);
             } else {
                 $('#submits').attr('disabled', true);
+            }
+        });
+      });
+      $(function () {
+        $('#submitss').attr('disabled', true);
+        $('#myForm').change(function () {
+            if ($('#names').val() != '' && $('#works').val() != '' && $('#locations').val() != '' && $('#whatsapps').val() != '') {
+                $('#submitss').attr('disabled', false);
+            } else {
+                $('#submitss').attr('disabled', true);
             }
         });
       });
