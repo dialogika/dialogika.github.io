@@ -324,6 +324,31 @@ h1, h2, h3, h4, h5, h6 {
   top:1px;
 }
 
+.orange-btn {
+  font-family: "Raleway", sans-serif;
+  box-shadow:inset 0px 1px 0px 0px #F9C72E;
+  background:linear-gradient(to bottom, #f9c62e 5%, #ffb13b 100%);
+  background-color:#ff9b08;
+  border-radius:22px;
+  display:inline-block;
+  cursor:pointer;
+  color: #231F20;
+  font-size:15px;
+  font-weight:bold;
+  padding:10px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #f9c62e;
+}
+.orange-btn:hover {
+  background:linear-gradient(to bottom, #ffb13b 5%, #f9c62e 100%);
+  background-color:#ffb13b;
+  color: #231F20;
+}
+.orange-btn:active {
+  position:relative;
+  top:1px;
+}
+
 .green-btn {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
@@ -358,6 +383,10 @@ mark.green {
   background-color: #edfbf0;
 }
 
+mark.orange {
+  background-color: #ff9b08;
+}
+
 mark.red {
   background-color: #F8E6E7;
 }
@@ -372,6 +401,13 @@ mark.orange {
 
 span.rounded-blue {
   background-color:#0B2B6A;
+  color: #fff;
+  margin-bottom: 10px;
+  border-radius: 50rem !important;
+}
+
+span.rounded-orange {
+  background-color:#ff9b08;
   color: #fff;
   margin-bottom: 10px;
   border-radius: 50rem !important;
