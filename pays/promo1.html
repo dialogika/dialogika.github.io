@@ -43,6 +43,42 @@
   <!-- Template Main CSS File -->
     <link href="../assets/css/style.css" rel="stylesheet">
 
+  <!-- Spreadsheet API Form Pendaftaran -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"      
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"></script>
+    <script>
+      function SubForm (){
+      $.ajax({
+        url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
+        type:"post",
+        data:$("#myForm").serializeArray(),
+        success: function(){
+          alert("Form Data Submitted :)")
+        },
+        error: function(){
+          alert("There was an error :(")
+        }
+      });
+    }
+
+      function Subcription (){
+        $.ajax({
+          url:"https://api.apispreadsheets.com/data/18511/",
+          type:"post",
+          data:$("#subcriptions").serializeArray(),
+          success: function(){
+            $('#subcription-modal').modal('show');
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
+    </script>
+  <!-- End Spreadsheet API Form Pendaftaran -->
+
   <!-- Pixel Facebook -->
     <!-- DEC 2021 -->
       <script>
@@ -144,14 +180,6 @@
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -  ->
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container">
-      <h1>Newsletter</h1>
-      <h2>Membaca itu melatih otak</h2>
-      <a href="#blog" class="btn-get-started scrollto">Read Now</a>
-    </div>
-  </section><!-- End Hero -->
 
   <main id="main">
 
@@ -331,7 +359,7 @@
               <div class="row">
                 <div class="col d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
-                    <i class='bx bxs-battery-charging'></i>
+                    <i class='bx bxs-webcam'></i>
                     <h4>Workshop Online</h4>
                     <p>Berjalan 3 Hari dan fokus pembahasan lebih kepada personal branding</p>
                     <div class="text-center">
@@ -343,7 +371,7 @@
                 </div>
                 <div class="col d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
-                    <i class='bx bxl-slack'></i>
+                    <i class='bx bxs-microphone' ></i>
                     <h4>Public Speaking Class</h4>
                     <p>Berjalan 3 bulan, dengan 20x pertemuan pembahasan lebih lengkap termasuk cara mengatasi rasa gugup</p>
                     <div class="text-center">
