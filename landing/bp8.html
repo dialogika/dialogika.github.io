@@ -45,8 +45,25 @@
           accessKey: "b5216464a11be561ae0b40f9ed98ee90",
           secretKey: "038c9369d3b221f2387c9d8f3f3e488d"},
           success: function(){ 
-            alert("Form Data Submitted :)")
-            // $('#notifications').modal('show');
+            alert("Data Telah Tersimpan :)")
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
+
+      function SubFormModal (){
+        $.ajax({
+        url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
+        type:"post",
+        data:$("#myFormModal").serializeArray(),
+        headers:{
+          accessKey: "b5216464a11be561ae0b40f9ed98ee90",
+          secretKey: "038c9369d3b221f2387c9d8f3f3e488d"},
+          success: function(){ 
+            // alert("Data Telah Tersimpan :)")
+            window.location.href = 'https://link.dialogika.co/whatsapp-modal';
           },
           error: function(){
             alert("There was an error :(")
@@ -542,7 +559,7 @@
                             </p>
                           </div>
                           <div class="mt-4 pt-2 text-center">
-                            <a href="#contact-modal" data-bs-toggle="modal" class="btn btn-primary w-100">Daftar Sekarang</a>
+                            <a href="#contact" data-bs-dismiss="offcanvas" data-bs-scroll="#contact" class="btn btn-primary w-100">Daftar Sekarang</a>
                           </div>
                       </div>
                     </div>
@@ -600,7 +617,7 @@
                           </p>
                         </div>
                         <div class="mt-4 pt-2 text-center">
-                          <a href="#contact-modal" data-bs-toggle="modal" class="btn btn-primary w-100">Daftar Sekarang</a>
+                          <a href="#contact" data-bs-dismiss="offcanvas" data-bs-scroll="#contact" class="btn btn-primary w-100">Daftar Sekarang</a>
                         </div>
                       </div>
                     </div>
@@ -874,7 +891,7 @@
             <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
 
               <div class="col-lg-6">
-                <form action="javascript:void" method="post" id="myForm" enctype="text/plain" role="form" class="php-email-form needs-validation">
+                <form action="javascript:void" method="post" id="myFormModal" enctype="text/plain" role="form" class="php-email-form needs-validation">
                   <div class="form-group">
                     <input type="text" name="Name" class="form-control" id="names" pattern="[a-zA-Z\s]{3,100}" placeholder="Nama Lengkap*" required>
                     <div class="validate"></div>
@@ -893,17 +910,13 @@
                     </select>
                   </div>
                   <select class="d-none" name="Timestamp">
-                    <option id="timestamp"></option>
+                    <option id="timestampModal"></option>
                   </select>
-                    <input type="hidden" name="UTM_Source" value="">
-                    <input type="hidden" name="UTM_Medium" value="">
-                    <input type="hidden" name="UTM_Campaign" value="">
-
                   <div class="form-text">
                     *Isikan data yang tepat karena kami akan memberikan KONSULTASI GRATIS via whatsapp.
                   </div>
                   <div class="text-center">
-                    <button type="submit" id="submits" class="send_contact" data-bs-toggle="modal" data-bs-target="#notifications" onclick="SubForm()">
+                    <button type="submit" id="submits" class="" data-bs-toggle="modal" data-bs-target="#notifications" onclick="SubFormModal()">
                       <i class='bx bxl-whatsapp bx-tada'></i>
                       Chat Sekarang</button>
                   </div>
@@ -925,11 +938,19 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Pesan telah dikirimkan, apabila <b>anda tidak langsung ter-redirect</b> ke Aplikasi Whatsapp atau Whatsapp Web silahkan pencet tombol Redirect dibawah ini</p>
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p> Sebentar lagi anda akan masuk ke aplikasi whatsapp mohon ditunggu</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius:25px;background: #cccccc;">Close</button>
-            <a role="button" href="javascript:void" class="btn btn-primary send_contact" style="border-radius:25px;background: #0B2B6A;">Redirect</a>
+            <a role="button" href="javascript:void" class="btn btn-primary send_contact" style="border-radius:25px;background: #0B2B6A;">
+              <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+               Redirect
+            </a>
           </div>
         </div>
       </div>
@@ -963,6 +984,7 @@
   <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/whatsapp.js"></script>
+    
     <script type="text/javascript">
       $(function () {
         $('#submits').attr('disabled', true);
@@ -980,6 +1002,7 @@
       var time = today.getHours() + ":" + today.getMinutes();
       var dateTime = date+'    '+time;
       document.getElementById("timestamp").innerHTML = dateTime;
+      document.getElementById("timestampModal").innerHTML = dateTime;
     </script>
 
   <!-- UTM Parameter -->
