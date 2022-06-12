@@ -62,9 +62,9 @@
           accessKey: "b5216464a11be561ae0b40f9ed98ee90",
           secretKey: "038c9369d3b221f2387c9d8f3f3e488d"},
           success: function(){ 
-            // alert("Data Telah Tersimpan :)")
+            alert("Data Telah Tersimpan, Anda akan ke Redirect ke Whatsapp :)")
             // window.location.href = 'https://link.dialogika.co/whatsapp-modal';
-            window.open("https://link.dialogika.co/whatsapp-modal");
+            // window.open("https://link.dialogika.co/whatsapp-modal");
           },
           error: function(){
             alert("There was an error :(")
@@ -892,7 +892,7 @@
             <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
 
               <div class="col-lg-6">
-                <form action="javascript:void" method="post" id="myFormModal" enctype="text/plain" role="form" class="php-email-form needs-validation">
+                <form action="javascript:void" method="post" id="myFormModal" enctype="text/plain" role="form" class="php-email-form needs-validation" onsubmit="SubFormModal()">
                   <div class="form-group">
                     <input type="text" name="Name" class="form-control" id="names" pattern="[a-zA-Z\s]{3,100}" placeholder="Nama Lengkap*" required>
                     <div class="validate"></div>
@@ -917,7 +917,7 @@
                     *Isikan data yang tepat karena kami akan memberikan KONSULTASI GRATIS via whatsapp.
                   </div>
                   <div class="text-center">
-                    <button type="submit" id="submits" class="" data-bs-toggle="modal" data-bs-target="#notifications" onclick="SubFormModal()">
+                    <button type="submit" id="submits" class="" data-bs-toggle="modal" data-bs-target="#notifications" onclick="window.open('https://link.dialogika.co/whatsapp-modal');" >
                       <i class='bx bxl-whatsapp bx-tada'></i>
                       Chat Sekarang</button>
                   </div>
