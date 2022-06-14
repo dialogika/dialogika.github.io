@@ -442,7 +442,6 @@ span.rounded-yellow {
 .bikini-btn {
   color: #fff;
   margin-top: 14px;
-  
   padding: 6px 18px;
   white-space: nowrap;
   transition: 0.3s;
@@ -470,6 +469,26 @@ span.rounded-yellow {
   }
 }
 
+.big-btn {
+  background-color:#dc143c;
+  border-radius:42px;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Verdana;
+  font-size:17px;
+  font-weight:bold;
+  padding:26px 69px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #2f6627;
+}
+.big-btn:hover {
+  background-color:#5cbf2a;
+}
+.big-btn:active {
+  position:relative;
+  top:1px;
+}
 
 /*--------------------------------------------------------------
 # Navigation Menu
