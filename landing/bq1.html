@@ -488,7 +488,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3><img src="../assets/img/logo.png" class="footer-logo" alt="Dialogika" /></h3>
+            <h3><img src="assets/img/logo.png" class="footer-logo" alt="Dialogika" /></h3>
             <p>
               Kami membantu Anda mengatasi gugup, tidak percaya diri dan ngeblank saat public speaking, wawancara kerja dan presentasi bisnis<br><br>
               <strong>Phone:</strong> +62 851-6299-2597<br>
@@ -497,52 +497,49 @@
           </div>
 
           <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
+            <h4>Our Program</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> 
-                <a href="https://talent.dialogika.co" onclick="return false;">Dialogika Intern</a>
+                <a href="../request/private-class.html">Private Class</a>
               </li>
               <li><i class="bx bx-chevron-right"></i> 
-                <a href="https://club.dialogika.co" onclick="return false;">Dialogika Club</a>
+                <a href="../program/basic-plus.html">Online Class</a>
               </li>
               <li><i class="bx bx-chevron-right"></i> 
-                <a href="https://blog.dialogika.co" onclick="return false;">Dialogika Blog</a>
-              </li>
-              <li><i class="bx bx-chevron-right"></i> 
-                <a href="https://event.dialogika.co" onclick="return false;">Dialogika Event</a>
-              </li>
-              <li><i class="bx bx-chevron-right"></i> 
-                <a href="https://course.dialogika.co" onclick="return false;">Dialogika eCourse</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Classes</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> 
-                <a href="../program/basic-plus.html">Basic Plus</a>
+                <a href="../program/pro-class.html">Offline Class</a>
               </li>
               <li><i class="bx bx-chevron-right"></i> 
                 <a href="../program/presentation-class.html">Presentation</a>
               </li>
               <li><i class="bx bx-chevron-right"></i> 
-                <a href="../program/pro-class.html">Pro Class</a>
+                <a href="../request/company.html">For Company</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Other Link</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> 
+                <a href="../intern/index.html" onclick="return false;">Intern Dialogika</a>
               </li>
               <li><i class="bx bx-chevron-right"></i> 
-                <a href="../program/english-class.html">English Class</a>
+                <a href="../video/index.html" onclick="return false;">Video Course</a>
               </li>
               <li><i class="bx bx-chevron-right"></i> 
-                <a href="../program/private-class.html">Private Class</a>
+                <a href="../blogs/perkenalan-diri.html" onclick="return false;">Blog Dialogika</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i> 
+                <a href="../workshop/interview-online.html" onclick="return false;">Workshop Dialogika</a>
               </li>
             </ul>
           </div>
 
           <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Join Our Newsletter</h4>
-            <p>Silahkan tinggalkan email dibawah ini kemudian klik tombol subscribe</p>
+            <h4>Gabung Group Whatsapp Gratis</h4>
+            <p>Setiap Minggunya Kami Akan Bagi-Bagi Tips & Trik Gratis, Dan Info Promo Lainnya</p>
             <form action="javascript:void" role="form" id="subcriptions" method="post">
-              <input type="email" name="Surel" placeholder="Email" required><input type="submit" value="Subscribe" onclick="Subcription()">
+              <input type="tel" name="Surel" placeholder="Nomor Whatsapp"><input type="submit" value="Join Now" onclick="Subcription()">
             </form>
           </div>
 
@@ -1204,22 +1201,20 @@
     <script src="../assets/js/whatsapp.js"></script>
     
     <script type="text/javascript">
-      $(function () {
-        $('#submits').attr('disabled', true);
-        $('#myForm').change(function () {
-            if ($('#names').val() != '' && $('#works').val() != '' && $('#locations').val() != '' && $('#whatsapps').val() != '') {
-                $('#submits').attr('disabled', false);
-            } else {
-                $('#submits').attr('disabled', true);
-            }
-        });
-      });
       // get date
       var today = new Date();
       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
       var time = today.getHours() + ":" + today.getMinutes();
       var dateTime = date+'    '+time;
       document.getElementById("timestamp").innerHTML = dateTime;
+    </script>
+
+    <script type="text/javascript">
+      // get date
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes();
+      var dateTime = date+'    '+time;
       document.getElementById("timestampModal").innerHTML = dateTime;
     </script>
 
@@ -1250,30 +1245,7 @@
       </script>
   <!-- /Toast Pop Up -->
 
-  <!-- UTM Parameter -->
-    <script>
-      var queryForm = function(settings){
-        var reset = settings && settings.reset ? settings.reset : false;
-        var self = window.location.toString();
-        var querystring = self.split("?");
-        if (querystring.length > 1) {
-          var pairs = querystring[1].split("&");
-          for (i in pairs) {
-            var keyval = pairs[i].split("=");
-            if (reset || sessionStorage.getItem(keyval[0]) === null) {
-              sessionStorage.setItem(keyval[0], decodeURIComponent(keyval[1]));
-            }
-          }
-        }
-        var hiddenFields = document.querySelectorAll("input[type=hidden], input[type=text]");
-        for (var i=0; i<hiddenFields.length; i++) {
-          var param = sessionStorage.getItem(hiddenFields[i].name);
-          if (param) document.getElementsByName(hiddenFields[i].name)[0].value = param;
-        }
-      }
 
-      setTimeout(function(){queryForm();}, 3000);
-    </script>
 
 </body>
 

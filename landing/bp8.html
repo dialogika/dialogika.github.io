@@ -184,8 +184,7 @@
       <h2 style="color:#FF781F;"><u>FAKTA: 89% JOBSEEKER GUGUR DI TAHAP WAWANCARA</u></h2><br>
       <p style="color: #fff;">Persiapkan diri Anda semata-matangnya bersama <b>mentor Dialogika dari HR Advisor dan Psikolog,</b> Anda akan dibantu untuk mudah masuk ke perusahaan yang Anda impikan.</p>
       
-        
-      <a href="#contact-modal" data-bs-toggle="modal" class="red-btn" style="margin-top: 20px;">Bagaimana Caranya?</a>
+      <a href="#departments" data-bs-scroll="#departments" class="red-btn" style="margin-top: 20px;">Bagaimana Caranya?</a>
     </div>
   </section><!-- End Hero -->
 
@@ -268,7 +267,7 @@
           <div class="swiper-pagination"></div>
         </div>
         <div class="text-center">
-          <a href="#contact-modal" data-bs-toggle="modal" class="red-btn">Ikuti Jejak Kesuksessan Mereka</a>
+          <a href="#contact" data-bs-scroll="#contact" class="red-btn">Ikuti Jejak Kesuksessan Mereka</a>
         </div>
       </div>
     </section><!-- End Testimonials Section -->
@@ -784,7 +783,7 @@
       <div class="container" data-aos="zoom-in">
         <div class="text-center">
           <h2 style="color:#fff;">Dapatkan Tempat Kerja Idealmu dan Profesi Impianmu Sekarang</h2><br>
-          <a class="red-btn" href="#contact-modal" data-bs-toggle="modal">Konsultasikan Sekarang</a>
+          <a class="red-btn" href="#contact" data-bs-scroll="#contact">Konsultasikan Sekarang</a>
           <br><em style="font-size:12px;color: #fff;">Nikmati diskon khusus bulan ini.</em>
         </div>
       </div>
@@ -1012,7 +1011,7 @@
       $(function () {
         $('#submits').attr('disabled', true);
         $('#myForm').change(function () {
-            if ($('#names').val() != '' && $('#works').val() != '' && $('#locations').val() != '' && $('#whatsapps').val() != '') {
+            if ($('#names').val() != '' $('#whatsapps').val() != '') {
                 $('#submits').attr('disabled', false);
             } else {
                 $('#submits').attr('disabled', true);
@@ -1025,6 +1024,14 @@
       var time = today.getHours() + ":" + today.getMinutes();
       var dateTime = date+'    '+time;
       document.getElementById("timestamp").innerHTML = dateTime;
+    </script>
+
+    <script type="text/javascript">
+      // get date
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes();
+      var dateTime = date+'    '+time;
       document.getElementById("timestampModal").innerHTML = dateTime;
     </script>
 
