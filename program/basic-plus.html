@@ -207,10 +207,10 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a href="../landing/bp7.html" target="__blank" class="blue-btn position-relative">Claim<span class="d-none d-md-inline"> Offer</span>
-        <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
+      <a href="../landing/bq1.html" target="__blank" class="blue-btn position-relative">Claim<span class="d-none d-md-inline"> Offer</span>
+        <span class="position-absolute top-0 start-70 translate-middle badge rounded-pill bg-danger">
           <i class='bx bxs-alarm-exclamation bx-tada'></i>
-          <em class="countdown" data-count="2025/12/2" data-template="&nbsp;%h:%m:%s" style="font-family: 'Nunito',sans-serif;font-style: normal;"></em>
+          <em class="countdown" data-count="2025/12/2" data-template="&nbsp;%m:%s" style="font-family: 'Nunito',sans-serif;font-style: normal;"></em>
           <span class="visually-hidden">unread messages</span>
         </span>
       </a>
@@ -1570,39 +1570,57 @@
   <!-- End Bottom Offcanvas -->
   
   <!-- ======= Modal Nofication ======= -->
-    <div class="modal fade" id="notifications" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>Pesan telah dikirimkan, apabila <b>anda tidak langsung ter-redirect</b> ke Aplikasi Whatsapp atau Whatsapp Web silahkan pencet tombol Redirect dibawah ini</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius:25px;background: #cccccc;">Close</button>
-            <a role="button" href="javascript:void" class="btn btn-primary send_contact" style="border-radius:25px;background: #0B2B6A;">Redirect</a>
-          </div>
+  <div class="modal fade" id="notifications" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Pesan telah dikirimkan, apabila <b>anda tidak langsung ter-redirect</b> ke Aplikasi Whatsapp atau Whatsapp Web silahkan pencet tombol Redirect dibawah ini</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius:25px;background: #cccccc;">Close</button>
+          <a role="button" href="javascript:void" class="btn btn-primary send_contact" style="border-radius:25px;background: #0B2B6A;">Redirect</a>
         </div>
       </div>
     </div>
-  <!-- End Modal -->
+  </div><!-- End Modal -->
 
   <!-- ======= Modal Subcription ======= -->
-    <div class="modal fade" id="subcription-modal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <p>Terima kasih sudah melakukan subcription dengan email anda, nantikan update blog,berita,diskonan dari Dialogika</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius:25px;background: #cccccc;">Close</button>
-          </div>
+  <div class="modal fade" id="subcription-modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>Terima kasih sudah melakukan subcription dengan email anda, nantikan update blog,berita,diskonan dari Dialogika</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius:25px;background: #cccccc;">Close</button>
         </div>
       </div>
     </div>
-  <!-- End Modal -->
+  </div><!-- End Modal -->
 
+  <!-- ======= Toast Ask Program ======= -->
+  <div class="toast toast-bawah" id="askToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">+1 Calon Peserta Bertanya</strong>
+      <small>1 menit yang lalu</small>
+      <button type="button" class="btn-close" id="closeAsk" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Gratis konsultasi program
+    </div>
+  </div><!-- End Toast Sold Program -->
+
+  <!-- ======= Toast Ask Program ======= -->
+  <div class="toast toast-paling-bawah text-bg-success" id="soldToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header" style="background-color: #009961;">
+      <strong class="me-auto text-light">+1 Peserta Telah Mendaftar</strong>
+      <small class="text-warning">Sisa 3 Seat</small>
+      <button type="button" class="btn-close btn-close-white" id="closeSold" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div><!-- End Toast Sold Program -->
 
   <!-- Vendor JS Files -->
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -1634,6 +1652,32 @@
       var dateTime = date+'    '+time;
       document.getElementById("timestamp").innerHTML = dateTime;
     </script>
+
+  <!-- Toast Pop Up -->
+    <script>
+      window.addEventListener("load", function(){
+          setTimeout(
+              function open(event){
+                  document.querySelector("#askToast").style.display = "block";
+              },2000),
+          setTimeout(
+            function open(event){
+              document.querySelector("#soldToast").style.display = "block";
+            }, 5000)
+      });
+    </script>
+
+      <script>
+        document.querySelector("#closeAsk").addEventListener("click", function(){
+            document.querySelector("#askToast").style.display = "none";
+        });
+      </script>
+
+      <script>
+        document.querySelector("#closeSold").addEventListener("click", function(){
+            document.querySelector("#soldToast").style.display = "none";
+        });
+      </script>
 
   <!-- UTM Parameter -->
     <script>

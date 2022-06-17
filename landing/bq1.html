@@ -224,9 +224,9 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       <a href="bp7.html" target="__blank" class="blue-btn position-relative">Claim<span class="d-none d-md-inline"> Offer</span>
-        <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
+        <span class="position-absolute top-0 start-70 translate-middle badge rounded-pill bg-danger">
           <i class='bx bxs-alarm-exclamation bx-tada'></i>
-          <em class="countdown" data-count="2025/12/2" data-template="&nbsp;%h:%m:%s" style="font-family: 'Nunito',sans-serif;font-style: normal;"></em>
+          <em class="countdown" data-count="2025/12/2" data-template="&nbsp;%m:%s" style="font-family: 'Nunito',sans-serif;font-style: normal;"></em>
           <span class="visually-hidden">unread messages</span>
         </span>
       </a>
@@ -569,6 +569,27 @@
   </footer><!-- End Footer -->
 
   <!-- <div id="preloader"></div> -->
+
+  <!-- ======= Toast Ask Program ======= -->
+  <div class="toast toast-bawah" id="askToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">+1 Calon Peserta Bertanya</strong>
+      <small>1 menit yang lalu</small>
+      <button type="button" class="btn-close" id="closeAsk" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Gratis konsultasi program
+    </div>
+  </div><!-- End Toast Sold Program -->
+
+  <!-- ======= Toast Ask Program ======= -->
+  <div class="toast toast-paling-bawah text-bg-success" id="soldToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header" style="background-color: #009961;">
+      <strong class="me-auto text-light">+1 Peserta Telah Mendaftar</strong>
+      <small class="text-warning">Sisa 3 Seat</small>
+      <button type="button" class="btn-close btn-close-white" id="closeSold" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div><!-- End Toast Sold Program -->
 
 
   <!-- ======= Modal Contact ======= -->
@@ -1201,6 +1222,33 @@
       document.getElementById("timestamp").innerHTML = dateTime;
       document.getElementById("timestampModal").innerHTML = dateTime;
     </script>
+
+  <!-- Toast Pop Up -->
+    <script>
+      window.addEventListener("load", function(){
+          setTimeout(
+              function open(event){
+                  document.querySelector("#askToast").style.display = "block";
+              },2000),
+          setTimeout(
+            function open(event){
+              document.querySelector("#soldToast").style.display = "block";
+            }, 5000)
+      });
+    </script>
+
+      <script>
+        document.querySelector("#closeAsk").addEventListener("click", function(){
+            document.querySelector("#askToast").style.display = "none";
+        });
+      </script>
+
+      <script>
+        document.querySelector("#closeSold").addEventListener("click", function(){
+            document.querySelector("#soldToast").style.display = "none";
+        });
+      </script>
+  <!-- /Toast Pop Up -->
 
   <!-- UTM Parameter -->
     <script>

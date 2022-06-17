@@ -211,62 +211,17 @@
               </li>
             </ul>
           </li>
-          <!-- <li class="dropdown"><a href="#"><span>Counseling</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li class="dropdown">
-                <a href="#">
-                  <span>Online</span> <i class="bi bi-chevron-right"></i>
-                </a>
-                <ul>
-                  <li><a href="program/coping-anxiety.html">Coping Anxiety</a></li>
-                  <li><a href="program/basic-plus.html">Family Issues</a></li>
-                  <li><a href="program/presentation-class.html">Relationship Issue</a></li>
-                  <li class="dropdown-divider"></li>
-                  <li><a href="program/english-class.html">Toxic Work Environment</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#">
-                  <span>Offline</span> <i class="bi bi-chevron-right"></i>
-                </a>
-                <ul>
-                  <li><a href="program/basic-class.html">Burn Out</a></li>
-                  <li><a href="program/basic-plus.html">Toxic Family</a></li>
-                  <li><a href="program/presentation-class.html">Breakup Relationship</a></li>
-                  <li class="dropdown-divider"></li>
-                  <li><a href="program/english-class.html">Stressful Work Environment</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#">
-                  <span>Custom</span> <i class="bi bi-chevron-right"></i>
-                </a>
-                <ul>
-                  <li><a href="request/private-class.html">Group Consultation </a></li>
-                  <li><a href="request/private-group.html">Private Group</a></li>
-                  <li class="dropdown-divider"></li>
-                  <li><a href="request/for-company.html">For School</a></li>
-                  <li><a href="request/for-company.html">For University</a></li>
-                  <li><a href="request/for-company.html">For Company</a></li>
-                </ul>
-              </li>
-              <li class="dropdown-divider"></li>
-              <li class="align-items-center">
-                <a href="consult/index.html">Discover</a>
-              </li>
-            </ul>
-          </li> -->
           <li><a class="nav-link" href="#mentor-dialogika" data-bs-toggle="offcanvas">Mentor</a></li>
           <li><a class="nav-link data-bs-scroll" data-scroll href="#about">About</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="landing/bp7.html" target="__blank" class="blue-btn position-relative" style="max-height:200px">
+      <a href="landing/bq1.html" target="__blank" class="blue-btn position-relative" style="max-height:200px">
         <span class="d-none d-md-inline">Check our</span> Promo
-          <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
+          <span class="position-absolute top-0 start-70 translate-middle badge rounded-pill bg-danger">
             <i class='bx bxs-alarm-exclamation bx-tada'></i>
-            <em class="countdown" data-count="2025/12/2" data-template="&nbsp;%h:%m:%s" style="font-family: 'Nunito',sans-serif;font-style: normal;"></em>
+            <em class="countdown" data-count="2025/12/2" data-template="&nbsp;%m:%s" style="font-family: 'Nunito',sans-serif;font-style: normal;"></em>
             <span class="visually-hidden">unread messages</span>
           </span>
       </a>
@@ -1453,6 +1408,26 @@
     </div>
   </div><!- - End Modal -->
 
+  <!-- ======= Toast Ask Program ======= -->
+  <div class="toast toast-bawah" id="askToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">+1 Calon Peserta Bertanya</strong>
+      <small>1 menit yang lalu</small>
+      <button type="button" class="btn-close" id="closeAsk" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Gratis konsultasi program
+    </div>
+  </div><!-- End Toast Sold Program -->
+
+  <!-- ======= Toast Ask Program ======= -->
+  <div class="toast toast-paling-bawah text-bg-success" id="soldToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header" style="background-color: #009961;">
+      <strong class="me-auto text-light">+1 Peserta Telah Mendaftar</strong>
+      <small class="text-warning">Sisa 3 Seat</small>
+      <button type="button" class="btn-close btn-close-white" id="closeSold" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div><!-- End Toast Sold Program -->
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
@@ -1492,6 +1467,33 @@
           $('#popups').modal('show');
       });
     </script> -->
+
+  <!-- Toast Pop Up -->
+    <script>
+      window.addEventListener("load", function(){
+          setTimeout(
+              function open(event){
+                  document.querySelector("#askToast").style.display = "block";
+              },2000),
+          setTimeout(
+            function open(event){
+              document.querySelector("#soldToast").style.display = "block";
+            }, 5000)
+      });
+    </script>
+
+      <script>
+        document.querySelector("#closeAsk").addEventListener("click", function(){
+            document.querySelector("#askToast").style.display = "none";
+        });
+      </script>
+
+      <script>
+        document.querySelector("#closeSold").addEventListener("click", function(){
+            document.querySelector("#soldToast").style.display = "none";
+        });
+      </script>
+  <!-- /Toast Pop Up -->
 
 </body>
 

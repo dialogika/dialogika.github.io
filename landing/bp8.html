@@ -328,6 +328,7 @@
               <div class="tab-pane" id="tab-1">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
+                    <br>
                     <h3>Dimentori LIVE</h3>
                     <p class="fst-italic">Workshop yang Anda ikuti <b>bukanlah video based</b> atau Anda belajar sendiri. Namun diajari hingga bisa.</p>
                     <p>Anda memperoleh akses komunikasi yang luas kepada para mentor untuk bertanya, berkonsultasi dari masalah public speaking hingga trauma yang Anda rasakan kepada diri Anda sendiri.</p>
@@ -339,7 +340,7 @@
               </div>
               <div class="tab-pane" id="tab-2">
                 <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
+                  <div class="col-lg-8 details order-2 order-lg-1"><br>
                     <h3>Best Practice</h3>
                     <p class="fst-italic">Mentor akan lebih banyak sharing terhadap <i>best practice</i> yang terjadi di lapangan</p>
                     <p>Bukan hanya materi biasa yang mungkin bisa Anda dapatkan dimanapun, melainkan sebuah materi yang lebih kepada praktikal yang cocok dengan profesi Anda dan bisa Anda coba.</p>
@@ -351,7 +352,7 @@
               </div>
               <div class="tab-pane" id="tab-3">
                 <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
+                  <div class="col-lg-8 details order-2 order-lg-1"><br>
                     <h3>Personal Feedback</h3>
                     <p class="fst-italic">Mentor akan memberikan feedback sesuai dengan permasalahan yang biasa terjadi pada diri member.</p>
                     <p>Mayoritas dari feedback bersifat personal, baik itu secara spontanitas ataupun feedback yang ditimbulkan dari pertanyaan para peserta.</p>
@@ -876,6 +877,27 @@
     <i class='bx bxl-whatsapp bx-tada' style="max-height:60px;"></i>
   </a>
 
+  <!-- ======= Toast Ask Program ======= -->
+  <div class="toast toast-bawah" id="askToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">+1 Calon Peserta Bertanya</strong>
+      <small>1 menit yang lalu</small>
+      <button type="button" class="btn-close" id="closeAsk" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Gratis konsultasi program
+    </div>
+  </div><!-- End Toast Sold Program -->
+
+  <!-- ======= Toast Ask Program ======= -->
+  <div class="toast toast-paling-bawah text-bg-success" id="soldToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header" style="background-color: #009961;">
+      <strong class="me-auto text-light">+1 Peserta Telah Mendaftar</strong>
+      <small class="text-warning">Sisa 3 Seat</small>
+      <button type="button" class="btn-close btn-close-white" id="closeSold" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div><!-- End Toast Sold Program -->
+
   <!-- ======= Modal Contact ======= -->
     <div class="modal fade" id="contact-modal" tabindex="-1">
       <div class="modal-dialog">
@@ -1005,6 +1027,33 @@
       document.getElementById("timestamp").innerHTML = dateTime;
       document.getElementById("timestampModal").innerHTML = dateTime;
     </script>
+
+  <!-- Toast Pop Up -->
+    <script>
+      window.addEventListener("load", function(){
+          setTimeout(
+              function open(event){
+                  document.querySelector("#askToast").style.display = "block";
+              },2000),
+          setTimeout(
+            function open(event){
+              document.querySelector("#soldToast").style.display = "block";
+            }, 5000)
+      });
+    </script>
+
+      <script>
+        document.querySelector("#closeAsk").addEventListener("click", function(){
+            document.querySelector("#askToast").style.display = "none";
+        });
+      </script>
+
+      <script>
+        document.querySelector("#closeSold").addEventListener("click", function(){
+            document.querySelector("#soldToast").style.display = "none";
+        });
+      </script>
+  <!-- /Toast Pop Up -->
 
   <!-- UTM Parameter -->
     <script>
