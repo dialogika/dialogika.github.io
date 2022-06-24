@@ -14,11 +14,11 @@
 
   <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
     <meta property="og:site_name" content="Dialogika | Kelas Public Speaking" /> <!-- website name -->
-    <meta property="og:site" content="dialogika.co/blog/LINK.html" /> <!-- GANTI -->
-    <meta property="og:title" content="JUDUL"/> <!-- GANTI -->
-    <meta property="og:description" content="DESKRIPSI" /> <!-- GANTI -->
-    <meta property="og:image" content="../assets/img/blog/GAMBAR-BACKGROUND.jpg" /> <!-- GANTI -->
-    <meta property="og:url" content="dialogika.co/blog/URL.html" /> <!-- GANTI -->
+    <meta property="og:site" content="dialogika.co" /> <!-- GANTI -->
+    <meta property="og:title" content="Critical Thinking Seorang Public Speaker"/> <!-- GANTI -->
+    <meta property="og:description" content="Cara mengatasi salah berbicara dengan berpikir kritis" /> <!-- GANTI -->
+    <meta property="og:image" content="../assets/img/blogs/critical-thinking/bg1.jpg" /> <!-- GANTI -->
+    <meta property="og:url" content="dialogika.co/blogs/critical-thinking.html" /> <!-- GANTI -->
     <meta property="og:type" content="article" />
 
   <!-- Favicons -->
@@ -42,6 +42,47 @@
 
   <!-- Template Main CSS File -->
     <link href="../assets/css/style.css" rel="stylesheet">
+
+    <!-- Spreadsheet API Form Pendaftaran -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"      
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"></script>
+    <script>
+      function SubForm (){
+        $.ajax({
+        url:"https://api.apispreadsheets.com/data/NBbg1qN8PQDE2DtL/",
+        type:"post",
+        data:$("#myForm").serializeArray(),
+        headers:{
+          accessKey: "cb9a0af0e3e5bcef8cdef8be8bcefe5b",
+          secretKey: "82b49ba860aa33d2127e125f2c66d005"},
+          success: function(){ 
+            // e.preventDefault();  //stop the browser from following
+            window.location.href = '../assets/file/pdf/Critical-Thinking.pdf';
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
+
+      function Subcription (){
+        $.ajax({
+          url:"https://api.apispreadsheets.com/data/18511/",
+          type:"post",
+          data:$("#subcriptions").serializeArray(),
+          success: function(){
+            $('#subcription-modal').modal('show');
+            window.location.href = 'https://chat.whatsapp.com/HclXM7ufIjJ9cvrgNdtzbl';
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
+    </script>
+  <!-- End Spreadsheet API Form Pendaftaran -->
 
   <!-- Pixel Facebook -->
     <!-- DEC 2021 -->
@@ -152,7 +193,7 @@
                   <li><a href="../program/basic-plus.html">Basic Plus</a></li>
                   <li><a href="../program/presentation-class.html">Presentasi</a></li>
                   <li class="dropdown-divider"></li>
-                  <li><a href="../program/english-class.html">English Class</a></li>
+                  <li><a href="../program/kids-class.html">Khusus Anak</a></li>
                 </ul>
               </li>
               <li class="dropdown">
@@ -191,10 +232,10 @@
       </nav><!-- .navbar -->
 
       <a href="../landing/bp7.html" target="__blank" class="blue-btn position-relative" style="max-height:200px">
-        <span class="d-none d-md-inline">Check our</span> Promo
-          <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
+        Discount
+          <span class="position-absolute top-100 start-50 translate-middle badge rounded-pill bg-danger">
             <i class='bx bxs-alarm-exclamation bx-tada'></i>
-            <em class="countdown" data-count="2025/12/2" data-template="&nbsp;%h:%m:%s" style="font-family: 'Nunito',sans-serif;font-style: normal;"></em>
+            <em class="countdown d-none d-md-block" data-count="2025/12/2" data-template="&nbsp;%m:%s" style="font-family: 'Nunito',sans-serif;font-style: normal;"></em>
             <span class="visually-hidden">unread messages</span>
           </span>
       </a>
@@ -220,7 +261,6 @@
 
   <main id="main">
 
-
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog">
       <div class="container">
@@ -232,7 +272,7 @@
             <article class="entry"> <!-- BLOG 1 [GANTI] -->
 
               <div class="entry-img">
-                <img src="../assets/img/blog/FOLDER_BLOG/GAMBAR.jpg" alt="" class="img-fluid"> <!-- GANTI -->
+                <img src="../assets/img/blogs/critical-thinking/bg1.jpg" alt="" class="img-fluid"> <!-- GANTI -->
               </div>
 
               <h2 class="entry-title">
@@ -268,70 +308,75 @@
 
               <div class="entry-content "> <!-- if COLLAPSE used, type "accordion" after entry-content -->
 
-                
+                <p>Menguasai critical thinking membantu anda memahami cara kerja uang mengalir, pemilihan politik, pasar saham bahkan untuk urusan-urusan kecil seperti berbeda pendapat</p>
 
-                Menguasai critical thinking membantu anda memahami cara kerja uang mengalir, pemilihan politik, pasar saham bahkan untuk urusan-urusan kecil seperti berbeda pendapat <br><br>
+                <p>Sayangnya keilmuan ini tidak diajarkan di dalam sekolah-sekolah sejak dini. Dari awal sekolah  di design agar anda mampu berpikir bukan bagaimana caranya anda berpikir dan mengambil keputusan.</p>
 
-                Sayangnya keilmuan ini tidak diajarkan di dalam sekolah-sekolah sejak dini. Dari awal sekolah  di design agar anda mampu berpikir bukan bagaimana caranya anda berpikir dan mengambil keputusan.<br><br>
+                <p>Dan juga yang cukup ironis terkadang adalah dikepala Anda dikumpulkan ide-ide dan fakta-fakta yang tidak anda mengerti sama sekali, mulai dari phytagoras, integral, ƒ = m/a dan beragam rumusan lainnya yang anda sendiri mungkin tidak mengerti kapan dan mengapa hal ini perlu dilakukan. </p>
 
-                Dan juga yang cukup ironis terkadang adalah dikepala Anda dikumpulkan ide-ide dan fakta-fakta yang tidak anda mengerti sama sekali, mulai dari phytagoras, integral, ƒ = m/a dan beragam rumusan lainnya yang anda sendiri mungkin tidak mengerti kapan dan mengapa hal ini perlu dilakukan. <br><br>
+                <p>Sekarang dan mungkin saat Anda membaca tulisan ini Anda sudah dewasa, let's move on.</p>
 
-                Sekarang dan mungkin saat Anda membaca tulisan ini Anda sudah dewasa, let's move on.<br><br>
+                <p><img src="../assets/img/blogs/critical-thinking/1.jpg" class="img-fluid" alt=""></p> 
 
-                Setidaknya untuk anda yang sudah kuliah, anda mengenal konsep sederhana 5W + 1H, yaitu strategi sederhana berpikir; (What, Where, When, Who, How). <br><br>
+                <p>Setidaknya untuk anda yang sudah kuliah, anda mengenal konsep sederhana 5W + 1H, yaitu strategi sederhana berpikir; (What, Where, When, Who, How). </p>
 
-                5W + 1H ini membantu anda untuk men-define banyak hal terutama keputusan-keputusan krusial di dalam hidup Anda seperti...
+                <p>5W + 1H ini membantu anda untuk men-define banyak hal terutama keputusan-keputusan krusial di dalam hidup Anda seperti...</p>
+
                 <ul>
-                <li>Nanti mau kuliah dimana?</li>
-                <li>Mau ambil jurusan apa?</li>
-                <li>Setelah lulus kerja dimana?</li>
-                <li>Ingin gaji berapa?</li>
+                  <li>Nanti mau kuliah dimana?</li>
+                  <li>Mau ambil jurusan apa?</li>
+                  <li>Setelah lulus kerja dimana?</li>
+                  <li>Ingin gaji berapa?</li>
                 </ul>
 
-                Bahkan untuk urusan remeh pun seperti nanti malam mau makan apa? bisa anda ambil berdasarkan 5W + 1H ini. Atau sebelum anda checkout shopee anda juga berpikir untuk melakukan ini.<br><br>
+                <p>Bahkan untuk urusan remeh pun seperti nanti malam mau makan apa? bisa anda ambil berdasarkan 5W + 1H ini. Atau sebelum anda checkout shopee anda juga berpikir untuk melakukan ini.</p>
 
-                Kok sampai se-ribet dan sedetail itu?<br><br>
+                <p>Kok sampai se-ribet dan sedetail itu?</p>
 
-                Karena hidup adalah kumpulan dari keputusan dan piihan yang anda ambil maka berhati-hatilah dalam memilih. You maybe wrong sometimes but you always learn from it.<br><br>
+                <p><mark class="yellow">Karena hidup adalah kumpulan dari keputusan dan piihan yang anda ambil maka berhati-hatilah dalam memilih. You maybe wrong sometimes but you always learn from it.</mark></p>
 
                 <h3>Aplikasi Critical Thinking</h3>
-                Secara sederhana critical thinking adalah proces membebaskan pikiran. Mungkin Anda berpikir seseorang seperti Deddy Corbuzier yang beralih dari magician menjadi host dan kemudian podcast adalah langkah-langkah brilian yang dia ambil.<br><br>
+                
+                <p>Secara sederhana critical thinking adalah proces membebaskan pikiran. Mungkin Anda berpikir seseorang seperti Deddy Corbuzier yang beralih dari magician menjadi host dan kemudian podcast adalah langkah-langkah brilian yang dia ambil.</p>
 
-                Namun jika posisinya saya balik seperti ini, Anda adalah magician paling ngetop sepanjang sejarah indonesia. Anda dikenal dan disetiap kali Anda perform bayaran Anda sangat luar biasa.<br><br>
+                <p>Namun jika posisinya saya balik seperti ini, Anda adalah magician paling ngetop sepanjang sejarah indonesia. Anda dikenal dan disetiap kali Anda perform bayaran Anda sangat luar biasa.</p>
 
-                Dan Anda menyukai hal tersebut, you love performing, you love to entertain people, you love magic. Pertanyaannya? mengapa saya harus meninggalkan hal yang saya sukai?<br><br>
+                <p>Dan Anda menyukai hal tersebut, you love performing, you love to entertain people, you love magic. Pertanyaannya? mengapa saya harus meninggalkan hal yang saya sukai?</p>
 
-                Saat Anda memahami Critical Thinking Anda mulai mengerti bahwa apabila Anda telah mencapai 'puncak,' jalan satu-satunya dalam hidup Anda adalah 'turun'. <br><br>
+                <p>Saat Anda memahami Critical Thinking Anda mulai mengerti bahwa apabila Anda telah mencapai 'puncak,' jalan satu-satunya dalam hidup Anda adalah 'turun'. </p>
 
-                Pertanyaannya sekarang... Dimana itu posisi puncak? Kapan itu? Dan apa yang harus anda lakukan begitu Anda turun?<br><br>
+                <p>Pertanyaannya sekarang... Dimana itu posisi puncak? Kapan itu? Dan apa yang harus anda lakukan begitu Anda turun?</p>
 
-                Critical Thinking membantu Anda didalam melakukan pilihan-pilihan tersebut.<br><br>
+                <p>Critical Thinking membantu Anda didalam melakukan pilihan-pilihan tersebut.</p>
 
                 <h3>Skills Yang Berevolusi Saat Anda Belajar Critical Thinking.</h3>
-                Ada beragam skill yang akan pelan-pelan ber-evolusi disaat Anda melakukan critical thinking. Goal awal anda di dalam tahap awal critical thinking adalah mengurangi informasi yang bias sebisa mungkin.<br><br>
+                <p>Ada beragam skill yang akan pelan-pelan ber-evolusi disaat Anda melakukan critical thinking. Goal awal anda di dalam tahap awal critical thinking adalah mengurangi informasi yang bias sebisa mungkin.</p>
 
-                Kemudian...<br><br>
+                <p>Kemudian...</p>
 
                 <blockquote class="blockquote">
                 Biasakan meng-evaluasi informasi yang masuk ke pikiran Anda, terutama dari Twitter & Tiktok.
                 </blockquote>
 
-                Ambil kesimpulan tidak hanya dari sebuah source informasi. Contoh jika Anda dapat info unik dari Twitter maka carilah artikel pendukungnya atau telusuri siapa sumbernya.<br><br>
-                Saat anda tidak menyukai sebuah keputusan pastikan hal tersebut berdasarkan data bukan feel anda.<br><br>
+                <p>Ambil kesimpulan tidak hanya dari sebuah source informasi. Contoh jika Anda dapat info unik dari Twitter maka carilah artikel pendukungnya atau telusuri siapa sumbernya.</p>
+
+                <p>Saat anda tidak menyukai sebuah keputusan pastikan hal tersebut berdasarkan data bukan feel anda.</p>
 
                 <h3>Cheatsheet Critical Thinking Untuk Pemula</h3>
-                Untuk anda yang masih pemula dan ingin berlatih memikirkan sesuatu sebelum mengambi sebuah keputusan Anda bisa men-download cheatsheet dibawah ini.<br><br>
+                
+                <p>Untuk anda yang masih pemula dan ingin berlatih memikirkan sesuatu sebelum mengambi sebuah keputusan Anda bisa men-download cheatsheet dibawah ini.</p>
 
-                Kami katakan secara sederhana, bahwa anda tidak perlu mengaplikasikan seluruh pertanyaan dan jawaban dari semua cheatsheet ini, namun... Anda hanya perlu mengambil salah satu pertanyaan dan aplikasikan didalam hidup Anda secara berulang.<br><br>
+                <p>Kami katakan secara sederhana, bahwa anda tidak perlu mengaplikasikan seluruh pertanyaan dan jawaban dari semua cheatsheet ini, namun... Anda hanya perlu mengambil salah satu pertanyaan dan aplikasikan didalam hidup Anda secara berulang.</p>
 
-                Percaya saya, pelan-pelan kehidupan anda akan berubah dan mindset critical thinking Anda akan mulai timbul.<br><br>
+                <p>Percaya saya, pelan-pelan kehidupan anda akan berubah dan mindset critical thinking Anda akan mulai timbul.</p>
 
                 <!-- ======= Appointment Section ======= -->
                 <section id="appointment" class="appointment section-bg " novalidate>
                   <div class="container">
 
                     <div class="section-title">
-                      <h2 class="tengah">Download Cheatsheet</h2>
+                      <h2 class="dumpil">Download Cheatsheet</h2>
+                      <h2 class="tengah">Critical Thinking</h2>
                       <p></p>
                     </div>
 
@@ -360,9 +405,13 @@
                       <select class="d-none" name="Timestamp">
                         <option id="timestamp"></option>
                       </select>
+                      <input type="text" class="d-none" name="Program" value="Blog: Critical Thinking"/>
 
                       <div class="text-center">
-                        <button type="submit" id="submits" class="send_contact" data-bs-toggle="modal" data-bs-target="#notifications">Download Sekarang</button>
+                        <button type="submit" id="submits" data-bs-toggle="modal" data-bs-target="#notifications">Download Sekarang</button>
+                      </div>
+                      <div class="form-text d-flex justify-content-center">
+                        <small>*Tombol akan menyala apabila data telah diisi dengan benar.</small>
                       </div>
                     </form>
 
@@ -498,16 +547,11 @@
               <div class="sidebar-item tags">
                 <h3 class="sidebar-title">Tags</h3>
                 <ul class="mt-3">
-                  <li><a href="#" onclick="return false;">IT</a></li>
-                  <li><a href="#" onclick="return false;">Business</a></li>
-                  <li><a href="#" onclick="return false;">Mac</a></li>
-                  <li><a href="#" onclick="return false;">Design</a></li>
-                  <li><a href="#" onclick="return false;">Office</a></li>
-                  <li><a href="#" onclick="return false;">Creative</a></li>
-                  <li><a href="#" onclick="return false;">Studio</a></li>
-                  <li><a href="#" onclick="return false;">Smart</a></li>
-                  <li><a href="#" onclick="return false;">Tips</a></li>
-                  <li><a href="#" onclick="return false;">Marketing</a></li>
+                  <li><a href="#" onclick="return false;">Critical Thinking</a></li>
+                  <li><a href="#" onclick="return false;">Public Speaking</a></li>
+                  <li><a href="#" onclick="return false;">Pengembangan Diri</a></li>
+                  <li><a href="#" onclick="return false;">Cheatsheet</a></li>
+                  <li><a href="#" onclick="return false;">Download File</a></li>
                 </ul>
               </div><!-- End sidebar tags-->
 
@@ -594,7 +638,7 @@
 
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>Dialogika</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>PT. Dialogika Persona Indonesia</span></strong>. All Rights Reserved
         </div>
         
       </div>
@@ -607,6 +651,38 @@
       </div>
     </div>
   </footer><!-- End Footer -->
+
+  <!-- ======= Modal Nofication ======= -->
+  <div class="modal fade" id="notifications" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>File Akan Segera Terdownload Mohon Ditunggu</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius:25px;background: #cccccc;">Close</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- End Modal -->
+
+  <!-- ======= Modal Subcription ======= -->
+  <div class="modal fade" id="subcription-modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>Terima kasih sudah melakukan subcription dengan whatsapp anda, nantikan update blog,berita,diskonan dari Dialogika di Group Whatsapp <b>Bisa Public Speaking</b></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius:25px;background: #cccccc;">Close</button>
+          <a role="button" href="#" class="btn btn-primary send_contact" style="border-radius:25px;background: #0B2B6A;">Gabung Group Whatsapp</a>
+        </div>
+      </div>
+    </div>
+  </div><!-- End Modal -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
@@ -621,7 +697,6 @@
 
   <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/whatsapp.js"></script>
     <script type="text/javascript">
       $(function () {
         $('#submits').attr('disabled', true);
