@@ -456,6 +456,29 @@ span.rounded-yellow {
   border-radius: 50rem !important;
 }
 
+/*bikini disable*/
+.bikini-disable-btn {
+  color: #fff;
+  margin-top: 14px;
+  padding: 6px 18px;
+  white-space: nowrap;
+  transition: 0.3s;
+  font-size: 12px;
+  display: inline-block;
+  background-color: #cccccc;
+  color: #666666;
+  box-shadow:inset 0px 0px 15px 3px #adadad;
+  border-radius:50px;
+}
+
+@media (max-width: 768px) {
+  .bikini-disable-btn {
+    margin-top: 14px;
+    padding: 6px 18px;
+  }
+}
+
+
 /*bikin button blue*/
 .bikini-btn {
   color: #fff;
@@ -518,6 +541,37 @@ span.rounded-yellow {
   }
 }
 
+/*bikini red*/
+.bikini-red-btn {
+  color: #fff;
+  margin-top: 14px;
+  padding: 6px 18px;
+  white-space: nowrap;
+  transition: 0.3s;
+  font-size: 12px;
+  display: inline-block;
+  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+  background-color:#f24537;
+  border-radius:50px;
+}
+
+.bikini-red-btn:hover {
+  background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+  background-color:#c62d1f;
+  /*cincin biru terang*/
+  box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
+  -webkit-box-shadow: 0psx 0px 4px 2px rgba(32,191,240,1);
+  -moz-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
+}
+
+@media (max-width: 768px) {
+  .bikini-red-btn {
+    margin-top: 14px;
+    padding: 6px 18px;
+  }
+}
+
 /*bikini yellow*/
 .bikin-yellow-btn {
   color: #fff;
@@ -543,6 +597,37 @@ span.rounded-yellow {
 
 @media (max-width: 768px) {
   .bikin-yellow-btn {
+    margin-top: 14px;
+    padding: 6px 18px;
+  }
+}
+
+/*bikini green*/
+.bikini-green-btn {
+  color: #fff;
+  margin-top: 14px;
+  padding: 6px 18px;
+  white-space: nowrap;
+  transition: 0.3s;
+  font-size: 12px;
+  display: inline-block;
+  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  background:linear-gradient(to bottom, #77d42a 5%, #5cb811 100%);
+  background-color:#009961;
+  border-radius:50px;
+}
+
+.bikini-green-btn:hover {
+  background:linear-gradient(to bottom, #5cb811 5%, #77d42a 100%);
+  background-color:#5cb811;
+  /*cincin biru terang*/
+  box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
+  -webkit-box-shadow: 0psx 0px 4px 2px rgba(32,191,240,1);
+  -moz-box-shadow: 0px 0px 4px 2px rgba(32,191,240,1);
+}
+
+@media (max-width: 768px) {
+  .bikini-green-btn {
     margin-top: 14px;
     padding: 6px 18px;
   }
