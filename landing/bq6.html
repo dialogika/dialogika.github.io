@@ -435,7 +435,7 @@
     </section><!-- End faqs Section -->
 
     <!-- ======= Features Section ======= -->
-    <section id="features" class="features" style="background-color: #0b2b6a;"> <!-- style="background: rgb(255,255,255);background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(254,254,254,1) 31%, rgba(11,43,106,1) 100%);" -->
+    <section id="features" class="features" style="background-color: #0b2b6a;">
       <div class="container">
 
         <div class="section-title">
@@ -736,7 +736,6 @@
     </div>
     <div>
       <a href="#daftarsekarang" data-bs-toggle="offcanvas" class="btn-bottom scrollto">Daftar <span class="d-none d-md-inline"> Sekarang</span></a>
-      <!-- <a href="#contact" class="btn-bottom scrollto">Daftar</a> -->
     </div>
   </nav><!-- End Super-bottom -->
 
@@ -793,8 +792,14 @@
             </div>
             <div class="form-group">
               <select name="Program" id="programs" class="form-select" required>
-                <option value="Pro Class (Ads)">Pro Class (1.249K)</option>
-                <option value="Private Pro (Ads)">Private Class</option>
+                <optgroup label="--- Preparation Test">
+                  <option value="Pretest Public Speaking">1x Pertemuan Online (25K)</option>
+                  <option value="Interview Preparation">Mocking Interview Online (35K)</option>
+                </optgroup>
+                <optgroup label="--- Kelas Offline">
+                  <option value="Pro Class (Ads)">Pro Class (1.249K)</option>
+                  <option value="Private Pro (Ads)">Private Class</option>
+                </optgroup>
               </select>
               <div class="validate"></div>
             </div>
