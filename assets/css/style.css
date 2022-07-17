@@ -4980,7 +4980,11 @@ page-section & Timeline
 .blog .entry {
   padding: 30px;
   margin-bottom: 60px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  /*box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);*/
+  border-radius: 13px;
+  box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
+  -webkit-box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
+  -moz-box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
 }
 
 .blog .entry .entry-img {
@@ -5171,11 +5175,12 @@ page-section & Timeline
 .blog .blog-author {
   padding: 20px;
   margin-bottom: 30px;
+  border-radius: 13px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .blog .blog-author img {
-  width: 120px;
+  width: 100px;
 }
 
 .blog .blog-author h4 {
@@ -5355,7 +5360,11 @@ page-section & Timeline
 .blog .sidebar {
   padding: 30px;
   margin: 0 0 60px 20px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  /*box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);*/
+  border-radius: 13px;
+  box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
+  -webkit-box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
+  -moz-box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
 }
 
 .blog .sidebar .sidebar-title {
