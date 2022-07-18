@@ -5642,6 +5642,7 @@ input[type="checkbox"] {
   margin-left: 10px;
 }
 
+
 .hero-area-two-wrapper {
   position: relative;
 }
@@ -6816,6 +6817,10 @@ input[type="checkbox"] {
 
 .post-meta-right-side a {
   margin-left: 10px;
+}
+
+.post-meta-right-side img {
+  max-height: 14px;
 }
 
 .large-banner-trending-article {
@@ -8209,7 +8214,7 @@ input[type="checkbox"] {
 }
 
 .single-touch:hover.tiktok .touch-socail-icon {
-  color: #1869FF;
+  color: #000000;
   background: #ffffff;
 }
 
@@ -9475,7 +9480,7 @@ input[type="checkbox"] {
 }
 
 .blockquote-box::before {
-  color: #f9c62e;
+  color: #0f61a8;
   font-size: 106px;
   position: absolute;
   content: "“";
