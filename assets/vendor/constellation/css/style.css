@@ -23,14 +23,14 @@
 /* ------------------------------------- */
 
 /* custom CSS files */
-@import url('../vendor/constellation/css/font-awesome.min.css');
-@import url('../vendor/constellation/css/ionicons.min.css');
-@import url('../vendor/constellation/css/bootstrap.min.css');
-@import url('../vendor/constellation/css/animate-promo.css');
-@import url('../vendor/constellation/css/photoswipe.css');
-@import url('../vendor/constellation/css/default-skin/default-skin.css');
-@import url('../vendor/constellation/css/jquery.mCustomScrollbar.css');
-@import url('../vendor/constellation/css/vegas.css');
+@import url(font-awesome.min.css);
+@import url(ionicons.min.css);
+@import url(bootstrap.min.css);
+@import url(animate.css);
+@import url(photoswipe.css);
+@import url(default-skin/default-skin.css);
+@import url(jquery.mCustomScrollbar.css);
+@import url(vegas.css);
 /* Google Fonts */
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,500,700");
@@ -108,7 +108,7 @@ table {
   margin: 0 auto;
 }
 #loading #preloader:after {
-  content: "Opal";
+  content: "Dialogika";
   /* Text under the circle */
   position: absolute;
   text-transform: uppercase;
@@ -135,7 +135,7 @@ table {
   width: 3rem;
   height: 3rem;
   left: calc(50% - 1.5rem);
-  border-bottom: 2px solid #00c8aa;
+  border-bottom: 2px solid #0f61a8;
   z-index: 10;
   -webkit-animation: spin-1 1s infinite ease-in-out;
   -moz-animation: spin-1 1s infinite ease-in-out;
@@ -420,6 +420,8 @@ sup {
 }
 
 #vegas-background {
+  background: url('../../../img/hero.jpg') center;
+  background-size: cover;
   position: fixed;
   top: 0;
   left: 0;
@@ -635,7 +637,7 @@ sup {
   width: 100%;
   display: block;
   position: relative;
-  border-bottom: 2px solid #00c8aa;
+  border-bottom: 2px solid #0f61a8;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -717,7 +719,7 @@ sup {
 #right-side .content .photo-line figure .photo-details span.border {
   display: block;
   height: 2px;
-  background: #00c8aa;
+  background: #0f61a8;
   width: 10%;
   margin: 0.8em 0 1em;
 }
@@ -729,7 +731,7 @@ sup {
   background: transparent;
   border: none;
   padding: 0;
-  color: #00c8aa;
+  color: #0f61a8;
   font-size: 1em;
   border-top: 50px solid #2B2D35;
   border-left: 50px solid transparent;
@@ -748,7 +750,7 @@ sup {
   background: transparent;
   border: none;
   padding: 0;
-  color: #00c8aa;
+  color: #0f61a8;
   font-size: 1em;
   border-bottom: 50px solid #2B2D35;
   border-left: 50px solid transparent;
@@ -767,7 +769,7 @@ sup {
   background: transparent;
   border: none;
   padding: 0;
-  color: #00c8aa;
+  color: #0f61a8;
   font-size: 1em;
   border-bottom: 50px solid #2B2D35;
   border-right: 50px solid transparent;
@@ -786,7 +788,7 @@ sup {
   background: transparent;
   border: none;
   padding: 0;
-  color: #00c8aa;
+  color: #0f61a8;
   font-size: 1em;
   border-top: 50px solid #2B2D35;
   border-right: 50px solid transparent;
@@ -886,7 +888,7 @@ sup {
   text-align: center;
 }
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-  background-color: #00c8aa;
+  background-color: #0f61a8;
 }
 
 .mCSB_scrollTools-left {
@@ -1175,7 +1177,7 @@ sup {
   font-size: 1.4rem;
   display: block;
   margin: 2rem auto 0;
-  background: #00c8aa;
+  background: #0f61a8;
   color: #FFFFFF;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -1208,7 +1210,7 @@ sup {
 }
 #subscribe .block-message.show-block-valid {
   bottom: 0;
-  background: #00c8aa;
+  background: #0f61a8;
 }
 #subscribe p.notify-valid {
   color: #FFFFFF;
@@ -1383,11 +1385,11 @@ sup {
   color: #666666;
 }
 .info-contact .item-map .contact-item a:hover {
-  color: #00c8aa;
+  color: #0f61a8;
 }
 
 .phone-mail-link {
-  color: #00c8aa;
+  color: #0f61a8;
   font-weight: bold;
 }
 
@@ -1442,7 +1444,7 @@ sup {
   font-size: 1.4rem;
   display: block;
   margin: 0;
-  background: #00c8aa;
+  background: #0f61a8;
   color: #FFFFFF;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;

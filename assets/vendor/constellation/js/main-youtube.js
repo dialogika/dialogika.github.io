@@ -10,108 +10,135 @@
 /*  TABLE OF CONTENTS
     ---------------------------
     1. Loading / Opening
-    2. Equal height box
-    3. Action Buttons
+    2. Action Buttons
+    3. YouTube buttons
     4. Scroll plugins
     5. Newsletter
     6. PhotoSwipe Gallery Init
+    7. Equal height box
 */
 
 /* ------------------------------------- */
 /* 1. Loading / Opening ................ */
 /* ------------------------------------- */
 
-$(window).load(function(){
+$(document).ready(function($) {
     "use strict";
 
-    setTimeout(function(){
+    var myPlayer = jQuery( "#bgndVideo" ).YTPlayer();
 
-        $("#loading").addClass('animated-middle slideOutUp').removeClass('opacity-0');
+    $( "a.expand-player" ).click(function() {
+        $( ".full-play" ).addClass( "display-none" );
+        $( ".comp-play" ).removeClass( "display-none" );
+    });
 
-    },1000);
+    $( "a.compress-player" ).click(function() {
+        $( ".full-play" ).removeClass( "display-none" );
+        $( ".comp-play" ).addClass( "display-none" );
+    });
 
-    setTimeout(function(){
+    var onMobile = false;
+            
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { onMobile = true; }
+    if( ( onMobile === false ) ) {
 
-        $("#home").addClass('animated-middle fadeInUp').removeClass('opacity-0');
+        $(".player").mb_YTPlayer();
 
-    },800);
+        myPlayer.on("YTPReady", function(){
 
-    setTimeout(function(){
+            setTimeout(function(){
 
-        setTimeout(function() {
-            $('.text-intro').each(function(i) {
-                (function(self) {
-                    setTimeout(function() {
-                        $(self).addClass('animated-middle fadeInUp').removeClass('opacity-0');
-                    },(i*150)+150);
-                    })(this);
+                $("#loading").addClass('animated-middle slideOutUp').removeClass('opacity-0');
+
+            },200);
+
+            setTimeout(function(){
+
+                $("#home").addClass('animated-middle fadeInUp').removeClass('opacity-0');
+
+            },0);
+
+            setTimeout(function(){
+
+                setTimeout(function() {
+                    $('.text-intro').each(function(i) {
+                        (function(self) {
+                            setTimeout(function() {
+                                $(self).addClass('animated-middle fadeInUp').removeClass('opacity-0');
+                            },(i*150)+150);
+                            })(this);
+                        });
+                    }, 0);
+                
+            },200);
+
+            setTimeout(function(){
+
+                $("#home").removeClass('animated-middle fadeInUp');
+
+            },1201);
+
+        });
+
+    } else {
+
+        $(window).load(function(){
+            "use strict";
+
+            setTimeout(function(){
+
+                $("#loading").addClass('animated-middle slideOutUp').removeClass('opacity-0');
+
+            },1000);
+
+            setTimeout(function(){
+
+                $("#home").addClass('animated-middle fadeInUp').removeClass('opacity-0');
+
+                $('body').vegas({
+                    slides: [
+                        { src: 'img/slide-1.jpg' },
+                        { src: 'img/slide-2.jpg' },
+                        { src: 'img/slide-3.jpg' },
+                    ],
+
+                    // Delay beetween slides in milliseconds.
+                    delay: 5000,
+
+                    // Chose your transition effect (See the documentation provided in your download pack)
+                    transition: 'fade'
                 });
-            }, 0);
-        
-    },1000);
 
-    setTimeout(function(){
+            },800);
 
-        $("#home").removeClass('animated-middle fadeInUp');
+            setTimeout(function(){
 
-    },2001);
+                setTimeout(function() {
+                    $('.text-intro').each(function(i) {
+                        (function(self) {
+                            setTimeout(function() {
+                                $(self).addClass('animated-middle fadeInUp').removeClass('opacity-0');
+                            },(i*150)+150);
+                            })(this);
+                        });
+                    }, 0);
+                
+            },1000);
 
-});
+            setTimeout(function(){
 
-/* ------------------------------------- */
-/* 2. Equal height box ................. */
-/* ------------------------------------- */
+                $("#home").removeClass('animated-middle fadeInUp');
 
-/* Thanks to CSS Tricks for pointing out this bit of jQuery
-http://css-tricks.com/equal-height-blocks-in-rows/
-It's been modified into a function called at page load and then each time the page is resized. One large modification was to remove the set height before each new calculation. */
+            },2001);
 
-equalheight = function(container){
+        });
 
-    var currentTallest = 0,
-         currentRowStart = 0,
-         rowDivs = new Array(),
-         $el,
-         topPosition = 0;
-     $(container).each(function() {
-
-       $el = $(this);
-       $($el).height('auto')
-       topPostion = $el.position().top;
-
-       if (currentRowStart != topPostion) {
-         for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
-           rowDivs[currentDiv].height(currentTallest);
-         }
-         rowDivs.length = 0; // empty the array
-         currentRowStart = topPostion;
-         currentTallest = $el.height();
-         rowDivs.push($el);
-       } else {
-         rowDivs.push($el);
-         currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
-      }
-       for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
-         rowDivs[currentDiv].height(currentTallest);
-       }
-     });
-}
-
-$(window).load(function() {
-    "use strict";
-    equalheight('.equalizer');
-});
-
-$(window).resize(function(){
-    "use strict";
-    equalheight('.equalizer');
-});
-
-$(document).ready(function(){
-    "use strict";
+        $("#player-nav").addClass("display-none").removeClass("");
+    
+    }
 
     /* ------------------------------------- */
-    /* 3. Action Buttons ................... */
+    /* 2. Action Buttons ................... */
     /* ------------------------------------- */
 
     $('a#open-more-info').on( "click", function() {
@@ -142,6 +169,42 @@ $(document).ready(function(){
                 callbacks:false
             });
         }, 350);
+    });
+
+    /* ------------------------------------- */
+    /* 3. YouTube Buttons .................. */
+    /* ------------------------------------- */
+
+    $('.expand-player').on( "click", function() {
+
+        $(".global-overlay").fadeOut();
+
+        $('.text-intro').each(function(i) {
+            (function(self) {
+                
+                setTimeout(function() {
+                    $(self).addClass('fadeOutDown').removeClass('fadeInUp');
+                },(i*150)+150);
+            
+            })(this);
+        });
+
+    });
+
+    $('.compress-player').on( "click", function() {
+
+        $(".global-overlay").fadeIn();
+
+        $('.text-intro').each(function(i) {
+            (function(self) {
+
+                setTimeout(function() {
+                    $(self).addClass('fadeInUp').removeClass('fadeOutDown');
+                },(i*150)+150);
+
+            })(this);
+        });
+        
     });
 
     /* ------------------------------------- */
@@ -417,4 +480,53 @@ $(document).ready(function(){
 // execute above function
 initPhotoSwipeFromDOM('.my-gallery');
 
+});
+
+/* ------------------------------------- */
+/* 7. Equal height box ................. */
+/* ------------------------------------- */
+
+/* Thanks to CSS Tricks for pointing out this bit of jQuery
+http://css-tricks.com/equal-height-blocks-in-rows/
+It's been modified into a function called at page load and then each time the page is resized. One large modification was to remove the set height before each new calculation. */
+
+equalheight = function(container){
+
+    var currentTallest = 0,
+         currentRowStart = 0,
+         rowDivs = new Array(),
+         $el,
+         topPosition = 0;
+     $(container).each(function() {
+
+       $el = $(this);
+       $($el).height('auto')
+       topPostion = $el.position().top;
+
+       if (currentRowStart != topPostion) {
+         for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
+           rowDivs[currentDiv].height(currentTallest);
+         }
+         rowDivs.length = 0; // empty the array
+         currentRowStart = topPostion;
+         currentTallest = $el.height();
+         rowDivs.push($el);
+       } else {
+         rowDivs.push($el);
+         currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
+      }
+       for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
+         rowDivs[currentDiv].height(currentTallest);
+       }
+     });
+}
+
+$(window).load(function() {
+    "use strict";
+    equalheight('.equalizer');
+});
+
+$(window).resize(function(){
+    "use strict";
+    equalheight('.equalizer');
 });
