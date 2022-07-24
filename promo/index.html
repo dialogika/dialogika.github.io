@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
         <title>Promo Kelas Public Speaking</title>
-        <meta name="description" content="The description should optimally be between 150-160 characters.">
+        <meta name="description" content="Promo Program Kelas Public Speaking Dialogika Khusus Dari Halaman Instagram">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Madeon08">
 
@@ -29,6 +29,46 @@
 
 		<!-- Modernizr runs quickly on page load to detect features -->
 		<script src="../assets/vendor/constellation/js/modernizr.custom.js"></script>
+
+		  <!-- Spreadsheet API Form Pendaftaran -->
+		    <script
+		      src="https://code.jquery.com/jquery-3.4.1.js"      
+		      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+		      crossorigin="anonymous"></script>
+		    <script>
+		      function SubForm (){
+		        $.ajax({
+		        url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
+		        type:"post",
+		        data:$("#notifyMe").serializeArray(),
+		        headers:{
+		          accessKey: "b5216464a11be561ae0b40f9ed98ee90",
+		          secretKey: "038c9369d3b221f2387c9d8f3f3e488d"},
+		          success: function(){ 
+		            alert("Form Data Submitted :)")
+		            // $('#notifications').modal('show');
+		          },
+		          error: function(){
+		            alert("There was an error :(")
+		          }
+		        });
+		      }
+
+		      function Subcription (){
+		        $.ajax({
+		          url:"https://api.apispreadsheets.com/data/18511/",
+		          type:"post",
+		          data:$("#subcriptions").serializeArray(),
+		          success: function(){
+		            $('#subcription-modal').modal('show');
+		          },
+		          error: function(){
+		            alert("There was an error :(")
+		          }
+		        });
+		      }
+		    </script>
+		  <!-- End Spreadsheet API Form Pendaftaran -->
 
 	</head>
 	
@@ -436,27 +476,38 @@
 					<!-- START - Newsletter Form -->
 					<div id="subscribe">
 
-            <form action="php/notify-me.php" id="notifyMe" method="POST">
+            <form action="javascript:void" id="notifyMe" method="POST" onsubmit="SubForm()">
 
                 <div class="form-group">
 
                     <div class="controls">
                         
                     	<!-- Field  -->
-                    	<input type="text" id="mail-sub" name="Name" placeholder="Nama" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Click here to write your email'" class="form-control email srequiredField" />
+                    	<input type="text" id="names" name="Name" placeholder="Nama" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Click here to write your name'" class="form-control email srequiredField" />
                     	<br>
 
-                    	<input type="text" id="mail-sub" name="Work" placeholder="Profesi Saat Ini" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Click here to write your email'" class="form-control email srequiredField" />
+                    	<input type="text" id="mail-sub" name="Work" placeholder="Profesi Saat Ini" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Click here to write your work'" class="form-control email srequiredField" />
                     	<br>
 
-                    	<input type="tel" id="mail-sub" name="Whatsapp" placeholder="Nomor Whatsapp" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Click here to write your email'" class="form-control email srequiredField" />
+                    	<input type="tel" id="mail-sub" name="Whatsapp" placeholder="Nomor Whatsapp" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Click here to write your phone number'" class="form-control email srequiredField" />
+
+                    	<div class="form-group" style="display:none;">
+			                <select name="Program" id="programs" class="form-select" required>
+			                  <option>From Instagram</option>
+			                </select>
+			                <select class="" name="Timestamp">
+				                <option id="timestamp"></option>
+				              </select>
+			             </div>
+
+
 
 
                     	<!-- Spinner top left during the submission -->
                     	<i class="fa fa-spinner opacity-0"></i>
 
                         <!-- Button -->
-                        <button class="btn btn-lg submit">Kontak Admin</button>
+                        <button class="btn btn-lg submit send_contact" type="submit">Kontak Admin</button>
 
                         <div class="clear"></div>
 
@@ -613,9 +664,18 @@
 		});
 		</script>
 
+		<script type="text/javascript">
+		  var today = new Date();
+	      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+	      var time = today.getHours() + ":" + today.getMinutes();
+	      var dateTime = date+'    '+time;
+	      document.getElementById("timestamp").innerHTML = dateTime;
+		</script>
+
 
 
 		<!-- Main JS File -->
+		<script src="../assets/js/whatsapp.js"></script>
 		<script src="../assets/vendor/constellation/js/main.js"></script>
 		
 		<!--[if lt IE 10]><script type="text/javascript" src="js/placeholder.js"></script><![endif]-->
