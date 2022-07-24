@@ -5482,6 +5482,8 @@ input[type="checkbox"] {
 .hero-banner-area {
   padding-left: 15px;
   padding-right: 15px;
+  max-width: 472px;
+  max-height: 726px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -6689,6 +6691,19 @@ input[type="checkbox"] {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 10px;
+  max-width: 160px;
+  max-height: 160px;
+}
+
+@media (max-width: 768px) {
+  .trending-single-item .trending-post-thum img {
+  height: fit-content;
+  width: 100%;
+  vertical-align: middle;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+  }
 }
 
 .trending-single-item .trending-post-content {
@@ -6879,6 +6894,59 @@ input[type="checkbox"] {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 10px;
+  max-width: 318px;
+  max-height: 359px;
+}
+
+@media (max-width: 768px) {
+  .trending-large-post-thum img {
+  height: fit-content;
+  width: 100%;
+  vertical-align: middle;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+  }
+}
+
+.trending-large-post-thum-2 {
+  max-width: 315px;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (max-width: 767px) {
+  .trending-large-post-thum-2 {
+    max-width: 160px;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .trending-large-post-thum-2 {
+    max-width: 100px;
+  }
+}
+
+.trending-large-post-thum-2 img {
+  height: 100%;
+  vertical-align: middle;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+  min-width:318px;
+  max-height: 161px;
+}
+
+@media (max-width: 768px) {
+  .trending-large-post-thum-2 img {
+  min-width:100px;
+  vertical-align: middle;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+  }
 }
 
 .trending-tody-content {
@@ -8060,6 +8128,8 @@ input[type="checkbox"] {
 
 .latest-post-thum a img {
   border-radius: 10px;
+  max-height: 85px;
+  max-width: 85px;
 }
 
 .latest-post-content {
