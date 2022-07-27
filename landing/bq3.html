@@ -26,7 +26,7 @@
     <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet"/>
     <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet"/>
     <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="../assets/vendor/aos/aos.css">
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet" type="text/css">
 
   <!-- Template Main CSS File -->
     <link href="../assets/css/style.css" rel="stylesheet"/>
@@ -239,39 +239,42 @@
       </div>
     </section>
 
-    <div class="" id="booking">
+    
 
-      <!-- ======= Appointment Section ======= -->
-      <section id="appointment" class="appointment section-bg " novalidate>
-        <div class="container">
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
 
           <div class="section-title">
             <h2 class="tengah">Form Pendaftaran</h2>
-            <p></p>
+            <p>Tombol akan menyala setelah data diinputkan dengan benar</p>
           </div>
 
-          <form action="javascript:void" method="post" id="myForm" role="form" class="php-email-form needs-validation" onsubmit="SubForm()">
-            <div class="row">
-              <div class="col-md-4 form-group">
-                <input type="text" name="Name" class="form-control" id="names" placeholder="Nama Lengkap" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
-                <div class="validate"></div>
-              </div>
-              <div class="col-md-4 form-group mt-3 mt-md-0">
-                <input type="tel" class="form-control" name="Whatsapp" pattern="[0-9]{10,15}" id="whatsapps" placeholder="Whatsapp" data-rule="minlen:2" data-msg="Please enter a correct phone number" required>
-                <div class="validate"></div>
-              </div>
-              <div class="col-md-4 form-group mt-3 mt-md-0">
-                <input type="text" class="form-control" name="Work" id="works" placeholder="Perkerjaan" data-rule="minlen:2" data-msg="Please enter at least 2 chars" required>
-                <div class="validate"></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col form-group mt-3">
-                <input type="text" class="form-control" name="Location" id="locations" placeholder="Domisili" data-rule="minlen:2" data-msg="Please enter a correct place" required>
-                <div class="validate"></div>
-              </div>
-              <div class="col form-group mt-3">
-                <select name="Program" id="programs" class="form-select" required>
+          <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="col-lg-6">
+              <form action="javascript:void" method="post" id="myForm" enctype="text/plain" role="form" class="php-email-form needs-validation" onsubmit="SubForm()">
+                <div class="form-group">
+                  <input type="text" name="Name" class="form-control" id="names" pattern="[a-zA-Z\s]{3,100}" placeholder="Nama Lengkap*" required>
+                  <div class="validate"></div>
+                </div>
+                  
+                <div class="row">
+                  <div class="col-md-4 form-group">
+                    <input type="tel" class="form-control" name="Whatsapp" id="whatsapps" pattern="[0-9]{10,15}" placeholder="Whatsapp*" required="">
+                    <div class="validate"></div>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <input type="text" class="form-control" name="Location" id="locations" pattern="[a-zA-Z\s]{3,100}" placeholder="Domisili*" required>
+                      <div class="validate"></div>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <input type="text" class="form-control" name="Work" id="works" pattern="[a-zA-Z\s]{3,100}" placeholder="Job Yang Diinginkan*" required>
+                    <div class="validate"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <select name="Program" id="programs" class="form-select" required>
                     <option value="" selected disabled value="">Perusahaan Yang Dipilih</option>
                     <optgroup label="------------">
                       <option select disabled value="Test: PNS">PNS (75K)</option>
@@ -280,26 +283,31 @@
                       <option select disabled value="Test: Multinasional">Multinasional (125K)</option>
                     </optgroup>
                   </select>
-                <div class="validate"></div>
-              </div>
+                  <div class="validate"></div>
+                </div>
+                <select class="d-none" name="Timestamp">
+                  <option id="timestamp"></option>
+                </select>
+                  <input type="hidden" name="UTM_Source" value="">
+                  <input type="hidden" name="UTM_Medium" value="">
+                  <input type="hidden" name="UTM_Campaign" value="">
+                <div class="form-group">
+                  <textarea class="form-control" name="Ket" id="messages" rows="4" placeholder="Masalah didalam public speaking?"></textarea>
+                  <div class="validate"></div>
+                </div>
+                <div class="form-text">
+                  *Tombol akan menyala apabila nama, nomor hp, profesi dan domisili telah terisi.
+                </div>
+                <div class="text-center">
+                  <button type="submit" id="submits" class="send_contact" data-bs-toggle="modal" data-bs-target="#notifications">Send Whatsapp</button>
+                </div>
+              </form>
             </div>
-            <select class="d-none" name="Timestamp">
-              <option id="timestamp"></option>
-            </select>
 
-            <div class="form-group mt-3">
-              <textarea class="form-control" name="Ket" id="messages" rows="5" placeholder="Kesulitan yang dirasakan" required></textarea>
-              <div class="validate"></div>
-            </div>
-            <div class="text-center">
-              <button type="submit" id="submits" class="send_contact" data-bs-toggle="modal" data-bs-target="#notifications">Daftar Sekarang</button>
-            </div>
-          </form>
+          </div>
 
         </div>
-      </section><!-- End Appointment Section -->
-
-      
+      </section><!-- End Contact Section -->
 
       <!-- ======= Features Section ======= -->
       <section id="features" class="features" >
@@ -374,7 +382,7 @@
         </div>
       </section><!-- End Counts Section -->
 
-    </div>
+
 
   </main><!-- End #main -->
 
@@ -828,7 +836,8 @@
   </div>
 
   <!-- Vendor JS Files -->
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <!-- <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <script src="../assets/vendor/aos/aos.js"></script>
     <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
