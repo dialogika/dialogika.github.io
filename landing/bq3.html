@@ -850,16 +850,16 @@
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/whatsapp.js"></script>
     <script type="text/javascript">
-      // $(function () {
-      //   $('#submits').attr('disabled', true);
-      //   $('#myForm').change(function () {
-      //       if ($('#names').val() != '' && $('#works').val() != '' && $('#locations').val() != '' && $('#whatsapps').val() != '') {
-      //           $('#submits').attr('disabled', false);
-      //       } else {
-      //           $('#submits').attr('disabled', true);
-      //       }
-      //   });
-      // });
+      $(function () {
+        $('#submits').attr('disabled', true);
+        $('#myForm').change(function () {
+            if ($('#names').val() != '' && $('#works').val() != '' && $('#locations').val() != '' && $('#whatsapps').val() != '') {
+                $('#submits').attr('disabled', false);
+            } else {
+                $('#submits').attr('disabled', true);
+            }
+        });
+      });
       // get date
       var today = new Date();
       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
