@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Kelas Public Online Speaking | Dialogika </title>
+  <meta content="Garansi PASTI BISA | Sebulan Bisa Public Speaking | Atasi Rasa Ngeblank dan tidak bisa bicara tanpa persiapan." name="description">
+  <meta content="Public Speaking" name="keywords">
+  <meta content="Dialogika" name="keywords">
+  <meta content="Online Class" name="keywords">
+
+  <!-- Favicons -->
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"/>
+
+  <!-- Vendor CSS Files -->
+
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/>
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet"/>
+    <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"/>
+    <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet"/>
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet"/>
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"/>
+
+
+  <!-- Template Main CSS File -->
+    <link href="../assets/css/style.css" rel="stylesheet"/>
+    
+
+
+  <!-- Spreadsheet API Form Pendaftaran -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"      
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"></script>
+    <script>
+      function SubForm (){
+        $.ajax({
+        url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
+        type:"post",
+        data:$("#myForm").serializeArray(),
+        headers:{
+          accessKey: "b5216464a11be561ae0b40f9ed98ee90",
+          secretKey: "038c9369d3b221f2387c9d8f3f3e488d"},
+          success: function(){ 
+            alert("Data Telah Tersimpan :)")
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
+
+      function SubFormModal (){
+        $.ajax({
+        url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
+        type:"post",
+        data:$("#myFormModal").serializeArray(),
+        headers:{
+          accessKey: "b5216464a11be561ae0b40f9ed98ee90",
+          secretKey: "038c9369d3b221f2387c9d8f3f3e488d"},
+          success: function(){ 
+            alert("Data Telah Tersimpan, Anda akan ke Redirect ke Whatsapp :)")
+            // window.location.href = 'https://link.dialogika.co/whatsapp-modal';
+            // window.open("https://link.dialogika.co/whatsapp-modal");
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
+
+      function Subcription (){
+        $.ajax({
+          url:"https://api.apispreadsheets.com/data/18511/",
+          type:"post",
+          data:$("#subcriptions").serializeArray(),
+          success: function(){
+            $('#subcription-modal').modal('show');
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
+    </script>
+  <!-- End Spreadsheet API Form Pendaftaran -->
+
+
+  <!-- Pixel Facebook -->
+    <!-- DEC 2021 -->
+      <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '916674555903437');
+        fbq('track', 'PageView');
+      </script>
+      <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=916674555903437&ev=PageView&noscript=1"
+      /></noscript>
+    <!-- END DEC 2021 -->
+  <!-- End Pixel Facebook -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148836422-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-148836422-2');
+    </script>
+  <!-- End Global site tag (gtag.js) - Google Analytics -->
+
+  <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KGK9D6H');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Hotjar Tracking Code for https://dialogika.co -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:2828594,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+  <!-- End Hotjar -->
+
+</head>
+
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGK9D6H"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope"></i> <a href="mailto:admin@dialogika.co">admin@dialogika.co</a>
+        <i class="bi bi-phone"></i> <a href="https://link.dialogika.co/wasap-2597-dialogika-co">+62 851-6299-2597</a>
+      </div>
+      <div class="d-none d-lg-flex social-links align-items-center">
+        <a href="https://link.dialogika.co/twitter" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="https://link.dialogika.co/facebook" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://link.dialogika.co/instagram" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://link.dialogika.co/linkedin" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </div><!-- End Top Bar -->
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+       <a href="../index.html" class="logo me-auto"><img src="../assets/img/logo.png" alt="Kelas Online Public Speaking" class="img-fluid"></a>
+
+       <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul id="navbar-navlist">
+          <li><a class="nav-link scrollto active" data-scroll href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" data-scroll href="#about">Why Us</a></li>
+          <li><a class="nav-link scrollto active" data-scroll href="#resume">Scheme</a></li>
+          <li><a class="nav-link scrollto active" data-scroll href="#pricing">Price</a></li>
+          <li><a class="nav-link" href="#mentor-dialogika" data-bs-toggle="offcanvas">Mentor</a></li>
+          <li><a class="nav-link data-bs-scroll" data-scroll href="#faq">FAQ</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+       
+
+    </div>    
+  </header><!-- End Header -->
+
+  <!-- ======= Hero-Resume Section ======= -->
+  <section id="hero-resume" class="d-flex flex-column justify-content-center" style=" background: url('../assets/img/landing/br1-hero.jpg') top right no-repeat;background-size: cover;">
+    <div class="container">
+      <h1>Cara Mengatasi</h1>
+      <p>Susah <span class="typed" data-typed-items="Mengatur Kata, Bicara Teratur, Mengembangkan Kata, Public Speaking"></span></p>
+      <div class="social-links">
+        <a href="https://fb.me/dialogika.co" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="https://twitter.com/dialogika_co" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="https://linkedin.com/company/dialogika" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        <a href="https://wa.me/6285162992597" class="google-plus"><i class="bx bxl-whatsapp"></i></a>
+        <a href="https://instagram.com/dialogika.co" class="instagram"><i class="bx bxl-instagram"></i></a>
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about-resume">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Fakta Mengejutkan!</h2>
+          <p><strong></strong> 80% masyakarat <b>telat sadar pentingnya</b> <i>Public Speaking.</i> Mengapa? <b>Karena tidak semua orang punya kesempatan</b> untuk berbicara dihadapan umum</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <img src="../assets/img/landing/br1-1.jpg" class="img-fluid" alt="public speaking online course">
+          </div>
+          <div class="col-lg-8 pt-4 pt-lg-0 content">
+            <h3>8 Tanda Kamu Butuh Bisa Public Speaking.</h3>
+            <p class="font-italic">
+              Check apakah kesulitanmu ada dibawah ini:
+            </p>
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class='bx bx-chevrons-right'></i> Sering <strong>nge-blank</strong> saat bicara</li>
+                  <li><i class='bx bx-chevrons-right'></i> Susah <strong>mengembangkan</strong> kata-kata</li>
+                  <li><i class='bx bx-chevrons-right'></i> Gugup <strong>mengungkapkan</strong> pendapat</li>
+                  <li><i class='bx bx-chevrons-right'></i> Takut <strong>salah</strong> saat bicara</li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class='bx bx-chevrons-right'></i> Rasa <strong>insecure</strong> berlebihan</li>
+                  <li><i class='bx bx-chevrons-right'></i> Merasa sering <strong>"eee" "umm"</strong></li>
+                  <li><i class='bx bx-chevrons-right'></i> <strong>Kaku</strong> dalam berbicara</li>
+                  <li><i class='bx bx-chevrons-right'></i> <strong>Tidak</strong> teratur saat berbicara</li>
+                </ul>
+              </div>
+            </div>
+            <p>
+              Nah yang gawat adalah <strong>sudah tau mengalami gejala tersebut namun memilih diam.</strong> Sedihnya ini fakta yang sering terjadi di masyarakat kita. "Nanti ah", "Nunggu ada temennya" dan beragam alasan lainnya yang kita ciptakan sendiri selalu menjadi penghambat untuk pengembangan diri.
+            </p>
+            <p>
+              Jika kamu <b>siap untuk berubah?</b> Simak caranya!
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Skills Section ======= -->
+    <section id="skills" class="skills section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2 class="dumpil">Caranya Gimana?</h2>
+          <h2 class="tengah">2 Tahun Riset</h2>
+          <p>Setelah 2 tahun kami melakukan riset. Ternyata langkah yang paling efektif untuk menguasai <i>public speaking</i> adalah...</p>
+        </div>
+
+        <div class="row skills-content">
+
+          <div class="col-lg-6">
+
+            <div class="progress">
+              <span class="skill" style="color:#009961;">Latihan! Latihan! Latihan! <i class="val">100%</i></span>
+              <div class="progress">
+                <div class="progress-bar w-100 bg-success " role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill" style="color:#c7022a;">Menulis <i class="val">25%</i></span>
+              <div class="progress">
+                <div class="progress-bar w-25 bg-danger" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill" style="color:#f9c62e;">Belajar Lewat Video <i class="val">50%</i></span>
+              <div class="progress">
+                <div class="progress-bar w-50 bg-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="progress">
+              <span class="skill" style="color:#c7022a;">Dengerin Video Motivasi <i class="val">25%</i></span>
+              <div class="progress">
+                <div class="progress-bar w-25 bg-danger" role="progressbar"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            
+
+            <div class="progress">
+              <span class="skill" style="color: #009961;">Di Bimbing Mentor <i class="val">100%</i></span>
+              <div class="progress">
+                <div class="progress-bar w-100 bg-success" role="progressbar"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            
+
+            <div class="progress">
+              <span class="skill" style="color:#0f61a8;">Bergabung ke Komunitas Yang Mendukung <i class="val">75%</i></span>
+              <div class="progress">
+                <div class="progress-bar w-75 bg-primary" role="progressbar"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Skills Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2 class="dumpil">Program Kelas</h2>
+          <h2 class="tengah">Virtual Practice</h2>
+          <p>Dalam program ini Dialogika akan mengajak kamu untuk</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="icon-box">
+              <div class="icon"><i class='bx bxs-calendar-check'></i></div>
+              <h4><a href="#" onclick="return false">Repetisi Berlatih</a></h4>
+              <p>
+                Berlatih terus-menerus di dalam berbicara dihadapan umum
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+            <div class="icon-box">
+              <div class="icon"><i class='bx bxs-message-dots' ></i></div>
+              <h4><a href="#" onclick="return false;">Play The Games</a></h4>
+              <p>
+                Latihannya seru-seru mulai dari berbicara tanpa persiapan hingga persentasi
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class='bx bxs-message-rounded-error' ></i></div>
+              <h4><a href="" onclick="return false">Positive Vibes</a></h4>
+              <p>
+                Semua member yang join di Dialogika akan di kondisikan untuk saling mendukung satu sama lain
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <div class="icon"><i class='bx bx-dna' ></i></div>
+              <h4><a href="" onclick="return false">Fear to Fun</a></h4>
+              <p>
+                Pelan-pelan mindset kamu akan berubah dari takut menjadi berani dan tentunya fun!
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <div class="icon"><i class='bx bxs-notepad'></i></div>
+              <h4><a href="#" onclick="return false">Online Live</a></h4>
+              <p>
+                Ini <b>BUKAN</b> video course, melainkan kamu akan latihan secara live via zoom/gmeet
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <div class="icon"><i class='bx bx-history'></i></div>
+              <h4><a href="" onclick="return false;">Durasi Sebulan</a></h4>
+              <p>
+                Program ini bersifat bulanan dan selama sebulan kamu akan berlatih disetiap minggunya.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Resume Section ======= -->
+    <section id="resume" class="resume">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2 class="tengah">Virtual Practice</h2>
+          <p>Seperti apa detailnya didalam satu bulan? </p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <h3 class="resume-title">Gambaran Kelas</h3>
+            <div class="resume-item pb-0">
+              <h4>Join Group</h4>
+              <p><em>Anda akan bergabung didalam group kelas di whatsapp bersama peserta lain</em></p>
+              <ul>
+                <li><b>Pelaksanaan: </b> Setiap Minggu</li>
+                <li><b>Mulai: </b> Minggu, 15:30 WIB</li>
+                <li><b>Selesai: </b> Minggu, 17:00 WIB</li>
+                <li><b>Via: </b> Zoom / Google Meet</li>
+                <li><b>Record: </b> Dapat Recording Kelas</li>
+                <li><b>Konsultasi: </b> Bebas Konsultasi</li>
+              </ul>
+            </div>
+
+            <h3 class="resume-title">Benefit &amp; </h3>
+            <div class="resume-item">
+              <h4>Online Meeting</h4>
+              <h5>Durasi: 90 - 100 Menit / meeting</h5>
+              <p><em>Kelas berlangsung selama sebulan. Berbeda dengan pelatihan softskill yang lain. Pelatihan Dialogika bersifat interaktif dan real-time <b>bukan video satu arah.</b></em></p>
+              <p>Yang dicover didalam kelas</p>
+              <ul>
+                <li>Latihan / Challenge yang <b>berbeda-beda disetiap harinya</b></li>
+                <li>Feedback mentor kepada member (atau peserta) kelas</li>
+                <li>Diskusi dan QnA dari para peserta kelas</li>
+                <li><b>Recording</b> disetiap pertemuannya</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="resume-item">
+              <h4>Konsep Kelas</h4>
+              <h5>70% praktek : 30% materi</h5>
+              <p><em>Setiap kali pertemuan selalu ada praktek dan member akan di...</em></p>
+              <ul>
+                <li>Dikomentari lalu disuruh perbaiki</li>
+                <li>Diberikan contoh lalu perbaiki</li>
+                <li>Diajarkan untuk bisa berbicara lebih baik</li>
+              </ul>
+              <p>dan masih banyak lagi...</p>
+            </div>
+            <h3 class="resume-title">Focus Point</h3>
+            <div class="resume-item">
+              <h4>Impromptu Speech</h4>
+              <h5>Bicara dengan tiba-tiba</h5>
+              <p><em>Member akan dikondisikan untuk bisa bicara tanpa persiapan, susah fokus dan nge-blank </em></p>
+            </div>
+            <div class="resume-item">
+              <h4>Storytelling</h4>
+              <h5>Bercerita ketimbang melakukan deskripsi</h5>
+              <p><em>Member dilatih untuk bisa membangun cerita dihadapan para peserta yang lain</em></p>
+            </div>
+            <div class="resume-item">
+              <h4>Fear to Fun</h4>
+              <h5>Mengatasi rasa takut</h5>
+              <p><em>Member akan belajar dan praktek untuk mengatasi rasa takut dari diri sendiri menjadi lebih fun dan enjoy.</em></p>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Resume Section -->
+
+    <!-- ======= Pricing Section ======= -->
+    <section class="section bg-light pricing" id="pricing">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-4">
+            <div class="heading-box">
+              <div class="title-box">
+                <h6 class="title-sub-title mb-0 text-primary">Pricing</h6>
+                <h3 class="title-heading mt-3 ms-0">Harga Kelas Bulanan vs Kelas Basic Plus</h3>
+              </div>
+
+              <p class="title-desc text-muted mt-3">Perbandingan Harga Dan Benefitnya</p>
+
+              <div class="pricing-tabs mt-4">
+                <ul class="nav nav-pills rounded justify-content-center d-inline-block pricing-tab-border py-1 px-2"
+                    id="pills-tab" role="tablist">
+                  <li class="nav-item d-inline-block">
+                    <a class="nav-link px-3 rounded active monthly" id="Monthly" data-bs-toggle="pill"
+                       href="#Month" role="tab" aria-controls="Month" aria-selected="true">Langganan</a>
+                  </li>
+                  <li class="nav-item d-inline-block">
+                    <a class="nav-link px-3 rounded yearly" id="Yearly" data-bs-toggle="pill"
+                      href="#Year" role="tab" aria-controls="Year" aria-selected="false">
+                        Hemat <span class="badge bg-success rounded text-white">61% Off </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-lg-7 g-0 offset-lg-1">
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade active show" id="Month" role="tabpanel" aria-labelledby="Monthly">
+                <div class="row g-0 align-items-center">
+                  <div class="col-lg-6">
+                    <div class="pricing-box active bg-white rounded mt-4">
+                      <div class="pricing-badge">
+                        <span class="badge">Langganan</span>
+                      </div>
+
+                      <h5 class="fw-normal">Virtual Practice</h5>
+                      <h1 class="pricing-title mt-3 mb-0">IDR 197.000 
+                        <span class="f-13"> Per Bulan</span>
+                      </h1>
+                      <p class="text-muted f-15 mt-3"><i>Focus Point:</i> Latihan Public Speaking untuk Atasi rasa takut didalam berbicara dihadapan umum</p>
+
+                      <hr class="mt-4">
+
+                      <div class="mt-4 pt-1">
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
+                          <strike style="color:#aaaaaa;">
+                            Garansi mengulang kelas</strike>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          <b>4x pertemuan</b> dalam sebulan
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Maksimal peserta <b>25 orang</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Durasi kelas <b>90 menit</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
+                          <strike style="color:#aaaaaa;">
+                            Dapat eCertificate</strike>
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-2 text-center">
+                        <a href="#contact" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="pricing-box bg-white rounded mt-4">
+                        <h5 class="fw-normal" style="font-family: verdana;">Virtual Practice : 3 Bulan </h5>
+                        <h1 class="pricing-title mt-3 mb-0">IDR 457.000
+                          <span class="f-13"> <strike>IDR 591.000</strike></span>
+                        </h1>
+                        <p class="text-muted f-15 mt-3"><i>Focus Point:</i> Latihan Public Speaking untuk Atasi rasa takut didalam berbicara dihadapan umum</p>
+                        <div class="mt-4 pt-1">
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
+                            <strike style="color:#aaaaaa;">
+                              Garansi mengulang kelas</strike>
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            <b>4x pertemuan</b> dalam sebulan
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Maksimal peserta <b>25 orang</b>
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Durasi kelas <b>90 menit</b>
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-x-circle'></i>
+                              Dapat eCertificate
+                          </p>
+                        </div>
+                      <div class="mt-4 pt-2 text-center">
+                        <a href="basic-class.html#contact" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="Year" role="tabpanel" aria-labelledby="Yearly">
+                <div class="row g-0 align-items-center">
+                  <div class="col-lg-6">
+                    <div class="pricing-box active bg-white rounded mt-4">
+                      <div class="pricing-badge">
+                        <span class="badge">Best Choice</span>
+                      </div>
+
+                      <h5 class="fw-normal">Paket Hemat</h5>
+                      <h1 class="pricing-title mt-3 mb-0">IDR 975.000 
+                        <span class="f-13"> <strike>IDR 2.500.000</strike></span>
+                      </h1>
+                      <p class="text-muted f-15 mt-3">Start dari awal hingga mampu mengelaborasi fakta dan data, serta storytelling dengan baik sekalipun tanpa powerpoint</p>
+                      <hr class="mt-4">
+                        <div class="mt-4 pt-1">
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Garansi mengulang kelas
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            <b>14x pertemuan Bimbingan:</b> 2 Bulan
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Maksimal peserta <b>7 orang</b>
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            <b>Bonus</b> Virtual Practice Class: 4 Bulan
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Durasi kelas <b>90 menit</b>
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Dapat eCertificate
+                          </p>
+                        </div>
+                        <div class="mt-4 pt-2 text-center">
+                          <a href="#../program/basic-plus.html#contact" class="btn btn-primary w-100">Daftar Sekarang</a>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="pricing-box bg-white rounded mt-4">
+                        <h5 class="fw-normal">Basic Plus</h5>
+                        <h1 class="pricing-title mt-3 mb-0">IDR 499.000
+                          <span class="f-13"> <strike>IDR 1.000.000</strike></span>
+                        </h1>
+                        <p class="text-muted f-15 mt-3">Mampu mengelaborasi fakta dan data, serta storytelling dengan baik</p>
+                        <div class="mt-4 pt-1">
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-x-circle'></i>
+                          Garansi mengulang kelas
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          <b>7x pertemuan Bimbingan</b> dalam sebulan
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Maksimal peserta <b>7 orang</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            <b>Bonus</b> Virtual Practice Class: 2 Bulan
+                          </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Durasi kelas <b>90 menit</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Dapat eCertificate</p>
+                      </div>
+                      <div class="mt-4 pt-2 text-center">
+                        <a href="../program/basic-plus.html#contact" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Pricing -->  
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+
+        <div class="section-title">
+          <h2 class="kiri text-start">Testimonial</h2>
+          <p class="kiri text-start">Our Client</p>
+        </div>
+
+        <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide"> 
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <img src="../assets/img/testimonials/rianprasetyo.jpg" class="testimonial-img" alt="">
+                  <h3>Rian Hilman Prasetyo</h3>
+                  <h4>Field Education Consultant at Ruangguru</h4>
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    Kelasnya membuat kita banyak bertukar pikiran dengan para peserta yang ada, dan nggak cuman disitu. Kita juga dilatih secara satu persatu untuk mengembangkan topik hingga berbicara tanpa persiapan. Terima kasih banyak Dialogika
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <img src="../assets/img/testimonials/satyanovi.jpg" class="testimonial-img" alt="">
+                  <h3>Satya Novi Hastuti</h3>
+                  <h4>Assistant Audit Manager at EY Global</h4>
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    Belajar public speaking nggak mengenal batas usia, buat kamu yang pingin belajar sekaligus prakek. Dialogika menjadi ajang yang baik untuk teman-teman berlatih public speaking mulai dasar. Terima kasih Dialogika!
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <img src="../assets/img/testimonials/beatrice.jpg" class="testimonial-img" alt="">
+                  <h3>Natasha Beatrice Silalahi</h3>
+                  <h4>Sales Manager</h4>
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    Terasa banget kak, biasanya aku sering bgt gugur di tahapan "wawancara" saat seleksi kerja tapi kemarin abis wawancara bener2 ngerasa beda dan <b>hasilnya juga baik.</b> Nervous sih masih ada tp udah tau cara mengontrolnya. Dan yg paling beda setiap bicara bisa lebih pede sama kata-kata yg aku ucapkan. Mungkin <b>terbantu banget</b> karena kelas public speaking Dialogika banyak prakteknya.
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+              <div class="testimonial-item">
+                <img src="../assets/img/testimonials/sherylna.jpg" class="testimonial-img" alt="">
+                <h3>Sherlyna Anggraini Putri</h3>
+                <h4>Mahasiswa</h4>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Public Speaking yang diberikan oleh Dialogika sangat bermanfaat bagi saya saat melakukan presentasi ujian. <b>Nervous</b> yang sering saya alami <b>sudah teratasi</b> dan jadi lebih rileks. Begitu pula saat memberikan opini... berjalan lancar tanpa belibet.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <img src="../assets/img/testimonials/salvathea.jpg" class="testimonial-img" alt="">
+                  <h3>Vanessa Salvathea</h3>
+                  <h4>Mahasiswa Ilmu Komunikasi</h4>
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    Seru banget dibimbing sama mentor-mentornya, yang menarik adalah cara kita mengolah emosi itu benar-benar dilatih sesuai masalah yang kita alami secara personal. Buat teman-teman yang merasa sulit dan takut saat berbicara bisa banget untuk join ke Dialogika
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title">
+          <h2 class="dumpil">Gallery</h2>
+          <h2 class="tengah">Program Kami</h2>
+          <p></p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <!-- <li data-filter="*" class="filter-active">All</li> -->
+              <li data-filter=".filter-photo" class="filter-active">Photo</li>
+              <li data-filter=".filter-video">Video</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container">
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
+            <img src="../assets/img/gallery/basic-p/1.jpg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-video">
+            <iframe width="100%" height="268" src="https://www.youtube.com/embed/l4MPvjCkUPw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
+            <img src="../assets/img/gallery/basic-p/3.jpg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
+            <img src="../assets/img/gallery/basic-p/4.jpg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-video">
+            <iframe width="100%" height="268" src="https://www.youtube.com/embed/d6ZIJ8Ilu3U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
+            <img src="../assets/img/gallery/basic-p/5.jpg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
+            <img src="../assets/img/gallery/basic-p/6.jpg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
+            <img src="../assets/img/gallery/basic-p/7.jpg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-video">
+            <iframe width="100%" height="268" src="https://www.youtube.com/embed/gVq-OyirtYg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
+            <img src="../assets/img/gallery/basic-p/8.jpg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
+            <img src="../assets/img/gallery/basic-p/9.jpg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-video">
+            <iframe width="100%" height="268" src="https://www.youtube.com/embed/kGPgfOno7jo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-photo">
+            <img src="../assets/img/gallery/basic-p/10.jpg" class="img-fluid" alt="">
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2 class="tengah">Form Pendaftaran</h2>
+          <p>Tombol akan menyala setelah data diinputkan dengan benar</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="col-lg-6">
+            <form action="javascript:void" method="post" id="myForm" enctype="text/plain" role="form" class="php-email-form needs-validation">
+              <div class="form-group">
+                <input type="text" name="Name" class="form-control" id="names" pattern="[a-zA-Z\s]{3,100}" placeholder="Nama Lengkap*" required>
+                <div class="validate"></div>
+              </div>
+                
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <input type="tel" class="form-control" name="Whatsapp" id="whatsapps" pattern="[0-9]{10,15}" placeholder="Whatsapp*" required="">
+                  <div class="validate"></div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <input type="text" class="form-control" name="Work" id="works" pattern="[a-zA-Z\s]{3,100}" placeholder="Profesi*" required>
+                  <div class="validate"></div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <input type="text" class="form-control" name="Location" id="locations" pattern="[a-zA-Z\s]{3,100}" placeholder="Domisili*" required>
+                    <div class="validate"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <select name="Program" id="programs" class="form-select" required>
+                  <option value="" selected disabled value="">Program Yang Akan Diambil</option>
+                  <optgroup selected disabled label="============="></optgroup>
+                  <optgroup label="Langganan Virtual Practice">
+                    <option>Per 1 Bulan: 197K</option>
+                    <option>Per 3 Bulan: 457K</option>
+                  </optgroup>
+                  <optgroup label="Bimbingan + Langganan">
+                    <option>Basic Plus: 499K</option>
+                    <option>Paket Hemat: 975K</option>
+                  </optgroup>
+                </select>
+                <div class="validate"></div>
+              </div>
+              <select class="d-none" name="Timestamp">
+                <option id="timestamp"></option>
+              </select>
+                <input type="hidden" name="UTM_Source" value="">
+                <input type="hidden" name="UTM_Medium" value="">
+                <input type="hidden" name="UTM_Campaign" value="">
+              <!-- <div class="form-group">
+                <textarea class="form-control" name="Ket" id="messages" rows="4" placeholder="Masalah didalam public speaking?"></textarea>
+                <div class="validate"></div>
+              </div> -->
+              <div class="form-text">
+                *Tombol akan menyala apabila nama, nomor hp, profesi dan domisili telah terisi.
+              </div>
+              <div class="text-center">
+                <button type="submit" id="submits" class="send_contact" data-bs-toggle="modal" data-bs-target="#notifications" onclick="SubForm()">Send Whatsapp</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="info-box">
+                  <i class="bx bx-map"></i>
+                  <h3>Our Address</h3>
+                  <p>Jl. Werkudoro, Tegalrejo, Jadan, Kasihan, Bantul<br> Special Region of Yogyakarta, 55184</p>
+                </div>
+              </div>
+              <div class="col-md-6" >
+                <div class="info-box mt-4">
+                  <i class="bx bx-envelope"></i>
+                  <h3>Email Contact</h3>
+                  <p>admin@dialogika.co<br></p>
+                </div>
+              </div>
+              <div class="col-md-6" >
+                <div class="info-box mt-4">
+                  <i class="bx bx-phone-call"></i>
+                  <h3>Whatsapp Contact</h3>
+                  <p>+62 851-6299-2597<br></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" style="padding-bottom: 100px;">   
+
+    <div class="container d-md-flex py-4">
+
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Dialogika</span></strong> | PT. Dialogika Persona Indonesia
+        </div>
+        
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="https://link.dialogika.co/twitter" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="https://link.dialogika.co/facebook" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://link.dialogika.co/instagram" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://link.dialogika.co/wasap-2597-dialogika-co" class="google-plus"><i class="bx bxl-whatsapp"></i></a>
+        <a href="https://link.dialogika.co/linkedin" class="linkedin"><i class="bx bxl-linkedin"></i></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <!-- <div id="preloader"></div> -->
+
+  <!-- ======= Super-bottom ======= -->
+  <nav class="navbar bar-bottom fixed-bottom">
+    <div class="price-wrap mr-auto">
+      <small class="text-muted">
+        <span class="badge rounded-pill bg-info text-dark">
+          <i class='bx bxs-info-circle'></i>
+          PROGRAM
+        </span>
+        <span class="badge rounded-pill bg-warning text-dark">
+          <i class='bx bxs-info-circle'></i>
+          VIRTUAL PRACTICE
+        </span>
+        <br>
+      </small>
+      <span class="badge rounded-pill bg-success">
+        <i class="bx bxs-check-shield"></i>PER BULAN
+      </span>
+      <span class="badge rounded-pill rounded-green">
+        <i class='bx bxs-briefcase-alt-2'></i>
+        ONLINE </span>
+    </div>
+    <div>
+      <a href="#contact" class="btn-bottom scrollto">Daftar <span class="d-none d-md-inline"> Sekarang</span></a>
+      <!-- <a href="#contact" class="btn-bottom scrollto">Daftar</a> -->
+    </div>
+  </nav><!-- End Super-bottom -->
+
+  <!-- ======= Offcanvas Bottom ======= -->
+  <div class="offcanvas offcanvas-bottom" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="daftarsekarang" >
+    <div class="offcanvas-header">
+      <nav class="navbar bar-top">
+        <div class="price-wrap mr-auto">
+          <small class="text-muted">
+            <span class="price">
+              <b>IDR. 25.000</b>
+            </span>
+            <span class="badge rounded-pill bg-warning text-dark">
+              <i class='bx bxs-info-circle'></i>
+              PER PERTEMUAN
+            </span>
+          <br>
+          </small>
+          <span class="badge rounded-pill bg-success">
+            <i class="bx bxs-check-shield"></i>GARANSI
+          </span>
+          <span class="badge rounded-pill rounded-green">
+            <i class='bx bxs-briefcase-alt-2'></i>
+            TOTAL: 499.000
+          </span>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </nav>
+    </div>
+    <div class="offcanvas-body contact">
+      <div class="container" data-aos="zoom-out">
+        <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+
+          <form action="javascript:void" method="post" id="myForm" enctype="text/plain" role="form" class="php-email-form needs-validation">
+            <div class="form-group">
+              <input type="text" name="Name" class="form-control" id="names" pattern="[a-zA-Z\s]{3,100}" placeholder="Nama Lengkap*" required>
+              <div class="validate"></div>
+            </div>
+              
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <input type="tel" class="form-control" name="Whatsapp" id="whatsapps" pattern="[0-9]{10,15}" placeholder="Whatsapp*" required="">
+                <div class="validate"></div>
+              </div>
+              <div class="col-md-4 form-group">
+                <input type="text" class="form-control" name="Location" id="locations" pattern="[a-zA-Z\s]{3,100}" placeholder="Domisili*" required>
+                  <div class="validate"></div>
+              </div>
+              <div class="col-md-4 form-group">
+                <input type="text" class="form-control" name="Work" id="works" pattern="[a-zA-Z\s]{3,100}" placeholder="Profesi*" required>
+                <div class="validate"></div>
+              </div>
+              
+            </div>
+            <div class="form-group">
+              <select name="Program" id="programs" class="form-select" required>
+                <optgroup label="--- Preparation Test">
+                  <option value="Pretest Public Speaking">1x Pertemuan (25K)</option>
+                  <option value="Interview Preparation">Mocking Interview (35K)</option>
+                </optgroup>
+                <optgroup label="--- Kelas Online">
+                  <option value="Basic Plus (Ads)">Basic Plus (499K)</option>
+                  <option value="Private BP (Ads)">Private Class Online</option>
+                  <option value="Pahe (Ads)">Paket Hemat 2 Level (975K)</option>
+                </optgroup>
+              </select>
+              <div class="validate"></div>
+            </div>
+            <select class="d-none" name="Timestamp">
+              <option id="timestamp"></option>
+            </select>
+              <input type="hidden" name="UTM_Source" value="">
+              <input type="hidden" name="UTM_Medium" value="">
+              <input type="hidden" name="UTM_Campaign" value="">
+            <div class="form-text">
+              *Tombol akan menyala apabila nama, nomor hp, profesi dan domisili telah terisi.
+            </div>
+            <div class="text-center">
+              <button type="submit" id="submits" class="send_contact" data-bs-toggle="modal" data-bs-target="#notifications" onclick="SubForm()">Send Whatsapp</button>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div><!-- End Bottom Offcanvas -->
+
+  <!-- ======= Toast Ask Program ======= -->
+  <div class="toast toast-bawah" id="askToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">+1 Calon Peserta Bertanya</strong>
+      <small>1 menit yang lalu</small>
+      <button type="button" class="btn-close" id="closeAsk" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Gratis konsultasi program
+    </div>
+  </div><!-- End Toast Sold Program -->
+
+  <!-- ======= Toast Ask Program ======= -->
+  <div class="toast toast-paling-bawah text-bg-success" id="soldToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header" style="background-color: #009961;">
+      <strong class="me-auto text-light">+1 Peserta Telah Mendaftar</strong>
+      <small class="text-warning">Sisa 3 Seat</small>
+      <button type="button" class="btn-close btn-close-white" id="closeSold" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div><!-- End Toast Sold Program -->
+
+  <!-- ======= Offcanvas List Mentor ======= -->
+  <div class="offcanvas offcanvas-start" id="canvas-list-mentor" data-bs-backdrop="false">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel"><b>List Mentor</b></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body doctors">
+      <div class="row">
+
+        <div class="col">
+          <div class="member d-flex align-items-start">
+            <div class="pic"><img src="../assets/img/mentor/oka.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+              <h4>Oka Fahreza</h4>
+              <span>Presenter Jogja TV</span>
+              <p>Presenter aktif sekaligus berpegalaman sebagai tenaga pendidik.</p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="member d-flex align-items-start">
+            <div class="pic"><img src="../assets/img/mentor/atik.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+              <h4>Atik Fauzia</h4>
+              <span>Presenter Jogja TV</span>
+              <p>Presenter aktif sekaligus aktif diberagam event MC</p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="member d-flex align-items-start">
+            <div class="pic"><img src="../assets/img/mentor/bilal.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+              <h4>Teuku Bilal Rizky</h4>
+              <span>Certified National Trainer from BNSP</span>
+              <p>Certified Trainer People Development & Founder Bincang Bilal</p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="member d-flex align-items-start">
+            <div class="pic"><img src="../assets/img/mentor/adam.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+              <h4>Adam Pratama</h4>
+              <span>Radio Announcer</span>
+              <p>Aktif sebagai penyiar radio plus memiliki pengalaman sebagai presenter televisi.</p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- End Offcanvas List Mentor -->
+
+  <!-- ======= Offcanvas FAQ ======= -->
+  <div class="offcanvas offcanvas-start section-bg" data-bs-backdrop="false"id="faq" >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
+      </h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body faq" style="background:none;">
+      <div class="section-title"><h2 class="dumpil">F.A.Q</h2></div>
+
+      <div class="faq-list" style="padding: 0px;">
+        <ul>
+          <span class="badge rounded-pill bg-blues">How?</span>
+          <li data-aos="fade-up">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Bagaimana sistem pengajaran Public Speaking di Dialogika? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-1" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Sistem pembelajaran yang baik adalah <b>disaat Anda diberikan ruang untuk berlatih dan salah BERULANG KALI,</b> bukan mendengarkan teori-teori. Dialogika memberikan akses dan keleluasaan untuk berlatih sepanjang berjalannya kelas. Bahkan setelah selesai kelas, Dialogika juga memberikan kesempatan untuk Anda bertanya dengan mentor-mentor yang ada di Dialogika.
+              </p>
+            </div>
+          </li>
+
+          <li data-aos="fade-up" data-aos-delay="100">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Bagaimana cara Saya tahu bahwa ada peningkatan didalam public speaking Saya?  <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Disetiap kali Anda berlatih, <b>mentor akan memberikan Anda Feedback</b> secara langsung mengenai penampilan Anda. Dari sana Anda akan mengerti peningkatan yang Anda dapatkan setiap kali pertemuannya.
+              </p>
+            </div>
+          </li>
+
+          <span class="badge rounded-pill bg-blues">What?</span>
+          <li data-aos="fade-up" data-aos-delay="400">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Apakah ada Garansi untuk hasilnya?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Kami menyediakan Garansi untuk beragam program pembelajaran yang kami miliki, mulai dari Basic Public Speaking, Presentasi, MC, hingga Pitching. Apabila Anda tidak merasa mendapatkan perubahan bersama kami. Anda <b>GRATIS mengulang kelas TANPA DIPUNGUT BIAYA</b> sepeser pun.
+              </p>
+            </div>
+          </li>
+
+          <li data-aos="fade-up" data-aos-delay="200">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Apakah Anda (Dialogika) pernah menangani semua jenis profesi client? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+              <p>Jika Anda serius ingin meningkatkan kemampuan Public Speaking Anda, dan butuh bantuan kami? Kami bisa membantu Anda.</p>
+
+              <p>Anda seorang introvert dan Anda ingin berani berbicara, dan butuh bantuan kami? Kami bisa membantu Anda.</p>
+
+              <p>Trauma buruk menghantui Anda, tampil dihadapan banyak orang bukanlah diri Anda yang sebenarnya. Tetapi Anda tahu bahwa Anda perlu menyelesaikan masalah tersebut, Dan Anda butuh bantuan kami? Kami bisa membantu Anda.</p>
+
+              <p>Umur Anda tidak lagi muda, jabatan Anda diperusahaan atau instansi pemerintah cukup tinggi. Gugup bukan masalah Anda namun Anda tidak bisa memotivasi bawahan Anda, bicara Anda cenderung melompat-lompat membuat karyawan Anda tidak bisa berkerja sesuai ekspektasi Anda. Kami bisa membantu Anda.</p>
+
+              <p>Anda seorang pengusaha sukses, Anda sering diminta berbicara dihadapan banyak orang. Tetapi Anda merasa bahwa apa yang didalam pikiran Anda tidak sesuai apa yang mulut Anda ingin katakan, Anda butuh kami? Kami Bisa membantu Anda.</p>
+
+              <p>Saat ini Anda hampir lulus kuliah di Jurusan Kedokteran tetapi karena lidah Anda Jawa, Anda cenderung Medhok dalam berbicara dan itu terdengar kurang profesional. Anda butuh bantuan? Kami bisa membantu Anda.</p>
+
+              <p>Tidak peduli apapun profesi Anda saat ini, pelajar, mahasiswa, freshgraduate, karyawan, profesional, freelancer, pimpinan, pengusaha hingga kader partai. Jika Anda ingin meningkatkan kemampuan Public Speaking, punya masalah di dalam berkomunikasi ataupun sedikit terkait masalah diri Anda. Kami siap membantu mengatasi masalah Anda.</p>
+            </div>
+          </li>
+
+          <span class="badge rounded-pill bg-blues">Why?</span>
+          <li data-aos="fade-up" data-aos-delay="300">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Mengapa Dialogika merupakan lembaga pengajaran Public Speaking terbaik? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Benar ada beragam pelatihan Public Speaking dan tentunya banyak sekali bukan? Ketimbang harus kami paparkan alasannya lebih baik kami berikan saja Angka. Karena Angka tidak pernah berbohong.
+              </p>
+              <ul>
+                <li>Total Client 318 dan terus bertambah setiap harinya.</li>
+                <li>Dari 12 jenis profesi yang berbeda.</li>
+                <li>Review Positif 4.9 dari 5 Stars di Google</li>
+                <li>Umur perusahaan 2 tahun</li>
+              </ul>
+              <p>Jika Anda memiliki visi yang sama dengan Dialogika silahkan perhitungkan Dialogika sebagai teman untuk mengisi sejarah hidup Anda yang luar biasa.</p>
+            </div>
+          </li>
+
+
+        </ul>
+      </div>
+
+    </div>
+  </div><!-- End FAQ Offcanvas -->
+
+  
+
+  <!-- Vendor JS Files -->
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/purecounter/purecounter.js"></script>
+    <script src="../assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/vendor/typed.js/typed.min.js"></script>
+    
+
+  <!-- Template Main JS File -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/whatsapp.js"></script>
+
+
+
+
+  <!-- Toast Pop Up -->
+    <script>
+      window.addEventListener("load", function(){
+          setTimeout(
+              function open(event){
+                  document.querySelector("#askToast").style.display = "block";
+              },2000),
+          setTimeout(
+            function open(event){
+              document.querySelector("#soldToast").style.display = "block";
+            }, 5000)
+      });
+    </script>
+
+      <script>
+        document.querySelector("#closeAsk").addEventListener("click", function(){
+            document.querySelector("#askToast").style.display = "none";
+        });
+      </script>
+
+      <script>
+        document.querySelector("#closeSold").addEventListener("click", function(){
+            document.querySelector("#soldToast").style.display = "none";
+        });
+      </script>
+  <!-- /Toast Pop Up -->
+    
+  <!-- Timestamp -->
+    <script type="text/javascript">
+      $(function () {
+        $('#submits').attr('disabled', true);
+        $('#myForm').change(function () {
+            if ($('#names').val() != '' && $('#works').val() != '' && $('#locations').val() != '' && $('#whatsapps').val() != '') {
+                $('#submits').attr('disabled', false);
+            } else {
+                $('#submits').attr('disabled', true);
+            }
+        });
+      });
+      // get date
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes();
+      var dateTime = date+'    '+time;
+      document.getElementById("timestamp").innerHTML = dateTime;
+      document.getElementById("timestampModal").innerHTML = dateTime;
+    </script>
+  <!-- /Timestamp -->
+
+  <!-- UTM Parameter -->
+    <script>
+      var queryForm = function(settings){
+        var reset = settings && settings.reset ? settings.reset : false;
+        var self = window.location.toString();
+        var querystring = self.split("?");
+        if (querystring.length > 1) {
+          var pairs = querystring[1].split("&");
+          for (i in pairs) {
+            var keyval = pairs[i].split("=");
+            if (reset || sessionStorage.getItem(keyval[0]) === null) {
+              sessionStorage.setItem(keyval[0], decodeURIComponent(keyval[1]));
+            }
+          }
+        }
+        var hiddenFields = document.querySelectorAll("input[type=hidden], input[type=text]");
+        for (var i=0; i<hiddenFields.length; i++) {
+          var param = sessionStorage.getItem(hiddenFields[i].name);
+          if (param) document.getElementsByName(hiddenFields[i].name)[0].value = param;
+        }
+      }
+
+      setTimeout(function(){queryForm();}, 3000);
+    </script>
+
+</body>
+
+</html>
