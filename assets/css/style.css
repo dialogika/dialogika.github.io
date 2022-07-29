@@ -1677,6 +1677,176 @@ section {
 }
 
 /*--------------------------------------------------------------
+# about-pure
+--------------------------------------------------------------*/
+.about-pure .icon-boxes h4 {
+  font-size: 18px;
+  color: #4b7dab;
+  margin-bottom: 15px;
+}
+
+.about-pure .icon-boxes h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c4964;
+  margin-bottom: 15px;
+}
+
+.about-pure .icon-box {
+  margin-top: 40px;
+}
+
+.about-pure .icon-box .icon {
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border: 2px solid #8dc2f1;
+  border-radius: 50px;
+  transition: 0.5s;
+}
+
+.about-pure .icon-box .icon i {
+  color: #0f61a8;
+  font-size: 32px;
+}
+
+.about-pure .icon-box:hover .icon {
+  background: #0f61a8;
+  border-color: #0f61a8;
+}
+
+.about-pure .icon-box:hover .icon i {
+  color: #fff;
+}
+
+.about-pure .icon-box .title {
+  margin-left: 85px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.about-pure .icon-box .title a {
+  color: #343a40;
+  transition: 0.3s;
+}
+
+.about-pure .icon-box .title a:hover {
+  color: #0f61a8;
+}
+
+.about-pure .icon-box .description {
+  margin-left: 85px;
+  line-height: 24px;
+  font-size: 14px;
+}
+
+.about-pure .video-box {
+  background-size: cover;
+  min-height: 500px;
+}
+
+.about-pure .play-btn {
+  width: 94px;
+  height: 94px;
+  background: radial-gradient(#0f61a8 50%, rgba(25, 119, 204, 0.4) 52%);
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  left: calc(50% - 47px);
+  top: calc(50% - 47px);
+  overflow: hidden;
+}
+
+.about-pure .play-btn::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-40%) translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #fff;
+  z-index: 100;
+  transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.about-pure .play-btn::before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-animation: pulsate-btn 2s;
+  animation: pulsate-btn 2s;
+  -webkit-animation-direction: forwards;
+  animation-direction: forwards;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: steps;
+  animation-timing-function: steps;
+  opacity: 1;
+  border-radius: 50%;
+  border: 5px solid rgba(25, 119, 204, 0.7);
+  top: -15%;
+  left: -15%;
+  background: rgba(198, 16, 0, 0);
+}
+
+.about-pure .play-btn:hover::after {
+  border-left: 15px solid #0f61a8;
+  transform: scale(20);
+}
+
+.about-pure .play-btn:hover::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-40%) translateY(-50%);
+  width: 0;
+  height: 0;
+  border: none;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #fff;
+  z-index: 200;
+  -webkit-animation: none;
+  animation: none;
+  border-radius: 0;
+}
+
+@-webkit-keyframes pulsate-btn {
+  0% {
+    transform: scale(0.6, 0.6);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1, 1);
+    opacity: 0;
+  }
+}
+
+@keyframes pulsate-btn {
+  0% {
+    transform: scale(0.6, 0.6);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1, 1);
+    opacity: 0;
+  }
+}
+
+/*--------------------------------------------------------------
 # About
 --------------------------------------------------------------*/
 .about img {
@@ -5176,7 +5346,7 @@ page-section & Timeline
 }
 
 .blog .entry .entry-title a:hover {
-  color: #1977cc;
+  color: #0f61a8;
 }
 
 .blog .entry .entry-meta {
@@ -5219,7 +5389,7 @@ page-section & Timeline
 
 .blog .entry .entry-content .read-more a {
   display: inline-block;
-  background: #1977cc;
+  background: #0f61a8;
   color: #fff;
   padding: 6px 20px 8px 20px;
   transition: 0.3s;
@@ -5299,7 +5469,7 @@ page-section & Timeline
 }
 
 .blog .entry .entry-footer a:hover {
-  color: #1977cc;
+  color: #0f61a8;
 }
 
 .blog .entry .entry-footer .cats {
@@ -5405,7 +5575,7 @@ page-section & Timeline
 }
 
 .blog .blog-comments .comment h5 a:hover {
-  color: #1977cc;
+  color: #0f61a8;
 }
 
 .blog .blog-comments .comment h5 .reply {
@@ -5478,7 +5648,7 @@ page-section & Timeline
 }
 
 .blog .blog-comments .reply-form .btn-primary:hover {
-  background-color: #1977cc;
+  background-color: #0f61a8;
 }
 
 .blog .blog-pagination {
@@ -5508,8 +5678,8 @@ page-section & Timeline
 }
 
 .blog .blog-pagination li.active, .blog .blog-pagination li:hover {
-  background: #1977cc;
-  border: 1px solid #1977cc;
+  background: #0f61a8;
+  border: 1px solid #0f61a8;
 }
 
 .blog .blog-pagination li.active a, .blog .blog-pagination li:hover a {
@@ -5581,7 +5751,7 @@ page-section & Timeline
 }
 
 .blog .sidebar .search-form form button:hover {
-  background: #1977cc;
+  background: #0f61a8;
 }
 
 .blog .sidebar .categories ul {
@@ -5598,7 +5768,7 @@ page-section & Timeline
 }
 
 .blog .sidebar .categories ul a:hover {
-  color: #1977cc;
+  color: #0f61a8;
 }
 
 .blog .sidebar .categories ul a span {
@@ -5628,7 +5798,7 @@ page-section & Timeline
 }
 
 .blog .sidebar .recent-posts h4 a:hover {
-  color: #1977cc;
+  color: #0f61a8;
 }
 
 .blog .sidebar .recent-posts time {
@@ -5665,8 +5835,8 @@ page-section & Timeline
 
 .blog .sidebar .tags ul a:hover {
   color: #fff;
-  border-color: #1977cc;
-  background: #1977cc;
+  border-color: #0f61a8;
+  background: #0f61a8;
 }
 
 .blog .sidebar .tags ul a span {
