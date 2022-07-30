@@ -56,7 +56,7 @@
                 $(".fa-spinner").addClass("opacity-0").removeClass("fa-spin");
                 $(".message").addClass("bad-email").removeClass("success-full");
                 $(".block-message").addClass("show-block-error").removeClass("show-block-valid");
-                $(".message").html('<p class="notify-valid">Your e-mail address is incorrect.<br>Please check it and try again.</p>').fadeIn();
+                $(".message").html('<p class="notify-valid" style="background-color: #009961;">Thank You.<br>We Will Contact You Soon.</p>').fadeIn();
                 o.hide();
             }
 

@@ -4846,7 +4846,7 @@ inner-page
 
 .offcanvas-bottom {
   border-radius: 20px;
-  height: 86%;
+  min-height: 91%;
   display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -4856,6 +4856,10 @@ inner-page
     -webkit-box-shadow: 0 2px 7px 0 rgba(0,0,0,0.2);
     box-shadow: 0 2px 7px 0 rgba(0,0,0,0.2);
     box-sizing: border-box;
+}
+
+.offcanvas-body.contact {
+  /*min-height: 86%;*/
 }
 
 /*--------------------------------------------------------------
