@@ -2094,19 +2094,21 @@ input[type="checkbox"] {
   right: 35px;
   bottom: 20px;
   content: '';
-  background: url("../../assets/images/icons/quote.png");
+  background: url("../../../icon/quote.png");
   background-repeat: no-repeat;
   height: 40px;
   width: 52px;
 }
 
 .single-testimonial-item-two::after {
-  background: url("../../assets/images/icons/quote-2.png");
+  background: url("../../../icon/quote.png");
   background-repeat: no-repeat;
 }
 
 .single-testimonial-item-two .testimonial-author-info p {
-  color: #f9c62e;
+  color: #0f61a8;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .testimonial-post-author {
@@ -2130,6 +2132,11 @@ input[type="checkbox"] {
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
   margin-right: 20px;
+  
+}
+
+.testimonial-author-image img{
+  border-radius: 50%;
 }
 
 .testimonial-author-info p {
@@ -9171,6 +9178,7 @@ input[type="checkbox"] {
 
 .platform-content .title {
   margin-bottom: 20px;
+  color: #000;
 }
 
 .platform-d-flex {
@@ -9338,8 +9346,16 @@ input[type="checkbox"] {
   margin-top: 40px;
 }
 
+.exteam .single-team-area .team-thum img {
+  width: 100%;
+  border-radius: 15px;
+  /*-webkit-filter: grayscale(100%); 
+  filter: grayscale(100%);*/
+}
+
 .single-team-area .team-thum img {
   width: 100%;
+  border-radius: 15px;
 }
 
 .single-team-area:hover .team-content {
@@ -9380,7 +9396,8 @@ input[type="checkbox"] {
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.9) 0, rgba(253, 195, 158, 0.9) 100%);
+  /*background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.9) 0, rgba(253, 195, 158, 0.9) 100%);*/
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 31%, rgba(11,43,106,0.9) 100%);
 }
 
 .team-share-top {
