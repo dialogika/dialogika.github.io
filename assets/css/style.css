@@ -887,6 +887,25 @@ span.rounded-yellow {
   margin-bottom: -200px;
 }
 
+#hero.index {
+  width: 100%;
+  height: 90vh;
+  background: url("../img/hero2.jpg") top center;
+  background-size: cover;
+  margin-bottom: -200px;
+}
+
+#hero.index:before {
+  content: "";
+  height: 90vh;
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 #hero .container {
   position: relative;
 }
@@ -921,6 +940,7 @@ span.rounded-yellow {
   /*text-shadow: 0px 4px 8px rgba(44,73,100,0.6);*/
   text-shadow: 0px 0px 4px rgba(0,0,0,1);
 }
+
 #hero h3 {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
@@ -931,6 +951,54 @@ span.rounded-yellow {
   margin-bottom: 20px;
   border-radius: 50px;
 }
+
+#hero p {
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-weight: 10px;
+  font-size: 12px;
+}
+
+#hero form{
+  margin-top: 0px;
+  background: #fff;
+  padding: 6px 10px;
+  position: relative;
+  border-radius: 50px;
+  text-align: left;
+  border: 1px solid #0B2B6A;
+}
+
+#hero form input[type="tel"] {
+  border: 0;
+  padding: 4px 8px;
+  width: calc(100% - 100px);
+}
+
+#hero form input[type="submit"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 0;
+  font-family: "Raleway", sans-serif;
+  -webkit-box-shadow: 0px 18px 7px -15px rgba(114,4,207,1);
+  -moz-box-shadow: 0px 18px 7px -15px rgba(114,4,207,1);
+  background:linear-gradient(to bottom, #0f61a8 5%, #0b2b6a 100%);
+  background-color:#0b2b6a;
+  border-radius:50px;
+  cursor:pointer;
+  color:#ffffff;
+  font-size:15px;
+  font-weight:bold;
+  padding:10px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #283966;
+}
+
+
+
 #hero span.bg-blues {
   background-color:#0B2B6A;
   color: #fff;
@@ -955,7 +1023,7 @@ span.rounded-yellow {
   font-family:Arial;
   font-size:15px;
   font-weight:bold;
-  padding:10px 24px;
+  padding:10px 35px;
   -webkit-box-shadow: 0px 18px 7px -15px rgba(114,4,207,1);
   -moz-box-shadow: 0px 18px 7px -15px rgba(114,4,207,1);
 }

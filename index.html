@@ -31,12 +31,30 @@
   <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet"/>
 
+  
   <!-- Spreadsheet API Form Pendaftaran -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.js"      
       integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
       crossorigin="anonymous"></script>
     <script>
+      function HeroForm (){
+        $.ajax({
+        url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
+        type:"post",
+        data:$("#hero-form").serializeArray(),
+        headers:{
+          accessKey: "b5216464a11be561ae0b40f9ed98ee90",
+          secretKey: "038c9369d3b221f2387c9d8f3f3e488d"},
+          success: function(){ 
+            window.location.href = "https://api.whatsapp.com/send?phone=6285162992597&text=Haloo%20kak%20saya%20tertarik%20dengan%20program%20public%20speaking%20dialogika%0A%0A%60%60%60dari%20halaman%20home%20dialogika%60%60%60";
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+        });
+      }
+
       function SubForm (){
         $.ajax({
         url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
@@ -313,6 +331,7 @@
           </li>
           <li><a class="nav-link" href="#mentors" data-scroll >Mentor</a></li>
           <li><a class="nav-link data-bs-scroll" data-scroll href="#faq">FAQ</a></li>
+          <li><a class="nav-link" href="#appointment" data-scroll >Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -330,33 +349,50 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center" style="background: url('assets/img/hero.jpg') top center;">
+  <section id="hero" class=" d-flex align-items-center" style="background: url('assets/img/hero.jpg') top center;" >
     <div class="container">
-      <h1 class="uncommon">Hello Leader!</h1>
-      <!-- <h2>We help you deliver your value and understand each other by mastering the art of public speaking</h2> -->
-      <h2>Membantu Anda mengatasi gugup, tidak percaya diri dan ngeblank saat public speaking, wawancara kerja dan presentasi bisnis</h2>
-      <a href="#favorite" class="btn-get-started scrollto">Get Started</a>
+      <h1>Like <span style="color:#F9C72E;">Steroids*</span> For<br> Your Mentality</h1>
+      <h2>Menguasai Public Speaking itu <span style="color:#e7181a;">Berat!</span> Kami Disini Membantu Anda  Menghadapinya Dengan Lebih Cepat, Mudah, Interaktif, Menarik dan Fun!</h2>
+      <div class="d-none d-md-block">
+        <a href="#favorite" class="btn-get-started scrollto">Get Started</a>
+        <p class="fw-lighter text-center">*Kami Tidak Menjual Obat-Obatan, Tapi Kelas Public Speaking</p>
+      </div>
+
+      <div class="d-block d-sm-none">
+        <p class="fw-lighter text-center">Konsultasikan Masalahmu | Gratis</p>
+        <form action="javascript:void" role="form" id="hero-form" method="post">
+          <input type="tel" name="Whatsapp" placeholder="Nomor Whatsapp">
+          <input type="submit" value="Konsultasi" onclick="HeroForm()">
+          <select class="d-none" name="Timestamp">
+            <option id="timestamp"></option>
+          </select>
+          <select class="d-none" name="Program" >
+            <option value="Halaman Home">Halaman Home</option>
+          </select>
+        </form>
+        <p class="fw-lighter text-center">*Kami Tidak Menjual Obat-Obatan, Tapi Kelas Public Speaking</p>
+      </div>
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
 
     <!-- ======= Why Us Section ======= -->
-    <section id="why-us" class="why-us d-none d-md-block">
+    <section id="why-us" class="why-us">
       <div class="container">
 
         <div class="row">
           <div class="col-lg-4 d-flex align-items-stretch">
             <div class="content">
-              <h3>Why Choose Dialogika?</h3>
-              <p>
-                Anda mungkin seorang profesional/senior dengan seabreg pengalaman, tapi anda merasa selalu <b>kesulitan menyampaikan</b> maksud anda didepan orang lain bahkan sering meleset, lompat-lompat hingga ngeblank tiba-tiba didepan umum atau dihadapan orang tertentu
-              </p>
-              <p>
-                Kami menyebut ini Gagal Paham Kepada Diri Sendiri. Di Dialogika kami membantu teman-teman yang sulit menyampaikan value untuk semua profesi dari <b>Profesional, Pengusaha & Mahasiswa</b>
-              </p>
+              <h3>Dear Leader</h3>
+              <p>We get it... menguasai public speaking itu berat</p>
+              <p>Terutama yang level basic atau pemula</p>
+              <p>Rasa takut salah, diketawain, dianggap bodoh, malu, grogi dan ngeblank</p>
+              <p>Bahkan jika ingin berlatih pun kamu membutuhkan audiens atau penonton</p>
+              <p>Celakanya kalau asal coba-coba karirmu bahkan harga dirimu bisa celaka</p>
+              <p>Inilah kenapa kami membangun Dialogika sebagai rumah, wadah dan playground buat kamu mengembangkan diri.</p>
               <div class="text-center">
-                <a href="#" class="more-btn">Our Value <i class="bx bx-chevron-right"></i></a>
+                <a href="#healing" class="more-btn">Our Value <i class="bx bx-chevron-right"></i></a>
               </div>
             </div>
           </div>
@@ -364,24 +400,27 @@
             <div class="icon-boxes d-flex flex-column justify-content-center">
               <div class="row">
                 <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
+                  <div id="healing" class="icon-box mt-4 mt-xl-0">
                     <i class='bx bxs-battery-charging'></i>
-                    <h4>Positive Process</h4>
-                    <p>Kami membantu anda untuk memahami proses pengembangan diri sendiri, mengenal lebih dalam pola pikir hingga susunan dan tahapan berbicara dihadapan orang lain.</p>
+                    <h4>Mindset &amp; Healing</h4>
+                    <p>Kebanyakan kesulitan seseorang di dalam public speaking disebabkan oleh pikiran (internal) dan lingkungan (eksternal).</p> 
+                    <p>Di Dialogika kita akan bersama membongkar rasa mindset hingga rasa insecure didalam mengemukakan isi pikiran</p>
                   </div>
                 </div>
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class='bx bxl-slack'></i>
-                    <h4>Bongkar Mindset</h4>
-                    <p>Dialogika menyediakan wadah untuk Anda berlatih tanpa harus takut membuat resiko yang besar. Disini anda akan dipaksa mengeluarkan kemampuan terbaik anda dan terbiasa dengannya.</p>
+                    <h4>Build Network</h4>
+                    <p>Sadar bahwa semakin bertambah umur semakin sedikit teman kita? Menambah relasi tidak semudah menaikkan follower sosial media.</p> 
+                    <p>Terutama relasi yang berbobot dan positif yang bisa terus saling support terutama dimasa-masa sangat butuh masukan</p>
                   </div>
                 </div>
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class='bx bx-message-check'></i>
-                    <h4>Mentor &amp; Vibes</h4>
-                    <p>Mentor akan membantu Anda dan membimbing Anda untuk terus bisa, dan mencoba lagi dan lagi. Mentor juga meng-analisis tata cara bicara anda selama pertemuan.</p>
+                    <h4>Home &amp; Vibes</h4>
+                    <p>Kami membangun wadah, playground dan rumah tidak hanya sebatas untuk menguasai public speaking.</p> 
+                    <p>Tidak sedikit dari member kami yang akhirnya lolos kerja, interview, bahkan berkonsultasi terkait relationship di Dialogika. Harapan kami, kamu bisa memiliki rumah baru untuk kamu berbagi</p>
                   </div>
                 </div>
               </div>
@@ -401,13 +440,13 @@
         </div>
         <div class="row gy-4">
           <div class="col-lg-6 col-md-6 m-b30 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.3s">
-            <a href="program/pro-class.html" class="category-box dlab-box">
+            <a href="program/first-class.html" class="category-box dlab-box">
               <div class="dlab-media dlab-img-effect zoom">
-                <img src="assets/img/program/pro-c/home.jpg" alt="">
+                <img src="assets/img/program/first-c/home.jpg" alt="">
                 <div class="top-lefts"><span class="badge rounded-pill rounded-red">Hot Program</span></div>
               </div>
               <div class="icon-content">
-                <h2 class="dlab-tilte">Pro Class</h2>
+                <h2 class="dlab-tilte">First Class</h2>
                 <span class="badge rounded-pill rounded-blue">Offline</span>
                 <span class="badge rounded-pill rounded-yellow">Discount</span>
                 <span class="badge rounded-pill rounded-green">Garansi</span>
@@ -696,12 +735,418 @@
       </div>
     </section><!-- End Testimonials Section -->
 
+    <!-- ======= Pricing Section ======= -->
+    <section class="section bg-light pricing" id="pricing">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-4">
+            <div class="heading-box">
+              <div class="title-box">
+                <h6 class="title-sub-title mb-0 text-primary">Overview Program</h6>
+                <h3 class="title-heading mt-3 ms-0">Public Speaking</h3>
+              </div>
+
+              <p class="title-desc text-muted mt-3">Gambaran Ringkas Kelas Public Speaking di Dialogika</p>
+
+              <div class="pricing-tabs mt-4" style="font-size:14px;">
+                <ul class="nav nav-pills rounded justify-content-center d-inline-block pricing-tab-border py-1 px-2"
+                    id="pills-tab" role="tablist">
+                  <li class="nav-item d-inline-block">
+                    <a class="nav-link px-3 rounded active monthly" id="online-tab" data-bs-toggle="pill"
+                       href="#online" role="tab" aria-controls="Online" aria-selected="true">
+                      Online
+                    </a>
+                  </li>
+                  <li class="nav-item d-inline-block">
+                    <a class="nav-link px-3 rounded yearly" id="offline-tab" data-bs-toggle="pill"
+                      href="#offline" role="tab" aria-controls="Offline" aria-selected="false">
+                        Offline 
+                    </a>
+                  </li>
+                  <li class="nav-item d-inline-block">
+                    <a class="nav-link px-3 rounded yearly" id="kids-tab" data-bs-toggle="pill"
+                      href="#kids" role="tab" aria-controls="Kids" aria-selected="false">
+                        Kids 
+                    </a>
+                  </li>
+                  <li class="nav-item d-inline-block">
+                    <a class="nav-link px-3 rounded yearly" id="subs-tab" data-bs-toggle="pill"
+                      href="#subs" role="tab" aria-controls="Subs" aria-selected="false">
+                        Subscribe 
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-lg-7 g-0 offset-lg-1">
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade active show" id="online" role="tabpanel" aria-labelledby="online">
+                <div class="row g-0 align-items-center">
+                  <div class="col-lg-6">
+                    <div class="pricing-box active bg-white rounded mt-4">
+                      <div class="pricing-badge">
+                        <span class="badge">Level I</span>
+                      </div>
+
+                      <h5 class="fw-normal">Basic Plus</h5>
+                      <h1 class="pricing-title mt-3 mb-0">IDR 499.000 
+                        <span class="f-13"> <strike>IDR 1.000.000</strike></span>
+                      </h1>
+                      <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa persiapan dan teratur didalam berbicara</p>
+
+                      <hr class="mt-4">
+
+                      <div class="mt-4 pt-1">
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Garansi mengulang kelas
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          <b>7x pertemuan</b> dalam sebulan
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Maksimal peserta <b>10 orang</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Durasi kelas <b>90 menit</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Dapat eCertificate
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-2 text-center">
+                        <a href="#appointments" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="pricing-box bg-white rounded mt-4">
+                      <div class="pricing-badge">
+                        <span class="badge">LEVEL II</span>
+                      </div>
+
+                      <h5 class="fw-normal">Presentation Class</h5>
+                        <h1 class="pricing-title mt-3 mb-0">IDR 699.000
+                          <span class="f-13"> <strike>IDR 1.500.000</strike></span>
+                        </h1>
+                        <p class="text-muted f-15 mt-3">Mampu mengelaborasi fakta dan data, serta storytelling dengan baik</p>
+                        <div class="mt-4 pt-1">
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-x-circle'></i>
+                            Garansi mengulang kelas
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            <b>7x pertemuan</b> dalam sebulan</p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Maksimal peserta <b>7 orang</b>
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Durasi kelas <b>90 menit</b>
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Dapat eCertificate</p>
+                        </div>
+                        <div class="mt-4 pt-2 text-center">
+                        <a href="#appointment" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="offline" role="tabpanel" aria-labelledby="offline">
+                <div class="row g-0 align-items-center">
+                  <div class="col-lg-6">
+                    <div class="pricing-box active bg-white rounded mt-4">
+                      <div class="pricing-badge">
+                        <span class="badge">Level I</span>
+                      </div>
+
+                      <h5 class="fw-normal">First Class</h5>
+                      <h1 class="pricing-title mt-3 mb-0">IDR 1.249.000 
+                        <span class="f-13"> <strike>IDR 3.000.000</strike></span>
+                      </h1>
+                      <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa persiapan dan teratur didalam berbicara</p>
+                      <hr class="mt-4">
+                        <div class="mt-4 pt-1">
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Garansi mengulang kelas
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            <b>10x pertemuan:</b> 2 Bulan*
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Maksimal peserta <b>10 orang</b>
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Minimal peserta <b>3 orang</b>
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Durasi kelas <b>120 menit</b>
+                          </p>
+                          <p class="mb-3 f-16">
+                            <i class='bx bxs-check-circle'></i>
+                            Dapat Certificate
+                          </p>
+                        </div>
+                      <div class="mt-4 pt-2 text-center">
+                        <a href="#appointment" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="pricing-box bg-white rounded mt-4">
+                      <div class="pricing-badge">
+                        <span class="badge">Level II</span>
+                      </div>
+
+                      <h5 class="fw-normal">Master Class</h5>
+                        <h1 class="pricing-title mt-3 mb-0">IDR 1.975.000
+                          <span class="f-13"> <strike>IDR 4.000.000</strike></span>
+                        </h1>
+                        <p class="text-muted f-15 mt-3">Berfokus untuk membentuk speech dan menyampaikannya dengan tingkat kualitas setara dengan keynote speaker</p>
+                      <div class="mt-4 pt-1">
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Garansi mengulang kelas
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          <b>10x pertemuan:</b> 2 Bulan
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Maksimal peserta <b>10 orang</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Durasi kelas <b>120 menit</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Dapat Certificate
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-2 text-center">
+                        <a href="#appointment" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="kids" role="tabpanel" aria-labelledby="kids">
+                <div class="row g-0 align-items-center">
+                  <div class="col-lg-6">
+                    <div class="pricing-box active bg-white rounded mt-4">
+                      <div class="pricing-badge">
+                        <span class="badge">6th-9th</span>
+                      </div>
+
+                      <h5 class="fw-normal">Kids Start
+                        <!-- <span class="fs-6 badge badge-pill rounded-yellow" style="font-family: 'nunito sans-serif;' ;">Usia: 6-9 tahun</span> -->
+                      </h5>
+                      <h1 class="pricing-title mt-3 mb-0">IDR 197.000 
+                        <span class="f-13"> Per Bulan</span>
+                      </h1>
+                      <p class="text-muted f-15 mt-3"><i>Focus Point:</i> Latihan Public Speaking untuk Atasi rasa takut didalam berbicara dihadapan umum</p>
+
+                      <hr class="mt-4">
+
+                      <div class="mt-4 pt-1">
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
+                          <strike style="color:#aaaaaa;">
+                            Garansi mengulang kelas</strike>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Pertemuan <b>setiap jumat</b> pukul 15:30 WIB
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          <b>4x pertemuan</b> dalam sebulan
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Maksimal peserta <b>25 orang</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Durasi kelas <b>90 menit</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
+                          <strike style="color:#aaaaaa;">
+                            Dapat eCertificate</strike>
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-2 text-center">
+                        <a href="#appointment" data-bs-scroll="#appointment" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="pricing-box bg-white rounded mt-4">
+                      <div class="pricing-badge">
+                        <span class="badge">10th-15th</span>
+                      </div>
+                        <h5 class="fw-normal" style="font-family: verdana;">Kids Play 
+                          <!-- <span class="fs-6 badge badge-pill rounded-yellow" style="font-family: 'nunito sans-serif;' ;">Usia: 10-15 tahun</span> -->
+                        </h5>
+                        <h1 class="pricing-title mt-3 mb-0">IDR 197.000
+                          <span class="f-13"> Per Bulan</span>
+                        </h1>
+                        <p class="text-muted f-15 mt-3"><i>Focus Point:</i> Latihan Public Speaking untuk Atasi rasa takut didalam berbicara dihadapan umum</p>
+                        <div class="mt-4 pt-1">
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
+                          <strike style="color:#aaaaaa;">
+                            Garansi mengulang kelas</strike>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Pertemuan <b>setiap sabtu</b> pukul 15:30 WIB
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          <b>4x pertemuan</b> dalam sebulan
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Maksimal peserta <b>25 orang</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Durasi kelas <b>90 menit</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
+                          <strike style="color:#aaaaaa;">
+                            Dapat eCertificate</strike>
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-2 text-center">
+                        <a href="#appointment" data-bs-scroll="#appointment" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="subs" role="tabpanel" aria-labelledby="subs">
+                <div class="row g-0 align-items-center">
+                  <div class="col-lg-6">
+                    <div class="pricing-box active bg-white rounded mt-4">
+                      <div class="pricing-badge">
+                        <span class="badge">New</span>
+                      </div>
+
+                      <h5 class="fw-normal" style="font-family: 'Nunito',sans-serif;">Action Play</h5>
+                      <h1 class="pricing-title mt-3 mb-0">IDR 217.000 
+                        <span class="f-13"> Per Bulan</span>
+                      </h1>
+                      <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa persiapan dan latihan praktek tanpa materi</p>
+
+                      <hr class="mt-4">
+
+                      <div class="mt-4 pt-1">
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
+                          <strike style="color:#aaaaaa;">
+                            Garansi mengulang kelas</strike>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          <b>4x pertemuan</b> dalam sebulan
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Maksimal peserta <b>25 orang</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Durasi kelas <b>90 menit</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
+                          <strike style="color:#aaaaaa;">
+                            Dapat eCertificate</strike>
+                        </p>
+                      </div>
+                      <div class="mt-4 pt-2 text-center">
+                        <a href="#appointment" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="pricing-box bg-white rounded mt-4">
+                        <h5 class="fw-normal" style="font-family: 'Nunito',sans-serif;">3 Bulan Lebih Hemat</h5>
+                        <h1 class="pricing-title mt-3 mb-0">IDR 597.000
+                          <span class="f-13"> Per 3 Bulan</span>
+                        </h1>
+                        <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa persiapan dan latihan praktek tanpa materi</p>
+                        <div class="mt-4 pt-1">
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
+                          <strike style="color:#aaaaaa;">
+                            Garansi mengulang kelas</strike>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          <b>4x pertemuan</b> dalam sebulan</p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Maksimal peserta <b>25 orang</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Durasi kelas <b>90 menit</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Dapat eCertificate</p>
+                      </div>
+                      <div class="mt-4 pt-2 text-center">
+                        <a href="#appointment" class="btn btn-primary w-100">Daftar Sekarang</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Pricing -->
+
     <!-- ======= Gallery Single Section ======= -->
     <section id="gallery-single" class="gallery-single d-block d-sm-none">
       <div class="container">
         <div class="section-title">
           <h2 class="dumpil">Gallery Kelas</h2>
-          <h2 class="tengah">Program Basic Plus</h2>
+          <h2 class="tengah">Public Speaking</h2>
           <span class="badge badge-pill rounded-blue"><i class='bx bxs-left-arrow-circle bx-tada' ></i></span>
           <span class="badge badge-pill rounded-blue">Swipe For More</span>
           <span class="badge badge-pill rounded-blue"><i class='bx bxs-right-arrow-circle bx-tada' ></i></span>
@@ -777,8 +1222,8 @@
       <div class="container-fluid">
 
         <div class="section-title">
-          <h2 class="dumpil">Gallery</h2>
-          <h2 class="tengah">Program Kami</h2>
+          <h2 class="dumpil">Gallery Kelas</h2>
+          <h2 class="tengah">Public Speaking</h2>
           <p></p>
         </div>
 
