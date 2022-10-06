@@ -1,0 +1,78 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXFileReference section */
+		1A425A0A28EE73E90052F218 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		1A425A0B28EE74690052F218 /* about */ = {isa = PBXFileReference; lastKnownFileType = folder; path = about; sourceTree = "<group>"; };
+		1A425A0C28EE76660052F218 /* archive */ = {isa = PBXFileReference; lastKnownFileType = folder; path = archive; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1A425A0328EE73650052F218 = {
+			isa = PBXGroup;
+			children = (
+				1A425A0C28EE76660052F218 /* archive */,
+				1A425A0A28EE73E90052F218 /* index.html */,
+				1A425A0B28EE74690052F218 /* about */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		1A425A0428EE73650052F218 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1400;
+			};
+			buildConfigurationList = 1A425A0728EE73650052F218 /* Build configuration list for PBXProject "dialogika" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1A425A0328EE73650052F218;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		1A425A0828EE73650052F218 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		1A425A0928EE73650052F218 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1A425A0728EE73650052F218 /* Build configuration list for PBXProject "dialogika" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A425A0828EE73650052F218 /* Debug */,
+				1A425A0928EE73650052F218 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1A425A0428EE73650052F218 /* Project object */;
+}
