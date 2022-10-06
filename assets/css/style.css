@@ -6678,8 +6678,8 @@ page-section & Timeline
   border: 0;
   padding: 25px 20px;
   color: #5670a0;
-  box-shadow: 5px 5px 25px rgba(86, 112, 160, 0.15);
-  border-radius: 0;
+  box-shadow: 5px 5px 25px rgba(86, 112, 160, 0.35);
+  border-radius: 20;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6703,14 +6703,16 @@ page-section & Timeline
 }
 .features-tabs .nav-link.active {
   transition: 0.3s;
-  background: #5670a0 linear-gradient(rgba(50, 121, 252, 0.95), rgba(50, 121, 252, 0.6));
+  /*background: #5670a0 linear-gradient(rgba(50, 121, 252, 0.95), rgba(50, 121, 252, 0.6));*/
+  background-color: #0f61a8;
   border-color: #0E2D68;
+  color: #fff;
 }
 .features-tabs .nav-link.active h4 {
-  color: var(--color-white);
+  color: #fff;
 }
 .features-tabs .nav-link.active i {
-  color: var(--color-white) !important;
+  color: #fff !important;
 }
 .features-tabs .tab-content {
   margin-top: 30px;
@@ -6761,11 +6763,20 @@ page-section & Timeline
   background-size: cover;
 }
 .onfocus .content {
-  background: linear-gradient(rgba(3, 29, 102, 0.8), rgba(86, 112, 160, 0.8)), url("../img/intern/cover.jpg") center center;
+  /*background: rgba(3, 29, 102, 0.8);*/ /* , rgba(86, 112, 160, 0.8)), url("../img/intern/cover.jpg") center center*/
+  background: #0E2D68;
   background-size: cover;
-  color: rgba(255, 255, 255, 0.8);
+  /*color: rgba(255, 255, 255, 0.8);*/
+  color: #fff;
   padding: 40px;
+  font-size: 17px;
 }
+
+.onfocus .content strong {
+  color: #f9c62e;
+  font-weight: bold;
+}
+
 @media (min-width: 768px) {
   .onfocus .content {
     padding: 80px;
@@ -6792,7 +6803,6 @@ page-section & Timeline
   margin-bottom: 0;
 }
 .onfocus .content .read-more {
-  font-family: var(--font-primary);
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 1px;
@@ -6802,8 +6812,8 @@ page-section & Timeline
   display: -nline-flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  background: #0E2D68;
+  color: #0E2D68;
+  background: #f9c62e;;
 }
 .onfocus .content .read-more i {
   font-size: 18px;
@@ -6812,7 +6822,8 @@ page-section & Timeline
   transition: 0.3s;
 }
 .onfocus .content .read-more:hover {
-  background: rgba(50, 121, 252, 0.9);
+  /*background: rgba(50, 121, 252, 0.9);*/
+  background: #fff;
   padding-right: 19px;
 }
 .onfocus .content .read-more:hover i {
