@@ -2382,6 +2382,18 @@ section {
   position: relative;
 }
 
+.resume .resume-item blockquote {
+  color: #000;
+  background-color: #DCF2FE;
+  padding-left: 20px;
+  font-size: 15px;
+  font-family: var(--font-default);
+  border-left: 2px solid #0f61a8;
+  margin: 40px 0;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
 .resume .resume-item h4 {
   line-height: 18px;
   font-size: 18px;
