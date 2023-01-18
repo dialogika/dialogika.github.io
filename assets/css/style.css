@@ -6963,6 +6963,24 @@ page-section & Timeline
 }
 
 /*--------------------------------------------------------------
+# Client Section
+--------------------------------------------------------------*/
+.client {
+  padding: 0 0 60px 0;
+}
+
+.client .swiper-slide img {
+  opacity: 0.5;
+  transition: 0.3s;
+  filter: grayscale(100);
+}
+
+.client .swiper-slide img:hover {
+  filter: none;
+  opacity: 1;
+}
+
+/*--------------------------------------------------------------
 # Events Section
 --------------------------------------------------------------*/
 .events .container-fluid {
