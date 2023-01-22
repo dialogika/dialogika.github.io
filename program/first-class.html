@@ -160,7 +160,7 @@
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope"></i> <a href="mailto:admin@dialogika.co">admin@dialogika.co</a>
+        <i class="bi bi-envelope"></i> <a href="mailto:hello@dialogika.co">hello@dialogika.co</a>
         <i class="bi bi-phone"></i> <a href="https://link.dialogika.co/wasap-2597-dialogika-co">+62 851-6299-2597</a>
       </div>
       <div class="d-none d-lg-flex social-links align-items-center">
@@ -1402,7 +1402,7 @@
                 <div class="info-box mt-4">
                   <i class="bx bx-envelope"></i>
                   <h3>Email Contact</h3>
-                  <p>admin@dialogika.co<br></p>
+                  <p>hello@dialogika.co<br></p>
                 </div>
               </div>
               <div class="col-md-6" >
@@ -1436,7 +1436,7 @@
               Kami membantu Anda mengatasi gugup, tidak percaya diri dan ngeblank saat public speaking, wawancara kerja dan presentasi bisnis<br><br>
 
               <strong>Phone:</strong> +62 851-6299-2597<br>
-              <strong>Email:</strong> admin@dialogika.co<br>
+              <strong>Email:</strong> hello@dialogika.co<br>
             </p>
           </div>
 
@@ -1515,7 +1515,7 @@
   <!-- <div id="preloader"></div> -->
 
   <!-- ======= Super-bottom ======= -->
-  <nav class="navbar bar-bottom fixed-bottom">
+  <nav class="navbar swipe-to-appear bar-bottom fixed-bottom">
     <div class="price-wrap mr-auto">
       <small class="text-muted">
         <span class="price">
@@ -1571,24 +1571,32 @@
     </div><!-- End Modal -->
 
     <!-- ======= Toast Ask Program ======= -->
-    <div class="toast toast-bawah" id="askToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast toast-atas" id="askToast" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
-        <strong class="me-auto">+1 Calon Peserta Bertanya</strong>
-        <small>1 menit yang lalu</small>
+        <strong class="me-auto">+<span id="tigapeserta"></span> Calon Peserta Bertanya</strong>
+        <small><span id="tigamenit"></span> menit yang lalu</small>
         <button type="button" class="btn-close" id="closeAsk" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
       <div class="toast-body">
         Gratis konsultasi program
       </div>
+      <script>
+        document.getElementById("tigapeserta").innerHTML = Math.floor(Math.random() * 4)+1;
+        document.getElementById("tigamenit").innerHTML = Math.floor(Math.random() * 4);
+      </script>
     </div><!-- End Toast Sold Program -->
 
     <!-- ======= Toast Ask Program ======= -->
-    <div class="toast toast-paling-bawah text-bg-success" id="soldToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast toast-paling-atas text-bg-success" id="soldToast" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header" style="background-color: #009961;">
-        <strong class="me-auto text-light">+1 Peserta Telah Mendaftar</strong>
-        <small class="text-warning">Sisa 3 Seat</small>
+        <strong class="me-auto text-light">+<span id="duaclosing"></span> Peserta Telah Mendaftar</strong>
+        <small class="text-warning">Sisa <span id="limaseat"></span> Seat</small>
         <button type="button" class="btn-close btn-close-white" id="closeSold" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
+      <script>
+        document.getElementById("duaclosing").innerHTML = Math.floor(Math.random() * 3)+1;
+        document.getElementById("limaseat").innerHTML = Math.floor(Math.random() * 6)+1;
+      </script>
     </div><!-- End Toast Sold Program -->
 
   <!-- Vendor JS Files -->
@@ -1650,6 +1658,7 @@
             document.querySelector("#soldToast").style.display = "none";
         });
       </script>
+  <!-- /Toast Pop Up -->
 
   <!-- UTM Parameter -->
     <script>

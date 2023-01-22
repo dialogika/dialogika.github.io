@@ -92,6 +92,22 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 996;
 }
 
+.toast-atas {
+  position: fixed;
+  right: 15px;
+  top: 125px;
+  z-index: 996;
+}
+
+.toast-paling-atas {
+  background-color: #009961;
+  position: fixed;
+  right: 15px;
+  top: 75px;
+  z-index: 996;
+}
+
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -131,6 +147,22 @@ h1, h2, h3, h4, h5, h6 {
 .datepicker-dropdown {
   padding: 20px !important;
 }
+
+/*--------------------------------------------------------------
+# Swipe to appear button
+--------------------------------------------------------------*/
+.swipe-to-appear {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.swipe-to-appear.active {
+  visibility: visible;
+  opacity: 1;
+}
+
 
 /*--------------------------------------------------------------
 # Top Bar
@@ -2667,6 +2699,16 @@ section {
 --------------------------------------------------------------*/
 .appointment .php-email-form {
   width: 100%;
+}
+
+.appointment .php-email-form.info-box {
+  color: #444444;
+  text-align: center;
+  padding: 30px 30px 35px 30px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 5px 1px rgba(32,191,240,1);
+  -webkit-box-shadow: 0px 2px 5px 1px rgba(32,191,240,1);
+  -moz-box-shadow: 0px 2px 5px 1px rgba(32,191,240,1);
 }
 
 .appointment .php-email-form .form-group {

@@ -195,6 +195,22 @@
   }
 
   /**
+   * Swipe to appear
+   */
+  let swipetoappear = select('.swipe-to-appear')
+  if (swipetoappear) {
+    const toggleSwipetoappear = () => {
+      if (window.scrollY > 4500) {
+        swipetoappear.classList.add('active')
+      } else {
+        swipetoappear.classList.remove('active')
+      }
+    }
+    window.addEventListener('load', toggleSwipetoappear)
+    onscroll(document, toggleSwipetoappear)
+  }
+
+  /**
    * Mobile nav toggle
    */
   on('click', '.mobile-nav-toggle', function(e) {
