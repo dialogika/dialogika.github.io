@@ -5489,6 +5489,65 @@ inner-page
   margin: 0 2px;
 }
 
+/*--------------------------------------------------------------
+# Recent Blog Posts Section
+--------------------------------------------------------------*/
+.recent-posts article {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 30px;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.recent-posts .post-img {
+  margin: -30px -30px 15px -30px;
+  overflow: hidden;
+  height: 250px;
+  background-size: cover;
+}
+
+.recent-posts .post-category {
+  font-size: 16px;
+  
+  margin-bottom: 10px;
+}
+
+.recent-posts .title {
+  font-size: 22px;
+  font-weight: 700;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.recent-posts .title a {
+  color: var(--color-default);
+  transition: 0.3s;
+}
+
+.recent-posts .title a:hover {
+  color: var(--color-primary);
+}
+
+.recent-posts .post-author-img {
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.recent-posts .post-author {
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.recent-posts .post-date {
+  font-size: 14px;
+  color: #3c3c3c;
+  margin-bottom: 0;
+}
+
 
 /*--------------------------------------------------------------
 # Recent Blog Posts
@@ -5500,6 +5559,10 @@ inner-page
   position: relative;
   display: flex;
   flex-direction: column;
+  border-radius: 13px;
+  box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
+  -webkit-box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
+  -moz-box-shadow: 0px 9px 16px -6px rgba(32,191,240,1);
 }
 .recent-blog-posts .post-box .post-img {
   overflow: hidden;
@@ -5508,6 +5571,8 @@ inner-page
 }
 .recent-blog-posts .post-box .post-img img {
   transition: 0.5s;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 .recent-blog-posts .post-box .meta {
   margin-top: 15px;
