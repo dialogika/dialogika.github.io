@@ -2003,30 +2003,30 @@
     </script> -->
 
   <!-- Toast Pop Up -->
-    <script>
-      window.addEventListener("load", function(){
-          setTimeout(
-              function open(event){
-                  document.querySelector("#askToast").style.display = "block";
-              },2000),
-          setTimeout(
+  <script>
+    window.addEventListener("load", function(){
+        setTimeout(
             function open(event){
-              document.querySelector("#soldToast").style.display = "block";
-            }, 8000)
-      });
-    </script>
+                document.querySelector("#askToast").style.display = "block";
+            },2000),
+        setTimeout(
+          function open(event){
+            document.querySelector("#soldToast").style.display = "block";
+          }, 8000)
+    });
+  </script>
 
-      <script>
-        document.querySelector("#closeAsk").addEventListener("click", function(){
-            document.querySelector("#askToast").style.display = "none";
-        });
-      </script>
+  <script>
+    document.querySelector("#closeAsk").addEventListener("click", function(){
+        document.querySelector("#askToast").style.display = "none";
+    });
+  </script>
 
-      <script>
-        document.querySelector("#closeSold").addEventListener("click", function(){
-            document.querySelector("#soldToast").style.display = "none";
-        });
-      </script>
+  <script>
+    document.querySelector("#closeSold").addEventListener("click", function(){
+        document.querySelector("#soldToast").style.display = "none";
+    });
+  </script>
   <!-- /Toast Pop Up -->
 
 </body>
