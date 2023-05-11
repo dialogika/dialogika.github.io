@@ -133,7 +133,7 @@ class Header extends HTMLElement {
               <li></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="../service/"><span>Service</span><i class='bx bx-chevron-down-circle'></i></a>
+          <li class="dropdown"><a href="../service/index.html"><span>Service</span><i class='bx bx-chevron-down-circle'></i></a>
             <ul>
               <li class="dropdown">
                 <a href="../service/counseling/"><span>Counseling</span> <i class="bi bi-chevron-right"></i></a>
