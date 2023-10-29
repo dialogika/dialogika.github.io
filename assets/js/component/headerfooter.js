@@ -38,8 +38,8 @@ class Header extends HTMLElement {
                   <li><a href="../program/basic-plus.html">Basic Plus</a></li>
                   <li><a href="../program/kids-plus.html">Kids Plus</a></li>
                   <li class="dropdown-divider"></li>
-                  <li><a href="../program/basic-private.html">Basic Private</a></li>
-                  <li><a href="../program/kids-private.html">Basic Private</a></li>
+                  <li><a href="../program/basic-plus.html">Basic Private</a></li>
+                  <li><a href="../program/kids-plus.html">Basic Private</a></li>
                   <li class="dropdown-divider"></li>
                   <li><a href="../program/action-play.html">Action Play</a></li>
                   <li><a href="../program/kids-play.html">Kids Play</a></li>
@@ -49,7 +49,7 @@ class Header extends HTMLElement {
               <li class="dropdown"><a href="../program/offline.html"><span>Offline</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="../program/first-class.html">First Class</a></li>
-                  <li><a href="../program/first-private.html">First Private</a></li>
+                  <li><a href="../program/first-class.html">First Private</a></li>
                   <li><a href="../program/first-kids.html">First Kids</a></li>
                 </ul>
               </li>
