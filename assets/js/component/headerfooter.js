@@ -56,9 +56,9 @@ class Header extends HTMLElement {
               <li class="dropdown-divider"></li>
               <li class="dropdown"><a href="../program/offline.html"><span>Area</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="../program/yogyakarta.html">Yogyakarta</a></li>
-                  <li><a href="program/tangerang-selatan.html">Tangerang</a></li>
-                  <li><a href="../program/surabaya.html"><span>Surabaya</span> <span class="badge rounded-grey">Coming Soon</span></a></li>
+                  <li><a href="../area/yogyakarta.html">Yogyakarta</a></li>
+                  <li><a href="area/tangerang-selatan.html">Tangerang</a></li>
+                  <li><a href="../area/surabaya.html"><span>Surabaya</span> <span class="badge rounded-grey">Coming Soon</span></a></li>
                 </ul>
               </li>
             </ul>
