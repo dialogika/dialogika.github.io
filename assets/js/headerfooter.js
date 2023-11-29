@@ -268,7 +268,7 @@ class Footer extends HTMLElement {
               </a>
               <ul class="accordion-collapse collapse show" id="footer-corporate-program">
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="../area/yogyakarta.html">
+                  <a href="../program/index-jogja.html">
                     Yogyakarta
                     <span class="badge rounded-pill text-bg-info">Best Selling</span>
                   </a>
@@ -277,7 +277,7 @@ class Footer extends HTMLElement {
                   <a href="../corporate/index.html">Corporate</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="../area/bintaro.html">
+                  <a href="../program/index-tangsel.html">
                     Bintaro
                     <span class="badge rounded-pill text-bg-warning">Private Only</span>
                   </a>
