@@ -62,6 +62,10 @@ class Header extends HTMLElement {
                     <span>Surabaya</span>
                     <span class="badge rounded-pill text-bg-secondary">Coming Soon</span></a>
                   </li>
+                  <li><a href="../program/index-solo.html" onclick="return false;">
+                    <span>Solo</span>
+                    <span class="badge rounded-pill text-bg-secondary">Coming Soon</span></a>
+                  </li>
                 </ul>
               </li>
             </ul>
