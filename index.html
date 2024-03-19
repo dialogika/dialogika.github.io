@@ -9,8 +9,6 @@
   <meta content="Pelatihan kelas public speaking jogja, selama 1 bulan hingga 3 bulan dan bergaransi bersama Dialogika" name="description">
   <meta content="public speaking" name="keywords">
 
-  <link rel="alternate" hreflang="en" href="https://www.dialogika.co/en/">
-
   <!-- Favicons -->
   <link href="assets/img/favicon.webp" rel="icon">
   <link href="assets/img/apple-touch-icon.webp" rel="apple-touch-icon">
@@ -189,25 +187,6 @@
         // Redirect ke landing page berbahasa Inggris
         window.location.href = "https://www.dialogika.co/en/";
         }
-        </script>
-
-        <script>
-          function redirectBasedOnLocation() {
-    fetch('https://freegeoip.app/json/')
-        .then(response => response.json())
-        .then(data => {
-            var countryCode = data.country_code; // Mendapatkan kode negara dari respons FreeGeoIP.app
-            var targetCountryCode = 'US'; // Kode negara untuk Indonesia
-
-            if (countryCode !== targetCountryCode) {
-                // Redirect ke versi berbahasa Inggris dari landing page
-                window.location.href = 'https://www.dialogika.co/en/'; // Ganti URL dengan versi berbahasa Inggris Anda
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
         </script>
   <!--  ========================================================  -->
 </head>
