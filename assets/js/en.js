@@ -252,8 +252,9 @@ if (google.loader.ClientLocation) {
 
     //
 //    document.getElementById('yourinfo').innerHTML = '<p>Lat/Lon: ' + visitor_lat + ' / ' + visitor_lon + '</p><p>Location: ' + visitor_city + ', ' + visitor_region + ', Continent : ' + Cont + ', ' + visitor_country + ' (' + visitor_countrycode + ')</p>';
-    window.location.replace("http://www.dialogika.co/en");
-} else {
+    
     window.location.replace("http://www.dialogika.co");
+} else {
+    window.location.replace("http://www.dialogika.co/en");
 //    document.getElementById('yourinfo').innerHTML = '<p>Whoops!</p>';
 }
