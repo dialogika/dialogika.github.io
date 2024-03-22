@@ -11,7 +11,7 @@ class Header extends HTMLElement {
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
       <div class="contact-info d-flex align-items-center">
-        <button type="button" class="btn btn-primary" onclick="location.href = 'www.dialogika.co/en';">
+        <button type="button" class="btn btn-primary" onclick="location.href = 'https://www.dialogika.co/en';">
           Click Here for English Version
         </button>
         
