@@ -131,6 +131,18 @@ h6 {
   transition: 0.3s;
 }
 
+#topbar .contact-info button {
+    --bs-btn-padding-y: .30rem;
+    --bs-btn-padding-x: .5rem;
+    --bs-btn-font-size: .75rem;
+    background: linear-gradient(to bottom, #0f61a8 5%, #0b2b6a 100%);
+    border: none;
+}
+
+#topbar .contact-info button:hover {
+    background: linear-gradient(to bottom, #0b2b6a 5%, #0f61a8 100%);
+}
+
 #topbar .contact-info a:hover {
   color: #0b2b6a;
 }
