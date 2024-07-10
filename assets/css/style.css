@@ -1975,8 +1975,11 @@ section {
 .faq .faq-list li {
   padding: 20px;
   background: #fff;
-  border-radius: 4px;
+  border-radius: 8px;
   position: relative;
+  box-shadow: 0px 9px 16px -6px rgba(11, 43, 106, 0.7);
+  -webkit-box-shadow: 0px 9px 16px -6px rgba(11, 43, 106, 0.7);
+  -moz-box-shadow: 0px 9px 16px -6px rgba(11, 43, 106, 0.7);
 }
 
 .faq .faq-list a {
@@ -2345,6 +2348,7 @@ section {
   /*  background: #0a0a0a;*/
   /*  background: #011548;*/
   background: #0b2b6a;
+  margin-bottom : -30px;
 }
 
 #footer .footer-top {
