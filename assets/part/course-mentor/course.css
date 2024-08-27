@@ -4,7 +4,7 @@
 .courses .course-item {
   border-radius: 5px;
   border: 1px solid #0B2B6A;
-  background-color: #0B2B6A;
+  /* background-color: #0B2B6A; */
   box-shadow: 0px 5px 16px -6px rgba(114, 4, 207, 1);
   -webkit-box-shadow: 0px 5px 16px -6px rgba(114, 4, 207, 1);
   -moz-box-shadow: 0px 5px 16px -6px rgba(114, 4, 207, 1);
@@ -17,21 +17,21 @@
 .courses .course-content h3 {
   font-weight: 700;
   font-size: 30px;
-  color: #fff;
+  color: black;
 }
 
 .courses .course-content h3 a {
-  color: #fff;
+  color: black;
   transition: 0.3s;
 }
 
 .courses .course-content h3 a:hover {
-  color: #0163ea;
+  color: black;
 }
 
 .courses .course-content p {
   font-size: 14px;
-  color: #fff;
+  color: black;
 }
 
 .courses .course-content hr {
