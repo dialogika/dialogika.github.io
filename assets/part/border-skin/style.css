@@ -57,20 +57,50 @@ section.border-skin .container {
   }
 }
 
+.program-badge {
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  right: 0;
+  width: 100%;
+  display: block;
+  font-size: 15px;
+  padding: 0;
+  overflow: hidden;
+  height: 100px;
+}
+
+.program-badge .badge {
+  float: right;
+  transform: rotate(45deg);
+  right: -60px;
+  top: 28px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  font-size: 13px;
+  margin: 0;
+  padding: 7px 10px;
+  font-weight: 500;
+  color: black;
+  background: #EBD922;
+}
+
 section.border-skin .container .card-skin {
   padding: 0.625rem;
   background: #fff;
-
+  position: relative;
   overflow: hidden;
   cursor: pointer;
 }
 
 section.border-skin .container .card-skin a {
+  position: relative;
   width: 100%;
   height: 100%;
 }
 
-@media screen and (min-width: 53rem) {
+@media screen and (min-width: 848px) {
 }
 section.border-skin .container .card-inner {
   position: relative;
@@ -80,17 +110,22 @@ section.border-skin .container .card-inner {
   box-shadow: -1px 5px 18px -1px rgba(190, 173, 173, 0.75);
   -webkit-box-shadow: -1px 5px 18px -1px rgba(190, 173, 173, 0.75);
   -moz-box-shadow: -1px 5px 18px -1px rgba(190, 173, 173, 0.75);
-  border-radius: 1rem;
+  border-radius: 1.6rem;
   overflow: hidden;
   transition: transform 0.1s ease;
   transform-origin: center;
+}
+
+@media screen and (max-width: 847px) {
+}
+section.border-skin .container .card-inner {
+  border-radius: 1rem;
 }
 
 section.border-skin .container .card-inner .box {
   width: 100%;
   height: 100%;
   background: #fff;
-  border-radius: 1.6rem;
   overflow: hidden;
 }
 section.border-skin .container .card-inner .box .imgBox {
@@ -101,12 +136,6 @@ section.border-skin .container .card-inner .box .imgBox img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 1rem;
-}
-@media screen and (min-width: 53rem) {
-  section.border-skin .container .card-inner .box .imgBox img {
-    border-radius: 1.6rem;
-  }
 }
 section.border-skin .container .card-inner .box .icon {
   position: absolute;

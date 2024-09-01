@@ -34,12 +34,12 @@ class Header extends HTMLElement {
        <nav id="navbar" class="navbar order-last order-lg-0">
         <ul class="navbar-desktop-list">
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li class="dropdown"><a href="#"><span>Program</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="../program"><span>Program</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li class="dropdown"><a href="#"><span>Online</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="../program/basic-play.html">Basic Play <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
-                  <li><a href="../program/basic-plus.html">Basic Plus</a></li>
+                  <li><a href="../program/basic-play.html">Basic Play </a></li>
+                  <li><a href="../program/basic-plus.html">Basic Plus <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
                   <li><a href="../program/basic-private.html">Basic Private</a></li>
                   <li><hr/></li>
                   <li><a href="../program/kids-play.html">Kids Play</a></li>
@@ -63,8 +63,7 @@ class Header extends HTMLElement {
                   <li><a href="../program/index-solo.html">Solo</a></li>
                   <li><a href="../program/index-banjarbaru.html">Banjarbaru</a></li>
                   <li><a href="../program/index-surabaya.html" onclick="return false;">
-                    <span>Surabaya</span>
-                    <span class="badge rounded-pill text-bg-secondary">Coming Soon</span></a>
+                    <span>Surabaya</span></a>
                   </li>
                 </ul>
               </li>
@@ -352,10 +351,10 @@ class Footer extends HTMLElement {
                   <a href="../about/faq.html">Frequent Asked Question</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="../about/help.html">Help Center</a>
+                  <a href="https://www.dialogika.co/help">Help Center</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="../about/privacy.html">Privacy Policy</a>
+                  <a href="https://www.dialogika.co/policy">Privacy Policy</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
                   <a href="../about/terms.html">Terms & Agreements</a>
