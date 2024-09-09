@@ -213,17 +213,6 @@
             </div>
         </section><!-- End Breadcrumbs Section -->
 
-        <!-- ======= Breadcrumbs ======= -->
-        <div class="breadcrumbs-banner">
-            <div class="container">
-                <div class="banner-block align-items-center">
-                    <span><a href="index.html">Offline</a></span>
-                    <span class=""><i class="fa fa-angle-right"></i></span>
-                    <span><a href="index.html">First Class</a></span>
-                </div>
-            </div>
-        </div><!-- End Breadcrumbs -->
-
         <!-- ======= Cource Details Section ======= -->
         <section id="course-details" class="course-details">
             <div class="container" data-aos="fade-up">
@@ -1465,8 +1454,7 @@
                     </div>
 
                     <div class="col-lg-6 order-1 order-lg-2">
-                        <form action="javascript:void" method="post" id="myForm" enctype="text/plain" role="form"
-                            class="php-email-form needs-validation">
+                        <form id="uploadForm" class="php-email-form needs-validation">
                             <div class="row gy-4">
 
                                 <div class="col-md-6">
@@ -1489,25 +1477,21 @@
                                         id="locations" placeholder="Domisili*" required>
                                         <option value="" selected disabled value="">Program Yang Akan Diambil</option>
                                         <optgroup label="First Class">
-                                            <option>FC Yogyakarta </option>
-                                            <option>FC Tangerang </option>
-                                            <option>FC Surabaya </option>
-                                            <option>FC Solo </option>
+                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Yogyakarta </option>
+                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Tangerang </option>
+                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Surabaya </option>
+                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Solo </option>
                                         </optgroup>
                                         <optgroup label="First Private">
-                                            <option>FP Yogyakarta </option>
-                                            <option>FP Tangerang </option>
-                                            <option>FP Surabaya </option>
+                                            <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Yogyakarta </option>
+                                            <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Tangerang </option>
+                                            <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Surabaya </option>
                                         </optgroup>
                                         <optgroup label="Konsultasi">
                                             <option>Asking Admin </option>
                                         </optgroup>
                                     </select>
                                 </div>
-
-                                <select class="d-none" name="Timestamp">
-                                    <option id="timestamp"></option>
-                                </select>
 
                                 <div class="col-md-12">
                                     <textarea class="form-control" name="Ket" id="messages" rows="7"
@@ -1519,7 +1503,7 @@
                                     <div class="error-message"></div>
                                     <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                                    <button type="submit" id="submits" onclick="SubForm()" class="send_contact">Send Whatsapp</button>
+                                    <button type="submit" class="send_contact">Send Whatsapp</button>
 
                                 </div>
 
@@ -1554,6 +1538,7 @@
     <!-- Template Main JS File -->
     <script src="../assets/js/headerfooter.js"></script>
     <script src="../assets/js/timestamp.js"></script>
+    <script src="../assets/js/clickup.js"></script>
     <script src="../assets/js/whatsapp.js"></script>
     <script src="../assets/js/textchange.js"></script>
     <script src="../assets/js/main.js"></script>

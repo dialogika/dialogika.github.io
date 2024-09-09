@@ -210,17 +210,6 @@
       </div>
     </section><!-- End Breadcrumbs Section -->
 
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs-banner" >
-      <div class="container">
-        <div class="banner-block">
-            <span><a href="index.html">Online</a></span>
-            <span class="dvdr"><i class="fa fa-angle-right"></i></span>
-            <span><a href="index.html">Kids Play</a></span>
-        </div>
-      </div>
-    </div><!-- End Breadcrumbs -->
-
     <!-- ======= Cource Details Section ======= -->
     <section id="course-details" class="course-details">
       <div class="container" data-aos="fade-up">
@@ -823,7 +812,7 @@
           </div>
 
           <div class="col-lg-6 order-1 order-lg-2">
-            <form action="javascript:void" method="post" id="myForm" enctype="text/plain" role="form" class="php-email-form needs-validation">
+            <form id="uploadForm" class="php-email-form needs-validation">
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -842,8 +831,7 @@
                   <select name="Program" id="programs" class="form-control" required>
                     <option value="" selected disabled value="">Program Yang Akan Diambil</option>
                     <optgroup label="Kids Play">
-                      <option id="bp-plus">1 Bulan</option>
-                      <option id="bp-priv">3 Bulan</option>
+                      <option value="b223bb1f-f06b-4d3d-811d-a9f8a50f7555">1 Bulan</option>
                     </optgroup>
                     <optgroup label="Konsultasi">
                       <option id="ask-adm">Asking Admin</option>
@@ -865,7 +853,7 @@
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit" id="submits" onclick="SubForm()" class="send_contact">Send Whatsapp</button>
+                  <button type="submit" class="send_contact">Send Whatsapp</button>
 
                 </div>
 
@@ -900,6 +888,7 @@
   <script src="../assets/js/headerfooter.js"></script>
   <script src="../assets/js/timestamp.js"></script>
   <script src="../assets/js/textchange.js"></script>
+  <script src="../assets/js/clickup.js"></script>
   <script src="../assets/js/whatsapp.js"></script>
   <script src="../assets/js/main.js"></script>
 

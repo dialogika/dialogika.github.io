@@ -58,38 +58,6 @@
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
           crossorigin="anonymous"></script>
         <script>
-          function HeroForm() {
-            $.ajax({
-              url: "https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
-              type: "post",
-              data: $("#hero-form").serializeArray(),
-              headers: {
-                accessKey: "b5216464a11be561ae0b40f9ed98ee90",
-                secretKey: "038c9369d3b221f2387c9d8f3f3e488d"
-              },
-              success: function () {
-                window.location.href = "https://api.whatsapp.com/send?phone=6285162992597&text=Haloo%20kak%20saya%20tertarik%20dengan%20program%20public%20speaking%20dialogika%0A%0A%60%60%60dari%20halaman%20home%20dialogika%60%60%60";
-              },
-              error: function () {
-                alert("There was an error :(")
-              }
-            });
-          }
-
-            function SubForm (){
-              $.ajax({
-                  url:"https://api.apispreadsheets.com/data/JYfPTNSLW4GoVohc/",
-                  type:"post",
-                  data:$("#myForm").serializeArray(),
-                success: function(){
-                  alert("Anda Telah Mendaftar :)")
-                },
-                error: function(){
-                  alert("There was an error :(")
-                }
-              });
-            }
-
           function Subcription() {
             $.ajax({
               url: "https://api.apispreadsheets.com/data/18511/",
@@ -208,17 +176,6 @@
 
       </div>
     </section><!-- End Breadcrumbs Section -->
-
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs-banner" >
-      <div class="container">
-        <div class="banner-block">
-            <span><a href="index.html">Online</a></span>
-            <span class="dvdr"><i class="fa fa-angle-right"></i></span>
-            <span><a href="index.html">Basic Plus</a></span>
-        </div>
-      </div>
-    </div><!-- End Breadcrumbs -->
 
     <!-- ======= Cource Details Section ======= -->
     <section id="course-details" class="course-details">
@@ -1067,7 +1024,7 @@
           </div>
 
           <div class="col-lg-6 order-1 order-lg-2">
-            <form action="javascript:void" method="post" id="myForm" enctype="text/plain" role="form" class="php-email-form needs-validation">
+            <form id="uploadForm" class="php-email-form needs-validation">
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -1086,18 +1043,14 @@
                   <select name="Program" id="programs" class="form-control" required>
                     <option value="" selected disabled value="">Program Yang Akan Diambil</option>
                     <optgroup label="Choose Program">
-                      <option id="bp-plus">Basic Plus</option>
-                      <option id="bp-priv">Basic Private</option>
+                      <option value="ed0a3dcf-c582-4c6d-918e-98842d75be7c">Basic Plus</option>
+                      <option value="7a4ccb01-3ac3-497c-b7b3-e8ab6683e8c0">Basic Private</option>
                     </optgroup>
                     <optgroup label="Konsultasi">
                       <option id="ask-adm">Asking Admin</option>
                     </optgroup>
                   </select>
                 </div>
-
-                <select class="d-none" name="Timestamp">
-                  <option id="timestamp"></option>
-                </select>
 
                 <div class="col-md-12">
                   <textarea class="form-control" name="Ket" id="messages" rows="7"
@@ -1109,7 +1062,7 @@
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit" id="submits" onclick="SubForm()" class="send_contact">Send Whatsapp</button>
+                  <button type="submit" class="send_contact">Send Whatsapp</button>
 
                 </div>
 
@@ -1144,6 +1097,7 @@
   <script src="../assets/js/headerfooter.js"></script>
   <script src="../assets/js/timestamp.js"></script>
   <script src="../assets/js/textchange.js"></script>
+  <script src="../assets/js/clickup.js"></script>
   <script src="../assets/js/whatsapp.js"></script>
   <script src="../assets/js/main.js"></script>
 
