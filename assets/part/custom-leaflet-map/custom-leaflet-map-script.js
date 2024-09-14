@@ -4,9 +4,12 @@ const dialogikaJogja = {
   name: "Dialogika Yogyakarta",
   adress:
     "Jl. Pandega Marta No.39, Manggung, Caturtunggal, Kec. Depok, Daerah Istimewa Yogyakarta",
-  city: "Catur tunggal",
-  website: ["https://www.dialogika.co/", "link-1→"],
-  socialMedia: ["https://www.linkedin.com/", "Linkedin →"],
+  city: "Caturtunggal",
+  website: ["https://www.dialogika.co/program/index-jogja.html", "Website →"],
+  socialMedia: [
+    "https://www.linkedin.com/company/dialogika/posts/?feedView=all",
+    "Linkedin →",
+  ],
   gmaps: ["https://maps.app.goo.gl/KaFAhUUySyo4FBBM9", "Gmaps →"],
 };
 
@@ -16,8 +19,14 @@ const dialogikaBintaro = {
   adress:
     "Jl. W R Supratman No.8, Pd. Karya, Kec. Pd. Aren, Kota Tangerang Selatan, Banten",
   city: "Tangerang Selatan",
-  website: ["https://www.dialogika.co/", "link-1→"],
-  socialMedia: ["https://www.linkedin.com/", "Linkedin →"],
+  website: [
+    "https://www.dialogika.co/program/index-tangsel.html",
+    "Website →",
+  ],
+  socialMedia: [
+    "https://www.linkedin.com/company/dialogika/posts/?feedView=all",
+    "Linkedin →",
+  ],
   gmaps: ["https://maps.app.goo.gl/kuKaRnQqXWF9XNjw6", "Gmaps →"],
 };
 
@@ -27,9 +36,29 @@ const dialogikaSolo = {
   adress:
     "Jl Permata Raya, Ginung RT : 001 RW : 002, Gatak, Gajahan, Colomadu, Karanganyar Regency, Central Java",
   city: "Gatak",
-  website: ["https://www.dialogika.co/", "link-1→"],
-  socialMedia: ["https://www.linkedin.com/", "Linkedin →"],
+  website: ["https://www.dialogika.co/program/index-solo.html", "Website →"],
+  socialMedia: [
+    "https://www.linkedin.com/company/dialogika/posts/?feedView=all",
+    "Linkedin →",
+  ],
   gmaps: ["https://maps.app.goo.gl/Ja9ymWssyymKkJNZ9", "Gmaps →"],
+};
+
+const dialogikaBanjarbaru = {
+  coordinates: [-3.444782337302218, 114.8454445401964],
+  name: "Dialogika Banjarbaru",
+  adress:
+    "Banjarbaru, Loktabat Selatan, Banjarbaru Selatan, Banjarbaru City, South Kalimantan 70714",
+  city: "Banjarbaru",
+  website: [
+    "https://www.dialogika.co/program/index-banjarbaru.html",
+    "Website →",
+  ],
+  socialMedia: [
+    "https://www.linkedin.com/company/dialogika/posts/?feedView=all",
+    "Linkedin →",
+  ],
+  gmaps: ["https://maps.app.goo.gl/dSEbVUMeFEZDdb269", "Gmaps →"],
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -80,21 +109,21 @@ document.addEventListener("DOMContentLoaded", function () {
       iconBoxes.classList.remove("active-map");
     } else {
       map.setView(location.coordinates, 18);
+      isMapFocused = true;
+      lastFocusedLocation = location;
+  
       if (location === dialogikaJogja) {
-        isMapFocused = true;
-        lastFocusedLocation = dialogikaJogja;
         markerJogja.openPopup();
       } else if (location === dialogikaBintaro) {
-        isMapFocused = true;
-        lastFocusedLocation = dialogikaBintaro;
         markerBintaro.openPopup();
       } else if (location === dialogikaSolo) {
-        isMapFocused = true;
-        lastFocusedLocation = dialogikaSolo;
         markerSolo.openPopup();
+      } else if (location === dialogikaBanjarbaru) {
+        markerBanjarbaru.openPopup();
       }
     }
   };
+  
 
   // show marker deskripsi popup on click
   const markerJogja = L.marker(dialogikaJogja.coordinates, { icon: myIcon })
@@ -136,6 +165,23 @@ document.addEventListener("DOMContentLoaded", function () {
       <a href="${dialogikaSolo.website[0]}">${dialogikaSolo.website[1]}</a>
       <a href="${dialogikaSolo.socialMedia[0]}">${dialogikaSolo.socialMedia[1]}</a>
       <a href="${dialogikaSolo.gmaps[0]}" target="_blank">${dialogikaSolo.gmaps[1]}</a>
+      </div>`
+      )
+    );
+
+  const markerBanjarbaru = L.marker(dialogikaBanjarbaru.coordinates, {
+    icon: myIcon,
+  })
+    .addTo(map)
+    .bindPopup(
+      L.popup({}).setContent(
+        `<h3 style="font-weight:600;">${dialogikaBanjarbaru.name}</h3>
+      <p>${dialogikaBanjarbaru.adress}</p>
+      <p> ${dialogikaBanjarbaru.city}</p>
+      <div class="links">
+      <a href="${dialogikaBanjarbaru.website[0]}">${dialogikaBanjarbaru.website[1]}</a>
+      <a href="${dialogikaBanjarbaru.socialMedia[0]}">${dialogikaBanjarbaru.socialMedia[1]}</a>
+      <a href="${dialogikaBanjarbaru.gmaps[0]}" target="_blank">${dialogikaBanjarbaru.gmaps[1]}</a>
       </div>`
       )
     );

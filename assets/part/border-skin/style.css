@@ -83,11 +83,12 @@ section.border-skin .container {
   padding: 7px 10px;
   font-weight: 500;
   color: black;
-  background: #EBD922;
+  background: #ebd922;
 }
 
 section.border-skin .container .card-skin {
-  padding: 0.625rem;
+  /* border: solid 2px black; */
+  padding: 0.85rem;
   background: #fff;
   position: relative;
   overflow: hidden;
@@ -107,9 +108,9 @@ section.border-skin .container .card-inner {
   width: inherit;
   height: 12rem;
   background: var(--clr);
-  box-shadow: -1px 5px 18px -1px rgba(190, 173, 173, 0.75);
-  -webkit-box-shadow: -1px 5px 18px -1px rgba(190, 173, 173, 0.75);
-  -moz-box-shadow: -1px 5px 18px -1px rgba(190, 173, 173, 0.75);
+  box-shadow: -1px 5px 5px -1px rgba(190, 173, 173, 0.75);
+  -webkit-box-shadow: -1px 5px 5px -1px rgba(190, 173, 173, 0.75);
+  -moz-box-shadow: -1px 5px 5px -1px rgba(190, 173, 173, 0.75);
   border-radius: 1.6rem;
   overflow: hidden;
   transition: transform 0.1s ease;
@@ -117,6 +118,9 @@ section.border-skin .container .card-inner {
 }
 
 @media screen and (max-width: 847px) {
+  section.border-skin .container .card-inner .box .icon h3 {
+    margin-left: 0.9em !important;
+  }
 }
 section.border-skin .container .card-inner {
   border-radius: 1rem;

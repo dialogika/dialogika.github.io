@@ -125,7 +125,7 @@ class Header extends HTMLElement {
                       <a href="../program/kids-plus.html"><div class="card card-body">
                         <div class="justify-content-between d-flex">
                           <span>Kids Plus </span>
-                          <span class="badge bg-info rounded-pill">New</span>
+                          <span class="badge bg-warning rounded-pill text-dark">Best Buy</span>
                         </div>
                       </div></a>
                       <a href="../program/kids-plus.html"><div class="card card-body">Kids Private</div></a>
