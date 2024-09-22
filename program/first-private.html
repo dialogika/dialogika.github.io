@@ -55,6 +55,7 @@
     <link href="../assets/part/course-mentor/course.css" rel="stylesheet">
     <link href="../assets/part/pricing/pricing.css" rel="stylesheet">
     <link href="../assets/part/contact-append/contact.css" rel="stylesheet">
+    <link href="../assets/part/read-more/read-more_less.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="../assets/css/style.css" rel="stylesheet">
@@ -187,6 +188,23 @@
 </head>
 
 <body>
+     <!-- Read More and Read Less -->
+    <script>
+        $(document).ready(function () {
+        $('.readMore').click(function () {
+            var parent = $(this).closest('p');
+            parent.find(".dots, .readMore").css("display", "none");
+            parent.find(".moreText, .readLess").css("display", "inline");
+        });
+
+        $('.readLess').click(function () {
+            var parent = $(this).closest('p');
+            parent.find(".dots, .readMore").css("display", "inline");
+            parent.find(".moreText, .readLess").css("display", "none");
+        });
+        });
+    </script>
+  <!-- End Read More and Read Less -->
 
     <!-- Google Tag Manager (noscript) -->
     <noscript>
@@ -345,136 +363,154 @@
         
         <!-- ======= Testimonials Section ======= -->
         <section id="testimonials" class="testimonials">
-          <div class="container">
-
-           <div class="row">
-            <div class="col-lg-3">
-              <div class="section-title" data-aos="fade-right">
-                <h5>Testimonials</h5>
-                <h3>Positive Feedback</h3>
-                <p class="text-start">Semua testimonial yang ada disini adalah member yang mengikuti kelas online, offline, anak dan juga program khusus koporasi, silahkan check real feedbacknya di google review kami</p>
-                <div class="text-center text-md-start" style="margin-top:20px;">
-                  <a target="__blank" href="https://www.google.com/maps/place/Dialogika+Kelas+Public+Speaking/@-7.7552251,110.3760129,17z/data=!4m18!1m9!3m8!1s0x2e7a597ab489149d:0x9306a2474322de7c!2sDialogika+Kelas+Public+Speaking!8m2!3d-7.7552251!4d110.3785878!9m1!1b1!16s%2Fg%2F11qyjgv8c8!3m7!1s0x2e7a597ab489149d:0x9306a2474322de7c!8m2!3d-7.7552251!4d110.3785878!9m1!1b1!16s%2Fg%2F11qyjgv8c8?entry=ttu">Google Review</a>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="section-title" data-aos="fade-right">
+                    <h5>Testimonials</h5>
+                    <h3>Positive Feedback</h3>
+                    <p class="text-start">
+                      Semua testimonial yang ada disini adalah member yang mengikuti
+                      kelas online, offline, anak dan juga program khusus korporasi,
+                      silahkan check real feedbacknya di google review kami
+                    </p>
+                    <div class="text-center text-md-start" style="margin-top: 20px">
+                      <a target="__blank"
+                        href="https://www.google.com/maps/place/Dialogika+Kelas+Public+Speaking/@-7.7552251,110.3760129,17z/data=!4m18!1m9!3m8!1s0x2e7a597ab489149d:0x9306a2474322de7c!2sDialogika+Kelas+Public+Speaking!8m2!3d-7.7552251!4d110.3785878!9m1!1b1!16s%2Fg%2F11qyjgv8c8!3m7!1s0x2e7a597ab489149d:0x9306a2474322de7c!8m2!3d-7.7552251!4d110.3785878!9m1!1b1!16s%2Fg%2F11qyjgv8c8?entry=ttu">Google
+                        Review</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-9">
+                  <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <div class="testimonial-wrap">
+                          <div class="testimonial-item">
+                            <img
+                              src="https://lh3.googleusercontent.com/a-/ALV-UjVu5lm1DwyAkqpjlFOVVALKFAuRm7mT2bweLDJKdzSCrEYwL-lW=w120-h120-p-rp-mo-br100"
+                              class="testimonial-img" alt="" />
+                            <h3>Arya Y Darmawan</h3>
+                            <h4>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                            </h4>
+                            <p>
+                              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                              Kelas berbicara di depan umum memberikan teknik-teknik praktis untuk meningkatkan kepercayaan diri dan keterampilan berkomunikasi. Instrukturnya menarik dan memberikan umpan balik yang dipersonalisasi. Secara keseluruhan, kursus ini terstruktur dengan baik dan membekali peserta dengan alat-alat presentasi yang penting. <span class="dots">...</span><span class="readMore"> Read More
+                                &raquo;</span><span class="moreText">kursus ini terstruktur dengan baik dan membekali peserta dengan alat-alat presentasi yang penting. </span><span
+                                class="readLess"> &laquo; Read Less</span>
+                              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End testimonial item -->
+      
+                      <div class="swiper-slide">
+                        <div class="testimonial-wrap">
+                          <div class="testimonial-item">
+                            <img
+                              src="https://lh3.googleusercontent.com/a-/ALV-UjXdLXa4DjiqQXM-3Xjc7Wu_5P1IS0klsTQcC-RVDBtBEgy7X_k4=w120-h120-p-rp-mo-br100"
+                              class="testimonial-img" alt="" />
+                            <h3>Hatta Saifa</h3>
+                            <h4>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                            </h4>
+                            <p>
+                              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                              Pub Speaking Class yang bisa dihadiri offline di Jogja, saya menjadi peserta kelas reguler di sini dan pengalaman saya selama menjadi peserta kelas alhamdulillah dipertemukan dengan kak vanny as a coach/mentor yang menyenangkan dan selalu<span class="dots">...</span><span class="readMore"> Read More
+                                &raquo;</span>
+                              <span class="moreText">antusias dalam berbagi ilmunya sebagai seorang expertise pub speaker. Para pegawai yang ada di daheim pun  ramah-ramah juga dalam menyambut tiap peserta kelas. Overall menyenangkan dan membantu juga dalam memperdalam ilmu pub speaking dengan guarantee nya yang bisa tetap mengikuti kelas meskipun sudah dinyatakan luluss.</span><span class="readLess"> &laquo; Read Less</span>
+                              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End testimonial item -->
+      
+                      <div class="swiper-slide">
+                        <div class="testimonial-wrap">
+                          <div class="testimonial-item">
+                            <img
+                              src="https://lh3.googleusercontent.com/a-/ALV-UjWUENEr-55CljB80GNXKDHyOfFK8qlA-ZTgYZsrFxQuWxbFH2Oa=w75-h75-p-rp-mo-br100"
+                              class="testimonial-img" alt="" />
+                            <h3>Dinara Salsabilla</h3>
+                            <h4>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                            </h4>
+                            <p>
+                              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                              Salah satu tempat kursus public speaking yang bagus sekali, saya mengambil private class online,
+                              jadi pertemuannya dilakukan via zoom meeting. Mentor yang mengajar sangat ramah dan seru,
+                              membuat saya tidak bosan selama kelas berlangsung, materi dijelaskan dengan sangat baik dan
+                              mudah dipahami.<span class="dots">...</span><span class="readMore"> Read More
+                                &raquo;</span><span class="moreText"> Selain itu, mentor juga selalu mendengarkan kesulitan
+                                saya terkait public speaking.
+                                Terima kasih dialogika dan miss Malla yang sudah memberikan saya ilmu selama 7 kali pertemuan
+                                kemarin 🙏🏻🙏🏻</span><span class="readLess"> &laquo; Read Less</span>
+                              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End testimonial item -->
+      
+                      <div class="swiper-slide">
+                        <div class="testimonial-wrap">
+                          <div class="testimonial-item">
+                            <img
+                              src="https://lh3.googleusercontent.com/a-/ALV-UjXdLXa4DjiqQXM-3Xjc7Wu_5P1IS0klsTQcC-RVDBtBEgy7X_k4=w75-h75-p-rp-mo-br100"
+                              class="testimonial-img" alt="" />
+                            <h3>Hatta Saifa</h3>
+                            <h4>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                            </h4>
+                            <p>
+                              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                              Pub Speaking Class yang bisa dihadiri offline di Jogja, saya menjadi peserta kelas reguler di
+                              sini dan pengalaman saya selama menjadi peserta kelas alhamdulillah dipertemukan dengan kak
+                              vanny as a coach/mentor yang menyenangkan dan selalu antusias dalam berbagi ilmunya sebagai
+                              seorang expertise pub speaker. <span class="dots">...</span><span class="readMore"> Read More
+                                &raquo;</span><span class="moreText">Para pegawai yang ada di daheim pun ramah-ramah juga
+                                dalam menyambut tiap peserta kelas. Overall menyenangkan dan membantu juga dalam memperdalam
+                                ilmu pub speaking dengan guarantee nya yang bisa tetap mengikuti kelas meskipun sudah
+                                dinyatakan lulus.
+                                Sedikit saran kalau ada yg perlu diperbaiki adalah mungkin pengadaaan kelas terpisah dengan
+                                ruang kerja para karyawan intern supaya para peserta kelas bisa lebih maksimal dalam menyerap
+                                ilmu yang disampaikan, juga responsibilitas admin kelas dalam menanggapi peserta kelas bisa
+                                lebih ditingkatkan, but overall sudah sangat cukup membantuu
+                                Thanks and good job buat kak vanny dan kaka-kaka Dialogika semuanyaa</span><span
+                                class="readLess"> &laquo; Read Less</span>
+                              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End testimonial item -->
+                    </div>
+                    <div class="swiper-pagination"></div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-9">
-              <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-                <div class="swiper-wrapper">
-
-                  <div class="swiper-slide">
-                    <div class="testimonial-wrap">
-                      <div class="testimonial-item">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjUerRQXePjqRfQdV18KNpbPS4slNXhSflUWVgOTgV0ImQ=w72-h72-p-rp-mo-br100" class="testimonial-img" alt="">
-                        <h3>Maysarah</h3>
-                        <h4>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                        </h4>
-                        <p>
-                          <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                          Terima Kasih kepada dialogika dan juga mentor saya yakni Panji Arya, selama belajar di sini selalu di beri tantangan sehingga membuat saya juga makin banyak dapat pengalaman dan juga pembelajaran baru untuk public speaking terlebih kelasnya sangat enjoy, pokoknya keren
-                          <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </div><!-- End testimonial item -->
-
-                  <div class="swiper-slide">
-                    <div class="testimonial-wrap">
-                      <div class="testimonial-item">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjUEw8d2W9pLUIDTodoFHwwIjhoLrxtkUA0LqFKfnrAmSLBV=w72-h72-p-rp-mo-br100" class="testimonial-img" alt="">
-                        <h3>Ahda Syifa</h3>
-                        <h4>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                        </h4>
-                        <p>
-                          <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                          seneng banget bisa ikut kelas disini, kelasnya seru dan menarik serta mentornya juga asik kebetulan dapet mentor kak fany dan mentor lain juga pasti ga kalah serunya. dapet banyak ilmu yang sangat membantu meningkatkan public speaking dan bikin makin pede, jadwal kelasnya juga fleksibel. sangat sangat worth it ikut kelas disini
-                          <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </div><!-- End testimonial item -->
-
-                  <div class="swiper-slide">
-                    <div class="testimonial-wrap">
-                      <div class="testimonial-item">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjVWtE3XWUT0y6FKpyaEvaz1WPqV1BDCntbM2TcUo270vlvH=w72-h72-p-rp-mo-br100" class="testimonial-img" alt="">
-                        <h3>Tascha Sabrie</h3>
-                        <h4>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                        </h4>
-                        <p>
-                          <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                          Mentor Ms Fany orangnya sangat menyenangkan sehingga materi yang disampaikan jadi mudah diterima oleh peserta. Yang paling saya suka selalu ada praktek setelah materi disampaikan jadi tidak hanya teori saja. Banyak sekali perkembangan yang saya rasakan selama bergabung di Dialogika. Sukses selalu untuk Mentor dan Dialogika!! 💛 …
-                          <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </div><!-- End testimonial item -->
-
-                  <div class="swiper-slide">
-                    <div class="testimonial-wrap">
-                      <div class="testimonial-item">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjWRAop2NAYOnPSO-FF8T6ubTHKs4F2JrUoMA3qZ1CqKcw=w72-h72-p-rp-mo-br100" class="testimonial-img" alt="">
-                        <h3>Qistina Arifadini</h3>
-                        <h4>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                        </h4>
-                        <p>
-                          <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                          Setelah mengikuti kelas public speaking di dialogika ini saya dapat banyak hal baru, mulai dari cara self branding, presentasi, dan berlatih menjadi mc. Mentor saya yaitu kak aditya sangat baik dan selalu menyebarkan positive vibes. Jadwalnya juga sangat fleksibel mengikuti dengan jadwal pesertanya. sangat worth it mengikuti kursus public speaking di dialogika!
-                          <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </div><!-- End testimonial item -->
-
-                  <div class="swiper-slide">
-                    <div class="testimonial-wrap">
-                      <div class="testimonial-item">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjVKsGynC7YR1LttqNOp1kT7KiE7j3u5qDE79oy7bZzgJls=w72-h72-p-rp-mo-br100" class="testimonial-img" alt="">
-                        <h3>Annissa Ibtisamah</h3>
-                        <h4>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                          <i class="bi bi-star-fill"></i>
-                        </h4>
-                        <p>
-                          <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                          tempat yang cocok belajar public speaking bagi pemula, mentornya ramah dan tidak membosankan. sangat recommended!! sukses selalu dialogika
-                          <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </div><!-- End testimonial item -->
-
-                </div>
-                <div class="swiper-pagination"></div>
-              </div>
-           </div>
-          </div>
-
-          </div>
-        </section><!-- End Testimonials Section -->
+        </section>
+        <!-- End Testimonials Section -->
 
         <!-- Call-to-action Section - Home Page -->
         <section id="call-to-action" class="call-to-action">
