@@ -1,17 +1,25 @@
-.readMore{
-    display:inline-block;
-    color:blue;
-  }
-  .readLess{
-    display:none;
-    color:blue;
-  }
-  .readMore:hover, .readLess:hover{
-    color:navy;
-    cursor:pointer;
-    text-decoration:underline;
-  }
-  .moreText{
-    display:none;
-  }
-  
+.readMore {
+  display: inline-block;
+  color: blue;
+}
+.readLess {
+  display: none;
+  color: blue;
+}
+.readMore:hover,
+.readLess:hover {
+  color: navy;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.moreText {
+  display: none;
+}
+
+.partner-wrapper {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  width: 210px;
+  height: 50px;
+}

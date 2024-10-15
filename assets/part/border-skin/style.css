@@ -87,7 +87,6 @@ section.border-skin .container {
 }
 
 section.border-skin .container .card-skin {
-  /* border: solid 2px black; */
   padding: 0.85rem;
   background: #fff;
   position: relative;

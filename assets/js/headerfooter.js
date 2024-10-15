@@ -348,7 +348,7 @@ class Footer extends HTMLElement {
                   <a href="../about/">About Us</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="../about/faq.html">Frequent Asked Question</a>
+                  <a href="https://www.dialogika.co/help/program-belajar.html">Frequent Asked Question</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
                   <a href="https://www.dialogika.co/help">Help Center</a>
