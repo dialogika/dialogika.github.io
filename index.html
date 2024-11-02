@@ -33,12 +33,13 @@
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet" />
-  <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
   <link href="assets/vendor/swiper/swiper-bundle.css" rel="stylesheet" />
+  <link href="assets/vendor/international-phone-number/intlTelInput.css" rel="stylesheet" />
 
   <!-- Part CSS Files -->
   <link href="assets/part/pricing/pricing.css" rel="stylesheet" />
@@ -59,6 +60,7 @@
   <link href="assets/part/event-venue/style.css" rel="stylesheet" />
   <link href="assets/part/read-more/read-more_less.css" rel="stylesheet" />
   <link href="assets/part/smooth-slider/smooth-slider.css" rel="stylesheet" />
+  <link href="assets/part/modals/modal.css" rel="stylesheet" />
 
   <!--  CDN  -->
   <script src="https://kit.fontawesome.com/cdde75dea2.js" crossorigin="anonymous"></script>
@@ -404,6 +406,9 @@
                 <div class="swiper-slide swiper-images">
                   <img src="assets/img/corporate/mercu.png" class="rounded" alt="mercu logo" />
                 </div>
+                <div class="swiper-slide swiper-images">
+                  <img src="assets/img/corporate/KOSABANGSA.webp" class="rounded" alt="mercu logo" />
+                </div>
               </div>
             </div>
             <div class="w-100 position-relative overflow-hidden py-3 smooth-swiper-container-middle">
@@ -421,40 +426,49 @@
                   <img src="assets/img/corporate/aveon.png" class="rounded" alt="aveon logo" />
                 </div>
                 <div class="swiper-slide swiper-images">
+                  <img src="assets/img/corporate/UNM.webp" class="rounded" alt="smk dr sutomo temanggung logo" />
+                </div>
+                <div class="swiper-slide swiper-images">
+                  <img src="assets/img/corporate/desa-matano.webp" class="rounded"
+                    alt="smk dr sutomo temanggung logo" />
+                </div>
+                <div class="swiper-slide swiper-images">
                   <img src="assets/img/corporate/smk-dr-sutomo-temanggung.png" class="rounded"
                     alt="smk dr sutomo temanggung logo" />
                 </div>
               </div>
-            </div>
 
-            <div class="w-100 position-relative overflow-hidden py-3 smooth-swiper-container-bottom">
-              <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide swiper-images">
-                  <img src="assets/img/corporate/uin-suka.png" class="rounded" alt="uin suka logo" />
-                </div>
-                <div class="swiper-slide swiper-images">
-                  <img src="assets/img/corporate/uii.png" class="rounded" alt="uii logo" />
-                </div>
-                <div class="swiper-slide swiper-images">
-                  <img src="assets/img/corporate/mnc.webp" class="rounded" alt="mnc logo" />
-                </div>
-                <div class="swiper-slide swiper-images">
-                  <img src="assets/img/corporate/kdi.webp" class="rounded" alt="kdi logo" />
-                </div>
-                <div class="swiper-slide swiper-images">
-                  <img src="assets/img/corporate/ugm.png" class="rounded" alt="ugm logo" />
-                </div>
-                <div class="swiper-slide swiper-images">
-                  <img src="assets/img/corporate/ui.png" class="rounded" alt="UI logo" />
+              <div class="w-100 position-relative overflow-hidden py-3 smooth-swiper-container-bottom">
+                <div class="swiper-wrapper align-items-center">
+                  <div class="swiper-slide swiper-images">
+                    <img src="assets/img/corporate/uin-suka.png" class="rounded" alt="uin suka logo" />
+                  </div>
+                  <div class="swiper-slide swiper-images">
+                    <img src="assets/img/corporate/uii.png" class="rounded" alt="uii logo" />
+                  </div>
+                  <div class="swiper-slide swiper-images">
+                    <img src="assets/img/corporate/mnc.webp" class="rounded" alt="mnc logo" />
+                  </div>
+                  <div class="swiper-slide swiper-images">
+                    <img src="assets/img/corporate/kdi.webp" class="rounded" alt="kdi logo" />
+                  </div>
+                  <div class="swiper-slide swiper-images">
+                    <img src="assets/img/corporate/ugm.png" class="rounded" alt="ugm logo" />
+                  </div>
+                  <div class="swiper-slide swiper-images">
+                    <img src="assets/img/corporate/ui.png" class="rounded" alt="UI logo" />
+                  </div>
+                  <div class="swiper-slide swiper-images">
+                    <img src="assets/img/corporate/smartano.webp" class="rounded" alt="UI logo" />
+                  </div>
                 </div>
               </div>
             </div>
+
           </div>
 
         </div>
-
-      </div>
-      <!-- End Clients Section -->
+        <!-- End Clients Section -->
     </section>
     <!-- End Clients Section -->
 
@@ -1708,6 +1722,9 @@
   <main-footer></main-footer>
   <!-- ======= End Footer & Counter Area ======= -->
 
+  <!-- Floating modal untuk form subscribe/gabung komunitas -->
+  <footer-modal></footer-modal>
+
   <div class="sosmed-container mt-4">
     <button type="button" class="btn-sosmed btn-trigger-sosmed">
       <i class="bi bi-phone-fill bx-tada" id="icon-trigger"></i>
@@ -1732,6 +1749,7 @@
 
   <script src="assets/part/gallery-ipsum/script.js"></script>
   <script src="assets/part/smooth-slider/smooth-slider.js"></script>
+  <script src="assets/part/modals/modal-component.js"></script>
   <script src="./assets/js/sosmed.js"></script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -1739,9 +1757,12 @@
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/international-phone-number/intlTelInput.min.js   "></script>
+  <script src="assets/vendor/international-phone-number/script.js"></script>
 
   <!-- Template Main JS File -->
   <!--  <script src="assets/js/en.js"></script>-->
+  <script src="assets/js/clickup-task.js"></script>
   <script src="assets/js/headerfooter.js"></script>
   <script src="assets/js/timestamp.js"></script>
   <script src="assets/js/whatsapp.js"></script>
