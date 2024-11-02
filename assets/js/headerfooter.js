@@ -11,10 +11,8 @@ class Header extends HTMLElement {
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
       <div class="contact-info d-flex align-items-center">
-        <button type="button" class="btn btn-primary" onclick="location.href = 'https://www.dialogika.co/en';">
-          Click Here for English Version
-        </button>
-        
+        <i class="bi bi-envelope"></i> <a href="mailto:admin@dialogika.co">admin@dialogika.co</a>
+        <i class="bi bi-phone"></i> +62 851 6299 2597
       </div>
       <div class="d-none d-lg-flex social-links align-items-center">
         <a href="https://link.dialogika.co/twitter" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -29,17 +27,17 @@ class Header extends HTMLElement {
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-       <a href="../index.html" class="logo me-auto"><img src="../assets/img/logo.webp" alt="" class="img-fluid"></a>
+       <a href="../index.html" class="logo me-auto"><img src="assets/img/logo.webp" alt="" class="img-fluid"></a>
 
        <nav id="navbar" class="navbar order-last order-lg-0">
         <ul class="navbar-desktop-list">
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li class="dropdown"><a href="../program"><span>Program</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="../program/"><span>Program</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li class="dropdown"><a href="#"><span>Online</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="../program/basic-play.html">Basic Play </a></li>
-                  <li><a href="../program/basic-plus.html">Basic Plus <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                  <li><a href="../program/basic-play.html">Basic Play <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                  <li><a href="../program/basic-plus.html">Basic Plus</a></li>
                   <li><a href="../program/basic-private.html">Basic Private</a></li>
                   <li><hr/></li>
                   <li><a href="../program/kids-play.html">Kids Play</a></li>
@@ -63,7 +61,8 @@ class Header extends HTMLElement {
                   <li><a href="../program/index-solo.html">Solo</a></li>
                   <li><a href="../program/index-banjarbaru.html">Banjarbaru</a></li>
                   <li><a href="../program/index-surabaya.html" onclick="return false;">
-                    <span>Surabaya</span></a>
+                    <span>Surabaya</span>
+                    <span class="badge rounded-pill text-bg-secondary">Coming Soon</span></a>
                   </li>
                 </ul>
               </li>
@@ -78,7 +77,7 @@ class Header extends HTMLElement {
         <i class="bi bi-list d-block d-md-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"></i>
        </nav><!-- .navbar -->
 
-      <a href="../promo/" class="appointment-btn">Promo <span class="d-none d-md-inline">Class</span></a>
+      <a href="#uploadForm" class="appointment-btn" id="scroll-link" data-scroll-offset="100">Daftar <span class="d-none d-md-inline">Sekarang</span></a>
 
     </div>
   </header><!-- End Header -->
@@ -89,7 +88,7 @@ class Header extends HTMLElement {
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
           <a href="../index.html">
-            <img src="../assets/img/logo.webp" class="offcanvas-title" id="offcanvasNavbarLabel"/>
+            <img src="assets/img/logo.webp" class="offcanvas-title" id="offcanvasNavbarLabel"/>
           </a>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
@@ -125,7 +124,7 @@ class Header extends HTMLElement {
                       <a href="../program/kids-plus.html"><div class="card card-body">
                         <div class="justify-content-between d-flex">
                           <span>Kids Plus </span>
-                          <span class="badge bg-warning rounded-pill text-dark">Best Buy</span>
+                          <span class="badge bg-info rounded-pill">New</span>
                         </div>
                       </div></a>
                       <a href="../program/kids-plus.html"><div class="card card-body">Kids Private</div></a>
@@ -205,7 +204,7 @@ class Footer extends HTMLElement {
         <div class="row justify-content-between">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3><img src="../assets/img/white-logo.webp" class="footer-logo" alt="Kelas Public Speaking Jogja" /></h3>
+            <h3><img src="assets/img/white-logo.webp" class="footer-logo" alt="Kelas Public Speaking Jogja" /></h3>
             <p>
               Wadah pengembangan diri membangun aura positif sekaligus meningkatkan kualitas skill, karir hingga level
               kehidupan Anda.
@@ -348,13 +347,13 @@ class Footer extends HTMLElement {
                   <a href="../about/">About Us</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="https://www.dialogika.co/help/program-belajar.html">Frequent Asked Question</a>
+                  <a href="../about/faq.html">Frequent Asked Question</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="https://www.dialogika.co/help">Help Center</a>
+                  <a href="../about/help.html">Help Center</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="https://www.dialogika.co/policy">Privacy Policy</a>
+                  <a href="../about/privacy.html">Privacy Policy</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
                   <a href="../about/terms.html">Terms & Agreements</a>
@@ -366,7 +365,7 @@ class Footer extends HTMLElement {
                 <h4>Instagram Post <i class='bx bx-chevron-down d-md-none'></i></h4>
                 <ul>
                   <li class="clearfix">
-                    <img src="../assets/img/ig/1.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                    <img src="assets/img/ig/1.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                     <div class="post float-left">
                       <a target="__blank" href="https://www.instagram.com/p/Claa6CPISTB/">Gambaran kelas praktek public speaking secara offline</a>
                       <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Nov 26, 2022</div>
@@ -374,7 +373,7 @@ class Footer extends HTMLElement {
                   </li>
                   <hr/>
                   <li class="clearfix">
-                    <img src="../assets/img/ig/2.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                    <img src="assets/img/ig/2.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                     <div class="post float-left">
                       <a target="__blank" href="https://www.instagram.com/p/CyXfjtkrJe7/">Tips-tips agar di notice dosen didalam kelas dan latihan membangun persona.</a>
                       <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 14, 2023</div>
@@ -382,7 +381,7 @@ class Footer extends HTMLElement {
                   </li>
                   <hr/>
                   <li class="clearfix">
-                    <img src="../assets/img/ig/3.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                    <img src="assets/img/ig/3.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                     <div class="post float-left">
                       <a target="__blank" href="https://www.instagram.com/p/CzAf73qr2mj/">5 tips jitu atasi otak yang ngeblank saat berbicara di depan umum</a>
                       <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 30, 2023</div>
@@ -390,7 +389,7 @@ class Footer extends HTMLElement {
                   </li>
                   <hr/>
                   <li class="clearfix">
-                    <img src="../assets/img/ig/4.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                    <img src="assets/img/ig/4.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                     <div class="post float-left">
                       <a target="__blank" href="blog-details.html">5 trik untuk para newbie agar viral di depan umum. (Cocok untuk konten creator)</a>
                       <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Nov 2, 2023</div>
@@ -406,20 +405,21 @@ class Footer extends HTMLElement {
                 class='bx bx-chevron-down d-md-none'></i></h4>
             <p>Secara Berkala Kami Akan Bagi-Bagi Tips & Trik Gratis, Dan Info Promo Lainnya</p>
             <form action="javascript:void" role="form" id="subcriptions" method="post">
-              <input type="tel" name="Surel" placeholder="Nomor Whatsapp"><input type="submit" value="Connect Now" onclick="Subcription()">
+              <input type="tel" name="Surel" class="custom-input-footer" placeholder="Join Our Class Group" disabled>
+              <button type="button" data-bs-toggle="modal" data-bs-target="#footerSubModal" class="blue-dialogika-btn footerSubBtn">Gabung</button>
             </form>
             <br><br>
             <h4 class="d-flex justify-content-between">Payment Method<i class='bx bx-chevron-down d-md-none'></i></h4>
             <p><i class="bx bx-chevron-down"></i> Bank Transfer</p>
-            <img src="../assets/img/bank.webp" style="width:100%;" />
+            <img src="assets/img/bank.webp" style="width:100%;"/>
             <br><br>
             <p><i class="bx bx-chevron-down"></i> E-Wallet</p>
-            <img src="../assets/img/wallet.webp" style="width:100%;" />
+            <img src="assets/img/wallet.webp" style="width:100%;"/>
 
             <ul class="list-group border-warning" style="background: transparent;">
               <li class="list-group-item">
                 <b>Telah Terdaftar Oleh</b><br>
-                <img src="../assets/img/ham.webp" class="" /><br>
+                <img src="assets/img/ham.webp" class="" /><br>
                 <strong>Nomor:</strong> AHU-0118640.AH.01.11.TAHUN 2022<br>
                 <strong>Registrasi: </strong>4022062334106037<br />
               </li>
