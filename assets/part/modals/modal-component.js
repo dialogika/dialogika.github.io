@@ -9,8 +9,8 @@ class FooterModal extends HTMLElement {
         <div class="modal fade overflow-hidden" id="footerSubModal" tabindex="-1" aria-hidden="true" aria-labelledby="footerSubModal">
           <div class="modal-dialog modal-fullscreen-md-down popup-box-dialog modal-dialog-centered modal-content position-relative overflow-hidden">
             <div class="d-flex flex-shrink-0 align-items-center justify-content-between position-relative overflow-hidden" style="height: 200px;">
-              <div class="w-100">
-                <img src="assets/img/footer-header-2.webp" alt="Bergabung dengan Komunitas Kami" class="w-auto h-auto object-fit-contain">
+              <div class="">
+                <img src="assets/img/footer-header-2.webp" alt="Bergabung dengan Komunitas Kami" class="img-fluid object-fit-contain">
               </div>
             </div>
             <div class="modal-body w-100 h-auto">
@@ -38,6 +38,14 @@ class FooterModal extends HTMLElement {
               <button style="border-radius:10px;" class="yellow-dialogika-btn" data-bs-toggle="modal" data-bs-target="#footerSubModal">Close</button>
               <button style="border-radius:10px;" class="blue-dialogika-btn" id="subFooterBtn">Kirim & Gabung group</button>
             </div>
+            <div class="success-overlay d-none" id="successOverlay">
+            <div class="success-content text-center">
+              <i class="bi bi-check-circle-fill" style="font-size: 3rem; color: #28a745;"></i>
+              <h2>Thank You!</h2>
+              <p>Terimakasih telah bergabung dengan komunitas kami !</p>
+              <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#footerSubModal">Close</button>
+            </div>
+    </div>
           </div>
         </div>
       `;
