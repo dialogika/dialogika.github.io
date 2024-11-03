@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
       utilsScript: "./utils.js",
     });
   }
-  // Hello world
 
+  
   // varibel untuk number di subscribe/connect now footer
   const inputSubFooterWhatsapp = document.querySelector(
     "#inputSubFooterWhatsapp"
