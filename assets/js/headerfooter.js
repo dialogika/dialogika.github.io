@@ -365,7 +365,7 @@ class Footer extends HTMLElement {
                 <h4>Instagram Post <i class='bx bx-chevron-down d-md-none'></i></h4>
                 <ul>
                   <li class="clearfix">
-                    <img src="../assets/img/ig/1.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                    <img loading="lazy" src="../assets/img/ig/1.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                     <div class="post float-left">
                       <a target="__blank" href="https://www.instagram.com/p/Claa6CPISTB/">Gambaran kelas praktek public speaking secara offline</a>
                       <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Nov 26, 2022</div>
@@ -373,7 +373,7 @@ class Footer extends HTMLElement {
                   </li>
                   <hr/>
                   <li class="clearfix">
-                    <img src="../assets/img/ig/2.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                    <img loading="lazy" src="../assets/img/ig/2.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                     <div class="post float-left">
                       <a target="__blank" href="https://www.instagram.com/p/CyXfjtkrJe7/">Tips-tips agar di notice dosen didalam kelas dan latihan membangun persona.</a>
                       <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 14, 2023</div>
@@ -381,7 +381,7 @@ class Footer extends HTMLElement {
                   </li>
                   <hr/>
                   <li class="clearfix">
-                    <img src="../assets/img/ig/3.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                    <img loading="lazy" src="../assets/img/ig/3.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                     <div class="post float-left">
                       <a target="__blank" href="https://www.instagram.com/p/CzAf73qr2mj/">5 tips jitu atasi otak yang ngeblank saat berbicara di depan umum</a>
                       <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 30, 2023</div>
@@ -389,7 +389,7 @@ class Footer extends HTMLElement {
                   </li>
                   <hr/>
                   <li class="clearfix">
-                    <img src="../assets/img/ig/4.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                    <img loading="lazy" src="../assets/img/ig/4.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                     <div class="post float-left">
                       <a target="__blank" href="blog-details.html">5 trik untuk para newbie agar viral di depan umum. (Cocok untuk konten creator)</a>
                       <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Nov 2, 2023</div>
@@ -411,15 +411,15 @@ class Footer extends HTMLElement {
             <br><br>
             <h4 class="d-flex justify-content-between">Payment Method<i class='bx bx-chevron-down d-md-none'></i></h4>
             <p><i class="bx bx-chevron-down"></i> Bank Transfer</p>
-            <img src="../assets/img/bank.webp" style="width:100%;"/>
+            <img loading="lazy" src="../assets/img/bank.webp" style="width:100%;"/>
             <br><br>
             <p><i class="bx bx-chevron-down"></i> E-Wallet</p>
-            <img src="../assets/img/wallet.webp" style="width:100%;"/>
+            <img loading="lazy" src="../assets/img/wallet.webp" style="width:100%;"/>
 
             <ul class="list-group border-warning" style="background: transparent;">
               <li class="list-group-item">
                 <b>Telah Terdaftar Oleh</b><br>
-                <img src="../assets/img/ham.webp" class="" /><br>
+                <img loading="lazy" src="../assets/img/ham.webp" class="" /><br>
                 <strong>Nomor:</strong> AHU-0118640.AH.01.11.TAHUN 2022<br>
                 <strong>Registrasi: </strong>4022062334106037<br />
               </li>
