@@ -77,7 +77,7 @@ class Header extends HTMLElement {
         <i class="bi bi-list d-block d-md-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"></i>
        </nav><!-- .navbar -->
 
-      <a href="#uploadForm" class="appointment-btn" id="scroll-link" data-scroll-offset="100">Daftar <span class="d-none d-md-inline">Sekarang</span></a>
+      <a href="https://www.dialogika.co/program/" class="appointment-btn">Daftar <span class="d-md-inline">Sekarang</span></a>
 
     </div>
   </header><!-- End Header -->
@@ -172,10 +172,9 @@ class Header extends HTMLElement {
               <span class="badge bg-warning rounded-pill">Coming Soon</span>
             </div>
           </div></a>
-          <a href="../shop/" onclick="return false;"><div class="card card-body">
+          <a href="https://www.dialogika.co/shop/" onclick="return false;"><div class="card card-body">
             <div class="justify-content-between d-flex">
               <span>Shop </span>
-              <span class="badge bg-warning rounded-pill">Coming Soon</span>
             </div>
           </div></a>
           <a href="../blog/"><div class="card card-body">Blog</div></a>
@@ -286,7 +285,8 @@ class Footer extends HTMLElement {
                   </a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="../program/first-class.html">Surabaya <span class="badge rounded-pill text-bg-warning">Coming Soon</span></a>
+                  <a href="https://www.dialogika.co/program/first-class.html">Surabaya 
+                  <span class="badge rounded-pill text-bg-warning">Private Only</span>
                 </li>
               </ul>
             </div><br>
@@ -347,13 +347,13 @@ class Footer extends HTMLElement {
                   <a href="../about/">About Us</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="../about/faq.html">Frequent Asked Question</a>
+                  <a href="https://www.dialogika.co/help/program-belajar.html">Frequent Asked Question</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="../about/help.html">Help Center</a>
+                  <a href="https://www.dialogika.co/help/">Help Center</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="../about/privacy.html">Privacy Policy</a>
+                  <a href="https://www.dialogika.co/policy/">Privacy Policy</a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
                   <a href="../about/terms.html">Terms & Agreements</a>
