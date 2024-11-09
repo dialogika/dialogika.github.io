@@ -32,7 +32,7 @@ class Header extends HTMLElement {
        <nav id="navbar" class="navbar order-last order-lg-0">
         <ul class="navbar-desktop-list">
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li class="dropdown"><a href="../program/"><span>Program</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="../program"><span>Program</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li class="dropdown"><a href="#"><span>Online</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
@@ -54,15 +54,14 @@ class Header extends HTMLElement {
                 </ul>
               </li>
               <li><hr/></li>
-              <li class="dropdown"><a href="#"><span>Area</span> <i class="bi bi-chevron-right"></i></a>
+              <li class="dropdown"><a disabled><span>Area</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="../program/index-jogja.html">Yogyakarta</a></li>
                   <li><a href="../program/index-tangsel.html">Bintaro</a></li>
                   <li><a href="../program/index-solo.html">Solo</a></li>
                   <li><a href="../program/index-banjarbaru.html">Banjarbaru</a></li>
-                  <li><a href="../program/index-surabaya.html" onclick="return false;">
-                    <span>Surabaya</span>
-                    <span class="badge rounded-pill text-bg-secondary">Coming Soon</span></a>
+                  <li><a href="../program/index-surabaya.html">
+                    <span>Surabaya</span></a>
                   </li>
                 </ul>
               </li>
@@ -285,8 +284,7 @@ class Footer extends HTMLElement {
                   </a>
                 </li>
                 <li><i class="bx bx-chevron-right"></i>
-                  <a href="https://www.dialogika.co/program/first-class.html">Surabaya 
-                  <span class="badge rounded-pill text-bg-warning">Private Only</span>
+                  <a href="https://www.dialogika.co/page/kelas-public-speaking-surabaya-new">Surabaya
                 </li>
               </ul>
             </div><br>
