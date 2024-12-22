@@ -17,7 +17,7 @@ class Header extends HTMLElement {
       <div class="d-none d-lg-flex social-links align-items-center">
         <a href="https://link.dialogika.co/twitter" class="twitter"><i class="bi bi-twitter"></i></a>
         <a href="https://link.dialogika.co/facebook" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="https://link.dialogika.co/instagram" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.instagram.com/dialogika.co" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="https://link.dialogika.co/linkedin" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
       </div>
     </div>
