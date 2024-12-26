@@ -45,10 +45,10 @@ const dialogikaSolo = {
 };
 
 const dialogikaBanjarbaru = {
-  coordinates: [-3.444782337302218, 114.8454445401964],
+  coordinates: [-3.4405526971594282, 114.83696919666075], 
   name: "Dialogika Banjarbaru",
   adress:
-    "Banjarbaru, Loktabat Selatan, Banjarbaru Selatan, Banjarbaru City, South Kalimantan 70714",
+    "Comet Coffee , Loktabat Utara, Kec. Banjarbaru Utara, Kota Banjar Baru, Kalimantan Selatan 70714",
   city: "Banjarbaru",
   website: [
     "https://www.dialogika.co/program/index-banjarbaru.html",
@@ -58,7 +58,7 @@ const dialogikaBanjarbaru = {
     "https://www.linkedin.com/company/dialogika/posts/?feedView=all",
     "Linkedin →",
   ],
-  gmaps: ["https://maps.app.goo.gl/dSEbVUMeFEZDdb269", "Gmaps →"],
+  gmaps: ["https://maps.app.goo.gl/U36sA9JRdfXvnKMN8", "Gmaps →"],
 };
 
 document.addEventListener("DOMContentLoaded", function () {
