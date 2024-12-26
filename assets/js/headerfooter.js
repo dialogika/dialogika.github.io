@@ -23,70 +23,70 @@ class Header extends HTMLElement {
     </div>
   </div>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center">
 
-       <a href="../index.html" class="logo me-auto"><img src="../assets/img/logo.webp" alt="" class="img-fluid"></a>
+        <a href="../index.html" class="logo me-auto"><img src="../assets/img/logo.webp" alt="" class="img-fluid"></a>
 
-       <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul class="navbar-desktop-list">
-          <li><a class="nav-link scrollto active" href="../index.html">Home</a></li>
-          <li class="dropdown"><a href="../program"><span>Program</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li class="dropdown"><a href="#"><span>Online</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="../program/basic-play.html">Basic Play <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
-                  <li><a href="../program/basic-plus.html">Basic Plus</a></li>
-                  <li><a href="../program/basic-private.html">Basic Private</a></li>
-                  <li><hr/></li>
-                  <li><a href="../program/kids-play.html">Kids Play</a></li>
-                  <li><a href="../program/kids-plus.html">Kids Plus<span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
-                  <li><a href="../program/kids-private.html">Kids Private</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a href="#"><span>Offline</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="../program/first-class.html">First Class <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
-                  <li><a href="../program/first-kids.html">First Kids</a></li>
-                  <li><hr/></li>
-                  <li><a href="../program/first-private.html">First Private</a></li>
-                </ul>
-              </li>
-              <li><hr/></li>
-              <li class="dropdown"><a disabled><span>Area</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="../program/index-jogja.html">Yogyakarta</a></li>
-                  <li><a href="../program/index-tangsel.html">Bintaro</a></li>
-                  <li><a href="../program/index-solo.html">Solo</a></li>
-                  <li><a href="../program/index-banjarbaru.html">Banjarbaru</a></li>
-                  <li><a href="../program/index-surabaya.html">
-                    <span>Surabaya</span></a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="../corporate/">Corporate</a></li>
-          <li><a class="nav-link scrollto" href="../about">About Us</a></li>
-          <li class="dropdown" style="color: #0b2b6a"><a disabled><span>More</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="../event/">Event</a></li>
-              <li><a href="../intern">Internship</a></li>
-              <li><a href="../shop">Shop</a></li>
-              <li><a href="../blog">Blog</a></li>
-              <li><a href="../service/">Service</a></li>
-            </ul>
-          </li>
-          
-        </ul>
-        <i class="bi bi-list d-block d-md-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"></i>
-       </nav><!-- .navbar -->
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul class="navbar-desktop-list">
+            <li><a class="nav-link scrollto active" href="../index.html">Home</a></li>
+            <li class="dropdown"><a href="../program"><span>Program</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li class="dropdown"><a href="#"><span>Online</span> <i class="bi bi-chevron-right"></i></a>
+                  <ul>
+                    <li><a href="../program/basic-play.html">Basic Play <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                    <li><a href="../program/basic-plus.html">Basic Plus</a></li>
+                    <li><a href="../program/basic-private.html">Basic Private</a></li>
+                    <li><hr/></li>
+                    <li><a href="../program/kids-play.html">Kids Play</a></li>
+                    <li><a href="../program/kids-plus.html">Kids Plus<span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                    <li><a href="../program/kids-private.html">Kids Private</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown"><a href="#"><span>Offline</span> <i class="bi bi-chevron-right"></i></a>
+                  <ul>
+                    <li><a href="../program/first-class.html">First Class <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                    <li><a href="../program/first-kids.html">First Kids</a></li>
+                    <li><hr/></li>
+                    <li><a href="../program/first-private.html">First Private</a></li>
+                  </ul>
+                </li>
+                <li><hr/></li>
+                <li class="dropdown"><a disabled><span>Area</span> <i class="bi bi-chevron-right"></i></a>
+                  <ul>
+                    <li><a href="../program/index-jogja.html">Yogyakarta</a></li>
+                    <li><a href="../program/index-tangsel.html">Bintaro</a></li>
+                    <li><a href="../program/index-solo.html">Solo</a></li>
+                    <li><a href="../program/index-banjarbaru.html">Banjarbaru</a></li>
+                    <li><a href="../program/index-surabaya.html">
+                      <span>Surabaya</span></a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a class="nav-link scrollto" href="../corporate/">Corporate</a></li>
+            <li><a class="nav-link scrollto" href="../about">About Us</a></li>
+            <li class="dropdown" style="color: #0b2b6a"><a disabled><span>More</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a href="../event/">Event</a></li>
+                <li><a href="../intern">Internship</a></li>
+                <li><a href="../shop">Shop</a></li>
+                <li><a href="../blog">Blog</a></li>
+                <li><a href="../service/">Service</a></li>
+              </ul>
+            </li>
+            
+          </ul>
+          <i class="bi bi-list d-block d-md-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"></i>
+        </nav><!-- .navbar -->
 
-      <a href="https://www.dialogika.co/program/" class="appointment-btn">Daftar <span class="d-md-inline">Sekarang</span></a>
+        <a href="https://www.dialogika.co/program/" class="appointment-btn">Daftar <span class="d-md-inline">Sekarang</span></a>
 
-    </div>
-  </header><!-- End Header -->
+      </div>
+    </header><!-- End Header -->
 
   <!-- ======= Mobile Nav ======= -->
   <nav class="navbar-canvas fixed-top">
