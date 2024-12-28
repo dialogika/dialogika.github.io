@@ -61,6 +61,41 @@ const dialogikaBanjarbaru = {
   gmaps: ["https://maps.app.goo.gl/U36sA9JRdfXvnKMN8", "Gmaps →"],
 };
 
+const dialogikaJakbar = {
+  coordinates: [-6.165760658098328, 106.79031677950233],
+  name: "Dialogika Jakarta Barat",
+  adress:
+  "Libero Coffee, Jl. Dr. Susilo Raya No.C4, Grogol, Kec. Grogol petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11450",
+  city: "Jakarta Barat",
+  website: [
+    "https://www.dialogika.co/page/kelas-public-speaking-jakarta",
+    "Website →",
+  ],
+  socialMedia: [
+    "https://www.linkedin.com/company/dialogika/posts/?feedView=all",
+    "Linkedin →",
+  ],
+  gmaps: ["https://maps.app.goo.gl/ZDRB8f58ozrEXLKVA", "Gmaps →"],
+};
+
+const dialogikaJaktim = {
+  coordinates: [-6.254988429504797, 106.90993721018226],
+  name: "Dialogika Jakarta Timur",
+  adress:
+  "Kyō Coffee, Jl. Wirajasa Jl. Raya Jatiwaringin No.1 Blok ZN, Cipinang Melayu, Makasar, East Jakarta City, Jakarta 13620",
+  city: "Jakarta Timur",
+  website: [
+    "https://www.dialogika.co/page/kelas-public-speaking-jakarta",
+    "Website →",
+  ],
+  socialMedia: [
+    "https://www.linkedin.com/company/dialogika/posts/?feedView=all",
+    "Linkedin →",
+  ],
+  gmaps: ["https://maps.app.goo.gl/BotGD1UpDLw2MZ9K7", "Gmaps →"],
+};
+
+
 document.addEventListener("DOMContentLoaded", function () {
   let map = L.map("map", {
     zoomMap: 6,
@@ -120,6 +155,10 @@ document.addEventListener("DOMContentLoaded", function () {
         markerSolo.openPopup();
       } else if (location === dialogikaBanjarbaru) {
         markerBanjarbaru.openPopup();
+      } else if (location === dialogikaJakbar){
+        markerJakbar.openPopup();
+      } else if (location === dialogikaJaktim){
+        markerJaktim.openPopup();
       }
     }
   };
@@ -185,6 +224,43 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>`
       )
     );
+
+    const markerJakbar = L.marker(dialogikaJakbar.coordinates, {
+      icon: myIcon,
+    })
+      .addTo(map)
+      .bindPopup(
+        L.popup({}).setContent(
+          `<h3 style="font-weight:600;">${dialogikaBanjarbaru.name}</h3>
+        <p>${dialogikaJakbar.adress}</p>
+        <p> ${dialogikaJakbar.city}</p>
+        <div class="links">
+        <a href="${dialogikaJakbar[0]}">${dialogikaJakbar.website[1]}</a>
+        <a href="${dialogikaJakbar[0]}">${dialogikaJakbar.socialMedia[1]}</a>
+        <a href="${dialogikaJakbar[0]}" target="_blank">${dialogikaJakbar.gmaps[1]}</a>
+        </div>`
+        )
+      );
+
+    const markerJaktim = L.marker(dialogikaJaktim.coordinates, {
+      icon: myIcon,
+    })
+      .addTo(map)
+      .bindPopup(
+        L.popup({}).setContent(
+          `<h3 style="font-weight:600;">${dialogikaJaktim.name}</h3>
+        <p>${dialogikaJaktim.adress}</p>
+        <p> ${dialogikaJaktim.city}</p>
+        <div class="links">
+        <a href="${dialogikaJaktim[0]}">${dialogikaJaktim.website[1]}</a>
+        <a href="${dialogikaJaktim[0]}">${dialogikaJaktim.socialMedia[1]}</a>
+        <a href="${dialogikaJaktim[0]}" target="_blank">${dialogikaJaktim.gmaps[1]}</a>
+        </div>`
+        )
+      );
+
+    
+    
 
   const bounds = L.latLngBounds([
     [6.0749, 94.5581],
