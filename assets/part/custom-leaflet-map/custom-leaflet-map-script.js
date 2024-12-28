@@ -235,9 +235,9 @@ document.addEventListener("DOMContentLoaded", function () {
         <p>${dialogikaJakbar.adress}</p>
         <p> ${dialogikaJakbar.city}</p>
         <div class="links">
-        <a href="${dialogikaJakbar[0]}">${dialogikaJakbar.website[1]}</a>
-        <a href="${dialogikaJakbar[0]}">${dialogikaJakbar.socialMedia[1]}</a>
-        <a href="${dialogikaJakbar[0]}" target="_blank">${dialogikaJakbar.gmaps[1]}</a>
+        <a href="${dialogikaJakbar.website[0]}">${dialogikaJakbar.website[1]}</a>
+        <a href="${dialogikaJakbar.socialMedia[0]}">${dialogikaJakbar.socialMedia[1]}</a>
+        <a href="${dialogikaJakbar.gmaps[0]}" target="_blank">${dialogikaJakbar.gmaps[1]}</a>
         </div>`
         )
       );
@@ -252,9 +252,9 @@ document.addEventListener("DOMContentLoaded", function () {
         <p>${dialogikaJaktim.adress}</p>
         <p> ${dialogikaJaktim.city}</p>
         <div class="links">
-        <a href="${dialogikaJaktim[0]}">${dialogikaJaktim.website[1]}</a>
-        <a href="${dialogikaJaktim[0]}">${dialogikaJaktim.socialMedia[1]}</a>
-        <a href="${dialogikaJaktim[0]}" target="_blank">${dialogikaJaktim.gmaps[1]}</a>
+        <a href="${dialogikaJaktim.website[0]}">${dialogikaJaktim.website[1]}</a>
+        <a href="${dialogikaJaktim.socialMedia[0]}">${dialogikaJaktim.socialMedia[1]}</a>
+        <a href="${dialogikaJaktim.gmaps[0]}" target="_blank">${dialogikaJaktim.gmaps[1]}</a>
         </div>`
         )
       );
