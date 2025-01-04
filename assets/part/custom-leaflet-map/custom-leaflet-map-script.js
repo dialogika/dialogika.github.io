@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .addTo(map)
       .bindPopup(
         L.popup({}).setContent(
-          `<h3 style="font-weight:600;">${dialogikaBanjarbaru.name}</h3>
+          `<h3 style="font-weight:600;">${dialogikaJakbar.name}</h3>
         <p>${dialogikaJakbar.adress}</p>
         <p> ${dialogikaJakbar.city}</p>
         <div class="links">
