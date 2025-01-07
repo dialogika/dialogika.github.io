@@ -32,6 +32,8 @@ const dialogikaSolo = {
   gmaps: ["https://maps.app.goo.gl/Ja9ymWssyymKkJNZ9", "Gmaps →"],
 };
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
   let map = L.map("map", {
     zoomMap: 6,
@@ -92,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
         isMapFocused = true;
         lastFocusedLocation = dialogikaSolo;
         markerSolo.openPopup();
-      }
+      } 
     }
   };
 

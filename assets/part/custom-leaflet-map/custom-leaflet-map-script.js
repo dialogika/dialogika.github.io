@@ -95,6 +95,22 @@ const dialogikaJaktim = {
   gmaps: ["https://maps.app.goo.gl/BotGD1UpDLw2MZ9K7", "Gmaps →"],
 };
 
+const dialogikaSurabaya = {
+  coordinates: [-7.289853210188593, 112.70644353086703],
+  name: "Dialogika Surabaya",
+  adress:
+  "Lagoon Avenue Mall Lantai G (MCAFE) Jl. KH Abdul Wahab Siamin Surabaya No.Kav. 9-10, Putat Gede, Kec. Dukuhpakis, Surabaya, Jawa Timur 60225",
+  city: "Jakarta Timur",
+  website: [
+    "https://www.dialogika.co/page/kelas-public-speaking-surabaya",
+    "Website →",
+  ],
+  socialMedia: [
+    "https://www.linkedin.com/company/dialogika/posts/?feedView=all",
+    "Linkedin →",
+  ],
+  gmaps: ["https://maps.app.goo.gl/ymr93bP8djLNhDib9", "Gmaps →"],
+};
 
 document.addEventListener("DOMContentLoaded", function () {
   let map = L.map("map", {
@@ -159,6 +175,8 @@ document.addEventListener("DOMContentLoaded", function () {
         markerJakbar.openPopup();
       } else if (location === dialogikaJaktim){
         markerJaktim.openPopup();
+      } else if (location === dialogikaSurabaya){
+        markerSurabaya.openPopup();
       }
     }
   };
@@ -255,6 +273,23 @@ document.addEventListener("DOMContentLoaded", function () {
         <a href="${dialogikaJaktim.website[0]}">${dialogikaJaktim.website[1]}</a>
         <a href="${dialogikaJaktim.socialMedia[0]}">${dialogikaJaktim.socialMedia[1]}</a>
         <a href="${dialogikaJaktim.gmaps[0]}" target="_blank">${dialogikaJaktim.gmaps[1]}</a>
+        </div>`
+        )
+      );
+
+    const markerSurabaya = L.marker(dialogikaSurabaya.coordinates, {
+      icon: myIcon,
+    })
+      .addTo(map)
+      .bindPopup(
+        L.popup({}).setContent(
+          `<h3 style="font-weight:600;">${dialogikaSurabaya.name}</h3>
+        <p>${dialogikaSurabaya.adress}</p>
+        <p> ${dialogikaSurabaya.city}</p>
+        <div class="links">
+        <a href="${dialogikaSurabaya.website[0]}">${dialogikaSurabaya.website[1]}</a>
+        <a href="${dialogikaSurabaya.socialMedia[0]}">${dialogikaSurabaya.socialMedia[1]}</a>
+        <a href="${dialogikaSurabaya.gmaps[0]}" target="_blank">${dialogikaSurabaya.gmaps[1]}</a>
         </div>`
         )
       );
