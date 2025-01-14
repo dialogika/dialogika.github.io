@@ -37,12 +37,12 @@ class Header extends HTMLElement {
                 <li class="dropdown"><a href="#"><span>Online</span> <i class="bi bi-chevron-right"></i></a>
                   <ul>
                     <li><a href="../program/basic-play.html">Basic Play </a></li>
-                    <li><a href="../program/basic-plus.html">Basic Plus <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
-                    <li><a href="../program/basic-private.html">Basic Private</a></li>
+                    <li><a href="../program/basic-plus.html">Basic Class <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                    <!-- <li><a href="../program/basic-private.html">Basic Private</a></li> -->
                     <li><hr/></li>
                     <li><a href="../program/kids-play.html">Kids Play</a></li>
-                    <li><a href="../program/kids-plus.html">Kids Plus<span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
-                    <li><a href="../program/kids-private.html">Kids Private</a></li>
+                    <li><a href="../program/kids-plus.html">Kids Class<span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                    <!-- <li><a href="../program/kids-private.html">Kids Private</a></li> -->
                   </ul>
                 </li>
                 <li class="dropdown"><a href="#"><span>Offline</span> <i class="bi bi-chevron-right"></i></a>
