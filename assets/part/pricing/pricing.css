@@ -277,14 +277,16 @@ h4 {
 
 .custom-pricing .pricing-tabs .nav-pills .nav-link {
   position: relative;
-  font-size: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
   overflow: hidden;
 }
 
 @media (min-width: 1080px) {
   .custom-pricing .pricing-tabs .nav-pills .nav-link {
     position: relative;
-    font-size: 14px;
+    font-size: 1rem;
+    font-weight: 600;
     overflow: hidden;
   }
 }
