@@ -41,7 +41,7 @@ class Header extends HTMLElement {
                     <!-- <li><a href="../program/basic-private.html">Basic Private</a></li> -->
                     <li><hr/></li>
                     <li><a href="../program/kids-play.html">Kids Play</a></li>
-                    <li><a href="../program/kids-plus.html">Kids Class<span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                    <li><a href="../program/kids-class.html">Kids Class<span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
                     <!-- <li><a href="../program/kids-private.html">Kids Private</a></li> -->
                   </ul>
                 </li>
