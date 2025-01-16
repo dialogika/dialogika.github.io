@@ -256,10 +256,10 @@
 
     new Swiper('.mentor-doctor', {
     direction: 'vertical',
-    speed: 600,
+    speed: 1000,
     loop: true,
     autoplay: {
-      delay: 1000,
+      delay: 2000,
       disableOnInteraction: false
     },
     slidesPerView: 'auto',
