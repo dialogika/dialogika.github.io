@@ -73,9 +73,9 @@ class Header extends HTMLElement {
               <ul>
                 <li><a href="../event/">Event</a></li>
                 <li><a href="../intern">Internship</a></li>
-                <!-- <li><a href="../shop">Shop</a></li> -->
+                <li><a href="../shop">Shop</a></li> 
                 <li><a href="../blog">Blog</a></li>
-                <!-- <li><a href="../service/">Service</a></li> -->
+                <li><a href="../service/">Service</a></li> 
               </ul>
             </li>
             
