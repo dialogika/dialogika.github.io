@@ -294,7 +294,7 @@ h4 {
 
 @media (min-width: 1080px) {
   .custom-pricing .pricing-tabs .nav-pills .nav-link {
-    font-size: 1rem; /* Use 1rem font size for desktop */
+    font-size: 1rem;
   }
 }
 

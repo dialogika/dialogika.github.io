@@ -272,15 +272,15 @@
               <div class="pricing-tabs mb-xl-0">
                 <h3 class="mt-0">Pilih Jenis Kelas</h3>
                 <!-- Untuk script ganti pricing box berada di part/custom/switch-price.js -->
-                <ul class="nav nav-pills rounded custom-price-tab justify-content-around"id="pills-tab" role="tablist">
+                <ul class="nav nav-pills rounded custom-price-tab justify-content-around" id="pills-tab" role="tablist">
                   <li class="col-5">
-                    <button type="button" class="w-100 nav-link custom-price-button active" role="tab" 
+                    <button type="button" class="w-100 nav-link custom-price-button active" role="tab"
                       data-target="basic-class-content">
                       Basic Class
                     </button>
                   </li>
                   <li class="col-5">
-                    <button type="button" class="w-100 nav-link custom-price-button" role="tab" 
+                    <button type="button" class="w-100 nav-link custom-price-button" role="tab"
                       data-target="basic-plus-content">
                       Basic Plus
                     </button>
@@ -1050,7 +1050,12 @@
           </div>
 
           <div class="col-lg-8">
-            <div class="align-items-center mentor-doctor swiper">
+            <!-- Lokasi untuk data dan script mentor-mentor berada di assets/part/landscape-mentor-card/landscape-mentor-card.js -->
+            <!-- Untuk mentor-card, perlu 2 attribute.Yaitu class-type=(Online atau Offline) dan teaching=(Kids atau Adult) -->
+            <mentor-card class-type="Online" teaching="Adult"></mentor-card>
+
+            
+            <!-- <div class="align-items-center mentor-doctor swiper">
               <div class="mentor-swiper swiper-wrapper">
 
                 <div class="swiper-slide">
@@ -1110,9 +1115,8 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="swiper-scrollbar"></div> -->
               <div class="swiper-pagination"></div>
-            </div>
+            </div> -->
           </div>
 
         </div>
@@ -1131,13 +1135,14 @@
                 <h3 class="title-heading mt-3 ms-0">Harga Kelas & Perbandingan Paket</h3>
               </div>
 
-              <p class="title-desc text-muted mt-3">Ambil paket Basic Plus (hemat) <span
-                  class="badge text-bg-success">lebih hemat</span> dengan value lebih banyak!
+              <p class="title-desc text-muted mt-3">Ambil paket Basic Plus (hemat)
+                <span class="badge text-bg-success">lebih hemat</span> dengan value lebih banyak!
               </p>
 
               <!-- Untuk script ganti pricing box berada di part/custom/switch-price.js -->
-              <div class="pricing-tabs mt-4 mb-4 mb-xl-0 custom-pricing">
-                <ul class="nav nav-pills rounded justify-content-center d-inline-block my-1 flex-nowrap flex gap-1" id="pills-tab" role="tablist">
+              <div class="pricing-tabs my-4 mb-xl-0 custom-pricing">
+                <ul class="nav nav-pills rounded justify-content-center d-inline-block my-1 flex-nowrap flex gap-1"
+                  id="pills-tab" role="tablist">
                   <li class="nav-item d-inline-block">
                     <button type="button" class="nav-link px-3 rounded custom-price-button active" role="tab"
                       id="custom-price-button" data-target="basic-class-content">
@@ -1147,15 +1152,14 @@
                   <li class="nav-item d-inline-block">
                     <button type="button" class="nav-link px-3 rounded custom-price-button" id="action-class" role="tab"
                       id="custom-price-button" data-target="basic-plus-content">
-                      Basic Plus <span class="badge bg-success rounded text-white">50% Off</span>
+                      Basic Plus <span class="badge bg-success rounded text-white">40% Off</span>
                     </button>
                   </li>
                 </ul>
               </div>
-              
-
             </div>
           </div>
+
 
           <div class="col-lg-7 g-0 offset-lg-1">
             <!-- Untuk script ganti pricing box berada di part/custom/switch-price.js -->
@@ -1183,7 +1187,7 @@
                       <div class="mt-4 pt-1">
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Garansi mengulang kelas (1 Kali)
+                          <b>Garansi</b> mengulang kelas (1 Kali)
                         </p>
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
@@ -1247,7 +1251,7 @@
                       <div class="mt-4 pt-1">
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Garansi Reschedule
+                          <b>Garansi</b> Reschedule
                         </p>
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
@@ -1383,7 +1387,7 @@
                       <div class="mt-4 pt-1">
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          <b>Garansi</b> mengulang kelas
+                          <b>Garansi</b> Reschedule
                         </p>
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
@@ -1610,6 +1614,7 @@
   <!-- Part JS Files -->
   <script src="../assets/part/modals/modal-component.js"></script>
   <script src="../assets/part/custom/switch-price.js"></script>
+  <script src="../assets/part/landscape-mentor-card/landscape-mentor-card.js"></script>
   <script src="../assets/part/read-more/read-more_less.js"></script>
 
   <!-- CDN -->
