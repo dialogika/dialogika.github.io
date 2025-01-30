@@ -2,14 +2,26 @@
 // Untuk role contohnya teacher, voice over, Master of Ceremony, dll
 
 // Untuk location, bila mentornya tersedia online dan offline maka masukkan lokasi offlinenya dan "Online" kedalam array
-// Contoh mentornya mixed dan lokasinya di yogyakarta, jadinya arrayClassType: ["Online", "Offline"] maka lokasinya = location: ["Online", "Yogyakarta"]
+// Contoh : bila mentornya mixed (bisa Online&Offline) dan lokasinya di yogyakarta, jadinya arrayClassType: ["Online", "Offline"] maka lokasinya = location: ["Online", "Yogyakarta"]
 
 const mentorData = [
   {
     id: 1,
+    mentorName: "Diah Nadiatul",
+    arrayClassType: ["Online", "Offline"], // Options: "Online", "Offline". Bila Mixing di clickupnya maka masukkan Online & Offline
+    teaching: ["Kids", "Adult"], // Options: "Kids", "Adult", "Master of Ceremony", dll. Pastikan ada Kids atau Adult didalam arraynya !!
+    gender: "Female",
+    location: ["Online", "Yogyakarta"], // Bila class typenya ada Online maka masukkan "Online" di locationnya !!
+    role: "Teacher",
+    imgPath: "../assets/img/mentor/diah.jpg",
+    description: "Berpengalaman mengajar lebih dari ratusan anak dan di dunia Host/Moderator/Presenter",
+    profileLink: "https://www.dialogika.co/mentor/diah.html",
+  },
+  {
+    id: 2,
     mentorName: "Fanny Carolina",
-    arrayClassType: ["Offline"], // Options: "Online", "Offline". Bila Mixing di clickupnya maka masukkan Online & Offline
-    teaching: ["Adult"], // Options: "Kids", "Adult", "Master of Ceremony", dll. Pastikan ada Kids atau Adult didalam arraynya !!
+    arrayClassType: ["Offline"],
+    teaching: ["Adult"],
     gender: "Female",
     location: ["Yogyakarta"],
     role: "Master of Ceremony",
@@ -18,19 +30,19 @@ const mentorData = [
     profileLink: "https://www.dialogika.co/mentor/fanny.html",
   },
   {
-    id: 2,
-    mentorName: "Diah Nadiatul",
+    id: 3,
+    mentorName: "Muhamad Naufal Dzaky",
     arrayClassType: ["Online", "Offline"],
-    teaching: ["Kids", "Adult"],
-    gender: "Female",
+    teaching: ["Adult", "Kids", "College Student", "Presentation"],
+    gender: "Male",
     location: ["Online", "Yogyakarta"],
-    role: "Teacher",
-    imgPath: "../assets/img/mentor/diah.jpg",
-    description: "Berpengalaman mengajar lebih dari ratusan anak dan di dunia Host/Moderator/Presenter",
-    profileLink: "https://www.dialogika.co/mentor/diah.html",
+    role: "Voice Over & Presentation",
+    imgPath: "../assets/img/mentor/muhammad-naufal-dzaky.webp",
+    description: "Mentor Voice Over, Presentation, MC dengan pengalaman lebih dari 5 tahun.",
+    profileLink: "https://www.dialogika.co/mentor/Muhammad-naufal-dzaky.html",
   },
   {
-    id: 3,
+    id: 4,
     mentorName: "Rismalla Ma'im Olam",
     arrayClassType: ["Online"],
     teaching: ["Kids"],
@@ -43,7 +55,7 @@ const mentorData = [
     profileLink: "https://www.dialogika.co/mentor/rismalla.html",
   },
   {
-    id: 4,
+    id: 5,
     mentorName: "Giomelando Eurichi Elaman",
     arrayClassType: ["Online"],
     teaching: ["Adult", "Kids"],
@@ -55,7 +67,7 @@ const mentorData = [
     profileLink: "https://www.dialogika.co/mentor/giomelando-eurichi-elaman.html",
   },
   {
-    id: 5,
+    id: 6,
     mentorName: "Muhammad Rio Fariza",
     arrayClassType: ["Online", "Offline"],
     teaching: ["Adult", "Kids"],
@@ -66,18 +78,6 @@ const mentorData = [
     description:
       "Mentor Master of Ceremony dengan pengalaman lebih dari 3 tahun, gemar berbagi pengalaman dan melatih orang.",
     profileLink: "https://www.dialogika.co/mentor/rio.html",
-  },
-  {
-    id: 6,
-    mentorName: "Muhamad Naufal Dzaky",
-    arrayClassType: ["Online", "Offline"],
-    teaching: ["Adult", "Kids", "College Student", "Presentation"],
-    gender: "Male",
-    location: ["Online", "Yogyakarta"],
-    role: "Voice Over & Presentation",
-    imgPath: "../assets/img/mentor/muhammad-naufal-dzaky.webp",
-    description: "Mentor Voice Over, Presentation, MC dengan pengalaman lebih dari 5 tahun.",
-    profileLink: "https://www.dialogika.co/mentor/Muhammad-naufal-dzaky.html",
   },
   {
     id: 7,
@@ -116,17 +116,44 @@ const mentorData = [
     profileLink: "https://www.dialogika.co/mentor/cia.html",
   },
   {
-    id: 9,
-    mentorName: "Pauline Tricia",
-    arrayClassType: ["Online"],
-    teaching: ["Kids"],
-    gender: "Female",
-    location: ["Online"],
-    role: "Public Speaker",
-    imgPath: "../assets/img/mentor/cia.jpg",
-    description: "Guru mengajar anak-anak dengan pengalaman lebih dari 4 tahun.",
-    profileLink: "https://www.dialogika.co/mentor/cia.html",
+    id: 10,
+    mentorName: "Ricardo Yacob",
+    arrayClassType: ["Online", "Offline"],
+    teaching: ["Adult", "Presentation", "Interview", "Company"],
+    gender: "Male",
+    location: ["Tangsel", "Online"],
+    role: "Presentation, Interview, Public Speaker",
+    imgPath: "../assets/img/mentor/Ricardo-Yacob.webp",
+    description:
+      "Memiliki banyak pengalaman sebagai pembawa acara dan presenter. Dapat memberikan pelatihan online dan offline yang berdampak",
+    profileLink: "https://www.dialogika.co/mentor/ricardo-yacob.html",
   },
+  {
+    id: 11,
+    mentorName: "Ghassani Salsabila",
+    arrayClassType: ["Online", "Offline"],
+    teaching: ["Adult"],
+    gender: "Female",
+    location: ["Tangsel", "Online"],
+    role: "Coaching, Mentoring, Public Speaker",
+    imgPath: "../assets/img/mentor/ghassani-salsabila.webp",
+    description:
+      "Telah menangani ratusan sesi mentoring dan coaching sejak 2021.",
+    profileLink: "https://www.dialogika.co/mentor/ghassani-salsabila.html",
+  },
+  // { Datanya Belum Lengkap
+  //   id: 11,
+  //   mentorName: "Dhanifa Aldeana Maheswari",
+  //   arrayClassType: ["Online"],
+  //   teaching: ["Adult"],
+  //   gender: "Male",
+  //   location: ["Online"],
+  //   role: "Public Speaker",
+  //   imgPath: "../assets/img/mentor/Ricardo-Yacob.webp",
+  //   description:
+  //     "Memiliki banyak pengalaman sebagai pembawa acara dan presenter. Dapat memberikan pelatihan online dan offline yang berdampak",
+  //   profileLink: "https://www.dialogika.co/mentor/ricardo-yacob.html",
+  // },
 ];
 
 class MentorCard extends HTMLElement {
@@ -136,13 +163,14 @@ class MentorCard extends HTMLElement {
 
   connectedCallback() {
     // Ambil parameter dari attribute
-    const classType = this.getAttribute("class-type") || "all";
-    const teaching = this.getAttribute("teaching") || "all";
+    const classType = this.getAttribute("class-type") || "all"; // Isinya Online atau Offline
+    const teaching = this.getAttribute("teaching") || "all"; // Isinya Kids atau Adult
+    const location = this.getAttribute("location") || "all"; // Isinya Online, Yogyakarta, Jakarta Barat, dan cabang dialogika lainnya
 
-    this.renderMentors(classType, teaching);
+    this.renderMentors(classType, teaching, location);
   }
 
-  renderMentors(classType, teaching) {
+  renderMentors(classType, teaching, location) {
     const container = document.createElement("div");
     container.className = "mentor-container row";
 
@@ -155,7 +183,8 @@ class MentorCard extends HTMLElement {
           ? mentor.arrayClassType.includes(classType)
           : mentor.arrayClassType === classType);
       const matchesTeaching = teaching === "all" || mentor.teaching.includes(teaching);
-      return matchesClassType && matchesTeaching;
+      const matchesLocation = location === "all" || mentor.location.includes(location);
+      return matchesClassType && matchesTeaching && matchesLocation;
     });
 
     // Cek mentorData apakah ada yang sama dengan kriteria class-type dan teaching
@@ -172,7 +201,7 @@ class MentorCard extends HTMLElement {
           <div class="col-lg-4 swiper-slide">
             <div class="member d-flex align-items-start">
               <div class="pic">
-                <img src="${mentor.imgPath}" class="img-fluid" alt="${mentor.mentorName}">
+                <img src="${mentor.imgPath}" class="img-fluid" loading="lazy" alt="${mentor.mentorName}">
               </div>
               <div class="member-info">
                 <h4>${mentor.mentorName}</h4>
