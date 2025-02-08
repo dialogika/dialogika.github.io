@@ -8,7 +8,7 @@ document.getElementById("uploadForm").addEventListener("submit", async function 
   const locations = document.getElementById("locations").value;
 
   // API Token dan List ID ClickUp
-  const apiToken = "pk_3640079_B56O8X0HW6FAEIZJFFJAQW99IAHQMF8N";
+  const apiToken = "pk_276677813_5LZTC2L1TYHRVBRRRK5BKXBZDVUU2X7E";
   const listId = "14355106";
 
   const whatsappUrl = `https://wa.me/62${whatsapp}`;
@@ -47,7 +47,7 @@ document.getElementById("uploadForm").addEventListener("submit", async function 
         ],
       }),
     });
-
+console.log("DAta sudah dikirim !!!!")
     // Memeriksa apakah request berhasil
     if (!createTaskResponse.ok) {
       const error = await createTaskResponse.json();
