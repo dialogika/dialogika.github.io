@@ -674,14 +674,22 @@
                           Durasi kelas <b>90 menit</b>
                         </p>
                         <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
+                          Waktu <b>Setiap Minggu 15:30 WIB</b>
+                        </p>
+                        <p class="mb-3 f-16">
                           <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
                           <strike style="color:#aaaaaa;">
                             Dapat eCertificate</strike>
                         </p>
                       </div>
                       <div class="mt-4 pt-2 text-center">
-                        <a href="#contact" class="btn btn-green w-100 title-change-registration">Daftar Sekarang</a>
-                        <a href="#contact" class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
+                        <a data-program="*Basic Play senilai 257K*."
+                          class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
+                          data-program="Basic Play" data-program-handler="malika">Daftar Sekarang</a>
+                        <a onclick="askAdminMessage(this)" data-program="Basic Play" data-program-handler="malika"
+                          class="btn btn-primary w-100 title-change-consultation">Tanya
+                          Admin</a>
                       </div>
                     </div>
                   </div>
@@ -696,13 +704,12 @@
                         didalam berbicara dihadapan umum</p>
                       <div class="mt-4 pt-1">
                         <p class="mb-3 f-16">
-                          <i class='bx bxs-x-circle' style="color:#aaaaaa;"></i>
-                          <strike style="color:#aaaaaa;">
-                            Garansi mengulang kelas</strike>
+                          <i class='bx bxs-check-circle'></i>
+                          Dapat <b>Garansi</b> Mengulang Kelas
                         </p>
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle'></i>
-                          <b>4x pertemuan</b> dalam sebulan
+                          <b>12x pertemuan</b> dalam 3 bulan
                         </p>
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle'></i>
@@ -714,12 +721,20 @@
                         </p>
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle'></i>
+                          Waktu <b>Setiap Minggu 15:30 WIB</b>
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
                           Dapat eCertificate
                         </p>
                       </div>
                       <div class="mt-4 pt-2 text-center">
-                        <a href="#contact" class="btn btn-green w-100 title-change-registration">Daftar Sekarang</a>
-                        <a href="#contact" class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
+                        <a data-program="*Basic Play 3 Bulan senilai 549K*."
+                          class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
+                          data-program="Basic Play 3 Bulan" data-program-handler="malika">Daftar Sekarang</a>
+                        <a onclick="askAdminMessage(this)" data-program="Basic Play 3 Bulan"
+                          data-program-handler="malika" class="btn btn-primary w-100 title-change-consultation">Tanya
+                          Admin</a>
                       </div>
                     </div>
                   </div>
@@ -805,6 +820,7 @@
                     <i class="bi bi-telephone"></i>
                     <h3>Call Us</h3>
                     <p>+62 851 6299 2597</p>
+                    <p>+62 857 8000 7799</p>
                   </div>
                 </div><!-- End Info Item -->
 
@@ -813,6 +829,7 @@
                     <div class="float-right"><i class="bi bi-envelope"></i></div>
                     <h3>Email Us</h3>
                     <p>hello@dialogika.co</p>
+                    <p><br /></p>
                   </div>
                 </div><!-- End Info Item -->
 
@@ -826,26 +843,29 @@
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="Name" class="form-control" id="names" pattern="[a-zA-Z\s]{3,100}"
+                  <input type="text" name="Name" class="form-control" id="names" pattern="[a-zA-Z0-9\s.,-]{3,100}"
                     placeholder="Nama Lengkap*" required autocomplete="name">
                 </div>
 
-                <div class="col-md-6 ">
-                  <input type="tel" class="form-control" name="Whatsapp" id="whatsapps" pattern="[0-9]{10,15}"
-                    placeholder="Whatsapp*" required="" autocomplete="tel">
+                <!-- Input ini menggunakan International Phone Number di asset/vendor/international-phone-number/script.js -->
+                <div class="col-md-6">
+                  <label for="whatsapp" style="display: none;">WhatsApp Number:</label>
+                  <input type="text" id="whatsapp-number" name="whatsapp-number" class="form-control" required />
                 </div>
 
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="Location" id="locations" pattern="[a-zA-Z\s]{3,100}"
-                    placeholder="Domisili*" required autocomplete="address-level1">
+                  <input type="text" class="form-control" name="Location" id="locations"
+                    pattern="[a-zA-Z0-9\s.,-]{3,100}" placeholder="Domisili*" required>
                 </div>
 
                 <div class="col-md-6">
                   <select name="Program" id="programs" class="form-control" required>
                     <option value="" selected disabled value="">Program Yang Akan Diambil</option>
                     <optgroup label="Basic Play">
-                      <option value="6292fa64-e1bf-4321-821e-1b29c186ef5d">1 Bulan</option>
-                      <option value="d990d420-14ad-439e-85a1-bdafa5ae0e05">3 Bulan</option>
+                      <option data-program-handler="malika" value="d990d420-14ad-439e-85a1-bdafa5ae0e05">1 Bulan
+                      </option>
+                      <option data-program-handler="malika" value="008eaa2c-f8d9-4da4-b9d5-91e7828d2cfd">3 Bulan
+                      </option>
                     </optgroup>
                     <optgroup label="Konsultasi">
                       <option id="ask-adm">Asking Admin</option>
@@ -868,6 +888,7 @@
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
                   <button type="submit" class="send_contact">Send Whatsapp</button>
+                  <!-- <button type="button" id="getClickupData" class="send_contact">GET ID</button> -->
 
                 </div>
 
@@ -911,7 +932,7 @@
   <script src="../assets/js/headerfooter.js"></script>
   <script src="../assets/js/timestamp.js"></script>
   <script src="../assets/js/textchange.js"></script>
-  <script src="../assets/js/clickup.js"></script>
+  <!-- <script src="../assets/js/clickup.js"></script> -->
   <script src="../assets/js/clickup-task.js"></script>
   <script src="../assets/js/whatsapp.js"></script>
   <script src="../assets/js/main.js"></script>

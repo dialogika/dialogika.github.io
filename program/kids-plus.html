@@ -1036,7 +1036,7 @@
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    Gratis <b>webinar</b> setiap bulan 
+                                                    Gratis <b>webinar</b> setiap bulan
                                                 </p>
 
                                                 <p class="mb-3 f-16">
@@ -1092,7 +1092,7 @@
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    Gratis <b>webinar</b> setiap bulan 
+                                                    Gratis <b>webinar</b> setiap bulan
                                                 </p>
 
                                                 <p class="mb-3 f-16">
@@ -1213,17 +1213,19 @@
 
                                 <div class="col-md-6">
                                     <input type="text" name="Name" class="form-control" id="names"
-                                        pattern="[a-zA-Z\s]{3,100}" placeholder="Nama Lengkap*" required>
+                                        placeholder="Nama Lengkap*" required>
                                 </div>
 
-                                <div class="col-md-6 ">
-                                    <input type="tel" class="form-control" name="Whatsapp" id="whatsapps"
-                                        pattern="[0-9]{10,15}" placeholder="Whatsapp*" required="">
+                                <!-- Input ini menggunakan International Phone Number di asset/vendor/international-phone-number/script.js -->
+                                <div class="col-md-6">
+                                    <label for="whatsapp" style="display: none;">WhatsApp Number:</label>
+                                    <input type="text" id="whatsapp-number" name="whatsapp-number" class="form-control"
+                                        required />
                                 </div>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="Location" id="locations"
-                                        pattern="[a-zA-Z\s]{3,100}" placeholder="Domisili*" required>
+                                        pattern="[a-zA-Z0-9\s.,-]{3,100}" placeholder="Domisili*" required>
                                 </div>
 
                                 <div class="col-md-6">
@@ -1299,7 +1301,7 @@
     <script src="../assets/js/headerfooter.js"></script>
     <script src="../assets/js/timestamp.js"></script>
     <script src="../assets/js/textchange.js"></script>
-    <script src="../assets/js/clickup.js"></script>
+    <!-- <script src="../assets/js/clickup.js"></script> -->
     <script src="../assets/js/clickup-task.js"></script>
     <script src="../assets/js/whatsapp.js"></script>
     <script src="../assets/js/main.js"></script>

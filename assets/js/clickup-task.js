@@ -1,41 +1,61 @@
 // Function untuk buat data baru
 const createNewTask = async (listId, taskName, customFields, description) => {
-  const createTaskResponse = await fetch(`https://api.clickup.com/api/v2/list/${listId}/task`, {
-    method: "POST",
-    headers: {
-      Authorization: apiToken,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: taskName,
-      description: description,
-      custom_fields: customFields,
-    }),
-  });
-
-  if (!createTaskResponse.ok) throw new Error("Gagal mengirim data. Harap coba lagi !");
+  try {
+    const createTaskResponse = await fetch(`https://api.clickup.com/api/v2/list/${listId}/task`, {
+      method: "POST",
+      headers: {
+        Authorization: apiToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: taskName,
+        description: description,
+        custom_fields: customFields,
+      }),
+    });
+    if (!createTaskResponse.ok) {
+      const errorText = await createTaskResponse.text();
+      throw new Error(`Gagal mengirim data: ${createTaskResponse.status} ${errorText}`);
+    }
+    // Optionally log or return the response JSON
+    const result = await createTaskResponse.json();
+    console.log("Task created successfully:", result);
+    return result;
+  } catch (error) {
+    console.error("Error in createNewTask:", error);
+    throw error;
+  }
 };
 
 const apiToken = "pk_276677813_5LZTC2L1TYHRVBRRRK5BKXBZDVUU2X7E";
 
 const handleNewTask = async (event) => {
   event.preventDefault();
-  let whatsapp = iti.getNumber();
-  const name = document.getElementById("names").value;
-  const note = document.getElementById("messages").value.trim();
-  const program = document.getElementById("programs").value;
-  const address = document.getElementById("locations").value;
-  const description =
-    "Mendaftar dari halaman program.";
 
-  // API Token dan List ID ClickUp
+  // Cek iti (International Telephone Input) ada dan return nomor valid
+  let whatsapp;
+  try {
+    whatsapp = iti.getNumber();
+  } catch (e) {
+    console.error("Error getting WhatsApp number from iti:", e);
+    alert("Error nomor tidak valid.");
+    return;
+  }
+
+  const taskName = document.getElementById("names")?.value;
+  const note = document.getElementById("messages")?.value.trim();
+  const program = document.getElementById("programs")?.value;
+  const address = document.getElementById("locations")?.value;
+  const description = "Mendaftar dari halaman program.";
+
   const listId = "14355106";
   const whatsappUrl = `https://wa.me/${whatsapp}`;
 
   if (!program) {
     alert("Program harus dipilih.");
     return;
-  } // Membuat task baru di ClickUp
+  }
+
   const custom_fields = [
     {
       id: "856f5a4e-fe7b-4ca3-8f2a-82ba0a1816b2",
@@ -50,26 +70,25 @@ const handleNewTask = async (event) => {
       value: address,
     },
     {
-      id: "0928d307-37dc-47e3-9ed4-ddc1bf73e4e7", // Channelnya dari website
-      value: ["03a4d146-a239-4156-b368-ba620c3a0dd4"], // Value channel = website
+      id: "0928d307-37dc-47e3-9ed4-ddc1bf73e4e7", // Channel from website
+      value: ["03a4d146-a239-4156-b368-ba620c3a0dd4"],
     },
     {
-      id: "76680f29-6988-4d55-ab67-508f051c2ed9", // Custom field ID for WhatsApp URL
+      id: "76680f29-6988-4d55-ab67-508f051c2ed9", // Custom field for WhatsApp URL
       value: whatsappUrl,
     },
   ];
 
   try {
-    await createNewTask(listId, name, custom_fields, description);
-
-    setTimeout(() => {
-      success.style.display = "none";
-    }, 10000);
+    await createNewTask(listId, taskName, custom_fields, description);
+    // Optionally show a success message here
+    alert("Data berhasil dikirim!");
   } catch (error) {
-    console.error("Kesalahan:", error);
-    alert("Terjadi kesalahan. Silakan coba lagi.");
+    console.error("Kesalahan dalam handleNewTask:", error);
+    alert(`Terjadi kesalahan. Silakan coba lagi.\n${error.message}`);
   }
 };
+
 const uploadForm = document.getElementById("uploadForm");
 if (uploadForm) uploadForm.addEventListener("submit", handleNewTask);
 

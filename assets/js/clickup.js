@@ -47,7 +47,6 @@ document.getElementById("uploadForm").addEventListener("submit", async function 
         ],
       }),
     });
-console.log("DAta sudah dikirim !!!!")
     // Memeriksa apakah request berhasil
     if (!createTaskResponse.ok) {
       const error = await createTaskResponse.json();
