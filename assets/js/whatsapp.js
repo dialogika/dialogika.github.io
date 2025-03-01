@@ -7,7 +7,7 @@ $(document).on("click", ".send_contact", function () {
   // Contoh <option data-program-handler="malika" value="id-program">1 Bulan
   const checkHandler = $("#programs :selected").attr("data-program-handler");
 
-  /* Whatsapp Settings */
+  
   var walink = "https://web.whatsapp.com/send",
     // Melakukan cek apakah option yang dipilih memiliki attribute "data-program-handler" dengan value "malika"
     // Bila ada attribute "data-program-handler" dengan value "malika", akan kirim pesan ke whatsappMalika
