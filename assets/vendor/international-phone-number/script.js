@@ -2,7 +2,7 @@
 var iti;
 var subFooterIti; //varibel untuk number di subscribe/connect now footer
 document.addEventListener("DOMContentLoaded", function () {
-  const input = document.querySelector("#whatsapp-number");
+  const input = document.getElementById("whatsapp-number");
   if (input) {
     iti = window.intlTelInput(input, {
       initialCountry: "id",
