@@ -226,7 +226,7 @@
 
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class=""><img src="../assets/img/program/kids-plus/kids-plus.webp"
+                        <div class=""><img src="../assets/img/program/first-kids/first-kids-avatar.webp"
                                 class="w-100 img-fluid rounded" alt="kursus public speaking anak jogja"></div>
                         <h3>Bangun Rasa Percaya Sejak Dini - Sebulan Public Speaking dan Bergaransi</h3>
                         <p><em>Apabila putra/putri Moms memiliki kendala dibawah ini, moms harus mulai aware dengan <br>
@@ -249,14 +249,14 @@
                         <ul style="list-style-type: none;">
                             <li><i class='bx bxs-check-circle' style="color:#009961"></i> Dibimbing langsung oleh mentor
                             </li>
-                            <li><i class='bx bxs-check-circle' style="color:#009961"></i> Online dan LIVE (via Zoom)
+                            <li><i class='bx bxs-check-circle' style="color:#009961"></i> Bersifat Offline
                             </li>
-                            <li><i class='bx bxs-check-circle' style="color:#009961"></i> Full Praktek Only bersama
+                            <li><i class='bx bxs-check-circle' style="color:#009961"></i> Full Praktek bersama
                                 Mentor </li>
-                            <li><i class='bx bxs-check-circle' style="color:#009961"></i> Pelaksanaan Setiap <b>Hari
-                                    Sabtu
-                                    : 15:30 WIB & Hari Minggu : 10:00 WIB</b> </li>
-                            <li><i class='bx bxs-check-circle' style="color:#009961"></i> 7x Pertemuan dalam 1 Bulan
+                            <li><i class='bx bxs-check-circle' style="color:#009961"></i> Jam dan Hari Pelaksanaan
+                                <b>Flexible</b>
+                            </li>
+                            <li><i class='bx bxs-check-circle' style="color:#009961"></i> 10x Pertemuan dalam 2 Bulan
                                 (Seminggu 2x) </li>
                             <li><i class='bx bxs-check-circle' style="color:#009961"></i> Terdapat <b>Garansi
                                     Mengulang</b> dan Pasti Bisa </li>
@@ -338,7 +338,7 @@
 
                         <div class="course-info d-flex justify-content-between align-items-center">
                             <h5>Total Pertemuan</h5>
-                            <p>7x Pertemuan</p>
+                            <p>10x Pertemuan</p>
                         </div>
 
                         <div class="course-info d-flex justify-content-between align-items-center">
@@ -348,7 +348,7 @@
 
                         <div class="course-info d-flex justify-content-between align-items-center">
                             <h5>Hari Kelas</h5>
-                            <p>Sabtu & Minggu</p>
+                            <p>Flexible</p>
                         </div>
 
                         <div class="course-info d-flex justify-content-between align-items-center">
@@ -358,7 +358,7 @@
 
                         <div class="course-info d-flex justify-content-between align-items-center">
                             <h5>Pelaksanaan</h5>
-                            <p>Via Zoom</p>
+                            <p>Offline</p>
                         </div>
 
                     </div>
@@ -1042,7 +1042,7 @@
                         <!-- Lokasi untuk data dan script mentor-mentor berada di assets/part/landscape-mentor-card/landscape-mentor-card.js -->
                         <!-- Untuk mentor-card, perlu 2 attribute dan 1 Opsional. Yaitu class-type=(Online atau Offline), teaching=(Kids atau Adult) -->
                         <!-- Attribute opsional yaitu location=(Online, Yogyakarta, Jakarta Barat, dll)" -->
-                        <mentor-card class-type="Offline" teaching="Kids" location="Yogyakarta"></mentor-card>
+                        <mentor-card class-type="Offline" teaching="Kids"></mentor-card>
                     </div>
 
                 </div>
@@ -1064,20 +1064,23 @@
                             <p class="title-desc text-muted mt-3">Saran kami ambil program First Kids agar mindset
                                 putra/putri moms bisa mendapatkan mindset awal di dalam public speaking.</p>
 
-                            <div class="pricing-tabs mt-4">
-                                <ul class="nav nav-pills rounded justify-content-center d-inline-block pricing-tab-border py-1 px-2"
+                            <!-- Untuk script ganti pricing box berada di part/pricing/switch-price.js -->
+                            <div class="pricing-tabs my-4 mb-xl-0 custom-pricing">
+                                <ul class="nav nav-pills rounded justify-content-center d-inline-block my-1 flex-nowrap flex gap-1"
                                     id="pills-tab" role="tablist">
                                     <li class="nav-item d-inline-block">
-                                        <a class="nav-link px-3 rounded active monthly" id="Monthly"
-                                            data-bs-toggle="pill" href="#Month" role="tab" aria-controls="Month"
-                                            aria-selected="true">Yogyakarta</a>
+                                        <button type="button"
+                                            class="fs-6 nav-link px-3 rounded custom-price-button active" id="jogja"
+                                            data-bs-toggle="pill" href="#jogjas" role="tab" id="custom-price-button"
+                                            data-target="kids-class-content">Yogyakarta</button>
                                     </li>
-                                    <!-- <li class="nav-item d-inline-block">
-                          <a class="nav-link px-3 rounded yearly" id="Yearly" data-bs-toggle="pill" href="#Year" role="tab"
-                            aria-controls="Year" aria-selected="false">
-                            Hemat <span class="badge bg-success rounded text-white">61% Off </span>
-                          </a>
-                        </li> -->
+                                    <li class="nav-item d-inline-block">
+                                        <button class="fs-6 nav-link px-3 rounded surabaya" id="surabaya"
+                                            data-bs-toggle="pill" href="#surabayas" role="tab" aria-controls="surabayas"
+                                            aria-selected="false">
+                                            Surabaya
+                                        </button>
+                                    </li>
                                 </ul>
                             </div>
 
@@ -1086,7 +1089,8 @@
 
                     <div class="col-lg-7 g-0 offset-lg-1">
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade active show" id="Month" role="tabpanel" aria-labelledby="Monthly">
+
+                            <div class="tab-pane fade active show" id="jogjas" role="tabpanel" aria-labelledby="jogja">
                                 <div class="row g-0 align-items-center">
                                     <div class="col-lg-6">
                                         <div class="pricing-box active bg-white rounded mt-4">
@@ -1094,8 +1098,8 @@
                                                 <span class="badge">Level I</span>
                                             </div>
 
-                                            <h5 class="fw-normal">First Kids</h5>
-                                            <h1 class="pricing-title mt-3 mb-0">IDR 1.279.000
+                                            <h5 class="fw-normal">First Kids - Yogyakarta</h5>
+                                            <h1 class="pricing-title mt-3 mb-0">IDR 1.579.000
                                                 <span class="f-13"> <strike>IDR 3.000.000</strike></span>
                                             </h1>
                                             <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa
@@ -1106,6 +1110,10 @@
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
                                                     Garansi mengulang kelas
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
+                                                    Waktu flexible
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
@@ -1125,7 +1133,7 @@
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    Dapat Certificate
+                                                    Dapat eCertificate
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
@@ -1137,71 +1145,28 @@
                                                 </p>
                                             </div>
                                             <div class="mt-4 pt-2 text-center">
-                                                <a data-program="*First Kids senilai 1.279K*."
+                                                <a data-program="*First Kids Regular senilai 1.579K*."
                                                     class="btn btn-green w-100 title-change-registration"
-                                                    onclick="sendWhatsAppMessage(this)" data-program="First Kids">Daftar
+                                                    onclick="sendWhatsAppMessage(this)"
+                                                    data-program="First Kids Regular">Daftar
                                                     Sekarang</a>
-                                                <a onclick="askAdminMessage(this)" data-program="First Kids"
+                                                <a onclick="askAdminMessage(this)" data-program="First Kids Regular"
                                                     class="btn btn-primary w-100 title-change-consultation">Tanya
                                                     Admin</a>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- <div class="col-lg-6">
-                          <div class="pricing-box bg-white rounded mt-4">
-                            <h5 class="fw-normal">First Private</h5>
-                            <h1 class="pricing-title mt-3 mb-0">IDR 2.579.000
-                              <span class="f-13"> <strike>IDR 5.000.000</strike></span>
-                            </h1>
-                            <p class="text-muted f-15 mt-3">Seperti First Class namun jumlah pertemuannya hanya 7x, materi
-                              hanya terfokus ke body language, tidak sampai kepada konten pembicaraan</p>
-                            <div class="mt-4 pt-1">
-                              <p class="mb-3 f-16">
-                                <i class='bx bxs-check-circle'></i>
-                                Waktu flexible
-                              </p>
-                              <p class="mb-3 f-16">
-                                <i class='bx bxs-check-circle'></i>
-                                <b>10x pertemuan:</b> hingga selesai
-                              </p>
-                              <p class="mb-3 f-16">
-                                <i class='bx bxs-check-circle'></i>
-                                Maksimal peserta <b>1-3 orang</b>
-                              </p>
-                              <p class="mb-3 f-16">
-                                <i class='bx bxs-check-circle'></i>
-                                Durasi kelas <b>120 menit</b>
-                              </p>
-                              <p class="mb-3 f-16">
-                                <i class='bx bxs-check-circle'></i>
-                                Dapat Certificate
-                              </p>
-                            </div>
-                            <div class="mt-4 pt-2 text-center">
-                              <a href="basic-class.html#contact" class="btn btn-primary w-100">Daftar Sekarang</a>
-                            </div>
-                          </div>
-                        </div> -->
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="Year" role="tabpanel" aria-labelledby="Yearly">
-                                <div class="row g-0 align-items-center">
                                     <div class="col-lg-6">
-                                        <div class="pricing-box active bg-white rounded mt-4">
-                                            <div class="pricing-badge">
-                                                <span class="badge">Smart Choice</span>
-                                            </div>
-
-                                            <h5 class="fw-normal">Master Plus</h5>
-                                            <h1 class="pricing-title mt-3 mb-0">IDR 2.759.000
-                                                <span class="f-13"> <strike>IDR 7.000.000</strike></span>
+                                        <div class="pricing-box bg-white rounded mt-4">
+                                            <h5 class="fw-normal">First Kids Private - Yogyakarta</h5>
+                                            <h1 class="pricing-title mt-3 mb-0">IDR 2.579.000
+                                                <span class="f-13"> <strike>IDR 5.000.000</strike></span>
                                             </h1>
-                                            <p class="text-muted f-15 mt-3">Merupakan gabungan dari program First Class
-                                                dan Master Class
-                                                dengan harga yang lebih hemat</p>
-                                            <hr class="mt-4">
+                                            <p class="text-muted f-15 mt-3">Seperti First Kids dengan jumlah 10x
+                                                pertemuan, materi hanya terfokus ke body language, tidak sampai kepada
+                                                konten pembicaraan
+                                            </p>
                                             <div class="mt-4 pt-1">
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
@@ -1209,19 +1174,23 @@
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    <b>20x pertemuan:</b> 4 Bulan
+                                                    Waktu flexible
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    Maksimal peserta <b>10 orang</b>
+                                                    <b>10x pertemuan:</b> hingga selesai
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    Durasi kelas <b>120 menit</b>
+                                                    Maksimal peserta <b>1-3 orang</b>
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    Dapat Certificate
+                                                    Durasi kelas <b>90 menit</b>
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
+                                                    Dapat eCertificate
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
@@ -1233,24 +1202,35 @@
                                                 </p>
                                             </div>
                                             <div class="mt-4 pt-2 text-center">
-                                                <a href="master-class.html#resume"
-                                                    class="btn btn-primary w-100">Pelajari Lebih Lanjut</a>
+                                                <a data-program="*First Kids Private Yogyakarta senilai 2.579K*."
+                                                    class="btn btn-green w-100 title-change-registration"
+                                                    onclick="sendWhatsAppMessage(this)"
+                                                    data-program="First Kids Private Yogyakarta">Daftar
+                                                    Sekarang</a>
+                                                <a onclick="askAdminMessage(this)"
+                                                    data-program="First Kids Private Yogyakarta"
+                                                    class="btn btn-primary w-100 title-change-consultation">Tanya
+                                                    Admin</a>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="surabayas" role="tabpanel" aria-labelledby="surabaya">
+                                <div class="row g-0 align-items-center">
+
 
                                     <div class="col-lg-6">
                                         <div class="pricing-box bg-white rounded mt-4">
-                                            <div class="pricing-badge">
-                                                <span class="badge">Level II</span>
-                                            </div>
-                                            <h5 class="fw-normal">Master Class</h5>
-                                            <h1 class="pricing-title mt-3 mb-0">IDR 1.975.000
-                                                <span class="f-13"> <strike>IDR 4.000.000</strike></span>
+                                            <h5 class="fw-normal">First Kids Private - Surabaya</h5>
+                                            <h1 class="pricing-title mt-3 mb-0">IDR 3.579.000
+                                                <span class="f-13"> <strike>IDR 6.000.000</strike></span>
                                             </h1>
-                                            <p class="text-muted f-15 mt-3">Berfokus untuk membentuk speech dan
-                                                menyampaikannya dengan tingkat
-                                                kualitas setara dengan keynote speaker</p>
+                                            <p class="text-muted f-15 mt-3">Seperti First Kids dengan jumlah 10x
+                                                pertemuan, materi hanya terfokus ke body language, tidak sampai kepada
+                                                konten pembicaraan
+                                            </p>
                                             <div class="mt-4 pt-1">
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
@@ -1258,19 +1238,23 @@
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    <b>10x pertemuan:</b> 2 Bulan
+                                                    Waktu flexible
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    Maksimal peserta <b>10 orang</b>
+                                                    <b>10x pertemuan:</b> hingga selesai
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    Durasi kelas <b>120 menit</b>
+                                                    Maksimal peserta <b>1-3 orang</b>
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
-                                                    Dapat Certificate
+                                                    Durasi kelas <b>90 menit</b>
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
+                                                    Dapat eCertificate
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
@@ -1282,8 +1266,15 @@
                                                 </p>
                                             </div>
                                             <div class="mt-4 pt-2 text-center">
-                                                <a href="master-class.html#resume"
-                                                    class="btn btn-primary w-100">Pelajari Lebih Lanjut</a>
+                                                <a data-program="*First Kids Private Surabaya senilai 3.579K*."
+                                                    class="btn btn-green w-100 title-change-registration"
+                                                    onclick="sendWhatsAppMessage(this)"
+                                                    data-program="First Kids Private Surabaya">Daftar
+                                                    Sekarang</a>
+                                                <a onclick="askAdminMessage(this)"
+                                                    data-program="First Kids Private Surabaya"
+                                                    class="btn btn-primary w-100 title-change-consultation">Tanya
+                                                    Admin</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1410,8 +1401,16 @@
                                     <select name="Program" id="programs" class="form-control" name="Location"
                                         id="locations" placeholder="Domisili*" required>
                                         <option value="" selected disabled value="">Program Yang Akan Diambil</option>
-                                        <optgroup label="Program">
-                                            <option value="a80d7b7d-b2b1-40a6-8527-88d4f923607b">First Kids </option>
+                                        <optgroup label="Kids Regular">
+                                            <option value="a80d7b7d-b2b1-40a6-8527-88d4f923607b">Kids Regular - Yogyakarta
+                                            </option>
+                                        </optgroup>
+                                        <optgroup label="Kids Private">
+                                            <option value="7945f652-23a8-456f-9a71-32da58cf4919">Kids Private- Yogyakarta
+                                            </option>
+                                            <option value="7945f652-23a8-456f-9a71-32da58cf4919">Kids Private- Surabaya
+                                            </option>
+                                            <!-- <option value="7945f652-23a8-456f-9a71-32da58cf4919">FP </option> -->
                                         </optgroup>
                                         <optgroup label="Konsultasi">
                                             <option>Asking Admin</option>
@@ -1430,6 +1429,7 @@
                                     <div class="sent-message">Your message has been sent. Thank you!</div>
 
                                     <button type="submit" class="send_contact">Send Whatsapp</button>
+                                    <!-- <button type="button" id="getClickupData" class="send_contact">GET ID</button> -->
 
                                 </div>
 
@@ -1450,8 +1450,11 @@
 
     <footer-modal></footer-modal>
 
-    <a href="#contact" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bx bxl-whatsapp bx-tada"></i></a>
+    <div class="sosmed-container mt-4">
+        <a href="https://wa.link/ei1dkf" target="__blank" type="button" class="btn-sosmed btn-trigger-sosmed">
+            <i class="bi bi-whatsapp bx-tada" id="icon-trigger"></i>
+        </a>
+    </div>>
 
     <!-- Part JS Files -->
     <script src="../assets/part/modals/modal-component.js"></script>

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Basic Class - Kursus Public Speaking Online | Dialogika</title>
+  <title>Basic Plus - Kursus Public Speaking Online | Dialogika</title>
   <meta
     content="Kursus Public Speaking Online selama SEBULAN mulai dari Basic Play ada GARANSI mengulang. Kelas ini hanya ada di Dialogika"
     name="description">
@@ -1175,9 +1175,10 @@
                       <div class="mt-4 pt-2 text-center">
                         <a data-program="*Basic Class senilai 499K*."
                           class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
-                          data-program="Basic Class">Daftar Sekarang</a>
+                          data-program="Basic Class" data-program-handler="malika">Daftar Sekarang</a>
                         <a onclick="askAdminMessage(this)" data-program="Basic Class"
-                          class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
+                          class="btn btn-primary w-100 title-change-consultation" data-program-handler="malika">Tanya
+                          Admin</a>
                       </div>
                     </div>
                   </div>
@@ -1238,9 +1239,9 @@
                       <div class="mt-4 pt-2 text-center">
                         <a data-program="*Basic Plus Private senilai 987K*."
                           class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
-                          data-program="Basic Plus Private">Daftar Sekarang</a>
+                          data-program="Basic Plus Private" data-program-handler="malika">Daftar Sekarang</a>
                         <a onclick="askAdminMessage(this)" data-program="Basic Plus Private"
-                          class="btn btn-primary w-100 title-change-consultation">Tanya
+                          class="btn btn-primary w-100 title-change-consultation" data-program-handler="malika">Tanya
                           Admin</a>
                       </div>
                     </div>
@@ -1248,7 +1249,6 @@
 
                 </div>
               </div>
-
 
               <div class="tab-pane custom-price-content fade" id="basic-plus-content" role="tabpanel">
                 <div class="row g-0 align-items-center">
@@ -1317,9 +1317,9 @@
                       <div class="mt-4 pt-2 text-center">
                         <a data-program="*Basic Plus senilai 599K*."
                           class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
-                          data-program="Basic Plus">Daftar Sekarang</a>
+                          data-program="Basic Plus" data-program-handler="malika">Daftar Sekarang</a>
                         <a onclick="askAdminMessage(this)" data-program="Basic Plus"
-                          class="btn btn-primary w-100 title-change-consultation">Tanya
+                          class="btn btn-primary w-100 title-change-consultation" data-program-handler="malika">Tanya
                           Admin</a>
                       </div>
                     </div>
@@ -1381,13 +1381,12 @@
                       </div>
                       <div class="mt-4 pt-2 text-center">
                         <a data-program="*Basic Plus Private senilai 987K*."
-                            class="btn btn-green w-100 title-change-registration"
-                            onclick="sendWhatsAppMessage(this)"
-                            data-program="Basic Plus Private">Daftar Sekarang</a>
+                          class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
+                          data-program="Basic Plus Private" data-program-handler="malika">Daftar Sekarang</a>
                         <a onclick="askAdminMessage(this)" data-program="Basic Plus Private"
-                            class="btn btn-primary w-100 title-change-consultation">Tanya
-                            Admin</a>
-                    </div>
+                          class="btn btn-primary w-100 title-change-consultation" data-program-handler="malika">Tanya
+                          Admin</a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1513,9 +1512,12 @@
                   <select name="Program" id="programs" class="form-control" required>
                     <option value="" selected disabled value="">Program Yang Akan Diambil</option>
                     <optgroup label="Choose Program">
-                      <option value="79fadca9-b5f2-4566-91d0-1b5aaa420cdf">Basic Class</option>
-                      <option value="ed0a3dcf-c582-4c6d-918e-98842d75be7c">Basic Plus</option>
-                      <option value="7a4ccb01-3ac3-497c-b7b3-e8ab6683e8c0">Basic Plus Private</option>
+                      <option value="79fadca9-b5f2-4566-91d0-1b5aaa420cdf" data-program-handler="malika">Basic Class
+                      </option>
+                      <option value="ed0a3dcf-c582-4c6d-918e-98842d75be7c" data-program-handler="malika">Basic Plus
+                      </option>
+                      <option value="7a4ccb01-3ac3-497c-b7b3-e8ab6683e8c0" data-program-handler="malika">Basic Plus
+                        Private</option>
                     </optgroup>
                     <optgroup label="Konsultasi">
                       <option id="ask-adm">Asking Admin</option>
@@ -1554,8 +1556,11 @@
 
   <footer-modal></footer-modal>
 
-  <a href="#contact" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bx bxl-whatsapp bx-tada"></i></a>
+  <div class="sosmed-container mt-4">
+    <a href="https://wa.link/wp7890" target="__blank" type="button" class="btn-sosmed btn-trigger-sosmed">
+      <i class="bi bi-whatsapp bx-tada" id="icon-trigger"></i>
+    </a>
+  </div>>
 
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>

@@ -1046,9 +1046,15 @@
 
                                             </div>
                                             <div class="mt-4 pt-2 text-center">
-                                                <a target="__blank" href="#contact" class="btn btn-green w-100"> Daftar
+                                                <a data-program="*Kids Plus senilai 589K*."
+                                                    class="btn btn-green w-100 title-change-registration"
+                                                    onclick="sendWhatsAppMessage(this)" data-program="Kids Plus"
+                                                    data-program-handler="malika">Daftar
                                                     Sekarang</a>
-                                                <a href="#contact" class="btn btn-primary w-100">Tanya Admin</a>
+                                                <a onclick="askAdminMessage(this)" data-program="Kids Plus"
+                                                    class="btn btn-primary w-100 title-change-consultation"
+                                                    data-program-handler="malika">Tanya
+                                                    Admin</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1101,11 +1107,14 @@
                                                 </p>
                                             </div>
                                             <div class="mt-4 pt-2 text-center">
-                                                <a href="#contact"
-                                                    class="btn btn-green w-100 title-change-registration">Daftar
+                                                <a data-program="*Kids Plus Private senilai 987K*."
+                                                    class="btn btn-green w-100 title-change-registration"
+                                                    onclick="sendWhatsAppMessage(this)" data-program="Kids Plus Private"
+                                                    data-program-handler="malika">Daftar
                                                     Sekarang</a>
-                                                <a href="#contact"
-                                                    class="btn btn-primary w-100 title-change-consultation">Tanya
+                                                <a onclick="askAdminMessage(this)" data-program="Kids Plus Private"
+                                                    class="btn btn-primary w-100 title-change-consultation"
+                                                    data-program-handler="malika">Tanya
                                                     Admin</a>
                                             </div>
                                         </div>
@@ -1191,6 +1200,7 @@
                                         <i class="bi bi-telephone"></i>
                                         <h3>Call Us</h3>
                                         <p>+62 851 6299 2597</p>
+                                        <p>+62 857 8000 7799</p>
                                     </div>
                                 </div><!-- End Info Item -->
 
@@ -1199,6 +1209,7 @@
                                         <div class="float-right"><i class="bi bi-envelope"></i></div>
                                         <h3>Email Us</h3>
                                         <p>hello@dialogika.co</p>
+                                        <p><br /></p>
                                     </div>
                                 </div><!-- End Info Item -->
 
@@ -1233,8 +1244,10 @@
                                         id="locations" placeholder="Domisili*" required>
                                         <option value="" selected disabled value="">Program Yang Akan Diambil</option>
                                         <optgroup label="Program">
-                                            <option value="c48b0259-c106-4c24-a25d-3b24ebfca4d7">Kids Plus</option>
-                                            <option value="8f2a4d48-195a-4e18-88a4-880871d30ccf">Kids Private</option>
+                                            <option value="c48b0259-c106-4c24-a25d-3b24ebfca4d7"
+                                                data-program-handler="malika">Kids Plus</option>
+                                            <option value="8f2a4d48-195a-4e18-88a4-880871d30ccf"
+                                                data-program-handler="malika">Kids Private</option>
                                         </optgroup>
                                         <optgroup label="Konsultasi">
                                             <option>Asking Admin</option>
@@ -1277,8 +1290,11 @@
 
     <footer-modal></footer-modal>
 
-    <a href="#contact" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bx bxl-whatsapp bx-tada"></i></a>
+    <div class="sosmed-container mt-4">
+        <a href="https://wa.link/lzq4jx" target="__blank" type="button" class="btn-sosmed btn-trigger-sosmed">
+            <i class="bi bi-whatsapp bx-tada" id="icon-trigger"></i>
+        </a>
+    </div>>
 
     <!-- Part JS Files -->
     <script src="../assets/part/modals/modal-component.js"></script>

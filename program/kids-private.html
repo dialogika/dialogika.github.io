@@ -1191,7 +1191,8 @@
                                         id="locations" placeholder="Domisili*" required>
                                         <option value="" selected disabled value="">Program Yang Akan Diambil</option>
                                         <optgroup label="Program">
-                                            <option value="8f2a4d48-195a-4e18-88a4-880871d30ccf">Kids Private</option>
+                                            <option value="8f2a4d48-195a-4e18-88a4-880871d30ccf"
+                                                data-program-handler="malika">Kids Private</option>
                                         </optgroup>
                                         <optgroup label="Konsultasi">
                                             <option>Asking Admin</option>
@@ -1230,8 +1231,11 @@
 
     <footer-modal></footer-modal>
 
-    <a href="#contact" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bx bxl-whatsapp bx-tada"></i></a>
+    <div class="sosmed-container mt-4">
+        <a href="https://wa.link/lzq4jx" target="__blank" type="button" class="btn-sosmed btn-trigger-sosmed">
+            <i class="bi bi-whatsapp bx-tada" id="icon-trigger"></i>
+        </a>
+    </div>>
 
     <!-- Part JS Files -->
     <script src="../assets/part/modals/modal-component.js"></script>
