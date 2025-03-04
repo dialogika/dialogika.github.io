@@ -32,14 +32,12 @@ const apiToken = "pk_276677813_5LZTC2L1TYHRVBRRRK5BKXBZDVUU2X7E";
 const handleNewTask = async (event) => {
   event.preventDefault();
 
-  // Cek iti (International Telephone Input) ada dan return nomor valid
+  // Cek iti (International Telephone Input) atau ada input dengan id "whatsapp-number"
   let whatsapp;
   try {
     whatsapp = iti.getNumber();
   } catch (e) {
-    console.error("Error getting WhatsApp number from iti:", e);
-    alert("Error nomor tidak valid.");
-    return;
+    whatsapp = document.getElementById("whatsapps").value;
   }
 
   const taskName = document.getElementById("names")?.value;
