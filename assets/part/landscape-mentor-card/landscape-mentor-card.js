@@ -117,15 +117,15 @@ const mentorData = [
   },
   {
     id: 10,
-    mentorName: "Ricardo Yacob",
+    mentorName: "Ricardo Jacob",
     arrayClassType: ["Offline"],
     teaching: ["Adult", "Presentation", "Interview", "Company"],
     gender: "Male",
     location: ["Tangsel"],
     role: "Presentation, Interview, Public Speaker",
-    imgPath: "../assets/img/mentor/Bang-Yacob.webp",
+    imgPath: "../assets/img/mentor/bang-jacob.webp",
     description: "Seorang Digital Learning Special dengan 5 tahun pemgalaman dan lebih dari 10 tahun menjadi MC",
-    profileLink: "https://www.dialogika.co/mentor/bang-yacob.html",
+    profileLink: "https://www.dialogika.co/mentor/bang-jacob.html",
   },
   {
     id: 11,
