@@ -117,7 +117,7 @@ const mentorData = [
   },
   {
     id: 10,
-    mentorName: "Ricardo Jacob",
+    mentorName: "Bang Jacob",
     arrayClassType: ["Offline"],
     teaching: ["Adult", "Presentation", "Interview", "Company"],
     gender: "Male",
