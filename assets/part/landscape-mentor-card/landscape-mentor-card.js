@@ -1,3 +1,5 @@
+// SCRIPT INI DIGUNAKAN DI PAGE-PAGE PROGRAM DI SECTION MENTOR PUBLIC SPEAKER DI ATAS PRICING
+
 // (Lihat di https://app.clickup.com/2307700/v/li/20433983, untuk detailnya)
 // Untuk role contohnya teacher, voice over, Master of Ceremony, dll
 
