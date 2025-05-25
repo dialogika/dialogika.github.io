@@ -1,3 +1,5 @@
+// SCRIPT INI DIGUNAKAN DI PAGE-PAGE PROGRAM DI SECTION MENTOR PUBLIC SPEAKER DI ATAS PRICING
+
 // (Lihat di https://app.clickup.com/2307700/v/li/20433983, untuk detailnya)
 // Untuk role contohnya teacher, voice over, Master of Ceremony, dll
 
@@ -117,16 +119,15 @@ const mentorData = [
   },
   {
     id: 10,
-    mentorName: "Ricardo Yacob",
-    arrayClassType: ["Online", "Offline"],
+    mentorName: "Bang Jacob",
+    arrayClassType: ["Offline"],
     teaching: ["Adult", "Presentation", "Interview", "Company"],
     gender: "Male",
-    location: ["Tangsel", "Online"],
+    location: ["Tangsel"],
     role: "Presentation, Interview, Public Speaker",
-    imgPath: "../assets/img/mentor/Ricardo-Yacob.webp",
-    description:
-      "Memiliki banyak pengalaman sebagai pembawa acara dan presenter. Dapat memberikan pelatihan online dan offline yang berdampak",
-    profileLink: "https://www.dialogika.co/mentor/ricardo-yacob.html",
+    imgPath: "../assets/img/mentor/bang-jacob.webp",
+    description: "Seorang Digital Learning Special dengan 5 tahun pemgalaman dan lebih dari 10 tahun menjadi MC",
+    profileLink: "https://www.dialogika.co/mentor/bang-jacob.html",
   },
   {
     id: 11,
@@ -137,8 +138,7 @@ const mentorData = [
     location: ["Tangsel", "Online"],
     role: "Coaching, Mentoring, Public Speaker",
     imgPath: "../assets/img/mentor/ghassani-salsabila.webp",
-    description:
-      "Telah menangani ratusan sesi mentoring dan coaching sejak 2021.",
+    description: "Telah menangani ratusan sesi mentoring dan coaching sejak 2021.",
     profileLink: "https://www.dialogika.co/mentor/ghassani-salsabila.html",
   },
   // { Datanya Belum Lengkap

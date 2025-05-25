@@ -278,7 +278,7 @@
             <div class="video-box">
               <img style="margin-bottom:10px;"
                 src="https://img.freepik.com/premium-photo/college-education-concept-teenage-girl-wear-headphone-watch-video-tutorial-tutor-laptop_1423-6946.jpg"
-                class="img-fluid rounded" alt="Praktek Public Speaking " loading="lazy">
+                class="img-fluid rounded" alt="Praktek Public Speaking" loading="lazy">
               <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox play-btn mb-4"></a>
             </div>
 
@@ -302,13 +302,8 @@
             </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
-              <h5>Reminder Kelas</h5>
+              <h5>eBook & eModule</h5>
               <p>Dapat <i class='bx bxs-check-circle' style="color:#009961"></i></p>
-            </div>
-
-            <div class="course-info d-flex justify-content-between align-items-center">
-              <h5>Materi Pembelajaran</h5>
-              <p>Tidak Dapat <i class='bx bx-x-circle' style="color: #e7181a;"></i></p>
             </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">
@@ -675,6 +670,10 @@
                         </p>
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle'></i>
+                          Dapat eBook & eModule
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
                           Waktu <b>Setiap Minggu 15:30 WIB</b>
                         </p>
                         <p class="mb-3 f-16">
@@ -686,8 +685,8 @@
                       <div class="mt-4 pt-2 text-center">
                         <a data-program="*Basic Play senilai 257K*."
                           class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
-                          data-program="Basic Play" data-program-handler="malika">Daftar Sekarang</a>
-                        <a onclick="askAdminMessage(this)" data-program="Basic Play" data-program-handler="malika"
+                          data-program="Basic Play">Daftar Sekarang</a>
+                        <a onclick="askAdminMessage(this)" data-program="Basic Play"
                           class="btn btn-primary w-100 title-change-consultation">Tanya
                           Admin</a>
                       </div>
@@ -721,6 +720,10 @@
                         </p>
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle'></i>
+                          Dapat eBook & eModule
+                        </p>
+                        <p class="mb-3 f-16">
+                          <i class='bx bxs-check-circle'></i>
                           Waktu <b>Setiap Minggu 15:30 WIB</b>
                         </p>
                         <p class="mb-3 f-16">
@@ -731,9 +734,9 @@
                       <div class="mt-4 pt-2 text-center">
                         <a data-program="*Basic Play 3 Bulan senilai 549K*."
                           class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
-                          data-program="Basic Play 3 Bulan" data-program-handler="malika">Daftar Sekarang</a>
+                          data-program="Basic Play 3 Bulan">Daftar Sekarang</a>
                         <a onclick="askAdminMessage(this)" data-program="Basic Play 3 Bulan"
-                          data-program-handler="malika" class="btn btn-primary w-100 title-change-consultation">Tanya
+                          class="btn btn-primary w-100 title-change-consultation">Tanya
                           Admin</a>
                       </div>
                     </div>
@@ -862,9 +865,9 @@
                   <select name="Program" id="programs" class="form-control" required>
                     <option value="" selected disabled value="">Program Yang Akan Diambil</option>
                     <optgroup label="Basic Play">
-                      <option data-program-handler="malika" value="d990d420-14ad-439e-85a1-bdafa5ae0e05">1 Bulan
+                      <option value="d990d420-14ad-439e-85a1-bdafa5ae0e05">1 Bulan
                       </option>
-                      <option data-program-handler="malika" value="008eaa2c-f8d9-4da4-b9d5-91e7828d2cfd">3 Bulan
+                      <option value="008eaa2c-f8d9-4da4-b9d5-91e7828d2cfd">3 Bulan
                       </option>
                     </optgroup>
                     <optgroup label="Konsultasi">
@@ -909,8 +912,11 @@
 
   <footer-modal></footer-modal>
 
-  <a href="#contact" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bx bxl-whatsapp bx-tada"></i></a>
+  <div class="sosmed-container mt-4">
+    <a href="https://wa.link/wp7890" target="__blank" type="button" class="btn-sosmed btn-trigger-sosmed">
+      <i class="bi bi-whatsapp bx-tada" id="icon-trigger"></i>
+    </a>
+  </div>>
 
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -932,7 +938,6 @@
   <script src="../assets/js/headerfooter.js"></script>
   <script src="../assets/js/timestamp.js"></script>
   <script src="../assets/js/textchange.js"></script>
-  <!-- <script src="../assets/js/clickup.js"></script> -->
   <script src="../assets/js/clickup-task.js"></script>
   <script src="../assets/js/whatsapp.js"></script>
   <script src="../assets/js/main.js"></script>

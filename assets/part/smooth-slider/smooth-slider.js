@@ -1,3 +1,5 @@
+// Script ini digunakan di home page dialogika (https://www.dialogika.co/) di section OUR PARTNER
+
 document.addEventListener("DOMContentLoaded", function () {
     var MySwiperR = new Swiper(".smooth-swiper-container-top", {
       direction: "horizontal",

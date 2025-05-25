@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isContentActive = content.getAttribute("id") === target;
         content.classList.toggle("show", isContentActive);
         content.classList.toggle("active", isContentActive);
+        content.classList.toggle("d-none", !isContentActive);
       });
     });
   });

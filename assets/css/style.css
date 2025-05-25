@@ -133,7 +133,6 @@ h6 {
   background-color: #009961;
 }
 
-
 .sosmed-container .btn-wa i,
 .sosmed-container .btn-trigger-sosmed i {
   font-size: x-large;
@@ -149,38 +148,36 @@ h6 {
 
 .btn-wa-active {
   bottom: 6rem !important;
-  
 }
 
 .btn-x-active {
   bottom: 10rem !important;
 }
 
-.btn-sosmed.btn-x{
-  background: linear-gradient(to bottom, #28282B 5%, #000 100%);
-  
+.btn-sosmed.btn-x {
+  background: linear-gradient(to bottom, #28282b 5%, #000 100%);
 }
 
 .btn-linkedin-active {
   bottom: 14rem !important;
 }
 
-.btn-sosmed.btn-linkedin{
-  background: linear-gradient(to bottom, #0E76A8 5%, #1B4F8F 100%);
+.btn-sosmed.btn-linkedin {
+  background: linear-gradient(to bottom, #0e76a8 5%, #1b4f8f 100%);
 }
 
 .btn-ig-active {
   bottom: 18rem !important;
 }
-.btn-sosmed.btn-ig{
-  background: linear-gradient(to bottom, #8134AF 20%, #DD2A7B 100%);
+.btn-sosmed.btn-ig {
+  background: linear-gradient(to bottom, #8134af 20%, #dd2a7b 100%);
 }
 
 .btn-tiktok-active {
   bottom: 22rem !important;
 }
-.btn-sosmed.btn-tiktok{
-  background: linear-gradient(to bottom, #010101 5%, #28282B 100%);
+.btn-sosmed.btn-tiktok {
+  background: linear-gradient(to bottom, #010101 5%, #28282b 100%);
 }
 /* SOSMED END */
 
@@ -2063,12 +2060,6 @@ section {
   background: var(--tp-common-white);
   border-radius: 50px;
 }
-
-@media (max-width: 767px) {
-  .faq .video-bg {
-  }
-}
-
 .faq .videos-faq .swiper-slide {
   border-radius: 10px;
 }
@@ -2348,7 +2339,7 @@ section {
   /*  background: #0a0a0a;*/
   /*  background: #011548;*/
   background: #0b2b6a;
-  margin-bottom : -30px;
+  margin-bottom: -30px;
 }
 
 #footer .footer-top {
@@ -2634,10 +2625,8 @@ section {
   color: black;
   display: inline-block;
   background: linear-gradient(to top, #f1ac15 22%, #fcf221 100%);
-  box-shadow: 0 4px 10px rgba(241, 172, 21, 0.4),
-    0 6px 20px rgba(252, 242, 33, 0.3);
-  -webkit-box-shadow: 0 4px 10px rgba(241, 172, 21, 0.4),
-  0 6px 20px rgba(252, 242, 33, 0.3);
+  box-shadow: 0 4px 10px rgba(241, 172, 21, 0.4), 0 6px 20px rgba(252, 242, 33, 0.3);
+  -webkit-box-shadow: 0 4px 10px rgba(241, 172, 21, 0.4), 0 6px 20px rgba(252, 242, 33, 0.3);
   white-space: nowrap;
   border-radius: 50px;
   -webkit-border-radius: 50px;

@@ -58,6 +58,7 @@
     <link href="../assets/part/read-more/read-more_less.css" rel="stylesheet">
     <link href="../assets/part/modals/modal.css" rel="stylesheet">
     <script src="../assets/part/modals/modal-component.js"></script>
+    <script src="../assets/part/pricing/pricing.css"></script>
 
     <!-- Template Main CSS File -->
     <link href="../assets/css/style.css" rel="stylesheet">
@@ -318,7 +319,10 @@
                             <h5>Garansi Mengulang</h5>
                             <p>Dapat <i class='bx bxs-check-circle' style="color:#009961"></i></p>
                         </div>
-
+                        <div class="course-info d-flex justify-content-between align-items-center">
+                            <h5>Bayar DP dan Mencicil</h5>
+                            <p>Bisa <i class="bx bxs-check-circle" style="color:#009961"></i></p>
+                        </div>
                         <div class="course-info d-flex justify-content-between align-items-center">
                             <h5>Video Progress</h5>
                             <p>Dapat <i class='bx bxs-check-circle' style="color:#009961"></i></p>
@@ -327,25 +331,20 @@
                         <div class="course-info d-flex justify-content-between align-items-center">
                             <h5>eCertificate</h5>
                             <p>Dapat <i class='bx bxs-check-circle' style="color:#009961"></i></p>
-                        </div>
-
-                        <div class="course-info d-flex justify-content-between align-items-center">
-                            <h5>Reminder Kelas</h5>
-                            <p>Dapat <i class='bx bxs-check-circle' style="color:#009961"></i></p>
-                        </div>
+                        </div> 
 
                         <div class="course-info d-flex justify-content-between align-items-center">
                             <h5>Materi Pembelajaran</h5>
                             <p>Dapat <i class='bx bxs-check-circle' style="color:#009961"></i></p>
                         </div>
 
-                        <div class="course-info d-flex justify-content-between align-items-center">
-                            <h5>Gratis webinar setiap bulan </h5>
+                       <div class="course-info d-flex justify-content-between align-items-center">
+                            <h5 class="text-wrap w-50">Gratis Materi setiap minggu </h5>
                             <p>Dapat <i class='bx bxs-check-circle' style="color:#009961"></i></p>
                         </div>
 
                         <div class="course-info d-flex justify-content-between align-items-center">
-                            <h5>Gratis Materi setiap minggu </h5>
+                            <h5 class="text-wrap w-50">Gratis Webinar setiap bulan </h5>
                             <p>Dapat <i class='bx bxs-check-circle' style="color:#009961"></i></p>
                         </div>
 
@@ -1108,7 +1107,7 @@
         </section><!-- End Doctors Section -->
 
         <!-- ======= Pricing Section ======= -->
-        <section class="section bg-light pricing" id="pricing">
+        <section class="section bg-light pricing custom-pricing" id="pricing">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-4">
@@ -1122,7 +1121,29 @@
                                 beberapa kota
                                 diharuskan untuk berbicara secara professional dihadapan orang-orang penting.</p>
 
-                            <div class="pricing-tabs mt-4 mb-4 mb-xl-0">
+                                <!-- Untuk script ganti pricing box berada di part/pricing/switch-price.js -->
+                            <div class="pricing-tabs my-4 mb-xl-0 custom-pricing">
+                                <ul class="nav nav-pills rounded justify-content-center d-inline-block my-1 flex-nowrap flex gap-2"
+                                    id="pills-tab" role="tablist">
+                                    <li class="nav-item d-inline-block">
+                                        <button type="button" class="nav-link px-3 rounded custom-price-button active"
+                                            role="tab" id="custom-price-button" data-target="first-class-jogja-content">
+                                            Yogyakarta atau Solo
+                                            <!-- <span class="badge bg-success rounded text-white">50% Off</span> -->
+                                        </button>
+                                    </li>
+                                    <li class="nav-item d-inline-block">
+                                        <button type="button" class="nav-link px-3 rounded custom-price-button"
+                                            id="action-class" role="tab" id="custom-price-button"
+                                            data-target="first-class-tangsel-content">
+                                            Tangsel atau Surabaya
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <!-- <div class="pricing-tabs mt-4 mb-4 mb-xl-0">
                                 <ul class="nav nav-pills rounded justify-content-center d-inline-block pricing-tab-border py-1 px-2"
                                     id="pills-tab" role="tablist">
                                     <li class="nav-item d-inline-block ">
@@ -1139,14 +1160,15 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
 
                     <div class="col-lg-7 g-0 offset-lg-1">
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade active show" id="jogjas" role="tabpanel" aria-labelledby="jogja">
+                            <!-- First Class : Jogja atau Solo -->
+                            <div class="tab-pane custom-price-content fade active show" id="first-class-jogja-content" role="tabpanel">
                                 <div class="row g-0 align-items-center">
                                     <div class="col-lg-6">
                                         <div class="pricing-box active bg-white rounded mt-4">
@@ -1189,6 +1211,10 @@
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
+                                                    Bisa <b>DP dan Dicicil</b>
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
                                                     Gratis <b>webinar</b> setiap bulan
                                                 </p>
                                                 <p class="mb-3 f-16">
@@ -1200,11 +1226,9 @@
                                                 <a data-program="*First Class : Jogja atau Solo senilai 1.579K*."
                                                     class="btn btn-green w-100 title-change-registration"
                                                     onclick="sendWhatsAppMessage(this)"
-                                                    data-program="First Class : Jogja atau Solo"
-                                                    data-program-handler="malika">Daftar Sekarang</a>
+                                                    data-program="First Class : Jogja atau Solo">Daftar Sekarang</a>
                                                 <a onclick="askAdminMessage(this)"
                                                     data-program="First Class : Jogja atau Solo"
-                                                    data-program-handler="malika"
                                                     class="btn btn-primary w-100 title-change-consultation">Tanya
                                                     Admin</a>
                                             </div>
@@ -1222,6 +1246,10 @@
                                                 hanya terfokus ke body language, tidak sampai kepada konten pembicaraan
                                             </p>
                                             <div class="mt-4 pt-1">
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
+                                                    Garansi mengulang kelas
+                                                </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
                                                     Waktu flexible
@@ -1244,6 +1272,10 @@
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
+                                                    Bisa <b>DP dan Dicicil</b>
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
                                                     Gratis <b>webinar</b> setiap bulan
                                                 </p>
                                                 <p class="mb-3 f-16">
@@ -1255,11 +1287,9 @@
                                                 <a data-program="*First Private Jogja atau Solo senilai 2.579K*."
                                                     class="btn btn-green w-100 title-change-registration"
                                                     onclick="sendWhatsAppMessage(this)"
-                                                    data-program="First Private Jogja atau Solo"
-                                                    data-program-handler="malika">Daftar Sekarang</a>
+                                                    data-program="First Private Jogja atau Solo">Daftar Sekarang</a>
                                                 <a onclick="askAdminMessage(this)"
                                                     data-program="First Private Jogja atau Solo"
-                                                    data-program-handler="malika"
                                                     class="btn btn-primary w-100 title-change-consultation">Tanya
                                                     Admin</a>
                                             </div>
@@ -1268,7 +1298,8 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="tangsels" role="tabpanel" aria-labelledby="tangsel">
+                            <!-- First Class : Tangsel atau Surabaya -->
+                            <div class="tab-pane custom-price-content fade" id="first-class-tangsel-content" role="tabpanel" aria-labelledby="tangsel">
                                 <div class="row g-0 align-items-center">
                                     <div class="col-lg-6">
                                         <div class="pricing-box active bg-white rounded mt-4">
@@ -1311,6 +1342,10 @@
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
+                                                    Bisa <b>DP dan Dicicil</b>
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
                                                     Gratis <b>webinar</b> setiap bulan
                                                 </p>
                                                 <p class="mb-3 f-16">
@@ -1344,6 +1379,10 @@
                                             <div class="mt-4 pt-1">
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
+                                                    Garansi mengulang kelas
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
                                                     Waktu flexible
                                                 </p>
                                                 <p class="mb-3 f-16">
@@ -1361,6 +1400,10 @@
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
                                                     Dapat Certificate
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
+                                                    Bisa <b>DP dan Dicicil</b>
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
@@ -1387,7 +1430,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="surabayas" role="tabpanel" aria-labelledby="surabaya">
+                            <div class="tab-pane custom-price-content fade" id="surabayas" role="tabpanel" aria-labelledby="surabaya">
                                 <div class="row g-0 align-items-center">
                                     <div class="col-lg-6">
                                         <div class="pricing-box active bg-white rounded mt-4">
@@ -1430,6 +1473,10 @@
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
+                                                    Bisa <b>DP dan Dicicil</b>
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
                                                     Gratis <b>webinar</b> setiap bulan
                                                 </p>
                                                 <p class="mb-3 f-16">
@@ -1462,6 +1509,10 @@
                                             <div class="mt-4 pt-1">
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
+                                                    Garansi mengulang kelas
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
                                                     Waktu flexible
                                                 </p>
                                                 <p class="mb-3 f-16">
@@ -1479,6 +1530,10 @@
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
                                                     Dapat Certificate
+                                                </p>
+                                                <p class="mb-3 f-16">
+                                                    <i class='bx bxs-check-circle'></i>
+                                                    Bisa <b>DP dan Dicicil</b>
                                                 </p>
                                                 <p class="mb-3 f-16">
                                                     <i class='bx bxs-check-circle'></i>
@@ -1625,15 +1680,13 @@
                                         id="locations" placeholder="Domisili*" required>
                                         <option value="" selected disabled value="">Program Yang Akan Diambil</option>
                                         <optgroup label="First Class">
-                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16"
-                                                data-program-handler="malika">FC Yogyakarta </option>
+                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Yogyakarta </option>
                                             <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Tangerang </option>
                                             <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Surabaya </option>
                                             <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Solo </option>
                                         </optgroup>
                                         <optgroup label="First Private">
-                                            <option value="7b444128-987a-4888-b6a8-fdcb3122dd95"
-                                                data-program-handler="malika">FP Yogyakarta </option>
+                                            <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Yogyakarta </option>
                                             <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Tangerang </option>
                                             <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Surabaya </option>
                                         </optgroup>
@@ -1674,8 +1727,11 @@
 
     <footer-modal></footer-modal>
 
-    <a href="#contact" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bx bxl-whatsapp bx-tada"></i></a>
+    <div class="sosmed-container mt-4">
+        <a href="https://wa.link/3qjjj8" target="__blank" type="button" class="btn-sosmed btn-trigger-sosmed">
+            <i class="bi bi-whatsapp bx-tada" id="icon-trigger"></i>
+        </a>
+    </div>>
 
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -1690,6 +1746,7 @@
     <script src="../assets/part/modals/modal-component.js"></script>
     <script src="../assets/part/landscape-mentor-card/landscape-mentor-card.js"></script>
     <script src="../assets/part/read-more/read-more_less.js"></script>
+    <script src="../assets/part/pricing/switch-price.js"></script>
 
     <!-- CDN -->
 
@@ -1697,7 +1754,6 @@
     <!-- Template Main JS File -->
     <script src="../assets/js/headerfooter.js"></script>
     <script src="../assets/js/timestamp.js"></script>
-    <!-- <script src="../assets/js/clickup.js"></script> -->
     <script src="../assets/js/clickup-task.js"></script>
     <script src="../assets/js/whatsapp.js"></script>
     <script src="../assets/js/textchange.js"></script>

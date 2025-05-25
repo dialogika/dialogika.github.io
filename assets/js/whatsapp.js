@@ -3,11 +3,10 @@ const whatsappMalika = "6285780007799";
 
 $(document).on("click", ".send_contact", function () {
   var input_blanter = document.getElementById("names");
-  // tambahkan data-program-handler="malika" di input select option bila ingin diarahkan ke malika
-  // Contoh <option data-program-handler="malika" value="id-program">1 Bulan
+  // tambahkan data-program-handler="malika" di input select option bila ingin whatsappnya diarahkan ke malika
+  // Contoh <option data-program-handler="malika" value="id-program">1 Bulan</option>
   const checkHandler = $("#programs :selected").attr("data-program-handler");
 
-  
   var walink = "https://web.whatsapp.com/send",
     // Melakukan cek apakah option yang dipilih memiliki attribute "data-program-handler" dengan value "malika"
     // Bila ada attribute "data-program-handler" dengan value "malika", akan kirim pesan ke whatsappMalika
@@ -64,7 +63,7 @@ $(document).on("click", ".send_contact", function () {
   }
 });
 
-// Function sendWhatsAppMessage digunakan saat user click DAFTAR SEKARANG di pricing
+// Function sendWhatsAppMessage digunakan saat user click tombol DAFTAR SEKARANG di pricing
 function sendWhatsAppMessage(button) {
   const checkHandler = button.getAttribute("data-program-handler");
   // WhatsApp Settings
@@ -90,7 +89,7 @@ function sendWhatsAppMessage(button) {
   window.open(blanter_whatsapp, "_blank");
 }
 
-// Function askAdminMessage digunakan saat user click TANYA ADMIN di pricing
+// Function askAdminMessage digunakan saat user click tombol TANYA ADMIN di pricing
 function askAdminMessage(button) {
   const checkHandler = button.getAttribute("data-program-handler");
   // WhatsApp Settings
