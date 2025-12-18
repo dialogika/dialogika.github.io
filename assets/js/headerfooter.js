@@ -260,13 +260,13 @@ class Footer extends HTMLElement {
             <br><br>
             <h4 class="d-flex justify-content-between">Follow Us<i class='bx bx-chevron-down d-md-none'></i></h4>
             <div class="social-link d-flex mt-3">
-              <a href="https://link.dialogika.co/twitter" class="d-flex align-items-center justify-content-center"><i
+              <a href="https://x.com/dialogika_co" class="d-flex align-items-center justify-content-center"><i
                   class="bi bi-twitter"></i></a>
-              <a href="https://link.dialogika.co/facebook" class="d-flex align-items-center justify-content-center"><i
+              <a href="https://www.facebook.com/dialogika.co" class="d-flex align-items-center justify-content-center"><i
                   class="bi bi-facebook"></i></a>
-              <a href="https://link.dialogika.co/instagram" class="d-flex align-items-center justify-content-center"><i
+              <a href="https://instagram.com/dialogika.co" class="d-flex align-items-center justify-content-center"><i
                   class="bi bi-instagram"></i></a>
-              <a href="https://link.dialogika.co/linkedin" class="d-flex align-items-center justify-content-center"><i
+              <a href="https://www.linkedin.com/company/dialogika" class="d-flex align-items-center justify-content-center"><i
                   class="bi bi-linkedin"></i></a>
             </div>
           </div>
@@ -452,12 +452,12 @@ class Footer extends HTMLElement {
                 <b>Telah Terdaftar Oleh</b><br>
                 <img loading="lazy" src="../assets/img/ham.webp" class="" /><br>
                 <strong>Nomor:</strong> AHU-0118640.AH.01.11.TAHUN 2022<br>
-                <strong>Registrasi: </strong>4022062334106037<br />
+                <strong>Registrasi: </strong>4022062334106037<br />k
               </li>
             </ul>
           </div>
 
-        </div>
+        </div>k
       </div>
     </div>
 
@@ -471,10 +471,9 @@ class Footer extends HTMLElement {
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
         <a href="https://x.com/dialogika_co" class="twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter"></i></a>
-        <a href="https://web.facebook.com/dialogika.co" class="facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.facebook.com/dialogika.co" class="facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
         <a href="https://instagram.com/dialogika.co" class="instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
-        <a href="https://wa.link/emi1qx" class="google-plus" target="_blank" rel="noopener noreferrer"><i
-            class="bx bxl-whatsapp"></i></a>
+        <a href="https://wa.link/emi1qx" class="google-plus" target="_blank" rel="noopener noreferrer"><i class="bx bxl-whatsapp"></i></a>
         <a href="https://linkedin.com/company/dialogika" class="linkedin" target="_blank" rel="noopener noreferrer"><i class="bx bxl-linkedin"></i></i></a>
       </div>
     </div>
