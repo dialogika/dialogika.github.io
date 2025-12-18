@@ -452,12 +452,12 @@ class Footer extends HTMLElement {
                 <b>Telah Terdaftar Oleh</b><br>
                 <img loading="lazy" src="../assets/img/ham.webp" class="" /><br>
                 <strong>Nomor:</strong> AHU-0118640.AH.01.11.TAHUN 2022<br>
-                <strong>Registrasi: </strong>4022062334106037<br />k
+                <strong>Registrasi: </strong>4022062334106037<br />
               </li>
             </ul>
           </div>
 
-        </div>k
+        </div>
       </div>
     </div>
 
