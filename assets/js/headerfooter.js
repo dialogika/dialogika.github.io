@@ -60,7 +60,7 @@ class Header extends HTMLElement {
                     <li><a href="../program/index-jogja.html">Yogyakarta</a></li>
                     <li><a href="../program/index-tangsel.html">Bintaro</a></li>
                     <li><a href="../program/index-solo.html">Solo</a></li>
-                    <li><a href="../program/index-banjarbaru.html">Banjarbaru</a></li>
+                    <li><a href="../program/index-banjarbaru.html">Pontianak</a></li>
                     <li><a href="../program/index-surabaya.html">
                       <span>Surabaya</span></a>
                     </li>
