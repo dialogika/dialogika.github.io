@@ -244,7 +244,7 @@ class Footer extends HTMLElement {
               perilaku, penampilan hingga sikap Anda terbentuk.</p><br>
             <h4 class="d-flex justify-content-between">Contact Us<i class='bx bx-chevron-down d-md-none'></i></h4>
             <div class="social-link d-flex mt-3">
-              <a href="https://wa.link/emi1qx"
+              <a href="https://https://wa.me/6285162992597"
                 class="text-light d-flex align-items-center justify-content-center"><i class="bx bxl-whatsapp"></i></a>
               <a href="mailto:hello@dialogika.co" class="d-flex align-items-center justify-content-center"><i
                   class="bi bi-envelope-at-fill"></i></a>
@@ -473,7 +473,7 @@ class Footer extends HTMLElement {
         <a href="https://x.com/dialogika_co" class="twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter"></i></a>
         <a href="https://www.facebook.com/dialogika.co" class="facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
         <a href="https://instagram.com/dialogika.co" class="instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
-        <a href="https://wa.link/emi1qx" class="google-plus" target="_blank" rel="noopener noreferrer"><i class="bx bxl-whatsapp"></i></a>
+        <a href="https://wa.me/6285162992597" class="google-plus" target="_blank" rel="noopener noreferrer"><i class="bx bxl-whatsapp"></i></a>
         <a href="https://linkedin.com/company/dialogika" class="linkedin" target="_blank" rel="noopener noreferrer"><i class="bx bxl-linkedin"></i></i></a>
       </div>
     </div>
