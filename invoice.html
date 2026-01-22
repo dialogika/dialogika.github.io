@@ -205,7 +205,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, doc, getDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, updateDoc, setDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
         import {
             getStorage,
             ref as storageRef,
@@ -236,7 +236,8 @@
         window.dlgInvoiceStorageRef = storageRef;
         window.dlgInvoiceUploadBytes = uploadBytes;
         window.dlgInvoiceGetDownloadURL = getDownloadURL;
-        window.dlgInvoiceSetDoc = setDoc;
+        window.dlgInvoiceCollection = collection;
+        window.dlgInvoiceGetDocs = getDocs;
         console.log("Firebase initialized in invoice.html");
     </script>
 
@@ -472,6 +473,30 @@
                 attempts++;
             }
             return !!(window.dlgInvoiceDb && window.dlgInvoiceDoc && window.dlgInvoiceGetDoc);
+        }
+
+        async function computeReferralUsedFromInvoices(code) {
+            const normalized = String(code || "").trim().toUpperCase();
+            if (!normalized) return null;
+            try {
+                const ready = await waitForInvoiceFirestoreTools();
+                if (!ready || !(window.dlgInvoiceDb && window.dlgInvoiceCollection && window.dlgInvoiceGetDocs)) {
+                    return null;
+                }
+                const snap = await window.dlgInvoiceGetDocs(window.dlgInvoiceCollection(window.dlgInvoiceDb, "invoices"));
+                let used = 0;
+                snap.forEach(function (docSnap) {
+                    const d = docSnap.data() || {};
+                    const codeInv = String(d.referralCode || "").trim().toUpperCase();
+                    if (!codeInv || codeInv !== normalized) return;
+                    const isPaid = (typeof d.paidAtMs === "number" && d.paidAtMs > 0) ||
+                        (typeof d.paidAmount === "number" && d.paidAmount > 0);
+                    if (isPaid) used++;
+                });
+                return used;
+            } catch (e) {
+                return null;
+            }
         }
 
         async function waitForInvoiceStorageTools() {
@@ -710,8 +735,24 @@
                 return;
             }
 
+            const currentProductName = (invoiceSettings && invoiceSettings.className ? String(invoiceSettings.className).trim() : "").toLowerCase();
+            const allowedProducts = Array.isArray(found.productNames) ? found.productNames.map(function (n) { return String(n || "").trim().toLowerCase(); }) : [];
+            if (allowedProducts.length && currentProductName) {
+                const isAllowed = allowedProducts.indexOf(currentProductName) !== -1;
+                if (!isAllowed) {
+                    msgEl.textContent = "Kode referral tidak berlaku untuk program ini.";
+                    msgEl.classList.remove('text-green-600');
+                    msgEl.classList.add('text-red-600');
+                    return;
+                }
+            }
+
             const max = found.maxUsage || 0;
-            const used = found.usedCount || 0;
+            let used = found.usedCount || 0;
+            const usedFromInvoices = await computeReferralUsedFromInvoices(code);
+            if (typeof usedFromInvoices === "number") {
+                used = usedFromInvoices;
+            }
             const remaining = Math.max(max - used, 0);
 
             if (max && remaining <= 0) {
