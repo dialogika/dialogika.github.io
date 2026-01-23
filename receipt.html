@@ -135,6 +135,45 @@
                         <p class="mt-1">Silakan kembali ke halaman invoice untuk melakukan konfirmasi pembayaran.</p>
                     </section>
 
+                    <section id="receiptDetailsWrapper" class="space-y-4 hidden">
+                        <div class="bg-white rounded-[2rem] border border-slate-200 overflow-hidden">
+                            <button type="button" id="receiptDetailsToggle" class="w-full flex items-center justify-between px-6 py-4">
+                                <div>
+                                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Details Program</p>
+                                    <p id="receiptDetailsSubtitle" class="text-xs text-slate-500 mt-1">Klik untuk melihat rincian program.</p>
+                                </div>
+                                <span id="receiptDetailsIcon" class="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-lg font-bold text-slate-500">+</span>
+                            </button>
+                            <div id="receiptDetailsContent" class="border-t border-slate-100 px-6 py-5 space-y-5 text-sm text-slate-800 hidden">
+                                <div id="receiptDetailsLoading" class="text-xs text-slate-500">Memuat detail program...</div>
+                                <div id="receiptCurriculumBlock" class="space-y-2 hidden">
+                                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Curriculum</p>
+                                    <ol id="receiptCurriculumList" class="list-decimal list-inside space-y-1 text-[13px]"></ol>
+                                </div>
+                                <div id="receiptFeaturesBlock" class="space-y-2 hidden">
+                                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Key Features</p>
+                                    <ul id="receiptFeaturesList" class="space-y-1 text-[13px]"></ul>
+                                </div>
+                                <div id="receiptSpecificationsBlock" class="space-y-2 hidden">
+                                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Specification</p>
+                                    <ul id="receiptSpecificationsList" class="space-y-1 text-[13px]"></ul>
+                                </div>
+                                <div id="receiptReferralBlock" class="space-y-1 hidden">
+                                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Potongan Referral</p>
+                                    <p id="receiptReferralValue" class="text-[13px] font-semibold text-emerald-600"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="receiptPrintActions" class="flex justify-end gap-3">
+                            <button type="button" onclick="openInvoicePage()" class="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-slate-100 text-slate-700 text-[11px] font-black uppercase tracking-[0.25em] border border-slate-200">
+                                Cetak Invoice
+                            </button>
+                            <button type="button" onclick="printReceipt()" class="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-slate-900 text-white text-[11px] font-black uppercase tracking-[0.25em] shadow-lg shadow-slate-300/60">
+                                Cetak Bukti Pembayaran
+                            </button>
+                        </div>
+                    </section>
+
                     <footer class="pt-2 border-t border-dashed border-slate-200 flex items-center justify-between gap-4">
                         <div class="text-[10px] text-slate-500 leading-relaxed">
                             <p>Terima kasih telah mempercayai Dialogika.</p>
@@ -219,6 +258,8 @@
                     invoiceNumber: d.invoiceNumber || "",
                     leadName: d.leadName || "Nama Peserta",
                     className: d.className || "Nama Kelas",
+                    productId: d.productId || "",
+                    productName: d.productName || "",
                     paymentType: d.paymentType || "full",
                     amountPaid: typeof d.paidAmount === "number" ? d.paidAmount : 0,
                     amountPaidFormatted: d.paidAmountFormatted || "",
@@ -258,11 +299,13 @@
             const proofSection = document.getElementById('receiptProofSection');
             const proofImg = document.getElementById('receiptProofImage');
             const emptySection = document.getElementById('receiptEmptySection');
+            const detailsWrapper = document.getElementById('receiptDetailsWrapper');
 
             if (!data) {
                 document.title = "Receipt Pembayaran | Dialogika";
                 if (proofSection) proofSection.classList.add('hidden');
                 if (emptySection) emptySection.classList.remove('hidden');
+                if (detailsWrapper) detailsWrapper.classList.add('hidden');
                 return;
             }
 
@@ -292,6 +335,8 @@
             if (methodEl) methodEl.textContent = data.paymentMethod || '-';
             if (bankEl) bankEl.textContent = data.bankName || '-';
             if (referralCodeEl) referralCodeEl.textContent = data.referralCode || '-';
+            if (detailsWrapper) detailsWrapper.classList.remove('hidden');
+            updateReceiptReferralDiscountDetail(data);
 
             if (dateLabelEl) {
                 const d = data.createdAtMs ? new Date(data.createdAtMs) : new Date();
@@ -311,6 +356,163 @@
             } else {
                 if (proofSection) proofSection.classList.add('hidden');
                 if (emptySection) emptySection.classList.add('hidden');
+            }
+        }
+
+        async function waitForReceiptFirestoreTools() {
+            if (window.dlgInvoiceDb && window.dlgInvoiceDoc && window.dlgInvoiceGetDoc) return true;
+            let attempts = 0;
+            while (!(window.dlgInvoiceDb && window.dlgInvoiceDoc && window.dlgInvoiceGetDoc) && attempts < 20) {
+                await new Promise(function (resolve) { return setTimeout(resolve, 250); });
+                attempts++;
+            }
+            return !!(window.dlgInvoiceDb && window.dlgInvoiceDoc && window.dlgInvoiceGetDoc);
+        }
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, function (m) {
+                return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[m];
+            });
+        }
+
+        function setupReceiptDetailsAccordion() {
+            const toggle = document.getElementById('receiptDetailsToggle');
+            const content = document.getElementById('receiptDetailsContent');
+            const icon = document.getElementById('receiptDetailsIcon');
+            if (!toggle || !content || !icon) return;
+            toggle.addEventListener('click', function () {
+                const isHidden = content.classList.contains('hidden');
+                if (isHidden) {
+                    content.classList.remove('hidden');
+                    icon.textContent = "−";
+                } else {
+                    content.classList.add('hidden');
+                    icon.textContent = "+";
+                }
+            });
+        }
+
+        function updateReceiptReferralDiscountDetail(data) {
+            const block = document.getElementById('receiptReferralBlock');
+            const valueEl = document.getElementById('receiptReferralValue');
+            if (!block || !valueEl) return;
+            const explicit = data && typeof data.discountAmount === "number" ? data.discountAmount : 0;
+            const ob = data && typeof data.originalBasePrice === "number" ? data.originalBasePrice : 0;
+            const fb = data && typeof data.finalBasePrice === "number" ? data.finalBasePrice : 0;
+            let discount = explicit;
+            if (!discount && ob && fb && fb < ob) {
+                discount = ob - fb;
+            }
+            if (discount && discount > 0) {
+                valueEl.textContent = formatCurrencyId(discount);
+                block.classList.remove('hidden');
+            } else {
+                valueEl.textContent = "";
+                block.classList.add('hidden');
+            }
+        }
+
+        function renderReceiptProductDetails(product, productName) {
+            const loadingEl = document.getElementById('receiptDetailsLoading');
+            const curriculumBlock = document.getElementById('receiptCurriculumBlock');
+            const curriculumList = document.getElementById('receiptCurriculumList');
+            const featuresBlock = document.getElementById('receiptFeaturesBlock');
+            const featuresList = document.getElementById('receiptFeaturesList');
+            const specsBlock = document.getElementById('receiptSpecificationsBlock');
+            const specsList = document.getElementById('receiptSpecificationsList');
+            const subtitleEl = document.getElementById('receiptDetailsSubtitle');
+            if (subtitleEl && productName) {
+                subtitleEl.textContent = productName;
+            }
+            if (loadingEl) {
+                loadingEl.classList.add('hidden');
+            }
+            if (!product) {
+                if (loadingEl) {
+                    loadingEl.textContent = "Detail program belum tersedia.";
+                    loadingEl.classList.remove('hidden');
+                }
+                if (curriculumBlock) curriculumBlock.classList.add('hidden');
+                if (featuresBlock) featuresBlock.classList.add('hidden');
+                if (specsBlock) specsBlock.classList.add('hidden');
+                return;
+            }
+            const materials = Array.isArray(product.materials) ? product.materials : [];
+            const features = Array.isArray(product.features) ? product.features : [];
+            const specifications = Array.isArray(product.specifications) ? product.specifications : [];
+            if (curriculumBlock && curriculumList) {
+                curriculumList.innerHTML = materials.map(function (item) {
+                    const order = String(item.order || "").trim();
+                    const title = String(item.title || "").trim();
+                    const desc = String(item.description || "").trim();
+                    const label = order ? order + ". " + title : title;
+                    if (desc) {
+                        return "<li><span class=\"font-semibold\">" + escapeHtml(label) + "</span><br><span class=\"text-[12px] text-slate-500\">" + escapeHtml(desc) + "</span></li>";
+                    }
+                    return "<li><span class=\"font-semibold\">" + escapeHtml(label) + "</span></li>";
+                }).join("");
+                if (materials.length) {
+                    curriculumBlock.classList.remove('hidden');
+                } else {
+                    curriculumBlock.classList.add('hidden');
+                }
+            }
+            if (featuresBlock && featuresList) {
+                featuresList.innerHTML = features.map(function (feat) {
+                    const label = String(feat && feat.label ? feat.label : "").trim() || "-";
+                    const type = String(feat && feat.type ? feat.type : "").toLowerCase();
+                    let valueLabel = "";
+                    if (type === "boolean") {
+                        valueLabel = feat && feat.value ? "Ya" : "Tidak";
+                    } else {
+                        valueLabel = String(feat && feat.value ? feat.value : "").trim();
+                    }
+                    if (!valueLabel) valueLabel = "-";
+                    return "<li class=\"flex justify-between gap-4\"><span class=\"font-semibold\">" + escapeHtml(label) + "</span><span class=\"text-[12px] text-slate-600\">" + escapeHtml(valueLabel) + "</span></li>";
+                }).join("");
+                if (features.length) {
+                    featuresBlock.classList.remove('hidden');
+                } else {
+                    featuresBlock.classList.add('hidden');
+                }
+            }
+            if (specsBlock && specsList) {
+                specsList.innerHTML = specifications.map(function (spec) {
+                    const text = String(spec || "").trim();
+                    return "<li>" + escapeHtml(text) + "</li>";
+                }).join("");
+                if (specifications.length) {
+                    specsBlock.classList.remove('hidden');
+                } else {
+                    specsBlock.classList.add('hidden');
+                }
+            }
+        }
+
+        async function initProductDetailsForReceipt() {
+            const data = lastReceiptData;
+            const productId = data && data.productId ? String(data.productId).trim() : "";
+            const productName = data && (data.productName || data.className) ? String(data.productName || data.className).trim() : "";
+            if (!productId) {
+                renderReceiptProductDetails(null, productName);
+                return;
+            }
+            try {
+                const ready = await waitForReceiptFirestoreTools();
+                if (!ready || !(window.dlgInvoiceDb && window.dlgInvoiceDoc && window.dlgInvoiceGetDoc)) {
+                    renderReceiptProductDetails(null, productName);
+                    return;
+                }
+                const ref = window.dlgInvoiceDoc(window.dlgInvoiceDb, "products", productId);
+                const snap = await window.dlgInvoiceGetDoc(ref);
+                if (!snap.exists()) {
+                    renderReceiptProductDetails(null, productName);
+                    return;
+                }
+                const d = snap.data() || {};
+                renderReceiptProductDetails(d, d.name || productName);
+            } catch (e) {
+                renderReceiptProductDetails(null, productName);
             }
         }
 
@@ -354,8 +556,22 @@
             window.open(waUrl, "_blank");
         }
 
+        function printReceipt() {
+            window.print();
+        }
+
+        function openInvoicePage() {
+            let targetUrl = "invoice.html";
+            if (invoiceIdFromUrl) {
+                targetUrl += "?invoiceId=" + encodeURIComponent(invoiceIdFromUrl);
+            }
+            window.open(targetUrl, "_blank");
+        }
+
         (async function () {
             await renderReceipt();
+            setupReceiptDetailsAccordion();
+            await initProductDetailsForReceipt();
             setupImageModal();
             const waBtn = document.getElementById('waConfirmBtn');
             if (waBtn) {

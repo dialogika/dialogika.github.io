@@ -37,9 +37,9 @@
                     <div>
                         <h2 class="font-bold text-lg" id="className">Public Speaking Playbook</h2>
                         <div class="mt-1 flex flex-wrap items-center gap-2">
-                            <span id="badgeBatch" class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-black bg-slate-800 text-slate-100 uppercase tracking-widest">Batch 42</span>
-                            <span id="badgeType" class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-black bg-slate-800 text-slate-100 uppercase tracking-widest">Offline</span>
-                            <span id="badgeLocation" class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-black bg-slate-800 text-slate-100 uppercase tracking-widest">Jakarta</span>
+                            <span id="badgeBatch" class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-black bg-green-700 text-slate-100 uppercase tracking-widest">Batch 42</span>
+                            <span id="badgeType" class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-black bg-green-700 text-slate-100 uppercase tracking-widest">Offline</span>
+                            <span id="badgeLocation" class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-black bg-green-700 text-slate-100 uppercase tracking-widest">Jakarta</span>
                         </div>
                         <div class="mt-1">
                             <span id="seatLeftLabel" class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-black bg-emerald-500/10 text-emerald-500 uppercase tracking-widest">
@@ -195,6 +195,42 @@
 
             </div>
         </div>
+
+        <section id="invoiceDetailsWrapper" class="mt-6 space-y-4">
+            <div class="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden">
+                <button type="button" id="invoiceDetailsToggle" class="w-full flex items-center justify-between px-6 py-4">
+                    <div>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Details Program</p>
+                        <p id="invoiceDetailsSubtitle" class="text-xs text-slate-500 mt-1">Klik untuk melihat rincian program.</p>
+                    </div>
+                    <span id="invoiceDetailsIcon" class="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-lg font-bold text-slate-500">+</span>
+                </button>
+                <div id="invoiceDetailsContent" class="border-t border-slate-100 px-6 py-5 space-y-5 text-sm text-slate-800 hidden">
+                    <div id="invoiceDetailsLoading" class="text-xs text-slate-500">Memuat detail program...</div>
+                    <div id="invoiceCurriculumBlock" class="space-y-2 hidden">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Curriculum</p>
+                        <ol id="invoiceCurriculumList" class="list-decimal list-inside space-y-1 text-[13px]"></ol>
+                    </div>
+                    <div id="invoiceFeaturesBlock" class="space-y-2 hidden">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Key Features</p>
+                        <ul id="invoiceFeaturesList" class="space-y-1 text-[13px]"></ul>
+                    </div>
+                    <div id="invoiceSpecificationsBlock" class="space-y-2 hidden">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Specification</p>
+                        <ul id="invoiceSpecificationsList" class="space-y-1 text-[13px]"></ul>
+                    </div>
+                    <div id="invoiceReferralBlock" class="space-y-1 hidden">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Potongan Referral</p>
+                        <p id="invoiceReferralValue" class="text-[13px] font-semibold text-emerald-600"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <button type="button" onclick="printInvoice()" class="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-slate-900 text-white text-[11px] font-black uppercase tracking-[0.25em] shadow-lg shadow-slate-300/60">
+                    Cetak Invoice
+                </button>
+            </div>
+        </section>
     </main>
 
     <div id="uploadPreviewModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
@@ -339,18 +375,22 @@
 
         async function loadReferralsForInvoice() {
             try {
-                const raw = localStorage.getItem(STORAGE_KEY_REFERRALS);
-                if (!raw) {
-                    // Coba muat dari Firestore jika localStorage kosong
-                    if (window.dlgInvoiceDb && window.dlgInvoiceDoc && window.dlgInvoiceGetDoc) {
-                        const docRef = window.dlgInvoiceDoc(window.dlgInvoiceDb, "settings", "referrals");
-                        const docSnap = await window.dlgInvoiceGetDoc(docRef);
-                        if (docSnap.exists()) {
-                            const data = docSnap.data();
-                            const referrals = data.referrals || [];
-                            return Array.isArray(referrals) ? referrals : [];
+                if (window.dlgInvoiceDb && window.dlgInvoiceDoc && window.dlgInvoiceGetDoc) {
+                    const docRef = window.dlgInvoiceDoc(window.dlgInvoiceDb, "settings", "referrals");
+                    const docSnap = await window.dlgInvoiceGetDoc(docRef);
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        const referrals = data.referrals || [];
+                        if (Array.isArray(referrals) && referrals.length) {
+                            try {
+                                localStorage.setItem(STORAGE_KEY_REFERRALS, JSON.stringify(referrals));
+                            } catch (e) {}
+                            return referrals;
                         }
                     }
+                }
+                const raw = localStorage.getItem(STORAGE_KEY_REFERRALS);
+                if (!raw) {
                     return [];
                 }
                 const parsed = raw ? JSON.parse(raw) : [];
@@ -441,6 +481,7 @@
                 minWarningEl.textContent = "* Minimal DP " + dpPercent + "% (Rp " + minDP.toLocaleString("id-ID") + ")";
             }
             handlePaymentTypeChange();
+            updateReferralDiscountDetail();
         }
 
         const fallbackBankConfig = {
@@ -562,6 +603,163 @@
         function parseFormattedNumber(value) {
             const numeric = value.toString().replace(/\D/g, '');
             return numeric ? parseInt(numeric, 10) : 0;
+        }
+
+        function formatCurrencyIdInt(value) {
+            try {
+                const n = typeof value === "number" ? value : parseInt(String(value).replace(/\D/g, ''), 10) || 0;
+                return "Rp " + n.toLocaleString("id-ID");
+            } catch (e) {
+                return "Rp 0";
+            }
+        }
+
+        function setupInvoiceDetailsAccordion() {
+            const toggle = document.getElementById('invoiceDetailsToggle');
+            const content = document.getElementById('invoiceDetailsContent');
+            const icon = document.getElementById('invoiceDetailsIcon');
+            if (!toggle || !content || !icon) return;
+            toggle.addEventListener('click', function () {
+                const isHidden = content.classList.contains('hidden');
+                if (isHidden) {
+                    content.classList.remove('hidden');
+                    icon.textContent = "−";
+                } else {
+                    content.classList.add('hidden');
+                    icon.textContent = "+";
+                }
+            });
+        }
+
+        function renderInvoiceProductDetails(product, productName) {
+            const wrapper = document.getElementById('invoiceDetailsWrapper');
+            const loadingEl = document.getElementById('invoiceDetailsLoading');
+            const curriculumBlock = document.getElementById('invoiceCurriculumBlock');
+            const curriculumList = document.getElementById('invoiceCurriculumList');
+            const featuresBlock = document.getElementById('invoiceFeaturesBlock');
+            const featuresList = document.getElementById('invoiceFeaturesList');
+            const specsBlock = document.getElementById('invoiceSpecificationsBlock');
+            const specsList = document.getElementById('invoiceSpecificationsList');
+            const subtitleEl = document.getElementById('invoiceDetailsSubtitle');
+            if (!wrapper) return;
+            if (subtitleEl && productName) {
+                subtitleEl.textContent = productName;
+            }
+            if (loadingEl) {
+                loadingEl.classList.add('hidden');
+            }
+            if (!product) {
+                if (loadingEl) {
+                    loadingEl.textContent = "Detail program belum tersedia.";
+                    loadingEl.classList.remove('hidden');
+                }
+                if (curriculumBlock) curriculumBlock.classList.add('hidden');
+                if (featuresBlock) featuresBlock.classList.add('hidden');
+                if (specsBlock) specsBlock.classList.add('hidden');
+                return;
+            }
+            const materials = Array.isArray(product.materials) ? product.materials : [];
+            const features = Array.isArray(product.features) ? product.features : [];
+            const specifications = Array.isArray(product.specifications) ? product.specifications : [];
+            if (curriculumBlock && curriculumList) {
+                curriculumList.innerHTML = materials.map(function (item) {
+                    const order = String(item.order || "").trim();
+                    const title = String(item.title || "").trim();
+                    const desc = String(item.description || "").trim();
+                    const label = order ? order + ". " + title : title;
+                    if (desc) {
+                        return "<li><span class=\"font-semibold\">" + label + "</span><br><span class=\"text-[12px] text-slate-500\">" + desc + "</span></li>";
+                    }
+                    return "<li><span class=\"font-semibold\">" + label + "</span></li>";
+                }).join("");
+                if (materials.length) {
+                    curriculumBlock.classList.remove('hidden');
+                } else {
+                    curriculumBlock.classList.add('hidden');
+                }
+            }
+            if (featuresBlock && featuresList) {
+                featuresList.innerHTML = features.map(function (feat) {
+                    const label = String(feat.label || "").trim() || "-";
+                    const type = String(feat.type || "").toLowerCase();
+                    let valueLabel = "";
+                    if (type === "boolean") {
+                        valueLabel = feat.value ? "Ya" : "Tidak";
+                    } else {
+                        valueLabel = String(feat.value || "").trim();
+                    }
+                    if (!valueLabel) valueLabel = "-";
+                    return "<li class=\"flex justify-between gap-4\"><span class=\"font-semibold\">" + label + "</span><span class=\"text-[12px] text-slate-600\">" + valueLabel + "</span></li>";
+                }).join("");
+                if (features.length) {
+                    featuresBlock.classList.remove('hidden');
+                } else {
+                    featuresBlock.classList.add('hidden');
+                }
+            }
+            if (specsBlock && specsList) {
+                specsList.innerHTML = specifications.map(function (spec) {
+                    const text = String(spec || "").trim();
+                    return "<li>" + text + "</li>";
+                }).join("");
+                if (specifications.length) {
+                    specsBlock.classList.remove('hidden');
+                } else {
+                    specsBlock.classList.add('hidden');
+                }
+            }
+        }
+
+        async function initProductDetailsForInvoice() {
+            const wrapper = document.getElementById('invoiceDetailsWrapper');
+            if (!wrapper) return;
+            const productId = invoiceSettings && invoiceSettings.productId ? String(invoiceSettings.productId).trim() : "";
+            const productName = invoiceSettings && (invoiceSettings.productName || invoiceSettings.className) ? String(invoiceSettings.productName || invoiceSettings.className).trim() : "";
+            const invoiceMaterials = invoiceSettings && Array.isArray(invoiceSettings.productMaterials) ? invoiceSettings.productMaterials : [];
+            const invoiceFeatures = invoiceSettings && Array.isArray(invoiceSettings.productFeatures) ? invoiceSettings.productFeatures : [];
+            const invoiceSpecifications = invoiceSettings && Array.isArray(invoiceSettings.productSpecifications) ? invoiceSettings.productSpecifications : [];
+            if (invoiceMaterials.length || invoiceFeatures.length || invoiceSpecifications.length) {
+                renderInvoiceProductDetails({
+                    materials: invoiceMaterials,
+                    features: invoiceFeatures,
+                    specifications: invoiceSpecifications
+                }, productName);
+                return;
+            }
+            if (!productId) {
+                renderInvoiceProductDetails(null, productName);
+                return;
+            }
+            try {
+                const ready = await waitForInvoiceFirestoreTools();
+                if (!ready || !(window.dlgInvoiceDb && window.dlgInvoiceDoc && window.dlgInvoiceGetDoc)) {
+                    renderInvoiceProductDetails(null, productName);
+                    return;
+                }
+                const ref = window.dlgInvoiceDoc(window.dlgInvoiceDb, "products", productId);
+                const snap = await window.dlgInvoiceGetDoc(ref);
+                if (!snap.exists()) {
+                    renderInvoiceProductDetails(null, productName);
+                    return;
+                }
+                const data = snap.data() || {};
+                renderInvoiceProductDetails(data, data.name || productName);
+            } catch (e) {
+                renderInvoiceProductDetails(null, productName);
+            }
+        }
+
+        function updateReferralDiscountDetail() {
+            const block = document.getElementById('invoiceReferralBlock');
+            const valueEl = document.getElementById('invoiceReferralValue');
+            if (!block || !valueEl) return;
+            if (appliedReferralDiscount && appliedReferralDiscount > 0) {
+                valueEl.textContent = formatCurrencyIdInt(appliedReferralDiscount);
+                block.classList.remove('hidden');
+            } else {
+                valueEl.textContent = "";
+                block.classList.add('hidden');
+            }
         }
 
         function handleAmountInputChange() {
@@ -735,7 +933,9 @@
                 return;
             }
 
-            const currentProductName = (invoiceSettings && invoiceSettings.className ? String(invoiceSettings.className).trim() : "").toLowerCase();
+            const currentProductName = (invoiceSettings && invoiceSettings.productName
+                ? String(invoiceSettings.productName).trim().toLowerCase()
+                : "");
             const allowedProducts = Array.isArray(found.productNames) ? found.productNames.map(function (n) { return String(n || "").trim().toLowerCase(); }) : [];
             if (allowedProducts.length && currentProductName) {
                 const isAllowed = allowedProducts.indexOf(currentProductName) !== -1;
@@ -1131,6 +1331,8 @@
                         const payload = {
                             leadName: (document.getElementById('leadName') || {}).textContent || "",
                             className: (document.getElementById('className') || {}).textContent || "",
+                            productId: (invoiceSettings && invoiceSettings.productId) ? String(invoiceSettings.productId) : "",
+                            productName: (invoiceSettings && (invoiceSettings.productName || invoiceSettings.className)) ? String(invoiceSettings.productName || invoiceSettings.className) : "",
                             paidAmount: amount,
                             paidAmountFormatted: amountInputEl.value,
                             paidAtMs: Date.now(),
@@ -1157,6 +1359,8 @@
                     invoiceNumber: (document.getElementById('invoiceNumber') || {}).textContent || "",
                     leadName: (document.getElementById('leadName') || {}).textContent || "",
                     className: (document.getElementById('className') || {}).textContent || "",
+                    productId: (invoiceSettings && invoiceSettings.productId) ? String(invoiceSettings.productId) : "",
+                    productName: (invoiceSettings && (invoiceSettings.productName || invoiceSettings.className)) ? String(invoiceSettings.productName || invoiceSettings.className) : "",
                     paymentType: document.getElementById('paymentType').value,
                     amountPaid: amount,
                     amountPaidFormatted: amountInputEl.value,
@@ -1217,7 +1421,12 @@
                     deadlineMinutes: typeof d.deadlineMinutes === "number" ? d.deadlineMinutes : invoiceSettings.deadlineMinutes,
                     basePrice: typeof d.basePrice === "number" ? d.basePrice : invoiceSettings.basePrice,
                     dpPercent: typeof d.dpPercent === "number" ? d.dpPercent : invoiceSettings.dpPercent,
-                    startedAtMs: startedAtMs
+                    startedAtMs: startedAtMs,
+                    productId: d.productId || invoiceSettings.productId,
+                    productName: d.productName || invoiceSettings.productName || (d.className || invoiceSettings.className),
+                    productMaterials: Array.isArray(d.productMaterials) ? d.productMaterials : (invoiceSettings.productMaterials || []),
+                    productFeatures: Array.isArray(d.productFeatures) ? d.productFeatures : (invoiceSettings.productFeatures || []),
+                    productSpecifications: Array.isArray(d.productSpecifications) ? d.productSpecifications : (invoiceSettings.productSpecifications || [])
                 });
                 invoiceSettings = merged;
                 basePrice = invoiceSettings.basePrice || 2500000;
@@ -1234,16 +1443,24 @@
             }
         }
 
+        function printInvoice() {
+            window.print();
+        }
+
         (async function () {
             renderInvoice(invoiceSettings);
             handlePaymentTypeChange();
             updateConfirmButtonState();
+            setupInvoiceDetailsAccordion();
+            updateReferralDiscountDetail();
             await initBankAndReferralConfig();
             await tryLoadInvoiceFromFirestore();
             initCountdownFromInvoice();
             handleMethodChange();
             handleBankChange();
             setupUploadPreviewModal();
+            await initProductDetailsForInvoice();
+            updateReferralDiscountDetail();
         })();
     </script>
 </body>
