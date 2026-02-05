@@ -1579,7 +1579,21 @@
                     <p>Materi komprehensif selama 10x pertemuan untuk memaksimalkan potensi public speaking anda.</p>
                 </div>
 
-                <div class="material-grid">
+
+                <!-- Carousel Container -->
+                <div class="materials-carousel-wrapper">
+                    <!-- Navigation Buttons -->
+                    <button class="carousel-nav-btn carousel-prev" id="materialsPrev" aria-label="Previous">
+                        <i class='bx bx-chevron-left'></i>
+                    </button>
+                    <button class="carousel-nav-btn carousel-next" id="materialsNext" aria-label="Next">
+                        <i class='bx bx-chevron-right'></i>
+                    </button>
+
+                    <!-- Carousel Track -->
+                    <div class="materials-carousel-track">
+                        <div class="material-grid" id="materialsGrid">
+
                     <!-- Pertemuan 1 -->
                     <div class="material-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="material-img">
@@ -1930,7 +1944,10 @@
                         </div>
                     </div>
 
-                </div>
+                        </div><!-- End material-grid -->
+                    </div><!-- End materials-carousel-track -->
+                </div><!-- End materials-carousel-wrapper -->
+
             </div>
         </section><!-- End Departments Section -->
 
@@ -2681,6 +2698,83 @@
     <script src="../assets/js/textchange.js"></script>
     <script src="../assets/js/main.js"></script>
 
+    <!-- Materials Carousel Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const grid = document.getElementById('materialsGrid');
+            const prevBtn = document.getElementById('materialsPrev');
+            const nextBtn = document.getElementById('materialsNext');
+            
+            if (!grid || !prevBtn || !nextBtn) return;
+            
+            const cards = grid.querySelectorAll('.material-card');
+            const totalCards = cards.length;
+            let currentSlide = 0;
+            
+            // Get cards per slide based on screen width
+            function getCardsPerSlide() {
+                return window.innerWidth <= 768 ? 1 : 2;
+            }
+            
+            // Calculate card width including gap
+            function getCardWidth() {
+                if (cards.length === 0) return 0;
+                const cardWidth = cards[0].offsetWidth;
+                const gap = 30; // Gap from CSS
+                return cardWidth + gap;
+            }
+            
+            // Get total slides
+            function getTotalSlides() {
+                const cardsPerSlide = getCardsPerSlide();
+                return Math.ceil(totalCards / cardsPerSlide);
+            }
+            
+            // Update carousel position
+            function updateCarousel() {
+                const cardsPerSlide = getCardsPerSlide();
+                const cardWidth = getCardWidth();
+                const offset = currentSlide * cardsPerSlide * cardWidth;
+                grid.style.transform = `translateX(-${offset}px)`;
+                
+                // Update button states
+                const totalSlides = getTotalSlides();
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide >= totalSlides - 1;
+            }
+            
+            // Previous button click
+            prevBtn.addEventListener('click', function() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateCarousel();
+                }
+            });
+            
+            // Next button click
+            nextBtn.addEventListener('click', function() {
+                const totalSlides = getTotalSlides();
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateCarousel();
+                }
+            });
+            
+            // Initialize carousel
+            updateCarousel();
+            
+            // Update on window resize
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    // Reset to first slide on resize to avoid positioning issues
+                    currentSlide = 0;
+                    updateCarousel();
+                }, 250);
+            });
+        });
+    </script>
 
 </body>
 

@@ -376,7 +376,7 @@
 /* Main Enhanced Section */
 .course-details-enhanced {
   padding: 60px 0;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: #ffffff;
   position: relative;
   overflow: hidden;
 }
@@ -1285,11 +1285,71 @@ html {
 # Material Grid Layout
 --------------------------------------------------------------*/
 
-.material-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+/* Carousel Wrapper */
+.materials-carousel-wrapper {
+  position: relative;
   margin-top: 30px;
+  padding: 0 60px;
+}
+
+/* Carousel Track */
+.materials-carousel-track {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Material Grid - Carousel Mode */
+.material-grid {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Navigation Buttons */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #0B2B6A 0%, #009961 100%);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(11, 43, 106, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-nav-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #009961 0%, #0B2B6A 100%);
+  box-shadow: 0 6px 20px rgba(0, 153, 97, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: #ccc;
+}
+
+.carousel-prev {
+  left: 0;
+}
+
+.carousel-next {
+  right: 0;
+}
+
+.carousel-nav-btn i {
+  font-size: 28px;
+  line-height: 1;
 }
 
 .material-card {
@@ -1302,6 +1362,8 @@ html {
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(11, 43, 106, 0.1);
+  width: calc((100% - 30px) / 2);
+  flex-shrink: 0;
 }
 
 .material-card:hover {
@@ -1445,10 +1507,39 @@ html {
 .badge-danger { background: rgba(220, 53, 69, 0.1); color: #dc3545; }
 .badge-secondary { background: rgba(108, 117, 125, 0.1); color: #6c757d; }
 
+
+/* Responsive Styles */
 @media (max-width: 992px) {
-  .material-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
+  .materials-carousel-wrapper {
+    padding: 0 50px;
+  }
+  
+  .carousel-nav-btn {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .carousel-nav-btn i {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .materials-carousel-wrapper {
+    padding: 0 45px;
+  }
+  
+  .material-card {
+    min-width: 100%;
+  }
+  
+  .carousel-nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .carousel-nav-btn i {
+    font-size: 20px;
   }
   
   .material-img {
