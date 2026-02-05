@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remake Favorite Classes - Dialogika Official Theme</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Dialogika Official Palette */
+            --d-navy: #0B2B6A;
+            --d-purple: #7204cf;
+            --d-green: #006a4e;
+            --d-red: #e7181a;
+            --d-yellow: #f7b12c;
+            --d-blue-bright: #0163ea;
+            --d-blue-sky: #1c84e3;
+            --bg-light: #f8f9fc;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--d-navy);
+        }
+
+        .section-favorite {
+            padding: 80px 0;
+        }
+
+        /* --- TITLE STYLING --- */
+        .section-title h5 {
+            color: var(--d-blue-sky);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 800;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .section-title h3 {
+            color: var(--d-navy);
+            font-weight: 800;
+            font-size: clamp(28px, 5vw, 42px);
+            margin-bottom: 0;
+        }
+
+        #btn-explore {
+            background: linear-gradient(135deg, var(--d-blue-sky) 0%, var(--d-navy) 100%);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(11, 43, 106, 0.2);
+            display: inline-block;
+            border: none;
+        }
+
+        #btn-explore:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(11, 43, 106, 0.3);
+            filter: contrast(1.1);
+        }
+
+        /* --- CARD STYLING --- */
+        .class-card {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            display: block;
+            height: 340px;
+            text-decoration: none;
+            box-shadow: 0 12px 30px rgba(11, 43, 106, 0.08);
+            transition: all 0.4s ease;
+            background-color: white;
+        }
+
+        .class-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(11, 43, 106, 0.18);
+        }
+
+        .class-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .class-card:hover img {
+            transform: scale(1.1) rotate(1deg);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, 
+                rgba(11, 43, 106, 0.9) 0%, 
+                rgba(11, 43, 106, 0.4) 40%, 
+                transparent 100%);
+            z-index: 2;
+        }
+
+        .card-body-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 28px;
+            z-index: 3;
+        }
+
+        .card-body-content h2 {
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        /* Badge Status (Top Left) */
+        .badge-status {
+            position: absolute;
+            top: 22px;
+            left: 22px;
+            z-index: 4;
+            padding: 7px 16px;
+            font-weight: 800;
+            font-size: 10px;
+            text-transform: uppercase;
+            border-radius: 12px;
+            color: white;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        /* Tag Pill (Bottom Glassmorphism) */
+        .tag-pill {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: white;
+            padding: 5px 14px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+
+        /* Specific Color Assignments from Theme */
+        .bg-dialogika-red { background-color: var(--d-red); }
+        .bg-dialogika-purple { background-color: var(--d-purple); }
+        .bg-dialogika-yellow { background-color: var(--d-yellow); color: var(--d-navy) !important; }
+        .bg-dialogika-green { background-color: var(--d-green); }
+        .bg-dialogika-blue { background-color: var(--d-blue-bright); }
+
+        /* Responsive height */
+        @media (max-width: 768px) {
+            .class-card { height: 280px; }
+            .section-favorite { padding: 50px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<section class="section-favorite">
+    <div class="container">
+        <!-- Header Section -->
+        <div class="row align-items-center mb-5">
+            <div class="col-md-8 text-center text-md-start">
+                <div class="section-title">
+                    <h5>FAVORITE SELECTIONS</h5>
+                    <h3>Explore Our Best Classes</h3>
+                </div>
+            </div>
+            <div class="col-md-4 text-center text-md-end mt-4 mt-md-0">
+                <a href="#" id="btn-explore">Explore Class</a>
+            </div>
+        </div>
+
+        <div class="row gy-4">
+            <!-- Row 1: Featured (6-column) -->
+            <div class="col-lg-6 col-md-6">
+                <a href="#" class="class-card">
+                    <span class="badge-status bg-dialogika-red">Best Selling</span>
+                    <div class="card-overlay"></div>
+                    <img src="https://dialogika.co/assets/img/program/first-class/class2.webp" alt="First Class">
+                    <div class="card-body-content">
+                        <h2>First Class</h2>
+                        <span class="tag-pill">Yogyakarta</span>
+                        <span class="tag-pill">Tangerang</span>
+                        <span class="tag-pill">Surabaya</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <a href="#" class="class-card">
+                    <span class="badge-status bg-dialogika-blue">Most Popular</span>
+                    <div class="card-overlay"></div>
+                    <img src="https://dialogika.co/assets/img/program/first-private/firstlite.webp" alt="First Lite">
+                    <div class="card-body-content">
+                        <h2>First Lite</h2>
+                        <span class="tag-pill">Yogyakarta</span>
+                        <span class="tag-pill">Tangerang</span>
+                        <span class="tag-pill">Surabaya</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Row 2: Grid (3-column) -->
+            <div class="col-lg-3 col-md-6">
+                <a href="#" class="class-card">
+                    <span class="badge-status bg-dialogika-yellow">Best Choice</span>
+                    <div class="card-overlay"></div>
+                    <img src="https://dialogika.co/assets/img/program/basic-plus/basic-plus.webp" alt="Basic Plus">
+                    <div class="card-body-content">
+                        <h2>Basic Plus</h2>
+                        <span class="tag-pill" style="background: rgba(247, 177, 44, 0.3);">Online</span>
+                        <span class="tag-pill" style="background: rgba(0, 106, 78, 0.3);">Garansi</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <a href="#" class="class-card">
+                    <span class="badge-status bg-dialogika-purple">New Program</span>
+                    <div class="card-overlay"></div>
+                    <img src="https://dialogika.co/assets/img/program/kids-plus/kidsplus.webp" alt="Kids Plus">
+                    <div class="card-body-content">
+                        <h2>Kids Plus</h2>
+                        <span class="tag-pill" style="background: rgba(114, 4, 207, 0.3);">Online</span>
+                        <span class="tag-pill">Promo</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <a href="#" class="class-card">
+                    <span class="badge-status bg-dialogika-green">Expert Class</span>
+                    <div class="card-overlay"></div>
+                    <img src="https://dialogika.co/assets/img/program/first-private/firstpriv.webp" alt="First Private">
+                    <div class="card-body-content">
+                        <h2>First Private</h2>
+                        <span class="tag-pill">Jogja</span>
+                        <span class="tag-pill">Tangerang</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <a href="#" class="class-card">
+                    <span class="badge-status bg-dialogika-red">Hot Program</span>
+                    <div class="card-overlay"></div>
+                    <img src="https://dialogika.co/assets/img/program/Kelas kak Diah-16.jpg" alt="Corporate">
+                    <div class="card-body-content">
+                        <h2>Corporate</h2>
+                        <span class="tag-pill" style="background: rgba(231, 24, 26, 0.3);">In House</span>
+                        <span class="tag-pill">Certified</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Row 3: Kids Section (6-column) -->
+            <div class="col-lg-6 col-md-6">
+                <a href="#" class="class-card">
+                    <span class="badge-status" style="background-color: var(--d-blue-sky);">Special Kids</span>
+                    <div class="card-overlay"></div>
+                    <img src="https://dialogika.co/assets/img/program/kids-private/kidspriv.webp" alt="Kids Play">
+                    <div class="card-body-content">
+                        <h2>Kids Play</h2>
+                        <span class="tag-pill">Interactive</span>
+                        <span class="tag-pill">Online</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <a href="#" class="class-card">
+                    <span class="badge-status bg-dialogika-purple">Premium Kids</span>
+                    <div class="card-overlay"></div>
+                    <img src="https://dialogika.co/assets/img/program/private-first-kids/KidsPrivate.jpg" alt="Kids Plus Private">
+                    <div class="card-body-content">
+                        <h2>Kids Plus Private</h2>
+                        <span class="tag-pill">Private</span>
+                        <span class="tag-pill">Online</span>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
