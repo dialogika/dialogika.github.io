@@ -466,7 +466,7 @@
                                 <div
                                     class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
                                     <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Garansi Mengulang</h6>
-                                    <span class="badge bg-success rounded-pill px-3 py-2">Tersedia</span>
+                                    <span class="badge bg-success rounded-pill px-3 py-2">Bisa</span>
                                 </div>
 
                                 <div
@@ -581,13 +581,218 @@
                                 </a>
                             </div>
 
+                            <!-- Class Available Section -->
+                            <div class="mt-4 pt-4 border-top">
+                                <h6 class="fw-bold mb-3" style="color: #0b2b6a; font-size: 14px;">
+                                    <i class='bx bxs-calendar-check me-1'></i> Kelas Tersedia
+                                </h6>
+                                
+                                <!-- Container for dynamic batch cards from Firebase -->
+                                <div id="classBatchContainer">
+                                <style>
+                                    .class-batch-card {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 12px;
+                                        padding: 12px;
+                                        background: #fff;
+                                        border-radius: 12px;
+                                        margin-bottom: 10px;
+                                        border: 1px solid #e9ecef;
+                                        transition: all 0.3s ease;
+                                    }
+                                    .class-batch-card:hover {
+                                        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                                        transform: translateY(-2px);
+                                    }
+                                    .class-batch-card:last-child {
+                                        margin-bottom: 0;
+                                    }
+                                    .batch-status {
+                                        width: 50px;
+                                        height: 50px;
+                                        border-radius: 10px;
+                                        display: flex;
+                                        flex-direction: column;
+                                        align-items: center;
+                                        justify-content: center;
+                                        flex-shrink: 0;
+                                    }
+                                    .batch-status.open {
+                                        background: linear-gradient(to bottom, #009961 5%, #006a4e 100%);
+                                    }
+                                    .batch-status.closed {
+                                        background: linear-gradient(135deg, #3d3e3f 0%, #3d3e3f 100%);
+                                    }
+                                    /* Disabled styling for closed batch cards */
+                                    .class-batch-card:has(.batch-status.closed) {
+                                        opacity: 0.5;
+                                        cursor: not-allowed;
+                                        pointer-events: none;
+                                    }
+                                    .class-batch-card:has(.batch-status.closed):hover {
+                                        box-shadow: none;
+                                        transform: none;
+                                    }
+                                    .batch-status-text {
+                                        font-size: 8px;
+                                        font-weight: 700;
+                                        color: #fff;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.5px;
+                                    }
+                                    .batch-status-icon {
+                                        font-size: 18px;
+                                        color: #fff;
+                                    }
+                                    .batch-info h6 {
+                                        font-size: 13px;
+                                        font-weight: 700;
+                                        color: #2d3436;
+                                        margin-bottom: 4px;
+                                    }
+                                    .batch-info .batch-meta {
+                                        font-size: 11px;
+                                        color: #636e72;
+                                        display: flex;
+                                        flex-wrap: wrap;
+                                        gap: 8px;
+                                    }
+                                    .batch-info .batch-meta span {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 3px;
+                                    }
+                                    .batch-info .batch-meta i {
+                                        font-size: 12px;
+                                    }
+                                </style>
+
+                                <!-- Batch 1 - Closed -->
+                                <div class="class-batch-card">
+                                    <div class="batch-status closed">
+                                        <i class='bx bxs-door-open batch-status-icon'></i>
+                                        <span class="batch-status-text">Closed</span>
+                                    </div>
+                                    <div class="batch-info">
+                                        <h6>First Class Januari #1</h6>
+                                        <div class="batch-meta">
+                                            <span><i class='bx bxs-calendar'></i> 1 Jan, 15:44</span>
+                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Batch 2 - Closed -->
+                                <div class="class-batch-card">
+                                    <div class="batch-status closed">
+                                        <i class='bx bxs-lock-alt batch-status-icon'></i>
+                                        <span class="batch-status-text">Closed</span>
+                                    </div>
+                                    <div class="batch-info">
+                                        <h6>First Class Januari #2</h6>
+                                        <div class="batch-meta">
+                                            <span><i class='bx bxs-calendar'></i> 10 Jan, 15:30</span>
+                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Batch 3 - Closed -->
+                                <div class="class-batch-card">
+                                    <div class="batch-status closed">
+                                        <i class='bx bxs-door-open batch-status-icon'></i>
+                                        <span class="batch-status-text">Closed</span>
+                                    </div>
+                                    <div class="batch-info">
+                                        <h6>First Class Januari #3</h6>
+                                        <div class="batch-meta">
+                                            <span><i class='bx bxs-calendar'></i> 15 Jan, 10:00</span>
+                                            <span><i class='bx bxs-user'></i> Salsabila Astaria</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Batch 4 - Closed -->
+                                <div class="class-batch-card">
+                                    <div class="batch-status closed">
+                                        <i class='bx bxs-door-open batch-status-icon'></i>
+                                        <span class="batch-status-text">Closed</span>
+                                    </div>
+                                    <div class="batch-info">
+                                        <h6>First Class Januari #4</h6>
+                                        <div class="batch-meta">
+                                            <span><i class='bx bxs-calendar'></i> 20 Jan, 10:00</span>
+                                            <span><i class='bx bxs-user'></i> Salsabila Astaria</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="class-batch-card">
+                                    <div class="batch-status open">
+                                        <i class='bx bxs-door-open batch-status-icon'></i>
+                                        <span class="batch-status-text">Open</span>
+                                    </div>
+                                    <div class="batch-info">
+                                        <h6>First Class Februari #1</h6>
+                                        <div class="batch-meta">
+                                            <span><i class='bx bxs-calendar'></i> 1 Feb, 15:44</span>
+                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="class-batch-card">
+                                    <div class="batch-status open">
+                                        <i class='bx bxs-door-open batch-status-icon'></i>
+                                        <span class="batch-status-text">Open</span>
+                                    </div>
+                                    <div class="batch-info">
+                                        <h6>First Class Februari #2</h6>
+                                        <div class="batch-meta">
+                                            <span><i class='bx bxs-calendar'></i> 8 Feb, 15:44</span>
+                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="class-batch-card">
+                                    <div class="batch-status open">
+                                        <i class='bx bxs-door-open batch-status-icon'></i>
+                                        <span class="batch-status-text">Open</span>
+                                    </div>
+                                    <div class="batch-info">
+                                        <h6>First Class Februari #3</h6>
+                                        <div class="batch-meta">
+                                            <span><i class='bx bxs-calendar'></i> 15 Feb, 15:44</span>
+                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="class-batch-card">
+                                    <div class="batch-status open">
+                                        <i class='bx bxs-door-open batch-status-icon'></i>
+                                        <span class="batch-status-text">Open</span>
+                                    </div>
+                                    <div class="batch-info">
+                                        <h6>First Class Februari #4</h6>
+                                        <div class="batch-meta">
+                                            <span><i class='bx bxs-calendar'></i> 22 Feb, 15:44</span>
+                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div><!-- End classBatchContainer -->    
+                            </div>
+
                             <!-- Quality Assurance -->
                             <p class="text-center mt-3 mb-0 text-muted" style="font-size: 13px;">
                                 <i class='bx bx-shield-quarter me-1'></i> Jaminan Kualitas Dialogika
                             </p>
 
                             <!-- Mentor Section (Moved inside card as requested to keep content) -->
-                            <div class="mt-4 pt-4 border-top">
+                            <!-- <div class="mt-4 pt-4 border-top">
                                 <h6 class="mb-3 text-muted fw-bold text-center" style="font-size: 14px;">Mentor
                                     Berpengalaman</h6>
                                 <div class="text-center">
@@ -596,7 +801,7 @@
                                         alt="Mentor">
                                     <p class="text-muted small mb-0">Praktisi ahli public speaking</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -1501,7 +1706,7 @@
         <!-- End Testimonials Section -->
 
         <!-- Call-to-action Section - Home Page -->
-        <section id="call-to-action" class="call-to-action">
+        <!-- <section id="call-to-action" class="call-to-action">
             <img src="https://michaelhyatt.com/wp-content/uploads/2013/08/iStock_000022230045Medium.jpg"
                 alt="Kelas Public Speaking Jogja">
 
@@ -1517,7 +1722,7 @@
                     </div>
                 </div>
             </div>
-        </section><!-- End Call-to-action Section -->
+        </section>End Call-to-action Section -->
 
         <!-- ======= Departments Section ======= -->
         <section id="departments" class="departments section-bg" style="background-color: #f8f9fa;">
@@ -1555,7 +1760,7 @@
                                 </div>
                                 <div class="material-content">
                                     <div class="material-header">
-                                        <h3>Bonding</h3>
+                                        <h3>#1 Bonding</h3>
                                         <span class="meeting-badge">Intro</span>
                                     </div>
                                     <p class="material-desc">Anda akan berlatih mengembangkan kata sebuah huruf, kata
@@ -1595,7 +1800,7 @@
                                 </div>
                                 <div class="material-content">
                                     <div class="material-header">
-                                        <h3>Self Confidence</h3>
+                                        <h3>#2 Self Confidence</h3>
                                         <span class="meeting-badge">Be Confidence</span>
                                     </div>
                                     <p class="material-desc">Anda akan berlatih cara menyampaikan sesuatu hal tanpa
@@ -1635,7 +1840,7 @@
                                 </div>
                                 <div class="material-content">
                                     <div class="material-header">
-                                        <h3>Profiling</h3>
+                                        <h3>#3 Profiling</h3>
                                         <span class="meeting-badge">Personal Branding</span>
                                     </div>
                                     <p class="material-desc">Anda akan berlatih untuk membentuk perkenalan diri anda
@@ -1675,7 +1880,7 @@
                                 </div>
                                 <div class="material-content">
                                     <div class="material-header">
-                                        <h3>Smiling Voice</h3>
+                                        <h3>#4 Smiling Voice</h3>
                                         <span class="meeting-badge">Vocal</span>
                                     </div>
                                     <p class="material-desc">Anda akan berlatih membentuk sebuah poin-poin pembicaraan
@@ -1715,7 +1920,7 @@
                                 </div>
                                 <div class="material-content">
                                     <div class="material-header">
-                                        <h3>Outlining</h3>
+                                        <h3>#5 Outlining</h3>
                                         <span class="meeting-badge">Impromptu</span>
                                     </div>
                                     <p class="material-desc">Anda akan berlatih bercerita dengan menarik dihadapan
@@ -1755,7 +1960,7 @@
                                 </div>
                                 <div class="material-content">
                                     <div class="material-header">
-                                        <h3>Body Language</h3>
+                                        <h3>#6 Body Language</h3>
                                         <span class="meeting-badge">Gesture</span>
                                     </div>
                                     <p class="material-desc">Ini paling krusial, disini Anda akan berlatih membuka
@@ -1795,7 +2000,7 @@
                                 </div>
                                 <div class="material-content">
                                     <div class="material-header">
-                                        <h3>Persuasive</h3>
+                                        <h3>#7 Persuasive</h3>
                                         <span class="meeting-badge">Influence</span>
                                     </div>
                                     <p class="material-desc">Membuka pembicaraan yang menarik sekaligus menarik hati
@@ -1835,7 +2040,7 @@
                                 </div>
                                 <div class="material-content">
                                     <div class="material-header">
-                                        <h3>Handling QnA</h3>
+                                        <h3>#8 Handling QnA</h3>
                                         <span class="meeting-badge">Interaction</span>
                                     </div>
                                     <p class="material-desc">Cara menghadapi tipikal-tipikal audiens yang tidak kita
@@ -1875,7 +2080,7 @@
                                 </div>
                                 <div class="material-content">
                                     <div class="material-header">
-                                        <h3>Storytelling</h3>
+                                        <h3>#9 Storytelling</h3>
                                         <span class="meeting-badge">Narrative</span>
                                     </div>
                                     <p class="material-desc">Membungkus seluruh pertemuan, materi dan isi pembicaraan
@@ -1915,7 +2120,7 @@
                                 </div>
                                 <div class="material-content">
                                     <div class="material-header">
-                                        <h3>Final Practice</h3>
+                                        <h3>#10 Final Practice</h3>
                                         <span class="meeting-badge">Rehearsal</span>
                                     </div>
                                     <p class="material-desc">Kamu akan berbicara dihadapan orang asing dan kami sediakan
@@ -2778,6 +2983,159 @@
                 }, 250);
             });
         });
+    </script>
+
+    <!-- Firebase SDK for Class Available -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+    <!-- Class Available Firebase Integration -->
+    <script>
+        (function() {
+            // Firebase configuration (same as class-available.html)
+            const firebaseConfig = {
+                apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
+                authDomain: "pre-dialogika.firebaseapp.com",
+                projectId: "pre-dialogika",
+                storageBucket: "pre-dialogika.firebasestorage.app",
+                messagingSenderId: "343771410480",
+                appId: "1:343771410480:web:32881c9868522090237df5",
+                measurementId: "G-SXN811P3N0"
+            };
+
+            // Initialize Firebase
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            const db = firebase.firestore();
+
+            // Check if batch is closed based on start_date
+            function isBatchClosed(startDate) {
+                if (!startDate || startDate === 'Flexible') return false;
+                try {
+                    const date = new Date(startDate);
+                    if (isNaN(date.getTime())) return false;
+                    return date.getTime() < Date.now();
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            // Format date to "25 Jan, 15:30"
+            function formatBatchDate(dateStr) {
+                if (!dateStr || dateStr === 'Flexible') return 'TBA';
+                try {
+                    const date = new Date(dateStr);
+                    if (isNaN(date.getTime())) return dateStr;
+                    
+                    const day = date.getDate();
+                    const month = date.toLocaleString('id-ID', { month: 'short' });
+                    const hour = date.getHours().toString().padStart(2, '0');
+                    const minute = date.getMinutes().toString().padStart(2, '0');
+                    
+                    return `${day} ${month}, ${hour}:${minute}`;
+                } catch (e) {
+                    return dateStr;
+                }
+            }
+
+            // Load Class Available Data
+            async function loadClassAvailable() {
+                const container = document.getElementById('classBatchContainer');
+                if (!container) return;
+
+                try {
+                    // Query Firestore for class_availability collection (same as class-available.html)
+                    const snapshot = await db.collection('class_availability').get();
+
+                    if (snapshot.empty) {
+                        // Keep static fallback if no data
+                        return;
+                    }
+
+                    // Filter for First Class only
+                    const classes = [];
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        const className = data.name || '';
+                        
+                        // Filter only First Class entries
+                        if (className.toLowerCase().includes('first class')) {
+                            classes.push({
+                                id: doc.id,
+                                name: className,
+                                max_seat: Number(data.max_seat || 0),
+                                current_joined: Number(data.current_joined || 0),
+                                start_date: data.start_date || 'Flexible',
+                                mentor_name: data.mentor_name || 'Mentor Dialogika'
+                            });
+                        }
+                    });
+
+                    // Sort by start_date descending (newest first)
+                    classes.sort((a, b) => {
+                        const dateA = new Date(a.start_date);
+                        const dateB = new Date(b.start_date);
+                        if (isNaN(dateA.getTime())) return 1;
+                        if (isNaN(dateB.getTime())) return -1;
+                        return dateB - dateA;
+                    });
+
+                    // Limit to 8 classes
+                    const limitedClasses = classes.slice(0, 8);
+
+                    if (limitedClasses.length === 0) {
+                        return; // Keep static fallback
+                    }
+
+                    // Build HTML
+                    let batchHTML = '';
+                    limitedClasses.forEach(item => {
+                        const seatsLeft = item.max_seat - item.current_joined;
+                        const closed = isBatchClosed(item.start_date);
+                        const isOpen = !closed && seatsLeft > 0;
+                        
+                        const statusClass = isOpen ? 'open' : 'closed';
+                        const statusIcon = isOpen ? 'bxs-door-open' : 'bxs-lock-alt';
+                        const statusText = isOpen ? 'Open' : 'Closed';
+                        const dateStr = formatBatchDate(item.start_date);
+
+                        batchHTML += `
+                            <div class="class-batch-card">
+                                <div class="batch-status ${statusClass}">
+                                    <i class='bx ${statusIcon} batch-status-icon'></i>
+                                    <span class="batch-status-text">${statusText}</span>
+                                </div>
+                                <div class="batch-info">
+                                    <h6>${item.name}</h6>
+                                    <div class="batch-meta">
+                                        <span><i class='bx bxs-calendar'></i> ${dateStr}</span>
+                                        <span><i class='bx bxs-user'></i> ${item.mentor_name}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    // Only replace content if we have data
+                    // Find and remove static cards, keep style tag
+                    const styleTag = container.querySelector('style');
+                    const styleHTML = styleTag ? styleTag.outerHTML : '';
+                    container.innerHTML = styleHTML + batchHTML;
+
+                } catch (error) {
+                    console.error('Error loading class data:', error);
+                    // Keep static fallback on error
+                }
+            }
+
+            // Load data when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', loadClassAvailable);
+            } else {
+                loadClassAvailable();
+            }
+        })();
     </script>
 
 </body>
