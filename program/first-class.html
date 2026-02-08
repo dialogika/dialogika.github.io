@@ -62,6 +62,9 @@
     <script src="../assets/part/modals/modal-component.js"></script>
     <script src="../assets/part/pricing/pricing.css"></script>
 
+    <!-- Team Mentor Diamond Grid CSS -->
+    <link href="../assets/part/team-mentor/style.css" rel="stylesheet">
+
     <!-- Template Main CSS File -->
     <link href="../assets/css/style.css" rel="stylesheet">
 
@@ -245,7 +248,7 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-8 d-none d-lg-block">
                         <!-- Hero Image -->
                         <!-- Hero Image Collage -->
                         <div class="hero-collage mb-4" data-aos="zoom-in" data-aos-duration="1000">
@@ -449,14 +452,21 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-12">
+                        <style>
+                            @media (max-width: 991.98px) {
+                                .course-info-card {
+                                    margin-top: 0 !important;
+                                }
+                            }
+                        </style>
                         <div class="course-info-card p-4 bg-white rounded shadow-sm" data-aos="fade-left"
                             data-aos-delay="200" style="border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
                             <!-- Video Preview -->
-                            <div class="video-box mb-4 position-relative overflow-hidden rounded"
-                                style="border-radius: 15px;">
+                            <div class="video-box mb-4 position-relative overflow-hidden"
+                                style="margin: -1.5rem -1.5rem 1rem -1.5rem; border-radius: 15px 15px 15px 15px;">
                                 <img src="../assets/img/program/first-class/IMG_5300.JPG" class="img-fluid w-100"
-                                    alt="Preview Kelas" style="height: 200px; object-fit: cover;">
+                                    alt="Preview Kelas" style="height: 220px; object-fit: cover;">
                                 <a href="https://youtu.be/-oeLrO7nHv0"
                                     class="glightbox play-btn position-absolute top-50 start-50 translate-middle"></a>
                             </div>
@@ -788,7 +798,7 @@
 
                             <!-- Quality Assurance -->
                             <p class="text-center mt-3 mb-0 text-muted" style="font-size: 13px;">
-                                <i class='bx bx-shield-quarter me-1'></i> Jaminan Kualitas Dialogika
+                                <i class='bx bxl-whatsapp me-1'></i> Hubungi Admin untuk Informasi lebih lanjut
                             </p>
 
                             <!-- Mentor Section (Moved inside card as requested to keep content) -->
@@ -815,8 +825,8 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="section-title" data-aos="fade-right">
-                            <h5>Positive Feedback</h5>
-                            <h3>Testimony</h3>
+                            <h5>Testimonials</h5>
+                            <h3>Positive Feedback</h3>
                             <p class="text-start">
                                 Semua testimonial yang ada disini adalah member yang mengikuti
                                 kelas online, offline, anak dan juga program khusus korporasi,
@@ -2157,34 +2167,159 @@
         </section><!-- End Departments Section -->
 
         <!-- ======= Doctors Section ======= -->
-        <section id="doctors" class="doctors">
+        <section id="doctors" class="" style="box-sizing: border-box; padding: 60px 0">
             <div class="container">
+                <div class="row d-flex justify-content-center flex-md-row flex-column-reverse">
+                    <div class="col-md-8 order-md-2">
+                        <ul class="team-members-triangle list-unstyled">
+                            <!-- single member row starts -->
+                            <li class="clearfix mb-4">
+                                <div class="member-details-triangle">
+                                    <div>
+                                        <img src="../assets/img/mentor/fanny.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
+                                            class="img-fluid" />
+                                        <div class="member-info-triangle">
+                                            <h3>Fanny Carolina</h3>
+                                            <p>Jogja</p>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <div class="row">
+                                <div class="member-details-triangle">
+                                    <div>
+                                        <img src="../assets/img/mentor/rio.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
+                                            class="img-fluid" />
+                                        <div class="member-info-triangle">
+                                            <h3>Rio Fariza</h3>
+                                            <p>Solo</p>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="col-lg-4">
+                                <div class="member-details-triangle">
+                                    <div>
+                                        <img src="../assets/img/mentor/sofari.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
+                                            class="img-fluid" />
+                                        <div class="member-info-triangle">
+                                            <h3>Ahmad Sofari</h3>
+                                            <p>Jogja</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- /single member row ends -->
+
+                            <!-- single member row starts -->
+                            <li class="clearfix mb-4">
+                                <div class="member-details-triangle">
+                                    <div>
+                                        <img src="../assets/img/mentor/aditya-diah.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
+                                            class="img-fluid" />
+                                        <div class="member-info-triangle">
+                                            <h3>Aditya Dyah</h3>
+                                            <p>Banjarbaru</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="member-details-triangle">
+                                    <div>
+                                        <img src="../assets/img/mentor/pitta.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
+                                            class="img-fluid" />
+                                        <div class="member-info-triangle">
+                                            <h3>Pitta Sekar</h3>
+                                            <p>Tangsel</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="member-details-triangle">
+                                    <div>
+                                        <img src="../assets/img/mentor/fajar.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
+                                            class="img-fluid" />
+                                        <div class="member-info-triangle">
+                                            <h3>Muhammad Fajar</h3>
+                                            <p>Jogja</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- /single member row ends -->
+
+                            <!-- single member row starts -->
+                            <li class="clearfix mb-4">
+                                <div class="member-details-triangle more-button">
+                                    <a href="../mentor/" style="text-decoration: none; display: block;">
+                                         <div class="more-box" style="background: linear-gradient(135deg, #0b2b6a 0%, #1a4b9c 100%); position: relative; overflow: hidden; border-radius: 8px; transition: transform 0.4s ease, box-shadow 0.4s ease;">
+                                            <div style="width: 100%; padding-bottom: 100%;"></div>
+                                            <div class="more-text-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); text-align: center; z-index: 2;">
+                                                <h3 style="color: #fff; font-size: 16px; font-weight: 700; text-transform: uppercase; margin: 0;">MORE</h3>
+                                                <!-- <p style="color: rgba(255,255,255,0.8); font-size: 20px; margin: 5px 0 0 0;"><i class='bx bx-right-arrow-alt'></i></p> -->
+                                            </div>
+                                        </div>
+                                        <style>
+                                            @media (max-width: 550px) {
+                                                .more-text-container {
+                                                    transform: translate(-50%, -50%) rotate(0deg) !important;
+                                                }
+                                            }
+                                        </style>
+                                    </a>
+                                </div>
+                                <style>
+                                    .more-button:hover .more-box {
+                                        transform: scale(1.1);
+                                        box-shadow: 0 10px 30px rgba(11, 43, 106, 0.4);
+                                    }
+                                </style>
+
+                                <div class="member-details-triangle">
+                                    <div>
+                                        <img src="../assets/img/mentor/audie.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
+                                            class="img-fluid" />
+                                        <div class="member-info-triangle">
+                                            <h3>Audie Ihza</h3>
+                                            <p>Jogja</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="member-details-triangle">
+                                    <div>
+                                        <img src="../assets/img/mentor/panji.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
+                                            class="img-fluid" />
+                                        <div class="member-info-triangle">
+                                            <h3>Panji Putra</h3>
+                                            <p>Karang Anyar</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- /single member row ends -->
+                        </ul>
+                        <!-- /end team-photos -->
+                    </div>
+                    <!-- /end col-md-8 -->
+
+                    <div class="col-md-4 order-md-1 text-center text-md-start">
                         <div class="section-title" data-aos="fade-right">
                             <h5>Mentor</h5>
                             <h3>Public Speaker</h3>
-                            <p class="text-start">Berikut ini adalah list mentor aktif di Dialogika baik mentor kelas
-                                online dan offline</p>
-                            <div class="text-start" style="margin-top:20px;">
+                            <p class="text-start">
+                                Berikut ini adalah list mentor aktif di Dialogika baik mentor
+                                kelas online dan offline
+                            </p>
+                            <div class="text-start" style="margin-top: 20px">
                                 <a href="../mentor/">List Mentor</a>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-8">
-                        <!-- Lokasi untuk data dan script mentor-mentor berada di assets/part/landscape-mentor-card/landscape-mentor-card.js -->
-                        <!-- Untuk mentor-card, perlu 2 attribute dan 1 Opsional. Yaitu class-type=(Online atau Offline), teaching=(Kids atau Adult) -->
-                        <!-- Attribute opsional yaitu location=(Online, Yogyakarta, Jakarta Barat, dll)" -->
-                        <mentor-card class-type="Offline" teaching="Adult" location="Yogyakarta"></mentor-card>
-                    </div>
-
+                    <!-- /end col-md-4 -->
                 </div>
-
+                <!-- /end row -->
             </div>
-        </section><!-- End Doctors Section -->
+            <!-- /end container -->
+        </section><!-- End Mentor Section -->
 
         <!-- ======= Pricing Section ======= -->
         <section class="section bg-light pricing custom-pricing" id="pricing">
