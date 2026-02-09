@@ -1321,7 +1321,7 @@ html {
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(11, 43, 106, 0.3);
+  box-shadow: 0 2px 8px rgba(114, 4, 207, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1329,7 +1329,7 @@ html {
 
 .carousel-nav-btn:hover:not(:disabled) {
   background: linear-gradient(to bottom, #0b2b6a 5%, #0f61a8 100%);
-  box-shadow: 0 6px 20px rgba(11, 43, 106, 0.4);
+  box-shadow: 0 4px 12px rgba(114, 4, 207, 0.5);
   transform: translateY(-50%) scale(1.1);
 }
 
