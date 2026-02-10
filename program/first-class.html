@@ -583,7 +583,8 @@
 
                             <!-- CTA Button -->
                             <div class="mt-4">
-                                <a href="#contact" class="appointment-btn w-100 d-block text-center" style="margin-left: 0;">Daftar <span class="d-md-inline">Sekarang</span></a>
+                                <a href="#contact" class="appointment-btn w-100 d-block text-center"
+                                    style="margin-left: 0;">Daftar <span class="d-md-inline">Sekarang</span></a>
                             </div>
 
                             <!-- Class Available Section -->
@@ -591,204 +592,217 @@
                                 <h6 class="fw-bold mb-3" style="color: #0b2b6a; font-size: 14px;">
                                     <i class='bx bxs-calendar-check me-1'></i> Kelas Tersedia
                                 </h6>
-                                
+
                                 <!-- Container for dynamic batch cards from Firebase -->
                                 <div id="classBatchContainer">
-                                <style>
-                                    .class-batch-card {
-                                        display: flex;
-                                        align-items: center;
-                                        gap: 12px;
-                                        padding: 12px;
-                                        background: #fff;
-                                        border-radius: 12px;
-                                        margin-bottom: 10px;
-                                        border: 1px solid #e9ecef;
-                                        transition: all 0.3s ease;
-                                    }
-                                    .class-batch-card:hover {
-                                        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                                        transform: translateY(-2px);
-                                    }
-                                    .class-batch-card:last-child {
-                                        margin-bottom: 0;
-                                    }
-                                    .batch-status {
-                                        width: 50px;
-                                        height: 50px;
-                                        border-radius: 10px;
-                                        display: flex;
-                                        flex-direction: column;
-                                        align-items: center;
-                                        justify-content: center;
-                                        flex-shrink: 0;
-                                    }
-                                    .batch-status.open {
-                                        background: linear-gradient(to bottom, #009961 5%, #006a4e 100%);
-                                    }
-                                    .batch-status.closed {
-                                        background: linear-gradient(135deg, #3d3e3f 0%, #3d3e3f 100%);
-                                    }
-                                    /* Disabled styling for closed batch cards */
-                                    .class-batch-card:has(.batch-status.closed) {
-                                        opacity: 0.5;
-                                        cursor: not-allowed;
-                                        pointer-events: none;
-                                    }
-                                    .class-batch-card:has(.batch-status.closed):hover {
-                                        box-shadow: none;
-                                        transform: none;
-                                    }
-                                    .batch-status-text {
-                                        font-size: 8px;
-                                        font-weight: 700;
-                                        color: #fff;
-                                        text-transform: uppercase;
-                                        letter-spacing: 0.5px;
-                                    }
-                                    .batch-status-icon {
-                                        font-size: 18px;
-                                        color: #fff;
-                                    }
-                                    .batch-info h6 {
-                                        font-size: 13px;
-                                        font-weight: 700;
-                                        color: #2d3436;
-                                        margin-bottom: 4px;
-                                    }
-                                    .batch-info .batch-meta {
-                                        font-size: 11px;
-                                        color: #636e72;
-                                        display: flex;
-                                        flex-wrap: wrap;
-                                        gap: 8px;
-                                    }
-                                    .batch-info .batch-meta span {
-                                        display: flex;
-                                        align-items: center;
-                                        gap: 3px;
-                                    }
-                                    .batch-info .batch-meta i {
-                                        font-size: 12px;
-                                    }
-                                </style>
+                                    <style>
+                                        .class-batch-card {
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 12px;
+                                            padding: 12px;
+                                            background: #fff;
+                                            border-radius: 12px;
+                                            margin-bottom: 10px;
+                                            border: 1px solid #e9ecef;
+                                            transition: all 0.3s ease;
+                                        }
 
-                                <!-- Batch 1 - Closed -->
-                                <div class="class-batch-card">
-                                    <div class="batch-status closed">
-                                        <i class='bx bxs-door-open batch-status-icon'></i>
-                                        <span class="batch-status-text">Closed</span>
-                                    </div>
-                                    <div class="batch-info">
-                                        <h6>First Class Januari #1</h6>
-                                        <div class="batch-meta">
-                                            <span><i class='bx bxs-calendar'></i> 1 Jan, 15:44</span>
-                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                        .class-batch-card:hover {
+                                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                                            transform: translateY(-2px);
+                                        }
+
+                                        .class-batch-card:last-child {
+                                            margin-bottom: 0;
+                                        }
+
+                                        .batch-status {
+                                            width: 50px;
+                                            height: 50px;
+                                            border-radius: 10px;
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                            justify-content: center;
+                                            flex-shrink: 0;
+                                        }
+
+                                        .batch-status.open {
+                                            background: linear-gradient(to bottom, #009961 5%, #006a4e 100%);
+                                        }
+
+                                        .batch-status.closed {
+                                            background: linear-gradient(135deg, #3d3e3f 0%, #3d3e3f 100%);
+                                        }
+
+                                        /* Disabled styling for closed batch cards */
+                                        .class-batch-card:has(.batch-status.closed) {
+                                            opacity: 0.5;
+                                            cursor: not-allowed;
+                                            pointer-events: none;
+                                        }
+
+                                        .class-batch-card:has(.batch-status.closed):hover {
+                                            box-shadow: none;
+                                            transform: none;
+                                        }
+
+                                        .batch-status-text {
+                                            font-size: 8px;
+                                            font-weight: 700;
+                                            color: #fff;
+                                            text-transform: uppercase;
+                                            letter-spacing: 0.5px;
+                                        }
+
+                                        .batch-status-icon {
+                                            font-size: 18px;
+                                            color: #fff;
+                                        }
+
+                                        .batch-info h6 {
+                                            font-size: 13px;
+                                            font-weight: 700;
+                                            color: #2d3436;
+                                            margin-bottom: 4px;
+                                        }
+
+                                        .batch-info .batch-meta {
+                                            font-size: 11px;
+                                            color: #636e72;
+                                            display: flex;
+                                            flex-wrap: wrap;
+                                            gap: 8px;
+                                        }
+
+                                        .batch-info .batch-meta span {
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 3px;
+                                        }
+
+                                        .batch-info .batch-meta i {
+                                            font-size: 12px;
+                                        }
+                                    </style>
+
+                                    <!-- Batch 1 - Closed -->
+                                    <div class="class-batch-card">
+                                        <div class="batch-status closed">
+                                            <i class='bx bxs-door-open batch-status-icon'></i>
+                                            <span class="batch-status-text">Closed</span>
+                                        </div>
+                                        <div class="batch-info">
+                                            <h6>First Class Januari #1</h6>
+                                            <div class="batch-meta">
+                                                <span><i class='bx bxs-calendar'></i> 1 Jan, 15:44</span>
+                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Batch 2 - Closed -->
-                                <div class="class-batch-card">
-                                    <div class="batch-status closed">
-                                        <i class='bx bxs-lock-alt batch-status-icon'></i>
-                                        <span class="batch-status-text">Closed</span>
-                                    </div>
-                                    <div class="batch-info">
-                                        <h6>First Class Januari #2</h6>
-                                        <div class="batch-meta">
-                                            <span><i class='bx bxs-calendar'></i> 10 Jan, 15:30</span>
-                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                    <!-- Batch 2 - Closed -->
+                                    <div class="class-batch-card">
+                                        <div class="batch-status closed">
+                                            <i class='bx bxs-lock-alt batch-status-icon'></i>
+                                            <span class="batch-status-text">Closed</span>
+                                        </div>
+                                        <div class="batch-info">
+                                            <h6>First Class Januari #2</h6>
+                                            <div class="batch-meta">
+                                                <span><i class='bx bxs-calendar'></i> 10 Jan, 15:30</span>
+                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Batch 3 - Closed -->
-                                <div class="class-batch-card">
-                                    <div class="batch-status closed">
-                                        <i class='bx bxs-door-open batch-status-icon'></i>
-                                        <span class="batch-status-text">Closed</span>
-                                    </div>
-                                    <div class="batch-info">
-                                        <h6>First Class Januari #3</h6>
-                                        <div class="batch-meta">
-                                            <span><i class='bx bxs-calendar'></i> 15 Jan, 10:00</span>
-                                            <span><i class='bx bxs-user'></i> Salsabila Astaria</span>
+                                    <!-- Batch 3 - Closed -->
+                                    <div class="class-batch-card">
+                                        <div class="batch-status closed">
+                                            <i class='bx bxs-door-open batch-status-icon'></i>
+                                            <span class="batch-status-text">Closed</span>
+                                        </div>
+                                        <div class="batch-info">
+                                            <h6>First Class Januari #3</h6>
+                                            <div class="batch-meta">
+                                                <span><i class='bx bxs-calendar'></i> 15 Jan, 10:00</span>
+                                                <span><i class='bx bxs-user'></i> Salsabila Astaria</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Batch 4 - Closed -->
-                                <div class="class-batch-card">
-                                    <div class="batch-status closed">
-                                        <i class='bx bxs-door-open batch-status-icon'></i>
-                                        <span class="batch-status-text">Closed</span>
-                                    </div>
-                                    <div class="batch-info">
-                                        <h6>First Class Januari #4</h6>
-                                        <div class="batch-meta">
-                                            <span><i class='bx bxs-calendar'></i> 20 Jan, 10:00</span>
-                                            <span><i class='bx bxs-user'></i> Salsabila Astaria</span>
+                                    <!-- Batch 4 - Closed -->
+                                    <div class="class-batch-card">
+                                        <div class="batch-status closed">
+                                            <i class='bx bxs-door-open batch-status-icon'></i>
+                                            <span class="batch-status-text">Closed</span>
+                                        </div>
+                                        <div class="batch-info">
+                                            <h6>First Class Januari #4</h6>
+                                            <div class="batch-meta">
+                                                <span><i class='bx bxs-calendar'></i> 20 Jan, 10:00</span>
+                                                <span><i class='bx bxs-user'></i> Salsabila Astaria</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="class-batch-card">
-                                    <div class="batch-status open">
-                                        <i class='bx bxs-door-open batch-status-icon'></i>
-                                        <span class="batch-status-text">Open</span>
-                                    </div>
-                                    <div class="batch-info">
-                                        <h6>First Class Februari #1</h6>
-                                        <div class="batch-meta">
-                                            <span><i class='bx bxs-calendar'></i> 1 Feb, 15:44</span>
-                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                    <div class="class-batch-card">
+                                        <div class="batch-status open">
+                                            <i class='bx bxs-door-open batch-status-icon'></i>
+                                            <span class="batch-status-text">Open</span>
+                                        </div>
+                                        <div class="batch-info">
+                                            <h6>First Class Februari #1</h6>
+                                            <div class="batch-meta">
+                                                <span><i class='bx bxs-calendar'></i> 1 Feb, 15:44</span>
+                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="class-batch-card">
-                                    <div class="batch-status open">
-                                        <i class='bx bxs-door-open batch-status-icon'></i>
-                                        <span class="batch-status-text">Open</span>
-                                    </div>
-                                    <div class="batch-info">
-                                        <h6>First Class Februari #2</h6>
-                                        <div class="batch-meta">
-                                            <span><i class='bx bxs-calendar'></i> 8 Feb, 15:44</span>
-                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                    <div class="class-batch-card">
+                                        <div class="batch-status open">
+                                            <i class='bx bxs-door-open batch-status-icon'></i>
+                                            <span class="batch-status-text">Open</span>
+                                        </div>
+                                        <div class="batch-info">
+                                            <h6>First Class Februari #2</h6>
+                                            <div class="batch-meta">
+                                                <span><i class='bx bxs-calendar'></i> 8 Feb, 15:44</span>
+                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="class-batch-card">
-                                    <div class="batch-status open">
-                                        <i class='bx bxs-door-open batch-status-icon'></i>
-                                        <span class="batch-status-text">Open</span>
-                                    </div>
-                                    <div class="batch-info">
-                                        <h6>First Class Februari #3</h6>
-                                        <div class="batch-meta">
-                                            <span><i class='bx bxs-calendar'></i> 15 Feb, 15:44</span>
-                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                    <div class="class-batch-card">
+                                        <div class="batch-status open">
+                                            <i class='bx bxs-door-open batch-status-icon'></i>
+                                            <span class="batch-status-text">Open</span>
+                                        </div>
+                                        <div class="batch-info">
+                                            <h6>First Class Februari #3</h6>
+                                            <div class="batch-meta">
+                                                <span><i class='bx bxs-calendar'></i> 15 Feb, 15:44</span>
+                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="class-batch-card">
-                                    <div class="batch-status open">
-                                        <i class='bx bxs-door-open batch-status-icon'></i>
-                                        <span class="batch-status-text">Open</span>
-                                    </div>
-                                    <div class="batch-info">
-                                        <h6>First Class Februari #4</h6>
-                                        <div class="batch-meta">
-                                            <span><i class='bx bxs-calendar'></i> 22 Feb, 15:44</span>
-                                            <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                    <div class="class-batch-card">
+                                        <div class="batch-status open">
+                                            <i class='bx bxs-door-open batch-status-icon'></i>
+                                            <span class="batch-status-text">Open</span>
+                                        </div>
+                                        <div class="batch-info">
+                                            <h6>First Class Februari #4</h6>
+                                            <div class="batch-meta">
+                                                <span><i class='bx bxs-calendar'></i> 22 Feb, 15:44</span>
+                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                </div><!-- End classBatchContainer -->    
+                                </div><!-- End classBatchContainer -->
                             </div>
 
                             <!-- Quality Assurance -->
@@ -2171,8 +2185,8 @@
                             <li class="clearfix mb-4">
                                 <div class="member-details-triangle">
                                     <div>
-                                        <img src="../assets/img/mentor/fanny.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
-                                            class="img-fluid" />
+                                        <img src="../assets/img/mentor/fanny.jpg" alt="Kelas Public Speaking Jogja"
+                                            loading="lazy" class="img-fluid" />
                                         <div class="member-info-triangle">
                                             <h3>Fanny Carolina</h3>
                                             <p>Jogja</p>
@@ -2182,8 +2196,8 @@
 
                                 <div class="member-details-triangle">
                                     <div>
-                                        <img src="../assets/img/mentor/rio.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
-                                            class="img-fluid" />
+                                        <img src="../assets/img/mentor/rio.jpg" alt="Kelas Public Speaking Jogja"
+                                            loading="lazy" class="img-fluid" />
                                         <div class="member-info-triangle">
                                             <h3>Rio Fariza</h3>
                                             <p>Solo</p>
@@ -2193,8 +2207,8 @@
 
                                 <div class="member-details-triangle">
                                     <div>
-                                        <img src="../assets/img/mentor/sofari.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
-                                            class="img-fluid" />
+                                        <img src="../assets/img/mentor/sofari.jpg" alt="Kelas Public Speaking Jogja"
+                                            loading="lazy" class="img-fluid" />
                                         <div class="member-info-triangle">
                                             <h3>Ahmad Sofari</h3>
                                             <p>Jogja</p>
@@ -2208,8 +2222,8 @@
                             <li class="clearfix mb-4">
                                 <div class="member-details-triangle">
                                     <div>
-                                        <img src="../assets/img/mentor/aditya-diah.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
-                                            class="img-fluid" />
+                                        <img src="../assets/img/mentor/aditya-diah.jpg"
+                                            alt="Kelas Public Speaking Jogja" loading="lazy" class="img-fluid" />
                                         <div class="member-info-triangle">
                                             <h3>Aditya Dyah</h3>
                                             <p>Banjarbaru</p>
@@ -2219,8 +2233,8 @@
 
                                 <div class="member-details-triangle">
                                     <div>
-                                        <img src="../assets/img/mentor/pitta.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
-                                            class="img-fluid" />
+                                        <img src="../assets/img/mentor/pitta.jpg" alt="Kelas Public Speaking Jogja"
+                                            loading="lazy" class="img-fluid" />
                                         <div class="member-info-triangle">
                                             <h3>Pitta Sekar</h3>
                                             <p>Tangsel</p>
@@ -2230,8 +2244,8 @@
 
                                 <div class="member-details-triangle">
                                     <div>
-                                        <img src="../assets/img/mentor/fajar.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
-                                            class="img-fluid" />
+                                        <img src="../assets/img/mentor/fajar.jpg" alt="Kelas Public Speaking Jogja"
+                                            loading="lazy" class="img-fluid" />
                                         <div class="member-info-triangle">
                                             <h3>Muhammad Fajar</h3>
                                             <p>Jogja</p>
@@ -2245,10 +2259,14 @@
                             <li class="clearfix mb-4">
                                 <div class="member-details-triangle more-button">
                                     <a href="../mentor/" style="text-decoration: none; display: block;">
-                                         <div class="more-box" style="background: linear-gradient(135deg, #0b2b6a 0%, #1a4b9c 100%); position: relative; overflow: hidden; border-radius: 8px; transition: transform 0.4s ease, box-shadow 0.4s ease;">
+                                        <div class="more-box"
+                                            style="background: linear-gradient(135deg, #0b2b6a 0%, #1a4b9c 100%); position: relative; overflow: hidden; border-radius: 8px; transition: transform 0.4s ease, box-shadow 0.4s ease;">
                                             <div style="width: 100%; padding-bottom: 100%;"></div>
-                                            <div class="more-text-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); text-align: center; z-index: 2;">
-                                                <h3 style="color: #fff; font-size: 16px; font-weight: 700; text-transform: uppercase; margin: 0;">MORE</h3>
+                                            <div class="more-text-container"
+                                                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); text-align: center; z-index: 2;">
+                                                <h3
+                                                    style="color: #fff; font-size: 16px; font-weight: 700; text-transform: uppercase; margin: 0;">
+                                                    MORE</h3>
                                                 <!-- <p style="color: rgba(255,255,255,0.8); font-size: 20px; margin: 5px 0 0 0;"><i class='bx bx-right-arrow-alt'></i></p> -->
                                             </div>
                                         </div>
@@ -2270,8 +2288,8 @@
 
                                 <div class="member-details-triangle">
                                     <div>
-                                        <img src="../assets/img/mentor/audie.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
-                                            class="img-fluid" />
+                                        <img src="../assets/img/mentor/audie.jpg" alt="Kelas Public Speaking Jogja"
+                                            loading="lazy" class="img-fluid" />
                                         <div class="member-info-triangle">
                                             <h3>Audie Ihza</h3>
                                             <p>Jogja</p>
@@ -2281,8 +2299,8 @@
 
                                 <div class="member-details-triangle">
                                     <div>
-                                        <img src="../assets/img/mentor/panji.jpg" alt="Kelas Public Speaking Jogja" loading="lazy"
-                                            class="img-fluid" />
+                                        <img src="../assets/img/mentor/panji.jpg" alt="Kelas Public Speaking Jogja"
+                                            loading="lazy" class="img-fluid" />
                                         <div class="member-info-triangle">
                                             <h3>Panji Putra</h3>
                                             <p>Karang Anyar</p>
@@ -2396,7 +2414,7 @@
                                             </div>
 
                                             <h5 class="fw-normal">First Class : Yogyakarta </h5>
-                                            <h1 class="pricing-title mt-3 mb-0">IDR 1.897.000
+                                            <h1 class="pricing-title mt-3 mb-0">IDR 3.000.000
 
                                                 <span class="d-block f-13 text-muted">
                                                     <strike>IDR 3.000.000</strike>
@@ -3121,7 +3139,7 @@
 
     <!-- Class Available Firebase Integration -->
     <script>
-        (function() {
+        (function () {
             // Firebase configuration (same as class-available.html)
             const firebaseConfig = {
                 apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
@@ -3157,12 +3175,12 @@
                 try {
                     const date = new Date(dateStr);
                     if (isNaN(date.getTime())) return dateStr;
-                    
+
                     const day = date.getDate();
                     const month = date.toLocaleString('id-ID', { month: 'short' });
                     const hour = date.getHours().toString().padStart(2, '0');
                     const minute = date.getMinutes().toString().padStart(2, '0');
-                    
+
                     return `${day} ${month}, ${hour}:${minute}`;
                 } catch (e) {
                     return dateStr;
@@ -3188,7 +3206,7 @@
                     snapshot.forEach(doc => {
                         const data = doc.data();
                         const className = data.name || '';
-                        
+
                         // Filter only First Class entries
                         if (className.toLowerCase().includes('first class')) {
                             classes.push({
@@ -3224,7 +3242,7 @@
                         const seatsLeft = item.max_seat - item.current_joined;
                         const closed = isBatchClosed(item.start_date);
                         const isOpen = !closed && seatsLeft > 0;
-                        
+
                         const statusClass = isOpen ? 'open' : 'closed';
                         const statusIcon = isOpen ? 'bxs-door-open' : 'bxs-lock-alt';
                         const statusText = isOpen ? 'Open' : 'Closed';
@@ -3268,6 +3286,242 @@
         })();
     </script>
 
+    <!-- Discount Promo Modal -->
+    <div class="modal fade" id="promoDiscountModal" tabindex="-1" aria-labelledby="promoDiscountModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content overflow-hidden border-0 shadow-lg" style="border-radius: 20px;">
+                <div class="modal-header border-0 p-0 position-relative">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3 z-3 bg-white p-2"
+                        data-bs-dismiss="modal" aria-label="Close"
+                        style="opacity: 0.9; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"></button>
+                    <div class="w-100 bg-primary text-white text-center py-4 position-relative overflow-hidden"
+                        style="background: linear-gradient(135deg, #0b2b6a 0%, #2980b9 100%);">
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                            style="background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);">
+                        </div>
+                        <h5 class="modal-title fw-bold mb-1 position-relative">LIMITED FLASH SALE!</h5>
+                        <p class="mb-0 small text-white-50 position-relative">Kesempatan Terbatas Hari Ini</p>
+                    </div>
+                </div>
+                <div class="modal-body text-center px-4 py-4 bg-light">
+
+                    <div class="d-inline-block mb-3 animate__animated animate__pulse animate__infinite">
+                        <span class="badge bg-danger rounded-pill px-3 py-2 fs-6 shadow-sm">
+                            <i class='bx bxs-hot me-1'></i> Sisa Kuota: <span id="quota-value" class="fw-bold">5</span>
+                            Orang
+                        </span>
+                    </div>
+
+                    <h3 class="fw-bold mb-2 text-dark">Potongan Spesial!</h3>
+                    <p class="text-muted mb-4 small">Dapatkan harga khusus untuk pendaftaran <b>First Class</b> dan
+                        <b>First Private</b> sekarang juga.
+                    </p>
+
+                    <div class="card border-2 border-dashed border-primary bg-white mb-4 position-relative">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class='bx bxs-coupon text-warning fs-1 me-3'></i>
+                                <div class="text-start">
+                                    <h5 class="fw-bold text-primary mb-0 ls-1">HEMAT 40%</h5>
+                                    <small class="text-muted" style="font-size: 10px;">Kode Voucher Otomatis</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute top-0 start-50 translate-middle badge bg-primary px-2 py-1 rounded-pill"
+                            style="font-size: 10px;">
+                            RECOMMENDED
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-primary btn-lg fw-bold shadow-sm" id="btnClaimPromo"
+                            onclick="claimPromoDiscount()">
+                            AMBIL DISKON SEKARANG
+                        </button>
+                        <button type="button" class="btn btn-link text-muted text-decoration-none btn-sm"
+                            data-bs-dismiss="modal">
+                            Nanti saja, terima kasih
+                        </button>
+                    </div>
+
+                    <div class="mt-3 text-start">
+                        <div class="d-flex align-items-center justify-content-center gap-2">
+                            <div class="d-flex align-items-center">
+                                <i class='bx bxs-user-circle text-muted me-1'></i>
+                                <small class="text-muted fst-italic" style="font-size: 11px;">Budi baru saja
+                                    mengklaim</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promo Logic Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Configuration
+            const PROMO_STORAGE_KEY = 'dialogika_firstclass_promo_claimed';
+            const DISCOUNT_RATE = 0.40; // 40% Discount
+            const QUOTA_START = 5;
+
+            // State
+            let promoActive = false;
+            let quotaCount = QUOTA_START;
+
+            // Elements
+            const modalEl = document.getElementById('promoDiscountModal');
+            const quotaEl = document.getElementById('quota-value');
+            const btnClaim = document.getElementById('btnClaimPromo');
+            const pricingSection = document.getElementById('pricing');
+
+            // Bootstrap Modal Instance
+            let promoModal;
+            if (typeof bootstrap !== 'undefined') {
+                promoModal = new bootstrap.Modal(modalEl);
+            }
+
+            // 1. Trigger Modal on Scroll
+            if (pricingSection && !sessionStorage.getItem('promoModalSeen')) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Show modal after delay
+                            setTimeout(() => {
+                                if (promoModal && !promoActive) {
+                                    promoModal.show();
+                                    sessionStorage.setItem('promoModalSeen', 'true');
+                                    startQuotaSimulation();
+                                }
+                            }, 2000);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                observer.observe(pricingSection);
+            }
+
+            // 2. Simulate Quota Dropping
+            function startQuotaSimulation() {
+                const interval = setInterval(() => {
+                    if (quotaCount > 2 && !promoActive) {
+                        quotaCount--;
+                        quotaEl.textContent = quotaCount;
+                        quotaEl.parentElement.classList.add('animate__rubberBand');
+                        setTimeout(() => quotaEl.parentElement.classList.remove('animate__rubberBand'), 1000);
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 4000); // Drop 1 every 4 seconds
+            }
+
+            // 3. Claim Discount Function
+            window.claimPromoDiscount = function () {
+                promoActive = true;
+                btnClaim.innerHTML = '<i class="bx bx-check-circle"></i> BERHASIL DIKLAIM!';
+                btnClaim.classList.remove('btn-primary');
+                btnClaim.classList.add('btn-success');
+
+                // Store in session
+                sessionStorage.setItem(PROMO_STORAGE_KEY, 'true');
+
+                setTimeout(() => {
+                    if (promoModal) promoModal.hide();
+                    applyDiscountToDOM();
+                    // Scroll to pricing
+                    pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 1000);
+            };
+
+            // 4. Render 'Use Coupon' Buttons
+            function renderUseCouponButtons() {
+                if (sessionStorage.getItem('dialogika_firstclass_promo_applied') === 'true') return;
+
+                const registerButtons = document.querySelectorAll('.title-change-registration');
+
+                registerButtons.forEach(btn => {
+                    const parent = btn.parentElement;
+                    if (parent.querySelector('.btn-use-coupon')) return;
+
+                    const couponBtn = document.createElement('button');
+                    couponBtn.className = 'btn btn-warning w-100 mb-2 btn-use-coupon fw-bold text-dark';
+                    couponBtn.innerHTML = '<i class="bx bxs-coupon"></i> Gunakan Kupon Hemat 10%';
+                    couponBtn.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                    couponBtn.onclick = function () {
+                        applyDiscountToDOM();
+                        document.querySelectorAll('.btn-use-coupon').forEach(b => {
+                            b.innerHTML = '<i class="bx bx-check"></i> Kupon Terpasang';
+                            b.classList.remove('btn-warning', 'text-dark');
+                            b.classList.add('btn-secondary', 'text-white');
+                            b.disabled = true;
+                            b.style.display = 'none';
+                        });
+                    };
+
+                    parent.insertBefore(couponBtn, btn);
+                });
+            }
+
+            // 5. Apply Discount to DOM
+            function applyDiscountToDOM() {
+                sessionStorage.setItem('dialogika_firstclass_promo_applied', 'true');
+                const priceTitles = document.querySelectorAll('.pricing-title');
+
+                priceTitles.forEach(title => {
+                    if (title.dataset.discounted) return;
+
+                    // Logic to extract price and update
+                    // Expected format: "IDR 1.897.000 <span...>"
+                    // We only care about the text node content start
+
+                    const originalHTML = title.innerHTML;
+                    const textContent = title.textContent.trim();
+                    const priceMatch = textContent.match(/IDR\s*([0-9.]+)/);
+
+                    if (priceMatch) {
+                        // Parse price (remove dots)
+                        const originalPrice = parseInt(priceMatch[1].replace(/\./g, ''));
+
+                        // Calculate new price
+                        let newPrice = originalPrice * (1 - DISCOUNT_RATE);
+                        // Round to nearest thousands for cleaner price
+                        newPrice = Math.ceil(newPrice / 1000) * 1000;
+
+                        const formattedNewPrice = 'IDR ' + newPrice.toLocaleString('id-ID');
+                        const formattedOriginalPrice = 'IDR ' + originalPrice.toLocaleString('id-ID');
+
+                        // Update DOM
+                        // We replace the main price text but keep the strike-through structure if exists
+                        // To be safe, we rebuild the inner HTML
+
+                        title.innerHTML = `
+                            ${formattedNewPrice}
+                            <span class="d-block f-13 text-muted">
+                                <strike>${formattedOriginalPrice}</strike> 
+                                <span class="badge bg-danger ms-1" style="font-size: 10px;">HEMAT 40%</span>
+                            </span>
+                        `;
+
+                        title.classList.add('text-success'); // Highlight
+                        title.dataset.discounted = 'true';
+                    }
+                });
+            }
+
+            // Check if already claimed/applied in this session
+            const claimed = sessionStorage.getItem(PROMO_STORAGE_KEY) === 'true';
+            const applied = sessionStorage.getItem('dialogika_firstclass_promo_applied') === 'true';
+
+            if (applied) {
+                applyDiscountToDOM();
+            } else if (claimed) {
+                renderUseCouponButtons();
+            }
+        });
+    </script>
 </body>
 
 </html>
