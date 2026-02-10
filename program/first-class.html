@@ -3612,12 +3612,18 @@
                         const formattedNewPrice = 'IDR ' + newPrice.toLocaleString('id-ID');
                         const formattedOriginalPrice = 'IDR ' + originalPrice.toLocaleString('id-ID');
 
+                        // Build referral code badge if available
+                        const referralBadge = REFERRAL_CODE 
+                            ? `<span class="badge bg-success ms-1" style="font-size: 10px;">Kode: ${REFERRAL_CODE}</span>`
+                            : '';
+
                         // Update DOM
                         title.innerHTML = `
                             ${formattedNewPrice}
                             <span class="d-block f-13 text-muted">
                                 <strike>${formattedOriginalPrice}</strike> 
                                 <span class="badge bg-danger ms-1" style="font-size: 10px;">HEMAT ${discountPercent}%</span>
+                                ${referralBadge}
                             </span>
                         `;
 
