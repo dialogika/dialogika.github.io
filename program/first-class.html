@@ -3220,8 +3220,21 @@
                         }
                     });
 
-                    // Sort by start_date descending (newest first)
+                    // Sort by status (open first) then by start_date descending
                     classes.sort((a, b) => {
+                        // Determine if each class is open or closed
+                        const seatsLeftA = a.max_seat - a.current_joined;
+                        const seatsLeftB = b.max_seat - b.current_joined;
+                        const closedA = isBatchClosed(a.start_date);
+                        const closedB = isBatchClosed(b.start_date);
+                        const isOpenA = !closedA && seatsLeftA > 0;
+                        const isOpenB = !closedB && seatsLeftB > 0;
+
+                        // First priority: open classes come before closed classes
+                        if (isOpenA && !isOpenB) return -1;
+                        if (!isOpenA && isOpenB) return 1;
+
+                        // Second priority: sort by start_date descending (newest first)
                         const dateA = new Date(a.start_date);
                         const dateB = new Date(b.start_date);
                         if (isNaN(dateA.getTime())) return 1;
