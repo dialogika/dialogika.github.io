@@ -2414,12 +2414,15 @@
                                             </div>
 
                                             <h5 class="fw-normal">First Class : Yogyakarta </h5>
-                                            <h1 class="pricing-title mt-3 mb-0">IDR 3.000.000
-
-                                                <span class="d-block f-13 text-muted">
-                                                    <strike>IDR 3.000.000</strike>
-                                                </span>
+                                            <h1 class="pricing-title mt-3 mb-0" id="price-first-class">IDR 3.000.000
                                             </h1>
+
+                                            <!-- Claim Discount Button (shown before popup) -->
+                                            <button class="btn btn-warning btn-sm mt-2 claim-discount-btn"
+                                                onclick="triggerPromoModal()"
+                                                style="font-size: 11px; padding: 4px 12px;">
+                                                <i class='bx bxs-discount'></i> Claim Diskon Spesial
+                                            </button>
                                             <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa
                                                 persiapan dan teratur
                                                 didalam berbicara</p>
@@ -2512,9 +2515,15 @@
                                                     50%!</span>
                                             </div>
                                             <h5 class="fw-normal">First Private : Yogyakarta</h5>
-                                            <h1 class="pricing-title mt-3 mb-0">IDR 5.000.000
-                                                <span class="f-13"> <strike>IDR 5.000.000</strike></span>
+                                            <h1 class="pricing-title mt-3 mb-0" id="price-first-private">IDR 5.000.000
                                             </h1>
+
+                                            <!-- Claim Discount Button (shown before popup) -->
+                                            <button class="btn btn-warning btn-sm mt-2 claim-discount-btn"
+                                                onclick="triggerPromoModal()"
+                                                style="font-size: 11px; padding: 4px 12px;">
+                                                <i class='bx bxs-discount'></i> Claim Diskon Spesial
+                                            </button>
                                             <p class="text-muted f-15 mt-3">Seperti First Class dengan jumlah 10x
                                                 pertemuan, materi
                                                 hanya terfokus ke body language, tidak sampai kepada konten pembicaraan
@@ -3551,6 +3560,22 @@
             // Initialize on load
             initializePromo();
 
+            // Global function to trigger promo modal manually
+            window.triggerPromoModal = function () {
+                if (promoModal) {
+                    // Reset the seen flag temporarily to allow re-showing
+                    promoModal.show();
+                    if (!promoActive) {
+                        startQuotaSimulation();
+                    }
+                    console.log('Promo modal triggered manually');
+                } else {
+                    console.error('Promo modal not initialized');
+                }
+            };
+
+
+
             // 1. Trigger Modal on Scroll
             if (pricingSection && !sessionStorage.getItem('promoModalSeen')) {
                 const observer = new IntersectionObserver((entries) => {
@@ -3643,6 +3668,11 @@
                 sessionStorage.setItem('dialogika_firstclass_promo_applied', 'true');
                 const priceTitles = document.querySelectorAll('.pricing-title');
                 const discountPercent = Math.round(DISCOUNT_RATE * 100);
+
+                // Hide all claim discount buttons
+                document.querySelectorAll('.claim-discount-btn').forEach(btn => {
+                    btn.style.display = 'none';
+                });
 
                 priceTitles.forEach(title => {
                     if (title.dataset.discounted) return;
