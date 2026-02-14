@@ -2974,21 +2974,27 @@
                                 <div class="col-md-6">
                                     <select name="Program" id="programs" class="form-control" required>
                                         <option value="" selected disabled>Program Yang Akan Diambil</option>
-                                        <optgroup label="First Class">
-                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Yogyakarta</option>
-                                        </optgroup>
-                                        <optgroup label="First Private">
-                                            <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Yogyakarta</option>
-                                        </optgroup>
+                                        <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">First Class Yogyakarta</option>
+                                        <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">First Private Yogyakarta</option>
                                     </select>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <input type="text" class="form-control" name="ReferralCode" id="referral-code"
                                         placeholder="Kode Referral (Opsional)" readonly>
                                     <small class="text-muted" style="font-size: 11px;">Kode referral akan terisi
                                         otomatis jika Anda menggunakan kupon diskon</small>
                                 </div>
+
+                                <div class="col-md-6" id="schedule-button-container" style="display: none;">
+                                    <button type="button" class="btn btn-primary w-100" id="btn-select-schedule" style="height: 38px;">
+                                        <i class='bx bx-calendar'></i> Pilih Jadwal
+                                    </button>
+                                    <small class="text-muted" style="font-size: 11px;">Pilih jadwal kelas yang tersedia</small>
+                                </div>
+
+                                <!-- Hidden input to store selected schedule -->
+                                <input type="hidden" id="selected-schedule-id" name="ScheduleId" value="">
 
                                 <div class="col-md-12">
                                     <textarea class="form-control" name="Ket" id="messages" rows="7"
@@ -3370,6 +3376,45 @@
         </div>
     </div>
 
+    <!-- Schedule Selection Modal -->
+    <div class="modal fade" id="scheduleSelectionModal" tabindex="-1" aria-labelledby="scheduleSelectionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content overflow-hidden border-0 shadow-lg" style="border-radius: 20px;">
+                <div class="modal-header border-0 p-0 position-relative">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3 z-3 bg-white p-2"
+                        data-bs-dismiss="modal" aria-label="Close"
+                        style="opacity: 0.9; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"></button>
+                    <div class="w-100 bg-primary text-white text-center py-4 position-relative overflow-hidden"
+                        style="background: linear-gradient(135deg, #0b2b6a 0%, #2980b9 100%);">
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                            style="background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);">
+                        </div>
+                        <h5 class="modal-title fw-bold mb-1 position-relative">Pilih Jadwal Kelas</h5>
+                        <p class="mb-0 small text-white-50 position-relative" id="selected-program-name">Pilih jadwal yang tersedia</p>
+                    </div>
+                </div>
+                <div class="modal-body p-4 bg-light" style="max-height: 500px; overflow-y: auto;">
+                    <div id="schedule-loading" class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-3 text-muted">Memuat jadwal tersedia...</p>
+                    </div>
+                    
+                    <div id="schedule-list" class="d-none">
+                        <!-- Schedules will be populated here by JavaScript -->
+                    </div>
+
+                    <div id="schedule-empty" class="text-center py-5 d-none">
+                        <i class='bx bx-calendar-x' style="font-size: 48px; color: #ccc;"></i>
+                        <p class="mt-3 text-muted">Tidak ada jadwal tersedia untuk program ini.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Promo Logic Script with Firebase Integration -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -3670,6 +3715,246 @@
             }
         });
     </script>
+
+    <!-- Schedule Selection Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const programSelect = document.getElementById('programs');
+            const scheduleButtonContainer = document.getElementById('schedule-button-container');
+            const btnSelectSchedule = document.getElementById('btn-select-schedule');
+            const scheduleModal = new bootstrap.Modal(document.getElementById('scheduleSelectionModal'));
+            const scheduleLoading = document.getElementById('schedule-loading');
+            const scheduleList = document.getElementById('schedule-list');
+            const scheduleEmpty = document.getElementById('schedule-empty');
+            const selectedProgramName = document.getElementById('selected-program-name');
+            const selectedScheduleInput = document.getElementById('selected-schedule-id');
+
+            // Program ID to name mapping
+            const programMapping = {
+                'b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16': 'First Class Yogyakarta',
+                '7b444128-987a-4888-b6a8-fdcb3122dd95': 'First Private Yogyakarta'
+            };
+
+            // Show/hide schedule button when program is selected
+            programSelect.addEventListener('change', function() {
+                if (this.value) {
+                    scheduleButtonContainer.style.display = 'block';
+                } else {
+                    scheduleButtonContainer.style.display = 'none';
+                }
+            });
+
+            // Open modal and load schedules when button is clicked
+            btnSelectSchedule.addEventListener('click', function() {
+                const selectedProgramId = programSelect.value;
+                if (!selectedProgramId) return;
+
+                const programName = programMapping[selectedProgramId];
+                selectedProgramName.textContent = programName;
+
+                // Show modal
+                scheduleModal.show();
+
+                // Load schedules
+                loadSchedules(programName);
+            });
+
+            // Format date to "25 Jan, 15:30"
+            function formatScheduleDate(dateStr) {
+                if (!dateStr || dateStr === 'Flexible') return 'Waktu Flexible';
+                try {
+                    const date = new Date(dateStr);
+                    if (isNaN(date.getTime())) return dateStr;
+
+                    const day = date.getDate();
+                    const month = date.toLocaleString('id-ID', { month: 'short' });
+                    const year = date.getFullYear();
+                    const hour = date.getHours().toString().padStart(2, '0');
+                    const minute = date.getMinutes().toString().padStart(2, '0');
+
+                    return `${day} ${month} ${year}, ${hour}:${minute} WIB`;
+                } catch (e) {
+                    return dateStr;
+                }
+            }
+
+            // Check if batch is closed
+            function isBatchClosed(startDate) {
+                if (!startDate || startDate === 'Flexible') return false;
+                try {
+                    const date = new Date(startDate);
+                    if (isNaN(date.getTime())) return false;
+                    return date.getTime() < Date.now();
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            // Load schedules from Firebase
+            async function loadSchedules(programName) {
+                // Show loading
+                scheduleLoading.classList.remove('d-none');
+                scheduleList.classList.add('d-none');
+                scheduleEmpty.classList.add('d-none');
+
+                try {
+                    // Get Firebase instance
+                    const db = firebase.firestore();
+
+                    // Query schedules
+                    const snapshot = await db.collection('class_availability').get();
+
+                    if (snapshot.empty) {
+                        showEmptyState();
+                        return;
+                    }
+
+                    // Filter schedules by program name
+                    const schedules = [];
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        const className = data.name || '';
+
+                        // Filter by program name (case insensitive)
+                        if (className.toLowerCase().includes(programName.toLowerCase().replace('yogyakarta', '').trim().toLowerCase())) {
+                            schedules.push({
+                                id: doc.id,
+                                name: className,
+                                max_seat: Number(data.max_seat || 0),
+                                current_joined: Number(data.current_joined || 0),
+                                start_date: data.start_date || 'Flexible',
+                                mentor_name: data.mentor_name || 'Mentor Dialogika'
+                            });
+                        }
+                    });
+
+                    if (schedules.length === 0) {
+                        showEmptyState();
+                        return;
+                    }
+
+                    // Sort by status (open first) then by start_date
+                    schedules.sort((a, b) => {
+                        const seatsLeftA = a.max_seat - a.current_joined;
+                        const seatsLeftB = b.max_seat - b.current_joined;
+                        const closedA = isBatchClosed(a.start_date);
+                        const closedB = isBatchClosed(b.start_date);
+                        const isOpenA = !closedA && seatsLeftA > 0;
+                        const isOpenB = !closedB && seatsLeftB > 0;
+
+                        if (isOpenA && !isOpenB) return -1;
+                        if (!isOpenA && isOpenB) return 1;
+
+                        const dateA = new Date(a.start_date);
+                        const dateB = new Date(b.start_date);
+                        if (isNaN(dateA.getTime())) return 1;
+                        if (isNaN(dateB.getTime())) return -1;
+                        return dateB - dateA;
+                    });
+
+                    // Display schedules
+                    displaySchedules(schedules);
+
+                } catch (error) {
+                    console.error('Error loading schedules:', error);
+                    showEmptyState();
+                }
+            }
+
+            // Display schedules in the modal
+            function displaySchedules(schedules) {
+                scheduleLoading.classList.add('d-none');
+                scheduleList.classList.remove('d-none');
+
+                let html = '<div class="row g-3">';
+
+                schedules.forEach(schedule => {
+                    const seatsLeft = schedule.max_seat - schedule.current_joined;
+                    const closed = isBatchClosed(schedule.start_date);
+                    const isOpen = !closed && seatsLeft > 0;
+
+                    const statusClass = isOpen ? 'success' : 'secondary';
+                    const statusText = isOpen ? 'Tersedia' : 'Penuh/Tutup';
+                    const dateStr = formatScheduleDate(schedule.start_date);
+                    const disabledClass = !isOpen ? 'disabled' : '';
+                    const cursorStyle = !isOpen ? 'cursor: not-allowed;' : 'cursor: pointer;';
+
+                    html += `
+                        <div class="col-12">
+                            <div class="card schedule-card ${disabledClass}" 
+                                 onclick="${isOpen ? `selectSchedule('${schedule.id}', '${schedule.name}', '${dateStr}')` : ''}"
+                                 style="border: 2px solid #e0e0e0; border-radius: 12px; transition: all 0.3s; ${cursorStyle}">
+                                <div class="card-body p-3">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-2 fw-bold">${schedule.name}</h6>
+                                            <div class="d-flex flex-wrap gap-3 mb-2">
+                                                <small class="text-muted">
+                                                    <i class='bx bx-calendar me-1'></i>${dateStr}
+                                                </small>
+                                                <small class="text-muted">
+                                                    <i class='bx bx-user me-1'></i>${schedule.mentor_name}
+                                                </small>
+                                                <small class="text-muted">
+                                                    <i class='bx bx-group me-1'></i>Sisa ${seatsLeft}/${schedule.max_seat} kursi
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <span class="badge bg-${statusClass} ms-2">${statusText}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+                scheduleList.innerHTML = html;
+
+                // Add hover effect via CSS
+                const style = document.createElement('style');
+                style.textContent = `
+                    .schedule-card:not(.disabled):hover {
+                        border-color: #0b2b6a !important;
+                        box-shadow: 0 4px 12px rgba(11, 43, 106, 0.15);
+                        transform: translateY(-2px);
+                    }
+                    .schedule-card.disabled {
+                        opacity: 0.6;
+                        background-color: #f8f9fa;
+                    }
+                `;
+                if (!document.getElementById('schedule-card-style')) {
+                    style.id = 'schedule-card-style';
+                    document.head.appendChild(style);
+                }
+            }
+
+            // Show empty state
+            function showEmptyState() {
+                scheduleLoading.classList.add('d-none');
+                scheduleList.classList.add('d-none');
+                scheduleEmpty.classList.remove('d-none');
+            }
+
+            // Select schedule function (global scope)
+            window.selectSchedule = function(scheduleId, scheduleName, scheduleDate) {
+                selectedScheduleInput.value = scheduleId;
+                
+                // Update button text to show selected schedule
+                btnSelectSchedule.innerHTML = `<i class='bx bx-check-circle'></i> ${scheduleName}`;
+                btnSelectSchedule.classList.remove('btn-primary');
+                btnSelectSchedule.classList.add('btn-success');
+
+                // Close modal
+                scheduleModal.hide();
+
+                // Show success message
+                alert(`Jadwal terpilih: ${scheduleName}\nTanggal: ${scheduleDate}`);
+            };
+        });
+    </script>
+
 </body>
 
 </html>
