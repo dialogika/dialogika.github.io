@@ -2972,24 +2972,22 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <select name="Program" id="programs" class="form-control" name="Location"
-                                        id="locations" placeholder="Domisili*" required>
-                                        <option value="" selected disabled value="">Program Yang Akan Diambil</option>
+                                    <select name="Program" id="programs" class="form-control" required>
+                                        <option value="" selected disabled>Program Yang Akan Diambil</option>
                                         <optgroup label="First Class">
-                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Yogyakarta </option>
-                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Tangerang </option>
-                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Surabaya </option>
-                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Solo </option>
+                                            <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">FC Yogyakarta</option>
                                         </optgroup>
                                         <optgroup label="First Private">
-                                            <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Yogyakarta </option>
-                                            <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Tangerang </option>
-                                            <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Surabaya </option>
-                                        </optgroup>
-                                        <optgroup label="Konsultasi">
-                                            <option>Asking Admin </option>
+                                            <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">FP Yogyakarta</option>
                                         </optgroup>
                                     </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="ReferralCode" id="referral-code"
+                                        placeholder="Kode Referral (Opsional)" readonly>
+                                    <small class="text-muted" style="font-size: 11px;">Kode referral akan terisi
+                                        otomatis jika Anda menggunakan kupon diskon</small>
                                 </div>
 
                                 <div class="col-md-12">
@@ -3483,10 +3481,10 @@
                     }
 
                     // Update modal UI with real data
-                    const discountText = referral.discountPercent 
-                        ? `HEMAT ${referral.discountPercent}%` 
+                    const discountText = referral.discountPercent
+                        ? `HEMAT ${referral.discountPercent}%`
                         : `HEMAT Rp ${(DISCOUNT_AMOUNT || 0).toLocaleString('id-ID')}`;
-                    
+
                     const discountLabel = modalEl.querySelector('.fw-bold.text-primary.mb-0');
                     if (discountLabel) {
                         discountLabel.textContent = discountText;
@@ -3559,6 +3557,7 @@
                 setTimeout(() => {
                     if (promoModal) promoModal.hide();
                     applyDiscountToDOM();
+                    updateReferralCodeField(); // Update referral field immediately
                     // Scroll to pricing
                     pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 1000);
@@ -3618,7 +3617,7 @@
                         } else {
                             newPrice = originalPrice * (1 - DISCOUNT_RATE);
                         }
-                        
+
                         // Round to nearest thousands for cleaner price
                         newPrice = Math.ceil(newPrice / 1000) * 1000;
 
@@ -3626,7 +3625,7 @@
                         const formattedOriginalPrice = 'IDR ' + originalPrice.toLocaleString('id-ID');
 
                         // Build referral code badge if available
-                        const referralBadge = REFERRAL_CODE 
+                        const referralBadge = REFERRAL_CODE
                             ? `<span class="badge bg-success ms-1" style="font-size: 10px;">Kode: ${REFERRAL_CODE}</span>`
                             : '';
 
@@ -3652,8 +3651,22 @@
 
             if (applied) {
                 applyDiscountToDOM();
+                updateReferralCodeField();
             } else if (claimed) {
                 renderUseCouponButtons();
+                updateReferralCodeField();
+            }
+
+            // Update referral code field in contact form
+            function updateReferralCodeField() {
+                const referralCode = sessionStorage.getItem(PROMO_CODE_KEY);
+                const referralInput = document.getElementById('referral-code');
+
+                if (referralInput && referralCode) {
+                    referralInput.value = referralCode;
+                    referralInput.style.backgroundColor = '#e8f5e9';
+                    referralInput.style.borderColor = '#4caf50';
+                }
             }
         });
     </script>
