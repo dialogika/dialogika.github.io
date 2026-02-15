@@ -3554,10 +3554,24 @@
                 }
             }
 
-            // Load Class Available Data
+            // Location keywords for filtering batch display
+            const batchLocationKeywords = {
+                'first-class-jogja-content': ['yogyakarta', 'jogja', 'yogya'],
+                'first-class-surabaya-content': ['surabaya'],
+                'first-class-jakarta-content': ['jakarta'],
+                'first-class-tangsel-content': ['tangsel', 'tangerang selatan'],
+                'first-class-pontianak-content': ['pontianak']
+            };
+
+            // Load Class Available Data filtered by location
             async function loadClassAvailable() {
                 const container = document.getElementById('classBatchContainer');
                 if (!container) return;
+
+                // Get current selected location
+                const locationSelect = document.getElementById('location-select');
+                const currentLocation = locationSelect ? locationSelect.value : 'first-class-jogja-content';
+                const locKeywords = batchLocationKeywords[currentLocation] || [];
 
                 try {
                     // Query Firestore for class_availability collection (same as class-available.html)
@@ -3568,17 +3582,25 @@
                         return;
                     }
 
-                    // Filter for First Class only
+                    // Filter for First Class only AND matching location
                     const classes = [];
                     snapshot.forEach(doc => {
                         const data = doc.data();
-                        const className = data.name || '';
+                        const className = (data.name || '').toLowerCase();
+                        const classLocation = (data.location || '').toLowerCase();
 
                         // Filter only First Class entries
-                        if (className.toLowerCase().includes('first class')) {
+                        const isFirstClass = className.includes('first class');
+
+                        // Check location match (check both name and location field)
+                        const locationMatch = locKeywords.length === 0 || locKeywords.some(keyword =>
+                            className.includes(keyword) || classLocation.includes(keyword)
+                        );
+
+                        if (isFirstClass && locationMatch) {
                             classes.push({
                                 id: doc.id,
-                                name: className,
+                                name: data.name || className,
                                 max_seat: Number(data.max_seat || 0),
                                 current_joined: Number(data.current_joined || 0),
                                 start_date: data.start_date || 'Flexible',
@@ -3662,6 +3684,14 @@
                 document.addEventListener('DOMContentLoaded', loadClassAvailable);
             } else {
                 loadClassAvailable();
+            }
+
+            // Reload class batches when location dropdown changes
+            const locationDropdown = document.getElementById('location-select');
+            if (locationDropdown) {
+                locationDropdown.addEventListener('change', () => {
+                    loadClassAvailable();
+                });
             }
         })();
     </script>
@@ -4211,6 +4241,20 @@
             programSelect.addEventListener('change', updateScheduleButtonState);
             updateScheduleButtonState(); // Initialize state on load
 
+            // Location keywords mapping - maps location dropdown values to search keywords
+            const locationKeywords = {
+                'first-class-jogja-content': ['yogyakarta', 'jogja', 'yogya'],
+                'first-class-surabaya-content': ['surabaya'],
+                'first-class-jakarta-content': ['jakarta'],
+                'first-class-tangsel-content': ['tangsel', 'tangerang selatan'],
+                'first-class-pontianak-content': ['pontianak']
+            };
+
+            // Get current location from dropdown
+            function getCurrentLocation() {
+                return locationSelect ? locationSelect.value : 'first-class-jogja-content';
+            }
+
             // Open modal and load schedules when button is clicked
             btnSelectSchedule.addEventListener('click', function () {
                 const selectedProgramId = programSelect.value;
@@ -4222,8 +4266,9 @@
                 // Show modal
                 scheduleModal.show();
 
-                // Load schedules
-                loadSchedules(programName);
+                // Load schedules filtered by location
+                const currentLocationId = getCurrentLocation();
+                loadSchedules(programName, currentLocationId);
             });
 
             // Format date to "25 Jan, 15:30"
@@ -4257,8 +4302,8 @@
                 }
             }
 
-            // Load schedules from Firebase
-            async function loadSchedules(programName) {
+            // Load schedules from Firebase filtered by program name and location
+            async function loadSchedules(programName, locationId) {
                 // Show loading
                 scheduleLoading.classList.remove('d-none');
                 scheduleList.classList.add('d-none');
@@ -4276,17 +4321,37 @@
                         return;
                     }
 
-                    // Filter schedules by program name
+                    // Determine program type keyword (e.g., "first class" or "first private")
+                    const programLower = programName.toLowerCase();
+                    let programTypeKeyword = '';
+                    if (programLower.includes('first private')) {
+                        programTypeKeyword = 'first private';
+                    } else if (programLower.includes('first class')) {
+                        programTypeKeyword = 'first class';
+                    }
+
+                    // Get location keywords for filtering
+                    const locKeywords = locationKeywords[locationId] || [];
+
+                    // Filter schedules by program type AND location
                     const schedules = [];
                     snapshot.forEach(doc => {
                         const data = doc.data();
-                        const className = data.name || '';
+                        const className = (data.name || '').toLowerCase();
+                        const classLocation = (data.location || '').toLowerCase();
 
-                        // Filter by program name (case insensitive)
-                        if (className.toLowerCase().includes(programName.toLowerCase().replace('yogyakarta', '').trim().toLowerCase())) {
+                        // Check if program type matches
+                        const programMatch = programTypeKeyword ? className.includes(programTypeKeyword) : true;
+
+                        // Check if location matches (check both class name and location field)
+                        const locationMatch = locKeywords.length === 0 || locKeywords.some(keyword =>
+                            className.includes(keyword) || classLocation.includes(keyword)
+                        );
+
+                        if (programMatch && locationMatch) {
                             schedules.push({
                                 id: doc.id,
-                                name: className,
+                                name: data.name || className,
                                 max_seat: Number(data.max_seat || 0),
                                 current_joined: Number(data.current_joined || 0),
                                 start_date: data.start_date || 'Flexible',
