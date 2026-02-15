@@ -192,7 +192,71 @@
         })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     </script>
     <!-- End Hotjar -->
-    <!--  ========================================================  -->
+    <!-- Custom Style for Floating Button -->
+    <style>
+        .btn-wa-admin {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            align-items: center;
+            background-color: #25d366;
+            border-radius: 50px;
+            padding: 6px 20px 6px 6px;
+            text-decoration: none;
+            color: #fff !important;
+            z-index: 9999;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-wa-admin:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            color: #fff !important;
+        }
+
+        .wa-icon-circle {
+            width: 42px;
+            height: 42px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+
+        .wa-icon-circle i {
+            color: #25d366;
+            font-size: 24px;
+            line-height: 0;
+        }
+
+        .wa-text-label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 576px) {
+            .wa-text-label {
+                display: none;
+            }
+
+            .btn-wa-admin {
+                padding: 6px;
+                right: 15px;
+                bottom: 15px;
+            }
+
+            .wa-icon-circle {
+                margin-right: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -258,7 +322,7 @@
                                             class="w-100 h-100 object-fit-cover" alt="Suasana Kelas Dialogika"
                                             style="min-height: 400px; object-fit: cover;">
                                         <div class="overlay-blue position-absolute top-0 start-0 w-100 h-100"
-                                            style="background: rgba(11, 43, 106, 0.1);"></div>
+                                            style="background: #0b2b6a1a;"></div>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -271,7 +335,7 @@
                                                 style="background: rgba(11, 43, 106, 0.1);"></div>
                                         </div>
                                         <div class="collage-item h-50 position-relative overflow-hidden rounded">
-                                            <img src="../assets/img/program/first-class/IMG_5001.JPG"
+                                            <img src="../assets/img/program/first-class/IMG_2680.JPG"
                                                 class="w-100 h-100 object-fit-cover" alt="Mentoring Session"
                                                 style="object-fit: cover;">
                                             <div class="overlay-blue position-absolute top-0 start-0 w-100 h-100"
@@ -464,7 +528,7 @@
                             <!-- Video Preview -->
                             <div class="video-box mb-4 position-relative overflow-hidden"
                                 style="margin: -1.5rem -1.5rem 1rem -1.5rem; border-radius: 15px 15px 0 0;">
-                                <img src="../assets/img/program/first-class/IMG_5300.JPG" class="img-fluid w-100"
+                                <img src="../assets/img/program/first-class/class2.webp" class="img-fluid w-100"
                                     alt="Preview Kelas" style="height: 220px; object-fit: cover;">
                                 <a href="https://youtu.be/-oeLrO7nHv0"
                                     class="glightbox play-btn position-absolute top-50 start-50 translate-middle"></a>
@@ -3119,8 +3183,10 @@
                                 <div class="col-md-6">
                                     <select name="Program" id="programs" class="form-control" required>
                                         <option value="" selected disabled>Program Yang Akan Diambil</option>
-                                        <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">First Class Yogyakarta</option>
-                                        <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">First Private Yogyakarta</option>
+                                        <option value="b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16">First Class Yogyakarta
+                                        </option>
+                                        <option value="7b444128-987a-4888-b6a8-fdcb3122dd95">First Private Yogyakarta
+                                        </option>
                                     </select>
                                 </div>
 
@@ -3131,11 +3197,13 @@
                                         otomatis jika Anda menggunakan kupon diskon</small>
                                 </div>
 
-                                <div class="col-md-6" id="schedule-button-container" style="display: none;">
-                                    <button type="button" class="btn btn-primary w-100" id="btn-select-schedule" style="height: 38px;">
+                                <div class="col-md-6" id="schedule-button-container">
+                                    <button type="button" class="btn btn-primary w-100" id="btn-select-schedule"
+                                        style="height: 38px; cursor: not-allowed; opacity: 0.6;" disabled>
                                         <i class='bx bx-calendar'></i> Pilih Jadwal
                                     </button>
-                                    <small class="text-muted" style="font-size: 11px;">Pilih jadwal kelas yang tersedia</small>
+                                    <small class="text-muted" style="font-size: 11px;">Pilih program terlebih dahulu
+                                        untuk memilih jadwal</small>
                                 </div>
 
                                 <!-- Hidden input to store selected schedule -->
@@ -3173,8 +3241,13 @@
     <footer-modal></footer-modal>
 
     <div class="sosmed-container mt-4">
-        <a href="https://wa.link/3qjjj8" target="__blank" type="button" class="btn-sosmed btn-trigger-sosmed">
-            <i class="bi bi-whatsapp bx-tada" id="icon-trigger"></i>
+        <a href="https://wa.link/3qjjj8" target="__blank" class="btn-wa-admin">
+            <div class="wa-icon-circle">
+                <i class="bi bi-whatsapp"></i>
+            </div>
+            <div class="wa-text-label">
+                Tanya Admin
+            </div>
         </a>
     </div>
 
@@ -3536,7 +3609,8 @@
                             style="background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);">
                         </div>
                         <h5 class="modal-title fw-bold mb-1 position-relative">Pilih Jadwal Kelas</h5>
-                        <p class="mb-0 small text-white-50 position-relative" id="selected-program-name">Pilih jadwal yang tersedia</p>
+                        <p class="mb-0 small text-white-50 position-relative" id="selected-program-name">Pilih jadwal
+                            yang tersedia</p>
                     </div>
                 </div>
                 <div class="modal-body p-4 bg-light" style="max-height: 500px; overflow-y: auto;">
@@ -3546,7 +3620,7 @@
                         </div>
                         <p class="mt-3 text-muted">Memuat jadwal tersedia...</p>
                     </div>
-                    
+
                     <div id="schedule-list" class="d-none">
                         <!-- Schedules will be populated here by JavaScript -->
                     </div>
@@ -3901,17 +3975,27 @@
                 '7b444128-987a-4888-b6a8-fdcb3122dd95': 'First Private Yogyakarta'
             };
 
-            // Show/hide schedule button when program is selected
-            programSelect.addEventListener('change', function() {
-                if (this.value) {
-                    scheduleButtonContainer.style.display = 'block';
+            // Toggle disabled state of schedule button when program is selected
+            function updateScheduleButtonState() {
+                const helpText = scheduleButtonContainer.querySelector('small');
+                if (programSelect.value) {
+                    btnSelectSchedule.disabled = false;
+                    btnSelectSchedule.style.cursor = 'pointer';
+                    btnSelectSchedule.style.opacity = '1';
+                    if (helpText) helpText.textContent = 'Pilih jadwal kelas yang tersedia';
                 } else {
-                    scheduleButtonContainer.style.display = 'none';
+                    btnSelectSchedule.disabled = true;
+                    btnSelectSchedule.style.cursor = 'not-allowed';
+                    btnSelectSchedule.style.opacity = '0.6';
+                    if (helpText) helpText.textContent = 'Pilih program terlebih dahulu untuk memilih jadwal';
                 }
-            });
+            }
+
+            programSelect.addEventListener('change', updateScheduleButtonState);
+            updateScheduleButtonState(); // Initialize state on load
 
             // Open modal and load schedules when button is clicked
-            btnSelectSchedule.addEventListener('click', function() {
+            btnSelectSchedule.addEventListener('click', function () {
                 const selectedProgramId = programSelect.value;
                 if (!selectedProgramId) return;
 
@@ -4104,9 +4188,9 @@
             }
 
             // Select schedule function (global scope)
-            window.selectSchedule = function(scheduleId, scheduleName, scheduleDate) {
+            window.selectSchedule = function (scheduleId, scheduleName, scheduleDate) {
                 selectedScheduleInput.value = scheduleId;
-                
+
                 // Update button text to show selected schedule
                 btnSelectSchedule.innerHTML = `<i class='bx bx-check-circle'></i> ${scheduleName}`;
                 btnSelectSchedule.classList.remove('btn-primary');
