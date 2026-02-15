@@ -322,7 +322,7 @@
                                             class="w-100 h-100 object-fit-cover" alt="Suasana Kelas Dialogika"
                                             style="min-height: 400px; object-fit: cover;">
                                         <div class="overlay-blue position-absolute top-0 start-0 w-100 h-100"
-                                            style="background: rgba(11, 43, 106, 0.1);"></div>
+                                            style="background: #0b2b6a1a;"></div>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -3061,13 +3061,13 @@
                                         otomatis jika Anda menggunakan kupon diskon</small>
                                 </div>
 
-                                <div class="col-md-6" id="schedule-button-container" style="display: none;">
+                                <div class="col-md-6" id="schedule-button-container">
                                     <button type="button" class="btn btn-primary w-100" id="btn-select-schedule"
-                                        style="height: 38px;">
+                                        style="height: 38px; cursor: not-allowed; opacity: 0.6;" disabled>
                                         <i class='bx bx-calendar'></i> Pilih Jadwal
                                     </button>
-                                    <small class="text-muted" style="font-size: 11px;">Pilih jadwal kelas yang
-                                        tersedia</small>
+                                    <small class="text-muted" style="font-size: 11px;">Pilih program terlebih dahulu
+                                        untuk memilih jadwal</small>
                                 </div>
 
                                 <!-- Hidden input to store selected schedule -->
@@ -3839,14 +3839,24 @@
                 '7b444128-987a-4888-b6a8-fdcb3122dd95': 'First Private Yogyakarta'
             };
 
-            // Show/hide schedule button when program is selected
-            programSelect.addEventListener('change', function () {
-                if (this.value) {
-                    scheduleButtonContainer.style.display = 'block';
+            // Toggle disabled state of schedule button when program is selected
+            function updateScheduleButtonState() {
+                const helpText = scheduleButtonContainer.querySelector('small');
+                if (programSelect.value) {
+                    btnSelectSchedule.disabled = false;
+                    btnSelectSchedule.style.cursor = 'pointer';
+                    btnSelectSchedule.style.opacity = '1';
+                    if (helpText) helpText.textContent = 'Pilih jadwal kelas yang tersedia';
                 } else {
-                    scheduleButtonContainer.style.display = 'none';
+                    btnSelectSchedule.disabled = true;
+                    btnSelectSchedule.style.cursor = 'not-allowed';
+                    btnSelectSchedule.style.opacity = '0.6';
+                    if (helpText) helpText.textContent = 'Pilih program terlebih dahulu untuk memilih jadwal';
                 }
-            });
+            }
+
+            programSelect.addEventListener('change', updateScheduleButtonState);
+            updateScheduleButtonState(); // Initialize state on load
 
             // Open modal and load schedules when button is clicked
             btnSelectSchedule.addEventListener('click', function () {
