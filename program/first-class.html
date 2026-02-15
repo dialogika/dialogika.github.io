@@ -200,7 +200,7 @@
             bottom: 20px;
             display: flex;
             align-items: center;
-            background-color: #25d366;
+            background: linear-gradient(to bottom, #009961 5%, #006a4e 100%);
             border-radius: 50px;
             padding: 6px 20px 6px 6px;
             text-decoration: none;
@@ -228,7 +228,7 @@
         }
 
         .wa-icon-circle i {
-            color: #25d366;
+            color: #009961;
             font-size: 24px;
             line-height: 0;
         }
@@ -641,7 +641,7 @@
                                 <div
                                     class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
                                     <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Lokasi</h6>
-                                    <span class="fw-bold text-dark" style="font-size: 14px;">Offline Jogja</span>
+                                    <span class="fw-bold text-dark" style="font-size: 14px;">Offline</span>
                                 </div>
                             </div>
 
@@ -751,120 +751,12 @@
                                         }
                                     </style>
 
-                                    <!-- Batch 1 - Closed -->
-                                    <div class="class-batch-card">
-                                        <div class="batch-status closed">
-                                            <i class='bx bxs-door-open batch-status-icon'></i>
-                                            <span class="batch-status-text">Closed</span>
+                                    <!-- Data loaded from API via loadClassAvailable() -->
+                                    <div class="text-center py-3">
+                                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
                                         </div>
-                                        <div class="batch-info">
-                                            <h6>First Class Januari #1</h6>
-                                            <div class="batch-meta">
-                                                <span><i class='bx bxs-calendar'></i> 1 Jan, 15:44</span>
-                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Batch 2 - Closed -->
-                                    <div class="class-batch-card">
-                                        <div class="batch-status closed">
-                                            <i class='bx bxs-lock-alt batch-status-icon'></i>
-                                            <span class="batch-status-text">Closed</span>
-                                        </div>
-                                        <div class="batch-info">
-                                            <h6>First Class Januari #2</h6>
-                                            <div class="batch-meta">
-                                                <span><i class='bx bxs-calendar'></i> 10 Jan, 15:30</span>
-                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Batch 3 - Closed -->
-                                    <div class="class-batch-card">
-                                        <div class="batch-status closed">
-                                            <i class='bx bxs-door-open batch-status-icon'></i>
-                                            <span class="batch-status-text">Closed</span>
-                                        </div>
-                                        <div class="batch-info">
-                                            <h6>First Class Januari #3</h6>
-                                            <div class="batch-meta">
-                                                <span><i class='bx bxs-calendar'></i> 15 Jan, 10:00</span>
-                                                <span><i class='bx bxs-user'></i> Salsabila Astaria</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Batch 4 - Closed -->
-                                    <div class="class-batch-card">
-                                        <div class="batch-status closed">
-                                            <i class='bx bxs-door-open batch-status-icon'></i>
-                                            <span class="batch-status-text">Closed</span>
-                                        </div>
-                                        <div class="batch-info">
-                                            <h6>First Class Januari #4</h6>
-                                            <div class="batch-meta">
-                                                <span><i class='bx bxs-calendar'></i> 20 Jan, 10:00</span>
-                                                <span><i class='bx bxs-user'></i> Salsabila Astaria</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="class-batch-card">
-                                        <div class="batch-status open">
-                                            <i class='bx bxs-door-open batch-status-icon'></i>
-                                            <span class="batch-status-text">Open</span>
-                                        </div>
-                                        <div class="batch-info">
-                                            <h6>First Class Februari #1</h6>
-                                            <div class="batch-meta">
-                                                <span><i class='bx bxs-calendar'></i> 1 Feb, 15:44</span>
-                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="class-batch-card">
-                                        <div class="batch-status open">
-                                            <i class='bx bxs-door-open batch-status-icon'></i>
-                                            <span class="batch-status-text">Open</span>
-                                        </div>
-                                        <div class="batch-info">
-                                            <h6>First Class Februari #2</h6>
-                                            <div class="batch-meta">
-                                                <span><i class='bx bxs-calendar'></i> 8 Feb, 15:44</span>
-                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="class-batch-card">
-                                        <div class="batch-status open">
-                                            <i class='bx bxs-door-open batch-status-icon'></i>
-                                            <span class="batch-status-text">Open</span>
-                                        </div>
-                                        <div class="batch-info">
-                                            <h6>First Class Februari #3</h6>
-                                            <div class="batch-meta">
-                                                <span><i class='bx bxs-calendar'></i> 15 Feb, 15:44</span>
-                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="class-batch-card">
-                                        <div class="batch-status open">
-                                            <i class='bx bxs-door-open batch-status-icon'></i>
-                                            <span class="batch-status-text">Open</span>
-                                        </div>
-                                        <div class="batch-info">
-                                            <h6>First Class Februari #4</h6>
-                                            <div class="batch-meta">
-                                                <span><i class='bx bxs-calendar'></i> 22 Feb, 15:44</span>
-                                                <span><i class='bx bxs-user'></i> Fanny Carolina</span>
-                                            </div>
-                                        </div>
+                                        <p class="text-muted small mt-2 mb-0">Memuat data jadwal...</p>
                                     </div>
                                 </div><!-- End classBatchContainer -->
                             </div>
@@ -2419,14 +2311,23 @@
                                     style="font-size: 14px; color: #0b2b6a;">
                                     <i class='bx bxs-map'></i> Pilih Lokasi
                                 </label>
-                                <select id="location-select" class="form-select"
-                                    style="max-width: 300px; border: 2px solid rgba(0, 115, 230, 0.6); border-radius: 8px; padding: 10px 15px; font-size: 14px; font-weight: 600; color: #0b2b6a; cursor: pointer; transition: all 0.3s ease;">
-                                    <option value="first-class-jogja-content" selected>Yogyakarta</option>
-                                    <option value="first-class-surabaya-content">Surabaya</option>
-                                    <option value="first-class-jakarta-content">Jakarta</option>
-                                    <option value="first-class-tangsel-content">Tangsel</option>
-                                    <option value="first-class-pontianak-content">Pontianak</option>
-                                </select>
+                                <div class="d-flex align-items-center flex-wrap gap-3">
+                                    <!-- Single location badge -->
+                                    <span id="location-badge"
+                                        style="display: inline-block; padding: 10px 20px; border-radius: 8px; background: linear-gradient(135deg, #0b2b6a 0%, #1a4a9e 100%); color: #fff; font-size: 14px; font-weight: 600; white-space: nowrap; box-shadow: 0 3px 10px rgba(11, 43, 106, 0.3);">
+                                        Yogyakarta
+                                    </span>
+
+                                    <!-- Location dropdown -->
+                                    <select id="location-select" class="form-select"
+                                        style="width: auto; min-width: 160px; border: 2px solid rgba(0, 115, 230, 0.6); border-radius: 8px; padding: 10px 15px; font-size: 14px; font-weight: 600; color: #0b2b6a; cursor: pointer; transition: all 0.3s ease;">
+                                        <option value="first-class-jogja-content" selected>Yogyakarta</option>
+                                        <option value="first-class-surabaya-content">Surabaya</option>
+                                        <option value="first-class-jakarta-content">Jakarta</option>
+                                        <option value="first-class-tangsel-content">Tangsel</option>
+                                        <option value="first-class-pontianak-content">Pontianak</option>
+                                    </select>
+                                </div>
                                 <style>
                                     #location-select:focus {
                                         border-color: #0b2b6a;
@@ -3568,50 +3469,60 @@
                 const container = document.getElementById('classBatchContainer');
                 if (!container) return;
 
-                // Get current selected location
-                const locationSelect = document.getElementById('location-select');
-                const currentLocation = locationSelect ? locationSelect.value : 'first-class-jogja-content';
-                const locKeywords = batchLocationKeywords[currentLocation] || [];
+                // Preserve the style tag
+                const styleTag = container.querySelector('style');
+                const styleHTML = styleTag ? styleTag.outerHTML : '';
+
+                // Show loading state
+                container.innerHTML = styleHTML + `
+                    <div class="text-center py-3">
+                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="text-muted small mt-2 mb-0">Memuat data jadwal...</p>
+                    </div>
+                `;
 
                 try {
                     // Query Firestore for class_availability collection (same as class-available.html)
                     const snapshot = await db.collection('class_availability').get();
 
                     if (snapshot.empty) {
-                        // Keep static fallback if no data
+                        container.innerHTML = styleHTML + `
+                            <div class="text-center py-3">
+                                <p class="text-muted small mb-0"><i class='bx bx-info-circle me-1'></i>Belum ada data kelas tersedia.</p>
+                            </div>
+                        `;
                         return;
                     }
 
-                    // Filter for First Class only AND matching location
+                    // Load all First Class / First Private entries (no location filter)
                     const classes = [];
                     snapshot.forEach(doc => {
                         const data = doc.data();
                         const className = (data.name || '').toLowerCase();
-                        const classLocation = (data.location || '').toLowerCase();
 
-                        // Filter only First Class entries
-                        const isFirstClass = className.includes('first class');
+                        // Filter First Class or First Private entries
+                        const isFirstProgram = className.includes('first class') || className.includes('first private');
 
-                        // Check location match (check both name and location field)
-                        const locationMatch = locKeywords.length === 0 || locKeywords.some(keyword =>
-                            className.includes(keyword) || classLocation.includes(keyword)
-                        );
-
-                        if (isFirstClass && locationMatch) {
+                        if (isFirstProgram) {
                             classes.push({
                                 id: doc.id,
                                 name: data.name || className,
+                                type: data.type || 'Offline',
                                 max_seat: Number(data.max_seat || 0),
                                 current_joined: Number(data.current_joined || 0),
                                 start_date: data.start_date || 'Flexible',
-                                mentor_name: data.mentor_name || 'Mentor Dialogika'
+                                mentor_name: data.mentor_name || 'Mentor Dialogika',
+                                location: data.location || '',
+                                product_id: data.productId || data.product_id || null,
+                                product_name: data.productName || data.product_name || null
                             });
                         }
                     });
 
                     // Sort by status (open first) then by start_date descending
                     classes.sort((a, b) => {
-                        // Determine if each class is open or closed
                         const seatsLeftA = a.max_seat - a.current_joined;
                         const seatsLeftB = b.max_seat - b.current_joined;
                         const closedA = isBatchClosed(a.start_date);
@@ -3619,11 +3530,9 @@
                         const isOpenA = !closedA && seatsLeftA > 0;
                         const isOpenB = !closedB && seatsLeftB > 0;
 
-                        // First priority: open classes come before closed classes
                         if (isOpenA && !isOpenB) return -1;
                         if (!isOpenA && isOpenB) return 1;
 
-                        // Second priority: sort by start_date descending (newest first)
                         const dateA = new Date(a.start_date);
                         const dateB = new Date(b.start_date);
                         if (isNaN(dateA.getTime())) return 1;
@@ -3635,7 +3544,12 @@
                     const limitedClasses = classes.slice(0, 8);
 
                     if (limitedClasses.length === 0) {
-                        return; // Keep static fallback
+                        container.innerHTML = styleHTML + `
+                            <div class="text-center py-3">
+                                <p class="text-muted small mb-0"><i class='bx bx-info-circle me-1'></i>Belum ada jadwal kelas untuk lokasi ini.</p>
+                            </div>
+                        `;
+                        return;
                     }
 
                     // Build HTML
@@ -3667,15 +3581,15 @@
                         `;
                     });
 
-                    // Only replace content if we have data
-                    // Find and remove static cards, keep style tag
-                    const styleTag = container.querySelector('style');
-                    const styleHTML = styleTag ? styleTag.outerHTML : '';
                     container.innerHTML = styleHTML + batchHTML;
 
                 } catch (error) {
                     console.error('Error loading class data:', error);
-                    // Keep static fallback on error
+                    container.innerHTML = styleHTML + `
+                        <div class="text-center py-3">
+                            <p class="text-muted small mb-0"><i class='bx bx-error me-1'></i>Gagal memuat data. Silakan refresh halaman.</p>
+                        </div>
+                    `;
                 }
             }
 
@@ -3686,13 +3600,6 @@
                 loadClassAvailable();
             }
 
-            // Reload class batches when location dropdown changes
-            const locationDropdown = document.getElementById('location-select');
-            if (locationDropdown) {
-                locationDropdown.addEventListener('change', () => {
-                    loadClassAvailable();
-                });
-            }
         })();
     </script>
 
@@ -4205,17 +4112,15 @@
             }
 
             if (locationSelect) {
+                // When dropdown changes, update badge and programs
                 locationSelect.addEventListener('change', function () {
-                    updateProgramsByLocation(this.value);
-                });
-
-                // Also listen to location buttons to sync the dropdown
-                const locationButtons = document.querySelectorAll('.custom-price-button');
-                locationButtons.forEach(btn => {
-                    btn.addEventListener('click', function () {
-                        const target = this.getAttribute('data-target');
-                        updateProgramsByLocation(target);
-                    });
+                    const val = this.value;
+                    updateProgramsByLocation(val);
+                    // Update the location badge text
+                    const badge = document.getElementById('location-badge');
+                    if (badge) {
+                        badge.textContent = this.options[this.selectedIndex].text;
+                    }
                 });
 
                 // Initialize on load if location is pre-selected
@@ -4352,10 +4257,14 @@
                             schedules.push({
                                 id: doc.id,
                                 name: data.name || className,
+                                type: data.type || 'Offline',
                                 max_seat: Number(data.max_seat || 0),
                                 current_joined: Number(data.current_joined || 0),
                                 start_date: data.start_date || 'Flexible',
-                                mentor_name: data.mentor_name || 'Mentor Dialogika'
+                                mentor_name: data.mentor_name || 'Mentor Dialogika',
+                                location: data.location || '',
+                                product_id: data.productId || data.product_id || null,
+                                product_name: data.productName || data.product_name || null
                             });
                         }
                     });
