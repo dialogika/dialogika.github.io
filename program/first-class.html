@@ -2351,23 +2351,26 @@
 
                             <!-- Untuk script ganti pricing box berada di part/pricing/switch-price.js -->
                             <div class="pricing-tabs my-4 mb-xl-0 custom-pricing">
-                                <ul class="nav nav-pills rounded justify-content-center d-inline-block my-1 flex-nowrap flex gap-2"
-                                    id="pills-tab" role="tablist">
-                                    <li class="nav-item d-inline-block">
-                                        <button type="button" class="nav-link px-3 rounded custom-price-button active"
-                                            role="tab" id="custom-price-button" data-target="first-class-jogja-content">
-                                            Yogyakarta
-                                            <!-- <span class="badge bg-success rounded text-white">50% Off</span> -->
-                                        </button>
-                                    </li>
-                                    <li class="nav-item d-inline-block">
-                                        <button type="button" class="nav-link px-3 rounded custom-price-button"
-                                            id="action-class" role="tab" id="custom-price-button"
-                                            data-target="first-class-tangsel-content">
-                                            Tangsel atau Surabaya
-                                        </button>
-                                    </li>
-                                </ul>
+                                <label for="location-select" class="fw-bold mb-2 d-block" style="font-size: 14px; color: #0b2b6a;">
+                                    <i class='bx bxs-map'></i> Pilih Lokasi
+                                </label>
+                                <select id="location-select" class="form-select"
+                                    style="max-width: 300px; border: 2px solid rgba(0, 115, 230, 0.6); border-radius: 8px; padding: 10px 15px; font-size: 14px; font-weight: 600; color: #0b2b6a; cursor: pointer; transition: all 0.3s ease;">
+                                    <option value="first-class-jogja-content" selected>Yogyakarta</option>
+                                    <option value="first-class-surabaya-content">Surabaya</option>
+                                    <option value="first-class-jakarta-content">Jakarta</option>
+                                    <option value="first-class-tangsel-content">Tangsel</option>
+                                    <option value="first-class-pontianak-content">Pontianak</option>
+                                </select>
+                                <style>
+                                    #location-select:focus {
+                                        border-color: #0b2b6a;
+                                        box-shadow: 0 0 0 3px rgba(11, 43, 106, 0.15);
+                                    }
+                                    #location-select:hover {
+                                        border-color: #0b2b6a;
+                                    }
+                                </style>
                             </div>
 
 
@@ -2409,20 +2412,27 @@
 
                                             <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
                                                 style="font-size: 10px;">
-                                                <span>Kontak admin <b>dapatkan</b> voucher <b>potongan</b> hingga
-                                                    50%!</span>
+                                                <span>Kontak Admin untuk request jadwal</span>
                                             </div>
 
                                             <h5 class="fw-normal">First Class : Yogyakarta </h5>
-                                            <h1 class="pricing-title mt-3 mb-0" id="price-first-class">IDR 3.000.000
-                                            </h1>
-
-                                            <!-- Claim Discount Button (shown before popup) -->
-                                            <button class="btn btn-warning btn-sm mt-2 claim-discount-btn"
-                                                onclick="triggerPromoModal()"
-                                                style="font-size: 11px; padding: 4px 12px;">
-                                                <i class='bx bxs-discount'></i> Claim Diskon Spesial
-                                            </button>
+                                            
+                                            <!-- Price and Button Container -->
+                                            <div style="white-space: nowrap; margin-top: 12px;">
+                                                <h1 class="pricing-title mb-0" id="price-first-class" style="display: inline; vertical-align: middle;">IDR 3.000.000</h1>
+                                                <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                    onclick="triggerPromoModal()"
+                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
+                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                                </button>
+                                            </div>
+                                            
+                                            <style>
+                                                .claim-discount-btn:hover {
+                                                    transform: scale(1.05);
+                                                    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+                                                }
+                                            </style>
                                             <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa
                                                 persiapan dan teratur
                                                 didalam berbicara</p>
@@ -2511,19 +2521,19 @@
                                         <div class="pricing-box bg-white rounded mt-4">
                                             <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
                                                 style="font-size: 10px;">
-                                                <span>Kontak admin <b>dapatkan</b> voucher <b>potongan</b> hingga
-                                                    50%!</span>
+                                                <span>Kontak Admin untuk request jadwal</span>
                                             </div>
                                             <h5 class="fw-normal">First Private : Yogyakarta</h5>
-                                            <h1 class="pricing-title mt-3 mb-0" id="price-first-private">IDR 5.000.000
-                                            </h1>
-
-                                            <!-- Claim Discount Button (shown before popup) -->
-                                            <button class="btn btn-warning btn-sm mt-2 claim-discount-btn"
-                                                onclick="triggerPromoModal()"
-                                                style="font-size: 11px; padding: 4px 12px;">
-                                                <i class='bx bxs-discount'></i> Claim Diskon Spesial
-                                            </button>
+                                            
+                                            <!-- Price and Button Container -->
+                                            <div style="white-space: nowrap; margin-top: 12px;">
+                                                <h1 class="pricing-title mb-0" id="price-first-private" style="display: inline; vertical-align: middle;">IDR 5.000.000</h1>
+                                                <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                    onclick="triggerPromoModal()"
+                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
+                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                                </button>
+                                            </div>
                                             <p class="text-muted f-15 mt-3">Seperti First Class dengan jumlah 10x
                                                 pertemuan, materi
                                                 hanya terfokus ke body language, tidak sampai kepada konten pembicaraan
@@ -2601,262 +2611,388 @@
                                 </div>
                             </div>
 
-                            <!-- First Class : Tangsel atau Surabaya -->
-                            <div class="tab-pane custom-price-content fade" id="first-class-tangsel-content"
-                                role="tabpanel" aria-labelledby="tangsel">
+                            <!-- First Class : Surabaya -->
+                            <div class="tab-pane custom-price-content fade" id="first-class-surabaya-content"
+                                role="tabpanel">
                                 <div class="row g-0 align-items-center">
                                     <div class="col-lg-6">
                                         <div class="pricing-box active bg-white rounded mt-4">
                                             <div class="pricing-badge">
                                                 <span class="badge">Best Buy</span>
                                             </div>
-
-                                            <h5 class="fw-normal">First Class : Tangsel atau Surabaya</h5>
-                                            <h1 class="pricing-title mt-3 mb-0">IDR 2.579.000
-                                                <span class="f-13"> <strike>IDR 5.000.000</strike></span>
-                                            </h1>
+                                            <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
+                                                style="font-size: 10px;">
+                                                <span>Kontak Admin untuk request jadwal</span>
+                                            </div>
+                                            <h5 class="fw-normal">First Class : Surabaya</h5>
+                                            <div style="white-space: nowrap; margin-top: 12px;">
+                                                <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 3.500.000</h1>
+                                                <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                    onclick="triggerPromoModal()"
+                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
+                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                                </button>
+                                            </div>
                                             <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa
                                                 persiapan dan teratur
                                                 didalam berbicara</p>
                                             <hr class="mt-4">
                                             <div class="mt-4 pt-1">
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Garansi mengulang kelas
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    <b>10x pertemuan:</b> 2 Bulan*
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Maksimal peserta <b>7 orang</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Minimal peserta <b>3 orang</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Durasi kelas <b>90 menit</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Dapat Certificate
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Bisa <b>DP dan Dicicil</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Gratis <b>webinar</b> setiap bulan
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Dapat <b>materi</b> setiap minggu
-                                                </p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Garansi mengulang kelas</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> <b>10x pertemuan:</b> 2 Bulan*</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Maksimal peserta <b>7 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Minimal peserta <b>3 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Durasi kelas <b>90 menit</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat Certificate</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Bisa <b>DP dan Dicicil</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Gratis <b>webinar</b> setiap bulan</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> E-book & E-module</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Komunitas alumni</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Evaluasi tiap sesi</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Ada WAG support</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat <b>materi</b> setiap minggu</p>
                                             </div>
                                             <div class="mt-4 pt-2 text-center">
-                                                <a data-program="*First Class Tangsel atau Surabaya senilai 2.579K*."
-                                                    class="btn btn-green w-100 title-change-registration"
+                                                <a class="btn btn-green w-100 title-change-registration"
                                                     onclick="sendWhatsAppMessage(this)"
-                                                    data-program="First Class Tangsel atau Surabaya">Daftar Sekarang</a>
+                                                    data-program="First Class Surabaya">Daftar Sekarang</a>
                                                 <a onclick="askAdminMessage(this)"
-                                                    data-program="First Class Tangsel atau Surabaya"
-                                                    class="btn btn-primary w-100 title-change-consultation">Tanya
-                                                    Admin</a>
+                                                    data-program="First Class Surabaya"
+                                                    class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="pricing-box bg-white rounded mt-4">
-                                            <h5 class="fw-normal">First Private : Tangsel atau Surabaya</h5>
-                                            <h1 class="pricing-title mt-3 mb-0">IDR 3.579.000
-                                                <span class="f-13"> <strike>IDR 7.000.000</strike></span>
-                                            </h1>
+                                            <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
+                                                style="font-size: 10px;">
+                                                <span>Kontak Admin untuk request jadwal</span>
+                                            </div>
+                                            <h5 class="fw-normal">First Private : Surabaya</h5>
+                                            <div style="white-space: nowrap; margin-top: 12px;">
+                                                <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 5.500.000</h1>
+                                                <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                    onclick="triggerPromoModal()"
+                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
+                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                                </button>
+                                            </div>
                                             <p class="text-muted f-15 mt-3">Seperti First Class dengan jumlah 10x
                                                 pertemuan, materi
-                                                hanya terfokus ke body language, tidak sampai kepada konten pembicaraan
-                                            </p>
+                                                hanya terfokus ke body language, tidak sampai kepada konten pembicaraan</p>
                                             <div class="mt-4 pt-1">
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Garansi mengulang kelas
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Waktu flexible
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    <b>10x pertemuan:</b> hingga selesai
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Maksimal peserta <b>1-3 orang</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Durasi kelas <b>90 menit</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Dapat Certificate
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Bisa <b>DP dan Dicicil</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Gratis <b>webinar</b> setiap bulan
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Dapat <b>materi</b> setiap minggu
-                                                </p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Garansi mengulang kelas</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Waktu flexible</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> <b>10x pertemuan:</b> hingga selesai</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Maksimal peserta <b>1-3 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Durasi kelas <b>90 menit</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat Certificate</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Bisa <b>DP dan Dicicil</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Gratis <b>webinar</b> setiap bulan</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Komunitas alumni</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Evaluasi tiap sesi</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Ada WAG support</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat <b>materi</b> setiap minggu</p>
                                             </div>
                                             <div class="mt-4 pt-2 text-center">
-                                                <a data-program="*First Private Tangsel atau Surabaya senilai 3.579K*."
-                                                    class="btn btn-green w-100 title-change-registration"
+                                                <a class="btn btn-green w-100 title-change-registration"
                                                     onclick="sendWhatsAppMessage(this)"
-                                                    data-program="First Private Tangsel atau Surabaya">Daftar
-                                                    Sekarang</a>
+                                                    data-program="First Private Surabaya">Daftar Sekarang</a>
                                                 <a onclick="askAdminMessage(this)"
-                                                    data-program="First Private Tangsel atau Surabaya"
-                                                    class="btn btn-primary w-100 title-change-consultation">Tanya
-                                                    Admin</a>
+                                                    data-program="First Private Surabaya"
+                                                    class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="tab-pane custom-price-content fade" id="surabayas" role="tabpanel"
-                                aria-labelledby="surabaya">
+                            <!-- First Class : Jakarta -->
+                            <div class="tab-pane custom-price-content fade" id="first-class-jakarta-content"
+                                role="tabpanel">
                                 <div class="row g-0 align-items-center">
                                     <div class="col-lg-6">
                                         <div class="pricing-box active bg-white rounded mt-4">
                                             <div class="pricing-badge">
-                                                <span class="badge">Surabaya</span>
+                                                <span class="badge">Best Buy</span>
                                             </div>
-
-                                            <h5 class="fw-normal">First Class : Surabaya</h5>
-                                            <h1 class="pricing-title mt-3 mb-0">IDR 2.579.000
-                                                <span class="f-13"> <strike>IDR 5.000.000</strike></span>
-                                            </h1>
+                                            <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
+                                                style="font-size: 10px;">
+                                                <span>Kontak Admin untuk request jadwal</span>
+                                            </div>
+                                            <h5 class="fw-normal">First Class : Jakarta</h5>
+                                            <div style="white-space: nowrap; margin-top: 12px;">
+                                                <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 4.000.000</h1>
+                                                <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                    onclick="triggerPromoModal()"
+                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
+                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                                </button>
+                                            </div>
                                             <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa
                                                 persiapan dan teratur
                                                 didalam berbicara</p>
                                             <hr class="mt-4">
                                             <div class="mt-4 pt-1">
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Garansi mengulang kelas
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    <b>10x pertemuan:</b> 2 Bulan*
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Maksimal peserta <b>7 orang</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Minimal peserta <b>3 orang</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Durasi kelas <b>90 menit</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Dapat Certificate
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Bisa <b>DP dan Dicicil</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Gratis <b>webinar</b> setiap bulan
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Dapat <b>materi</b> setiap minggu
-                                                </p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Garansi mengulang kelas</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> <b>10x pertemuan:</b> 2 Bulan*</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Maksimal peserta <b>7 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Minimal peserta <b>3 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Durasi kelas <b>90 menit</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat Certificate</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Bisa <b>DP dan Dicicil</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Gratis <b>webinar</b> setiap bulan</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> E-book & E-module</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Komunitas alumni</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Evaluasi tiap sesi</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Ada WAG support</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat <b>materi</b> setiap minggu</p>
                                             </div>
                                             <div class="mt-4 pt-2 text-center">
-                                                <a data-program="*First Class Surabaya senilai 2.579K*."
-                                                    class="btn btn-green w-100 title-change-registration"
+                                                <a class="btn btn-green w-100 title-change-registration"
                                                     onclick="sendWhatsAppMessage(this)"
-                                                    data-program="First Class Surabaya">Daftar Sekarang</a>
-                                                <a onclick="askAdminMessage(this)" data-program="First Class Surabaya"
-                                                    class="btn btn-primary w-100 title-change-consultation">Tanya
-                                                    Admin</a>
+                                                    data-program="First Class Jakarta">Daftar Sekarang</a>
+                                                <a onclick="askAdminMessage(this)"
+                                                    data-program="First Class Jakarta"
+                                                    class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="pricing-box bg-white rounded mt-4">
-                                            <h5 class="fw-normal">First Private : Surabaya</h5>
-                                            <h1 class="pricing-title mt-3 mb-0">IDR 3.579.000
-                                                <span class="f-13"> <strike>IDR 7.500.000</strike></span>
-                                            </h1>
+                                            <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
+                                                style="font-size: 10px;">
+                                                <span>Kontak Admin untuk request jadwal</span>
+                                            </div>
+                                            <h5 class="fw-normal">First Private : Jakarta</h5>
+                                            <div style="white-space: nowrap; margin-top: 12px;">
+                                                <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 6.500.000</h1>
+                                                <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                    onclick="triggerPromoModal()"
+                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
+                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                                </button>
+                                            </div>
                                             <p class="text-muted f-15 mt-3">Seperti First Class dengan jumlah 10x
                                                 pertemuan, materi
-                                                hanya terfokus ke body language, tidak sampai kepada konten pembicaraan
-                                            </p>
+                                                hanya terfokus ke body language, tidak sampai kepada konten pembicaraan</p>
                                             <div class="mt-4 pt-1">
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Garansi mengulang kelas
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Waktu flexible
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    <b>10x pertemuan:</b> hingga selesai
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Maksimal peserta <b>1-3 orang</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Durasi kelas <b>90 menit</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Dapat Certificate
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Bisa <b>DP dan Dicicil</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Gratis <b>webinar</b> setiap bulan
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Dapat <b>materi</b> setiap minggu
-                                                </p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Garansi mengulang kelas</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Waktu flexible</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> <b>10x pertemuan:</b> hingga selesai</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Maksimal peserta <b>1-3 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Durasi kelas <b>90 menit</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat Certificate</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Bisa <b>DP dan Dicicil</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Gratis <b>webinar</b> setiap bulan</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Komunitas alumni</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Evaluasi tiap sesi</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Ada WAG support</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat <b>materi</b> setiap minggu</p>
                                             </div>
                                             <div class="mt-4 pt-2 text-center">
-                                                <a data-program="*First Private Surabaya senilai 3.579K*."
-                                                    class="btn btn-green w-100 title-change-registration"
+                                                <a class="btn btn-green w-100 title-change-registration"
                                                     onclick="sendWhatsAppMessage(this)"
-                                                    data-program="First Private Surabaya">Daftar Sekarang</a>
-                                                <a onclick="askAdminMessage(this)" data-program="First Private Surabaya"
-                                                    class="btn btn-primary w-100 title-change-consultation">Tanya
-                                                    Admin</a>
+                                                    data-program="First Private Jakarta">Daftar Sekarang</a>
+                                                <a onclick="askAdminMessage(this)"
+                                                    data-program="First Private Jakarta"
+                                                    class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- First Class : Tangsel -->
+                            <div class="tab-pane custom-price-content fade" id="first-class-tangsel-content"
+                                role="tabpanel">
+                                <div class="row g-0 align-items-center">
+                                    <div class="col-lg-6">
+                                        <div class="pricing-box active bg-white rounded mt-4">
+                                            <div class="pricing-badge">
+                                                <span class="badge">Best Buy</span>
+                                            </div>
+                                            <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
+                                                style="font-size: 10px;">
+                                                <span>Kontak Admin untuk request jadwal</span>
+                                            </div>
+                                            <h5 class="fw-normal">First Class : Tangsel</h5>
+                                            <div style="white-space: nowrap; margin-top: 12px;">
+                                                <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 3.500.000</h1>
+                                                <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                    onclick="triggerPromoModal()"
+                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
+                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                                </button>
+                                            </div>
+                                            <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa
+                                                persiapan dan teratur
+                                                didalam berbicara</p>
+                                            <hr class="mt-4">
+                                            <div class="mt-4 pt-1">
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Garansi mengulang kelas</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> <b>10x pertemuan:</b> 2 Bulan*</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Maksimal peserta <b>7 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Minimal peserta <b>3 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Durasi kelas <b>90 menit</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat Certificate</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Bisa <b>DP dan Dicicil</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Gratis <b>webinar</b> setiap bulan</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> E-book & E-module</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Komunitas alumni</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Evaluasi tiap sesi</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Ada WAG support</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat <b>materi</b> setiap minggu</p>
+                                            </div>
+                                            <div class="mt-4 pt-2 text-center">
+                                                <a class="btn btn-green w-100 title-change-registration"
+                                                    onclick="sendWhatsAppMessage(this)"
+                                                    data-program="First Class Tangsel">Daftar Sekarang</a>
+                                                <a onclick="askAdminMessage(this)"
+                                                    data-program="First Class Tangsel"
+                                                    class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="pricing-box bg-white rounded mt-4">
+                                            <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
+                                                style="font-size: 10px;">
+                                                <span>Kontak Admin untuk request jadwal</span>
+                                            </div>
+                                            <h5 class="fw-normal">First Private : Tangsel</h5>
+                                            <div style="white-space: nowrap; margin-top: 12px;">
+                                                <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 5.500.000</h1>
+                                                <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                    onclick="triggerPromoModal()"
+                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
+                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                                </button>
+                                            </div>
+                                            <p class="text-muted f-15 mt-3">Seperti First Class dengan jumlah 10x
+                                                pertemuan, materi
+                                                hanya terfokus ke body language, tidak sampai kepada konten pembicaraan</p>
+                                            <div class="mt-4 pt-1">
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Garansi mengulang kelas</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Waktu flexible</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> <b>10x pertemuan:</b> hingga selesai</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Maksimal peserta <b>1-3 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Durasi kelas <b>90 menit</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat Certificate</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Bisa <b>DP dan Dicicil</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Gratis <b>webinar</b> setiap bulan</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Komunitas alumni</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Evaluasi tiap sesi</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Ada WAG support</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat <b>materi</b> setiap minggu</p>
+                                            </div>
+                                            <div class="mt-4 pt-2 text-center">
+                                                <a class="btn btn-green w-100 title-change-registration"
+                                                    onclick="sendWhatsAppMessage(this)"
+                                                    data-program="First Private Tangsel">Daftar Sekarang</a>
+                                                <a onclick="askAdminMessage(this)"
+                                                    data-program="First Private Tangsel"
+                                                    class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- First Class : Pontianak -->
+                            <div class="tab-pane custom-price-content fade" id="first-class-pontianak-content"
+                                role="tabpanel">
+                                <div class="row g-0 align-items-center">
+                                    <div class="col-lg-6">
+                                        <div class="pricing-box active bg-white rounded mt-4">
+                                            <div class="pricing-badge">
+                                                <span class="badge">Best Buy</span>
+                                            </div>
+                                            <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
+                                                style="font-size: 10px;">
+                                                <span>Kontak Admin untuk request jadwal</span>
+                                            </div>
+                                            <h5 class="fw-normal">First Class : Pontianak</h5>
+                                            <div style="white-space: nowrap; margin-top: 12px;">
+                                                <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 3.000.000</h1>
+                                                <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                    onclick="triggerPromoModal()"
+                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
+                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                                </button>
+                                            </div>
+                                            <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa
+                                                persiapan dan teratur
+                                                didalam berbicara</p>
+                                            <hr class="mt-4">
+                                            <div class="mt-4 pt-1">
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Garansi mengulang kelas</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> <b>10x pertemuan:</b> 2 Bulan*</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Maksimal peserta <b>7 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Minimal peserta <b>3 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Durasi kelas <b>90 menit</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat Certificate</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Bisa <b>DP dan Dicicil</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Gratis <b>webinar</b> setiap bulan</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> E-book & E-module</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Komunitas alumni</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Evaluasi tiap sesi</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Ada WAG support</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat <b>materi</b> setiap minggu</p>
+                                            </div>
+                                            <div class="mt-4 pt-2 text-center">
+                                                <a class="btn btn-green w-100 title-change-registration"
+                                                    onclick="sendWhatsAppMessage(this)"
+                                                    data-program="First Class Pontianak">Daftar Sekarang</a>
+                                                <a onclick="askAdminMessage(this)"
+                                                    data-program="First Class Pontianak"
+                                                    class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="pricing-box bg-white rounded mt-4">
+                                            <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
+                                                style="font-size: 10px;">
+                                                <span>Kontak Admin untuk request jadwal</span>
+                                            </div>
+                                            <h5 class="fw-normal">First Private : Pontianak</h5>
+                                            <div style="white-space: nowrap; margin-top: 12px;">
+                                                <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 5.000.000</h1>
+                                                <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                    onclick="triggerPromoModal()"
+                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
+                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                                </button>
+                                            </div>
+                                            <p class="text-muted f-15 mt-3">Seperti First Class dengan jumlah 10x
+                                                pertemuan, materi
+                                                hanya terfokus ke body language, tidak sampai kepada konten pembicaraan</p>
+                                            <div class="mt-4 pt-1">
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Garansi mengulang kelas</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Waktu flexible</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> <b>10x pertemuan:</b> hingga selesai</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Maksimal peserta <b>1-3 orang</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Durasi kelas <b>90 menit</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat Certificate</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Bisa <b>DP dan Dicicil</b></p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Gratis <b>webinar</b> setiap bulan</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Komunitas alumni</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Evaluasi tiap sesi</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Ada WAG support</p>
+                                                <p class="mb-3 f-16"><i class='bx bxs-check-circle'></i> Dapat <b>materi</b> setiap minggu</p>
+                                            </div>
+                                            <div class="mt-4 pt-2 text-center">
+                                                <a class="btn btn-green w-100 title-change-registration"
+                                                    onclick="sendWhatsAppMessage(this)"
+                                                    data-program="First Private Pontianak">Daftar Sekarang</a>
+                                                <a onclick="askAdminMessage(this)"
+                                                    data-program="First Private Pontianak"
+                                                    class="btn btn-primary w-100 title-change-consultation">Tanya Admin</a>
                                             </div>
                                         </div>
                                     </div>
