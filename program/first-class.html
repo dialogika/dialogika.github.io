@@ -3237,10 +3237,12 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="ReferralCode" id="referral-code"
-                                        placeholder="Kode Referral (Opsional)" readonly>
-                                    <small class="text-muted" style="font-size: 11px; display: block; margin-top: 2px;">Kode referral akan terisi
-                                        otomatis jika Anda menggunakan kupon diskon</small>
+                                    <div class="position-relative">
+                                        <input type="text" class="form-control" name="ReferralCode" id="referral-code"
+                                            placeholder="Masukkan Kode Referral (Opsional)" style="padding-right: 40px;">
+                                        <span id="referral-status-icon" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: none;"></span>
+                                    </div>
+                                    <small id="referral-helper-text" class="text-muted" style="font-size: 11px; display: block; margin-top: 2px;">Masukkan kode referral Anda, atau akan terisi otomatis saat menggunakan kupon diskon</small>
                                 </div>
 
                                 <div class="col-md-6" id="schedule-button-container">
@@ -3770,6 +3772,9 @@
                         // Check if it's a discount type
                         if ((ref.functionType || '').toLowerCase() !== 'discount') return false;
 
+                        // Only show system referrals in the popup (not user-specific ones)
+                        if ((ref.holderType || 'system') === 'user') return false;
+
                         // Check if it's still valid (not expired)
                         const createdAt = ref.createdAtMs || 0;
                         const monthsValid = ref.monthsValid || 2;
@@ -3969,6 +3974,11 @@
                 priceTitles.forEach(title => {
                     if (title.dataset.discounted) return;
 
+                    // Save original HTML for potential reset
+                    if (!title.dataset.originalHtml) {
+                        title.dataset.originalHtml = title.innerHTML;
+                    }
+
                     const originalHTML = title.innerHTML;
                     const textContent = title.textContent.trim();
                     const priceMatch = textContent.match(/IDR\s*([0-9.]+)/);
@@ -4029,11 +4039,188 @@
                 const referralCode = sessionStorage.getItem(PROMO_CODE_KEY);
                 const referralInput = document.getElementById('referral-code');
 
-                if (referralInput && referralCode) {
+                // Only auto-fill if user hasn't manually entered a code
+                if (referralInput && referralCode && !referralInput.value.trim()) {
                     referralInput.value = referralCode;
-                    referralInput.style.backgroundColor = '#e8f5e9';
-                    referralInput.style.borderColor = '#4caf50';
+                    showReferralStatus('valid', 'Kode referral berhasil diterapkan');
                 }
+            }
+
+            // === USER REFERRAL CODE VALIDATION ===
+
+            // Show status icon & helper text for referral field
+            function showReferralStatus(status, message) {
+                const icon = document.getElementById('referral-status-icon');
+                const helper = document.getElementById('referral-helper-text');
+                const input = document.getElementById('referral-code');
+                if (!icon || !helper || !input) return;
+
+                icon.style.display = 'inline-flex';
+
+                if (status === 'loading') {
+                    icon.innerHTML = '<i class="bx bx-loader-alt bx-spin" style="font-size: 18px; color: #6c757d;"></i>';
+                    helper.innerHTML = '<span style="color: #6c757d;">Memeriksa kode referral...</span>';
+                    input.style.backgroundColor = '';
+                    input.style.borderColor = '';
+                } else if (status === 'valid') {
+                    icon.innerHTML = '<i class="bx bxs-check-circle" style="font-size: 20px; color: #4caf50;"></i>';
+                    helper.innerHTML = '<span style="color: #4caf50; font-weight: 600;"><i class="bx bxs-check-circle"></i> ' + message + '</span>';
+                    input.style.backgroundColor = '#e8f5e9';
+                    input.style.borderColor = '#4caf50';
+                } else if (status === 'invalid') {
+                    icon.innerHTML = '<i class="bx bxs-x-circle" style="font-size: 20px; color: #f44336;"></i>';
+                    helper.innerHTML = '<span style="color: #f44336;">' + message + '</span>';
+                    input.style.backgroundColor = '#ffebee';
+                    input.style.borderColor = '#f44336';
+                } else {
+                    // Reset
+                    icon.style.display = 'none';
+                    icon.innerHTML = '';
+                    helper.innerHTML = 'Masukkan kode referral Anda, atau akan terisi otomatis saat menggunakan kupon diskon';
+                    helper.className = 'text-muted';
+                    input.style.backgroundColor = '';
+                    input.style.borderColor = '';
+                }
+            }
+
+            // Validate user-specific referral code against Firebase
+            async function validateUserReferralCode(code) {
+                if (!code || !code.trim()) {
+                    showReferralStatus('reset');
+                    // Reset discount if previously applied by user referral
+                    resetUserReferralDiscount();
+                    return;
+                }
+
+                code = code.trim().toUpperCase();
+                showReferralStatus('loading');
+
+                try {
+                    if (!firebase || !firebase.firestore) {
+                        showReferralStatus('invalid', 'Tidak dapat memverifikasi kode saat ini');
+                        return;
+                    }
+
+                    const db = firebase.firestore();
+                    const snapshot = await db.collection('settings').doc('referrals').get();
+
+                    if (!snapshot.exists) {
+                        showReferralStatus('invalid', 'Kode referral tidak ditemukan');
+                        return;
+                    }
+
+                    const data = snapshot.data();
+                    const referrals = data.referrals || [];
+                    const now = Date.now();
+
+                    // Find matching referral code (user type)
+                    const matchingRef = referrals.find(ref => {
+                        if ((ref.code || '').toUpperCase() !== code) return false;
+                        if ((ref.holderType || 'system') !== 'user') return false;
+                        if ((ref.functionType || '').toLowerCase() !== 'discount') return false;
+
+                        // Check validity
+                        const createdAt = ref.createdAtMs || 0;
+                        const monthsValid = ref.monthsValid || 2;
+                        const expiryMs = createdAt + (monthsValid * 30 * 24 * 60 * 60 * 1000);
+                        if (now > expiryMs) return false;
+
+                        // Check usage limit
+                        const maxUsage = ref.maxUsage || 999;
+                        const usedCount = ref.usedCount || 0;
+                        if (usedCount >= maxUsage) return false;
+
+                        return true;
+                    });
+
+                    if (matchingRef) {
+                        // Valid! Apply discount
+                        const discountPct = matchingRef.discountPercent || 0;
+                        const discountAmt = matchingRef.discountAmount || 0;
+
+                        // Update global discount settings
+                        if (discountPct > 0) {
+                            DISCOUNT_RATE = discountPct / 100;
+                        }
+                        if (discountAmt > 0) {
+                            DISCOUNT_AMOUNT = discountAmt;
+                        }
+                        REFERRAL_CODE = matchingRef.code || code;
+
+                        // Store in session
+                        sessionStorage.setItem(PROMO_CODE_KEY, REFERRAL_CODE);
+                        sessionStorage.setItem(PROMO_STORAGE_KEY, 'true');
+
+                        // Show success
+                        const discountInfo = discountPct > 0 ? `Diskon ${discountPct}%` : `Potongan Rp ${discountAmt.toLocaleString('id-ID')}`;
+                        showReferralStatus('valid', `Kode valid! ${discountInfo} diterapkan`);
+
+                        // Reset previous discount DOM before applying new one
+                        resetDiscountDOM();
+
+                        // Apply discount to pricing
+                        applyDiscountToDOM();
+                    } else {
+                        // Check if code exists but is a system type (not meant for manual input)
+                        const systemMatch = referrals.find(ref => (ref.code || '').toUpperCase() === code && (ref.holderType || 'system') === 'system');
+                        if (systemMatch) {
+                            showReferralStatus('invalid', 'Kode ini adalah promo sistem, silakan klaim melalui tombol "Claim Diskon"');
+                        } else {
+                            showReferralStatus('invalid', 'Kode referral tidak valid atau sudah kedaluwarsa');
+                        }
+                        resetUserReferralDiscount();
+                    }
+                } catch (error) {
+                    console.error('Error validating referral code:', error);
+                    showReferralStatus('invalid', 'Gagal memverifikasi kode, coba lagi');
+                }
+            }
+
+            // Reset discount DOM (remove any applied discounts so new one can be applied)
+            function resetDiscountDOM() {
+                sessionStorage.removeItem('dialogika_firstclass_promo_applied');
+                const priceTitles = document.querySelectorAll('.pricing-title');
+                priceTitles.forEach(title => {
+                    if (title.dataset.discounted && title.dataset.originalHtml) {
+                        title.innerHTML = title.dataset.originalHtml;
+                        title.classList.remove('text-success');
+                        delete title.dataset.discounted;
+                    }
+                });
+            }
+
+            // Reset discount if user clears the referral code
+            function resetUserReferralDiscount() {
+                // Only reset if the discount was applied via user referral (not system claim)
+                if (!promoActive) {
+                    resetDiscountDOM();
+                    // Show claim discount buttons again
+                    document.querySelectorAll('.claim-discount-btn').forEach(btn => {
+                        btn.style.display = '';
+                    });
+                }
+            }
+
+            // Debounced input listener for referral code field
+            const referralInput = document.getElementById('referral-code');
+            let referralDebounceTimer = null;
+
+            if (referralInput) {
+                referralInput.addEventListener('input', function () {
+                    clearTimeout(referralDebounceTimer);
+                    const value = this.value.trim();
+
+                    if (!value) {
+                        showReferralStatus('reset');
+                        resetUserReferralDiscount();
+                        return;
+                    }
+
+                    // Debounce: wait 600ms after user stops typing
+                    referralDebounceTimer = setTimeout(() => {
+                        validateUserReferralCode(value);
+                    }, 600);
+                });
             }
         });
     </script>
