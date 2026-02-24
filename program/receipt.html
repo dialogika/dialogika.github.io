@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt Pendaftaran - Dialogika</title>
+
+    <!-- Favicons -->
+    <link href="../assets/img/favicon.webp" rel="icon">
+    <link href="../assets/img/apple-touch-icon.webp" rel="apple-touch-icon">
+
+    <!-- Vendor CSS Files -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --success-color: #10b981;
+            --bg-body: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .receipt-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .success-animation {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .check-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success-color);
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+            margin-bottom: 20px;
+            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+
+            70% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .receipt-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Zig-zag bottom edge effect */
+        .receipt-card::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background-image: linear-gradient(-45deg, var(--bg-body) 6px, transparent 0),
+                linear-gradient(45deg, var(--bg-body) 6px, transparent 0);
+            background-position: left bottom;
+            background-repeat: repeat-x;
+            background-size: 12px 12px;
+        }
+
+        .receipt-header {
+            padding: 40px;
+            text-align: center;
+            border-bottom: 2px dashed #f1f5f9;
+        }
+
+        .receipt-title {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .receipt-id {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .receipt-body {
+            padding: 40px;
+        }
+
+        .info-group {
+            margin-bottom: 30px;
+        }
+
+        .info-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .info-key {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .divider {
+            height: 1.5px;
+            background: #f1f5f9;
+            margin: 25px 0;
+        }
+
+        .total-section {
+            background: #f8fafc;
+            margin: 0 -40px -40px;
+            padding: 40px;
+            border-top: 2px dashed #f1f5f9;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-label {
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .total-price {
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 16px;
+            border-radius: 18px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary-action {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-outline-action {
+            background: white;
+            color: var(--text-main);
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+        }
+
+        .footer-note {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 30px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 576px) {
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .receipt-header,
+            .receipt-body {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Print Style */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .action-buttons,
+            .footer-note,
+            .success-animation {
+                display: none;
+            }
+
+            .receipt-card {
+                box-shadow: none;
+                border: 1px solid #eee;
+                margin-top: 50px;
+            }
+
+            .receipt-card::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="receipt-container">
+        <!-- Success Animation -->
+        <div class="success-animation">
+            <div class="check-icon">
+                <i class='bx bx-check'></i>
+            </div>
+            <h2 class="fw-black mb-1">Terima Kasih!</h2>
+            <p class="text-muted">Pendaftaran Anda telah kami terima.</p>
+        </div>
+
+        <!-- Receipt Card -->
+        <div class="receipt-card">
+            <div class="receipt-header">
+                <div class="receipt-title">Order Summary</div>
+                <div class="receipt-id" id="receipt-id">#ORD-2402-9981</div>
+                <div class="text-muted small mt-1" id="receipt-date">24 Februari 2026, 14:45</div>
+            </div>
+
+            <div class="receipt-body">
+                <!-- Group 1: Pendaftar -->
+                <div class="info-group">
+                    <span class="info-label">Detail Pendaftar</span>
+                    <div class="info-row">
+                        <span class="info-key">Nama</span>
+                        <span class="info-value" id="val-pendaftar-name">John Doe</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-key">WhatsApp</span>
+                        <span class="info-value" id="val-pendaftar-phone">08123456789</span>
+                    </div>
+                </div>
+
+                <!-- Group 2: Program -->
+                <div class="info-group">
+                    <span class="info-label">Program & Batch</span>
+                    <div class="info-row">
+                        <span class="info-key">Nama Kelas</span>
+                        <span class="info-value" id="val-program-name">Public Speaking Mastery</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-key">Jadwal</span>
+                        <span class="info-value" id="val-schedule">Sabtu & Minggu, 13:00 - 15:00</span>
+                    </div>
+                </div>
+
+                <!-- Group 3: Payment -->
+                <div class="info-group">
+                    <span class="info-label">Informasi Pembayaran</span>
+                    <div class="info-row">
+                        <span class="info-key">Metode</span>
+                        <span class="info-value" id="val-payment-method">Bank Transfer (BCA Syariah)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-key">Tipe Pembayaran</span>
+                        <span class="info-value" id="val-payment-type">Full Payment</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-key">Status</span>
+                        <span class="info-value text-success">Verifying Proof</span>
+                    </div>
+                </div>
+
+                <div class="total-section">
+                    <div class="total-row">
+                        <span class="total-label">Total Dibayar</span>
+                        <span class="total-price" id="val-total-price">Rp 1.500.000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn-action btn-outline-action" onclick="window.print()">
+                <i class='bx bx-printer'></i> Print PDF
+            </button>
+            <button class="btn-action btn-primary-action" id="btn-whatsapp-confirm">
+                <i class='bx bxl-whatsapp'></i> Konfirmasi WA
+            </button>
+        </div>
+
+        <div class="footer-note">
+            <p>Admin kami akan segera menghubungi Anda dalam waktu maksimal 1x24 jam untuk aktivasi grup kelas.</p>
+            <a href="first-class.html" class="text-primary fw-bold text-decoration-none">Kembali ke Beranda</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Generate Random Order ID
+            const randomId = 'ORD-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000);
+            $('#receipt-id').text('#' + randomId);
+
+            // Set Current Date
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' +
+                now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            $('#receipt-date').text(dateStr);
+
+            // Load Data from Submission Storage
+            const submissionData = JSON.parse(localStorage.getItem('dialogika_last_submission') || '{}');
+
+            if (submissionData.pendaftarName) $('#val-pendaftar-name').text(submissionData.pendaftarName);
+            if (submissionData.pendaftarPhone) $('#val-pendaftar-phone').text(submissionData.pendaftarPhone);
+            if (submissionData.programName) $('#val-program-name').text(submissionData.programName);
+            if (submissionData.paymentMethod) $('#val-payment-method').text(submissionData.paymentMethod);
+            if (submissionData.paymentType) $('#val-payment-type').text(submissionData.paymentType === 'full' ? 'Full Payment' : 'DP (Deposit)');
+            if (submissionData.totalPrice) $('#val-total-price').text('Rp ' + parseInt(submissionData.totalPrice).toLocaleString('id-ID'));
+
+            // WhatsApp Confirmation Logic
+            $('#btn-whatsapp-confirm').click(function () {
+                const text = `Halo Admin Dialogika! Saya telah melakukan pendaftaran:\n\n` +
+                    `*Order ID*: ${randomId}\n` +
+                    `*Nama*: ${submissionData.pendaftarName}\n` +
+                    `*Program*: ${submissionData.programName}\n` +
+                    `*Tipe*: ${submissionData.paymentType === 'full' ? 'Full Payment' : 'DP'}\n` +
+                    `*Total*: Rp ${parseInt(submissionData.totalPrice).toLocaleString('id-ID')}\n\n` +
+                    `Saya sudah mengunggah bukti transfer. Mohon bantu verifikasinya. Terima kasih!`;
+
+                window.open(`https://api.whatsapp.com/send?phone=6285162992597&text=${encodeURIComponent(text)}`, '_blank');
+            });
+        });
+    </script>
+</body>
+
+</html>
