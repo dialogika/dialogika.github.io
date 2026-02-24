@@ -332,6 +332,18 @@
                         <span class="info-key">Status</span>
                         <span class="info-value text-success">Verifying Proof</span>
                     </div>
+                    <div class="info-row d-none invoice-info-row" id="invoice-id-row">
+                        <span class="info-key">Invoice ID</span>
+                        <span class="info-value" id="val-invoice-id" style="color: var(--primary-color); font-weight: 800;"></span>
+                    </div>
+                    <div class="info-row d-none invoice-info-row" id="invoice-url-row" style="margin-top: 2px;">
+                        <span class="info-key">Invoice Link</span>
+                        <span class="info-value">
+                            <a href="#" id="val-invoice-url" target="_blank"
+                               style="color: var(--primary-color); font-size: 0.75rem; word-break: break-all; text-decoration: underline; font-weight: 700;">
+                            </a>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="total-section">
@@ -360,41 +372,164 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Generate Random Order ID
-            const randomId = 'ORD-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000);
-            $('#receipt-id').text('#' + randomId);
 
-            // Set Current Date
+    <!-- Firebase SDK (same config as invoice.html) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
+            authDomain: "pre-dialogika.firebaseapp.com",
+            projectId: "pre-dialogika",
+            storageBucket: "pre-dialogika.firebasestorage.app",
+            messagingSenderId: "343771410480",
+            appId: "1:343771410480:web:32881c9868522090237df5",
+            measurementId: "G-SXN811P3N0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.dlgReceiptDb = db;
+        window.dlgReceiptDoc = doc;
+        window.dlgReceiptGetDoc = getDoc;
+        window.__firebaseReady = true;
+        console.log("Firebase initialized in receipt.html");
+    </script>
+
+    <script>
+        $(document).ready(async function () {
+            // ─── Parse invoiceId from URL ───
+            const params = new URLSearchParams(window.location.search);
+            const invoiceId = params.get('invoiceId') || '';
+
+            // ─── Set Current Date ───
             const now = new Date();
             const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' +
                 now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
             $('#receipt-date').text(dateStr);
 
-            // Load Data from Submission Storage
-            const submissionData = JSON.parse(localStorage.getItem('dialogika_last_submission') || '{}');
+            // ─── Data resolution order: sessionStorage > Firestore > localStorage ───
+            let receiptData = null;
 
-            if (submissionData.pendaftarName) $('#val-pendaftar-name').text(submissionData.pendaftarName);
-            if (submissionData.pendaftarPhone) $('#val-pendaftar-phone').text(submissionData.pendaftarPhone);
-            if (submissionData.programName) $('#val-program-name').text(submissionData.programName);
-            if (submissionData.paymentMethod) $('#val-payment-method').text(submissionData.paymentMethod);
-            if (submissionData.paymentType) $('#val-payment-type').text(submissionData.paymentType === 'full' ? 'Full Payment' : 'DP (Deposit)');
-            if (submissionData.totalPrice) $('#val-total-price').text('Rp ' + parseInt(submissionData.totalPrice).toLocaleString('id-ID'));
+            // 1) Try sessionStorage (set by invoice.html before redirect)
+            try {
+                const sessionRaw = sessionStorage.getItem('dlg_invoice_receipt');
+                if (sessionRaw) {
+                    receiptData = JSON.parse(sessionRaw);
+                }
+            } catch (e) {}
 
-            // WhatsApp Confirmation Logic
+            // 2) Try Firestore if we have an invoiceId and sessionStorage was empty
+            if (!receiptData && invoiceId) {
+                receiptData = await loadFromFirestore(invoiceId);
+            }
+
+            // 3) Fallback to localStorage (legacy support)
+            if (!receiptData) {
+                try {
+                    const localRaw = localStorage.getItem('dialogika_last_submission');
+                    if (localRaw) {
+                        const ld = JSON.parse(localRaw);
+                        // Map legacy keys to unified format
+                        receiptData = {
+                            leadName: ld.pendaftarName || '',
+                            leadPhone: ld.pendaftarPhone || '',
+                            className: ld.programName || '',
+                            paymentMethod: ld.paymentMethod || '',
+                            bankName: ld.bankName || '',
+                            paymentType: ld.paymentType || '',
+                            amountPaid: ld.totalPrice ? parseInt(ld.totalPrice) : 0,
+                            invoiceNumber: ''
+                        };
+                    }
+                } catch (e) {}
+            }
+
+            if (!receiptData) receiptData = {};
+
+            // ─── Determine display ID ───
+            const displayId = receiptData.invoiceNumber ||
+                (invoiceId ? invoiceId : 'ORD-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000));
+            $('#receipt-id').text('#' + displayId);
+
+            // ─── Populate receipt fields ───
+            if (receiptData.leadName) $('#val-pendaftar-name').text(receiptData.leadName);
+            if (receiptData.leadPhone) $('#val-pendaftar-phone').text(receiptData.leadPhone);
+            if (receiptData.className || receiptData.productName) {
+                $('#val-program-name').text(receiptData.productName || receiptData.className);
+            }
+
+            // Payment method display
+            const methodDisplay = receiptData.paymentMethod
+                ? (receiptData.bankName ? receiptData.paymentMethod + ' (' + receiptData.bankName + ')' : receiptData.paymentMethod)
+                : '';
+            if (methodDisplay) $('#val-payment-method').text(methodDisplay);
+
+            if (receiptData.paymentType) {
+                $('#val-payment-type').text(receiptData.paymentType === 'full' ? 'Full Payment' : 'DP (Deposit)');
+            }
+
+            // Price
+            const totalPaid = receiptData.amountPaid || receiptData.paidAmount || 0;
+            if (totalPaid) {
+                $('#val-total-price').text('Rp ' + parseInt(totalPaid).toLocaleString('id-ID'));
+            }
+
+            // Schedule (if available from sessionStorage legacy)
+            if (receiptData.schedule) {
+                $('#val-schedule').text(receiptData.schedule);
+            }
+
+            // ─── Invoice URL row ───
+            if (invoiceId) {
+                const invoiceUrl = window.location.origin + window.location.pathname.replace('receipt.html', 'invoice.html') + '?invoiceId=' + encodeURIComponent(invoiceId);
+                $('.invoice-info-row').removeClass('d-none');
+                $('#val-invoice-url').attr('href', invoiceUrl).text(invoiceUrl);
+                $('#val-invoice-id').text(invoiceId);
+            }
+
+            // ─── WhatsApp Confirmation Logic ───
             $('#btn-whatsapp-confirm').click(function () {
+                const name = $('#val-pendaftar-name').text();
+                const program = $('#val-program-name').text();
+                const tipe = $('#val-payment-type').text();
+                const total = $('#val-total-price').text();
+                const invId = invoiceId || displayId;
+
                 const text = `Halo Admin Dialogika! Saya telah melakukan pendaftaran:\n\n` +
-                    `*Order ID*: ${randomId}\n` +
-                    `*Nama*: ${submissionData.pendaftarName}\n` +
-                    `*Program*: ${submissionData.programName}\n` +
-                    `*Tipe*: ${submissionData.paymentType === 'full' ? 'Full Payment' : 'DP'}\n` +
-                    `*Total*: Rp ${parseInt(submissionData.totalPrice).toLocaleString('id-ID')}\n\n` +
+                    `*Invoice ID*: ${invId}\n` +
+                    `*Nama*: ${name}\n` +
+                    `*Program*: ${program}\n` +
+                    `*Tipe*: ${tipe}\n` +
+                    `*Total*: ${total}\n\n` +
                     `Saya sudah mengunggah bukti transfer. Mohon bantu verifikasinya. Terima kasih!`;
 
                 window.open(`https://api.whatsapp.com/send?phone=6285162992597&text=${encodeURIComponent(text)}`, '_blank');
             });
         });
+
+        // ─── Load invoice data from Firestore ───
+        async function loadFromFirestore(invoiceId) {
+            try {
+                // Wait for Firebase module to be ready
+                let attempts = 0;
+                while (!window.__firebaseReady && attempts < 20) {
+                    await new Promise(r => setTimeout(r, 250));
+                    attempts++;
+                }
+                if (!(window.dlgReceiptDb && window.dlgReceiptDoc && window.dlgReceiptGetDoc)) return null;
+
+                const ref = window.dlgReceiptDoc(window.dlgReceiptDb, 'invoices', invoiceId);
+                const snap = await window.dlgReceiptGetDoc(ref);
+                if (!snap.exists()) return null;
+                return snap.data() || null;
+            } catch (e) {
+                console.error('Failed to load invoice from Firestore:', e);
+                return null;
+            }
+        }
     </script>
 </body>
 
