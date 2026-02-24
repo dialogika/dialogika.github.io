@@ -3353,7 +3353,8 @@
                                     <div class="error-message"></div>
                                     <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                                    <button type="submit" id="send_contact" class="send_contact">Send Whatsapp</button>
+                                    <button type="submit" id="send_contact" class="btn-checkout">Next to
+                                        Payment</button>
 
                                 </div>
 
@@ -4560,6 +4561,58 @@
 
             // Page load initialization for benefits summary
             setTimeout(updateReferralBenefitsSummary, 1500);
+
+            // Handle Contact Form Submission to Checkout
+            const contactForm = document.getElementById('uploadForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Capture data
+                    const name = document.getElementById('names').value;
+                    const phone = document.getElementById('whatsapp-number').value;
+                    const programId = document.getElementById('programs').value;
+                    const programName = document.querySelector(`#programs option[value="${programId}"]`)?.textContent || 'First Class Package';
+
+                    // Get current price from the selected program (fallback to Yogya if not found)
+                    let basePrice = 3000000;
+                    const jogjaPriceEl = document.getElementById('price-first-class');
+                    if (jogjaPriceEl) {
+                        const priceText = jogjaPriceEl.textContent.trim();
+                        const priceMatch = priceText.match(/IDR\s*([0-9.]+)/);
+                        if (priceMatch) {
+                            basePrice = parseInt(priceMatch[1].replace(/\./g, ''));
+                        }
+                    }
+
+                    // Save to localStorage
+                    const checkoutData = {
+                        name: name,
+                        phone: phone,
+                        program: programName,
+                        basePrice: basePrice,
+                        discountRate: window.DISCOUNT_RATE || 0.40,
+                        referralCode: document.getElementById('referral-code')?.value || ''
+                    };
+                    localStorage.setItem('dialogika_checkout_data', JSON.stringify(checkoutData));
+
+                    // Show loading
+                    const loading = contactForm.querySelector('.loading');
+                    if (loading) loading.classList.add('d-block');
+
+                    // Animation before redirect
+                    const btn = document.getElementById('send_contact');
+                    if (btn) {
+                        btn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Processing...';
+                        btn.style.opacity = '0.8';
+                    }
+
+                    // Redirect after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'checkout.html';
+                    }, 1200);
+                });
+            }
         });
     </script>
 
