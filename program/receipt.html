@@ -376,7 +376,7 @@
     <!-- Firebase SDK (same config as invoice.html) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
@@ -394,15 +394,69 @@
         window.dlgReceiptDb = db;
         window.dlgReceiptDoc = doc;
         window.dlgReceiptGetDoc = getDoc;
+        window.dlgReceiptSetDoc = setDoc;
         window.__firebaseReady = true;
         console.log("Firebase initialized in receipt.html");
     </script>
 
     <script>
+        // ─── Generate a proper Invoice ID ───
+        function generateInvoiceId() {
+            const now = new Date();
+            const yy = String(now.getFullYear()).slice(-2);
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const random = Math.floor(Math.random() * 9000) + 1000;
+            return 'INV-' + yy + mm + dd + '-' + random;
+        }
+
+        // ─── Wait for Firebase to be ready ───
+        async function waitForFirebase() {
+            let attempts = 0;
+            while (!window.__firebaseReady && attempts < 30) {
+                await new Promise(r => setTimeout(r, 250));
+                attempts++;
+            }
+            return !!(window.dlgReceiptDb && window.dlgReceiptDoc && window.dlgReceiptGetDoc);
+        }
+
+        // ─── Load invoice data from Firestore ───
+        async function loadFromFirestore(invoiceId) {
+            try {
+                const ready = await waitForFirebase();
+                if (!ready) return null;
+                const ref = window.dlgReceiptDoc(window.dlgReceiptDb, 'invoices', invoiceId);
+                const snap = await window.dlgReceiptGetDoc(ref);
+                if (!snap.exists()) return null;
+                return snap.data() || null;
+            } catch (e) {
+                console.error('Failed to load invoice from Firestore:', e);
+                return null;
+            }
+        }
+
+        // ─── Save receipt data to Firestore as an invoice document ───
+        async function saveToFirestore(docId, data) {
+            try {
+                const ready = await waitForFirebase();
+                if (!ready || !window.dlgReceiptSetDoc) {
+                    console.error('Firebase setDoc not available');
+                    return false;
+                }
+                const ref = window.dlgReceiptDoc(window.dlgReceiptDb, 'invoices', docId);
+                await window.dlgReceiptSetDoc(ref, data, { merge: true });
+                console.log('Invoice saved to Firestore:', docId);
+                return true;
+            } catch (e) {
+                console.error('Failed to save invoice to Firestore:', e);
+                return false;
+            }
+        }
+
         $(document).ready(async function () {
             // ─── Parse invoiceId from URL ───
             const params = new URLSearchParams(window.location.search);
-            const invoiceId = params.get('invoiceId') || '';
+            let invoiceId = params.get('invoiceId') || '';
 
             // ─── Set Current Date ───
             const now = new Date();
@@ -432,7 +486,6 @@
                     const localRaw = localStorage.getItem('dialogika_last_submission');
                     if (localRaw) {
                         const ld = JSON.parse(localRaw);
-                        // Map legacy keys to unified format
                         receiptData = {
                             leadName: ld.pendaftarName || '',
                             leadPhone: ld.pendaftarPhone || '',
@@ -449,9 +502,39 @@
 
             if (!receiptData) receiptData = {};
 
+            // ─── If no invoiceId from URL, create one in Firestore ───
+            if (!invoiceId && Object.keys(receiptData).length > 0) {
+                invoiceId = generateInvoiceId();
+                const firestorePayload = {
+                    invoiceNumber: invoiceId,
+                    leadName: receiptData.leadName || '',
+                    className: receiptData.className || receiptData.productName || '',
+                    productName: receiptData.productName || receiptData.className || '',
+                    paymentMethod: receiptData.paymentMethod || '',
+                    bankName: receiptData.bankName || '',
+                    paymentType: receiptData.paymentType || '',
+                    paidAmount: receiptData.amountPaid || receiptData.paidAmount || 0,
+                    originalBasePrice: receiptData.originalBasePrice || receiptData.amountPaid || 0,
+                    finalBasePrice: receiptData.finalBasePrice || receiptData.amountPaid || 0,
+                    basePrice: receiptData.originalBasePrice || receiptData.amountPaid || 0,
+                    transferProofUrl: receiptData.transferProofUrl || '',
+                    referralCode: receiptData.referralCode || '',
+                    discountAmount: receiptData.discountAmount || 0,
+                    verificationStatus: 'not_verified',
+                    paidAtMs: receiptData.createdAtMs || Date.now(),
+                    createdFromReceipt: true
+                };
+                const saved = await saveToFirestore(invoiceId, firestorePayload);
+                if (saved) {
+                    // Update URL without reload so the link is bookmarkable
+                    const newUrl = window.location.pathname + '?invoiceId=' + encodeURIComponent(invoiceId);
+                    window.history.replaceState(null, '', newUrl);
+                }
+            }
+
             // ─── Determine display ID ───
-            const displayId = receiptData.invoiceNumber ||
-                (invoiceId ? invoiceId : 'ORD-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000));
+            const displayId = receiptData.invoiceNumber || invoiceId || 
+                ('ORD-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000));
             $('#receipt-id').text('#' + displayId);
 
             // ─── Populate receipt fields ───
@@ -461,7 +544,6 @@
                 $('#val-program-name').text(receiptData.productName || receiptData.className);
             }
 
-            // Payment method display
             const methodDisplay = receiptData.paymentMethod
                 ? (receiptData.bankName ? receiptData.paymentMethod + ' (' + receiptData.bankName + ')' : receiptData.paymentMethod)
                 : '';
@@ -471,18 +553,16 @@
                 $('#val-payment-type').text(receiptData.paymentType === 'full' ? 'Full Payment' : 'DP (Deposit)');
             }
 
-            // Price
             const totalPaid = receiptData.amountPaid || receiptData.paidAmount || 0;
             if (totalPaid) {
                 $('#val-total-price').text('Rp ' + parseInt(totalPaid).toLocaleString('id-ID'));
             }
 
-            // Schedule (if available from sessionStorage legacy)
             if (receiptData.schedule) {
                 $('#val-schedule').text(receiptData.schedule);
             }
 
-            // ─── Invoice URL row ───
+            // ─── Invoice URL row (always show when we have an invoiceId) ───
             if (invoiceId) {
                 const invoiceUrl = window.location.origin + window.location.pathname.replace('receipt.html', 'invoice.html') + '?invoiceId=' + encodeURIComponent(invoiceId);
                 $('.invoice-info-row').removeClass('d-none');
@@ -509,27 +589,6 @@
                 window.open(`https://api.whatsapp.com/send?phone=6285162992597&text=${encodeURIComponent(text)}`, '_blank');
             });
         });
-
-        // ─── Load invoice data from Firestore ───
-        async function loadFromFirestore(invoiceId) {
-            try {
-                // Wait for Firebase module to be ready
-                let attempts = 0;
-                while (!window.__firebaseReady && attempts < 20) {
-                    await new Promise(r => setTimeout(r, 250));
-                    attempts++;
-                }
-                if (!(window.dlgReceiptDb && window.dlgReceiptDoc && window.dlgReceiptGetDoc)) return null;
-
-                const ref = window.dlgReceiptDoc(window.dlgReceiptDb, 'invoices', invoiceId);
-                const snap = await window.dlgReceiptGetDoc(ref);
-                if (!snap.exists()) return null;
-                return snap.data() || null;
-            } catch (e) {
-                console.error('Failed to load invoice from Firestore:', e);
-                return null;
-            }
-        }
     </script>
 </body>
 
