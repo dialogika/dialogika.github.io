@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Selesaikan Pembayaran Anda | Dialogika</title>
+    <title>Pendaftaran Dialogika - Checkout</title>
 
     <!-- Favicons -->
     <link href="../assets/img/favicon.webp" rel="icon">
@@ -19,69 +19,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-    <link href="../assets/css/style.css" rel="stylesheet">
-
     <style>
         :root {
             --primary-color: #6366f1;
-            --primary-hover: #4f46e5;
-            --bg-body: #f8fafc;
-            --border-color: #e2e8f0;
+            --secondary-color: #f5f3ff;
             --text-main: #1e293b;
             --text-muted: #64748b;
+            --bg-body: #f8fafc;
+            --border-color: #e2e8f0;
+            --accent-blue: #3b82f6;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
-            padding-bottom: 50px;
+            padding-bottom: 80px;
         }
 
-        .checkout-header {
-            padding: 40px 0 20px;
+        /* Header Style */
+        .page-header {
+            text-align: center;
+            padding: 60px 0 40px;
         }
 
-        .checkout-title {
-            font-weight: 800;
-            font-size: 2.5rem;
+        .page-title {
+            font-weight: 900;
+            font-size: 2.2rem;
             color: #0f172a;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
-        .checkout-subtitle {
+        .page-subtitle {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
-        .step-container {
-            display: flex;
-            gap: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .step-item {
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .step-item.active {
-            color: var(--primary-color);
-        }
-
-        .step-divider {
-            color: #cbd5e1;
-        }
-
+        /* Card Style */
         .checkout-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 24px;
             border: 1px solid var(--border-color);
-            padding: 30px;
+            padding: 32px;
             margin-bottom: 24px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
@@ -90,223 +69,390 @@
             width: 28px;
             height: 28px;
             background: #eff6ff;
-            color: #3b82f6;
+            color: var(--accent-blue);
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 0.8rem;
+            font-weight: 800;
+            font-size: 0.75rem;
             margin-right: 12px;
         }
 
         .section-title {
-            font-weight: 700;
-            font-size: 1.25rem;
-            margin-bottom: 24px;
+            font-weight: 800;
+            font-size: 1.15rem;
+            margin-bottom: 28px;
             display: flex;
             align-items: center;
         }
 
+        /* Form Controls */
         .form-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 10px;
         }
 
-        .form-control {
-            border-radius: 12px;
-            padding: 12px 16px;
-            border: 1px solid var(--border-color);
-            font-size: 0.95rem;
+        .form-control,
+        .form-select {
+            border-radius: 14px;
+            padding: 12px 18px;
+            border: 1.5px solid var(--border-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            background-color: #ffffff;
             transition: all 0.2s;
         }
 
-        .form-control:focus {
+        .form-control:focus,
+        .form-select:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08);
+            outline: none;
         }
 
-        .payment-method-grid {
+        .input-group-text {
+            background-color: #ffffff;
+            border: 1.5px solid var(--border-color);
+            border-right: none;
+            border-radius: 14px 0 0 14px;
+            color: var(--text-muted);
+        }
+
+        .input-group .form-control {
+            border-left: none;
+            border-radius: 0 14px 14px 0;
+        }
+
+        /* Custom Radio/Checkbox */
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .form-check-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Payment Tabs */
+        .payment-type-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .payment-type-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1.5px solid var(--border-color);
+            background: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .payment-type-btn.active {
+            border-color: var(--primary-color);
+            background: #f5f3ff;
+            color: var(--primary-color);
+        }
+
+        /* Payment Grid */
+        .payment-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
-        .payment-option {
-            border: 1px solid var(--border-color);
+        .payment-item {
+            border: 1.5px solid var(--border-color);
             border-radius: 16px;
-            padding: 20px 10px;
+            padding: 18px 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .payment-option:hover {
+        .payment-item:hover {
             border-color: var(--primary-color);
             background: #f5f3ff;
         }
 
-        .payment-option.active {
+        .payment-item.active {
             border: 2px solid var(--primary-color);
             background: #f5f3ff;
-            outline: none;
         }
 
-        .payment-option i {
-            font-size: 1.5rem;
+        .payment-item i {
+            font-size: 1.4rem;
             color: var(--text-muted);
         }
 
-        .payment-option.active i {
+        .payment-item.active i {
             color: var(--primary-color);
         }
 
-        .payment-option .option-label {
+        .payment-item span {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .payment-item.active span {
+            color: var(--primary-color);
+        }
+
+        /* Bank Details Card */
+        .bank-details-card {
+            background: #f0f7ff;
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bank-label {
+            color: var(--primary-color);
+            font-size: 0.65rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .bank-name {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #0f172a;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .bank-number {
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .bank-holder {
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-muted);
         }
 
-        .payment-option.active .option-label {
-            color: var(--primary-color);
+        .bank-icon {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: rgba(99, 102, 241, 0.1);
         }
 
-        .info-box {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 20px;
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            border-radius: 20px;
+            padding: 40px 20px;
             text-align: center;
-            font-size: 0.875rem;
-            color: var(--text-main);
-            margin-top: 20px;
-            border: 1px dashed var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #ffffff;
         }
 
-        .summary-card {
-            top: 20px;
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background: #f8fafc;
         }
 
-        .summary-title {
-            font-weight: 700;
-            font-size: 1.125rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
+        .upload-icon {
+            font-size: 2rem;
+            color: var(--text-muted);
             margin-bottom: 12px;
         }
 
-        .item-details {
-            flex: 1;
+        .upload-text {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
         }
 
-        .item-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 2px;
-        }
-
-        .item-qty {
-            font-size: 0.75rem;
+        .upload-hint {
+            font-size: 0.7rem;
             color: var(--text-muted);
         }
 
-        .item-price {
-            font-weight: 600;
-            font-size: 0.9rem;
+        /* Sidebar - Ringkasan */
+        .summary-card {
+            top: 100px;
         }
 
-        .summary-divider {
-            border-top: 1px solid var(--border-color);
-            margin: 20px 0;
+        .summary-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
-        .total-row {
+        .program-package-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .package-label {
+            font-size: 0.6rem;
+            font-weight: 900;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .package-name {
+            font-weight: 800;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .package-meta {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .summary-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+        }
+
+        .summary-row .label {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .summary-row .value {
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .total-row {
             margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1.5px solid var(--border-color);
         }
 
         .total-label {
             font-weight: 800;
-            font-size: 1.125rem;
+            font-size: 1rem;
         }
 
-        .total-amount {
-            font-weight: 800;
-            font-size: 1.25rem;
+        .total-value {
+            font-weight: 900;
+            font-size: 1.2rem;
             color: var(--primary-color);
         }
 
-        .promo-section {
-            margin-top: 30px;
+        .promo-input-group {
+            margin-top: 24px;
         }
 
-        .btn-apply {
+        .btn-apply-promo {
             background: #0f172a;
             color: white;
+            border: none;
             border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.875rem;
-            padding: 10px 20px;
+            padding: 10px 18px;
+            font-weight: 800;
+            font-size: 0.8rem;
         }
 
-        .btn-pay {
-            background: var(--primary-color);
+        .btn-proceed {
             background: linear-gradient(135deg, #7c3aed, #a855f7);
-            color: white;
+            color: white !important;
             border: none;
-            border-radius: 16px;
-            padding: 18px;
+            border-radius: 18px;
+            padding: 16px;
             width: 100%;
             font-weight: 800;
-            font-size: 1.1rem;
-            margin-top: 30px;
+            font-size: 1rem;
+            margin-top: 24px;
             box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3);
             transition: all 0.2s;
         }
 
-        .btn-pay:hover {
+        .btn-proceed:hover {
             transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(124, 58, 237, 0.4);
+            box-shadow: 0 20px 25px -5px rgba(124, 58, 237, 0.35);
         }
 
-        .compliance-text {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-align: center;
-            margin-top: 20px;
-            line-height: 1.5;
-        }
-
-        .payment-icons {
+        /* Warning Box */
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 24px;
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 40px;
+            gap: 12px;
         }
 
-        .payment-icons img {
-            height: 24px;
-            opacity: 0.5;
-            filter: grayscale(1);
+        .warning-box i {
+            color: #d97706;
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
-        @media (max-width: 768px) {
-            .payment-method-grid {
+        .warning-text {
+            font-size: 0.7rem;
+            color: #92400e;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        @media (max-width: 991px) {
+            .summary-card {
+                margin-top: 40px;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .payment-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .page-title {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -315,221 +461,376 @@
 <body>
 
     <div class="container">
-        <header class="checkout-header d-flex justify-content-between align-items-end flex-wrap gap-4">
-            <div>
-                <h1 class="checkout-title">Checkout</h1>
-                <p class="checkout-subtitle">Selesaikan pembayaran Anda untuk melanjutkan.</p>
-            </div>
-
+        <!-- Header -->
+        <header class="page-header">
+            <h1 class="page-title">Pendaftaran Dialogika</h1>
+            <p class="page-subtitle">Lengkapi formulir di bawah ini untuk bergabung dengan kelas kami.</p>
         </header>
 
-        <div class="row mt-4">
-            <!-- Left Column: Forms -->
+        <div class="row">
+            <!-- Left Side: Registration Sections -->
             <div class="col-lg-7">
-                <!-- Section 1: Data Pembeli -->
+
+                <!-- 1. Data Pendaftar -->
                 <div class="checkout-card">
-                    <h2 class="section-title">
-                        <span class="section-number">1</span>
-                        Data Pembeli
-                    </h2>
+                    <h2 class="section-title"><span class="section-number">1</span> Data Pendaftar</h2>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Nama Pendaftar *</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class='bx bx-user'></i></span>
+                                <input type="text" id="pendaftar-name" class="form-control"
+                                    placeholder="Nama lengkap Anda">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">No HP Pendaftar *</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class='bx bx-phone'></i></span>
+                                <input type="text" id="pendaftar-phone" class="form-control" placeholder="0812xxxxxxxx">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Data Peserta -->
+                <div class="checkout-card">
+                    <h2 class="section-title"><span class="section-number">2</span> Data Peserta</h2>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Nama Peserta *</label>
+                            <input type="text" id="peserta-name" class="form-control"
+                                placeholder="Nama lengkap peserta">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">No WhatsApp Peserta *</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class='bx bx-phone'></i></span>
+                                <input type="text" id="peserta-whatsapp" class="form-control"
+                                    placeholder="0812xxxxxxxx">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email Peserta</label>
+                            <input type="email" id="peserta-email" class="form-control" placeholder="email@peserta.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Instagram Peserta</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class='bx bxl-instagram'></i></span>
+                                <input type="text" id="peserta-ig" class="form-control" placeholder="@username">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Pekerjaan *</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class='bx bx-briefcase'></i></span>
+                                <input type="text" id="peserta-job" class="form-control"
+                                    placeholder="Contoh: Mahasiswa">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Usia *</label>
+                            <input type="number" id="peserta-age" class="form-control" placeholder="Angka">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Gender *</label>
+                            <select id="peserta-gender" class="form-select">
+                                <option value="" selected disabled>Laki-laki</option>
+                                <option value="Male">Laki-laki</option>
+                                <option value="Female">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Kota Domisili *</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class='bx bx-map-pin'></i></span>
+                                <input type="text" id="peserta-city" class="form-control" placeholder="Contoh: Jakarta">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Status Pernikahan</label>
+                            <div class="d-flex gap-4 mt-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="marryStatus" id="marryNot"
+                                        checked>
+                                    <label class="form-check-label" for="marryNot">Belum Menikah</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="marryStatus" id="marryYes">
+                                    <label class="form-check-label" for="marryYes">Menikah</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Informasi Tambahan -->
+                <div class="checkout-card">
+                    <h2 class="section-title"><span class="section-number">3</span> Informasi Tambahan</h2>
                     <div class="row g-4">
                         <div class="col-12">
-                            <label class="form-label">Nama Lengkap</label>
-                            <input type="text" id="buyer-name" class="form-control" placeholder="Contoh: John Doe"
-                                required>
+                            <label class="form-label">Tahu Dialogika dari mana? *</label>
+                            <textarea id="source-info" class="form-control" rows="3"
+                                placeholder="Contoh: Iklan Instagram, Teman, Google, dll"></textarea>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Email</label>
-                            <input type="email" id="buyer-email" class="form-control" placeholder="john@example.com"
-                                required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Nomor HP</label>
-                            <input type="text" id="buyer-phone" class="form-control" placeholder="0812xxxxxxxx"
-                                required>
+                        <div class="col-12">
+                            <label class="form-label">Catatan (Opsional)</label>
+                            <textarea id="notes-info" class="form-control" rows="3"
+                                placeholder="Ada pesan khusus?"></textarea>
                         </div>
                     </div>
                 </div>
 
-                <!-- Section 2: Metode Pembayaran -->
+                <!-- 4. Metode Pembayaran -->
                 <div class="checkout-card">
-                    <h2 class="section-title">
-                        <span class="section-number">2</span>
-                        Metode Pembayaran
-                    </h2>
-                    <div class="payment-method-grid">
-                        <div class="payment-option" data-method="credit-card">
-                            <i class='bx bx-credit-card'></i>
-                            <span class="option-label">Kartu Kredit</span>
-                        </div>
-                        <div class="payment-option" data-method="bank-transfer">
+                    <h2 class="section-title"><span class="section-number">4</span> Metode Pembayaran</h2>
+
+                    <label class="form-label">Tipe Pembayaran</label>
+                    <div class="payment-type-tabs">
+                        <button class="payment-type-btn active" data-type="full">Full Payment</button>
+                        <button class="payment-type-btn" data-type="dp">DP (Rp 500rb)</button>
+                    </div>
+
+                    <div class="payment-grid">
+                        <div class="payment-item active" data-method="transfer">
                             <i class='bx bx-transfer-alt'></i>
-                            <span class="option-label">Transfer Bank</span>
+                            <span>Transfer Bank</span>
                         </div>
-                        <div class="payment-option" data-method="e-wallet">
-                            <i class='bx bx-wallet'></i>
-                            <span class="option-label">E-Wallet</span>
-                        </div>
-                        <div class="payment-option active" data-method="qris">
+                        <div class="payment-item" data-method="qris">
                             <i class='bx bx-qr-scan'></i>
-                            <span class="option-label">QRIS</span>
+                            <span>QRIS</span>
+                        </div>
+                        <div class="payment-item" data-method="wallet">
+                            <i class='bx bx-wallet'></i>
+                            <span>E-Wallet</span>
+                        </div>
+                        <div class="payment-item" data-method="card">
+                            <i class='bx bx-credit-card'></i>
+                            <span>Kartu Kredit</span>
                         </div>
                     </div>
 
-                    <div class="info-box">
-                        Instruksi pembayaran akan ditampilkan setelah Anda menekan tombol <strong>Bayar
-                            Sekarang</strong>.
+                    <!-- Bank Details Panel -->
+                    <div id="panel-bank" class="bank-details-panel">
+                        <div class="bank-details-card">
+                            <span class="bank-label">Rekening Tujuan</span>
+                            <span class="bank-name">BCA Syariah</span>
+                            <span class="bank-number">0460227911</span>
+                            <span class="bank-holder">A.N PT Dialogika Persona Indonesia</span>
+                            <i class='bx bxs-bank bank-icon'></i>
+                        </div>
+
+                        <label class="form-label">Upload Bukti Transfer *</label>
+                        <div class="upload-area">
+                            <i class='bx bx-upload upload-icon'></i>
+                            <p class="upload-text">Klik atau drag file bukti transfer ke sini</p>
+                            <p class="upload-hint">Format: JPG, PNG (Maks 5MB)</p>
+                            <input type="file" id="proof-upload" class="d-none">
+                        </div>
                     </div>
                 </div>
+
             </div>
 
-            <!-- Right Column: Summary -->
+            <!-- Right Side: Sidebar Ringkasan -->
             <div class="col-lg-5">
                 <div class="checkout-card summary-card sticky-top">
-                    <h2 class="summary-title">
-                        <i class='bx bx-shopping-bag'></i>
-                        Ringkasan Pesanan
-                    </h2>
+                    <h2 class="summary-title"><i class='bx bx-spreadsheet text-primary'></i> Ringkasan</h2>
 
-                    <div id="order-items">
-                        <!-- Items will be populated by JS -->
-                        <div class="summary-item">
-                            <div class="item-details">
-                                <div class="item-name" id="display-program-name">First Class Yogyakarta</div>
-                                <div class="item-qty">Qty: 1</div>
-                            </div>
-                            <div class="item-price" id="display-base-price">Rp 3.000.000</div>
+                    <div class="program-package-card">
+                        <span class="package-label">Program</span>
+                        <span class="package-name" id="label-program-name">Public Speaking Mastery - Batch 42</span>
+                        <div class="package-meta">
+                            <i class='bx bx-calendar'></i>
+                            <span id="label-batch-schedule">Sabtu & Minggu, 13:00 - 15:00 WIB</span>
                         </div>
-                        <!-- Excluded Features if any? Usually just the product -->
                     </div>
 
-                    <div class="summary-divider"></div>
-
-                    <div class="summary-item">
-                        <span class="text-muted">Subtotal</span>
-                        <span class="fw-bold" id="display-subtotal">Rp 3.000.000</span>
+                    <div class="summary-row">
+                        <span class="label">Harga Normal</span>
+                        <span class="value" id="label-price-normal">Rp 1.500.000</span>
+                    </div>
+                    <div class="summary-row" id="row-discount" style="display: none;">
+                        <span class="label text-success">Diskon Referral</span>
+                        <span class="value text-success" id="label-price-discount">- Rp 0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Tipe: <span id="label-payment-type-text">Full Payment</span></span>
+                        <span class="value" id="label-price-active">Rp 1.500.000</span>
                     </div>
 
-                    <div class="summary-item" id="discount-row" style="display: none;">
-                        <span class="text-success">Diskon</span>
-                        <span class="text-success fw-bold" id="display-discount">- Rp 0</span>
+                    <div class="total-row summary-row">
+                        <span class="total-label">Total Bayar</span>
+                        <span class="total-value" id="label-price-total">Rp 1.500.000</span>
                     </div>
 
-                    <div class="summary-item">
-                        <span class="text-muted">Pajak (0%)</span>
-                        <span class="fw-bold">Rp 0</span>
-                    </div>
-
-                    <div class="total-row">
-                        <span class="total-label">Total</span>
-                        <span class="total-amount" id="display-total">Rp 3.000.000</span>
-                    </div>
-
-                    <div class="promo-section">
+                    <div class="promo-input-group">
                         <label class="form-label">KODE PROMO</label>
                         <div class="input-group">
-                            <input type="text" id="promo-input" class="form-control" placeholder="Masukkan kode">
-                            <button class="btn btn-apply" type="button">Apply</button>
+                            <input type="text" id="promo-code-input" class="form-control" placeholder="Masukkan kode">
+                            <button class="btn-apply-promo" id="btn-apply-promo">Apply</button>
                         </div>
-                        <small class="text-muted mt-2 d-block" style="font-size: 0.75rem;">
-                            Gunakan kode <span class="fw-bold text-primary">"HEMAT40"</span> untuk diskon 40%
+                        <small class="text-muted mt-2 d-block" style="font-size: 0.65rem; font-weight: 600;">
+                            Gunakan kode <span class="text-primary">"DIALOGIKA100"</span> untuk diskon Rp 100.000
                         </small>
                     </div>
 
-                    <button class="btn-pay" id="btn-pay-now">Bayar Sekarang</button>
+                    <button class="btn btn-proceed" id="btn-submit-registration">Lanjut ke Receipt</button>
 
-                    <p class="compliance-text">
-                        Dengan menekan tombol di atas, Anda menyetujui <a href="#">Syarat & Ketentuan</a> yang berlaku.
-                    </p>
-
-                    <div class="payment-icons">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
-                            alt="Mastercard">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+                    <div class="warning-box">
+                        <i class='bx bx-info-circle'></i>
+                        <div class="warning-text">
+                            Pastikan data yang Anda masukkan sudah benar. Data ini akan digunakan untuk sertifikat dan
+                            komunikasi selama program berlangsung.
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            // Load data from localStorage
+            // Load Context from localStorage
             const checkoutData = JSON.parse(localStorage.getItem('dialogika_checkout_data') || '{}');
 
-            if (checkoutData.name) $('#buyer-name').val(checkoutData.name);
-            if (checkoutData.phone) $('#buyer-phone').val(checkoutData.phone);
-            if (checkoutData.program) $('#display-program-name').text(checkoutData.program);
+            // Populate Fields
+            if (checkoutData.name) {
+                $('#pendaftar-name').val(checkoutData.name);
+                $('#peserta-name').val(checkoutData.name);
+            }
+            if (checkoutData.phone) {
+                $('#pendaftar-phone').val(checkoutData.phone);
+                $('#peserta-whatsapp').val(checkoutData.phone);
+            }
+            if (checkoutData.program) {
+                $('#label-program-name').text(checkoutData.program);
+            }
 
-            // Prices
+            // Price State
             let basePrice = parseInt(checkoutData.basePrice) || 3000000;
             let discountRate = parseFloat(checkoutData.discountRate) || 0;
             let referralCode = checkoutData.referralCode || '';
+            let paymentType = 'full'; // 'full' or 'dp'
+            let promoDiscount = 0;
 
             if (referralCode) {
-                $('#promo-input').val(referralCode);
+                $('#promo-code-input').val(referralCode);
             }
 
-            let discountAmount = basePrice * discountRate;
-            let total = basePrice - discountAmount;
+            function recalculate() {
+                let discountedBase = basePrice * (1 - discountRate);
+                let finalPrice = discountedBase - promoDiscount;
 
-            function updateUI() {
-                $('#display-base-price').text('Rp ' + basePrice.toLocaleString('id-ID'));
-                $('#display-subtotal').text('Rp ' + basePrice.toLocaleString('id-ID'));
+                // If DP, total pay is just 500k
+                let displayTypePrice = finalPrice;
+                let totalPay = finalPrice;
 
-                if (discountAmount > 0) {
-                    $('#discount-row').show();
-                    $('#display-discount').text('- Rp ' + Math.round(discountAmount).toLocaleString('id-ID'));
-                } else {
-                    $('#discount-row').hide();
+                if (paymentType === 'dp') {
+                    displayTypePrice = 500000;
+                    totalPay = 500000;
                 }
 
-                $('#display-total').text('Rp ' + Math.round(total).toLocaleString('id-ID'));
+                // Update UI
+                $('#label-price-normal').text('Rp ' + basePrice.toLocaleString('id-ID'));
+
+                if (discountRate > 0) {
+                    $('#row-discount').show();
+                    $('#label-price-discount').text('- Rp ' + Math.round(basePrice * discountRate).toLocaleString('id-ID'));
+                } else {
+                    $('#row-discount').hide();
+                }
+
+                $('#label-payment-type-text').text(paymentType === 'full' ? 'Full Payment' : 'DP (Deposit)');
+                $('#label-price-active').text('Rp ' + displayTypePrice.toLocaleString('id-ID'));
+                $('#label-price-total').text('Rp ' + totalPay.toLocaleString('id-ID'));
             }
 
-            updateUI();
+            recalculate();
 
-            // Payment Option Selection
-            $('.payment-option').click(function () {
-                $('.payment-option').removeClass('active');
+            // Interactivity: Payment Type Tabs
+            $('.payment-type-btn').click(function () {
+                $('.payment-type-btn').removeClass('active');
                 $(this).addClass('active');
+                paymentType = $(this).data('type');
+                recalculate();
             });
 
-            // Apply Promo
-            $('.btn-apply').click(function () {
-                const code = $('#promo-input').val().toUpperCase();
-                if (code === 'HEMAT40') {
-                    discountRate = 0.40;
-                    discountAmount = basePrice * discountRate;
-                    total = basePrice - discountAmount;
-                    updateUI();
-                    alert('Promo berhasil digunakan!');
+            // Interactivity: Payment Methods
+            $('.payment-item').click(function () {
+                $('.payment-item').removeClass('active');
+                $(this).addClass('active');
+
+                const method = $(this).data('method');
+                if (method === 'transfer') {
+                    $('#panel-bank').slideDown();
                 } else {
-                    alert('Kode promo tidak valid.');
+                    $('#panel-bank').slideUp();
                 }
             });
 
-            // Pay Now
-            $('#btn-pay-now').click(function () {
-                const name = $('#buyer-name').val();
-                if (!name) {
-                    alert('Silakan isi nama lengkap Anda.');
+            // Interactivity: Promo Application
+            $('#btn-apply-promo').click(function () {
+                const code = $('#promo-code-input').val().toUpperCase();
+                if (code === 'DIALOGIKA100') {
+                    promoDiscount = 100000;
+                    alert('Promo DIALOGIKA100 Berhasil Diterapkan!');
+                    recalculate();
+                } else {
+                    alert('Kode promo tidak ditemukan.');
+                }
+            });
+
+            // Trigger File Upload on area click
+            $('.upload-area').click(function () {
+                $('#proof-upload').trigger('click');
+            });
+
+            $('#proof-upload').change(function () {
+                if (this.files && this.files[0]) {
+                    $('.upload-text').text('File terpilih: ' + this.files[0].name);
+                    $('.upload-icon').removeClass('bx-upload').addClass('bx-check-circle text-success');
+                }
+            });
+
+            // Proceed Action
+            $('#btn-submit-registration').click(function () {
+                const btn = $(this);
+                const originalText = btn.text();
+
+                // Basic Validation
+                if (!$('#pendaftar-name').val() || !$('#pendaftar-phone').val()) {
+                    alert('Silakan lengkapi Data Pendaftar.');
                     return;
                 }
 
-                const method = $('.payment-option.active').data('method');
-                alert('Mengarahkan ke pembayaran ' + method.toUpperCase() + '...');
+                btn.prop('disabled', true).html('<i class="bx bx-loader-alt bx-spin"></i> Memproses...');
 
-                // Final WhatsApp Redirect (as a fallback or step)
-                const message = `Halo Dialogika! Saya baru saja melakukan checkout:\n\n` +
-                    `Nama: ${name}\n` +
-                    `Program: ${$('#display-program-name').text()}\n` +
-                    `Metode: ${method}\n` +
-                    `Total: Rp ${total.toLocaleString('id-ID')}`;
+                // Final Price Check
+                let discountedBase = basePrice * (1 - discountRate);
+                let finalPrice = discountedBase - promoDiscount;
+                let totalPay = (paymentType === 'dp') ? 500000 : finalPrice;
 
-                window.location.href = `https://api.whatsapp.com/send?phone=6285162992597&text=${encodeURIComponent(message)}`;
+                // Save submission data for receipt
+                const submissionData = {
+                    pendaftarName: $('#pendaftar-name').val(),
+                    pendaftarPhone: $('#pendaftar-phone').val(),
+                    pesertaName: $('#peserta-name').val(),
+                    programName: $('#label-program-name').text(),
+                    paymentMethod: $('.payment-item.active span').text(),
+                    paymentType: paymentType,
+                    totalPrice: totalPay,
+                    timestamp: new Date().toISOString()
+                };
+                localStorage.setItem('dialogika_last_submission', JSON.stringify(submissionData));
+
+                setTimeout(() => {
+                    window.location.href = 'receipt.html';
+                }, 1500);
             });
         });
     </script>
