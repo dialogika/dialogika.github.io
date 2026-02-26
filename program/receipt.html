@@ -336,14 +336,7 @@
                         <span class="info-key">Invoice ID</span>
                         <span class="info-value" id="val-invoice-id" style="color: var(--primary-color); font-weight: 800;"></span>
                     </div>
-                    <div class="info-row d-none invoice-info-row" id="invoice-url-row" style="margin-top: 2px;">
-                        <span class="info-key">Invoice Link</span>
-                        <span class="info-value">
-                            <a href="#" id="val-invoice-url" target="_blank"
-                               style="color: var(--primary-color); font-size: 0.75rem; word-break: break-all; text-decoration: underline; font-weight: 700;">
-                            </a>
-                        </span>
-                    </div>
+
                 </div>
 
                 <div class="total-section">
@@ -562,11 +555,9 @@
                 $('#val-schedule').text(receiptData.schedule);
             }
 
-            // ─── Invoice URL row (always show when we have an invoiceId) ───
+            // ─── Invoice ID row (always show when we have an invoiceId) ───
             if (invoiceId) {
-                const invoiceUrl = window.location.origin + window.location.pathname.replace('receipt.html', 'invoice.html') + '?invoiceId=' + encodeURIComponent(invoiceId);
                 $('.invoice-info-row').removeClass('d-none');
-                $('#val-invoice-url').attr('href', invoiceUrl).text(invoiceUrl);
                 $('#val-invoice-id').text(invoiceId);
             }
 
@@ -574,17 +565,17 @@
             $('#btn-whatsapp-confirm').click(function () {
                 const name = $('#val-pendaftar-name').text();
                 const program = $('#val-program-name').text();
-                const tipe = $('#val-payment-type').text();
                 const total = $('#val-total-price').text();
                 const invId = invoiceId || displayId;
 
-                const text = `Halo Admin Dialogika! Saya telah melakukan pendaftaran:\n\n` +
-                    `*Invoice ID*: ${invId}\n` +
-                    `*Nama*: ${name}\n` +
-                    `*Program*: ${program}\n` +
-                    `*Tipe*: ${tipe}\n` +
-                    `*Total*: ${total}\n\n` +
-                    `Saya sudah mengunggah bukti transfer. Mohon bantu verifikasinya. Terima kasih!`;
+                const receiptUrl = `https://www.dialogika.co/receipt.html?invoiceId=${encodeURIComponent(invId)}`;
+
+                const text = `Halo Admin Dialogika, saya sudah melakukan pembayaran.\n` +
+                    `Nama: ${name}\n` +
+                    `Kelas: ${program}\n` +
+                    `Invoice: ${invId}\n` +
+                    `Nominal: ${total}\n\n` +
+                    `Bukti pembayaran: ${receiptUrl}`;
 
                 window.open(`https://api.whatsapp.com/send?phone=6285162992597&text=${encodeURIComponent(text)}`, '_blank');
             });
