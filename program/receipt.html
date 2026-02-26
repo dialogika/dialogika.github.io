@@ -253,7 +253,9 @@
 
             .action-buttons,
             .footer-note,
-            .success-animation {
+            .success-animation,
+            .step-progress,
+            .step-progress-mini {
                 display: none;
             }
 
@@ -267,12 +269,256 @@
                 display: none;
             }
         }
+
+        /* ─── Step Progress Indicator ─── */
+        .step-progress {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 30px;
+            padding: 0 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .step-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-circle i {
+            font-size: 1.1rem;
+            display: none;
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .step-line {
+            width: 50px;
+            height: 3px;
+            background: #e2e8f0;
+            margin: 0 6px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            transition: background 0.35s;
+        }
+
+        /* Active step */
+        .step-item.active .step-circle {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+        }
+        .step-item.active .step-label {
+            color: var(--primary-color);
+        }
+
+        /* Completed step */
+        .step-item.completed .step-circle {
+            background: #10b981;
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        .step-item.completed .step-circle .step-num { display: none; }
+        .step-item.completed .step-circle i { display: block; }
+        .step-item.completed .step-label {
+            color: #10b981;
+        }
+        .step-line.completed {
+            background: #10b981;
+        }
+
+        /* ─── Mini Stepper (fixed right) ─── */
+        .step-progress-mini {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .step-progress-mini.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .step-progress-mini .mini-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .step-progress-mini .mini-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: white;
+            border: 2.5px solid #e2e8f0;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            transition: all 0.35s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-progress-mini .mini-circle i {
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .step-progress-mini .mini-line {
+            width: 3px;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            transition: background 0.35s;
+        }
+
+        .step-progress-mini .mini-step.active .mini-circle {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+        }
+
+        .step-progress-mini .mini-step.completed .mini-circle {
+            border-color: #10b981;
+            background: #10b981;
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        .step-progress-mini .mini-step.completed .mini-circle .mini-num { display: none; }
+        .step-progress-mini .mini-step.completed .mini-circle i { display: block; }
+        .step-progress-mini .mini-line.completed {
+            background: #10b981;
+        }
+
+        /* Tooltip on hover */
+        .step-progress-mini .mini-tooltip {
+            position: absolute;
+            right: 42px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #0f172a;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .step-progress-mini .mini-step:hover .mini-tooltip {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .step-progress {
+                gap: 0;
+                padding: 0 10px;
+            }
+            .step-label {
+                display: none;
+            }
+            .step-line {
+                width: 30px;
+            }
+            .step-progress-mini {
+                right: 10px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <div class="receipt-container">
+        <!-- Step Progress Indicator -->
+        <div class="step-progress" id="step-progress">
+            <div class="step-item completed" data-step="1">
+                <div class="step-circle"><span class="step-num">1</span><i class='bx bx-check'></i></div>
+                <span class="step-label">Isi Formulir</span>
+            </div>
+            <div class="step-line completed" data-line="1"></div>
+            <div class="step-item completed" data-step="2">
+                <div class="step-circle"><span class="step-num">2</span><i class='bx bx-check'></i></div>
+                <span class="step-label">Transfer</span>
+            </div>
+            <div class="step-line completed" data-line="2"></div>
+            <div class="step-item completed" data-step="3">
+                <div class="step-circle"><span class="step-num">3</span><i class='bx bx-check'></i></div>
+                <span class="step-label">Receipt</span>
+            </div>
+            <div class="step-line completed" data-line="3"></div>
+            <div class="step-item active" data-step="4">
+                <div class="step-circle"><span class="step-num">4</span><i class='bx bx-check'></i></div>
+                <span class="step-label">WhatsApp</span>
+            </div>
+        </div>
+
+        <!-- Mini Stepper (fixed right, visible on scroll) -->
+        <div class="step-progress-mini" id="step-progress-mini">
+            <div class="mini-step completed" data-step="1">
+                <div class="mini-tooltip">Isi Formulir Pendaftaran</div>
+                <div class="mini-circle"><span class="mini-num">1</span><i class='bx bx-check'></i></div>
+            </div>
+            <div class="mini-line completed" data-line="1"></div>
+            <div class="mini-step completed" data-step="2">
+                <div class="mini-tooltip">Transfer sesuai nominal</div>
+                <div class="mini-circle"><span class="mini-num">2</span><i class='bx bx-check'></i></div>
+            </div>
+            <div class="mini-line completed" data-line="2"></div>
+            <div class="mini-step completed" data-step="3">
+                <div class="mini-tooltip">Lanjut ke Receipt</div>
+                <div class="mini-circle"><span class="mini-num">3</span><i class='bx bx-check'></i></div>
+            </div>
+            <div class="mini-line completed" data-line="3"></div>
+            <div class="mini-step active" data-step="4">
+                <div class="mini-tooltip">Konfirmasi via WhatsApp</div>
+                <div class="mini-circle"><span class="mini-num">4</span><i class='bx bx-check'></i></div>
+            </div>
+        </div>
+
         <!-- Success Animation -->
         <div class="success-animation">
             <div class="check-icon">
@@ -577,8 +823,32 @@
                     `Nominal: ${total}\n\n` +
                     `Bukti pembayaran: ${receiptUrl}`;
 
+                // Mark step 4 as completed
+                markStep4Complete();
+
                 window.open(`https://api.whatsapp.com/send?phone=6285162992597&text=${encodeURIComponent(text)}`, '_blank');
             });
+
+            // ─── Step 4 completion ───
+            function markStep4Complete() {
+                const $step = $('.step-item[data-step="4"]');
+                const $mini = $('.mini-step[data-step="4"]');
+                $step.removeClass('active').addClass('completed');
+                $mini.removeClass('active').addClass('completed');
+            }
+
+            // ─── Scroll → show mini stepper ───
+            const miniStepper = document.getElementById('step-progress-mini');
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        miniStepper.classList.remove('visible');
+                    } else {
+                        miniStepper.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0 });
+            observer.observe(document.getElementById('step-progress'));
         });
     </script>
 </body>

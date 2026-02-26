@@ -455,6 +455,206 @@
                 font-size: 1.8rem;
             }
         }
+
+        /* ─── Step Progress Indicator ─── */
+        .step-progress {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 40px;
+            padding: 0 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .step-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-circle i {
+            font-size: 1.1rem;
+            display: none;
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .step-line {
+            width: 50px;
+            height: 3px;
+            background: #e2e8f0;
+            margin: 0 6px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            transition: background 0.35s;
+        }
+
+        /* Active step */
+        .step-item.active .step-circle {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+        }
+        .step-item.active .step-label {
+            color: var(--primary-color);
+        }
+
+        /* Completed step */
+        .step-item.completed .step-circle {
+            background: #10b981;
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        .step-item.completed .step-circle .step-num { display: none; }
+        .step-item.completed .step-circle i { display: block; }
+        .step-item.completed .step-label {
+            color: #10b981;
+        }
+        .step-line.completed {
+            background: #10b981;
+        }
+
+        /* ─── Mini Stepper (fixed right) ─── */
+        .step-progress-mini {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .step-progress-mini.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .step-progress-mini .mini-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .step-progress-mini .mini-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: white;
+            border: 2.5px solid #e2e8f0;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            transition: all 0.35s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-progress-mini .mini-circle i {
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .step-progress-mini .mini-line {
+            width: 3px;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            transition: background 0.35s;
+        }
+
+        .step-progress-mini .mini-step.active .mini-circle {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+        }
+
+        .step-progress-mini .mini-step.completed .mini-circle {
+            border-color: #10b981;
+            background: #10b981;
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        .step-progress-mini .mini-step.completed .mini-circle .mini-num { display: none; }
+        .step-progress-mini .mini-step.completed .mini-circle i { display: block; }
+        .step-progress-mini .mini-line.completed {
+            background: #10b981;
+        }
+
+        /* Tooltip on hover */
+        .step-progress-mini .mini-step {
+            position: relative;
+        }
+        .step-progress-mini .mini-tooltip {
+            position: absolute;
+            right: 42px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #0f172a;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .step-progress-mini .mini-step:hover .mini-tooltip {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .step-progress {
+                gap: 0;
+                padding: 0 10px;
+            }
+            .step-label {
+                display: none;
+            }
+            .step-line {
+                width: 30px;
+            }
+            .step-progress-mini {
+                right: 10px;
+            }
+        }
     </style>
 </head>
 
@@ -462,10 +662,56 @@
 
     <div class="container">
         <!-- Header -->
-        <header class="page-header">
+        <header class="page-header" id="page-header">
             <h1 class="page-title">Pendaftaran Dialogika</h1>
             <p class="page-subtitle">Lengkapi formulir di bawah ini untuk bergabung dengan kelas kami.</p>
         </header>
+
+        <!-- Step Progress Indicator -->
+        <div class="step-progress" id="step-progress">
+            <div class="step-item active" data-step="1">
+                <div class="step-circle"><span class="step-num">1</span><i class='bx bx-check'></i></div>
+                <span class="step-label">Isi Formulir</span>
+            </div>
+            <div class="step-line" data-line="1"></div>
+            <div class="step-item" data-step="2">
+                <div class="step-circle"><span class="step-num">2</span><i class='bx bx-check'></i></div>
+                <span class="step-label">Transfer</span>
+            </div>
+            <div class="step-line" data-line="2"></div>
+            <div class="step-item" data-step="3">
+                <div class="step-circle"><span class="step-num">3</span><i class='bx bx-check'></i></div>
+                <span class="step-label">Receipt</span>
+            </div>
+            <div class="step-line" data-line="3"></div>
+            <div class="step-item" data-step="4">
+                <div class="step-circle"><span class="step-num">4</span><i class='bx bx-check'></i></div>
+                <span class="step-label">WhatsApp</span>
+            </div>
+        </div>
+
+        <!-- Mini Stepper (fixed right, visible on scroll) -->
+        <div class="step-progress-mini" id="step-progress-mini">
+            <div class="mini-step active" data-step="1">
+                <div class="mini-tooltip">Isi Formulir Pendaftaran</div>
+                <div class="mini-circle"><span class="mini-num">1</span><i class='bx bx-check'></i></div>
+            </div>
+            <div class="mini-line" data-line="1"></div>
+            <div class="mini-step" data-step="2">
+                <div class="mini-tooltip">Transfer sesuai nominal</div>
+                <div class="mini-circle"><span class="mini-num">2</span><i class='bx bx-check'></i></div>
+            </div>
+            <div class="mini-line" data-line="2"></div>
+            <div class="mini-step" data-step="3">
+                <div class="mini-tooltip">Lanjut ke Receipt</div>
+                <div class="mini-circle"><span class="mini-num">3</span><i class='bx bx-check'></i></div>
+            </div>
+            <div class="mini-line" data-line="3"></div>
+            <div class="mini-step" data-step="4">
+                <div class="mini-tooltip">Konfirmasi via WhatsApp</div>
+                <div class="mini-circle"><span class="mini-num">4</span><i class='bx bx-check'></i></div>
+            </div>
+        </div>
 
         <div class="row">
             <!-- Left Side: Registration Sections -->
@@ -668,12 +914,12 @@
                     <div class="promo-input-group">
                         <label class="form-label">KODE PROMO</label>
                         <div class="input-group">
-                            <input type="text" id="promo-code-input" class="form-control" placeholder="Masukkan kode">
-                            <button class="btn-apply-promo" id="btn-apply-promo">Apply</button>
+                            <input type="text" id="promo-code-input" class="form-control" placeholder="Kode Promo">
+                            <!-- <button class="btn-apply-promo" id="btn-apply-promo">Apply</button> -->
                         </div>
-                        <small class="text-muted mt-2 d-block" style="font-size: 0.65rem; font-weight: 600;">
+                        <!-- <small class="text-muted mt-2 d-block" style="font-size: 0.65rem; font-weight: 600;">
                             Gunakan kode <span class="text-primary">"DIALOGIKA100"</span> untuk diskon Rp 100.000
-                        </small>
+                        </small> -->
                     </div>
 
                     <button class="btn btn-proceed" id="btn-submit-registration">Lanjut ke Receipt</button>
@@ -810,6 +1056,12 @@
 
                 btn.prop('disabled', true).html('<i class="bx bx-loader-alt bx-spin"></i> Memproses...');
 
+                // Mark step 3 as completed
+                updateStep(3, true);
+
+                // Save step state for receipt page
+                sessionStorage.setItem('dlg_steps', JSON.stringify(stepState));
+
                 // Final Price Check
                 let discountedBase = basePrice * (1 - discountRate);
                 let finalPrice = discountedBase - promoDiscount;
@@ -832,6 +1084,66 @@
                     window.location.href = 'receipt.html';
                 }, 1500);
             });
+
+            // ─── Step Progress Logic ───
+            const stepState = { 1: false, 2: false, 3: false, 4: false };
+
+            function updateStep(num, completed) {
+                stepState[num] = completed;
+                // Update main stepper
+                const $step = $(`.step-item[data-step="${num}"]`);
+                const $mini = $(`.mini-step[data-step="${num}"]`);
+                if (completed) {
+                    $step.removeClass('active').addClass('completed');
+                    $mini.removeClass('active').addClass('completed');
+                    // Mark connecting line
+                    if (num > 1) {
+                        $(`.step-line[data-line="${num - 1}"]`).addClass('completed');
+                        $(`.mini-line[data-line="${num - 1}"]`).addClass('completed');
+                    }
+                    // Activate next step
+                    const $nextStep = $(`.step-item[data-step="${num + 1}"]`);
+                    const $nextMini = $(`.mini-step[data-step="${num + 1}"]`);
+                    if ($nextStep.length && !$nextStep.hasClass('completed')) {
+                        $nextStep.addClass('active');
+                        $nextMini.addClass('active');
+                    }
+                } else {
+                    $step.removeClass('completed');
+                    $mini.removeClass('completed');
+                }
+            }
+
+            // Step 1: form fields filled
+            function checkStep1() {
+                const nameOk = !!$('#pendaftar-name').val().trim();
+                const phoneOk = !!$('#pendaftar-phone').val().trim();
+                updateStep(1, nameOk && phoneOk);
+            }
+            $('#pendaftar-name, #pendaftar-phone').on('input', checkStep1);
+            checkStep1();
+
+            // Step 2: proof uploaded
+            $('#proof-upload').on('change', function () {
+                if (this.files && this.files[0]) {
+                    updateStep(2, true);
+                }
+            });
+
+            // ─── Scroll → show mini stepper ───
+            const headerEl = document.getElementById('page-header');
+            const miniStepper = document.getElementById('step-progress-mini');
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        miniStepper.classList.remove('visible');
+                    } else {
+                        miniStepper.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0 });
+            observer.observe(document.getElementById('step-progress'));
         });
     </script>
 </body>
