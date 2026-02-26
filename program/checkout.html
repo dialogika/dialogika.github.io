@@ -113,6 +113,13 @@
             outline: none;
         }
 
+        .form-control:disabled {
+            background-color: #f1f5f9;
+            color: #94a3b8;
+            cursor: not-allowed;
+            border-color: var(--border-color);
+        }
+
         .input-group-text {
             background-color: #ffffff;
             border: 1.5px solid var(--border-color);
@@ -397,7 +404,7 @@
         }
 
         .btn-proceed {
-            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white !important;
             border: none;
             border-radius: 18px;
@@ -406,13 +413,21 @@
             font-weight: 800;
             font-size: 1rem;
             margin-top: 24px;
-            box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
             transition: all 0.2s;
         }
 
         .btn-proceed:hover {
             transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(124, 58, 237, 0.35);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.35);
+        }
+
+        .btn-proceed:disabled {
+            background: #cbd5e1;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+            opacity: 0.7;
         }
 
         /* Warning Box */
@@ -520,6 +535,7 @@
             color: white;
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
         }
+
         .step-item.active .step-label {
             color: var(--primary-color);
         }
@@ -530,11 +546,19 @@
             color: white;
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
-        .step-item.completed .step-circle .step-num { display: none; }
-        .step-item.completed .step-circle i { display: block; }
+
+        .step-item.completed .step-circle .step-num {
+            display: none;
+        }
+
+        .step-item.completed .step-circle i {
+            display: block;
+        }
+
         .step-item.completed .step-label {
             color: #10b981;
         }
+
         .step-line.completed {
             background: #10b981;
         }
@@ -554,6 +578,7 @@
             pointer-events: none;
             transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .step-progress-mini.visible {
             opacity: 1;
             pointer-events: auto;
@@ -579,7 +604,7 @@
             font-size: 0.7rem;
             flex-shrink: 0;
             transition: all 0.35s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             position: relative;
             z-index: 2;
         }
@@ -610,8 +635,15 @@
             color: white;
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
-        .step-progress-mini .mini-step.completed .mini-circle .mini-num { display: none; }
-        .step-progress-mini .mini-step.completed .mini-circle i { display: block; }
+
+        .step-progress-mini .mini-step.completed .mini-circle .mini-num {
+            display: none;
+        }
+
+        .step-progress-mini .mini-step.completed .mini-circle i {
+            display: block;
+        }
+
         .step-progress-mini .mini-line.completed {
             background: #10b981;
         }
@@ -620,6 +652,7 @@
         .step-progress-mini .mini-step {
             position: relative;
         }
+
         .step-progress-mini .mini-tooltip {
             position: absolute;
             right: 42px;
@@ -636,6 +669,7 @@
             pointer-events: none;
             transition: opacity 0.2s;
         }
+
         .step-progress-mini .mini-step:hover .mini-tooltip {
             opacity: 1;
         }
@@ -645,12 +679,15 @@
                 gap: 0;
                 padding: 0 10px;
             }
+
             .step-label {
                 display: none;
             }
+
             .step-line {
                 width: 30px;
             }
+
             .step-progress-mini {
                 right: 10px;
             }
@@ -744,9 +781,9 @@
                     <h2 class="section-title"><span class="section-number">2</span> Data Peserta</h2>
                     <div class="row g-4">
                         <div class="col-md-6">
-                            <label class="form-label">Nama Peserta *</label>
+                            <label class="form-label">Nama untuk Sertifikat *</label>
                             <input type="text" id="peserta-name" class="form-control"
-                                placeholder="Nama lengkap peserta">
+                                placeholder="Nama lengkap untuk Sertifikat">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">No WhatsApp Peserta *</label>
@@ -867,7 +904,7 @@
                             <i class='bx bxs-bank bank-icon'></i>
                         </div>
 
-                        <label class="form-label">Upload Bukti Transfer *</label>
+                        <label class="form-label" style="color: #ef4444;">Upload Bukti Transfer *</label>
                         <div class="upload-area">
                             <i class='bx bx-upload upload-icon'></i>
                             <p class="upload-text">Klik atau drag file bukti transfer ke sini</p>
@@ -914,15 +951,12 @@
                     <div class="promo-input-group">
                         <label class="form-label">KODE PROMO</label>
                         <div class="input-group">
-                            <input type="text" id="promo-code-input" class="form-control" placeholder="Kode Promo">
-                            <!-- <button class="btn-apply-promo" id="btn-apply-promo">Apply</button> -->
+                            <input type="text" id="promo-code-input" class="form-control" placeholder="Kode Promo"
+                                disabled>
                         </div>
-                        <!-- <small class="text-muted mt-2 d-block" style="font-size: 0.65rem; font-weight: 600;">
-                            Gunakan kode <span class="text-primary">"DIALOGIKA100"</span> untuk diskon Rp 100.000
-                        </small> -->
                     </div>
 
-                    <button class="btn btn-proceed" id="btn-submit-registration">Lanjut ke Receipt</button>
+                    <button class="btn btn-proceed" id="btn-submit-registration" disabled>Lanjut ke Receipt</button>
 
                     <div class="warning-box">
                         <i class='bx bx-info-circle'></i>
@@ -1019,21 +1053,36 @@
                 }
             });
 
-            // Interactivity: Promo Application
-            $('#btn-apply-promo').click(function () {
-                const code = $('#promo-code-input').val().toUpperCase();
-                if (code === 'DIALOGIKA100') {
-                    promoDiscount = 100000;
-                    alert('Promo DIALOGIKA100 Berhasil Diterapkan!');
-                    recalculate();
-                } else {
-                    alert('Kode promo tidak ditemukan.');
+
+
+            // Trigger File Upload on area click
+            $(document).on('click', '.upload-area', function (e) {
+                if (e.target !== $('#proof-upload')[0]) {
+                    $('#proof-upload').click();
                 }
             });
 
-            // Trigger File Upload on area click
-            $('.upload-area').click(function () {
-                $('#proof-upload').trigger('click');
+            // Drag and Drop Logic
+            const $uploadArea = $('.upload-area');
+
+            $uploadArea.on('dragover dragenter', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).addClass('dragging').css('border-color', 'var(--primary-color)').css('background', '#f5f3ff');
+            });
+
+            $uploadArea.on('dragleave drop', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).removeClass('dragging').css('border-color', '#cbd5e1').css('background', '#ffffff');
+            });
+
+            $uploadArea.on('drop', function (e) {
+                const files = e.originalEvent.dataTransfer.files;
+                if (files.length) {
+                    $('#proof-upload')[0].files = files;
+                    $('#proof-upload').trigger('change');
+                }
             });
 
             $('#proof-upload').change(function () {
@@ -1127,6 +1176,10 @@
             $('#proof-upload').on('change', function () {
                 if (this.files && this.files[0]) {
                     updateStep(2, true);
+                    $('#btn-submit-registration').prop('disabled', false);
+                } else {
+                    updateStep(2, false);
+                    $('#btn-submit-registration').prop('disabled', true);
                 }
             });
 
@@ -1134,8 +1187,8 @@
             const headerEl = document.getElementById('page-header');
             const miniStepper = document.getElementById('step-progress-mini');
 
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
                     if (entry.isIntersecting) {
                         miniStepper.classList.remove('visible');
                     } else {
