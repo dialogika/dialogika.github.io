@@ -21,13 +21,13 @@
 
     <style>
         :root {
-            --primary-color: #6366f1;
-            --secondary-color: #f5f3ff;
+            --primary-color: #0b2b6a;
+            --secondary-color: #e7f1fd;
             --text-main: #1e293b;
             --text-muted: #64748b;
-            --bg-body: #f8fafc;
+            --bg-body: #ffffff;
             --border-color: #e2e8f0;
-            --accent-blue: #3b82f6;
+            --accent-blue: #0f61a8;
         }
 
         body {
@@ -68,7 +68,7 @@
         .section-number {
             width: 28px;
             height: 28px;
-            background: #eff6ff;
+            background: #e7f1fd;
             color: var(--accent-blue);
             border-radius: 50%;
             display: inline-flex;
@@ -109,7 +109,7 @@
         .form-control:focus,
         .form-select:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 0 4px rgba(11, 43, 106, 0.08);
             outline: none;
         }
 
@@ -166,7 +166,7 @@
 
         .payment-type-btn.active {
             border-color: var(--primary-color);
-            background: #f5f3ff;
+            background: #e7f1fd;
             color: var(--primary-color);
         }
 
@@ -193,7 +193,7 @@
 
         .payment-item:hover {
             border-color: var(--primary-color);
-            background: #f5f3ff;
+            background: #e7f1fd;
         }
 
         .payment-item.active {
@@ -222,7 +222,7 @@
 
         /* Bank Details Card */
         .bank-details-card {
-            background: #f0f7ff;
+            background: #e7f1fd;
             border-radius: 18px;
             padding: 24px;
             margin-bottom: 24px;
@@ -269,7 +269,7 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 3rem;
-            color: rgba(99, 102, 241, 0.1);
+            color: rgba(11, 43, 106, 0.1);
         }
 
         /* Upload Area */
@@ -404,7 +404,7 @@
         }
 
         .btn-proceed {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(to bottom, #0f61a8 5%, #0b2b6a 100%);
             color: white !important;
             border: none;
             border-radius: 18px;
@@ -413,13 +413,13 @@
             font-weight: 800;
             font-size: 1rem;
             margin-top: 24px;
-            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 15px -3px rgba(11, 43, 106, 0.3);
             transition: all 0.2s;
         }
 
         .btn-proceed:hover {
             transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.35);
+            box-shadow: 0 20px 25px -5px rgba(11, 43, 106, 0.35);
         }
 
         .btn-proceed:disabled {
@@ -533,7 +533,7 @@
         .step-item.active .step-circle {
             background: var(--primary-color);
             color: white;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+            box-shadow: 0 4px 12px rgba(11, 43, 106, 0.35);
         }
 
         .step-item.active .step-label {
@@ -626,7 +626,7 @@
             border-color: var(--primary-color);
             background: var(--primary-color);
             color: white;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+            box-shadow: 0 4px 12px rgba(11, 43, 106, 0.35);
         }
 
         .step-progress-mini .mini-step.completed .mini-circle {
@@ -700,6 +700,7 @@
     <div class="container">
         <!-- Header -->
         <header class="page-header" id="page-header">
+            <img src="../assets/img/logo.webp" alt="Dialogika Logo" style="height: 60px; margin-bottom: 20px;">
             <h1 class="page-title">Pendaftaran Dialogika</h1>
             <p class="page-subtitle">Lengkapi formulir di bawah ini untuk bergabung dengan kelas kami.</p>
         </header>
