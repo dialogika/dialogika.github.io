@@ -860,7 +860,7 @@
             }
 
             // ─── WhatsApp Confirmation Logic ───
-            $('#btn-whatsapp-confirm').click(function () {
+            $('#btn-whatsapp-confirm').click(async function () {
                 const name = $('#val-pendaftar-name').text();
                 const program = $('#val-program-name').text();
                 const total = $('#val-total-price').text();
@@ -877,6 +877,37 @@
 
                 // Mark step 4 as completed
                 markStep4Complete();
+
+                // Update invoice verification status in Firestore
+                try {
+                    const ready = await waitForFirebase();
+                    if (ready && window.dlgReceiptSetDoc) {
+                        // Update invoice as verified
+                        if (invId) {
+                            const invoiceRef = window.dlgReceiptDoc(window.dlgReceiptDb, 'invoices', invId);
+                            await window.dlgReceiptSetDoc(invoiceRef, {
+                                verificationStatus: 'legit',
+                                verifiedAtMs: Date.now()
+                            }, { merge: true });
+                            console.log('Invoice marked as verified:', invId);
+                        }
+                        // Update lead stage to VERIFIED
+                        const submissionRaw = localStorage.getItem('dialogika_last_submission');
+                        if (submissionRaw) {
+                            const sub = JSON.parse(submissionRaw);
+                            if (sub.leadId) {
+                                const leadRef = window.dlgReceiptDoc(window.dlgReceiptDb, 'leads', sub.leadId);
+                                await window.dlgReceiptSetDoc(leadRef, {
+                                    stage: 'VERIFIED',
+                                    updated_at: new Date().toISOString()
+                                }, { merge: true });
+                                console.log('Lead marked as VERIFIED:', sub.leadId);
+                            }
+                        }
+                    }
+                } catch (err) {
+                    console.error('Failed to update verification status:', err);
+                }
 
                 window.open(`https://api.whatsapp.com/send?phone=6285162992597&text=${encodeURIComponent(text)}`, '_blank');
             });

@@ -1195,6 +1195,46 @@
                     }
                 }
 
+                // Create invoice in Firestore
+                try {
+                    const invoiceDb = firebase.firestore();
+                    const now = new Date();
+                    const yy = String(now.getFullYear()).slice(-2);
+                    const mm = String(now.getMonth() + 1).padStart(2, '0');
+                    const dd = String(now.getDate()).padStart(2, '0');
+                    const random = Math.floor(Math.random() * 9000) + 1000;
+                    const invoiceId = 'INV-' + yy + mm + dd + '-' + random;
+
+                    const invoicePayload = {
+                        invoiceNumber: invoiceId,
+                        leadName: submissionData.pendaftarName || '',
+                        leadPhone: submissionData.pendaftarPhone || '',
+                        className: submissionData.programName || '',
+                        productName: submissionData.programName || '',
+                        paymentMethod: submissionData.paymentMethod || '',
+                        paymentType: submissionData.paymentType || '',
+                        paidAmount: totalPay,
+                        finalBasePrice: finalPrice,
+                        basePrice: basePrice,
+                        originalBasePrice: basePrice,
+                        referralCode: referralCode || '',
+                        discountAmount: Math.round(basePrice * discountRate),
+                        transferProofUrl: 'pending_upload',
+                        verificationStatus: 'not_verified',
+                        leadId: checkoutData.leadId || '',
+                        createdAtMs: Date.now(),
+                        paidAtMs: Date.now(),
+                        createdFromCheckout: true
+                    };
+
+                    invoiceDb.collection('invoices').doc(invoiceId).set(invoicePayload);
+                    submissionData.invoiceId = invoiceId;
+                    localStorage.setItem('dialogika_last_submission', JSON.stringify(submissionData));
+                    console.log('Invoice created from checkout:', invoiceId);
+                } catch (err) {
+                    console.error('Failed to create invoice:', err);
+                }
+
                 setTimeout(() => {
                     window.location.href = 'receipt.html';
                 }, 1500);
