@@ -18,6 +18,12 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="../assets/css/style.css" rel="stylesheet">
 
     <style>
         :root {
@@ -40,7 +46,7 @@
         /* Header Style */
         .page-header {
             text-align: center;
-            padding: 60px 0 40px;
+            padding: 140px 0 40px;
         }
 
         .page-title {
@@ -308,7 +314,8 @@
 
         /* Sidebar - Ringkasan */
         .summary-card {
-            top: 100px;
+            top: 140px;
+            z-index: 1 !important;
         }
 
         .summary-title {
@@ -697,10 +704,14 @@
 
 <body>
 
+    <!-- ======= Top Bar, Header, Side Bar ======= -->
+    <main-header></main-header>
+    <!-- ======= Top Bar, Header, Side Bar ======= -->
+
     <div class="container">
         <!-- Header -->
         <header class="page-header" id="page-header">
-            <img src="../assets/img/logo.webp" alt="Dialogika Logo" style="height: 60px; margin-bottom: 20px;">
+            <!-- <img src="../assets/img/logo.webp" alt="Dialogika Logo" style="height: 60px; margin-bottom: 20px;"> -->
             <h1 class="page-title">Pendaftaran Dialogika</h1>
             <p class="page-subtitle">Lengkapi formulir di bawah ini untuk bergabung dengan kelas kami.</p>
         </header>
@@ -1200,6 +1211,9 @@
             observer.observe(document.getElementById('step-progress'));
         });
     </script>
+    <!-- Template Main JS File -->
+    <script src="../assets/js/headerfooter.js"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>
