@@ -768,6 +768,29 @@
                     // Update URL without reload so the link is bookmarkable
                     const newUrl = window.location.pathname + '?invoiceId=' + encodeURIComponent(invoiceId);
                     window.history.replaceState(null, '', newUrl);
+
+                    // Update lead stage to RECEIPT in Firestore
+                    try {
+                        const submissionRaw = localStorage.getItem('dialogika_last_submission');
+                        if (submissionRaw) {
+                            const sub = JSON.parse(submissionRaw);
+                            if (sub.leadId) {
+                                const ready = await waitForFirebase();
+                                if (ready && window.dlgReceiptSetDoc) {
+                                    const leadRef = window.dlgReceiptDoc(window.dlgReceiptDb, 'leads', sub.leadId);
+                                    await window.dlgReceiptSetDoc(leadRef, {
+                                        stage: 'RECEIPT',
+                                        invoice_id: invoiceId,
+                                        total_paid: firestorePayload.paidAmount || 0,
+                                        updated_at: new Date().toISOString()
+                                    }, { merge: true });
+                                    console.log('Lead stage updated to RECEIPT:', sub.leadId);
+                                }
+                            }
+                        }
+                    } catch (err) {
+                        console.error('Failed to update lead stage to RECEIPT:', err);
+                    }
                 }
             }
 
