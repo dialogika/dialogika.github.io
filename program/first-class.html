@@ -4574,12 +4574,19 @@
                     const programId = document.getElementById('programs').value;
                     const programName = document.querySelector(`#programs option[value="${programId}"]`)?.textContent || 'First Class Package';
 
-                    // Get current price from the selected program (fallback to Yogya if not found)
+                    // Get ORIGINAL price (before any discount) from the selected program
                     let basePrice = 3000000;
                     const jogjaPriceEl = document.getElementById('price-first-class');
                     if (jogjaPriceEl) {
-                        const priceText = jogjaPriceEl.textContent.trim();
-                        const priceMatch = priceText.match(/IDR\s*([0-9.]+)/);
+                        // If discount was applied, get original price from stored data
+                        let priceSource = jogjaPriceEl.textContent.trim();
+                        if (jogjaPriceEl.dataset.discounted && jogjaPriceEl.dataset.originalHtml) {
+                            // Extract price from the saved original HTML
+                            const tempDiv = document.createElement('div');
+                            tempDiv.innerHTML = jogjaPriceEl.dataset.originalHtml;
+                            priceSource = tempDiv.textContent.trim();
+                        }
+                        const priceMatch = priceSource.match(/IDR\s*([0-9.]+)/);
                         if (priceMatch) {
                             basePrice = parseInt(priceMatch[1].replace(/\./g, ''));
                         }
