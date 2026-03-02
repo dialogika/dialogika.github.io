@@ -1300,26 +1300,61 @@
             if (checkoutData.program) {
                 try {
                     const db = firebase.firestore();
-                    db.collection('products')
+                    
+                    // 1. First fetch the class/batch details to get the dynamic DP
+                    db.collection('class_availability')
                         .where('name', '==', checkoutData.program)
                         .limit(1)
                         .get()
-                        .then(snapshot => {
-                            if (!snapshot.empty) {
-                                const productData = snapshot.docs[0].data();
-                                if (productData.downPayment) {
-                                    downPayment = productData.downPayment;
-                                    console.log('Dynamic DP loaded:', downPayment);
+                        .then(classSnapshot => {
+                            if (!classSnapshot.empty) {
+                                const classData = classSnapshot.docs[0].data();
+                                
+                                // Update Down Payment from class_availability
+                                if (classData.down_payment !== undefined) {
+                                    downPayment = Number(classData.down_payment);
+                                    console.log('Dynamic DP loaded from class_availability:', downPayment);
                                 }
-                                if (productData.basePrice) {
-                                    basePrice = productData.basePrice;
-                                    console.log('Dynamic Base Price loaded:', basePrice);
+
+                                // 2. Use productId from classData to fetch the basePrice from products collection
+                                const productId = classData.productId || classData.product_id;
+                                if (productId) {
+                                    db.collection('products').doc(productId).get()
+                                        .then(productDoc => {
+                                            if (productDoc.exists) {
+                                                const productData = productDoc.data();
+                                                if (productData.basePrice) {
+                                                    basePrice = Number(productData.basePrice);
+                                                    console.log('Dynamic Base Price loaded from products:', basePrice);
+                                                }
+                                            }
+                                            recalculate(); // Recalculate after both or just DP is fetched
+                                        })
+                                        .catch(err => {
+                                            console.error('Error fetching product base price:', err);
+                                            recalculate();
+                                        });
+                                } else {
+                                    recalculate();
                                 }
-                                recalculate();
+                            } else {
+                                // Fallback: try fetching from products directly if no specific class found
+                                db.collection('products')
+                                    .where('name', '==', checkoutData.program)
+                                    .limit(1)
+                                    .get()
+                                    .then(productSnapshot => {
+                                        if (!productSnapshot.empty) {
+                                            const productData = productSnapshot.docs[0].data();
+                                            if (productData.downPayment) downPayment = productData.downPayment;
+                                            if (productData.basePrice) basePrice = productData.basePrice;
+                                            recalculate();
+                                        }
+                                    });
                             }
                         })
                         .catch(err => {
-                            console.error('Error fetching product data:', err);
+                            console.error('Error fetching class availability data:', err);
                         });
                 } catch (err) {
                     console.error('Firestore not ready or error:', err);
