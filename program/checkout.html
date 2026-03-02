@@ -1150,7 +1150,7 @@
                     <label class="form-label">Tipe Pembayaran</label>
                     <div class="payment-type-tabs">
                         <button class="payment-type-btn active" data-type="full">Full Payment</button>
-                        <button class="payment-type-btn" data-type="dp">DP (Rp 500rb)</button>
+                        <button class="payment-type-btn" data-type="dp">DP (Down Payment)</button>
                     </div>
 
                     <div class="payment-grid">
@@ -1345,6 +1345,10 @@
 
                 // Update UI
                 $('#label-price-normal').text('Rp ' + basePrice.toLocaleString('id-ID'));
+
+                // Update DP button text
+                const dpLabel = downPayment > 0 ? `DP (Rp ${downPayment.toLocaleString('id-ID')})` : 'DP (Down Payment)';
+                $('.payment-type-btn[data-type="dp"]').text(dpLabel);
 
                 if (discountRate > 0) {
                     $('#row-discount').show();
