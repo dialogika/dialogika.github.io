@@ -4746,15 +4746,36 @@
             // Toggle disabled state of schedule button when program is selected
             function updateScheduleButtonState() {
                 const helpText = scheduleButtonContainer.querySelector('small');
-                if (programSelect.value) {
-                    btnSelectSchedule.disabled = false;
-                    btnSelectSchedule.style.cursor = 'pointer';
-                    btnSelectSchedule.style.opacity = '1';
-                    if (helpText) helpText.textContent = 'Pilih jadwal kelas yang tersedia';
+                const selectedProgramValue = programSelect.value;
+                const isPrivate = selectedProgramValue && programMapping[selectedProgramValue] && programMapping[selectedProgramValue].toLowerCase().includes('private');
+
+                if (selectedProgramValue) {
+                    if (isPrivate) {
+                        btnSelectSchedule.innerHTML = `<i class='bx bx-calendar-check'></i> Jadwal Flexibel`;
+                        btnSelectSchedule.disabled = true;
+                        btnSelectSchedule.style.cursor = 'not-allowed';
+                        btnSelectSchedule.style.opacity = '1';
+                        btnSelectSchedule.classList.remove('btn-primary');
+                        btnSelectSchedule.classList.add('btn-success');
+                        if (helpText) helpText.textContent = 'Jadwal ditentukan bersama admin';
+                        selectedScheduleInput.value = "flexible";
+                    } else {
+                        btnSelectSchedule.innerHTML = `<i class='bx bx-calendar'></i> Pilih Jadwal`;
+                        btnSelectSchedule.disabled = false;
+                        btnSelectSchedule.style.cursor = 'pointer';
+                        btnSelectSchedule.style.opacity = '1';
+                        btnSelectSchedule.classList.add('btn-primary');
+                        btnSelectSchedule.classList.remove('btn-success');
+                        if (helpText) helpText.textContent = 'Pilih jadwal kelas yang tersedia';
+                        if(selectedScheduleInput.value === "flexible") selectedScheduleInput.value = "";
+                    }
                 } else {
+                    btnSelectSchedule.innerHTML = `<i class='bx bx-calendar'></i> Pilih Jadwal`;
                     btnSelectSchedule.disabled = true;
                     btnSelectSchedule.style.cursor = 'not-allowed';
                     btnSelectSchedule.style.opacity = '0.6';
+                    btnSelectSchedule.classList.add('btn-primary');
+                    btnSelectSchedule.classList.remove('btn-success');
                     if (helpText) helpText.textContent = 'Pilih program terlebih dahulu untuk memilih jadwal';
                 }
             }
