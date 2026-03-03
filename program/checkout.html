@@ -1151,7 +1151,7 @@
                     <label class="form-label">Tipe Pembayaran</label>
                     <div class="payment-type-tabs">
                         <button class="payment-type-btn active" data-type="full">Full Payment</button>
-                        <button class="payment-type-btn" data-type="dp">DP (Down Payment)</button>
+                        <button class="payment-type-btn" data-type="dp">DP (50%)</button>
                     </div>
 
                     <div class="payment-grid">
@@ -1272,7 +1272,7 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(async function () {
             // Load Context from localStorage
             const checkoutData = JSON.parse(localStorage.getItem('dialogika_checkout_data') || '{}');
 
@@ -1362,8 +1362,58 @@
                 }
             }
 
+            // Validate referral code against Firestore and apply correct discount
             if (referralCode) {
+                // Show the referral code in the promo input field
                 $('#promo-code-input').val(referralCode);
+                try {
+                    const db = firebase.firestore();
+                    const settingsDoc = await db.collection('settings').doc('referrals').get();
+                    if (settingsDoc.exists) {
+                        const data = settingsDoc.data();
+                        const referrals = data.referrals || [];
+                        const now = Date.now();
+                        const codeUpper = referralCode.trim().toUpperCase();
+
+                        const matchingRef = referrals.find(function(ref) {
+                            if ((ref.code || '').toUpperCase() !== codeUpper) return false;
+                            if ((ref.functionType || '').toLowerCase() !== 'discount') return false;
+
+                            // Check expiry
+                            const createdAt = ref.createdAtMs || 0;
+                            const monthsValid = ref.monthsValid || 2;
+                            const expiryMs = createdAt + (monthsValid * 30 * 24 * 60 * 60 * 1000);
+                            if (now > expiryMs) return false;
+
+                            // Check usage limit
+                            const maxUsage = ref.maxUsage || 999;
+                            const usedCount = ref.usedCount || 0;
+                            if (usedCount >= maxUsage) return false;
+
+                            return true;
+                        });
+
+                        if (matchingRef) {
+                            // Apply the actual discount from Firestore
+                            if (matchingRef.discountPercent && matchingRef.discountPercent > 0) {
+                                discountRate = matchingRef.discountPercent / 100;
+                                console.log('Referral discount loaded from API:', matchingRef.discountPercent + '%');
+                            }
+                            if (matchingRef.discountAmount && matchingRef.discountAmount > 0) {
+                                promoDiscount = matchingRef.discountAmount;
+                                discountRate = 0; // Use fixed amount instead of percentage
+                                console.log('Referral fixed discount loaded from API: Rp', matchingRef.discountAmount);
+                            }
+                        } else {
+                            console.log('Referral code not found or expired:', referralCode);
+                            discountRate = 0;
+                            promoDiscount = 0;
+                        }
+                    }
+                } catch (err) {
+                    console.error('Error validating referral code:', err);
+                }
+                recalculate();
             }
 
             function recalculate() {
@@ -1384,13 +1434,14 @@
                 // Update UI
                 $('#label-price-normal').text('Rp ' + basePrice.toLocaleString('id-ID'));
 
-                // Update DP button text
-                const dpLabel = downPayment > 0 ? `DP (Rp ${downPayment.toLocaleString('id-ID')})` : 'DP (Down Payment)';
-                $('.payment-type-btn[data-type="dp"]').text(dpLabel);
+                // Update DP button text (always show 50%)
+                $('.payment-type-btn[data-type="dp"]').text('DP (50%)');
 
-                if (discountRate > 0) {
+                if (discountRate > 0 || promoDiscount > 0) {
                     $('#row-discount').show();
-                    const discountAmount = Math.round(basePrice * discountRate);
+                    const discountAmount = discountRate > 0 
+                        ? Math.round(basePrice * discountRate) 
+                        : promoDiscount;
                     $('#label-price-discount').text('- Rp ' + discountAmount.toLocaleString('id-ID'));
                 } else {
                     $('#row-discount').hide();

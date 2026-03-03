@@ -3937,8 +3937,9 @@
                         DISCOUNT_AMOUNT = referral.discountAmount;
                     }
 
-                    // Apply feature exclusions for system promo
-                    updateFeaturesDisplay(referral.excludedFeatures || []);
+                    // Store excluded features for later use (only apply when claimed)
+                    // Do NOT call updateFeaturesDisplay here - features should only be
+                    // crossed out AFTER the user claims the promo
 
                     // Update modal UI with real data
                     const discountText = referral.discountPercent
@@ -4028,6 +4029,11 @@
                 sessionStorage.setItem(PROMO_STORAGE_KEY, 'true');
                 if (REFERRAL_CODE) {
                     sessionStorage.setItem(PROMO_CODE_KEY, REFERRAL_CODE);
+                }
+
+                // Apply feature exclusions only when promo is claimed
+                if (activeReferral && activeReferral.excludedFeatures) {
+                    updateFeaturesDisplay(activeReferral.excludedFeatures);
                 }
 
                 setTimeout(() => {
@@ -4137,6 +4143,10 @@
 
             if (applied) {
                 applyDiscountToDOM();
+                // Also apply feature exclusions for already-claimed promo
+                if (activeReferral && activeReferral.excludedFeatures) {
+                    updateFeaturesDisplay(activeReferral.excludedFeatures);
+                }
                 updateReferralCodeField();
             } else if (claimed) {
                 renderUseCouponButtons();
@@ -4598,7 +4608,7 @@
                         phone: phone,
                         program: programName,
                         basePrice: basePrice,
-                        discountRate: window.DISCOUNT_RATE || 0.40,
+                        discountRate: sessionStorage.getItem('dialogika_firstclass_promo_applied') === 'true' ? (window.DISCOUNT_RATE || 0) : 0,
                         referralCode: document.getElementById('referral-code')?.value || ''
                     };
 
