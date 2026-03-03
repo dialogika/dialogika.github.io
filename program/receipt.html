@@ -1039,6 +1039,10 @@
                             leadName: ld.pendaftarName || '',
                             leadPhone: ld.pendaftarPhone || '',
                             className: ld.programName || '',
+                            batchSchedule: ld.batchSchedule || '',
+                            batchLocation: ld.batchLocation || '',
+                            batchType: ld.batchType || '',
+                            batchMentor: ld.batchMentor || '',
                             paymentMethod: ld.paymentMethod || '',
                             bankName: ld.bankName || '',
                             paymentType: ld.paymentType || '',
@@ -1131,8 +1135,8 @@
                 $('#val-total-price').text('Rp ' + parseInt(totalPaid).toLocaleString('id-ID'));
             }
 
-            if (receiptData.schedule) {
-                $('#val-schedule').text(receiptData.schedule);
+            if (receiptData.schedule || receiptData.batchSchedule) {
+                $('#val-schedule').text(receiptData.schedule || receiptData.batchSchedule);
             }
 
             // ─── Invoice ID row (always show when we have an invoiceId) ───

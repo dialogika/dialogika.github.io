@@ -1286,7 +1286,14 @@
                 $('#peserta-whatsapp').val(checkoutData.phone);
             }
             if (checkoutData.program) {
-                $('#label-program-name').text(checkoutData.program);
+                let displayName = checkoutData.program;
+                if (checkoutData.batchName) {
+                    displayName = checkoutData.batchName;
+                }
+                $('#label-program-name').text(displayName);
+            }
+            if (checkoutData.batchSchedule) {
+                $('#label-batch-schedule').text(checkoutData.batchSchedule);
             }
 
             // Price State
@@ -1296,6 +1303,10 @@
             let referralCode = checkoutData.referralCode || '';
             let paymentType = 'full'; // 'full' or 'dp'
             let promoDiscount = 0;
+            let batchSchedule = '';
+            let batchLocation = '';
+            let batchType = '';
+            let batchMentor = '';
 
             // Fetch product data from API (Firestore)
             if (checkoutData.program) {
@@ -1315,6 +1326,22 @@
                                 if (classData.down_payment !== undefined) {
                                     downPayment = Number(classData.down_payment);
                                     console.log('Dynamic DP loaded from class_availability:', downPayment);
+                                }
+
+                                // Extract batch schedule and location
+                                if (classData.start_date) {
+                                    batchSchedule = classData.start_date;
+                                    $('#label-batch-schedule').text(batchSchedule);
+                                    console.log('Batch schedule loaded:', batchSchedule);
+                                }
+                                if (classData.location) {
+                                    batchLocation = classData.location;
+                                }
+                                if (classData.type) {
+                                    batchType = classData.type;
+                                }
+                                if (classData.mentor_name) {
+                                    batchMentor = classData.mentor_name;
                                 }
 
                                 // 2. Use productId from classData to fetch the basePrice from products collection
@@ -1564,6 +1591,10 @@
                     pendaftarPhone: $('#pendaftar-phone').val(),
                     pesertaName: $('#peserta-name').val(),
                     programName: $('#label-program-name').text(),
+                    batchSchedule: batchSchedule || $('#label-batch-schedule').text() || '',
+                    batchLocation: batchLocation || '',
+                    batchType: batchType || '',
+                    batchMentor: batchMentor || '',
                     paymentMethod: $('.payment-item.active span').text(),
                     paymentType: paymentType,
                     totalPrice: totalPay,
@@ -1615,6 +1646,10 @@
                         leadPhone: submissionData.pendaftarPhone || '',
                         className: submissionData.programName || '',
                         productName: submissionData.programName || '',
+                        batchSchedule: submissionData.batchSchedule || '',
+                        batchLocation: submissionData.batchLocation || '',
+                        batchType: submissionData.batchType || '',
+                        batchMentor: submissionData.batchMentor || '',
                         paymentMethod: submissionData.paymentMethod || '',
                         paymentType: submissionData.paymentType || '',
                         paidAmount: totalPay,

@@ -4607,6 +4607,8 @@
                         name: name,
                         phone: phone,
                         program: programName,
+                        batchName: window._selectedBatchName || '',
+                        batchSchedule: window._selectedBatchSchedule || '',
                         basePrice: basePrice,
                         discountRate: sessionStorage.getItem('dialogika_firstclass_promo_applied') === 'true' ? (window.DISCOUNT_RATE || 0) : 0,
                         referralCode: document.getElementById('referral-code')?.value || ''
@@ -5028,6 +5030,10 @@
             // Select schedule function (global scope)
             window.selectSchedule = function (scheduleId, scheduleName, scheduleDate) {
                 selectedScheduleInput.value = scheduleId;
+
+                // Store batch name and schedule for checkout
+                window._selectedBatchName = scheduleName;
+                window._selectedBatchSchedule = scheduleDate;
 
                 // Update button text to show selected schedule
                 btnSelectSchedule.innerHTML = `<i class='bx bx-check-circle'></i> ${scheduleName}`;
