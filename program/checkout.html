@@ -1369,7 +1369,9 @@
                 let discountedBase = basePrice * (1 - discountRate);
                 let finalPrice = discountedBase - promoDiscount;
 
-                // If DP, total pay is just 500k
+                // DP is always 50% of finalPrice (after discount)
+                downPayment = Math.round(finalPrice * 0.5);
+
                 let displayTypePrice = finalPrice;
                 let totalPay = finalPrice;
 
@@ -1387,7 +1389,8 @@
 
                 if (discountRate > 0) {
                     $('#row-discount').show();
-                    $('#label-price-discount').text('- Rp ' + Math.round(basePrice * discountRate).toLocaleString('id-ID'));
+                    const discountAmount = Math.round(basePrice * discountRate);
+                    $('#label-price-discount').text('- Rp ' + discountAmount.toLocaleString('id-ID'));
                 } else {
                     $('#row-discount').hide();
                 }
@@ -1483,7 +1486,7 @@
                 // Final Price Check
                 let discountedBase = basePrice * (1 - discountRate);
                 let finalPrice = discountedBase - promoDiscount;
-                let totalPay = (paymentType === 'dp') ? 500000 : finalPrice;
+                let totalPay = (paymentType === 'dp') ? downPayment : finalPrice;
 
                 // Save submission data for receipt
                 const submissionData = {
