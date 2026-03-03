@@ -1439,7 +1439,29 @@
                 handlePaymentTypeChange();
                 handleBankChange();
                 handleMethodChange();
+
+                // Show Payment Proof if exists
+                if (d.transferProofUrl && d.transferProofUrl !== 'pending_upload' && d.transferProofUrl !== 'no_file') {
+                    const isImage = d.transferProofUrl.match(/\.(jpeg|jpg|gif|png|webp)/i) != null || d.transferProofUrl.includes('firebasestorage.googleapis.com');
+                    if (isImage) {
+                        setUploadPreview({ name: 'Bukti Pembayaran' }, d.transferProofUrl, true);
+                    } else {
+                        setUploadPreview({ name: d.transferProofUrl.split('/').pop() }, "", true);
+                    }
+                    uploadedProofUrl = d.transferProofUrl;
+                    
+                    // Show success message if proof exists
+                    const successMsg = document.getElementById('uploadSuccess');
+                    if (successMsg) {
+                        successMsg.classList.remove('hidden');
+                        const successText = successMsg.querySelector('p');
+                        if (successText) {
+                            successText.textContent = "Bukti transfer sudah diupload.";
+                        }
+                    }
+                }
             } catch (e) {
+                console.error("Error loading invoice from Firestore:", e);
             }
         }
 

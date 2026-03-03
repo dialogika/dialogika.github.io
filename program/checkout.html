@@ -25,6 +25,7 @@
     <!-- Firebase SDK for Leads Pipeline -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
     <script>
         if (!firebase.apps.length) {
             firebase.initializeApp({
@@ -1464,8 +1465,26 @@
                 }
             });
 
+            async function uploadProof(file, invoiceId) {
+                if (!file) return 'pending_upload';
+                try {
+                    const storageRef = firebase.storage().ref();
+                    const fileExtension = file.name.split('.').pop();
+                    const fileName = `payment-proofs/${invoiceId}_${Date.now()}.${fileExtension}`;
+                    const proofRef = storageRef.child(fileName);
+                    
+                    const snapshot = await proofRef.put(file);
+                    const downloadURL = await snapshot.ref.getDownloadURL();
+                    console.log('File uploaded successfully. URL:', downloadURL);
+                    return downloadURL;
+                } catch (error) {
+                    console.error('Error uploading proof:', error);
+                    return 'upload_failed';
+                }
+            }
+
             // Proceed Action
-            $('#btn-submit-registration').click(function () {
+            $('#btn-submit-registration').click(async function () {
                 const btn = $(this);
                 const originalText = btn.text();
 
@@ -1502,6 +1521,22 @@
                 };
                 localStorage.setItem('dialogika_last_submission', JSON.stringify(submissionData));
 
+                // Generate Invoice ID early
+                const now = new Date();
+                const yy = String(now.getFullYear()).slice(-2);
+                const mm = String(now.getMonth() + 1).padStart(2, '0');
+                const dd = String(now.getDate()).padStart(2, '0');
+                const random = Math.floor(Math.random() * 9000) + 1000;
+                const invoiceId = 'INV-' + yy + mm + dd + '-' + random;
+
+                // Handle Proof Upload
+                let proofUrl = 'no_file';
+                const proofFile = $('#proof-upload')[0].files[0];
+                if (proofFile) {
+                    btn.html('<i class="bx bx-loader-alt bx-spin"></i> Uploading Bukti...');
+                    proofUrl = await uploadProof(proofFile, invoiceId);
+                }
+
                 // Update lead stage to CHECKOUT in Firestore
                 if (checkoutData.leadId) {
                     try {
@@ -1511,6 +1546,7 @@
                             payment_type: paymentType,
                             payment_method: $('.payment-item.active span').text(),
                             total_price: totalPay,
+                            transfer_proof_url: proofUrl,
                             updated_at: firebase.firestore.FieldValue.serverTimestamp()
                         });
                         console.log('Lead stage updated to CHECKOUT:', checkoutData.leadId);
@@ -1522,13 +1558,6 @@
                 // Create invoice in Firestore
                 try {
                     const invoiceDb = firebase.firestore();
-                    const now = new Date();
-                    const yy = String(now.getFullYear()).slice(-2);
-                    const mm = String(now.getMonth() + 1).padStart(2, '0');
-                    const dd = String(now.getDate()).padStart(2, '0');
-                    const random = Math.floor(Math.random() * 9000) + 1000;
-                    const invoiceId = 'INV-' + yy + mm + dd + '-' + random;
-
                     const invoicePayload = {
                         invoiceNumber: invoiceId,
                         leadName: submissionData.pendaftarName || '',
@@ -1543,7 +1572,7 @@
                         originalBasePrice: basePrice,
                         referralCode: referralCode || '',
                         discountAmount: Math.round(basePrice * discountRate),
-                        transferProofUrl: 'pending_upload',
+                        transferProofUrl: proofUrl,
                         verificationStatus: 'not_verified',
                         leadId: checkoutData.leadId || '',
                         createdAtMs: Date.now(),
@@ -1551,8 +1580,9 @@
                         createdFromCheckout: true
                     };
 
-                    invoiceDb.collection('invoices').doc(invoiceId).set(invoicePayload);
+                    await invoiceDb.collection('invoices').doc(invoiceId).set(invoicePayload);
                     submissionData.invoiceId = invoiceId;
+                    submissionData.transferProofUrl = proofUrl; // Add to submission data
                     localStorage.setItem('dialogika_last_submission', JSON.stringify(submissionData));
                     console.log('Invoice created from checkout:', invoiceId);
                 } catch (err) {
