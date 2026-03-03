@@ -1043,7 +1043,8 @@
                             bankName: ld.bankName || '',
                             paymentType: ld.paymentType || '',
                             amountPaid: ld.totalPrice ? parseInt(ld.totalPrice) : 0,
-                            invoiceNumber: ''
+                            transferProofUrl: ld.transferProofUrl || '',
+                            invoiceNumber: ld.invoiceId || ''
                         };
                     }
                 } catch (e) {}
@@ -1141,13 +1142,35 @@
             }
 
             // ─── Handle Payment Proof Display ───
-            const proofData = localStorage.getItem('dialogika_payment_proof');
-            if (proofData) {
+            // Priority: Firestore transferProofUrl > localStorage data
+            let proofDisplayUrl = '';
+
+            // 1) Check Firestore data (works cross-browser)
+            if (receiptData.transferProofUrl && 
+                receiptData.transferProofUrl !== 'pending_upload' && 
+                receiptData.transferProofUrl !== 'no_file' &&
+                receiptData.transferProofUrl !== 'upload_failed') {
+                proofDisplayUrl = receiptData.transferProofUrl;
+            }
+
+            // 2) Fallback to localStorage base64 data (same browser only)
+            if (!proofDisplayUrl) {
+                const proofData = localStorage.getItem('dialogika_payment_proof');
+                if (proofData) {
+                    proofDisplayUrl = proofData;
+                }
+            }
+
+            if (proofDisplayUrl) {
                 const $img = $('#img-payment-proof');
-                $img.attr('src', proofData);
+                $img.attr('src', proofDisplayUrl);
                 $img.on('load', function() {
                     $('#proof-section').removeClass('d-none');
                 });
+                // Also show immediately for non-lazy-loading scenarios
+                if ($img[0].complete) {
+                    $('#proof-section').removeClass('d-none');
+                }
             }
 
             // ─── WhatsApp Confirmation Logic ───
