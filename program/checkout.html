@@ -1625,6 +1625,8 @@
                         const leadDb = firebase.firestore();
                         leadDb.collection('leads').doc(checkoutData.leadId).update({
                             stage: 'CHECKOUT',
+                            batch_name: checkoutData.batchName || '',
+                            batch_schedule: submissionData.batchSchedule || '',
                             payment_type: paymentType,
                             payment_method: $('.payment-item.active span').text(),
                             total_price: totalPay,
@@ -1645,6 +1647,7 @@
                         leadName: submissionData.pendaftarName || '',
                         leadPhone: submissionData.pendaftarPhone || '',
                         className: submissionData.programName || '',
+                        batchName: checkoutData.batchName || submissionData.programName || '',
                         productName: submissionData.programName || '',
                         batchSchedule: submissionData.batchSchedule || '',
                         batchLocation: submissionData.batchLocation || '',
