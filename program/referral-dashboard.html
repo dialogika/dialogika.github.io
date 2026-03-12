@@ -1770,6 +1770,21 @@
                     if (document.getElementById("rdRefOwnerName")) document.getElementById("rdRefOwnerName").value = item.holderName || item.ownerName || "";
                     if (document.getElementById("rdRefFunctionType")) document.getElementById("rdRefFunctionType").value = item.functionType || "";
 
+                    const pctInput = document.getElementById("rdRefDiscountPercent");
+                    if (pctInput) {
+                        const pct = typeof item.discountPercent === "number" ? item.discountPercent : parseFloat(item.discountPercent || "0");
+                        pctInput.value = !isNaN(pct) && pct > 0 ? pct : "";
+                    }
+                    const amtInput = document.getElementById("rdRefDiscountAmount");
+                    if (amtInput) {
+                        const amt = typeof item.discountAmount === "number"
+                            ? item.discountAmount
+                            : parseInt(String(item.discountAmount || "0").replace(/\D/g, ""), 10);
+                        amtInput.value = !isNaN(amt) && amt > 0
+                            ? new Intl.NumberFormat("id-ID").format(amt)
+                            : "";
+                    }
+
                     // Trigger changes
                     if (document.getElementById("rdRefFunctionType")) document.getElementById("rdRefFunctionType").dispatchEvent(new Event('change'));
                     if (document.getElementById("rdRefHolderType")) document.getElementById("rdRefHolderType").dispatchEvent(new Event('change'));
