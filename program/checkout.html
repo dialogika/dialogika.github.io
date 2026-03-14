@@ -1099,7 +1099,7 @@
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Usia *</label>
-                            <input type="number" id="peserta-age" class="form-control" placeholder="Angka">
+                            <input type="number" id="peserta-age" class="form-control" placeholder="Angka" min="1" max="99">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Gender *</label>
@@ -1303,7 +1303,7 @@
             }
 
             // Price State
-            let basePrice = parseInt(checkoutData.basePrice) || 3000000;
+            let basePrice = Number(checkoutData.basePrice);
             let downPayment = 500000; // Default DP
             let discountRate = parseFloat(checkoutData.discountRate) || 0;
             let referralCode = checkoutData.referralCode || '';
@@ -1351,6 +1351,11 @@
             if (checkoutData.program) {
                 try {
                     const db = firebase.firestore();
+
+                    const storedProductId = checkoutData.productId || checkoutData.product_id;
+                    if (storedProductId) {
+                        await loadBasePriceByProductId(db, storedProductId);
+                    }
                     
                     // 1. First fetch the class/batch details to get the dynamic DP
                     db.collection('class_availability')
@@ -1385,25 +1390,7 @@
 
                                 // 2. Use productId from classData to fetch the basePrice from products collection
                                 const productId = classData.productId || classData.product_id;
-                                if (productId) {
-                                    db.collection('products').doc(productId).get()
-                                        .then(productDoc => {
-                                            if (productDoc.exists) {
-                                                const productData = productDoc.data();
-                                                if (productData.basePrice) {
-                                                    basePrice = Number(productData.basePrice);
-                                                    console.log('Dynamic Base Price loaded from products:', basePrice);
-                                                }
-                                            }
-                                            recalculate(); // Recalculate after both or just DP is fetched
-                                        })
-                                        .catch(err => {
-                                            console.error('Error fetching product base price:', err);
-                                            recalculate();
-                                        });
-                                } else {
-                                    recalculate();
-                                }
+                                loadBasePriceByProductId(db, productId).then(() => recalculate());
                             } else {
                                 // Fallback: try fetching from products directly if no specific class found
                                 db.collection('products')
@@ -1414,7 +1401,7 @@
                                         if (!productSnapshot.empty) {
                                             const productData = productSnapshot.docs[0].data();
                                             if (productData.downPayment) downPayment = productData.downPayment;
-                                            if (productData.basePrice) basePrice = productData.basePrice;
+                                            if (productData.basePrice !== undefined) basePrice = normalizePrice(productData.basePrice);
                                             recalculate();
                                         }
                                     });
