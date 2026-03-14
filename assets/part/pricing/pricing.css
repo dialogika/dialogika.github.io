@@ -139,6 +139,7 @@ h4 {
   padding: 0;
   overflow: hidden;
   height: 100px;
+  pointer-events: none;
 }
 
 .pricing .pricing-box .pricing-badge .badge {
@@ -173,6 +174,7 @@ h4 {
   padding: 0;
   overflow: hidden;
   height: 100px;
+  pointer-events: none;
 }
 
 .pricing .pricing-badge .badge {

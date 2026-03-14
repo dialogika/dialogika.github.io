@@ -2169,15 +2169,16 @@
                 <ul class="nav nav-pills rounded justify-content-center d-inline-block my-1 flex-nowrap flex gap-1"
                   id="pills-tab" role="tablist">
                   <li class="nav-item d-inline-block">
-                    <button type="button" class="nav-link px-3 rounded custom-price-button active" role="tab"
-                      id="custom-price-button" data-target="basic-class-content">
-                      Basic Plus
+                    <button type="button" class="nav-link px-3 rounded custom-price-button" role="tab"
+                      id="basic-package-tab" data-target="basic-plus-content">
+                      Basic
                     </button>
                   </li>
                   <li class="nav-item d-inline-block">
-                    <button type="button" class="nav-link px-3 rounded custom-price-button" id="action-class" role="tab"
-                      id="custom-price-button" data-target="basic-plus-content">
-                      Basic Plus Private
+                    <button type="button" class="nav-link px-3 rounded custom-price-button active" id="basicplus-package-tab" role="tab"
+                      data-target="basic-class-content">
+                      Basic Plus
+                      <span class="badge-plus-icon"></span>
                     </button>
                   </li>
                 </ul>
@@ -2201,12 +2202,65 @@
                       </div>
 
                       <h5 class="fw-normal">Basic Plus</h5>
-                      <h1 class="pricing-title mt-3 mb-0">IDR 1.000.000</h1>
+                      <div style="white-space: nowrap; margin-top: 12px; position: relative; z-index: 2;">
+                        <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 1.000.000</h1>
+                        <button id="basic-claim-discount-btn-main" class="btn btn-warning btn-sm claim-discount-btn"
+                          onclick="triggerBasicPromoModal()"
+                          style="display: none; font-size: 9px; padding: 3px 10px; border-radius: 18px; transition: all 0.3s ease; vertical-align: middle; margin-left: 6px; position: relative; z-index: 3;">
+                          <i class='bx bxs-discount'></i> Claim Diskon
+                        </button>
+                      </div>
                       <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa persiapan dan teratur
                         didalam berbicara</p>
 
                       <hr class="mt-4">
 
+                      <style>
+                        .claim-discount-btn:hover {
+                          transform: scale(1.05);
+                          box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+                        }
+                        .basic-excluded {
+                          opacity: 0.65;
+                        }
+                        .basic-excluded span {
+                          text-decoration: line-through;
+                        }
+                        .basic-excluded i {
+                          color: #dc3545 !important;
+                        }
+                        #basicplus-package-tab {
+                          display: inline-flex;
+                          align-items: center;
+                          justify-content: center;
+                          gap: 6px;
+                        }
+                        .badge-plus-icon {
+                          position: relative;
+                          display: inline-flex;
+                          align-items: center;
+                          justify-content: center;
+                          width: 18px;
+                          height: 18px;
+                          border-radius: 999px;
+                          background-color: #028532;
+                          box-shadow: 0 2px 6px rgba(21, 128, 61, 0.45);
+                        }
+                        .badge-plus-icon::before,
+                        .badge-plus-icon::after {
+                          content: '';
+                          position: absolute;
+                          background-color: #ffffff;
+                        }
+                        .badge-plus-icon::before {
+                          width: 10px;
+                          height: 2px;
+                        }
+                        .badge-plus-icon::after {
+                          width: 2px;
+                          height: 10px;
+                        }
+                      </style>
                       <div class="mt-4 pt-1">
                         <p class="mb-3 f-16" data-feat-key="fc-feat-1">
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
@@ -2266,8 +2320,15 @@
                   </div>
                   <div class="col-lg-6">
                     <div class="pricing-box bg-white rounded mt-4">
-                      <h5 class="fw-normal">Basic Plus Private</h5>
-                      <h1 class="pricing-title mt-3 mb-0">IDR 2.000.000</h1>
+                      <h5 class="fw-normal">Basic Private</h5>
+                      <div style="white-space: nowrap; margin-top: 12px; position: relative; z-index: 2;">
+                        <h1 id="price-basic-plus-private" class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 2.000.000</h1>
+                        <button id="basic-claim-discount-btn" class="btn btn-warning btn-sm claim-discount-btn"
+                          onclick="triggerBasicPromoModal()"
+                          style="display: none; font-size: 9px; padding: 3px 10px; border-radius: 18px; transition: all 0.3s ease; vertical-align: middle; margin-left: 6px; position: relative; z-index: 3;">
+                          <i class='bx bxs-discount'></i> Claim Diskon
+                        </button>
+                      </div>
                       <p class="text-muted f-15 mt-3">Fokus pembelajaran: Bisa berbicara tanpa persiapan dan teratur
                         didalam berbicara</p>
                       <div class="mt-4 pt-1">
@@ -2337,24 +2398,29 @@
                 <div class="row g-0 align-items-center">
 
                   <div class="col-lg-6">
-                    <div class="pricing-box active bg-white rounded mt-4">
+                      <div class="pricing-box active bg-white rounded mt-4">
                       <div class="pricing-badge">
                         <span class="badge">Best Choice</span>
                       </div>
 
-                      <h5 class="fw-normal">Basic Plus</h5>
-                      <h1 class="pricing-title mt-3 mb-0">IDR 599.000
-                        <span class="f-13"> <strike>IDR 1.000.000</strike></span>
-                      </h1>
+                      <h5 class="fw-normal">Basic Class</h5>
+                      <div style="white-space: nowrap; margin-top: 12px; position: relative; z-index: 2;">
+                        <h1 id="price-basic-class" class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 1.000.000</h1>
+                        <button class="btn btn-warning btn-sm claim-discount-btn"
+                          onclick="triggerBasicPromoModal()"
+                          style="display: none; font-size: 9px; padding: 3px 10px; border-radius: 18px; transition: all 0.3s ease; vertical-align: middle; margin-left: 6px; position: relative; z-index: 3;">
+                          <i class='bx bxs-discount'></i> Claim Diskon
+                        </button>
+                      </div>
                       <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa persiapan dan teratur
                         didalam berbicara</p>
 
                       <hr class="mt-4">
 
                       <div class="mt-4 pt-1">
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-1">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          <b>Garansi</b> mengulang kelas
+                        <p class="mb-3 f-16 basic-excluded" data-feat-key="fc-feat-1">
+                          <i class='bx bxs-x-circle'></i>
+                          <span><b>Garansi</b> mengulang kelas</span>
                         </p>
                         <p class="mb-3 f-16" data-feat-key="fc-feat-2">
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
@@ -2368,9 +2434,9 @@
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
                           Durasi kelas <b>90 menit</b>
                         </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-7">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Bayar bisa <b>DP dan Dicicil</b>
+                        <p class="mb-3 f-16 basic-excluded" data-feat-key="fc-feat-7">
+                          <i class='bx bxs-x-circle'></i>
+                          <span>Bayar bisa <b>DP dan Dicicil</b></span>
                         </p>
                         <p class="mb-3 f-16">
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
@@ -2384,9 +2450,9 @@
                           <i class='bx bxs-check-circle' style="color:#009961"></i>
                           eModule & eBook
                         </p>
-                        <p class="mb-3 f-16">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Recording Kelas
+                        <p class="mb-3 f-16 basic-excluded">
+                          <i class='bx bxs-x-circle'></i>
+                          <span>Recording Kelas</span>
                         </p>
                          
                         <p class="mb-3 f-16" data-feat-key="fc-feat-8">
@@ -2399,10 +2465,10 @@
                         </p>
                       </div>
                       <div class="mt-4 pt-2 text-center">
-                        <a data-program="*Basic Plus senilai 1.000.000*."
+                        <a data-program="*Basic senilai 599K*."
                           class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
-                          data-program="Basic Plus">Daftar Sekarang</a>
-                        <a onclick="askAdminMessage(this)" data-program="Basic Plus"
+                          data-program="Basic">Daftar Sekarang</a>
+                        <a onclick="askAdminMessage(this)" data-program="Basic"
                           class="btn btn-primary w-100 title-change-consultation">Tanya
                           Admin</a>
                       </div>
@@ -2411,8 +2477,15 @@
 
                   <div class="col-lg-6">
                     <div class="pricing-box bg-white rounded mt-4">
-                      <h5 class="fw-normal">Basic Plus Private</h5>
-                      <h1 class="pricing-title mt-3 mb-0">IDR 2.000.000</h1>
+                      <h5 class="fw-normal">Basic Private</h5>
+                      <div style="white-space: nowrap; margin-top: 12px; position: relative; z-index: 2;">
+                        <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 2.000.000</h1>
+                        <button class="btn btn-warning btn-sm claim-discount-btn"
+                          onclick="triggerBasicPromoModal()"
+                          style="display: none; font-size: 9px; padding: 3px 10px; border-radius: 18px; transition: all 0.3s ease; vertical-align: middle; margin-left: 6px; position: relative; z-index: 3;">
+                          <i class='bx bxs-discount'></i> Claim Diskon
+                        </button>
+                      </div>
                       <p class="text-muted f-15 mt-3">Fokus pembelajaran: Bisa berbicara tanpa persiapan dan teratur
                         didalam berbicara</p>
                       <div class="mt-4 pt-1">
@@ -2463,10 +2536,10 @@
                         </p>
                       </div>
                       <div class="mt-4 pt-2 text-center">
-                        <a data-program="*Basic Plus Private senilai 987K*."
+                        <a data-program="*Basic Private senilai 987K*."
                           class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
-                          data-program="Basic Plus Private">Daftar Sekarang</a>
-                        <a onclick="askAdminMessage(this)" data-program="Basic Plus Private"
+                          data-program="Basic Private">Daftar Sekarang</a>
+                        <a onclick="askAdminMessage(this)" data-program="Basic Private"
                           class="btn btn-primary w-100 title-change-consultation">Tanya
                           Admin</a>
                       </div>
@@ -2659,9 +2732,7 @@
                 <div class="col-md-12 text-center">
                   <div class="loading">Loading</div>
                   <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit" id="send_contact" class="send_contact">Next to Payment</button>
+                  <button type="submit" id="send_contact" class="btn-checkout">Next to Payment</button>
                 </div>
 
               </div>
@@ -2680,6 +2751,78 @@
   <!-- ======= End Footer & Counter Area ======= -->
 
   <footer-modal></footer-modal>
+
+  <!-- Discount Promo Modal -->
+  <div class="modal fade" id="promoDiscountModal" tabindex="-1" aria-labelledby="promoDiscountModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content overflow-hidden border-0 shadow-lg" style="border-radius: 20px;">
+        <div class="modal-header border-0 p-0 position-relative">
+          <button type="button" class="btn-close position-absolute top-0 end-0 m-3 z-3 bg-white p-2"
+            data-bs-dismiss="modal" aria-label="Close"
+            style="opacity: 0.9; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"></button>
+          <div class="w-100 bg-primary text-white text-center py-4 position-relative overflow-hidden"
+            style="background: linear-gradient(135deg, #0b2b6a 0%, #2980b9 100%);">
+            <div class="position-absolute top-0 start-0 w-100 h-100"
+              style="background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);">
+            </div>
+            <h5 class="modal-title fw-bold mb-1 position-relative">LIMITED FLASH SALE!</h5>
+            <p class="mb-0 small text-white-50 position-relative">Kesempatan Terbatas Hari Ini</p>
+          </div>
+        </div>
+        <div class="modal-body text-center px-4 py-4 bg-light">
+
+          <div class="d-inline-block mb-3 animate__animated animate__pulse animate__infinite">
+            <span class="badge bg-danger rounded-pill px-3 py-2 fs-6 shadow-sm">
+              <i class='bx bxs-hot me-1'></i> Sisa Kuota: <span id="quota-value" class="fw-bold">5</span>
+              Orang
+            </span>
+          </div>
+
+          <h3 class="fw-bold mb-2 text-dark">Potongan Spesial!</h3>
+          <p class="text-muted mb-4 small">Dapatkan harga khusus untuk pendaftaran <b>Basic Plus</b> dan
+            <b>Basic Private</b> sekarang juga.
+          </p>
+
+          <div class="card border-2 border-dashed border-primary bg-white mb-4 position-relative">
+            <div class="card-body p-3">
+              <div class="d-flex align-items-center justify-content-center">
+                <i class='bx bxs-coupon text-warning fs-1 me-3'></i>
+                <div class="text-start">
+                  <h5 class="fw-bold text-primary mb-0 ls-1">HEMAT 40%</h5>
+                  <small class="text-muted" style="font-size: 10px;">Kode Voucher Otomatis</small>
+                </div>
+              </div>
+            </div>
+            <div class="position-absolute top-0 start-50 translate-middle badge bg-primary px-2 py-1 rounded-pill"
+              style="font-size: 10px;">
+              RECOMMENDED
+            </div>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-primary btn-lg fw-bold shadow-sm" id="btnClaimPromo"
+              onclick="claimPromoDiscountBasic()">
+              AMBIL DISKON SEKARANG
+            </button>
+            <button type="button" class="btn btn-link text-muted text-decoration-none btn-sm" data-bs-dismiss="modal">
+              Nanti saja, terima kasih
+            </button>
+          </div>
+
+          <div class="mt-3 text-start">
+            <div class="d-flex align-items-center justify-content-center gap-2">
+              <div class="d-flex align-items-center">
+                <i class='bx bxs-user-circle text-muted me-1'></i>
+                <small class="text-muted fst-italic" style="font-size: 11px;">Budi baru saja
+                  mengklaim</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Referral Benefits Detailed Modal -->
   <div class="modal fade" id="referralDetailedModal" tabindex="-1" aria-hidden="true">
@@ -2934,9 +3077,12 @@
     // Shared State & Constants
     const PROMO_CODE_KEY = 'dialogika_basicplus_promo_code';
     const PROMO_APPLIED_KEY = 'dialogika_basicplus_promo_applied';
-    let DISCOUNT_RATE = 0; // Default 0%
+    const PROMO_EXCLUDED_KEY = 'dialogika_basicplus_promo_excluded_features';
+    const PROMO_MODAL_SEEN_KEY = 'dialogika_basicplus_promo_seen';
+    let DISCOUNT_RATE = 0;
     let DISCOUNT_AMOUNT = 0;
     let REFERRAL_CODE = '';
+    let BASIC_AUTO_REFERRAL = null;
 
     // Initialize Firebase
     if (!firebase.apps.length) {
@@ -3348,6 +3494,48 @@
       }
     }
 
+    function claimPromoDiscountBasic() {
+      if (!BASIC_AUTO_REFERRAL) return;
+      const ref = BASIC_AUTO_REFERRAL;
+      const code = String(ref.code || '').trim();
+      const pct = Number(ref.discountPercent || 0) || 0;
+      const amt = Number(ref.discountAmount || 0) || 0;
+
+      DISCOUNT_RATE = pct > 0 ? pct / 100 : 0;
+      DISCOUNT_AMOUNT = amt > 0 ? amt : 0;
+      REFERRAL_CODE = code;
+
+      const excluded = Array.isArray(ref.excludedFeatures) ? ref.excludedFeatures : [];
+      updateFeaturesDisplay(excluded);
+      try {
+        sessionStorage.setItem(PROMO_EXCLUDED_KEY, JSON.stringify(excluded));
+      } catch (e) {}
+      resetDiscountDOM();
+      applyDiscountToDOM();
+
+      const input = document.getElementById('referral-code');
+      if (input && code) {
+        input.value = code;
+      }
+
+      window.showReferralStatus('valid', 'Kode promo otomatis diterapkan');
+      if (code) {
+        sessionStorage.setItem(PROMO_CODE_KEY, code);
+      }
+      sessionStorage.setItem(PROMO_APPLIED_KEY, 'true');
+
+      const claimBtns = document.querySelectorAll('.claim-discount-btn');
+      claimBtns.forEach(function(btn) {
+        btn.style.display = 'none';
+      });
+
+      const modalEl = document.getElementById('promoDiscountModal');
+      if (typeof bootstrap !== 'undefined' && modalEl) {
+        const inst = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        inst.hide();
+      }
+    }
+
     // Helper: Check if batch is closed
     function isBatchClosed(startDate) {
       if (!startDate || startDate === 'Flexible') return false;
@@ -3503,11 +3691,120 @@
       });
     }
 
+    window.triggerBasicPromoModal = function() {
+      const modalEl = document.getElementById('promoDiscountModal');
+      if (!modalEl || typeof bootstrap === 'undefined') return;
+      const inst = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+      inst.show();
+    };
+
+    async function loadBasicAutoReferral() {
+      try {
+        let basicProductId = null;
+        try {
+          const docSnap = await resolveBasicPlusProductDoc(null);
+          if (docSnap && typeof docSnap.data === 'function') {
+            const d = docSnap.data() || {};
+            basicProductId = String(d.productId || docSnap.id || '').trim();
+          }
+        } catch (e) {
+          console.error('Error resolving basic product for auto referral:', e);
+        }
+
+        const snapshot = await db.collection('settings').doc('referrals').get();
+        if (!snapshot.exists) return null;
+        const data = snapshot.data() || {};
+        const referrals = Array.isArray(data.referrals) ? data.referrals : [];
+        if (!referrals.length) return null;
+
+        const now = Date.now();
+        const candidates = referrals.filter(function(r) {
+          if (!r) return false;
+          const code = String(r.code || '').trim();
+          if (!code) return false;
+          const holder = String(r.holderType || 'system').toLowerCase();
+          if (holder !== 'system') return false;
+          const fType = String(r.functionType || 'discount').toLowerCase();
+          if (fType !== 'discount') return false;
+
+          const createdAtMs = Number(r.createdAtMs || r.createdAt || 0) || 0;
+          const monthsValid = Number(r.monthsValid || 2) || 2;
+          const explicitExpiry = Number(r.expiresAt || 0) || 0;
+          const expiryMs = explicitExpiry || (createdAtMs ? createdAtMs + monthsValid * 30 * 24 * 60 * 60 * 1000 : 0);
+          if (expiryMs && now > expiryMs) return false;
+
+          const maxUsage = Number(r.maxUsage || 0) || 0;
+          const usedCount = Number(r.usedCount || 0) || 0;
+          if (maxUsage && usedCount >= maxUsage) return false;
+
+          const discountPercent = Number(r.discountPercent || 0) || 0;
+          const discountAmount = Number(r.discountAmount || 0) || 0;
+          if (!discountPercent && !discountAmount) return false;
+
+          if (basicProductId) {
+            const targets = Array.isArray(r.products) ? r.products : [];
+            if (targets.length > 0) {
+              const pNorm = basicProductId.toUpperCase();
+              const tNorm = targets.map(function(x) { return String(x || '').trim().toUpperCase(); });
+              if (!tNorm.includes(pNorm)) return false;
+            }
+          }
+
+          return true;
+        });
+
+        if (!candidates.length) return null;
+
+        candidates.sort(function(a, b) {
+          const ap = Number(a.discountPercent || 0) || 0;
+          const bp = Number(b.discountPercent || 0) || 0;
+          if (bp !== ap) return bp - ap;
+          const aa = Number(a.discountAmount || 0) || 0;
+          const ba = Number(b.discountAmount || 0) || 0;
+          return ba - aa;
+        });
+
+        const best = candidates[0];
+        BASIC_AUTO_REFERRAL = best;
+
+        const modalEl = document.getElementById('promoDiscountModal');
+        if (modalEl && best) {
+          const discountLabel = modalEl.querySelector('.fw-bold.text-primary.mb-0');
+          if (discountLabel) {
+            const pct = Number(best.discountPercent || 0) || 0;
+            const amt = Number(best.discountAmount || 0) || 0;
+            let labelText = '';
+            if (pct > 0) {
+              labelText = 'HEMAT ' + pct + '%';
+            } else if (amt > 0) {
+              labelText = 'HEMAT Rp ' + amt.toLocaleString('id-ID');
+            }
+            if (labelText) discountLabel.textContent = labelText;
+          }
+          const quotaEl = document.getElementById('quota-value');
+          if (quotaEl && typeof best.maxUsage !== 'undefined') {
+            const remaining = Math.max((Number(best.maxUsage || 0) || 0) - (Number(best.usedCount || 0) || 0), 0);
+            quotaEl.textContent = String(remaining || 5);
+          }
+          const claimBtns = document.querySelectorAll('.claim-discount-btn');
+          claimBtns.forEach(function(btn) {
+            btn.style.display = 'inline-block';
+          });
+        }
+
+        return best;
+      } catch (e) {
+        console.error('Error loadBasicAutoReferral:', e);
+        return null;
+      }
+    }
+
     function resetUserReferralDiscount() {
       resetDiscountDOM();
       updateFeaturesDisplay([]);
       sessionStorage.removeItem(PROMO_CODE_KEY);
       sessionStorage.removeItem(PROMO_APPLIED_KEY);
+      sessionStorage.removeItem(PROMO_EXCLUDED_KEY);
       DISCOUNT_RATE = 0;
       DISCOUNT_AMOUNT = 0;
       REFERRAL_CODE = '';
@@ -3676,9 +3973,11 @@
           DISCOUNT_AMOUNT = match.discountAmount || 0;
           REFERRAL_CODE = match.code;
           
-          // Apply exclusions
-          updateFeaturesDisplay(match.excludedFeatures || []);
-          
+          const excluded = Array.isArray(match.excludedFeatures) ? match.excludedFeatures : [];
+          updateFeaturesDisplay(excluded);
+          try {
+            sessionStorage.setItem(PROMO_EXCLUDED_KEY, JSON.stringify(excluded));
+          } catch (e) {}
           resetDiscountDOM();
           applyDiscountToDOM();
           window.showReferralStatus('valid', `Kode valid! Diskon diterapkan`);
@@ -3772,12 +4071,43 @@
         referralInput.value = '';
         referralInput.addEventListener('input', (e) => {
           clearTimeout(debounce);
-          if (!e.target.value.trim()) { window.showReferralStatus('reset'); resetUserReferralDiscount(); return; }
+          if (!e.target.value.trim()) {
+            window.showReferralStatus('reset');
+            resetUserReferralDiscount();
+            if (BASIC_AUTO_REFERRAL) {
+              const claimBtns = document.querySelectorAll('.claim-discount-btn');
+              claimBtns.forEach(function(btn) {
+                btn.style.display = 'inline-block';
+              });
+            }
+            return;
+          }
           debounce = setTimeout(() => validateReferral(e.target.value), 600);
         });
       }
 
-      // 3. Schedule Selection Button Logic
+      loadBasicAutoReferral().then(function(ref) {
+        if (!ref) return;
+        const pricingSection = document.getElementById('pricing');
+        const promoModalEl = document.getElementById('promoDiscountModal');
+        if (pricingSection && promoModalEl && !sessionStorage.getItem(PROMO_MODAL_SEEN_KEY) && typeof IntersectionObserver !== 'undefined' && typeof bootstrap !== 'undefined') {
+          const promoModal = new bootstrap.Modal(promoModalEl);
+          const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                setTimeout(function() {
+                  promoModal.show();
+                  sessionStorage.setItem(PROMO_MODAL_SEEN_KEY, 'true');
+                }, 2000);
+                observer.unobserve(entry.target);
+              }
+            });
+          });
+          observer.observe(pricingSection);
+        }
+      });
+
+      // 4. Schedule Selection Button Logic
       const programSelect = document.getElementById('programs');
       const btnSelectSchedule = document.getElementById('btn-select-schedule');
       const programMapping = {
@@ -3820,20 +4150,81 @@
         });
       }
 
-      // 4. Form Submission
+      // 5. Form Submission
       const form = document.getElementById('uploadForm');
       if (form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
+
+          const name = document.getElementById('names').value;
+          const phone = document.getElementById('whatsapp-number').value;
+          const referralCode = document.getElementById('referral-code').value;
+          const programName = programMapping[programSelect.value] || 'Basic Plus Package';
+
+          let basePrice = 0;
+          try {
+            const isPrivate = programName.toLowerCase().includes('private');
+            const priceEl = isPrivate
+              ? document.getElementById('price-basic-plus-private')
+              : document.getElementById('price-basic-class');
+            if (priceEl) {
+              let textSource = priceEl.textContent || '';
+
+              if (priceEl.dataset.discounted && priceEl.dataset.originalHtml) {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = priceEl.dataset.originalHtml;
+                textSource = (tempDiv.textContent || textSource).trim();
+              }
+
+              const match = textSource.match(/IDR\s*([0-9.]+)/i);
+              if (match && match[1]) {
+                basePrice = parseInt(match[1].replace(/\./g, ''), 10) || 0;
+              }
+            }
+          } catch (_) {}
+
           const checkoutData = {
-            name: document.getElementById('names').value,
-            phone: document.getElementById('whatsapp-number').value,
-            program: programMapping[programSelect.value] || 'Basic Plus Package',
+            name: name,
+            phone: phone,
+            program: programName,
             batchName: window._selectedBatchName || '',
             batchSchedule: window._selectedBatchSchedule || '',
+            basePrice: basePrice || undefined,
             discountRate: sessionStorage.getItem(PROMO_APPLIED_KEY) === 'true' ? DISCOUNT_RATE : 0,
-            referralCode: document.getElementById('referral-code').value
+            referralCode: referralCode
           };
+
+          try {
+            const leadDb = firebase.firestore();
+            const leadId = 'LEAD-' + Date.now() + '-' + Math.floor(Math.random() * 9000 + 1000);
+            const now = new Date();
+            const dateStr =
+              now.getFullYear() + '-' +
+              String(now.getMonth() + 1).padStart(2, '0') + '-' +
+              String(now.getDate()).padStart(2, '0') + ' ' +
+              String(now.getHours()).padStart(2, '0') + ':' +
+              String(now.getMinutes()).padStart(2, '0') + ':' +
+              String(now.getSeconds()).padStart(2, '0');
+
+            const leadPayload = {
+              name: name,
+              whatsapp: phone,
+              city: document.getElementById('locations')?.value || '',
+              interest_program: programName.trim(),
+              ads_channel: '',
+              stage: 'LEADS',
+              referral_code: referralCode || '',
+              created_display: dateStr,
+              created_at: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            leadDb.collection('leads').doc(leadId).set(leadPayload);
+            checkoutData.leadId = leadId;
+            console.log('Lead saved to Firestore from basic-class:', leadId);
+          } catch (err) {
+            console.error('Failed to save lead from basic-class:', err);
+          }
+
           localStorage.setItem('dialogika_checkout_data', JSON.stringify(checkoutData));
           form.querySelector('.loading')?.classList.add('d-block');
           setTimeout(() => { window.location.href = 'checkout.html'; }, 1000);

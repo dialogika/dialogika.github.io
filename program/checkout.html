@@ -210,6 +210,12 @@
             color: var(--primary-color);
         }
 
+        .payment-type-btn.disabled,
+        .payment-type-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         /* Payment Grid */
         .payment-grid {
             display: grid;
@@ -1303,10 +1309,43 @@
             let referralCode = checkoutData.referralCode || '';
             let paymentType = 'full'; // 'full' or 'dp'
             let promoDiscount = 0;
+            let excludedFeatures = [];
+            let isDpAllowed = true;
             let batchSchedule = '';
             let batchLocation = '';
             let batchType = '';
             let batchMentor = '';
+
+            // Restore excluded features from sessionStorage (if any)
+            try {
+                const storedExcluded = sessionStorage.getItem('dialogika_basicplus_promo_excluded_features');
+                if (storedExcluded) {
+                    excludedFeatures = JSON.parse(storedExcluded) || [];
+                }
+            } catch (e) {
+                excludedFeatures = [];
+            }
+
+            function updateDpAvailability() {
+                const dpKey = 'fc-feat-7';
+                isDpAllowed = !Array.isArray(excludedFeatures) || !excludedFeatures.includes(dpKey);
+
+                const dpBtn = $('.payment-type-btn[data-type="dp"]');
+                const fullBtn = $('.payment-type-btn[data-type="full"]');
+
+                if (!isDpAllowed) {
+                    dpBtn.prop('disabled', true).addClass('disabled');
+                    if (paymentType === 'dp') {
+                        paymentType = 'full';
+                    }
+                    $('.payment-type-btn').removeClass('active');
+                    fullBtn.addClass('active');
+                } else {
+                    dpBtn.prop('disabled', false).removeClass('disabled');
+                }
+            }
+
+            updateDpAvailability();
 
             // Fetch product data from API (Firestore)
             if (checkoutData.program) {
@@ -1431,6 +1470,10 @@
                                 discountRate = 0; // Use fixed amount instead of percentage
                                 console.log('Referral fixed discount loaded from API: Rp', matchingRef.discountAmount);
                             }
+
+                            if (Array.isArray(matchingRef.excludedFeatures)) {
+                                excludedFeatures = matchingRef.excludedFeatures.slice();
+                            }
                         } else {
                             console.log('Referral code not found or expired:', referralCode);
                             discountRate = 0;
@@ -1440,10 +1483,13 @@
                 } catch (err) {
                     console.error('Error validating referral code:', err);
                 }
+                updateDpAvailability();
                 recalculate();
             }
 
             function recalculate() {
+                updateDpAvailability();
+
                 let discountedBase = basePrice * (1 - discountRate);
                 let finalPrice = discountedBase - promoDiscount;
 

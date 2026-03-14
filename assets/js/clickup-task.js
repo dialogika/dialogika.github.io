@@ -79,8 +79,6 @@ const handleNewTask = async (event) => {
 
   try {
     await createNewTask(listId, taskName, custom_fields, description);
-    // Optionally show a success message here
-    alert("Data berhasil dikirim!");
   } catch (error) {
     console.error("Kesalahan dalam handleNewTask:", error);
     alert(`Terjadi kesalahan. Silakan coba lagi.\n${error.message}`);
