@@ -3695,8 +3695,7 @@
             const PROMO_STORAGE_KEY = 'dialogika_firstkids_promo_claimed';
             const PROMO_CODE_KEY = 'dialogika_firstkids_promo_code';
             const PRODUCT_ID = 'FK_LVL1';
-            let DISCOUNT_RATE = 0.40; // Default 40% Discount
-            let DISCOUNT_AMOUNT = 0; // Fixed discount amount
+            let DISCOUNT_RATE = 0.4; // Default 0% Discount
             let REFERRAL_CODE = '';
             const QUOTA_START = 5;
 
@@ -3815,18 +3814,13 @@
                     if (referral.discountPercent && referral.discountPercent > 0) {
                         DISCOUNT_RATE = referral.discountPercent / 100;
                     }
-                    if (referral.discountAmount && referral.discountAmount > 0) {
-                        DISCOUNT_AMOUNT = referral.discountAmount;
-                    }
 
                     // Store excluded features for later use (only apply when claimed)
                     // Do NOT call updateFeaturesDisplay here - features should only be
                     // crossed out AFTER the user claims the promo
 
                     // Update modal UI with real data
-                    const discountText = referral.discountPercent
-                        ? `HEMAT ${referral.discountPercent}%`
-                        : `HEMAT Rp ${(DISCOUNT_AMOUNT || 0).toLocaleString('id-ID')}`;
+                    const discountText = `HEMAT ${Math.round(DISCOUNT_RATE * 100)}%`;
 
                     const discountLabel = modalEl.querySelector('.fw-bold.text-primary.mb-0');
                     if (discountLabel) {
@@ -3985,12 +3979,7 @@
                         const originalPrice = parseInt(priceMatch[1].replace(/\./g, ''));
 
                         // Calculate new price
-                        let newPrice;
-                        if (DISCOUNT_AMOUNT > 0) {
-                            newPrice = originalPrice - DISCOUNT_AMOUNT;
-                        } else {
-                            newPrice = originalPrice * (1 - DISCOUNT_RATE);
-                        }
+                        let newPrice = originalPrice - (originalPrice * DISCOUNT_RATE);
 
                         // Round to nearest thousands for cleaner price
                         newPrice = Math.ceil(newPrice / 1000) * 1000;
@@ -4170,11 +4159,10 @@
                 let receivedHtml = ''; // Kiri: Yang didapat (Active)
                 let notReceivedHtml = ''; // Kanan: Yang tidak didapat (Excluded)
                 const pct = Math.round(DISCOUNT_RATE * 100);
-                const amt = DISCOUNT_AMOUNT;
 
                 // 1. Fill Left Column (Received) - Discount and Active Features
-                if (pct > 0 || amt > 0) {
-                    const discountText = pct > 0 ? `Potongan ${pct}%` : `Potongan Rp ${amt.toLocaleString('id-ID')}`;
+                if (pct > 0) {
+                    const discountText = `Potongan ${pct}%`;
                     receivedHtml += `
                         <div class="d-flex align-items-center mb-1">
                             <i class='bx bxs-check-circle text-success me-1' style="font-size: 14px;"></i>
@@ -4217,7 +4205,7 @@
                     container.classList.remove('d-none');
                     // Store full list for modal
                     container.dataset.fullBenefits = JSON.stringify({
-                        pct, amt, feats: activeFeats, excluded: excludedFeats
+                        pct, feats: activeFeats, excluded: excludedFeats
                     });
 
                     setTimeout(() => {
@@ -4241,8 +4229,8 @@
                     const data = JSON.parse(container.dataset.fullBenefits || '{}');
                     let html = '';
 
-                    if (data.pct > 0 || data.amt > 0) {
-                        const discountText = data.pct > 0 ? `Potongan Harga ${data.pct}%` : `Potongan Harga Rp ${data.amt.toLocaleString('id-ID')}`;
+                    if (data.pct > 0) {
+                        const discountText = `Potongan Harga ${data.pct}%`;
                         html += `
                             <div class="col-12">
                                 <div class="p-3 rounded-3 bg-primary bg-opacity-10 d-flex align-items-center">
@@ -4344,15 +4332,11 @@
                     if (matchingRef) {
                         // Valid! Apply discount
                         const discountPct = matchingRef.discountPercent || 0;
-                        const discountAmt = matchingRef.discountAmount || 0;
                         const excludedFeatures = matchingRef.excludedFeatures || [];
 
                         // Update global discount settings
                         if (discountPct > 0) {
                             DISCOUNT_RATE = discountPct / 100;
-                        }
-                        if (discountAmt > 0) {
-                            DISCOUNT_AMOUNT = discountAmt;
                         }
                         REFERRAL_CODE = matchingRef.code || code;
 
@@ -4364,7 +4348,7 @@
                         applyDiscountToDOM();
 
                         // Finally update the status (this will also trigger summary update)
-                        const discountInfo = discountPct > 0 ? `Diskon ${discountPct}%` : `Potongan Rp ${discountAmt.toLocaleString('id-ID')}`;
+                        const discountInfo = `Diskon ${discountPct}%`;
                         showReferralStatus('valid', `Kode valid! ${discountInfo} diterapkan`);
 
                         // Store in session last
@@ -4421,7 +4405,6 @@
 
                 // Reset globals
                 DISCOUNT_RATE = 0.40; // Default
-                DISCOUNT_AMOUNT = 0;
                 REFERRAL_CODE = '';
 
                 if (!promoActive) {
