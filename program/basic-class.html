@@ -3501,8 +3501,16 @@
       const pct = Number(ref.discountPercent || 0) || 0;
       const amt = Number(ref.discountAmount || 0) || 0;
 
-      DISCOUNT_RATE = pct > 0 ? pct / 100 : 0;
-      DISCOUNT_AMOUNT = amt > 0 ? amt : 0;
+      if (pct > 0) {
+        DISCOUNT_RATE = pct / 100;
+        DISCOUNT_AMOUNT = 0;
+      } else if (amt > 0) {
+        DISCOUNT_RATE = 0;
+        DISCOUNT_AMOUNT = amt;
+      } else {
+        DISCOUNT_RATE = 0;
+        DISCOUNT_AMOUNT = 0;
+      }
       REFERRAL_CODE = code;
 
       const excluded = Array.isArray(ref.excludedFeatures) ? ref.excludedFeatures : [];
@@ -3969,8 +3977,19 @@
         });
         
         if (match) {
-          DISCOUNT_RATE = (match.discountPercent || 0) / 100 || DISCOUNT_RATE;
-          DISCOUNT_AMOUNT = match.discountAmount || 0;
+          const pct = Number(match.discountPercent || 0) || 0;
+          const amt = Number(match.discountAmount || 0) || 0;
+
+          if (pct > 0) {
+            DISCOUNT_RATE = pct / 100;
+            DISCOUNT_AMOUNT = 0;
+          } else if (amt > 0) {
+            DISCOUNT_RATE = 0;
+            DISCOUNT_AMOUNT = amt;
+          } else {
+            DISCOUNT_RATE = 0;
+            DISCOUNT_AMOUNT = 0;
+          }
           REFERRAL_CODE = match.code;
           
           const excluded = Array.isArray(match.excludedFeatures) ? match.excludedFeatures : [];
