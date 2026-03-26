@@ -1195,6 +1195,10 @@ section {
     position: static;
     margin-top: 10px;
   }
+
+  .course-details .row > .col-lg-8 {
+    display: none;
+  }
 }
 
 .course-details.first-class-layout .referral-alert {
