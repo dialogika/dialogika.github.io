@@ -3825,7 +3825,16 @@
       const code = (document.getElementById('referral-code')?.value || '').trim();
 
       if (!container || !list || !textarea) return;
-      if (!code) { container.classList.add('d-none'); textarea.style.paddingTop = '12px'; return; }
+
+      const hasActiveDiscount = (DISCOUNT_RATE > 0 || DISCOUNT_AMOUNT > 0) &&
+        sessionStorage.getItem(PROMO_APPLIED_KEY) === 'true';
+
+      if (!code || !hasActiveDiscount) {
+        container.classList.add('d-none');
+        textarea.style.paddingTop = '12px';
+        container.dataset.fullBenefits = '';
+        return;
+      }
 
       let activeFeats = [];
       let excludedFeats = [];
@@ -3960,7 +3969,9 @@
         
         const match = referrals.find(r => {
             if ((r.code || '').toUpperCase() !== code) return false;
-            if ((r.holderType || 'system') !== 'user') return false;
+            
+            const holder = String(r.holderType || 'system').toLowerCase();
+            if (holder !== 'user' && holder !== 'system') return false;
             
             // Check expiry
             const createdAt = r.createdAtMs || 0;
@@ -4002,6 +4013,11 @@
           window.showReferralStatus('valid', `Kode valid! Diskon diterapkan`);
           sessionStorage.setItem(PROMO_CODE_KEY, REFERRAL_CODE);
           sessionStorage.setItem(PROMO_APPLIED_KEY, 'true');
+
+          const claimBtns = document.querySelectorAll('.claim-discount-btn');
+          claimBtns.forEach(function(btn) {
+            btn.style.display = 'none';
+          });
         } else {
           window.showReferralStatus('invalid', 'Kode tidak valid, kedaluwarsa, atau habis');
           resetUserReferralDiscount();
