@@ -1512,14 +1512,22 @@
 
                         if (matchingRef) {
                             // Apply the actual discount from Firestore
-                            if (matchingRef.discountPercent && matchingRef.discountPercent > 0) {
-                                discountRate = matchingRef.discountPercent / 100;
-                                console.log('Referral discount loaded from API:', matchingRef.discountPercent + '%');
-                            }
-                            if (matchingRef.discountAmount && matchingRef.discountAmount > 0) {
-                                promoDiscount = matchingRef.discountAmount;
-                                discountRate = 0; // Use fixed amount instead of percentage
-                                console.log('Referral fixed discount loaded from API: Rp', matchingRef.discountAmount);
+                            const pct = Number(matchingRef.discountPercent || 0) || 0;
+                            const amt = Number(matchingRef.discountAmount || 0) || 0;
+
+                            if (pct > 0) {
+                                // Prioritaskan diskon persentase jika tersedia
+                                discountRate = pct / 100;
+                                promoDiscount = 0;
+                                console.log('Referral percentage discount loaded from API:', pct + '%');
+                            } else if (amt > 0) {
+                                // Jika tidak ada persen, baru gunakan nominal
+                                discountRate = 0;
+                                promoDiscount = amt;
+                                console.log('Referral fixed discount loaded from API: Rp', amt);
+                            } else {
+                                discountRate = 0;
+                                promoDiscount = 0;
                             }
 
                             if (Array.isArray(matchingRef.excludedFeatures)) {
@@ -1541,8 +1549,14 @@
             function recalculate() {
                 updateDpAvailability();
 
-                let discountedBase = basePrice * (1 - discountRate);
-                let finalPrice = discountedBase - promoDiscount;
+                let discountedBase = basePrice;
+                if (discountRate > 0) {
+                    discountedBase = basePrice * (1 - discountRate);
+                }
+
+                let finalPrice = discountedBase - (promoDiscount || 0);
+                // Jangan biarkan total bayar menjadi negatif
+                if (finalPrice < 0) finalPrice = 0;
 
                 // DP is always 50% of finalPrice (after discount)
                 downPayment = Math.round(finalPrice * 0.5);
@@ -1563,9 +1577,13 @@
 
                 if (discountRate > 0 || promoDiscount > 0) {
                     $('#row-discount').show();
-                    const discountAmount = discountRate > 0 
-                        ? Math.round(basePrice * discountRate) 
-                        : promoDiscount;
+                    let discountAmount = 0;
+                    if (discountRate > 0) {
+                        discountAmount = Math.round(basePrice * discountRate);
+                    } else if (promoDiscount > 0) {
+                        // Potongan nominal tidak boleh melebihi harga normal
+                        discountAmount = Math.min(promoDiscount, basePrice);
+                    }
                     $('#label-price-discount').text('- Rp ' + discountAmount.toLocaleString('id-ID'));
                 } else {
                     $('#row-discount').hide();
