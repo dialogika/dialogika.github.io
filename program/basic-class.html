@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Basic Plus - Kursus Public Speaking Online | Dialogika</title>
+  <title>Basic Class - Kursus Public Speaking Online | Dialogika</title>
   <meta
     content="Kursus Public Speaking Online selama SEBULAN mulai dari Basic Play ada GARANSI mengulang. Kelas ini hanya ada di Dialogika"
     name="description">
@@ -261,11 +261,11 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Basic Plus</h2>
+          <h2>Basic Class</h2>
           <ol>
             <li><a href="../index.html">Home</a></li>
-            <li><a href="index.html">Program</a></li>
-            <li>Basic Plus</li>
+            <li><a href="index.html">Program</a></li> 
+            <li>Basic Class</li>
           </ol>
         </div>
 
@@ -467,42 +467,172 @@
                 <span id="productMetaSummary" class="text-muted small"></span>
               </div>
 
-              <div class="course-details-list" id="courseSpecificationsList">
-                <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
-                  <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Garansi Mengulang</h6>
-                  <span class="badge bg-success rounded-pill px-3 py-2">1x</span>
+              <div class="mb-3">
+                <ul class="nav nav-pills nav-fill" id="courseInfoTabs">
+                  <li class="nav-item">
+                    <button type="button" class="nav-link active" data-course-tab-target="course-info-basic">
+                      Basic Class
+                    </button>
+                  </li>
+                  <li class="nav-item">
+                    <button type="button" class="nav-link" data-course-tab-target="course-info-plus">
+                      Basic Plus
+                    </button>
+                  </li>
+                </ul>
+                <style>
+                  #courseInfoTabs .nav-link {
+                    border-radius: 999px;
+                    border: 1px solid #d1d5db;
+                    font-weight: 600;
+                    font-size: 13px;
+                    padding: 6px 12px;
+                    cursor: pointer;
+                    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+                  }
+                  #courseInfoTabs .nav-link:not(.active) {
+                    background-color: #ffffff;
+                    color: #0b2b6a;
+                  }
+                  #courseInfoTabs .nav-link.active {
+                    background-color: #0b2b6a;
+                    color: #ffffff;
+                    box-shadow: 0 4px 10px rgba(11, 43, 106, 0.25);
+                  }
+                  #courseInfoTabs .nav-link:hover {
+                    transform: translateY(-1px);
+                    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.2);
+                  }
+                </style>
+              </div>
+
+              <div class="course-details-list">
+                <div id="course-info-basic" class="course-info-pane">
+                  <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                    <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Garansi Mengulang</h6>
+                    <span class="badge bg-success rounded-pill px-3 py-2">1x</span>
+                  </div>
+                  <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                    <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Sistem Pembayaran</h6>
+                    <span class="text-muted d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                      <i class='bx bx-x-circle' style="color:#E71B2B; margin-right:4px;"></i>
+                      <span style="text-decoration: line-through;">DP &amp; Cicilan</span>
+                    </span>
+                  </div>
+                  <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                    <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Recording</h6>
+                    <span class="text-muted d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                      <i class='bx bx-x-circle' style="color:#E71B2B; margin-right:4px;"></i>
+                      <span style="text-decoration: line-through;">Tidak tersedia</span>
+                    </span>
+                  </div>
+                  <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                    <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Sertifikat</h6>
+                    <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                      <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                      <span>e-Certificate</span>
+                    </span>
+                  </div>
+                  <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                    <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Materi Pembelajaran</h6>
+                    <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                      <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                      <span>Lengkap</span>
+                    </span>
+                  </div>
+                  <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                    <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Gratis Webinar</h6>
+                    <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                      <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                      <span>Setiap Bulan</span>
+                    </span>
+                  </div>
+                  <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                    <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">E-book & Modul</h6>
+                    <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                      <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                      <span>Dapat Akses</span>
+                    </span>
+                  </div>
+                  <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                    <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Bahasa</h6>
+                    <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                      <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                      <span>Indonesia</span>
+                    </span>
+                  </div>
+                  <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                    <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Pelaksanaan</h6>
+                    <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                      <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                      <span>Online (Zoom)</span>
+                    </span>
+                  </div>
                 </div>
-                <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
-                  <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Sistem Pembayaran</h6>
-                  <span class="fw-bold text-dark" style="font-size: 14px;">DP & Cicilan</span>
-                </div>
-                <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
-                  <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Recording</h6>
-                  <span class="fw-bold text-dark" style="font-size: 14px;">Tersedia</span>
-                </div>
-                <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
-                  <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Sertifikat</h6>
-                  <span class="fw-bold text-dark" style="font-size: 14px;">e-Certificate</span>
-                </div>
-                <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
-                  <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Materi Pembelajaran</h6>
-                  <span class="fw-bold text-dark" style="font-size: 14px;">Lengkap</span>
-                </div>
-                <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
-                  <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Gratis Webinar</h6>
-                  <span class="fw-bold text-dark" style="font-size: 14px;">Setiap Bulan</span>
-                </div>
-                <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
-                  <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">E-book & Modul</h6>
-                  <span class="fw-bold text-dark" style="font-size: 14px;">Dapat Akses</span>
-                </div>
-                <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
-                  <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Bahasa</h6>
-                  <span class="fw-bold text-dark" style="font-size: 14px;">Indonesia</span>
-                </div>
-                <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
-                  <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Pelaksanaan</h6>
-                  <span class="fw-bold text-dark" style="font-size: 14px;">Online (Zoom)</span>
+
+                <div id="course-info-plus" class="course-info-pane d-none">
+                  <div id="courseSpecificationsList">
+                    <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                      <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Garansi Mengulang</h6>
+                      <span class="badge bg-success rounded-pill px-3 py-2">3x</span>
+                    </div>
+                    <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                      <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Sistem Pembayaran</h6>
+                      <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                        <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                        <span>DP &amp; Cicilan</span>
+                      </span>
+                    </div>
+                    <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                      <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Recording</h6>
+                      <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                        <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                        <span>Tersedia</span>
+                      </span>
+                    </div>
+                    <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                      <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Sertifikat</h6>
+                      <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                        <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                        <span>e-Certificate</span>
+                      </span>
+                    </div>
+                    <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                      <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Materi Pembelajaran</h6>
+                      <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                        <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                        <span>Lengkap</span>
+                      </span>
+                    </div>
+                    <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                      <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Gratis Webinar</h6>
+                      <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                        <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                        <span>Setiap Bulan</span>
+                      </span>
+                    </div>
+                    <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                      <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">E-book & Modul</h6>
+                      <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                        <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                        <span>Dapat Akses</span>
+                      </span>
+                    </div>
+                    <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                      <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Bahasa</h6>
+                      <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                        <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                        <span>Indonesia</span>
+                      </span>
+                    </div>
+                    <div class="course-info-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                      <h6 class="mb-0 text-muted fw-bold" style="font-size: 14px;">Pelaksanaan</h6>
+                      <span class="fw-bold text-dark d-flex align-items-center justify-content-end" style="font-size: 14px;">
+                        <i class='bx bxs-check-circle' style="color:#009961; margin-right:4px;"></i>
+                        <span>Online (Zoom)</span>
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -4093,6 +4223,61 @@
       loadLearningMaterials();
       loadProductSpecifications();
       setupBasicProductRealtime();
+      const infoTabButtons = document.querySelectorAll('#courseInfoTabs .nav-link');
+      const infoPanes = document.querySelectorAll('.course-info-pane');
+      infoTabButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const targetId = btn.getAttribute('data-course-tab-target');
+          infoTabButtons.forEach(function(b) {
+            b.classList.remove('active');
+          });
+          btn.classList.add('active');
+          infoPanes.forEach(function(pane) {
+            pane.classList.add('d-none');
+          });
+          const target = document.getElementById(targetId);
+          if (target) target.classList.remove('d-none');
+
+          const mainBasicBtn = document.getElementById('basic-package-tab');
+          const mainPlusBtn = document.getElementById('basicplus-package-tab');
+          if (targetId === 'course-info-basic' && mainBasicBtn) {
+            mainBasicBtn.click();
+          } else if (targetId === 'course-info-plus' && mainPlusBtn) {
+            mainPlusBtn.click();
+          }
+        });
+      });
+
+      const mainBasicBtn = document.getElementById('basic-package-tab');
+      const mainPlusBtn = document.getElementById('basicplus-package-tab');
+      const upperBasicTab = document.querySelector('#courseInfoTabs .nav-link[data-course-tab-target="course-info-basic"]');
+      const upperPlusTab = document.querySelector('#courseInfoTabs .nav-link[data-course-tab-target="course-info-plus"]');
+      if (mainBasicBtn && upperBasicTab) {
+        mainBasicBtn.addEventListener('click', function() {
+          infoTabButtons.forEach(function(b) {
+            b.classList.remove('active');
+          });
+          upperBasicTab.classList.add('active');
+          infoPanes.forEach(function(pane) {
+            pane.classList.add('d-none');
+          });
+          const target = document.getElementById('course-info-basic');
+          if (target) target.classList.remove('d-none');
+        });
+      }
+      if (mainPlusBtn && upperPlusTab) {
+        mainPlusBtn.addEventListener('click', function() {
+          infoTabButtons.forEach(function(b) {
+            b.classList.remove('active');
+          });
+          upperPlusTab.classList.add('active');
+          infoPanes.forEach(function(pane) {
+            pane.classList.add('d-none');
+          });
+          const target = document.getElementById('course-info-plus');
+          if (target) target.classList.remove('d-none');
+        });
+      }
       // 1. Hero Class Availability
       loadClassAvailable();
 
