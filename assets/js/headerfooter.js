@@ -593,7 +593,7 @@ function saveSubscriptionEmail(email) {
         return db.collection("subscription_email").add({
           email: normalizedEmail,
           createdAt: formatTimestampGMT7(new Date()),
-          source: "footer"
+          // source: "footer"
         });
       });
   });

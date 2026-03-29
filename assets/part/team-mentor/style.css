@@ -20,8 +20,10 @@
 .member-details-triangle > div {
 	background-color: #ddd;
 	margin: 5px;
-	box-shadow: 0 6px 12px rgba(11, 43, 106, 0.32);
+	border-radius: 8px;
+	box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
 }
+
 .member-details-triangle img {
 	transform: rotate(45deg) translate(0, 15px) scale(1.2);
 	display: block;
