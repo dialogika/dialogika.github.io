@@ -282,13 +282,15 @@ class Footer extends HTMLElement {
             </a>
             <ul class="accordion-collapse collapse show" id="footer-online-program" data-bs-parent=".footer-links">
               <li><i class="bx bx-chevron-right"></i>
-                <a href="../program/basic-class.html">Basic Class</a>
+                <a href="../program/basic-plus.html">Basic Plus
+                  <span class="badge rounded-pill text-bg-info">Best Selling</span>
+                </a>
               </li>
               <li><i class="bx bx-chevron-right"></i>
-                <a href="../program/basic-plus.html">Basic Plus</a>
+                <a href="../program/kids-plus.html">Kids Plus</a>
               </li>
               <li><i class="bx bx-chevron-right"></i>
-                <a href="../program/kids-class.html">Kids Class</a>
+                <a href="../program/kids-private.html">Kids Private</a>
               </li>
             </ul>
           </div><br>
@@ -299,7 +301,9 @@ class Footer extends HTMLElement {
             </a>
             <ul class="accordion-collapse collapse show" id="footer-offline-program">
               <li><i class="bx bx-chevron-right"></i>
-                <a href="../program/index-jogja.html">Jogja</a>
+                <a href="../program/index-jogja.html">Yogyakarta
+                  <span class="badge rounded-pill text-bg-info">Best Selling</span>
+                </a>
               </li>
               <li><i class="bx bx-chevron-right"></i>
                 <a href="../program/index.html">Jakarta</a>
@@ -313,6 +317,43 @@ class Footer extends HTMLElement {
             </ul>
           </div><br>
 
+          <div>
+            <a href="#footer-about" class="d-flex justify-content-between" data-bs-toggle="collapse"
+              id="footer-accordion-about">
+              <h4>About</h4><i class='bx bx-chevron-down d-md-none'></i>
+            </a>
+            <ul class="accordion-collapse collapse show" id="footer-about" data-bs-parent=".footer-links">
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="https://www.dialogika.co/about">About</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="https://www.dialogika.co/help/payment">FAQ</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="https://www.dialogika.co/help/">Help Center</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../about/terms.html">Terms & Agreement</a>
+              </li>
+            </ul><br/>
+          </div>
+
+          <div>
+            <a href="#footer-useful-link" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion-useful">
+              <h4>Useful Links</h4><i class='bx bx-chevron-down d-md-none'></i>
+            </a>
+            <ul class="accordion-collapse collapse show" id="footer-useful-link" data-bs-parent=".footer-links">
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../blog/index.html">Blog</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../mentor/index.html">Mentor</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links">
           <div>
             <a href="#footer-corporate-program" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion-corporate">
               <h4>Corporate Program</h4><i class='bx bx-chevron-down d-md-none'></i>
@@ -332,43 +373,6 @@ class Footer extends HTMLElement {
               </li>
             </ul>
           </div><br>
-
-          <div>
-            <a href="#footer-useful-link" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion-useful">
-              <h4>Useful Links</h4><i class='bx bx-chevron-down d-md-none'></i>
-            </a>
-            <ul class="accordion-collapse collapse show" id="footer-useful-link" data-bs-parent=".footer-links">
-              <li><i class="bx bx-chevron-right"></i>
-                <a href="../blog/index.html">Blog</a>
-              </li>
-              <li><i class="bx bx-chevron-right"></i>
-                <a href="../mentor/index.html">Mentor</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 footer-links">
-          <div>
-            <a href="#footer-about" class="d-flex justify-content-between" data-bs-toggle="collapse"
-              id="footer-accordion-about">
-              <h4>About</h4><i class='bx bx-chevron-down d-md-none'></i>
-            </a>
-            <ul class="accordion-collapse collapse show" id="footer-about" data-bs-parent=".footer-links">
-              <li><i class="bx bx-chevron-right"></i>
-                <a href="https://www.dialogika.co/help/payment">FAQ</a>
-              </li>
-              <li><i class="bx bx-chevron-right"></i>
-                <a href="https://www.dialogika.co/help/">Help Center</a>
-              </li>
-              <li><i class="bx bx-chevron-right"></i>
-                <a href="https://www.dialogika.co/policy/">Privacy Policy</a>
-              </li>
-              <li><i class="bx bx-chevron-right"></i>
-                <a href="../about/terms.html">Terms & Agreement</a>
-              </li>
-            </ul><br/>
-          </div>
           <div>
             <div class="footer-recent-post align-items-center">
               <h4>Instagram Post <i class='bx bx-chevron-down d-md-none'></i></h4>

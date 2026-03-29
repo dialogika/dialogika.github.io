@@ -3216,8 +3216,21 @@ section {
 #footer .footer-top .footer-links ul a {
   color: #fff;
   transition: 0.3s;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  line-height: 1.1;
+}
+
+#footer .footer-top .footer-links ul a .badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: clamp(8px, 2.4vw, 11px);
   line-height: 1;
+  padding: 0.2em 0.5em;
+  flex: 0 1 auto;
 }
 
 #footer .footer-top .footer-links ul a:hover {
