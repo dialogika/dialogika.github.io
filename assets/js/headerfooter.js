@@ -506,8 +506,14 @@ class Footer extends HTMLElement {
                 emailInput.value = "";
               }
             })
-            .catch(function () {
+            .catch(function (error) {
               if (messageElement) {
+                if (error && error.code === "email-exists") {
+                  messageElement.textContent = "Email sudah terdaftar";
+                  messageElement.classList.remove("text-success");
+                  messageElement.classList.add("text-danger");
+                  return;
+                }
                 messageElement.textContent = "Terjadi kesalahan saat menyimpan email";
                 messageElement.classList.remove("text-success");
                 messageElement.classList.add("text-danger");
@@ -573,13 +579,36 @@ function getFirestoreInstance() {
 }
 
 function saveSubscriptionEmail(email) {
+  var normalizedEmail = email.toLowerCase();
   return getFirestoreInstance().then(function (db) {
-    return db.collection("subscription_email").add({
-      email: email,
-      createdAt: new Date().toISOString(),
-      source: "footer"
-    });
+    return db
+      .collection("subscription_email")
+      .where("email", "==", normalizedEmail)
+      .limit(1)
+      .get()
+      .then(function (snapshot) {
+        if (!snapshot.empty) {
+          return Promise.reject({ code: "email-exists" });
+        }
+        return db.collection("subscription_email").add({
+          email: normalizedEmail,
+          createdAt: formatTimestampGMT7(new Date()),
+          source: "footer"
+        });
+      });
   });
+}
+
+function formatTimestampGMT7(date) {
+  var offsetMs = 7 * 60 * 60 * 1000;
+  var gmt7Date = new Date(date.getTime() + offsetMs);
+  var year = gmt7Date.getUTCFullYear();
+  var month = String(gmt7Date.getUTCMonth() + 1).padStart(2, "0");
+  var day = String(gmt7Date.getUTCDate()).padStart(2, "0");
+  var hours = String(gmt7Date.getUTCHours()).padStart(2, "0");
+  var minutes = String(gmt7Date.getUTCMinutes()).padStart(2, "0");
+  var seconds = String(gmt7Date.getUTCSeconds()).padStart(2, "0");
+  return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds + " GMT+7";
 }
 
 customElements.define("main-header", Header);
