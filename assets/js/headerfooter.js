@@ -225,262 +225,357 @@ class Footer extends HTMLElement {
     super();
   }
   connectedCallback() {
-    this.innerHTML = `
+    let footerElement = document.querySelector("footer");
+    if (!footerElement) {
+      footerElement = document.createElement("footer");
+      footerElement.id = "footer";
+      this.appendChild(footerElement);
+    }
+    footerElement.innerHTML = `
   
   <!-- ======= Footer ======= -->
-  <footer id="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row justify-content-between">
 
-    <div class="footer-top">
-      <div class="container">
-        <div class="row justify-content-between">
-
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3><img src="../assets/img/white-logo.webp" class="footer-logo" alt="Kelas Public Speaking Jogja" /></h3>
-            <p>
-              Wadah pengembangan diri membangun aura positif sekaligus meningkatkan kualitas skill, karir hingga level
-              kehidupan Anda.
-            </p><br>
-            <p>Kami memberikan pelatihan Kelas Public Speaking karena dengan menguasai Public Speaking, mental,
-              perilaku, penampilan hingga sikap Anda terbentuk.</p><br>
-            <h4 class="d-flex justify-content-between">Contact Us<i class='bx bx-chevron-down d-md-none'></i></h4>
-            <div class="social-link d-flex mt-3">
-              <a href="https://https://wa.me/6285162992597"
-                class="text-light d-flex align-items-center justify-content-center"><i class="bx bxl-whatsapp"></i></a>
-              <a href="mailto:hello@dialogika.co" class="d-flex align-items-center justify-content-center"><i
-                  class="bi bi-envelope-at-fill"></i></a>
-            </div>
-            <hr />
-            <p>Punya pertanyaan mengenai Dialogika?</p>
-            <br>
-            <p>
-
-              <strong>Phone:</strong> +62 851-6299-2597<br>
-              <strong>Email:</strong> hello@dialogika.co<br>
-            </p>
-            <br><br>
-            <h4 class="d-flex justify-content-between">Follow Us<i class='bx bx-chevron-down d-md-none'></i></h4>
-            <div class="social-link d-flex mt-3">
-              <a href="https://x.com/dialogika_co" class="d-flex align-items-center justify-content-center"><i
-                  class="bi bi-twitter"></i></a>
-              <a href="https://www.facebook.com/dialogika.co" class="d-flex align-items-center justify-content-center"><i
-                  class="bi bi-facebook"></i></a>
-              <a href="https://instagram.com/dialogika.co" class="d-flex align-items-center justify-content-center"><i
-                  class="bi bi-instagram"></i></a>
-              <a href="https://www.linkedin.com/company/dialogika" class="d-flex align-items-center justify-content-center"><i
-                  class="bi bi-linkedin"></i></a>
-            </div>
+        <div class="col-lg-3 col-md-6 footer-contact">
+          <h3><img src="../assets/img/white-logo.webp" class="footer-logo" alt="Kelas Public Speaking Jogja" /></h3>
+          <p>
+            Wadah pengembangan diri membangun aura positif sekaligus meningkatkan kualitas skill, karir hingga level
+            kehidupan Anda.
+          </p><br>
+          <p>Kami memberikan pelatihan Kelas Public Speaking karena dengan menguasai Public Speaking, mental,
+            perilaku, penampilan hingga sikap Anda terbentuk.</p><br>
+          <h4 class="d-flex justify-content-between">Contact Us<i class='bx bx-chevron-down d-md-none'></i></h4>
+          <div class="social-link d-flex mt-3">
+            <a href="https://wa.me/6285162992597"
+              class="text-light d-flex align-items-center justify-content-center"><i class="bx bxl-whatsapp"></i></a>
+            <a href="mailto:hello@dialogika.co" class="d-flex align-items-center justify-content-center"><i
+                class="bi bi-envelope-at-fill"></i></a>
           </div>
-
-          <div class="col-lg-2 col-md-6 footer-links accordion">
-
-            <div class="">
-              <a href="#footer-best-program" class="d-flex justify-content-between " data-bs-toggle="collapse" id="footer-accordion">
-                <h4>Online Program</h4><i class='bx bx-chevron-down d-md-none'></i>
-              </a>
-              <ul class="accordion-collapse collapse show" id="footer-best-program" data-bs-parent=".footer-links">
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../program/basic-plus.html">
-                    Basic Plus
-                    <span class="badge rounded-pill text-bg-info">Best Selling</span>
-                  </a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../program/kids-plus.html">Kids Plus</a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../program/basic-private.html">Basic Private</a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../program/kids-private.html">Kids Private</a>
-                </li>
-              </ul>
-            </div><br>
-
-            <div class="">
-              <a href="#footer-corporate-program" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion">
-                <h4>Offline Program</h4><i class='bx bx-chevron-down d-md-none'></i>
-              </a>
-              <ul class="accordion-collapse collapse show" id="footer-corporate-program">
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../program/index-jogja.html">
-                    Yogyakarta
-                    <span class="badge rounded-pill text-bg-info">Best Selling</span>
-                  </a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../corporate/index.html">Corporate</a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../program/index-tangsel.html">
-                    Bintaro
-                    <span class="badge rounded-pill text-bg-warning">Private Only</span>
-                  </a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="https://www.dialogika.co/page/kelas-public-speaking-surabaya-new">Surabaya
-                </li>
-              </ul>
-            </div><br>
-
-            <div class="">
-              <a href="#footer-private-program" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion">
-                <h4>Kids Program</h4><i class='bx bx-chevron-down d-md-none'></i>
-              </a>
-              <ul class="accordion-collapse collapse show" id="footer-private-program" data-bs-parent=".footer-links">
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../program/kids-plus.html">Online Class</a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../program/first-kids.html">Offline Class</a>
-                </li>
-              </ul>
-            </div><br>
-
-
-            <div class="">
-              <a href="#footer-career-info" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion">
-                <h4>Recruitment</h4><i class='bx bx-chevron-down d-md-none'></i>
-              </a>
-              <ul class="accordion-collapse collapse show" id="footer-career-info" data-bs-parent=".footer-links">
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../mentor/registration.html">Mentor</a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../intern/index.html">Internship</a>
-                </li>
-              </ul>
-              <br>
-            </div>
-
-            <div class="">
-              <a href="#footer-useful-link" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion">
-                <h4>Useful Link</h4><i class='bx bx-chevron-down d-md-none'></i>
-              </a>
-              <ul class="accordion-collapse collapse show" id="footer-useful-link" data-bs-parent=".footer-links">
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../blog/index.html">Blog Dialogika</a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../mentor/index.html">Mentor Dialogika</a>
-                </li>
-              </ul>
-            </div>
+          <hr />
+          <p>Punya pertanyaan mengenai Dialogika?</p>
+          <br>
+          <p>
+            <strong>Phone:</strong> +62 851-6299-2597<br>
+            <strong>Email:</strong> hello@dialogika.co<br>
+          </p>
+          <br><br>
+          <h4 class="d-flex justify-content-between">Follow Us<i class='bx bx-chevron-down d-md-none'></i></h4>
+          <div class="social-link d-flex mt-3">
+            <a href="https://x.com/dialogika_co" class="d-flex align-items-center justify-content-center"><i
+                class="bi bi-twitter"></i></a>
+            <a href="https://www.facebook.com/dialogika.co" class="d-flex align-items-center justify-content-center"><i
+                class="bi bi-facebook"></i></a>
+            <a href="https://instagram.com/dialogika.co" class="d-flex align-items-center justify-content-center"><i
+                class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/dialogika" class="d-flex align-items-center justify-content-center"><i
+                class="bi bi-linkedin"></i></a>
           </div>
+        </div>
 
-          <div class="col-lg-3 col-md-6 footer-links">
-            <div class="">
-              <a href="#footer-about-dialogika" class="d-flex justify-content-between" data-bs-toggle="collapse"
-                id="footer-accordion">
-                <h4>About Dialogika</h4><i class='bx bx-chevron-down d-md-none'></i>
-              </a>
-              <ul class="accordion-collapse collapse show" id="footer-about-dialogika" data-bs-parent=".footer-links">
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="https://www.dialogika.co/about">About Us</a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="https://www.dialogika.co/help/payment">Frequent Asked Question</a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="https://www.dialogika.co/help/">Help Center</a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="https://www.dialogika.co/policy/">Privacy Policy</a>
-                </li>
-                <li><i class="bx bx-chevron-right"></i>
-                  <a href="../about/terms.html">Terms & Agreements</a>
-                </li>
-              </ul><br/>
-            </div>
-            <div class="">
-              <div class="footer-recent-post align-items-center">
-                <h4>Instagram Post <i class='bx bx-chevron-down d-md-none'></i></h4>
-                <ul>
-                  <li class="clearfix">
-                    <img loading="lazy" src="../assets/img/ig/1.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
-                    <div class="post float-left">
-                      <a target="__blank" href="https://www.instagram.com/p/Claa6CPISTB/">Gambaran kelas praktek public speaking secara offline</a>
-                      <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Nov 26, 2022</div>
-                    </div>
-                  </li>
-                  <hr/>
-                  <li class="clearfix">
-                    <img loading="lazy" src="../assets/img/ig/2.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
-                    <div class="post float-left">
-                      <a target="__blank" href="https://www.instagram.com/p/CyXfjtkrJe7/">Tips-tips agar di notice dosen didalam kelas dan latihan membangun persona.</a>
-                      <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 14, 2023</div>
-                    </div>
-                  </li>
-                  <hr/>
-                  <li class="clearfix">
-                    <img loading="lazy" src="../assets/img/ig/3.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
-                    <div class="post float-left">
-                      <a target="__blank" href="https://www.instagram.com/p/CzAf73qr2mj/">5 tips jitu atasi otak yang ngeblank saat berbicara di depan umum</a>
-                      <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 30, 2023</div>
-                    </div>
-                  </li>
-                  <hr/>
-                  <li class="clearfix">
-                    <img loading="lazy" src="../assets/img/ig/4.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
-                    <div class="post float-left">
-                      <a target="__blank" href="blog-details.html">5 trik untuk para newbie agar viral di depan umum. (Cocok untuk konten creator)</a>
-                      <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Nov 2, 2023</div>
-                    </div>
-                  </li>
-                </ul>
-              </div> <!-- /.footer-recent-post -->
-            </div>
-          </div>
+        <div class="col-lg-2 col-md-6 footer-links accordion">
 
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4 class="d-flex justify-content-between">Join Whatsapp Group Community<i
-                class='bx bx-chevron-down d-md-none'></i></h4>
-            <p>Secara Berkala Kami Akan Bagi-Bagi Tips & Trik Gratis, Dan Info Promo Lainnya</p>
-            <form action="javascript:void" role="form" id="subcriptions" method="post">
-              <input type="tel" name="Surel" class="custom-input-footer" placeholder="Join Our Class Group" disabled>
-              <button type="button" data-bs-toggle="modal" data-bs-target="#footerSubModal" class="blue-dialogika-btn footerSubBtn">Gabung</button>
-            </form>
-            <br><br>
-            <h4 class="d-flex justify-content-between">Payment Method<i class='bx bx-chevron-down d-md-none'></i></h4>
-            <p><i class="bx bx-chevron-down"></i> Bank Transfer</p>
-            <img loading="lazy" src="../assets/img/bank.webp" style="width:100%;"/>
-            <br><br>
-            <p><i class="bx bx-chevron-down"></i> E-Wallet</p>
-            <img loading="lazy" src="../assets/img/wallet.webp" style="width:100%;"/>
+          <div>
+            <a href="#footer-online-program" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion-online">
+              <h4>Online Program</h4><i class='bx bx-chevron-down d-md-none'></i>
+            </a>
+            <ul class="accordion-collapse collapse show" id="footer-online-program" data-bs-parent=".footer-links">
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../program/basic-class.html">Basic Class</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../program/basic-plus.html">Basic Plus</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../program/kids-class.html">Kids Class</a>
+              </li>
+            </ul>
+          </div><br>
 
-            <ul class="list-group border-warning" style="background: transparent;">
-              <li class="list-group-item">
-                <b>Telah Terdaftar Oleh</b><br>
-                <img loading="lazy" src="../assets/img/ham.webp" class="" /><br>
-                <strong>Nomor:</strong> AHU-0118640.AH.01.11.TAHUN 2022<br>
-                <strong>Registrasi: </strong>4022062334106037<br />
+          <div>
+            <a href="#footer-offline-program" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion-offline">
+              <h4>Offline Program</h4><i class='bx bx-chevron-down d-md-none'></i>
+            </a>
+            <ul class="accordion-collapse collapse show" id="footer-offline-program">
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../program/index-jogja.html">Jogja</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../program/index.html">Jakarta</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../program/index-tangsel.html">Bintaro</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="https://www.dialogika.co/page/kelas-public-speaking-surabaya-new">Surabaya</a>
+              </li>
+            </ul>
+          </div><br>
+
+          <div>
+            <a href="#footer-corporate-program" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion-corporate">
+              <h4>Corporate Program</h4><i class='bx bx-chevron-down d-md-none'></i>
+            </a>
+            <ul class="accordion-collapse collapse show" id="footer-corporate-program" data-bs-parent=".footer-links">
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../corporate/">Effective Communication</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../corporate/">Service Excellence</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../corporate/">Sales Training</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../corporate/">Tour Guide Training</a>
+              </li>
+            </ul>
+          </div><br>
+
+          <div>
+            <a href="#footer-useful-link" class="d-flex justify-content-between" data-bs-toggle="collapse" id="footer-accordion-useful">
+              <h4>Useful Links</h4><i class='bx bx-chevron-down d-md-none'></i>
+            </a>
+            <ul class="accordion-collapse collapse show" id="footer-useful-link" data-bs-parent=".footer-links">
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../blog/index.html">Blog</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../mentor/index.html">Mentor</a>
               </li>
             </ul>
           </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container d-md-flex py-4">
-
-      <div class="me-md-auto text-center text-md-start">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Dialogika</span></strong> | PT. Dialogika Persona Indonesia
         </div>
 
-      </div>
-      <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="https://x.com/dialogika_co" class="twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter"></i></a>
-        <a href="https://www.facebook.com/dialogika.co" class="facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
-        <a href="https://instagram.com/dialogika.co" class="instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
-        <a href="https://wa.me/6285162992597" class="google-plus" target="_blank" rel="noopener noreferrer"><i class="bx bxl-whatsapp"></i></a>
-        <a href="https://linkedin.com/company/dialogika" class="linkedin" target="_blank" rel="noopener noreferrer"><i class="bx bxl-linkedin"></i></i></a>
+        <div class="col-lg-3 col-md-6 footer-links">
+          <div>
+            <a href="#footer-about" class="d-flex justify-content-between" data-bs-toggle="collapse"
+              id="footer-accordion-about">
+              <h4>About</h4><i class='bx bx-chevron-down d-md-none'></i>
+            </a>
+            <ul class="accordion-collapse collapse show" id="footer-about" data-bs-parent=".footer-links">
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="https://www.dialogika.co/help/payment">FAQ</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="https://www.dialogika.co/help/">Help Center</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="https://www.dialogika.co/policy/">Privacy Policy</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="../about/terms.html">Terms & Agreement</a>
+              </li>
+            </ul><br/>
+          </div>
+          <div>
+            <div class="footer-recent-post align-items-center">
+              <h4>Instagram Post <i class='bx bx-chevron-down d-md-none'></i></h4>
+              <ul>
+                <li class="clearfix">
+                  <img loading="lazy" src="../assets/img/ig/1.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                  <div class="post float-left">
+                    <a target="__blank" href="https://www.instagram.com/p/Claa6CPISTB/">Gambaran kelas praktek public speaking secara offline</a>
+                    <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Nov 26, 2022</div>
+                  </div>
+                </li>
+                <hr/>
+                <li class="clearfix">
+                  <img loading="lazy" src="../assets/img/ig/2.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                  <div class="post float-left">
+                    <a target="__blank" href="https://www.instagram.com/p/CyXfjtkrJe7/">Tips-tips agar di notice dosen didalam kelas dan latihan membangun persona.</a>
+                    <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 14, 2023</div>
+                  </div>
+                </li>
+                <hr/>
+                <li class="clearfix">
+                  <img loading="lazy" src="../assets/img/ig/3.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                  <div class="post float-left">
+                    <a target="__blank" href="https://www.instagram.com/p/CzAf73qr2mj/">5 tips jitu atasi otak yang ngeblank saat berbicara di depan umum</a>
+                    <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 30, 2023</div>
+                  </div>
+                </li>
+                <hr/>
+                <li class="clearfix">
+                  <img loading="lazy" src="../assets/img/ig/4.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                  <div class="post float-left">
+                    <a target="__blank" href="blog-details.html">5 trik untuk para newbie agar viral di depan umum. (Cocok untuk konten creator)</a>
+                    <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Nov 2, 2023</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 footer-newsletter">
+          <h4 class="d-flex justify-content-between">Subscribe<i
+              class='bx bx-chevron-down d-md-none'></i></h4>
+          <p>Dapatkan update program, tips public speaking, dan info promo terbaru dari Dialogika melalui email.</p>
+          <form action="javascript:void(0)" role="form" id="subscriptionForm" method="post">
+            <input
+              type="email"
+              id="footerEmail"
+              name="email"
+              class="custom-input-footer"
+              placeholder="Masukkan email kamu"
+            >
+            <button
+              type="button"
+              class="blue-dialogika-btn"
+              id="footerSubscribeButton"
+            >
+              Subscribe
+            </button>
+          </form>
+          <div id="footerSubscribeMessage" class="mt-2 small"></div>
+          <br><br>
+          <h4 class="d-flex justify-content-between">Payment Method<i class='bx bx-chevron-down d-md-none'></i></h4>
+          <p><i class="bx bx-chevron-down"></i> Bank Transfer</p>
+          <img loading="lazy" src="../assets/img/bank.webp" style="width:100%;"/>
+          <br><br>
+          <p><i class="bx bx-chevron-down"></i> E-Wallet</p>
+          <img loading="lazy" src="../assets/img/wallet.webp" style="width:100%;"/>
+
+          <ul class="list-group border-warning" style="background: transparent;">
+            <li class="list-group-item">
+              <b>Telah Terdaftar Oleh</b><br>
+              <img loading="lazy" src="../assets/img/ham.webp" class="" /><br>
+              <strong>Nomor:</strong> AHU-0118640.AH.01.11.TAHUN 2022<br>
+              <strong>Registrasi: </strong>4022062334106037<br />
+            </li>
+          </ul>
+        </div>
+
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </div>
+
+  <div class="container d-md-flex py-4">
+
+    <div class="me-md-auto text-center text-md-start">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Dialogika</span></strong> | PT. Dialogika Persona Indonesia
+      </div>
+
+    </div>
+    <div class="social-links text-center text-md-right pt-3 pt-md-0">
+      <a href="https://x.com/dialogika_co" class="twitter" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter"></i></a>
+      <a href="https://www.facebook.com/dialogika.co" class="facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+      <a href="https://instagram.com/dialogika.co" class="instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+      <a href="https://wa.me/6285162992597" class="google-plus" target="_blank" rel="noopener noreferrer"><i class="bx bxl-whatsapp"></i></a>
+      <a href="https://linkedin.com/company/dialogika" class="linkedin" target="_blank" rel="noopener noreferrer"><i class="bx bxl-linkedin"></i></i></a>
+    </div>
+  </div>
+  <!-- End Footer -->
 
     `;
+
+    const subscribeButton = document.getElementById("footerSubscribeButton");
+    if (subscribeButton) {
+      subscribeButton.addEventListener("click", function () {
+        const emailInput = document.getElementById("footerEmail");
+        const messageElement = document.getElementById("footerSubscribeMessage");
+        const email = emailInput ? emailInput.value.trim() : "";
+
+        if (!validateEmail(email)) {
+          if (messageElement) {
+            messageElement.textContent = "Email tidak valid";
+            messageElement.classList.remove("text-success");
+            messageElement.classList.add("text-danger");
+          }
+        } else {
+          if (messageElement) {
+            messageElement.textContent = "Menyimpan email...";
+            messageElement.classList.remove("text-danger");
+            messageElement.classList.remove("text-success");
+          }
+          saveSubscriptionEmail(email)
+            .then(function () {
+              if (messageElement) {
+                messageElement.textContent = "Berhasil subscribe";
+                messageElement.classList.remove("text-danger");
+                messageElement.classList.add("text-success");
+              }
+              if (emailInput) {
+                emailInput.value = "";
+              }
+            })
+            .catch(function () {
+              if (messageElement) {
+                messageElement.textContent = "Terjadi kesalahan saat menyimpan email";
+                messageElement.classList.remove("text-success");
+                messageElement.classList.add("text-danger");
+              }
+            });
+        }
+      });
+    }
   }
+}
+
+function validateEmail(email) {
+  return email.includes("@") && email.includes(".");
+}
+
+function loadFirebaseScripts() {
+  if (window.firebase) {
+    return Promise.resolve();
+  }
+  if (window.dialogikaFirebaseLoading) {
+    return window.dialogikaFirebaseLoading;
+  }
+  var appScript = document.createElement("script");
+  appScript.src = "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js";
+  var firestoreScript = document.createElement("script");
+  firestoreScript.src = "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js";
+  var promise = new Promise(function (resolve, reject) {
+    appScript.onload = function () {
+      firestoreScript.onload = function () {
+        resolve();
+      };
+      firestoreScript.onerror = reject;
+      document.head.appendChild(firestoreScript);
+    };
+    appScript.onerror = reject;
+    document.head.appendChild(appScript);
+  });
+  window.dialogikaFirebaseLoading = promise;
+  return promise;
+}
+
+function getFirestoreInstance() {
+  if (window.dialogikaFirestore) {
+    return Promise.resolve(window.dialogikaFirestore);
+  }
+  return loadFirebaseScripts().then(function () {
+    if (!window.dialogikaFirebaseApp) {
+      var firebaseConfig = {
+        apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
+        authDomain: "pre-dialogika.firebaseapp.com",
+        projectId: "pre-dialogika",
+        storageBucket: "pre-dialogika.firebasestorage.app",
+        messagingSenderId: "343771410480",
+        appId: "1:343771410480:web:32881c9868522090237df5",
+        measurementId: "G-SXN811P3N0"
+      };
+      window.dialogikaFirebaseApp = firebase.initializeApp(firebaseConfig);
+    }
+    var db = firebase.firestore();
+    window.dialogikaFirestore = db;
+    return db;
+  });
+}
+
+function saveSubscriptionEmail(email) {
+  return getFirestoreInstance().then(function (db) {
+    return db.collection("subscription_email").add({
+      email: email,
+      createdAt: new Date().toISOString(),
+      source: "footer"
+    });
+  });
 }
 
 customElements.define("main-header", Header);

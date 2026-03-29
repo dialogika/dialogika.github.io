@@ -3260,6 +3260,9 @@ section {
   border-radius: 50px;
   text-align: left;
   border: 1px solid #bfdcf7;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 #footer .footer-newsletter form input:active,
@@ -3268,10 +3271,12 @@ section {
   box-shadow: none;
 }
 
-#footer .footer-newsletter form input[type="tel"] {
+#footer .footer-newsletter form input[type="tel"],
+#footer .footer-newsletter form input[type="email"] {
   border: 0;
   padding: 4px 8px;
-  width: calc(100% - 100px);
+  width: 100%;
+  background: transparent;
 }
 
 #footer .footer-newsletter form input[type="submit"] {
