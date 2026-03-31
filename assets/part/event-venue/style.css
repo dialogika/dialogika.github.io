@@ -1,28 +1,38 @@
 /*--------------------------------------------------------------
 # Venue Section
 --------------------------------------------------------------*/
+.venue.section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .venue .container-fluid {
-  margin-bottom: 0px;
-  margin-top: 0px;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .venue .venue-map iframe {
   width: 100%;
   height: 100%;
-  min-height: 300px;
+  min-height: 340px;
+  border: 0;
+  filter: saturate(0.92) contrast(1.02);
 }
 
 .venue .venue-info {
   background: url("../../img/portfolio/13.webp") top center no-repeat;
   background-size: cover;
   position: relative;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: clamp(48px, 5vw, 76px);
+  padding-bottom: clamp(48px, 5vw, 76px);
+  overflow: hidden;
 }
 
 .venue .venue-info:before {
   content: "";
-  background: rgba(0, 0, 0, 0.5);
+  background:
+    linear-gradient(135deg, rgba(8, 13, 24, 0.84), rgba(12, 18, 32, 0.58)),
+    radial-gradient(560px 260px at 85% 18%, rgba(161, 192, 255, 0.22), rgba(10, 16, 28, 0) 76%);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -37,80 +47,114 @@
 }
 
 .venue .venue-info .section-title h5 {
-  color:#f9c62e;
+  color: #9cc0ff;
+  letter-spacing: 0.08em;
 }
 
 .venue .venue-info .section-title h5::after {
   content: "";
-  width: 120px;
+  width: 110px;
   height: 1px;
   display: inline-block;
-  background: #f9c62e;
+  background: linear-gradient(90deg, rgba(156, 192, 255, 0.15), rgba(156, 192, 255, 0.9));
   margin: 4px 10px;
 
 }
 
 .venue .venue-info .section-title h3 {
-  font-size: 36px;
+  font-size: clamp(1.9rem, 3.1vw, 2.35rem);
   font-weight: 700;
-  margin-bottom: -20px;
-  color:#fff;
+  margin-bottom: -8px;
+  color: #f5f9ff;
+  line-height: 1.2;
 }
 
 .venue .venue-info a {
-  margin-top: 20px;
-  color: #fff;
+  margin-top: 24px;
+  color: #0f1a2b;
   border-radius: 50px;
-  padding: 8px 25px;
+  padding: 10px 24px;
   white-space: nowrap;
-  transition: 0.3s;
-  font-size: 14px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  font-size: 0.78rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   display: inline-block;
-  background: linear-gradient(to bottom, #f9c62e 5%, #ffb13b 100%);
-  box-shadow: 0px 5px 16px -6px rgba(255, 194, 176, 1);
-  -webkit-box-shadow: 0px 5px 16px -6px rgba(255, 194, 176, 1);
-  -moz-box-shadow: 0px 5px 16px -6px rgba(255, 194, 176, 1);
+  background: linear-gradient(125deg, #ffd890 0%, #f5c06c 100%);
+  box-shadow: 0 14px 30px rgba(192, 126, 30, 0.36);
+  border: 1px solid rgba(255, 238, 204, 0.9);
 }
 
 .venue .venue-info a:hover {
-  background: linear-gradient(to bottom, #ffb13b 5%, #f9c62e 100%);
-  background-color: #ffb13b;
-  color: #231f20;
+  color: #0b1524;
   text-decoration: none;
-  box-shadow: 0px 0px 4px 2px rgba(255, 194, 176, 1);
-  -webkit-box-shadow: 0px 0px 4px 2px rgba(255, 194, 176, 1);
-  -moz-box-shadow: 0px 0px 4px 2px rgba(255, 194, 176, 1);
+  transform: translateY(-2px);
+  filter: saturate(1.06);
+  box-shadow: 0 18px 36px rgba(192, 126, 30, 0.46);
 }
 
 @media (max-width: 574px) {
   .venue .venue-info h3 {
     font-size: 24px;
   }
+
   .venue .venue-info .section-title h3 {
-  font-size: 24px;
+    font-size: 24px;
   }
 }
 
 .venue .venue-info p {
-  color: #fff;
+  color: rgba(238, 245, 255, 0.9);
   margin-bottom: 0;
+  line-height: 1.75;
+  max-width: 36ch;
 }
 
 .venue .venue-gallery-container {
   padding-right: 12px;
+  background: linear-gradient(180deg, #0f1726 0%, #111d30 100%);
+  padding-top: 6px;
 }
 
 .venue .venue-gallery {
   overflow: hidden;
-  border-right: 3px solid var(--background-color);
-  border-bottom: 3px solid var(--background-color);
+  border-right: 3px solid rgba(12, 20, 35, 0.72);
+  border-bottom: 3px solid rgba(12, 20, 35, 0.72);
+  border-radius: 14px;
+  position: relative;
+}
+
+.venue .venue-gallery a {
+  display: block;
 }
 
 .venue .venue-gallery img {
-  transition: all ease-in-out 0.4s;
+  transition: transform 0.42s ease, filter 0.42s ease;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: saturate(0.94);
 }
 
 .venue .venue-gallery:hover img {
-  transform: scale(1.1);
+  transform: scale(1.08);
+  filter: saturate(1.05);
+}
+
+@media (max-width: 991px) {
+  .venue .venue-info p {
+    max-width: none;
+  }
+
+  .venue .venue-gallery {
+    border-radius: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .venue .venue-gallery img,
+  .venue .venue-info a {
+    transition: none;
+  }
 }
