@@ -2,7 +2,7 @@
 
 // Daftar informasi dialogika
 const dialogikaJogja = {
-  coordinates: [-7.755023108799819, 110.37858779538364],
+  coordinates: [-7.752615, 110.382387],
   name: "Dialogika Yogyakarta",
   adress:
     "Jl. Pandega Marta No.39, Manggung, Caturtunggal, Kec. Depok, Daerah Istimewa Yogyakarta",
@@ -12,7 +12,7 @@ const dialogikaJogja = {
     "https://www.linkedin.com/company/dialogika/posts/?feedView=all",
     "Linkedin →",
   ],
-  gmaps: ["https://maps.app.goo.gl/KaFAhUUySyo4FBBM9", "Gmaps →"],
+  gmaps: ["https://maps.app.goo.gl/QfTS15gTT7cSrDjU7", "Gmaps →"],
 };
 
 const dialogikaBintaro = {
