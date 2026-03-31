@@ -5,8 +5,8 @@ const dialogikaJogja = {
   coordinates: [-7.752615, 110.382387],
   name: "Dialogika Yogyakarta",
   adress:
-    "Jl. Pandega Marta No.39, Manggung, Caturtunggal, Kec. Depok, Daerah Istimewa Yogyakarta",
-  city: "Caturtunggal",
+    "Jl. Sumbawa, Purwosari, Sinduadi, Kec. Mlati, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55284",
+  city: "Yogyakarta",
   website: ["https://www.dialogika.co/program/index-jogja.html", "Website →"],
   socialMedia: [
     "https://www.linkedin.com/company/dialogika/posts/?feedView=all",
