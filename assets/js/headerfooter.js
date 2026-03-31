@@ -282,12 +282,12 @@ class Footer extends HTMLElement {
             </a>
             <ul class="accordion-collapse collapse show" id="footer-online-program" data-bs-parent=".footer-links">
               <li><i class="bx bx-chevron-right"></i>
-                <a href="../program/basic-plus.html">Basic Plus
+                <a href="../program/basic-class.html">Basic Class
                   <span class="badge rounded-pill text-bg-info">Best Selling</span>
                 </a>
               </li>
               <li><i class="bx bx-chevron-right"></i>
-                <a href="../program/kids-plus.html">Kids Plus</a>
+                <a href="../program/kids-class.html">Kids Class</a>
               </li>
               <li><i class="bx bx-chevron-right"></i>
                 <a href="../program/kids-private.html">Kids Private</a>
