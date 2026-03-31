@@ -282,11 +282,14 @@
   });
 
     new Swiper('.blog-slider', {
+      speed: 750,
+      slidesPerView: 1,
       spaceBetween: 30,
-      effect: 'fade',
-      loop: false,
-      mousewheel: {
-        invert: false,
+      loop: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
       },
       // autoHeight: true,
       pagination: {
