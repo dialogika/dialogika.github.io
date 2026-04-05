@@ -3703,12 +3703,23 @@
             let promoActive = false;
             let quotaCount = QUOTA_START;
             let activeReferral = null;
+            let hasPromoForProduct = false;
 
             // Elements
             const modalEl = document.getElementById('promoDiscountModal');
             const quotaEl = document.getElementById('quota-value');
             const btnClaim = document.getElementById('btnClaimPromo');
             const pricingSection = document.getElementById('pricing');
+            const claimDiscountButtons = document.querySelectorAll('.claim-discount-btn');
+
+            function setClaimButtonsVisible(visible) {
+                claimDiscountButtons.forEach(btn => {
+                    btn.style.display = visible ? '' : 'none';
+                });
+            }
+
+            // Keep claim buttons hidden by default until promo availability is confirmed.
+            setClaimButtonsVisible(false);
 
             // Bootstrap Modal Instance
             let promoModal;
@@ -3807,6 +3818,8 @@
                 const referral = await loadActiveReferral();
 
                 if (referral) {
+                    hasPromoForProduct = true;
+                    setClaimButtonsVisible(true);
                     activeReferral = referral;
                     REFERRAL_CODE = referral.code || '';
 
@@ -3835,8 +3848,11 @@
                     }
 
                     console.log('Loaded referral:', REFERRAL_CODE, 'Discount:', DISCOUNT_RATE * 100 + '%');
+                    setupPromoScrollTrigger();
                 } else {
-                    console.log('Using default promo settings');
+                    hasPromoForProduct = false;
+                    setClaimButtonsVisible(false);
+                    console.log('No active product referral found. Promo modal disabled.');
                 }
             }
 
@@ -3845,6 +3861,11 @@
 
             // Global function to trigger promo modal manually
             window.triggerPromoModal = function () {
+                if (!hasPromoForProduct) {
+                    console.log('Promo modal blocked: no active referral for this product.');
+                    return;
+                }
+
                 if (promoModal) {
                     // Reset the seen flag temporarily to allow re-showing
                     promoModal.show();
@@ -3860,13 +3881,17 @@
 
 
             // 1. Trigger Modal on Scroll
-            if (pricingSection && !sessionStorage.getItem('promoModalSeen')) {
+            function setupPromoScrollTrigger() {
+                if (!hasPromoForProduct || !pricingSection || !promoModal || sessionStorage.getItem('promoModalSeen')) {
+                    return;
+                }
+
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             // Show modal after delay
                             setTimeout(() => {
-                                if (promoModal && !promoActive) {
+                                if (hasPromoForProduct && promoModal && !promoActive) {
                                     promoModal.show();
                                     sessionStorage.setItem('promoModalSeen', 'true');
                                     startQuotaSimulation();
