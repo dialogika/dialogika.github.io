@@ -1416,6 +1416,23 @@
                 }
             }
 
+            function getActivePaymentTypeFromUi() {
+                const activeType = $('.payment-type-btn.active').data('type');
+                return activeType === 'dp' ? 'dp' : 'full';
+            }
+
+            function syncPaymentTypeFromUi() {
+                paymentType = getActivePaymentTypeFromUi();
+
+                if (paymentType === 'dp' && !isDpAllowed) {
+                    paymentType = 'full';
+                    $('.payment-type-btn').removeClass('active');
+                    $('.payment-type-btn[data-type="full"]').addClass('active');
+                }
+
+                return paymentType;
+            }
+
             updateDpAvailability();
 
             // Fetch product data from API (Firestore)
@@ -1556,6 +1573,7 @@
 
             function recalculate() {
                 updateDpAvailability();
+                syncPaymentTypeFromUi();
 
                 let discountedBase = basePrice;
                 if (discountRate > 0) {
@@ -1606,9 +1624,12 @@
 
             // Interactivity: Payment Type Tabs
             $('.payment-type-btn').click(function () {
+                if ($(this).prop('disabled') || $(this).hasClass('disabled')) {
+                    return;
+                }
                 $('.payment-type-btn').removeClass('active');
                 $(this).addClass('active');
-                paymentType = $(this).data('type');
+                syncPaymentTypeFromUi();
                 recalculate();
             });
 
@@ -1703,10 +1724,16 @@
                 // Save step state for receipt page
                 sessionStorage.setItem('dlg_steps', JSON.stringify(stepState));
 
+                // Ensure submit payload always follows currently active payment tab.
+                updateDpAvailability();
+                syncPaymentTypeFromUi();
+                recalculate();
+
                 // Final Price Check
                 let discountedBase = basePrice * (1 - discountRate);
                 let finalPrice = discountedBase - promoDiscount;
-                let totalPay = (paymentType === 'dp') ? downPayment : finalPrice;
+                if (finalPrice < 0) finalPrice = 0;
+                let totalPay = (paymentType === 'dp') ? Math.round(finalPrice * 0.5) : finalPrice;
 
                 // Save submission data for receipt
                 const maritalStatus = $('input[name="marryStatus"]:checked').attr('id') === 'marryYes' ? 'Menikah' : 'Belum Menikah';
@@ -1730,6 +1757,7 @@
                     batchMentor: batchMentor || '',
                     paymentMethod: $('.payment-item.active span').text(),
                     paymentType: paymentType,
+                    payment_type: paymentType,
                     totalPrice: totalPay,
                     leadId: checkoutData.leadId || '',
                     timestamp: new Date().toISOString()
@@ -1771,6 +1799,7 @@
                             source_info: submissionData.sourceInfo || '',
                             notes_info: submissionData.notesInfo || '',
                             payment_type: paymentType,
+                            paymentType: paymentType,
                             payment_method: $('.payment-item.active span').text(),
                             total_price: totalPay,
                             transfer_proof_url: proofUrl,
@@ -1808,6 +1837,7 @@
                         batchMentor: submissionData.batchMentor || '',
                         paymentMethod: submissionData.paymentMethod || '',
                         paymentType: submissionData.paymentType || '',
+                        payment_type: submissionData.paymentType || '',
                         paidAmount: totalPay,
                         finalBasePrice: finalPrice,
                         basePrice: basePrice,
