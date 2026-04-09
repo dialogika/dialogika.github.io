@@ -362,6 +362,33 @@
             color: var(--text-muted);
         }
 
+        .file-error-toast {
+            margin-top: 10px;
+            padding: 9px 11px;
+            border-radius: 14px;
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .file-error-toast.show {
+            display: flex;
+        }
+
+        .file-error-toast i {
+            color: #dc2626;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .file-error-text {
+            font-size: 0.75rem;
+            color: #b91c1c;
+            font-weight: 600;
+        }
+
         .transfer-warning-box {
             margin-top: 16px;
             margin-bottom: 8px;
@@ -1320,8 +1347,14 @@
                         <div class="upload-area">
                             <i class='bx bx-upload upload-icon'></i>
                             <p class="upload-text">Klik atau drag file bukti transfer ke sini</p>
-                            <p class="upload-hint">Format: JPG, PNG (Maks 5MB)</p>
-                            <input type="file" id="proof-upload" class="d-none">
+                            <p class="upload-hint">Format: JPG, JPEG, PNG, PDF (Maks 5MB)</p>
+                            <input type="file" id="proof-upload" class="d-none" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf">
+                            <div class="file-error-toast" id="file-format-error">
+                                <i class='bx bx-error-circle'></i>
+                                <div class="file-error-text">
+                                    Format file tidak didukung. Gunakan file JPG, JPEG, PNG, atau PDF.
+                                </div>
+                            </div>
                         </div>
                         <div class="form-check mt-3 amount-confirm-checkbox">
                             <input class="form-check-input" type="checkbox" id="confirm-amount-checkbox">
@@ -1505,6 +1538,26 @@
             let batchMentor = '';
 
             let hasProofFile = false;
+
+            function showFileFormatError() {
+                const box = $('#file-format-error');
+                box.addClass('show');
+                setTimeout(function () {
+                    box.removeClass('show');
+                }, 4000);
+            }
+
+            function hideFileFormatError() {
+                $('#file-format-error').removeClass('show');
+            }
+
+            function isValidProofFile(file) {
+                if (!file || !file.name) return false;
+                const parts = file.name.split('.');
+                if (parts.length < 2) return false;
+                const ext = parts.pop().toLowerCase();
+                return ext === 'jpg' || ext === 'jpeg' || ext === 'png' || ext === 'pdf';
+            }
 
             function getTotalPayText() {
                 return $('#label-price-total').text().trim();
@@ -1863,6 +1916,11 @@
             $uploadArea.on('drop', function (e) {
                 const files = e.originalEvent.dataTransfer.files;
                 if (files.length) {
+                    const file = files[0];
+                    if (!isValidProofFile(file)) {
+                        showFileFormatError();
+                        return;
+                    }
                     $('#proof-upload')[0].files = files;
                     $('#proof-upload').trigger('change');
                 }
@@ -1870,8 +1928,21 @@
 
             $('#proof-upload').change(function () {
                 if (this.files && this.files[0]) {
+                    const file = this.files[0];
+                    if (!isValidProofFile(file)) {
+                        showFileFormatError();
+                        this.value = '';
+                        hasProofFile = false;
+                        $('.upload-text').text('Klik atau drag file bukti transfer ke sini');
+                        $('.upload-icon').removeClass('bx-check-circle text-success').addClass('bx-upload');
+                        $('#confirm-amount-checkbox').prop('checked', false);
+                        closeAmountConfirmModal();
+                        updateSubmitButtonState();
+                        return;
+                    }
                     hasProofFile = true;
-                    $('.upload-text').text('File terpilih: ' + this.files[0].name);
+                    hideFileFormatError();
+                    $('.upload-text').text('File terpilih: ' + file.name);
                     $('.upload-icon').removeClass('bx-upload').addClass('bx-check-circle text-success');
                     openAmountConfirmModal();
                 } else {
