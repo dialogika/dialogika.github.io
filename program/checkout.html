@@ -362,6 +362,63 @@
             color: var(--text-muted);
         }
 
+        .file-error-toast {
+            margin-top: 10px;
+            padding: 9px 11px;
+            border-radius: 14px;
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .file-error-toast.show {
+            display: flex;
+        }
+
+        .file-error-toast i {
+            color: #dc2626;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .file-error-text {
+            font-size: 0.75rem;
+            color: #b91c1c;
+            font-weight: 600;
+        }
+
+        .transfer-warning-box {
+            margin-top: 16px;
+            margin-bottom: 8px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid #facc15;
+            background: #fffbeb;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .transfer-warning-box i {
+            color: #d97706;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .transfer-warning-content {
+            font-size: 0.75rem;
+            color: #92400e;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        .transfer-warning-highlight {
+            font-weight: 800;
+            color: #b45309;
+        }
+
         /* Sidebar - Ringkasan */
         .summary-card {
             top: 140px;
@@ -509,6 +566,95 @@
             color: #92400e;
             line-height: 1.6;
             font-weight: 600;
+        }
+
+        .amount-confirm-checkbox label {
+            font-size: 0.8rem;
+            color: #334155;
+        }
+
+        .amount-confirm-checkbox span.amount-text {
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .dlg-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .dlg-modal-backdrop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .dlg-modal {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 24px 22px 20px;
+            max-width: 380px;
+            width: 100%;
+            box-shadow: 0 24px 48px rgba(15, 23, 42, 0.35);
+            text-align: center;
+        }
+
+        .dlg-modal-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            background: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+        }
+
+        .dlg-modal-title {
+            font-weight: 800;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .dlg-modal-text {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-bottom: 18px;
+        }
+
+        .dlg-modal-text .amount-text {
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .dlg-modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .dlg-btn-secondary {
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .dlg-btn-primary {
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-weight: 800;
+            font-size: 0.8rem;
         }
 
         @media (max-width: 991px) {
@@ -1190,11 +1336,32 @@
                         </div>
 
                         <label class="form-label" style="color: #ef4444;">Upload Bukti Transfer *</label>
+                        <div class="transfer-warning-box">
+                            <i class='bx bx-error-circle'></i>
+                            <div class="transfer-warning-content">
+                                Pastikan Anda mentransfer sesuai nominal
+                                <span class="transfer-warning-highlight" id="transfer-warning-amount">Total Bayar</span>
+                                yang tertera pada Ringkasan sebelum mengupload bukti.
+                            </div>
+                        </div>
                         <div class="upload-area">
                             <i class='bx bx-upload upload-icon'></i>
                             <p class="upload-text">Klik atau drag file bukti transfer ke sini</p>
-                            <p class="upload-hint">Format: JPG, PNG (Maks 5MB)</p>
-                            <input type="file" id="proof-upload" class="d-none">
+                            <p class="upload-hint">Format: JPG, JPEG, PNG, PDF (Maks 5MB)</p>
+                            <input type="file" id="proof-upload" class="d-none" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf">
+                            <div class="file-error-toast" id="file-format-error">
+                                <i class='bx bx-error-circle'></i>
+                                <div class="file-error-text">
+                                    Format file tidak didukung. Gunakan file JPG, JPEG, PNG, atau PDF.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-check mt-3 amount-confirm-checkbox">
+                            <input class="form-check-input" type="checkbox" id="confirm-amount-checkbox">
+                            <label class="form-check-label" for="confirm-amount-checkbox">
+                                Saya sudah transfer sesuai nominal
+                                <span class="amount-text" id="confirm-amount-label">Rp 0</span>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -1257,6 +1424,24 @@
     </div>
 
     </main>
+
+    <div class="dlg-modal-backdrop" id="amount-confirm-modal">
+      <div class="dlg-modal">
+        <div class="dlg-modal-icon">
+          <i class='bx bx-help-circle'></i>
+        </div>
+        <h3 class="dlg-modal-title">Konfirmasi Nominal Transfer</h3>
+        <p class="dlg-modal-text">
+          Apakah Anda sudah mentransfer sesuai nominal
+          <span class="amount-text" id="amount-confirm-text-amount">Rp 0</span>
+          yang tertera pada Total Bayar?
+        </p>
+        <div class="dlg-modal-actions">
+          <button type="button" class="btn btn-light dlg-btn-secondary" id="amount-confirm-no">Cek Lagi</button>
+          <button type="button" class="btn btn-primary dlg-btn-primary" id="amount-confirm-yes">Ya, Sudah Sesuai</button>
+        </div>
+      </div>
+    </div>
     <!-- ======= Footer ======= -->
     <footer id="footer">
       <div class="container d-md-flex py-4">
@@ -1351,6 +1536,45 @@
             let batchLocation = '';
             let batchType = '';
             let batchMentor = '';
+
+            let hasProofFile = false;
+
+            function showFileFormatError() {
+                const box = $('#file-format-error');
+                box.addClass('show');
+                setTimeout(function () {
+                    box.removeClass('show');
+                }, 4000);
+            }
+
+            function hideFileFormatError() {
+                $('#file-format-error').removeClass('show');
+            }
+
+            function isValidProofFile(file) {
+                if (!file || !file.name) return false;
+                const parts = file.name.split('.');
+                if (parts.length < 2) return false;
+                const ext = parts.pop().toLowerCase();
+                return ext === 'jpg' || ext === 'jpeg' || ext === 'png' || ext === 'pdf';
+            }
+
+            function getTotalPayText() {
+                return $('#label-price-total').text().trim();
+            }
+
+            function refreshAmountTexts() {
+                const totalText = getTotalPayText() || 'Rp 0';
+                $('#transfer-warning-amount').text(totalText);
+                $('#confirm-amount-label').text(totalText);
+                $('#amount-confirm-text-amount').text(totalText);
+            }
+
+            function updateSubmitButtonState() {
+                const confirmed = $('#confirm-amount-checkbox').is(':checked');
+                const canSubmit = hasProofFile && confirmed;
+                $('#btn-submit-registration').prop('disabled', !canSubmit);
+            }
 
             // Restore excluded features from sessionStorage (if any)
             try {
@@ -1618,9 +1842,26 @@
                 $('#label-payment-type-text').text(paymentType === 'full' ? 'Full Payment' : 'DP (Deposit)');
                 $('#label-price-active').text('Rp ' + displayTypePrice.toLocaleString('id-ID'));
                 $('#label-price-total').text('Rp ' + totalPay.toLocaleString('id-ID'));
+                refreshAmountTexts();
             }
 
             recalculate();
+            refreshAmountTexts();
+
+            function openAmountConfirmModal() {
+                refreshAmountTexts();
+                const modal = document.getElementById('amount-confirm-modal');
+                if (modal) {
+                    modal.classList.add('show');
+                }
+            }
+
+            function closeAmountConfirmModal() {
+                const modal = document.getElementById('amount-confirm-modal');
+                if (modal) {
+                    modal.classList.remove('show');
+                }
+            }
 
             // Interactivity: Payment Type Tabs
             $('.payment-type-btn').click(function () {
@@ -1675,6 +1916,11 @@
             $uploadArea.on('drop', function (e) {
                 const files = e.originalEvent.dataTransfer.files;
                 if (files.length) {
+                    const file = files[0];
+                    if (!isValidProofFile(file)) {
+                        showFileFormatError();
+                        return;
+                    }
                     $('#proof-upload')[0].files = files;
                     $('#proof-upload').trigger('change');
                 }
@@ -1682,9 +1928,31 @@
 
             $('#proof-upload').change(function () {
                 if (this.files && this.files[0]) {
-                    $('.upload-text').text('File terpilih: ' + this.files[0].name);
+                    const file = this.files[0];
+                    if (!isValidProofFile(file)) {
+                        showFileFormatError();
+                        this.value = '';
+                        hasProofFile = false;
+                        $('.upload-text').text('Klik atau drag file bukti transfer ke sini');
+                        $('.upload-icon').removeClass('bx-check-circle text-success').addClass('bx-upload');
+                        $('#confirm-amount-checkbox').prop('checked', false);
+                        closeAmountConfirmModal();
+                        updateSubmitButtonState();
+                        return;
+                    }
+                    hasProofFile = true;
+                    hideFileFormatError();
+                    $('.upload-text').text('File terpilih: ' + file.name);
                     $('.upload-icon').removeClass('bx-upload').addClass('bx-check-circle text-success');
+                    openAmountConfirmModal();
+                } else {
+                    hasProofFile = false;
+                    $('.upload-text').text('Klik atau drag file bukti transfer ke sini');
+                    $('.upload-icon').removeClass('bx-check-circle text-success').addClass('bx-upload');
+                    $('#confirm-amount-checkbox').prop('checked', false);
+                    closeAmountConfirmModal();
                 }
+                updateSubmitButtonState();
             });
 
             async function uploadProof(file, invoiceId) {
@@ -1895,6 +2163,28 @@
                 }
             }
 
+            $('#amount-confirm-yes').on('click', function () {
+                $('#confirm-amount-checkbox').prop('checked', true);
+                closeAmountConfirmModal();
+                updateSubmitButtonState();
+            });
+
+            $('#amount-confirm-no').on('click', function () {
+                $('#confirm-amount-checkbox').prop('checked', false);
+                closeAmountConfirmModal();
+                updateSubmitButtonState();
+            });
+
+            $('#amount-confirm-modal').on('click', function (e) {
+                if (e.target === this) {
+                    closeAmountConfirmModal();
+                }
+            });
+
+            $('#confirm-amount-checkbox').on('change', function () {
+                updateSubmitButtonState();
+            });
+
             // Step 1: form fields filled
             function checkStep1() {
                 const nameOk = !!$('#pendaftar-name').val().trim();
@@ -1918,10 +2208,8 @@
                     reader.readAsDataURL(this.files[0]);
 
                     updateStep(2, true);
-                    $('#btn-submit-registration').prop('disabled', false);
                 } else {
                     updateStep(2, false);
-                    $('#btn-submit-registration').prop('disabled', true);
                     localStorage.removeItem('dialogika_payment_proof');
                 }
             });
