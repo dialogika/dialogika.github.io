@@ -3313,7 +3313,7 @@
                                 </div>
 
                                 <!-- Hidden input to store selected schedule -->
-                                <input type="hidden" id="selected-schedule-id" name="ScheduleId" value="">
+                                <input type="hidden" id="selected-schedule-id" name="ScheduleId" value="" data-program-id="">
 
                                 <div class="col-md-12">
                                     <div class="position-relative">
@@ -3830,21 +3830,108 @@
             // Configuration
             const PROMO_STORAGE_KEY = 'dialogika_firstclass_promo_claimed';
             const PROMO_CODE_KEY = 'dialogika_firstclass_promo_code';
-            let DISCOUNT_RATE = 0.40; // Default 40% Discount
-            let DISCOUNT_AMOUNT = 0; // Fixed discount amount
-            let REFERRAL_CODE = '';
+            const PROMO_APPLIED_KEY = 'dialogika_firstclass_promo_applied';
             const QUOTA_START = 5;
+            const FIRST_CLASS_PRODUCT_IDS = new Set([
+                'b0db1cd0-b016-46c2-8fdf-3dd65a2f0c16',
+                '7b444128-987a-4888-b6a8-fdcb3122dd95',
+                'first class surabaya',
+                'first private surabaya',
+                'first class jakarta',
+                'first private jakarta',
+                'first class tangsel',
+                'first private tangsel',
+                'first class pontianak',
+                'first private pontianak',
+                'fc_lvl1',
+                'fp_lvl1'
+            ]);
+            const FIRST_CLASS_PRODUCT_KEYWORDS = ['first class', 'first private', 'fc_lvl', 'fp_lvl'];
+
+            let DISCOUNT_RATE = 0;
+            let DISCOUNT_AMOUNT = 0;
+            let REFERRAL_CODE = '';
 
             // State
             let promoActive = false;
+            let promoEligible = false;
             let quotaCount = QUOTA_START;
             let activeReferral = null;
+            let referralValidationState = 'empty';
+            let referralLastCheckedCode = '';
 
             // Elements
             const modalEl = document.getElementById('promoDiscountModal');
             const quotaEl = document.getElementById('quota-value');
             const btnClaim = document.getElementById('btnClaimPromo');
             const pricingSection = document.getElementById('pricing');
+            const claimDiscountButtons = document.querySelectorAll('.claim-discount-btn');
+
+            function setClaimButtonsVisible(visible) {
+                claimDiscountButtons.forEach(btn => {
+                    btn.style.display = visible ? '' : 'none';
+                });
+            }
+
+            setClaimButtonsVisible(false);
+
+            function normalizeProductToken(value) {
+                return String(value || '').trim().toLowerCase();
+            }
+
+            function extractReferralProductTokens(ref) {
+                if (!ref || typeof ref !== 'object') return [];
+                const raw = Array.isArray(ref.productIds)
+                    ? ref.productIds
+                    : Array.isArray(ref.products)
+                        ? ref.products
+                        : Array.isArray(ref.product_ids)
+                            ? ref.product_ids
+                            : [];
+
+                return raw
+                    .map(item => {
+                        if (item && typeof item === 'object') {
+                            return (
+                                item.productId ||
+                                item.product_id ||
+                                item.id ||
+                                item.name ||
+                                item.productName ||
+                                ''
+                            );
+                        }
+                        return item;
+                    })
+                    .map(normalizeProductToken)
+                    .filter(Boolean);
+            }
+
+            function isReferralForFirstClassProduct(ref) {
+                const tokens = extractReferralProductTokens(ref);
+                if (!tokens.length) return false;
+                return tokens.some(token => {
+                    if (FIRST_CLASS_PRODUCT_IDS.has(token)) return true;
+                    return FIRST_CLASS_PRODUCT_KEYWORDS.some(keyword => token.includes(keyword));
+                });
+            }
+
+            function resetDiscountValuesFromActiveReferral() {
+                if (activeReferral) {
+                    DISCOUNT_RATE = Number(activeReferral.discountPercent || 0) > 0
+                        ? Number(activeReferral.discountPercent) / 100
+                        : 0;
+                    DISCOUNT_AMOUNT = Number(activeReferral.discountAmount || 0) > 0
+                        ? Number(activeReferral.discountAmount)
+                        : 0;
+                    REFERRAL_CODE = activeReferral.code || '';
+                    return;
+                }
+
+                DISCOUNT_RATE = 0;
+                DISCOUNT_AMOUNT = 0;
+                REFERRAL_CODE = '';
+            }
 
             // Bootstrap Modal Instance
             let promoModal;
@@ -3892,14 +3979,8 @@
                         const usedCount = ref.usedCount || 0;
                         if (usedCount >= maxUsage) return false;
 
-                        // Check if applies to First Class or First Private products
-                        const products = ref.productIds || [];
-                        // If no specific products, assume it applies to all
-                        if (products.length === 0) return true;
-
-                        // Check if any product name contains "First Class" or "First Private"
-                        // Note: We'd need product names, but for now we'll accept any with products
-                        return true;
+                        // Must be scoped specifically to First Class / First Private products
+                        return isReferralForFirstClassProduct(ref);
                     });
 
                     if (activeDiscounts.length === 0) {
@@ -3921,46 +4002,89 @@
                 }
             }
 
+            function setupPromoScrollTrigger() {
+                if (!promoEligible || !pricingSection || !promoModal || sessionStorage.getItem('promoModalSeen')) {
+                    return;
+                }
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Show modal after delay
+                            setTimeout(() => {
+                                if (promoEligible && promoModal && !promoActive) {
+                                    promoModal.show();
+                                    sessionStorage.setItem('promoModalSeen', 'true');
+                                    startQuotaSimulation();
+                                }
+                            }, 2000);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                observer.observe(pricingSection);
+            }
+
             // Initialize promo with Firebase data
             async function initializePromo() {
                 const referral = await loadActiveReferral();
 
-                if (referral) {
-                    activeReferral = referral;
-                    REFERRAL_CODE = referral.code || '';
+                if (!referral) {
+                    promoEligible = false;
+                    activeReferral = null;
+                    resetDiscountValuesFromActiveReferral();
+                    setClaimButtonsVisible(false);
 
-                    // Update discount rate from Firebase
-                    if (referral.discountPercent && referral.discountPercent > 0) {
-                        DISCOUNT_RATE = referral.discountPercent / 100;
+                    sessionStorage.removeItem(PROMO_STORAGE_KEY);
+                    sessionStorage.removeItem(PROMO_CODE_KEY);
+                    sessionStorage.removeItem(PROMO_APPLIED_KEY);
+
+                    resetDiscountDOM();
+                    updateFeaturesDisplay([]);
+                    showReferralStatus('reset');
+                    console.log('No active First Class referral found. Promo hidden.');
+                    return;
+                }
+
+                promoEligible = true;
+                activeReferral = referral;
+                resetDiscountValuesFromActiveReferral();
+                setClaimButtonsVisible(true);
+
+                // Update modal UI with real data
+                const discountText = Number(referral.discountPercent || 0) > 0
+                    ? `HEMAT ${referral.discountPercent}%`
+                    : `HEMAT Rp ${(DISCOUNT_AMOUNT || 0).toLocaleString('id-ID')}`;
+
+                const discountLabel = modalEl.querySelector('.fw-bold.text-primary.mb-0');
+                if (discountLabel) {
+                    discountLabel.textContent = discountText;
+                }
+
+                // Update quota if available
+                const remaining = (referral.maxUsage || 999) - (referral.usedCount || 0);
+                if (remaining < QUOTA_START) {
+                    quotaCount = Math.max(remaining, 2);
+                    if (quotaEl) quotaEl.textContent = quotaCount;
+                }
+
+                console.log('Loaded referral:', REFERRAL_CODE, 'Discount:', DISCOUNT_RATE * 100 + '%');
+                setupPromoScrollTrigger();
+
+                const claimed = sessionStorage.getItem(PROMO_STORAGE_KEY) === 'true';
+                const applied = sessionStorage.getItem(PROMO_APPLIED_KEY) === 'true';
+
+                if (applied) {
+                    promoActive = true;
+                    applyDiscountToDOM();
+                    if (activeReferral && activeReferral.excludedFeatures) {
+                        updateFeaturesDisplay(activeReferral.excludedFeatures);
                     }
-                    if (referral.discountAmount && referral.discountAmount > 0) {
-                        DISCOUNT_AMOUNT = referral.discountAmount;
-                    }
-
-                    // Store excluded features for later use (only apply when claimed)
-                    // Do NOT call updateFeaturesDisplay here - features should only be
-                    // crossed out AFTER the user claims the promo
-
-                    // Update modal UI with real data
-                    const discountText = referral.discountPercent
-                        ? `HEMAT ${referral.discountPercent}%`
-                        : `HEMAT Rp ${(DISCOUNT_AMOUNT || 0).toLocaleString('id-ID')}`;
-
-                    const discountLabel = modalEl.querySelector('.fw-bold.text-primary.mb-0');
-                    if (discountLabel) {
-                        discountLabel.textContent = discountText;
-                    }
-
-                    // Update quota if available
-                    const remaining = (referral.maxUsage || 999) - (referral.usedCount || 0);
-                    if (remaining < QUOTA_START) {
-                        quotaCount = Math.max(remaining, 2);
-                        if (quotaEl) quotaEl.textContent = quotaCount;
-                    }
-
-                    console.log('Loaded referral:', REFERRAL_CODE, 'Discount:', DISCOUNT_RATE * 100 + '%');
-                } else {
-                    console.log('Using default promo settings');
+                    updateReferralCodeField();
+                } else if (claimed) {
+                    renderUseCouponButtons();
+                    updateReferralCodeField();
                 }
             }
 
@@ -3969,6 +4093,9 @@
 
             // Global function to trigger promo modal manually
             window.triggerPromoModal = function () {
+                if (!promoEligible || !promoModal) {
+                    return;
+                }
                 if (promoModal) {
                     // Reset the seen flag temporarily to allow re-showing
                     promoModal.show();
@@ -3982,27 +4109,6 @@
             };
 
 
-
-            // 1. Trigger Modal on Scroll
-            if (pricingSection && !sessionStorage.getItem('promoModalSeen')) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Show modal after delay
-                            setTimeout(() => {
-                                if (promoModal && !promoActive) {
-                                    promoModal.show();
-                                    sessionStorage.setItem('promoModalSeen', 'true');
-                                    startQuotaSimulation();
-                                }
-                            }, 2000);
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.3 });
-
-                observer.observe(pricingSection);
-            }
 
             // 2. Simulate Quota Dropping
             function startQuotaSimulation() {
@@ -4020,6 +4126,9 @@
 
             // 3. Claim Discount Function
             window.claimPromoDiscount = function () {
+                if (!promoEligible || !activeReferral) {
+                    return;
+                }
                 promoActive = true;
                 btnClaim.innerHTML = '<i class="bx bx-check-circle"></i> BERHASIL DIKLAIM!';
                 btnClaim.classList.remove('btn-primary');
@@ -4047,10 +4156,12 @@
 
             // 4. Render 'Use Coupon' Buttons
             function renderUseCouponButtons() {
-                if (sessionStorage.getItem('dialogika_firstclass_promo_applied') === 'true') return;
+                if (!promoEligible || sessionStorage.getItem(PROMO_APPLIED_KEY) === 'true') return;
 
                 const registerButtons = document.querySelectorAll('.title-change-registration');
-                const discountPercent = Math.round(DISCOUNT_RATE * 100);
+                const discountLabel = DISCOUNT_AMOUNT > 0
+                    ? 'Rp ' + DISCOUNT_AMOUNT.toLocaleString('id-ID')
+                    : Math.round(DISCOUNT_RATE * 100) + '%';
 
                 registerButtons.forEach(btn => {
                     const parent = btn.parentElement;
@@ -4058,7 +4169,7 @@
 
                     const couponBtn = document.createElement('button');
                     couponBtn.className = 'btn btn-warning w-100 mb-2 btn-use-coupon fw-bold text-dark';
-                    couponBtn.innerHTML = `<i class="bx bxs-coupon"></i> Gunakan Kupon Hemat ${discountPercent}%`;
+                    couponBtn.innerHTML = `<i class="bx bxs-coupon"></i> Gunakan Kupon Hemat ${discountLabel}`;
                     couponBtn.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
                     couponBtn.onclick = function () {
                         applyDiscountToDOM();
@@ -4077,9 +4188,14 @@
 
             // 5. Apply Discount to DOM
             function applyDiscountToDOM() {
-                sessionStorage.setItem('dialogika_firstclass_promo_applied', 'true');
+                if (DISCOUNT_RATE <= 0 && DISCOUNT_AMOUNT <= 0) return;
+
+                sessionStorage.setItem(PROMO_APPLIED_KEY, 'true');
                 const priceTitles = document.querySelectorAll('.pricing-title');
                 const discountPercent = Math.round(DISCOUNT_RATE * 100);
+                const discountBadgeText = DISCOUNT_AMOUNT > 0
+                    ? 'HEMAT Rp ' + DISCOUNT_AMOUNT.toLocaleString('id-ID')
+                    : `HEMAT ${discountPercent}%`;
 
                 // Hide all claim discount buttons
                 document.querySelectorAll('.claim-discount-btn').forEach(btn => {
@@ -4126,7 +4242,7 @@
                             ${formattedNewPrice}
                             <span class="d-block f-13 text-muted">
                                 <strike>${formattedOriginalPrice}</strike> 
-                                <span class="badge bg-danger ms-1" style="font-size: 10px;">HEMAT ${discountPercent}%</span>
+                                <span class="badge bg-danger ms-1" style="font-size: 10px;">${discountBadgeText}</span>
                                 ${referralBadge}
                             </span>
                         `;
@@ -4137,22 +4253,6 @@
                 });
             }
 
-            // Check if already claimed/applied in this session
-            const claimed = sessionStorage.getItem(PROMO_STORAGE_KEY) === 'true';
-            const applied = sessionStorage.getItem('dialogika_firstclass_promo_applied') === 'true';
-
-            if (applied) {
-                applyDiscountToDOM();
-                // Also apply feature exclusions for already-claimed promo
-                if (activeReferral && activeReferral.excludedFeatures) {
-                    updateFeaturesDisplay(activeReferral.excludedFeatures);
-                }
-                updateReferralCodeField();
-            } else if (claimed) {
-                renderUseCouponButtons();
-                updateReferralCodeField();
-            }
-
             // Update referral code field in contact form
             function updateReferralCodeField() {
                 const referralCode = sessionStorage.getItem(PROMO_CODE_KEY);
@@ -4161,6 +4261,8 @@
                 // Only auto-fill if user hasn't manually entered a code
                 if (referralInput && referralCode && !referralInput.value.trim()) {
                     referralInput.value = referralCode;
+                    referralLastCheckedCode = referralCode.trim().toUpperCase();
+                    referralValidationState = 'valid';
                     showReferralStatus('valid', 'Kode referral berhasil diterapkan');
                 }
             }
@@ -4214,21 +4316,25 @@
                 icon.style.display = 'inline-flex';
 
                 if (status === 'loading') {
+                    referralValidationState = 'loading';
                     icon.innerHTML = '<i class="bx bx-loader-alt bx-spin" style="font-size: 18px; color: #6c757d;"></i>';
                     helper.innerHTML = '<span style="color: #6c757d;">Memeriksa kode referral...</span>';
                     input.style.backgroundColor = '';
                     input.style.borderColor = '';
                 } else if (status === 'valid') {
+                    referralValidationState = 'valid';
                     icon.innerHTML = '<i class="bx bxs-check-circle" style="font-size: 20px; color: #4caf50;"></i>';
                     helper.innerHTML = '<span style="color: #4caf50; font-weight: 600;"><i class="bx bxs-check-circle"></i> ' + message + '</span>';
                     input.style.backgroundColor = '#e8f5e9';
                     input.style.borderColor = '#4caf50';
                 } else if (status === 'invalid') {
+                    referralValidationState = 'invalid';
                     icon.innerHTML = '<i class="bx bxs-x-circle" style="font-size: 20px; color: #f44336;"></i>';
                     helper.innerHTML = '<span style="color: #f44336;">' + message + '</span>';
                     input.style.backgroundColor = '#ffebee';
                     input.style.borderColor = '#f44336';
                 } else {
+                    referralValidationState = 'empty';
                     // Reset
                     icon.style.display = 'none';
                     icon.innerHTML = '';
@@ -4250,7 +4356,9 @@
 
                 if (!container || !list || !textarea) return;
 
-                if (!code) {
+                const shouldShowBenefits = !!code && referralValidationState === 'valid';
+
+                if (!shouldShowBenefits) {
                     container.classList.add('d-none');
                     textarea.style.paddingTop = '12px';
                     return;
@@ -4411,6 +4519,7 @@
             // Validate user-specific referral code against Firebase
             async function validateUserReferralCode(code) {
                 if (!code || !code.trim()) {
+                    referralLastCheckedCode = '';
                     showReferralStatus('reset');
                     // Reset discount if previously applied by user referral
                     resetUserReferralDiscount();
@@ -4418,6 +4527,7 @@
                 }
 
                 code = code.trim().toUpperCase();
+                referralLastCheckedCode = code;
                 showReferralStatus('loading');
 
                 try {
@@ -4443,6 +4553,7 @@
                         if ((ref.code || '').toUpperCase() !== code) return false;
                         if ((ref.holderType || 'system') !== 'user') return false;
                         if ((ref.functionType || '').toLowerCase() !== 'discount') return false;
+                        if (!isReferralForFirstClassProduct(ref)) return false;
 
                         // Check validity
                         const createdAt = ref.createdAtMs || 0;
@@ -4489,7 +4600,11 @@
                         sessionStorage.setItem(PROMO_STORAGE_KEY, 'true');
                     } else {
                         // Check if code exists but is a system type (not meant for manual input)
-                        const systemMatch = referrals.find(ref => (ref.code || '').toUpperCase() === code && (ref.holderType || 'system') === 'system');
+                        const systemMatch = referrals.find(ref => {
+                            if ((ref.code || '').toUpperCase() !== code) return false;
+                            if ((ref.holderType || 'system') !== 'system') return false;
+                            return isReferralForFirstClassProduct(ref);
+                        });
                         if (systemMatch) {
                             showReferralStatus('invalid', 'Kode ini adalah promo sistem, silakan klaim melalui tombol "Claim Diskon"');
                         } else {
@@ -4531,18 +4646,15 @@
                 // Clear session
                 sessionStorage.removeItem(PROMO_CODE_KEY);
                 sessionStorage.removeItem(PROMO_STORAGE_KEY);
+                sessionStorage.removeItem(PROMO_APPLIED_KEY);
 
                 // Reset globals
-                DISCOUNT_RATE = 0.40; // Default
-                DISCOUNT_AMOUNT = 0;
-                REFERRAL_CODE = '';
+                resetDiscountValuesFromActiveReferral();
+                referralLastCheckedCode = '';
 
                 if (!promoActive) {
                     resetDiscountDOM();
-                    // Show claim discount buttons again
-                    document.querySelectorAll('.claim-discount-btn').forEach(btn => {
-                        btn.style.display = '';
-                    });
+                    setClaimButtonsVisible(promoEligible);
                 }
             }
 
@@ -4562,6 +4674,8 @@
                         return;
                     }
 
+                    referralValidationState = 'loading';
+
                     // Debounce: wait 600ms after user stops typing
                     referralDebounceTimer = setTimeout(() => {
                         validateUserReferralCode(value);
@@ -4575,14 +4689,66 @@
             // Handle Contact Form Submission to Checkout
             const contactForm = document.getElementById('uploadForm');
             if (contactForm) {
-                contactForm.addEventListener('submit', function (e) {
+                const loadingEl = contactForm.querySelector('.loading');
+                const sentEl = contactForm.querySelector('.sent-message');
+                const errorEl = contactForm.querySelector('.error-message');
+
+                function resetFormFeedback() {
+                    if (loadingEl) loadingEl.classList.remove('d-block');
+                    if (sentEl) sentEl.classList.remove('d-block');
+                    if (errorEl) errorEl.classList.remove('d-block');
+                }
+
+                // Keep vendor php-email-form handler from showing false success state.
+                contactForm.addEventListener('submit', async function (e) {
                     e.preventDefault();
+                    e.stopPropagation();
+                    if (typeof e.stopImmediatePropagation === 'function') {
+                        e.stopImmediatePropagation();
+                    }
+
+                    resetFormFeedback();
+
+                    if (!contactForm.checkValidity()) {
+                        contactForm.reportValidity();
+                        return;
+                    }
 
                     // Capture data
                     const name = document.getElementById('names').value;
                     const phone = document.getElementById('whatsapp-number').value;
                     const programId = document.getElementById('programs').value;
                     const programName = document.querySelector(`#programs option[value="${programId}"]`)?.textContent || 'First Class Package';
+                    const isPrivateProgram = programName.toLowerCase().includes('private');
+                    const selectedScheduleEl = document.getElementById('selected-schedule-id');
+                    const selectedScheduleId = (selectedScheduleEl?.value || '').trim();
+                    const selectedScheduleProgramId = (selectedScheduleEl?.dataset?.programId || '').trim();
+                    const referralValue = (document.getElementById('referral-code')?.value || '').trim();
+
+                    if (!isPrivateProgram && (!selectedScheduleId || selectedScheduleId.toLowerCase() === 'flexible' || selectedScheduleProgramId !== programId)) {
+                        alert('Silakan pilih jadwal kelas terlebih dahulu untuk program non-private.');
+                        const scheduleBtn = document.getElementById('btn-select-schedule');
+                        if (scheduleBtn) scheduleBtn.focus();
+                        return;
+                    }
+
+                    const isClaimedSystemReferral =
+                        promoEligible &&
+                        sessionStorage.getItem(PROMO_STORAGE_KEY) === 'true' &&
+                        !!REFERRAL_CODE &&
+                        referralValue.toUpperCase() === REFERRAL_CODE.toUpperCase();
+
+                    if (referralValue && !isClaimedSystemReferral) {
+                        const normalizedReferral = referralValue.toUpperCase();
+                        if (referralLastCheckedCode !== normalizedReferral || referralValidationState === 'loading') {
+                            await validateUserReferralCode(referralValue);
+                        }
+
+                        if (referralValidationState !== 'valid') {
+                            alert('Kode referral tidak valid. Kosongkan atau gunakan kode referral yang valid untuk melanjutkan.');
+                            return;
+                        }
+                    }
 
                     // Get ORIGINAL price (before any discount) from the selected program
                     let basePrice = 3000000;
@@ -4610,7 +4776,7 @@
                         batchName: window._selectedBatchName || '',
                         batchSchedule: window._selectedBatchSchedule || '',
                         basePrice: basePrice,
-                        discountRate: sessionStorage.getItem('dialogika_firstclass_promo_applied') === 'true' ? (window.DISCOUNT_RATE || 0) : 0,
+                        discountRate: sessionStorage.getItem(PROMO_APPLIED_KEY) === 'true' ? DISCOUNT_RATE : 0,
                         referralCode: document.getElementById('referral-code')?.value || ''
                     };
 
@@ -4647,8 +4813,8 @@
                     localStorage.setItem('dialogika_checkout_data', JSON.stringify(checkoutData));
 
                     // Show loading
-                    const loading = contactForm.querySelector('.loading');
-                    if (loading) loading.classList.add('d-block');
+                    resetFormFeedback();
+                    if (loadingEl) loadingEl.classList.add('d-block');
 
                     // Animation before redirect
                     const btn = document.getElementById('send_contact');
@@ -4661,7 +4827,7 @@
                     setTimeout(() => {
                         window.location.href = 'checkout.html';
                     }, 1200);
-                });
+                }, true);
             }
         });
     </script>
@@ -4760,6 +4926,7 @@
                 const helpText = scheduleButtonContainer.querySelector('small');
                 const selectedProgramValue = programSelect.value;
                 const isPrivate = selectedProgramValue && programMapping[selectedProgramValue] && programMapping[selectedProgramValue].toLowerCase().includes('private');
+                const selectedScheduleProgramId = (selectedScheduleInput.dataset.programId || '').trim();
 
                 if (selectedProgramValue) {
                     if (isPrivate) {
@@ -4771,7 +4938,14 @@
                         btnSelectSchedule.classList.add('btn-success');
                         if (helpText) helpText.textContent = 'Jadwal ditentukan bersama admin';
                         selectedScheduleInput.value = "flexible";
+                        selectedScheduleInput.dataset.programId = selectedProgramValue;
                     } else {
+                        if (selectedScheduleProgramId !== selectedProgramValue) {
+                            selectedScheduleInput.value = "";
+                            selectedScheduleInput.dataset.programId = "";
+                            window._selectedBatchName = '';
+                            window._selectedBatchSchedule = '';
+                        }
                         btnSelectSchedule.innerHTML = `<i class='bx bx-calendar'></i> Pilih Jadwal`;
                         btnSelectSchedule.disabled = false;
                         btnSelectSchedule.style.cursor = 'pointer';
@@ -4782,6 +4956,10 @@
                         if(selectedScheduleInput.value === "flexible") selectedScheduleInput.value = "";
                     }
                 } else {
+                    selectedScheduleInput.value = "";
+                    selectedScheduleInput.dataset.programId = "";
+                    window._selectedBatchName = '';
+                    window._selectedBatchSchedule = '';
                     btnSelectSchedule.innerHTML = `<i class='bx bx-calendar'></i> Pilih Jadwal`;
                     btnSelectSchedule.disabled = true;
                     btnSelectSchedule.style.cursor = 'not-allowed';
@@ -5030,6 +5208,7 @@
             // Select schedule function (global scope)
             window.selectSchedule = function (scheduleId, scheduleName, scheduleDate) {
                 selectedScheduleInput.value = scheduleId;
+                selectedScheduleInput.dataset.programId = programSelect.value;
 
                 // Store batch name and schedule for checkout
                 window._selectedBatchName = scheduleName;
