@@ -2333,7 +2333,7 @@
 
                       <h5 class="fw-normal">Basic Plus</h5>
                       <div style="white-space: nowrap; margin-top: 12px; position: relative; z-index: 2;">
-                        <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 1.000.000</h1>
+                        <h1 id="price-basic-plus" class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 1.500.000</h1>
                         <button id="basic-claim-discount-btn-main" class="btn btn-warning btn-sm claim-discount-btn"
                           onclick="triggerBasicPromoModal()"
                           style="display: none; font-size: 9px; padding: 3px 10px; border-radius: 18px; transition: all 0.3s ease; vertical-align: middle; margin-left: 6px; position: relative; z-index: 3;">
@@ -3248,6 +3248,13 @@
       return null;
     }
 
+    function normalizePriceValue(value) {
+      if (typeof value === 'number' && !Number.isNaN(value)) return value;
+      const raw = String(value || '').replace(/[^\d]/g, '');
+      const parsed = parseInt(raw, 10);
+      return Number.isNaN(parsed) ? 0 : parsed;
+    }
+
     async function resolveBasicPlusProductDoc(forcedProductId) {
       const products = db.collection('products');
 
@@ -3338,6 +3345,62 @@
       }
 
       return null;
+    }
+
+    async function loadBasicCardPrices() {
+      try {
+        const products = db.collection('products');
+
+        async function getProductPriceByDocId(docId) {
+          try {
+            const snap = await products.doc(docId).get();
+            if (!snap || !snap.exists) return 0;
+            const data = snap.data() || {};
+            const priceValue =
+              data.basePrice ??
+              data.base_price ??
+              data.price ??
+              data.normalPrice ??
+              data.normal_price;
+            const normalized = normalizePriceValue(priceValue);
+            return normalized > 0 ? normalized : 0;
+          } catch (e) {
+            console.error('Error getProductPriceByDocId', docId, e);
+            return 0;
+          }
+        }
+
+        const [basicPlusPrice, basicClassPrice, basicPrivatePrice] = await Promise.all([
+          getProductPriceByDocId('bp_lvl1'),
+          getProductPriceByDocId('BC_lvl1'),
+          getProductPriceByDocId('BPRI_lvl01')
+        ]);
+
+        const formatter = new Intl.NumberFormat('id-ID');
+
+        if (basicPlusPrice > 0) {
+          const el = document.getElementById('price-basic-plus');
+          if (el) {
+            el.textContent = 'IDR ' + formatter.format(basicPlusPrice);
+          }
+        }
+
+        if (basicClassPrice > 0) {
+          const el = document.getElementById('price-basic-class');
+          if (el) {
+            el.textContent = 'IDR ' + formatter.format(basicClassPrice);
+          }
+        }
+
+        if (basicPrivatePrice > 0) {
+          const el = document.getElementById('price-basic-plus-private');
+          if (el) {
+            el.textContent = 'IDR ' + formatter.format(basicPrivatePrice);
+          }
+        }
+      } catch (e) {
+        console.error('Error loadBasicCardPrices', e);
+      }
     }
 
     function buildMaterialCardHtml(item, index) {
@@ -3712,18 +3775,37 @@
 
         const classes = [];
         snapshot.forEach(doc => {
-          const data = doc.data();
-          const name = (data.name || '').toLowerCase();
-          if (name.includes('basic plus')) {
-            classes.push({ id: doc.id, ...data });
+          const data = doc.data() || {};
+          const nameRaw = String(data.name || '');
+          const name = nameRaw.toLowerCase();
+          if (name.includes('basic') && !name.includes('private')) {
+            classes.push({
+              id: doc.id,
+              name: nameRaw,
+              max_seat: Number(data.max_seat || 0),
+              current_joined: Number(data.current_joined || 0),
+              start_date: data.start_date || 'Flexible',
+              mentor_name: data.mentor_name || 'Mentor Dialogika'
+            });
           }
         });
 
         classes.sort((a, b) => {
-          const openA = !isBatchClosed(a.start_date) && (a.max_seat - a.current_joined > 0);
-          const openB = !isBatchClosed(b.start_date) && (b.max_seat - b.current_joined > 0);
-          if (openA !== openB) return openA ? -1 : 1;
-          return new Date(b.start_date) - new Date(a.start_date);
+          const seatsLeftA = a.max_seat - a.current_joined;
+          const seatsLeftB = b.max_seat - b.current_joined;
+          const closedA = isBatchClosed(a.start_date);
+          const closedB = isBatchClosed(b.start_date);
+          const isOpenA = !closedA && seatsLeftA > 0;
+          const isOpenB = !closedB && seatsLeftB > 0;
+
+          if (isOpenA && !isOpenB) return -1;
+          if (!isOpenA && isOpenB) return 1;
+
+          const dateA = new Date(a.start_date);
+          const dateB = new Date(b.start_date);
+          if (isNaN(dateA.getTime())) return 1;
+          if (isNaN(dateB.getTime())) return -1;
+          return dateA - dateB;
         });
 
         const limited = classes.slice(0, 5);
@@ -3804,6 +3886,9 @@
       document.querySelectorAll('[data-feat-key]').forEach(el => {
         const key = el.getAttribute('data-feat-key');
         const icon = el.querySelector('i');
+        if (el.classList.contains('basic-excluded')) {
+          return;
+        }
         
         if (excludedKeys && excludedKeys.includes(key)) {
            if (icon) icon.className = 'bx bxs-x-circle text-danger';
@@ -4178,39 +4263,114 @@
       try {
         const snapshot = await db.collection('class_availability').get();
         const schedules = [];
+        const programLower = String(programName || '').toLowerCase();
+        const combineBasic = programLower.includes('basic') && !programLower.includes('private');
+
         snapshot.forEach(doc => {
-          const data = doc.data();
-          if ((data.name || '').toLowerCase().includes(programName.toLowerCase())) {
-            schedules.push({ id: doc.id, ...data });
+          const data = doc.data() || {};
+          const rawName = String(data.name || '');
+          const nameLower = rawName.toLowerCase();
+
+          let match = false;
+          if (combineBasic) {
+            match = nameLower.includes('basic') && !nameLower.includes('private');
+          } else {
+            match = nameLower.includes(programLower);
           }
+          if (!match) return;
+
+          schedules.push({
+            id: doc.id,
+            name: rawName,
+            max_seat: Number(data.max_seat || 0),
+            current_joined: Number(data.current_joined || 0),
+            start_date: data.start_date || '',
+            mentor_name: data.mentor_name || 'Mentor Dialogika'
+          });
         });
 
         loading.classList.add('d-none');
-        if (schedules.length === 0) { empty.classList.remove('d-none'); return; }
 
-        list.classList.remove('d-none');
-        list.innerHTML = '<div class="row g-3">' + schedules.map(s => {
-          const seatsLeft = (s.max_seat || 0) - (s.current_joined || 0);
-          const isOpen = seatsLeft > 0 && !isBatchClosed(s.start_date);
+        const available = schedules.filter(s => {
+          const seatsLeft = s.max_seat - s.current_joined;
+          const closed = isBatchClosed(s.start_date);
+          const d = new Date(s.start_date);
+          if (isNaN(d.getTime())) return false;
+          return seatsLeft > 0 && !closed;
+        });
+
+        const fullSchedules = schedules.filter(s => {
+          return s.max_seat > 0 && s.current_joined >= s.max_seat;
+        });
+
+        let latestFullSchedule = null;
+        if (fullSchedules.length > 0) {
+          latestFullSchedule = fullSchedules.reduce((latest, current) => {
+            if (!latest) return current;
+            const tLatest = Date.parse(latest.start_date || '') || 0;
+            const tCurrent = Date.parse(current.start_date || '') || 0;
+            return tCurrent > tLatest ? current : latest;
+          }, null);
+        }
+
+        if (available.length === 0) {
+          let html = '';
+          if (latestFullSchedule) {
+            html += `
+              <div class="mb-3">
+                <div class="alert alert-secondary py-2 px-3 mb-0 small text-center" role="status">
+                  ${latestFullSchedule.name} sudah penuh
+                </div>
+              </div>
+            `;
+          } else {
+            html += `<div class="text-center py-3 text-muted small">Saat ini belum ada jadwal yang tersedia.</div>`;
+          }
+          empty.classList.remove('d-none');
+          empty.innerHTML = html;
+          return;
+        }
+
+        available.sort((a, b) => {
+          const da = new Date(a.start_date);
+          const db = new Date(b.start_date);
+          return da - db;
+        });
+
+        let html = '';
+        if (latestFullSchedule) {
+          html += `
+            <div class="mb-3">
+              <div class="alert alert-secondary py-2 px-3 mb-0 small text-center" role="status">
+                ${latestFullSchedule.name} sudah penuh
+              </div>
+            </div>
+          `;
+        }
+
+        html += '<div class="row g-3">' + available.map(s => {
           const dateStr = formatBatchDate(s.start_date);
           return `
             <div class="col-12">
-              <div class="card schedule-card ${!isOpen ? 'disabled' : ''}" 
-                   onclick="${isOpen ? `selectSchedule('${s.id}', '${s.name}', '${dateStr}')` : ''}"
-                   style="border: 2px solid #e0e0e0; border-radius: 12px; cursor: ${isOpen ? 'pointer' : 'not-allowed'};">
+              <div class="card schedule-card" 
+                   onclick="selectSchedule('${s.id}', '${s.name}', '${dateStr}')"
+                   style="border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer;">
                 <div class="card-body p-3">
                   <div class="d-flex justify-content-between">
                     <div>
                       <h6 class="fw-bold mb-1">${s.name}</h6>
                       <small class="text-muted d-block"><i class='bx bx-calendar'></i> ${dateStr}</small>
-                      <small class="text-muted d-block"><i class='bx bx-user'></i> ${s.mentor_name || 'Mentor Dialogika'}</small>
+                      <small class="text-muted d-block"><i class='bx bx-user'></i> ${s.mentor_name}</small>
                     </div>
-                    <span class="badge bg-${isOpen ? 'success' : 'secondary'}">${isOpen ? 'Tersedia' : 'Penuh'}</span>
+                    <span class="badge bg-success">Tersedia</span>
                   </div>
                 </div>
               </div>
             </div>`;
         }).join('') + '</div>';
+
+        list.classList.remove('d-none');
+        list.innerHTML = html;
       } catch (e) { console.error('Error loadSchedules:', e); }
     }
 
@@ -4228,6 +4388,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       loadLearningMaterials();
       loadProductSpecifications();
+      loadBasicCardPrices();
       setupBasicProductRealtime();
       const infoTabButtons = document.querySelectorAll('#courseInfoTabs .nav-link');
       const infoPanes = document.querySelectorAll('.course-info-pane');
