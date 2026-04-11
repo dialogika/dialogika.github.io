@@ -3775,18 +3775,36 @@
 
         const classes = [];
         snapshot.forEach(doc => {
-          const data = doc.data();
-          const name = (data.name || '').toLowerCase();
+          const data = doc.data() || {};
+          const name = String(data.name || '').toLowerCase();
           if (name.includes('basic plus')) {
-            classes.push({ id: doc.id, ...data });
+            classes.push({
+              id: doc.id,
+              name: data.name || '',
+              max_seat: Number(data.max_seat || 0),
+              current_joined: Number(data.current_joined || 0),
+              start_date: data.start_date || 'Flexible',
+              mentor_name: data.mentor_name || 'Mentor Dialogika'
+            });
           }
         });
 
         classes.sort((a, b) => {
-          const openA = !isBatchClosed(a.start_date) && (a.max_seat - a.current_joined > 0);
-          const openB = !isBatchClosed(b.start_date) && (b.max_seat - b.current_joined > 0);
-          if (openA !== openB) return openA ? -1 : 1;
-          return new Date(b.start_date) - new Date(a.start_date);
+          const seatsLeftA = a.max_seat - a.current_joined;
+          const seatsLeftB = b.max_seat - b.current_joined;
+          const closedA = isBatchClosed(a.start_date);
+          const closedB = isBatchClosed(b.start_date);
+          const isOpenA = !closedA && seatsLeftA > 0;
+          const isOpenB = !closedB && seatsLeftB > 0;
+
+          if (isOpenA && !isOpenB) return -1;
+          if (!isOpenA && isOpenB) return 1;
+
+          const dateA = new Date(a.start_date);
+          const dateB = new Date(b.start_date);
+          if (isNaN(dateA.getTime())) return 1;
+          if (isNaN(dateB.getTime())) return -1;
+          return dateA - dateB;
         });
 
         const limited = classes.slice(0, 5);
@@ -4245,38 +4263,101 @@
         const snapshot = await db.collection('class_availability').get();
         const schedules = [];
         snapshot.forEach(doc => {
-          const data = doc.data();
-          if ((data.name || '').toLowerCase().includes(programName.toLowerCase())) {
-            schedules.push({ id: doc.id, ...data });
-          }
+          const data = doc.data() || {};
+          const rawName = String(data.name || '');
+          if (!rawName.toLowerCase().includes(programName.toLowerCase())) return;
+          schedules.push({
+            id: doc.id,
+            name: rawName,
+            max_seat: Number(data.max_seat || 0),
+            current_joined: Number(data.current_joined || 0),
+            start_date: data.start_date || '',
+            mentor_name: data.mentor_name || 'Mentor Dialogika'
+          });
         });
 
         loading.classList.add('d-none');
-        if (schedules.length === 0) { empty.classList.remove('d-none'); return; }
 
-        list.classList.remove('d-none');
-        list.innerHTML = '<div class="row g-3">' + schedules.map(s => {
-          const seatsLeft = (s.max_seat || 0) - (s.current_joined || 0);
-          const isOpen = seatsLeft > 0 && !isBatchClosed(s.start_date);
+        const available = schedules.filter(s => {
+          const seatsLeft = s.max_seat - s.current_joined;
+          const closed = isBatchClosed(s.start_date);
+          const d = new Date(s.start_date);
+          if (isNaN(d.getTime())) return false;
+          return seatsLeft > 0 && !closed;
+        });
+
+        const fullSchedules = schedules.filter(s => {
+          return s.max_seat > 0 && s.current_joined >= s.max_seat;
+        });
+
+        let latestFullSchedule = null;
+        if (fullSchedules.length > 0) {
+          latestFullSchedule = fullSchedules.reduce((latest, current) => {
+            if (!latest) return current;
+            const tLatest = Date.parse(latest.start_date || '') || 0;
+            const tCurrent = Date.parse(current.start_date || '') || 0;
+            return tCurrent > tLatest ? current : latest;
+          }, null);
+        }
+
+        if (available.length === 0) {
+          let html = '';
+          if (latestFullSchedule) {
+            html += `
+              <div class="mb-3">
+                <div class="alert alert-secondary py-2 px-3 mb-0 small text-center" role="status">
+                  ${latestFullSchedule.name} sudah penuh
+                </div>
+              </div>
+            `;
+          } else {
+            html += `<div class="text-center py-3 text-muted small">Saat ini belum ada jadwal yang tersedia.</div>`;
+          }
+          empty.classList.remove('d-none');
+          empty.innerHTML = html;
+          return;
+        }
+
+        available.sort((a, b) => {
+          const da = new Date(a.start_date);
+          const db = new Date(b.start_date);
+          return da - db;
+        });
+
+        let html = '';
+        if (latestFullSchedule) {
+          html += `
+            <div class="mb-3">
+              <div class="alert alert-secondary py-2 px-3 mb-0 small text-center" role="status">
+                ${latestFullSchedule.name} sudah penuh
+              </div>
+            </div>
+          `;
+        }
+
+        html += '<div class="row g-3">' + available.map(s => {
           const dateStr = formatBatchDate(s.start_date);
           return `
             <div class="col-12">
-              <div class="card schedule-card ${!isOpen ? 'disabled' : ''}" 
-                   onclick="${isOpen ? `selectSchedule('${s.id}', '${s.name}', '${dateStr}')` : ''}"
-                   style="border: 2px solid #e0e0e0; border-radius: 12px; cursor: ${isOpen ? 'pointer' : 'not-allowed'};">
+              <div class="card schedule-card" 
+                   onclick="selectSchedule('${s.id}', '${s.name}', '${dateStr}')"
+                   style="border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer;">
                 <div class="card-body p-3">
                   <div class="d-flex justify-content-between">
                     <div>
                       <h6 class="fw-bold mb-1">${s.name}</h6>
                       <small class="text-muted d-block"><i class='bx bx-calendar'></i> ${dateStr}</small>
-                      <small class="text-muted d-block"><i class='bx bx-user'></i> ${s.mentor_name || 'Mentor Dialogika'}</small>
+                      <small class="text-muted d-block"><i class='bx bx-user'></i> ${s.mentor_name}</small>
                     </div>
-                    <span class="badge bg-${isOpen ? 'success' : 'secondary'}">${isOpen ? 'Tersedia' : 'Penuh'}</span>
+                    <span class="badge bg-success">Tersedia</span>
                   </div>
                 </div>
               </div>
             </div>`;
         }).join('') + '</div>';
+
+        list.classList.remove('d-none');
+        list.innerHTML = html;
       } catch (e) { console.error('Error loadSchedules:', e); }
     }
 
