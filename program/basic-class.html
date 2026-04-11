@@ -2299,13 +2299,13 @@
                 <ul class="nav nav-pills rounded justify-content-center d-inline-block my-1 flex-nowrap flex gap-1"
                   id="pills-tab" role="tablist">
                   <li class="nav-item d-inline-block">
-                    <button type="button" class="nav-link px-3 rounded custom-price-button" role="tab"
+                    <button type="button" class="nav-link px-3 rounded custom-price-button active" role="tab"
                       id="basic-package-tab" data-target="basic-plus-content">
                       Basic
                     </button>
                   </li>
                   <li class="nav-item d-inline-block">
-                    <button type="button" class="nav-link px-3 rounded custom-price-button active" id="basicplus-package-tab" role="tab"
+                    <button type="button" class="nav-link px-3 rounded custom-price-button" id="basicplus-package-tab" role="tab"
                       data-target="basic-class-content">
                       Basic Plus
                       <span class="badge-plus-icon"></span>
@@ -2322,7 +2322,7 @@
             <div class="tab-content" id="pills-tabContent">
 
 
-              <div class="tab-pane custom-price-content fade show active" id="basic-class-content" role="tabpanel">
+              <div class="tab-pane custom-price-content fade" id="basic-class-content" role="tabpanel">
                 <div class="row g-0 align-items-center">
 
                   <div class="col-lg-6">
@@ -2524,7 +2524,7 @@
               </div>
 
 
-              <div class="tab-pane custom-price-content fade" id="basic-plus-content" role="tabpanel">
+              <div class="tab-pane custom-price-content fade show active" id="basic-plus-content" role="tabpanel">
                 <div class="row g-0 align-items-center">
 
                   <div class="col-lg-6">
@@ -2798,6 +2798,7 @@
                 <div class="col-md-6">
                   <select name="Program" id="programs" class="form-control" required>
                     <option value="" selected disabled>Program Yang Akan Diambil</option>
+                    <option value="79fadca9-b5f2-4566-91d0-1b5aaa420cdf">Basic Class</option>
                     <option value="ed0a3dcf-c582-4c6d-918e-98842d75be7c">Basic Plus</option>
                     <option value="7a4ccb01-3ac3-497c-b7b3-e8ab6683e8c0">Basic Plus Private</option>
                   </select>
@@ -3213,6 +3214,7 @@
     let DISCOUNT_AMOUNT = 0;
     let REFERRAL_CODE = '';
     let BASIC_AUTO_REFERRAL = null;
+    let isReferralValid = true;
 
     // Initialize Firebase
     if (!firebase.apps.length) {
@@ -3775,21 +3777,25 @@
         helper.innerHTML = '<span style="color: #6c757d;">Memeriksa kode...</span>';
         input.style.backgroundColor = '';
         input.style.borderColor = '';
+        isReferralValid = false;
       } else if (status === 'valid') {
         icon.innerHTML = '<i class="bx bxs-check-circle" style="font-size: 20px; color: #4caf50;"></i>';
         helper.innerHTML = `<span style="color: #4caf50; font-weight: 600;"><i class="bx bxs-check-circle"></i> ${message}</span>`;
         input.style.backgroundColor = '#e8f5e9';
         input.style.borderColor = '#4caf50';
+        isReferralValid = true;
       } else if (status === 'invalid') {
         icon.innerHTML = '<i class="bx bxs-x-circle" style="font-size: 20px; color: #f44336;"></i>';
         helper.innerHTML = `<span style="color: #f44336;">${message}</span>`;
         input.style.backgroundColor = '#ffebee';
         input.style.borderColor = '#f44336';
+        isReferralValid = false;
       } else {
         icon.style.display = 'none';
         helper.innerHTML = 'Masukkan kode referral Anda';
         input.style.backgroundColor = '';
         input.style.borderColor = '';
+        isReferralValid = true;
       }
       updateReferralBenefitsSummary();
     };
@@ -4149,12 +4155,12 @@
             btn.style.display = 'none';
           });
         } else {
-          window.showReferralStatus('invalid', 'Kode tidak valid, kedaluwarsa, atau habis');
+          window.showReferralStatus('invalid', 'Kode referral tidak valid. Jika tidak memiliki kode, silakan kosongkan kolom ini.');
           resetUserReferralDiscount();
         }
       } catch (e) { 
           console.error(e);
-          window.showReferralStatus('invalid', 'Gagal memverifikasi'); 
+          window.showReferralStatus('invalid', 'Gagal memverifikasi kode referral. Silakan coba lagi atau kosongkan kolom ini.'); 
       }
     }
 
@@ -4331,6 +4337,7 @@
       const programSelect = document.getElementById('programs');
       const btnSelectSchedule = document.getElementById('btn-select-schedule');
       const programMapping = {
+        '79fadca9-b5f2-4566-91d0-1b5aaa420cdf': 'Basic Class',
         'ed0a3dcf-c582-4c6d-918e-98842d75be7c': 'Basic Plus',
         '7a4ccb01-3ac3-497c-b7b3-e8ab6683e8c0': 'Basic Plus Private'
       };
@@ -4376,10 +4383,23 @@
         form.addEventListener('submit', function(e) {
           e.preventDefault();
 
+          const referralInputEl = document.getElementById('referral-code');
+          const currentReferral = referralInputEl ? referralInputEl.value.trim() : '';
+          if (!isReferralValid && currentReferral) {
+            window.showReferralStatus('invalid', 'Kode referral tidak valid. Jika tidak memiliki kode, silakan kosongkan kolom ini.');
+            if (referralInputEl) {
+              referralInputEl.focus();
+              try {
+                referralInputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              } catch (_) {}
+            }
+            return;
+          }
+
           const name = document.getElementById('names').value;
           const phone = document.getElementById('whatsapp-number').value;
           const referralCode = document.getElementById('referral-code').value;
-          const programName = programMapping[programSelect.value] || 'Basic Plus Package';
+          const programName = programMapping[programSelect.value] || 'Basic Class';
 
           let basePrice = 0;
           try {

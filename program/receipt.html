@@ -742,7 +742,7 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>First Class</h2>
+                    <h2 id="receipt-program-title">First Class</h2>
                     <ol>
                         <li><a href="../index.html">Home</a></li>
                         <li><a href="index.html">Program</a></li>
@@ -897,7 +897,7 @@
 
         <div class="footer-note">
             <p>Admin kami akan segera menghubungi Anda dalam waktu maksimal 1x24 jam untuk aktivasi grup kelas.</p>
-            <a href="first-class.html" class="text-primary fw-bold text-decoration-none">Kembali ke Beranda</a>
+            <a href="index.html" class="text-primary fw-bold text-decoration-none">Kembali ke Beranda</a>
         </div>
     </div>
 
@@ -1118,7 +1118,9 @@
             if (receiptData.leadName) $('#val-pendaftar-name').text(receiptData.leadName);
             if (receiptData.leadPhone) $('#val-pendaftar-phone').text(receiptData.leadPhone);
             if (receiptData.className || receiptData.productName) {
-                $('#val-program-name').text(receiptData.productName || receiptData.className);
+                const programName = receiptData.productName || receiptData.className;
+                $('#val-program-name').text(programName);
+                $('#receipt-program-title').text(programName);
             }
 
             const methodDisplay = receiptData.paymentMethod
