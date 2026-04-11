@@ -3918,12 +3918,20 @@
 
             function resetDiscountValuesFromActiveReferral() {
                 if (activeReferral) {
-                    DISCOUNT_RATE = Number(activeReferral.discountPercent || 0) > 0
-                        ? Number(activeReferral.discountPercent) / 100
-                        : 0;
-                    DISCOUNT_AMOUNT = Number(activeReferral.discountAmount || 0) > 0
-                        ? Number(activeReferral.discountAmount)
-                        : 0;
+                    const percent = Number(activeReferral.discountPercent || 0);
+                    const amount = Number(activeReferral.discountAmount || 0);
+
+                    if (percent > 0) {
+                        DISCOUNT_RATE = percent / 100;
+                        DISCOUNT_AMOUNT = 0;
+                    } else if (amount > 0) {
+                        DISCOUNT_RATE = 0;
+                        DISCOUNT_AMOUNT = amount;
+                    } else {
+                        DISCOUNT_RATE = 0;
+                        DISCOUNT_AMOUNT = 0;
+                    }
+
                     REFERRAL_CODE = activeReferral.code || '';
                     return;
                 }
@@ -4225,9 +4233,7 @@
                         } else {
                             newPrice = originalPrice * (1 - DISCOUNT_RATE);
                         }
-
-                        // Round to nearest thousands for cleaner price
-                        newPrice = Math.ceil(newPrice / 1000) * 1000;
+                        newPrice = Math.round(newPrice);
 
                         const formattedNewPrice = 'IDR ' + newPrice.toLocaleString('id-ID');
                         const formattedOriginalPrice = 'IDR ' + originalPrice.toLocaleString('id-ID');
