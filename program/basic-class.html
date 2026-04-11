@@ -2333,7 +2333,7 @@
 
                       <h5 class="fw-normal">Basic Plus</h5>
                       <div style="white-space: nowrap; margin-top: 12px; position: relative; z-index: 2;">
-                        <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 1.000.000</h1>
+                        <h1 id="price-basic-plus" class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 1.500.000</h1>
                         <button id="basic-claim-discount-btn-main" class="btn btn-warning btn-sm claim-discount-btn"
                           onclick="triggerBasicPromoModal()"
                           style="display: none; font-size: 9px; padding: 3px 10px; border-radius: 18px; transition: all 0.3s ease; vertical-align: middle; margin-left: 6px; position: relative; z-index: 3;">
@@ -3248,6 +3248,13 @@
       return null;
     }
 
+    function normalizePriceValue(value) {
+      if (typeof value === 'number' && !Number.isNaN(value)) return value;
+      const raw = String(value || '').replace(/[^\d]/g, '');
+      const parsed = parseInt(raw, 10);
+      return Number.isNaN(parsed) ? 0 : parsed;
+    }
+
     async function resolveBasicPlusProductDoc(forcedProductId) {
       const products = db.collection('products');
 
@@ -3338,6 +3345,62 @@
       }
 
       return null;
+    }
+
+    async function loadBasicCardPrices() {
+      try {
+        const products = db.collection('products');
+
+        async function getProductPriceByDocId(docId) {
+          try {
+            const snap = await products.doc(docId).get();
+            if (!snap || !snap.exists) return 0;
+            const data = snap.data() || {};
+            const priceValue =
+              data.basePrice ??
+              data.base_price ??
+              data.price ??
+              data.normalPrice ??
+              data.normal_price;
+            const normalized = normalizePriceValue(priceValue);
+            return normalized > 0 ? normalized : 0;
+          } catch (e) {
+            console.error('Error getProductPriceByDocId', docId, e);
+            return 0;
+          }
+        }
+
+        const [basicPlusPrice, basicClassPrice, basicPrivatePrice] = await Promise.all([
+          getProductPriceByDocId('bp_lvl1'),
+          getProductPriceByDocId('BC_lvl1'),
+          getProductPriceByDocId('BPRI_lvl01')
+        ]);
+
+        const formatter = new Intl.NumberFormat('id-ID');
+
+        if (basicPlusPrice > 0) {
+          const el = document.getElementById('price-basic-plus');
+          if (el) {
+            el.textContent = 'IDR ' + formatter.format(basicPlusPrice);
+          }
+        }
+
+        if (basicClassPrice > 0) {
+          const el = document.getElementById('price-basic-class');
+          if (el) {
+            el.textContent = 'IDR ' + formatter.format(basicClassPrice);
+          }
+        }
+
+        if (basicPrivatePrice > 0) {
+          const el = document.getElementById('price-basic-plus-private');
+          if (el) {
+            el.textContent = 'IDR ' + formatter.format(basicPrivatePrice);
+          }
+        }
+      } catch (e) {
+        console.error('Error loadBasicCardPrices', e);
+      }
     }
 
     function buildMaterialCardHtml(item, index) {
@@ -3804,6 +3867,9 @@
       document.querySelectorAll('[data-feat-key]').forEach(el => {
         const key = el.getAttribute('data-feat-key');
         const icon = el.querySelector('i');
+        if (el.classList.contains('basic-excluded')) {
+          return;
+        }
         
         if (excludedKeys && excludedKeys.includes(key)) {
            if (icon) icon.className = 'bx bxs-x-circle text-danger';
@@ -4228,6 +4294,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       loadLearningMaterials();
       loadProductSpecifications();
+      loadBasicCardPrices();
       setupBasicProductRealtime();
       const infoTabButtons = document.querySelectorAll('#courseInfoTabs .nav-link');
       const infoPanes = document.querySelectorAll('.course-info-pane');
