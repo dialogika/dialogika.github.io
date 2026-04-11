@@ -3776,11 +3776,12 @@
         const classes = [];
         snapshot.forEach(doc => {
           const data = doc.data() || {};
-          const name = String(data.name || '').toLowerCase();
-          if (name.includes('basic plus')) {
+          const nameRaw = String(data.name || '');
+          const name = nameRaw.toLowerCase();
+          if (name.includes('basic') && !name.includes('private')) {
             classes.push({
               id: doc.id,
-              name: data.name || '',
+              name: nameRaw,
               max_seat: Number(data.max_seat || 0),
               current_joined: Number(data.current_joined || 0),
               start_date: data.start_date || 'Flexible',
@@ -4262,10 +4263,22 @@
       try {
         const snapshot = await db.collection('class_availability').get();
         const schedules = [];
+        const programLower = String(programName || '').toLowerCase();
+        const combineBasic = programLower.includes('basic') && !programLower.includes('private');
+
         snapshot.forEach(doc => {
           const data = doc.data() || {};
           const rawName = String(data.name || '');
-          if (!rawName.toLowerCase().includes(programName.toLowerCase())) return;
+          const nameLower = rawName.toLowerCase();
+
+          let match = false;
+          if (combineBasic) {
+            match = nameLower.includes('basic') && !nameLower.includes('private');
+          } else {
+            match = nameLower.includes(programLower);
+          }
+          if (!match) return;
+
           schedules.push({
             id: doc.id,
             name: rawName,
