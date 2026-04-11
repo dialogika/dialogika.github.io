@@ -2867,7 +2867,7 @@
                                 </div>
 
                                 <!-- Hidden input to store selected schedule -->
-                                <input type="hidden" id="selected-schedule-id" name="ScheduleId" value="">
+                                <input type="hidden" id="selected-schedule-id" name="ScheduleId" value="" data-program-id="">
 
                                 <div class="col-md-12">
                                     <div class="position-relative">
@@ -3645,7 +3645,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>  
     </div>
 
     <!-- Schedule Selection Modal -->
@@ -3694,16 +3694,34 @@
             // Configuration
             const PROMO_STORAGE_KEY = 'dialogika_firstkids_promo_claimed';
             const PROMO_CODE_KEY = 'dialogika_firstkids_promo_code';
-            const PRODUCT_ID = 'FK_LVL1';
-            let DISCOUNT_RATE = 0.4; // Default 0% Discount
-            let REFERRAL_CODE = '';
+            const PROMO_APPLIED_KEY = 'dialogika_firstkids_promo_applied';
             const QUOTA_START = 5;
+            const DEFAULT_PRODUCT_ID = 'FK_LVL1';
+            const FIRST_KIDS_PRODUCT_IDS = new Set([
+                'a80d7b7d-b2b1-40a6-8527-88d4f923607b',
+                '7945f652-23a8-456f-9a71-32da58cf4919',
+                'first kids surabaya',
+                'first kids private surabaya',
+                'first kids jakarta',
+                'first kids private jakarta',
+                'first kids tangsel',
+                'first kids private tangsel',
+                'first kids pontianak',
+                'first kids private pontianak',
+                'fk_lvl1'
+            ]);
+            const FIRST_KIDS_PRODUCT_KEYWORDS = ['first kids', 'kids private', 'fk_lvl'];
+
+            let DISCOUNT_RATE = 0;
+            let REFERRAL_CODE = '';
 
             // State
             let promoActive = false;
+            let promoEligible = false;
             let quotaCount = QUOTA_START;
             let activeReferral = null;
-            let hasPromoForProduct = false;
+            let referralValidationState = 'empty';
+            let referralLastCheckedCode = '';
 
             // Elements
             const modalEl = document.getElementById('promoDiscountModal');
@@ -3721,15 +3739,12 @@
             // Keep claim buttons hidden by default until promo availability is confirmed.
             setClaimButtonsVisible(false);
 
-            // Bootstrap Modal Instance
-            let promoModal;
-            if (typeof bootstrap !== 'undefined') {
-                promoModal = new bootstrap.Modal(modalEl);
+            function normalizeProductToken(value) {
+                return String(value || '').trim().toLowerCase();
             }
 
-            // Load Active Referral from Firebase
-            function extractProductIds(ref) {
-                if (!ref) return [];
+            function extractReferralProductTokens(ref) {
+                if (!ref || typeof ref !== 'object') return [];
                 const raw = Array.isArray(ref.productIds)
                     ? ref.productIds
                     : Array.isArray(ref.products)
@@ -3737,26 +3752,59 @@
                         : Array.isArray(ref.product_ids)
                             ? ref.product_ids
                             : [];
-                return raw.map(item => {
-                    if (item && typeof item === 'object') {
-                        return item.productId || item.product_id || item.id || "";
-                    }
-                    return item;
+
+                return raw
+                    .map(item => {
+                        if (item && typeof item === 'object') {
+                            return (
+                                item.productId ||
+                                item.product_id ||
+                                item.id ||
+                                item.name ||
+                                item.productName ||
+                                ''
+                            );
+                        }
+                        return item;
+                    })
+                    .map(normalizeProductToken)
+                    .filter(Boolean);
+            }
+
+            function isReferralForFirstKidsProduct(ref) {
+                const tokens = extractReferralProductTokens(ref);
+                if (!tokens.length) return false;
+                return tokens.some(token => {
+                    if (FIRST_KIDS_PRODUCT_IDS.has(token)) return true;
+                    return FIRST_KIDS_PRODUCT_KEYWORDS.some(keyword => token.includes(keyword));
                 });
             }
 
-            function isReferralForProduct(ref, productId) {
-                const target = String(productId || '').trim().toUpperCase();
-                const ids = extractProductIds(ref).map(id => String(id || '').trim().toUpperCase());
-                if (!ids.length) return false;
-                return ids.includes(target);
+            function resetDiscountValuesFromActiveReferral() {
+                if (activeReferral) {
+                    DISCOUNT_RATE = Number(activeReferral.discountPercent || 0) > 0
+                        ? Number(activeReferral.discountPercent) / 100
+                        : 0;
+                    REFERRAL_CODE = activeReferral.code || '';
+                    return;
+                }
+
+                DISCOUNT_RATE = 0;
+                REFERRAL_CODE = '';
             }
 
+            // Bootstrap Modal Instance
+            let promoModal;
+            if (typeof bootstrap !== 'undefined') {
+                promoModal = new bootstrap.Modal(modalEl);
+            }
+
+            // Load Active Referral from Firebase
             async function loadActiveReferral() {
                 try {
                     // Wait for Firebase to be initialized
                     if (!firebase || !firebase.firestore) {
-                        console.log('Firebase not available, using default discount');
+                        console.log('Firebase not available, promo disabled');
                         return null;
                     }
 
@@ -3776,6 +3824,7 @@
                     const activeDiscounts = referrals.filter(ref => {
                         // Check if it's a discount type
                         if ((ref.functionType || '').toLowerCase() !== 'discount') return false;
+                        if (Number(ref.discountPercent || 0) <= 0) return false;
 
                         // Only show system referrals in the popup (not user-specific ones)
                         if ((ref.holderType || 'system') === 'user') return false;
@@ -3791,7 +3840,7 @@
                         const usedCount = ref.usedCount || 0;
                         if (usedCount >= maxUsage) return false;
 
-                        return isReferralForProduct(ref, PRODUCT_ID);
+                        return isReferralForFirstKidsProduct(ref);
                     });
 
                     if (activeDiscounts.length === 0) {
@@ -3817,42 +3866,60 @@
             async function initializePromo() {
                 const referral = await loadActiveReferral();
 
-                if (referral) {
-                    hasPromoForProduct = true;
-                    setClaimButtonsVisible(true);
-                    activeReferral = referral;
-                    REFERRAL_CODE = referral.code || '';
-
-                    // Update discount rate from Firebase
-                    if (referral.discountPercent && referral.discountPercent > 0) {
-                        DISCOUNT_RATE = referral.discountPercent / 100;
-                    }
-
-                    // Store excluded features for later use (only apply when claimed)
-                    // Do NOT call updateFeaturesDisplay here - features should only be
-                    // crossed out AFTER the user claims the promo
-
-                    // Update modal UI with real data
-                    const discountText = `HEMAT ${Math.round(DISCOUNT_RATE * 100)}%`;
-
-                    const discountLabel = modalEl.querySelector('.fw-bold.text-primary.mb-0');
-                    if (discountLabel) {
-                        discountLabel.textContent = discountText;
-                    }
-
-                    // Update quota if available
-                    const remaining = (referral.maxUsage || 999) - (referral.usedCount || 0);
-                    if (remaining < QUOTA_START) {
-                        quotaCount = Math.max(remaining, 2);
-                        if (quotaEl) quotaEl.textContent = quotaCount;
-                    }
-
-                    console.log('Loaded referral:', REFERRAL_CODE, 'Discount:', DISCOUNT_RATE * 100 + '%');
-                    setupPromoScrollTrigger();
-                } else {
-                    hasPromoForProduct = false;
+                if (!referral) {
+                    promoEligible = false;
+                    activeReferral = null;
+                    resetDiscountValuesFromActiveReferral();
                     setClaimButtonsVisible(false);
-                    console.log('No active product referral found. Promo modal disabled.');
+
+                    sessionStorage.removeItem(PROMO_STORAGE_KEY);
+                    sessionStorage.removeItem(PROMO_CODE_KEY);
+                    sessionStorage.removeItem(PROMO_APPLIED_KEY);
+
+                    resetDiscountDOM();
+                    updateFeaturesDisplay([]);
+                    showReferralStatus('reset');
+                    console.log('No active First Kids referral found. Promo hidden.');
+                    return;
+                }
+
+                promoEligible = true;
+                activeReferral = referral;
+                resetDiscountValuesFromActiveReferral();
+                setClaimButtonsVisible(true);
+
+                // Update modal UI with real data
+                const percentValue = Math.round(DISCOUNT_RATE * 100);
+                const discountText = `HEMAT ${percentValue}%`;
+
+                const discountLabel = modalEl.querySelector('.fw-bold.text-primary.mb-0');
+                if (discountLabel) {
+                    discountLabel.textContent = discountText;
+                }
+
+                // Update quota if available
+                const remaining = (referral.maxUsage || 999) - (referral.usedCount || 0);
+                if (remaining < QUOTA_START) {
+                    quotaCount = Math.max(remaining, 2);
+                    if (quotaEl) quotaEl.textContent = quotaCount;
+                }
+
+                console.log('Loaded referral:', REFERRAL_CODE, 'Discount:', DISCOUNT_RATE * 100 + '%');
+                setupPromoScrollTrigger();
+
+                const claimed = sessionStorage.getItem(PROMO_STORAGE_KEY) === 'true';
+                const applied = sessionStorage.getItem(PROMO_APPLIED_KEY) === 'true';
+
+                if (applied) {
+                    promoActive = true;
+                    applyDiscountToDOM();
+                    if (activeReferral && activeReferral.excludedFeatures) {
+                        updateFeaturesDisplay(activeReferral.excludedFeatures);
+                    }
+                    updateReferralCodeField();
+                } else if (claimed) {
+                    renderUseCouponButtons();
+                    updateReferralCodeField();
                 }
             }
 
@@ -3861,8 +3928,7 @@
 
             // Global function to trigger promo modal manually
             window.triggerPromoModal = function () {
-                if (!hasPromoForProduct) {
-                    console.log('Promo modal blocked: no active referral for this product.');
+                if (!promoEligible || !promoModal) {
                     return;
                 }
 
@@ -3882,7 +3948,7 @@
 
             // 1. Trigger Modal on Scroll
             function setupPromoScrollTrigger() {
-                if (!hasPromoForProduct || !pricingSection || !promoModal || sessionStorage.getItem('promoModalSeen')) {
+                if (!promoEligible || !pricingSection || !promoModal || sessionStorage.getItem('promoModalSeen')) {
                     return;
                 }
 
@@ -3891,7 +3957,7 @@
                         if (entry.isIntersecting) {
                             // Show modal after delay
                             setTimeout(() => {
-                                if (hasPromoForProduct && promoModal && !promoActive) {
+                                if (promoEligible && promoModal && !promoActive) {
                                     promoModal.show();
                                     sessionStorage.setItem('promoModalSeen', 'true');
                                     startQuotaSimulation();
@@ -3921,6 +3987,9 @@
 
             // 3. Claim Discount Function
             window.claimPromoDiscount = function () {
+                if (!promoEligible || !activeReferral) {
+                    return;
+                }
                 promoActive = true;
                 btnClaim.innerHTML = '<i class="bx bx-check-circle"></i> BERHASIL DIKLAIM!';
                 btnClaim.classList.remove('btn-primary');
@@ -3948,10 +4017,10 @@
 
             // 4. Render 'Use Coupon' Buttons
             function renderUseCouponButtons() {
-                if (sessionStorage.getItem('dialogika_firstkids_promo_applied') === 'true') return;
+                if (!promoEligible || sessionStorage.getItem(PROMO_APPLIED_KEY) === 'true') return;
 
                 const registerButtons = document.querySelectorAll('.title-change-registration');
-                const discountPercent = Math.round(DISCOUNT_RATE * 100);
+                const discountLabel = Math.round(DISCOUNT_RATE * 100) + '%';
 
                 registerButtons.forEach(btn => {
                     const parent = btn.parentElement;
@@ -3959,7 +4028,7 @@
 
                     const couponBtn = document.createElement('button');
                     couponBtn.className = 'btn btn-warning w-100 mb-2 btn-use-coupon fw-bold text-dark';
-                    couponBtn.innerHTML = `<i class="bx bxs-coupon"></i> Gunakan Kupon Hemat ${discountPercent}%`;
+                    couponBtn.innerHTML = `<i class="bx bxs-coupon"></i> Gunakan Kupon Hemat ${discountLabel}`;
                     couponBtn.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
                     couponBtn.onclick = function () {
                         applyDiscountToDOM();
@@ -3978,9 +4047,12 @@
 
             // 5. Apply Discount to DOM
             function applyDiscountToDOM() {
-                sessionStorage.setItem('dialogika_firstkids_promo_applied', 'true');
+                if (DISCOUNT_RATE <= 0) return;
+
+                sessionStorage.setItem(PROMO_APPLIED_KEY, 'true');
                 const priceTitles = document.querySelectorAll('.pricing-title');
                 const discountPercent = Math.round(DISCOUNT_RATE * 100);
+                const discountBadgeText = `HEMAT ${discountPercent}%`;
 
                 // Hide all claim discount buttons
                 document.querySelectorAll('.claim-discount-btn').forEach(btn => {
@@ -4004,10 +4076,9 @@
                         const originalPrice = parseInt(priceMatch[1].replace(/\./g, ''));
 
                         // Calculate new price
-                        let newPrice = originalPrice - (originalPrice * DISCOUNT_RATE);
+                        let newPrice = originalPrice * (1 - DISCOUNT_RATE);
 
-                        // Round to nearest thousands for cleaner price
-                        newPrice = Math.ceil(newPrice / 1000) * 1000;
+                        newPrice = Math.round(newPrice);
 
                         const formattedNewPrice = 'IDR ' + newPrice.toLocaleString('id-ID');
                         const formattedOriginalPrice = 'IDR ' + originalPrice.toLocaleString('id-ID');
@@ -4022,7 +4093,7 @@
                             ${formattedNewPrice}
                             <span class="d-block f-13 text-muted">
                                 <strike>${formattedOriginalPrice}</strike> 
-                                <span class="badge bg-danger ms-1" style="font-size: 10px;">HEMAT ${discountPercent}%</span>
+                                <span class="badge bg-danger ms-1" style="font-size: 10px;">${discountBadgeText}</span>
                                 ${referralBadge}
                             </span>
                         `;
@@ -4033,22 +4104,6 @@
                 });
             }
 
-            // Check if already claimed/applied in this session
-            const claimed = sessionStorage.getItem(PROMO_STORAGE_KEY) === 'true';
-            const applied = sessionStorage.getItem('dialogika_firstkids_promo_applied') === 'true';
-
-            if (applied) {
-                applyDiscountToDOM();
-                // Also apply feature exclusions for already-claimed promo
-                if (activeReferral && activeReferral.excludedFeatures) {
-                    updateFeaturesDisplay(activeReferral.excludedFeatures);
-                }
-                updateReferralCodeField();
-            } else if (claimed) {
-                renderUseCouponButtons();
-                updateReferralCodeField();
-            }
-
             // Update referral code field in contact form
             function updateReferralCodeField() {
                 const referralCode = sessionStorage.getItem(PROMO_CODE_KEY);
@@ -4057,6 +4112,8 @@
                 // Only auto-fill if user hasn't manually entered a code
                 if (referralInput && referralCode && !referralInput.value.trim()) {
                     referralInput.value = referralCode;
+                    referralLastCheckedCode = referralCode.trim().toUpperCase();
+                    referralValidationState = 'valid';
                     showReferralStatus('valid', 'Kode referral berhasil diterapkan');
                 }
             }
@@ -4146,7 +4203,9 @@
 
                 if (!container || !list || !textarea) return;
 
-                if (!code) {
+                const shouldShowBenefits = !!code && referralValidationState === 'valid';
+
+                if (!shouldShowBenefits) {
                     container.classList.add('d-none');
                     textarea.style.paddingTop = '12px';
                     return;
@@ -4184,9 +4243,10 @@
                 let receivedHtml = ''; // Kiri: Yang didapat (Active)
                 let notReceivedHtml = ''; // Kanan: Yang tidak didapat (Excluded)
                 const pct = Math.round(DISCOUNT_RATE * 100);
+                const amt = 0;
 
                 // 1. Fill Left Column (Received) - Discount and Active Features
-                if (pct > 0) {
+                if (pct > 0 || amt > 0) {
                     const discountText = `Potongan ${pct}%`;
                     receivedHtml += `
                         <div class="d-flex align-items-center mb-1">
@@ -4230,7 +4290,7 @@
                     container.classList.remove('d-none');
                     // Store full list for modal
                     container.dataset.fullBenefits = JSON.stringify({
-                        pct, feats: activeFeats, excluded: excludedFeats
+                        pct, amt, feats: activeFeats, excluded: excludedFeats
                     });
 
                     setTimeout(() => {
@@ -4254,7 +4314,7 @@
                     const data = JSON.parse(container.dataset.fullBenefits || '{}');
                     let html = '';
 
-                    if (data.pct > 0) {
+                    if (data.pct > 0 || data.amt > 0) {
                         const discountText = `Potongan Harga ${data.pct}%`;
                         html += `
                             <div class="col-12">
@@ -4306,6 +4366,7 @@
             // Validate user-specific referral code against Firebase
             async function validateUserReferralCode(code) {
                 if (!code || !code.trim()) {
+                    referralLastCheckedCode = '';
                     showReferralStatus('reset');
                     // Reset discount if previously applied by user referral
                     resetUserReferralDiscount();
@@ -4313,6 +4374,7 @@
                 }
 
                 code = code.trim().toUpperCase();
+                referralLastCheckedCode = code;
                 showReferralStatus('loading');
 
                 try {
@@ -4338,7 +4400,8 @@
                         if ((ref.code || '').toUpperCase() !== code) return false;
                         if ((ref.holderType || 'system') !== 'user') return false;
                         if ((ref.functionType || '').toLowerCase() !== 'discount') return false;
-                        if (!isReferralForProduct(ref, PRODUCT_ID)) return false;
+                        if (Number(ref.discountPercent || 0) <= 0) return false;
+                        if (!isReferralForFirstKidsProduct(ref)) return false;
 
                         // Check validity
                         const createdAt = ref.createdAtMs || 0;
@@ -4356,13 +4419,11 @@
 
                     if (matchingRef) {
                         // Valid! Apply discount
-                        const discountPct = matchingRef.discountPercent || 0;
+                        const discountPct = Number(matchingRef.discountPercent || 0);
                         const excludedFeatures = matchingRef.excludedFeatures || [];
 
                         // Update global discount settings
-                        if (discountPct > 0) {
-                            DISCOUNT_RATE = discountPct / 100;
-                        }
+                        DISCOUNT_RATE = discountPct > 0 ? discountPct / 100 : 0;
                         REFERRAL_CODE = matchingRef.code || code;
 
                         // Apply feature exclusions first
@@ -4373,7 +4434,7 @@
                         applyDiscountToDOM();
 
                         // Finally update the status (this will also trigger summary update)
-                        const discountInfo = `Diskon ${discountPct}%`;
+                        const discountInfo = `Diskon ${Math.round(DISCOUNT_RATE * 100)}%`;
                         showReferralStatus('valid', `Kode valid! ${discountInfo} diterapkan`);
 
                         // Store in session last
@@ -4384,7 +4445,7 @@
                         const systemMatch = referrals.find(ref => {
                             if ((ref.code || '').toUpperCase() !== code) return false;
                             if ((ref.holderType || 'system') !== 'system') return false;
-                            return isReferralForProduct(ref, PRODUCT_ID);
+                            return isReferralForFirstKidsProduct(ref);
                         });
                         if (systemMatch) {
                             showReferralStatus('invalid', 'Kode ini adalah promo sistem, silakan klaim melalui tombol "Claim Diskon"');
@@ -4401,7 +4462,7 @@
 
             // Reset discount DOM (remove any applied discounts so new one can be applied)
             function resetDiscountDOM() {
-                sessionStorage.removeItem('dialogika_firstkids_promo_applied');
+                sessionStorage.removeItem(PROMO_APPLIED_KEY);
                 const priceTitles = document.querySelectorAll('.pricing-title');
                 priceTitles.forEach(title => {
                     if (title.dataset.discounted && title.dataset.originalHtml) {
@@ -4427,17 +4488,15 @@
                 // Clear session
                 sessionStorage.removeItem(PROMO_CODE_KEY);
                 sessionStorage.removeItem(PROMO_STORAGE_KEY);
+                sessionStorage.removeItem(PROMO_APPLIED_KEY);
 
                 // Reset globals
-                DISCOUNT_RATE = 0.40; // Default
-                REFERRAL_CODE = '';
+                resetDiscountValuesFromActiveReferral();
+                referralLastCheckedCode = '';
 
                 if (!promoActive) {
                     resetDiscountDOM();
-                    // Show claim discount buttons again
-                    document.querySelectorAll('.claim-discount-btn').forEach(btn => {
-                        btn.style.display = '';
-                    });
+                    setClaimButtonsVisible(promoEligible);
                 }
             }
 
@@ -4457,6 +4516,8 @@
                         return;
                     }
 
+                    referralValidationState = 'loading';
+
                     // Debounce: wait 600ms after user stops typing
                     referralDebounceTimer = setTimeout(() => {
                         validateUserReferralCode(value);
@@ -4470,14 +4531,66 @@
             // Handle Contact Form Submission to Checkout
             const contactForm = document.getElementById('uploadForm');
             if (contactForm) {
-                contactForm.addEventListener('submit', function (e) {
+                const loadingEl = contactForm.querySelector('.loading');
+                const sentEl = contactForm.querySelector('.sent-message');
+                const errorEl = contactForm.querySelector('.error-message');
+
+                function resetFormFeedback() {
+                    if (loadingEl) loadingEl.classList.remove('d-block');
+                    if (sentEl) sentEl.classList.remove('d-block');
+                    if (errorEl) errorEl.classList.remove('d-block');
+                }
+
+                // Keep vendor php-email-form handler from showing false success state.
+                contactForm.addEventListener('submit', async function (e) {
                     e.preventDefault();
+                    e.stopPropagation();
+                    if (typeof e.stopImmediatePropagation === 'function') {
+                        e.stopImmediatePropagation();
+                    }
+
+                    resetFormFeedback();
+
+                    if (!contactForm.checkValidity()) {
+                        contactForm.reportValidity();
+                        return;
+                    }
 
                     // Capture data
                     const name = document.getElementById('names').value;
                     const phone = document.getElementById('whatsapp-number').value;
                     const programId = document.getElementById('programs').value;
                     const programName = document.querySelector(`#programs option[value="${programId}"]`)?.textContent || 'First Kids Package';
+                    const isPrivateProgram = programName.toLowerCase().includes('private');
+                    const selectedScheduleEl = document.getElementById('selected-schedule-id');
+                    const selectedScheduleId = (selectedScheduleEl?.value || '').trim();
+                    const selectedScheduleProgramId = (selectedScheduleEl?.dataset?.programId || '').trim();
+                    const referralValue = (document.getElementById('referral-code')?.value || '').trim();
+
+                    if (!isPrivateProgram && (!selectedScheduleId || selectedScheduleId.toLowerCase() === 'flexible' || selectedScheduleProgramId !== programId)) {
+                        alert('Silakan pilih jadwal kelas terlebih dahulu untuk program non-private.');
+                        const scheduleBtn = document.getElementById('btn-select-schedule');
+                        if (scheduleBtn) scheduleBtn.focus();
+                        return;
+                    }
+
+                    const isClaimedSystemReferral =
+                        promoEligible &&
+                        sessionStorage.getItem(PROMO_STORAGE_KEY) === 'true' &&
+                        !!REFERRAL_CODE &&
+                        referralValue.toUpperCase() === REFERRAL_CODE.toUpperCase();
+
+                    if (referralValue && !isClaimedSystemReferral) {
+                        const normalizedReferral = referralValue.toUpperCase();
+                        if (referralLastCheckedCode !== normalizedReferral || referralValidationState === 'loading') {
+                            await validateUserReferralCode(referralValue);
+                        }
+
+                        if (referralValidationState !== 'valid') {
+                            alert('Kode referral tidak valid. Kosongkan atau gunakan kode referral yang valid untuk melanjutkan.');
+                            return;
+                        }
+                    }
 
                     // Get ORIGINAL price (before any discount) from the selected program
                     let basePrice = 3000000;
@@ -4504,10 +4617,10 @@
                         program: programName,
                         batchName: window._selectedBatchName || '',
                         batchSchedule: window._selectedBatchSchedule || '',
-                        productId: PRODUCT_ID,
+                        productId: programId || DEFAULT_PRODUCT_ID,
                         basePrice: basePrice,
-                        discountRate: sessionStorage.getItem('dialogika_firstkids_promo_applied') === 'true' ? (window.DISCOUNT_RATE || 0) : 0,
-                        referralCode: document.getElementById('referral-code')?.value || ''
+                        discountRate: sessionStorage.getItem(PROMO_APPLIED_KEY) === 'true' ? DISCOUNT_RATE : 0,
+                        referralCode: referralValue
                     };
 
                     // Save lead to Firestore 'leads' collection
@@ -4543,8 +4656,8 @@
                     localStorage.setItem('dialogika_checkout_data', JSON.stringify(checkoutData));
 
                     // Show loading
-                    const loading = contactForm.querySelector('.loading');
-                    if (loading) loading.classList.add('d-block');
+                    resetFormFeedback();
+                    if (loadingEl) loadingEl.classList.add('d-block');
 
                     // Animation before redirect
                     const btn = document.getElementById('send_contact');
@@ -4557,7 +4670,7 @@
                     setTimeout(() => {
                         window.location.href = 'checkout.html';
                     }, 1200);
-                });
+                }, true);
             }
         });
     </script>
@@ -4602,6 +4715,8 @@
             const programMapping = {
                 'a80d7b7d-b2b1-40a6-8527-88d4f923607b': 'First Kids Yogyakarta',
                 '7945f652-23a8-456f-9a71-32da58cf4919': 'First Kids Private Yogyakarta',
+                'First Kids Yogyakarta': 'First Kids Yogyakarta',
+                'First Kids Private Yogyakarta': 'First Kids Private Yogyakarta',
                 'First Kids Surabaya': 'First Kids Surabaya',
                 'First Kids Private Surabaya': 'First Kids Private Surabaya',
                 'First Kids Jakarta': 'First Kids Jakarta',
@@ -4655,6 +4770,7 @@
                 const helpText = scheduleButtonContainer.querySelector('small');
                 const selectedProgramValue = programSelect.value;
                 const isPrivate = selectedProgramValue && programMapping[selectedProgramValue] && programMapping[selectedProgramValue].toLowerCase().includes('private');
+                const selectedScheduleProgramId = (selectedScheduleInput.dataset.programId || '').trim();
 
                 if (selectedProgramValue) {
                     if (isPrivate) {
@@ -4666,7 +4782,14 @@
                         btnSelectSchedule.classList.add('btn-success');
                         if (helpText) helpText.textContent = 'Jadwal ditentukan bersama admin';
                         selectedScheduleInput.value = "flexible";
+                        selectedScheduleInput.dataset.programId = selectedProgramValue;
                     } else {
+                        if (selectedScheduleProgramId !== selectedProgramValue) {
+                            selectedScheduleInput.value = "";
+                            selectedScheduleInput.dataset.programId = "";
+                            window._selectedBatchName = '';
+                            window._selectedBatchSchedule = '';
+                        }
                         btnSelectSchedule.innerHTML = `<i class='bx bx-calendar'></i> Pilih Jadwal`;
                         btnSelectSchedule.disabled = false;
                         btnSelectSchedule.style.cursor = 'pointer';
@@ -4674,9 +4797,13 @@
                         btnSelectSchedule.classList.add('btn-primary');
                         btnSelectSchedule.classList.remove('btn-success');
                         if (helpText) helpText.textContent = 'Pilih jadwal kelas yang tersedia';
-                        if(selectedScheduleInput.value === "flexible") selectedScheduleInput.value = "";
+                        if (selectedScheduleInput.value === "flexible") selectedScheduleInput.value = "";
                     }
                 } else {
+                    selectedScheduleInput.value = "";
+                    selectedScheduleInput.dataset.programId = "";
+                    window._selectedBatchName = '';
+                    window._selectedBatchSchedule = '';
                     btnSelectSchedule.innerHTML = `<i class='bx bx-calendar'></i> Pilih Jadwal`;
                     btnSelectSchedule.disabled = true;
                     btnSelectSchedule.style.cursor = 'not-allowed';
@@ -4717,7 +4844,7 @@
 
                 // Load schedules filtered by location
                 const currentLocationId = getCurrentLocation();
-                loadSchedules(programName, currentLocationId);
+                loadSchedules(programName, currentLocationId, selectedProgramId);
             });
 
             // Format date to "25 Jan, 15:30"
@@ -4751,8 +4878,8 @@
                 }
             }
 
-            // Load schedules from Firebase filtered by program name and location
-            async function loadSchedules(programName, locationId) {
+            // Load schedules from Firebase filtered by selected program and location
+            async function loadSchedules(programName, locationId, selectedProgramId) {
                 // Show loading
                 scheduleLoading.classList.remove('d-none');
                 scheduleList.classList.add('d-none');
@@ -4781,23 +4908,44 @@
 
                     // Get location keywords for filtering
                     const locKeywords = locationKeywords[locationId] || [];
+                    const locationTokens = locKeywords
+                        .map(keyword => String(keyword || '').toLowerCase().trim())
+                        .filter(Boolean);
+                    const selectedProgramToken = String(selectedProgramId || '').trim().toLowerCase();
+                    const selectedProgramNameToken = String(programName || '').trim().toLowerCase();
+                    const activeCityToken = selectedProgramNameToken
+                        .replace('first kids private', '')
+                        .replace('first kids', '')
+                        .trim();
 
-                    // Filter schedules by program type AND location
+                    // Filter schedules by program identity, program type, and location.
                     const schedules = [];
                     snapshot.forEach(doc => {
                         const data = doc.data();
                         const className = (data.name || '').toLowerCase();
                         const classLocation = (data.location || '').toLowerCase();
+                        const productTokens = [data.productId, data.product_id, data.productName, data.product_name]
+                            .map(value => String(value || '').trim().toLowerCase())
+                            .filter(Boolean);
+                        const hasProductMetadata = productTokens.length > 0;
 
                         // Check if program type matches
                         const programMatch = programTypeKeyword ? className.includes(programTypeKeyword) : true;
 
-                        // Check if location matches (check both class name and location field)
-                        const locationMatch = locKeywords.length === 0 || locKeywords.some(keyword =>
-                            className.includes(keyword) || classLocation.includes(keyword)
-                        );
+                        // If product metadata exists, prefer direct product match.
+                        // If not available/mismatch, fallback to city match to avoid dropping valid schedules.
+                        const cityMatch = locationTokens.length > 0
+                            ? locationTokens.some(token => className.includes(token) || classLocation.includes(token))
+                            : (!activeCityToken || className.includes(activeCityToken) || classLocation.includes(activeCityToken));
+                        const programIdentityMatch = !selectedProgramToken || !hasProductMetadata
+                            ? true
+                            : productTokens.includes(selectedProgramToken) || productTokens.includes(selectedProgramNameToken) || cityMatch;
 
-                        if (programMatch && locationMatch) {
+                        // Check if location matches (check both class name and location field)
+                        const locationMatch = locationTokens.length === 0
+                            || locationTokens.some(token => className.includes(token) || classLocation.includes(token));
+
+                        if (programMatch && locationMatch && programIdentityMatch) {
                             schedules.push({
                                 id: doc.id,
                                 name: data.name || className,
@@ -4818,27 +4966,100 @@
                         return;
                     }
 
-                    // Sort by status (open first) then by start_date
+                    function extractBatchNumber(name) {
+                        const match = String(name || '').match(/#\s*(\d+)/i);
+                        return match ? Number(match[1]) : Number.POSITIVE_INFINITY;
+                    }
+
+                    function inferMonthTimeFromName(name) {
+                        const text = String(name || '').toLowerCase();
+                        const monthMap = {
+                            jan: 0,
+                            januari: 0,
+                            feb: 1,
+                            februari: 1,
+                            mar: 2,
+                            maret: 2,
+                            apr: 3,
+                            april: 3,
+                            mei: 4,
+                            may: 4,
+                            jun: 5,
+                            juni: 5,
+                            jul: 6,
+                            juli: 6,
+                            agu: 7,
+                            agustus: 7,
+                            aug: 7,
+                            sep: 8,
+                            september: 8,
+                            okt: 9,
+                            oktober: 9,
+                            oct: 9,
+                            nov: 10,
+                            november: 10,
+                            des: 11,
+                            desember: 11,
+                            dec: 11
+                        };
+
+                        let monthIndex = null;
+                        Object.keys(monthMap).forEach(key => {
+                            if (monthIndex === null && text.includes(key)) {
+                                monthIndex = monthMap[key];
+                            }
+                        });
+
+                        if (monthIndex === null) return Number.POSITIVE_INFINITY;
+
+                        const yearMatch = text.match(/\b(20\d{2})\b/);
+                        const year = yearMatch ? Number(yearMatch[1]) : new Date().getFullYear();
+
+                        // Flexible schedule should stay in its month group but after dated classes.
+                        const inferredDay = 28 + Math.min(extractBatchNumber(name), 3);
+                        return new Date(year, monthIndex, inferredDay, 23, 59, 59).getTime();
+                    }
+
+                    // Sort by status (open first) then by effective date ascending.
                     schedules.sort((a, b) => {
-                        const seatsLeftA = a.max_seat - a.current_joined;
-                        const seatsLeftB = b.max_seat - b.current_joined;
                         const closedA = isBatchClosed(a.start_date);
                         const closedB = isBatchClosed(b.start_date);
-                        const isOpenA = !closedA && seatsLeftA > 0;
-                        const isOpenB = !closedB && seatsLeftB > 0;
+                        const atCapacityA = a.max_seat > 0 && a.current_joined >= a.max_seat;
+                        const atCapacityB = b.max_seat > 0 && b.current_joined >= b.max_seat;
+                        const isOpenA = !closedA && !atCapacityA;
+                        const isOpenB = !closedB && !atCapacityB;
 
                         if (isOpenA && !isOpenB) return -1;
                         if (!isOpenA && isOpenB) return 1;
 
-                        const dateA = new Date(a.start_date);
-                        const dateB = new Date(b.start_date);
-                        if (isNaN(dateA.getTime())) return 1;
-                        if (isNaN(dateB.getTime())) return -1;
-                        return dateB - dateA;
+                        const timeA = Date.parse(a.start_date);
+                        const timeB = Date.parse(b.start_date);
+                        const validA = Number.isFinite(timeA);
+                        const validB = Number.isFinite(timeB);
+                        const effectiveA = validA ? timeA : inferMonthTimeFromName(a.name);
+                        const effectiveB = validB ? timeB : inferMonthTimeFromName(b.name);
+                        const hasEffectiveA = Number.isFinite(effectiveA);
+                        const hasEffectiveB = Number.isFinite(effectiveB);
+
+                        if (hasEffectiveA && hasEffectiveB && effectiveA !== effectiveB) {
+                            return effectiveA - effectiveB;
+                        }
+
+                        // For equal month groups, dated classes stay before flexible classes.
+                        if (validA && !validB) return -1;
+                        if (!validA && validB) return 1;
+
+                        const batchNumberA = extractBatchNumber(a.name);
+                        const batchNumberB = extractBatchNumber(b.name);
+                        if (Number.isFinite(batchNumberA) && Number.isFinite(batchNumberB) && batchNumberA !== batchNumberB) {
+                            return batchNumberA - batchNumberB;
+                        }
+
+                        return (a.name || '').localeCompare(b.name || '', 'id', { sensitivity: 'base' });
                     });
 
                     // Display schedules
-                    displaySchedules(schedules);
+                    displaySchedules(schedules, programName, locKeywords);
 
                 } catch (error) {
                     console.error('Error loading schedules:', error);
@@ -4847,27 +5068,171 @@
             }
 
             // Display schedules in the modal
-            function displaySchedules(schedules) {
+            function displaySchedules(schedules, activeProgramName = '', activeLocKeywords = []) {
                 scheduleLoading.classList.add('d-none');
                 scheduleList.classList.remove('d-none');
 
-                let html = '<div class="row g-3">';
+                const openSchedules = [];
+                const fullSchedules = [];
 
                 schedules.forEach(schedule => {
-                    const seatsLeft = schedule.max_seat - schedule.current_joined;
+                    const atCapacity = schedule.max_seat > 0 && schedule.current_joined >= schedule.max_seat;
                     const closed = isBatchClosed(schedule.start_date);
-                    const isOpen = !closed && seatsLeft > 0;
+                    const isOpen = !closed && !atCapacity;
 
-                    const statusClass = isOpen ? 'success' : 'secondary';
-                    const statusText = isOpen ? 'Tersedia' : 'Penuh/Tutup';
+                    if (isOpen) {
+                        openSchedules.push(schedule);
+                    }
+
+                    if (atCapacity) {
+                        fullSchedules.push(schedule);
+                    }
+                });
+
+                const activeCityToken = String(activeProgramName || '')
+                    .toLowerCase()
+                    .replace('first kids private', '')
+                    .replace('first kids', '')
+                    .trim();
+
+                const normalizedLocKeywords = Array.isArray(activeLocKeywords)
+                    ? activeLocKeywords.map(keyword => String(keyword || '').toLowerCase().trim()).filter(Boolean)
+                    : [];
+                const summaryLocationTokens = normalizedLocKeywords.length > 0
+                    ? normalizedLocKeywords
+                    : (activeCityToken ? [activeCityToken] : []);
+
+                function extractBatchNumberForSummary(name) {
+                    const match = String(name || '').match(/#\s*(\d+)/i);
+                    return match ? Number(match[1]) : Number.NaN;
+                }
+
+                function inferMonthTimeFromNameForSummary(name) {
+                    const text = String(name || '').toLowerCase();
+                    const monthMap = {
+                        jan: 0,
+                        januari: 0,
+                        feb: 1,
+                        februari: 1,
+                        mar: 2,
+                        maret: 2,
+                        apr: 3,
+                        april: 3,
+                        mei: 4,
+                        may: 4,
+                        jun: 5,
+                        juni: 5,
+                        jul: 6,
+                        juli: 6,
+                        agu: 7,
+                        agustus: 7,
+                        aug: 7,
+                        sep: 8,
+                        september: 8,
+                        okt: 9,
+                        oktober: 9,
+                        oct: 9,
+                        nov: 10,
+                        november: 10,
+                        des: 11,
+                        desember: 11,
+                        dec: 11
+                    };
+
+                    let monthIndex = null;
+                    Object.keys(monthMap).forEach(key => {
+                        if (monthIndex === null && text.includes(key)) {
+                            monthIndex = monthMap[key];
+                        }
+                    });
+
+                    if (monthIndex === null) return Number.NaN;
+
+                    const yearMatch = text.match(/\b(20\d{2})\b/);
+                    const year = yearMatch ? Number(yearMatch[1]) : new Date().getFullYear();
+                    const batchNumber = extractBatchNumberForSummary(name);
+                    const inferredDay = 28 + (Number.isFinite(batchNumber) ? Math.min(batchNumber, 3) : 1);
+                    return new Date(year, monthIndex, inferredDay, 23, 59, 59).getTime();
+                }
+
+                function getEffectiveSummaryTime(schedule) {
+                    const parsed = Date.parse(schedule?.start_date || '');
+                    return Number.isFinite(parsed) ? parsed : inferMonthTimeFromNameForSummary(schedule?.name);
+                }
+
+                const scopedFullSchedules = fullSchedules.filter(schedule => {
+                    const scheduleName = String(schedule.name || '').toLowerCase();
+                    const scheduleLocation = String(schedule.location || '').toLowerCase();
+
+                    if (summaryLocationTokens.length > 0) {
+                        return summaryLocationTokens.some(token =>
+                            scheduleName.includes(token) || scheduleLocation.includes(token)
+                        );
+                    }
+
+                    return activeCityToken ? scheduleName.includes(activeCityToken) : true;
+                });
+
+                const latestFullSchedule = scopedFullSchedules.reduce((latest, current) => {
+                    if (!latest) return current;
+
+                    const latestTime = getEffectiveSummaryTime(latest);
+                    const currentTime = getEffectiveSummaryTime(current);
+
+                    if (Number.isFinite(latestTime) && Number.isFinite(currentTime) && currentTime !== latestTime) {
+                        return currentTime > latestTime ? current : latest;
+                    }
+                    if (!Number.isFinite(latestTime) && Number.isFinite(currentTime)) return current;
+                    if (Number.isFinite(latestTime) && !Number.isFinite(currentTime)) return latest;
+
+                    const latestBatch = extractBatchNumberForSummary(latest.name);
+                    const currentBatch = extractBatchNumberForSummary(current.name);
+                    if (Number.isFinite(latestBatch) && Number.isFinite(currentBatch) && currentBatch !== latestBatch) {
+                        return currentBatch > latestBatch ? current : latest;
+                    }
+
+                    return String(current.name || '').localeCompare(String(latest.name || ''), 'id', { sensitivity: 'base' }) > 0
+                        ? current
+                        : latest;
+                }, null);
+
+                let html = '';
+
+                if (latestFullSchedule) {
+                    html += `
+                        <div class="mb-3">
+                            <div class="alert alert-secondary py-2 px-3 mb-0 small text-center" role="status">
+                                ${latestFullSchedule.name} sudah penuh
+                            </div>
+                        </div>
+                    `;
+                }
+
+                if (openSchedules.length === 0) {
+                    html += `
+                        <div class="text-center py-3 text-muted small">
+                            Saat ini belum ada jadwal yang tersedia.
+                        </div>
+                    `;
+                    scheduleList.innerHTML = html;
+                    return;
+                }
+
+                html += '<div class="row g-3">';
+
+                openSchedules.forEach(schedule => {
+                    const seatsLeft = schedule.max_seat - schedule.current_joined;
                     const dateStr = formatScheduleDate(schedule.start_date);
-                    const disabledClass = !isOpen ? 'disabled' : '';
-                    const cursorStyle = !isOpen ? 'cursor: not-allowed;' : 'cursor: pointer;';
+
+                    const statusClass = 'success';
+                    const statusText = 'Tersedia';
+                    const disabledClass = '';
+                    const cursorStyle = 'cursor: pointer;';
 
                     html += `
                         <div class="col-12">
                             <div class="card schedule-card ${disabledClass}" 
-                                 onclick="${isOpen ? `selectSchedule('${schedule.id}', '${schedule.name}', '${dateStr}')` : ''}"
+                                 onclick="selectSchedule('${schedule.id}', '${schedule.name}', '${dateStr}')"
                                  style="border: 2px solid #e0e0e0; border-radius: 12px; transition: all 0.3s; ${cursorStyle}">
                                 <div class="card-body p-3">
                                     <div class="d-flex justify-content-between align-items-start">
@@ -4925,6 +5290,7 @@
             // Select schedule function (global scope)
             window.selectSchedule = function (scheduleId, scheduleName, scheduleDate) {
                 selectedScheduleInput.value = scheduleId;
+                selectedScheduleInput.dataset.programId = programSelect.value;
 
                 // Store batch name and schedule for checkout
                 window._selectedBatchName = scheduleName;
