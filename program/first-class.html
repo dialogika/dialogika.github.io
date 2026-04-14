@@ -3291,10 +3291,17 @@
                                 <div class="col-md-6">
                                     <div class="position-relative">
                                         <input type="text" class="form-control" name="ReferralCode" id="referral-code"
-                                            placeholder="Masukkan Kode Referral (Opsional)"
-                                            style="padding-right: 40px;">
+                                            placeholder="Masukkan Kode Promo (Opsional)"
+                                            style="padding-right: 70px;">
                                         <span id="referral-status-icon"
-                                            style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: none;"></span>
+                                            style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%); display: none;"></span>
+                                        <button type="button" id="referral-promo-trigger" onclick="triggerPromoModal()"
+                                            title="Lihat promo tersedia"
+                                            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: #ffc107; border: none; color: #212529; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; padding: 0; transition: background 0.2s ease, transform 0.2s ease;"
+                                            onmouseover="this.style.background='#e0a800'; this.style.transform='translateY(-50%) scale(1.1)'"
+                                            onmouseout="this.style.background='#ffc107'; this.style.transform='translateY(-50%) scale(1)'">
+                                            <i class='bx bxs-discount'></i>
+                                        </button>
                                     </div>
                                     <small id="referral-helper-text" class="text-muted"
                                         style="font-size: 11px; display: block; margin-top: 2px;">Masukkan kode referral
