@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Data Member | Dialogika</title>
+
+  <link href="assets/img/favicon.webp" rel="icon">
+  <link href="assets/img/apple-touch-icon.webp" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    body.member-body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 15px;
+      background: radial-gradient(circle at top left, #e0f2fe 0, #f9fafb 45%, #e5f6ff 100%);
+      font-family: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .member-shell {
+      max-width: 900px;
+    }
+
+    .member-header-title {
+      font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      letter-spacing: 0.03em;
+    }
+
+    .member-header-subtitle {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .member-form-card {
+      border-radius: 20px;
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      box-shadow: 0 18px 40px -24px rgba(15, 23, 42, 0.4);
+      background: #ffffff;
+    }
+
+    .member-form-card .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+
+    .member-form-card .form-control,
+    .member-form-card .form-select,
+    .member-form-card textarea {
+      border-radius: 10px;
+      border-color: #e5e7eb;
+      font-size: 13px;
+      padding: 0.55rem 0.75rem;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    }
+
+    .member-form-card .form-control:focus,
+    .member-form-card .form-select:focus,
+    .member-form-card textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.15);
+      background-color: #f9fafb;
+    }
+
+    .member-form-card small.text-muted {
+      font-size: 11px;
+    }
+
+    .member-alert {
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .member-alert i {
+      font-size: 16px;
+    }
+
+    #memberAlertSuccess {
+      border: none;
+      background: rgba(16, 185, 129, 0.08);
+      color: #065f46;
+    }
+
+    #memberAlertError {
+      border: none;
+      background: rgba(239, 68, 68, 0.08);
+      color: #7f1d1d;
+    }
+
+    #memberSubmitBtn {
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.7rem 1rem;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border: none;
+      box-shadow: 0 12px 24px -12px rgba(37, 99, 235, 0.6);
+    }
+
+    #memberSubmitBtn:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      box-shadow: 0 16px 32px -16px rgba(30, 64, 175, 0.7);
+    }
+
+    #memberSubmitBtn:disabled {
+      box-shadow: none;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 575.98px) {
+      body.member-body {
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+
+      .member-form-card {
+        padding: 1.25rem !important;
+      }
+    }
+  </style>
+</head>
+<body class="member-body">
+  <main class="container member-shell">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center mb-4">
+          <img src="assets/img/logo.webp" alt="Dialogika" style="height: 48px;" class="mb-3">
+          <h1 class="h4 fw-bold mb-1 member-header-title">Form Data Member</h1>
+          <p class="member-header-subtitle mb-0">Lengkapi data di bawah ini untuk pendataan member Dialogika.</p>
+        </div>
+
+        <div id="memberAlertSuccess" class="alert member-alert d-none" role="alert">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Data member berhasil disimpan ke sistem.</span>
+        </div>
+
+        <div id="memberAlertError" class="alert member-alert d-none" role="alert">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <span>Terjadi kesalahan saat menyimpan data. Silakan coba lagi.</span>
+        </div>
+
+        <form id="memberForm" class="card member-form-card p-4 needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="full_name" class="form-label">Nama Lengkap</label>
+              <input type="text" class="form-control" id="full_name" name="full_name" required>
+              <div class="invalid-feedback">Nama lengkap wajib diisi.</div>
+              <small class="text-muted" style="font-size: 11px;">Nama ini akan digunakan di sertifikat</small>
+            </div>
+
+            <div class="col-md-6">
+              <label for="whatsapp" class="form-label">Nomor WhatsApp Peserta</label>
+              <input type="tel" class="form-control" id="whatsapp" name="whatsapp" required>
+              <div class="invalid-feedback">Nomor WhatsApp wajib diisi.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+              <div class="invalid-feedback">Email yang valid wajib diisi.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="instagram" class="form-label">Username Instagram</label>
+              <input type="text" class="form-control" id="instagram" name="instagram" placeholder="@username">
+            </div>
+
+            <div class="col-md-6">
+              <label for="job" class="form-label">Pekerjaan</label>
+              <input type="text" class="form-control" id="job" name="job">
+            </div>
+
+            <div class="col-md-3">
+              <label for="age" class="form-label">Usia</label>
+              <input type="number" class="form-control" id="age" name="age" min="5" max="100" required>
+              <div class="invalid-feedback">Usia wajib diisi.</div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="gender" class="form-label">Gender</label>
+              <select class="form-select" id="gender" name="gender" required>
+                <option value="">Pilih</option>
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select>
+              <div class="invalid-feedback">Pilih gender.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="domisili" class="form-label">Domisili</label>
+              <input type="text" class="form-control" id="domisili" name="domisili">
+            </div>
+
+            <div class="col-md-6">
+              <label for="marital_status" class="form-label">Status Pernikahan</label>
+              <select class="form-select" id="marital_status" name="marital_status" required>
+                <option value="">Pilih</option>
+                <option value="Belum menikah">Belum menikah</option>
+                <option value="Menikah">Menikah</option>
+              </select>
+              <div class="invalid-feedback">Pilih status pernikahan.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="source" class="form-label">Mengetahui Dialogika dari</label>
+              <select class="form-select" id="source" name="source">
+                <option value="">Pilih</option>
+                <option value="Instagram">Instagram</option>
+                <option value="TikTok">TikTok</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Google">Google</option>
+                <option value="Teman/Kerabat">Teman/Kerabat</option>
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+
+            <div class="col-md-6" id="source_other_group" style="display: none;">
+              <label for="source_other" class="form-label">Sebutkan sumber lain</label>
+              <input type="text" class="form-control" id="source_other" name="source_other" placeholder="Contoh: Komunitas, Kampus, dll.">
+            </div>
+
+            <div class="col-12">
+              <label for="notes" class="form-label">Catatan Tambahan</label>
+              <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Catatan khusus terkait peserta, jadwal, atau kebutuhan lain."></textarea>
+            </div>
+
+            <div class="col-12 pt-2">
+              <button type="submit" id="memberSubmitBtn" class="btn btn-primary w-100">
+                Simpan Data Member
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
+      authDomain: "pre-dialogika.firebaseapp.com",
+      projectId: "pre-dialogika",
+      storageBucket: "pre-dialogika.firebasestorage.app",
+      messagingSenderId: "343771410480",
+      appId: "1:343771410480:web:32881c9868522090237df5",
+      measurementId: "G-SXN811P3N0"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const db = firebase.firestore();
+
+    function generateMemberId() {
+      const now = new Date();
+      const y = String(now.getFullYear());
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      const rand = Math.floor(Math.random() * 9000) + 1000;
+      return "MBR-" + y + m + d + "-" + rand;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("memberForm");
+      const submitBtn = document.getElementById("memberSubmitBtn");
+      const alertSuccess = document.getElementById("memberAlertSuccess");
+      const alertError = document.getElementById("memberAlertError");
+      const sourceSelect = document.getElementById("source");
+      const sourceOtherGroup = document.getElementById("source_other_group");
+      const sourceOtherInput = document.getElementById("source_other");
+
+      if (sourceSelect) {
+        sourceSelect.addEventListener("change", function () {
+          if (this.value === "Lainnya") {
+            sourceOtherGroup.style.display = "block";
+          } else {
+            sourceOtherGroup.style.display = "none";
+            sourceOtherInput.value = "";
+          }
+        });
+      }
+
+      if (form) {
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          alertSuccess.classList.add("d-none");
+          alertError.classList.add("d-none");
+
+          if (!form.checkValidity()) {
+            form.classList.add("was-validated");
+            return;
+          }
+
+          form.classList.remove("was-validated");
+
+          const formData = new FormData(form);
+          const source = formData.get("source") || "";
+          const customSource = formData.get("source_other") || "";
+          const finalSource = source === "Lainnya" ? customSource : source;
+          const fullName = formData.get("full_name") || "";
+
+          const payload = {
+            memberId: generateMemberId(),
+            nama_lengkap: fullName,
+            nama_sertifikat: fullName,
+            whatsapp: formData.get("whatsapp") || "",
+            email: formData.get("email") || "",
+            instagram: formData.get("instagram") || "",
+            pekerjaan: formData.get("job") || "",
+            usia: formData.get("age") ? Number(formData.get("age")) : null,
+            gender: formData.get("gender") || "",
+            domisili: formData.get("domisili") || "",
+            status_pernikahan: formData.get("marital_status") || "",
+            mengetahui_dari: finalSource || "",
+            catatan: formData.get("notes") || "",
+            created_at: firebase.firestore.FieldValue.serverTimestamp()
+          };
+
+          try {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Menyimpan...";
+
+            await db.collection("data_member").add(payload);
+
+            form.reset();
+            form.classList.remove("was-validated");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Simpan Data Member";
+            alertSuccess.classList.remove("d-none");
+          } catch (err) {
+            console.error("Error saving member data:", err);
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Simpan Data Member";
+            alertError.classList.remove("d-none");
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
