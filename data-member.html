@@ -244,6 +244,12 @@
             </div>
 
             <div class="col-12 col-sm-6">
+              <label for="instagram" class="form-label">Instagram</label>
+              <input type="text" class="form-control" id="instagram" name="instagram" placeholder="@username atau link profil" aria-describedby="instagram_hint">
+              <small id="instagram_hint" class="text-muted">Contoh: @namapengguna atau https://instagram.com/username.</small>
+            </div>
+
+            <div class="col-12 col-sm-6">
               <label for="tanggal_pembayaran" class="form-label">Tanggal Pembayaran</label>
               <input type="date" class="form-control" id="tanggal_pembayaran" name="tanggal_pembayaran" required aria-describedby="tanggal_pembayaran_error">
               <div id="tanggal_pembayaran_error" class="invalid-feedback">Tanggal pembayaran wajib diisi dan tidak boleh melebihi hari ini.</div>
@@ -323,12 +329,6 @@
               <label for="profesi" class="form-label">Profesi</label>
               <input type="text" class="form-control" id="profesi" name="profesi" required placeholder="Contoh: Digital Marketing" aria-describedby="profesi_error">
               <div id="profesi_error" class="invalid-feedback">Profesi wajib diisi.</div>
-            </div>
-
-            <div class="col-12 col-sm-6">
-              <label for="posisi_pekerjaan" class="form-label">Posisi di Pekerjaan</label>
-              <input type="text" class="form-control" id="posisi_pekerjaan" name="posisi_pekerjaan" required placeholder="Contoh: Supervisor" aria-describedby="posisi_pekerjaan_error">
-              <div id="posisi_pekerjaan_error" class="invalid-feedback">Posisi pekerjaan wajib diisi.</div>
             </div>
 
             <div class="col-12 col-sm-6">
@@ -632,6 +632,7 @@
             nama: formData.get("nama") || "",
             whatsapp: formData.get("whatsapp") || "",
             email: formData.get("email") || "",
+            instagram: formData.get("instagram") || "",
             tanggal_pembayaran: formData.get("tanggal_pembayaran") || "",
             tipe_payment: formData.get("tipe_payment") || "",
             jenis_kelamin: formData.get("jenis_kelamin") || "",
@@ -642,7 +643,6 @@
             usia: formData.get("usia") ? Number(formData.get("usia")) : null,
             domisili: formData.get("domisili") || "",
             profesi: formData.get("profesi") || "",
-            posisi_pekerjaan: formData.get("posisi_pekerjaan") || "",
             program_diambil: formData.get("program_diambil") || "",
             kebutuhan_kesulitan: formData.get("kebutuhan_kesulitan") || "",
             bukti_pembayaran: buktiPembayaranUrl,
