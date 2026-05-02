@@ -653,9 +653,19 @@
 
                             <!-- Class Available Section -->
                             <div class="mt-4 pt-4 border-top">
-                                <h6 class="fw-bold mb-3" style="color: #0b2b6a; font-size: 14px;">
-                                    <i class='bx bxs-calendar-check me-1'></i> Kelas Tersedia
-                                </h6>
+                                <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-3">
+                                    <h6 class="fw-bold mb-0" style="color: #0b2b6a; font-size: 14px;">
+                                        <i class='bx bxs-calendar-check me-1'></i> Kelas Tersedia
+                                    </h6>
+                                    <select id="class-location-select" class="form-select form-select-sm"
+                                        style="width: auto; min-width: 160px; border: 2px solid rgba(0, 115, 230, 0.6); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 600; color: #0b2b6a; cursor: pointer;">
+                                        <option value="first-class-jogja-content" selected>Yogyakarta</option>
+                                        <option value="first-class-surabaya-content">Surabaya</option>
+                                        <option value="first-class-jakarta-content">Jakarta</option>
+                                        <option value="first-class-tangsel-content">Tangsel</option>
+                                        <option value="first-class-pontianak-content">Pontianak</option>
+                                    </select>
+                                </div>
 
                                 <!-- Container for dynamic batch cards from Firebase -->
                                 <div id="classBatchContainer">
@@ -696,6 +706,10 @@
                                             background: linear-gradient(to bottom, #009961 5%, #006a4e 100%);
                                         }
 
+                                        .batch-status.full {
+                                            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                                        }
+
                                         .batch-status.closed {
                                             background: linear-gradient(135deg, #3d3e3f 0%, #3d3e3f 100%);
                                         }
@@ -708,6 +722,17 @@
                                         }
 
                                         .class-batch-card:has(.batch-status.closed):hover {
+                                            box-shadow: none;
+                                            transform: none;
+                                        }
+
+                                        .class-batch-card:has(.batch-status.full) {
+                                            opacity: 0.75;
+                                            cursor: not-allowed;
+                                            pointer-events: none;
+                                        }
+
+                                        .class-batch-card:has(.batch-status.full):hover {
                                             box-shadow: none;
                                             transform: none;
                                         }
@@ -3560,7 +3585,29 @@
                 'first-class-pontianak-content': ['pontianak']
             };
 
-            // Load Class Available Data filtered by location
+            function matchBatchLocation(item, keywords) {
+                if (!Array.isArray(keywords) || keywords.length === 0) return true;
+                const haystacks = [
+                    item?.name,
+                    item?.location,
+                    item?.product_name
+                ].map(v => String(v || '').toLowerCase());
+                return keywords.some(k => {
+                    const key = String(k || '').toLowerCase().trim();
+                    if (!key) return false;
+                    return haystacks.some(text => text.includes(key));
+                });
+            }
+
+            const locationLabels = {
+                'first-class-jogja-content': 'Yogyakarta',
+                'first-class-surabaya-content': 'Surabaya',
+                'first-class-jakarta-content': 'Jakarta',
+                'first-class-tangsel-content': 'Tangsel',
+                'first-class-pontianak-content': 'Pontianak'
+            };
+
+            // Load Class Available Data filtered by dropdown
             async function loadClassAvailable() {
                 const container = document.getElementById('classBatchContainer');
                 if (!container) return;
@@ -3592,7 +3639,7 @@
                         return;
                     }
 
-                    // Load all First Class / First Private entries (no location filter)
+                    // Load all First Class / First Private entries
                     const classes = [];
                     snapshot.forEach(doc => {
                         const data = doc.data();
@@ -3617,47 +3664,62 @@
                         }
                     });
 
-                    // Sort by status (open first) then by start_date descending
-                    classes.sort((a, b) => {
-                        const seatsLeftA = a.max_seat - a.current_joined;
-                        const seatsLeftB = b.max_seat - b.current_joined;
-                        const closedA = isBatchClosed(a.start_date);
-                        const closedB = isBatchClosed(b.start_date);
-                        const isOpenA = !closedA && seatsLeftA > 0;
-                        const isOpenB = !closedB && seatsLeftB > 0;
+                    function sortBatches(list) {
+                        return list.sort((a, b) => {
+                            const seatsLeftA = a.max_seat - a.current_joined;
+                            const seatsLeftB = b.max_seat - b.current_joined;
+                            const closedA = isBatchClosed(a.start_date);
+                            const closedB = isBatchClosed(b.start_date);
+                            const isOpenA = !closedA && seatsLeftA > 0;
+                            const isOpenB = !closedB && seatsLeftB > 0;
 
-                        if (isOpenA && !isOpenB) return -1;
-                        if (!isOpenA && isOpenB) return 1;
+                            if (isOpenA && !isOpenB) return -1;
+                            if (!isOpenA && isOpenB) return 1;
 
-                        const dateA = new Date(a.start_date);
-                        const dateB = new Date(b.start_date);
-                        if (isNaN(dateA.getTime())) return 1;
-                        if (isNaN(dateB.getTime())) return -1;
-                        return dateB - dateA;
-                    });
+                            const dateA = new Date(a.start_date);
+                            const dateB = new Date(b.start_date);
+                            if (isNaN(dateA.getTime())) return 1;
+                            if (isNaN(dateB.getTime())) return -1;
+                            return dateB - dateA;
+                        });
+                    }
 
-                    // Limit to 8 classes
-                    const limitedClasses = classes.slice(0, 8);
+                    const locationSelect = document.getElementById('class-location-select');
+                    const selectedLocationId = locationSelect?.value || 'first-class-jogja-content';
+                    const keywords = batchLocationKeywords[selectedLocationId] || [];
+                    const locationName = locationLabels[selectedLocationId] || 'lokasi ini';
+                    const filtered = classes.filter(item => matchBatchLocation(item, keywords));
+                    const sorted = sortBatches(filtered).slice(0, 3);
 
-                    if (limitedClasses.length === 0) {
+                    if (sorted.length === 0) {
                         container.innerHTML = styleHTML + `
                             <div class="text-center py-3">
-                                <p class="text-muted small mb-0"><i class='bx bx-info-circle me-1'></i>Jadwal ditentukan bersama admin dan mentor di Grub Whatsapp</p>
+                                <p class="text-muted small mb-0"><i class='bx bx-info-circle me-1'></i>Belum ada jadwal untuk ${locationName}.</p>
                             </div>
                         `;
                         return;
                     }
 
-                    // Build HTML
                     let batchHTML = '';
-                    limitedClasses.forEach(item => {
+                    sorted.forEach(item => {
                         const seatsLeft = item.max_seat - item.current_joined;
                         const closed = isBatchClosed(item.start_date);
+                        const atCapacity = item.max_seat > 0 && item.current_joined >= item.max_seat;
                         const isOpen = !closed && seatsLeft > 0;
 
-                        const statusClass = isOpen ? 'open' : 'closed';
-                        const statusIcon = isOpen ? 'bxs-door-open' : 'bxs-lock-alt';
-                        const statusText = isOpen ? 'Open' : 'Closed';
+                        let statusClass = 'closed';
+                        let statusIcon = 'bxs-lock-alt';
+                        let statusText = 'Closed';
+
+                        if (isOpen) {
+                            statusClass = 'open';
+                            statusIcon = 'bxs-door-open';
+                            statusText = 'Open';
+                        } else if (atCapacity && !closed) {
+                            statusClass = 'full';
+                            statusIcon = 'bxs-x-circle';
+                            statusText = 'Sudah Penuh';
+                        }
                         const dateStr = formatBatchDate(item.start_date);
 
                         batchHTML += `
@@ -3695,6 +3757,42 @@
             } else {
                 loadClassAvailable();
             }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const classLocationSelect = document.getElementById('class-location-select');
+                if (!classLocationSelect) return;
+
+                const pricingLocationSelect = document.getElementById('location-select');
+                let isSyncingDropdown = false;
+
+                const pricingValue = pricingLocationSelect?.value;
+                if (pricingValue && batchLocationKeywords[pricingValue]) classLocationSelect.value = pricingValue;
+
+                if (pricingLocationSelect) {
+                    pricingLocationSelect.addEventListener('change', function () {
+                        if (isSyncingDropdown) return;
+                        const val = this.value;
+                        if (!val || classLocationSelect.value === val) return;
+                        if (!batchLocationKeywords[val]) return;
+                        isSyncingDropdown = true;
+                        classLocationSelect.value = val;
+                        isSyncingDropdown = false;
+                        loadClassAvailable();
+                    });
+                }
+
+                classLocationSelect.addEventListener('change', function () {
+                    if (isSyncingDropdown) return;
+                    const val = this.value;
+                    if (pricingLocationSelect && val && pricingLocationSelect.value !== val) {
+                        isSyncingDropdown = true;
+                        pricingLocationSelect.value = val;
+                        pricingLocationSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        isSyncingDropdown = false;
+                    }
+                    loadClassAvailable();
+                });
+            });
 
         })();
     </script>
