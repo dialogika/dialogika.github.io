@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Pendaftaran Member | Dialogika</title>
+
+  <link href="assets/img/favicon.webp" rel="icon">
+  <link href="assets/img/apple-touch-icon.webp" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    body.member-body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 15px;
+      background: radial-gradient(circle at top left, #e0f2fe 0, #f9fafb 45%, #e5f6ff 100%);
+      font-family: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .member-shell {
+      max-width: 800px; /* Reduced max-width since fewer fields */
+    }
+
+    .member-header-title {
+      font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      letter-spacing: 0.03em;
+    }
+
+    .member-header-subtitle {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .member-form-card {
+      border-radius: 20px;
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      box-shadow: 0 18px 40px -24px rgba(15, 23, 42, 0.4);
+      background: #ffffff;
+    }
+
+    .member-form-card .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+
+    .member-form-card .form-control,
+    .member-form-card .form-select,
+    .member-form-card textarea {
+      border-radius: 10px;
+      border-color: #e5e7eb;
+      font-size: 13px;
+      padding: 0.55rem 0.75rem;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    }
+
+    .member-form-card .form-control:focus,
+    .member-form-card .form-select:focus,
+    .member-form-card textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.15);
+      background-color: #f9fafb;
+    }
+
+    .member-form-card small.text-muted {
+      font-size: 11px;
+    }
+
+    .member-alert {
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .member-alert i {
+      font-size: 16px;
+    }
+
+    #memberAlertSuccess {
+      border: none;
+      background: rgba(16, 185, 129, 0.08);
+      color: #065f46;
+    }
+
+    #memberAlertError {
+      border: none;
+      background: rgba(239, 68, 68, 0.08);
+      color: #7f1d1d;
+    }
+
+    #memberSubmitBtn {
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.7rem 1rem;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border: none;
+      box-shadow: 0 12px 24px -12px rgba(37, 99, 235, 0.6);
+    }
+
+    #memberSubmitBtn:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      box-shadow: 0 16px 32px -16px rgba(30, 64, 175, 0.7);
+    }
+
+    #memberSubmitBtn:disabled {
+      box-shadow: none;
+      opacity: 0.8;
+    }
+
+    .member-toast {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 1080;
+      min-width: 240px;
+      max-width: 320px;
+      background: #065f46;
+      color: #fff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: 0 16px 32px -16px rgba(6, 95, 70, 0.8);
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .member-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .member-file-preview {
+      margin-top: 8px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 8px;
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8fafc;
+      color: #64748b;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .member-file-preview img {
+      max-height: 120px;
+      width: auto;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .payment-info-box {
+      background-color: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      color: #0369a1;
+      font-size: 13px;
+    }
+
+    .payment-info-box h6 {
+      color: #0c4a6e;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    @media (max-width: 575.98px) {
+      body.member-body {
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+
+      .member-form-card {
+        padding: 1.25rem !important;
+      }
+    }
+  </style>
+</head>
+<body class="member-body">
+  <div id="memberSuccessToast" class="member-toast" role="status" aria-live="polite">
+    <i class="bi bi-check-circle-fill"></i>
+    <span>Data berhasil disimpan. Mengarahkan ke WhatsApp...</span>
+  </div>
+  <main class="container member-shell">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="text-center mb-4">
+          <img src="assets/img/logo.webp" alt="Dialogika" style="height: 48px;" class="mb-3">
+          <h1 class="h4 fw-bold mb-1 member-header-title">Pendaftaran Member</h1>
+          <p class="member-header-subtitle mb-0">Lengkapi form pendaftaran dan unggah bukti pembayaran Anda.</p>
+        </div>
+
+        <div id="memberAlertError" class="alert member-alert d-none" role="alert">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <span>Terjadi kesalahan saat menyimpan data. Silakan coba lagi.</span>
+        </div>
+
+        <form id="memberForm" class="card member-form-card p-4 needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label for="nama" class="form-label">Nama</label>
+              <input type="text" class="form-control" id="nama" name="nama" maxlength="100" required aria-describedby="nama_error">
+              <div id="nama_error" class="invalid-feedback">Nama wajib diisi.</div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="whatsapp" class="form-label">No HP / WhatsApp</label>
+              <input type="tel" class="form-control" id="whatsapp" name="whatsapp" required pattern="^\+62\d{8,15}$" placeholder="+628123456789" aria-describedby="whatsapp_hint whatsapp_error">
+              <small id="whatsapp_hint" class="text-muted">Format: +62 diikuti 8-15 digit.</small>
+              <div id="whatsapp_error" class="invalid-feedback">Nomor WhatsApp harus format +62xxxxxxxx.</div>
+            </div>
+
+            <div class="col-12">
+              <label for="nama_kelas" class="form-label">Nama Kelas</label>
+              <input type="text" class="form-control" id="nama_kelas" name="nama_kelas" required placeholder="Contoh: First Class" aria-describedby="nama_kelas_error">
+              <div id="nama_kelas_error" class="invalid-feedback">Nama kelas wajib diisi.</div>
+            </div>
+
+            <div class="col-12">
+              <div class="payment-info-box mt-2">
+                <h6 class="fw-bold mb-2"><i class="bi bi-info-circle-fill me-2"></i>Rekening Pembayaran</h6>
+                <p class="mb-2">Pembayaran dapat dilakukan ke rekening berikut:</p>
+                
+                <p class="mb-1 fw-bold">PT Dialogika Persona Indonesia</p>
+                <p class="mb-3">BCA Syariah: <strong>0460227911</strong></p>
+                
+                <hr style="border-color: #bae6fd; margin: 10px 0;">
+                
+                <p class="mb-1 fw-bold mt-2">ATAU REKENING OWNER</p>
+                <p class="mb-2 text-muted" style="font-size: 12px;">(Muhammad Ghufran Asrofi)</p>
+                <ul class="mb-0 ps-0" style="list-style-type: none;">
+                  <li class="mb-1">• BCA: <strong>1260761052</strong></li>
+                  <li class="mb-1">• BSI: <strong>7040032511</strong></li>
+                  <li class="mb-1">• BTPN: <strong>90020307448</strong></li>
+                  <li class="mb-0">• BRI: <strong>002901227911569</strong></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-12 mt-4">
+              <label for="bukti_pembayaran" class="form-label">Upload Bukti Pembayaran</label>
+              <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" required accept=".jpg,.jpeg,.png,.pdf" aria-describedby="bukti_hint bukti_error">
+              <small id="bukti_hint" class="text-muted">Format: JPG, JPEG, PNG, PDF. Maksimal 2 MB.</small>
+              <div id="bukti_error" class="invalid-feedback">Bukti pembayaran wajib diunggah sesuai format dan ukuran.</div>
+              <div id="bukti_preview" class="member-file-preview" aria-live="polite">Preview bukti pembayaran belum tersedia.</div>
+            </div>
+
+            <div class="col-12 pt-3">
+              <button type="submit" id="memberSubmitBtn" class="btn btn-primary w-100">
+                <i class="bi bi-whatsapp me-2"></i> Simpan & Konfirmasi ke WhatsApp
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
+      authDomain: "pre-dialogika.firebaseapp.com",
+      projectId: "pre-dialogika",
+      storageBucket: "pre-dialogika.firebasestorage.app",
+      messagingSenderId: "343771410480",
+      appId: "1:343771410480:web:32881c9868522090237df5",
+      measurementId: "G-SXN811P3N0"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+
+    function generateRegistrationId() {
+      const now = new Date();
+      const y = String(now.getFullYear());
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      const rand = Math.floor(Math.random() * 9000) + 1000;
+      return "REG-" + y + m + d + "-" + rand;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("memberForm");
+      const submitBtn = document.getElementById("memberSubmitBtn");
+      const alertError = document.getElementById("memberAlertError");
+      const successToast = document.getElementById("memberSuccessToast");
+      const whatsappInput = document.getElementById("whatsapp");
+      const buktiInput = document.getElementById("bukti_pembayaran");
+      const buktiPreview = document.getElementById("bukti_preview");
+
+      const MAX_FILE_SIZE_BYTES = 2 * 1024 * 1024;
+      const ALLOWED_FILE_TYPES = ["image/jpeg", "image/jpg", "image/png", "application/pdf"];
+
+      function isValidWhatsappNumber(value) {
+        return /^\+62\d{8,15}$/.test(String(value || "").trim());
+      }
+
+      function isValidProofFile(file) {
+        if (!file) return false;
+        return file.size <= MAX_FILE_SIZE_BYTES && ALLOWED_FILE_TYPES.includes(file.type);
+      }
+
+      async function uploadProofToStorage(file, regId) {
+        if (!file) return "";
+        const ext = (String(file.name || "").split(".").pop() || "bin").toLowerCase();
+        const safeRegId = String(regId || "reg").replace(/[^\w-]/g, "_");
+        const filePath = "pendaftaran-proofs/" + safeRegId + "_" + Date.now() + "." + ext;
+        const proofRef = storage.ref().child(filePath);
+        const snapshot = await proofRef.put(file);
+        return await snapshot.ref.getDownloadURL();
+      }
+
+      function showSuccessToast() {
+        if (!successToast) return;
+        successToast.classList.add("show");
+      }
+
+      function normalizeWhatsappInput() {
+        if (!whatsappInput) return;
+        let raw = String(whatsappInput.value || "").replace(/[^\d+]/g, "");
+        raw = raw.replace(/^\+{2,}/, "+");
+        if (!raw.startsWith("+62")) {
+          raw = raw.replace(/^\+/, "");
+          raw = raw.replace(/^62/, "");
+          raw = raw.replace(/^0+/, "");
+          raw = "+62" + raw;
+        }
+        whatsappInput.value = raw;
+      }
+
+      function validateWhatsappField() {
+        if (!whatsappInput) return true;
+        normalizeWhatsappInput();
+        if (!isValidWhatsappNumber(whatsappInput.value)) {
+          whatsappInput.setCustomValidity("Nomor WhatsApp harus format +62xxxxxxxx.");
+        } else {
+          whatsappInput.setCustomValidity("");
+        }
+        return whatsappInput.checkValidity();
+      }
+
+      function renderFilePreview(file) {
+        if (!buktiPreview) return;
+        if (!file) {
+          buktiPreview.innerHTML = "Preview bukti pembayaran belum tersedia.";
+          return;
+        }
+        if (file.type.startsWith("image/")) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            buktiPreview.innerHTML = '<img src="' + event.target.result + '" alt="Preview bukti pembayaran">';
+          };
+          reader.readAsDataURL(file);
+          return;
+        }
+        buktiPreview.innerHTML = '<div><i class="bi bi-file-earmark-pdf-fill" style="font-size: 24px;"></i><br>' + file.name + "</div>";
+      }
+
+      function validateProofFileField() {
+        if (!buktiInput) return true;
+        const file = buktiInput.files && buktiInput.files[0];
+        if (!file) {
+          buktiInput.setCustomValidity("Bukti pembayaran wajib diunggah.");
+          renderFilePreview(null);
+        } else if (!isValidProofFile(file)) {
+          buktiInput.setCustomValidity("Bukti pembayaran harus JPG/JPEG/PNG/PDF maksimal 2 MB.");
+          renderFilePreview(file);
+        } else {
+          buktiInput.setCustomValidity("");
+          renderFilePreview(file);
+        }
+        return buktiInput.checkValidity();
+      }
+
+      if (whatsappInput) {
+        whatsappInput.addEventListener("focus", function () {
+          if (!String(whatsappInput.value || "").trim()) whatsappInput.value = "+62";
+        });
+        whatsappInput.addEventListener("input", validateWhatsappField);
+      }
+      if (buktiInput) buktiInput.addEventListener("change", validateProofFileField);
+
+      if (form) {
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          alertError.classList.add("d-none");
+          const isWhatsappValid = validateWhatsappField();
+          const isFileValid = validateProofFileField();
+          const html5Valid = form.checkValidity();
+
+          if (!html5Valid || !isWhatsappValid || !isFileValid) {
+            form.classList.add("was-validated");
+            return;
+          }
+
+          form.classList.remove("was-validated");
+
+          const formData = new FormData(form);
+          const proofFile = buktiInput && buktiInput.files ? buktiInput.files[0] : null;
+          const regId = generateRegistrationId();
+          
+          const nama = formData.get("nama") || "";
+          const whatsapp = formData.get("whatsapp") || "";
+          const namaKelas = formData.get("nama_kelas") || "";
+
+          try {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Mengunggah & Menyimpan...';
+
+            let buktiPembayaranUrl = "";
+            if (proofFile) {
+              buktiPembayaranUrl = await uploadProofToStorage(proofFile, regId);
+            }
+
+            const payload = {
+              registration_id: regId,
+              nama: nama,
+              whatsapp: whatsapp,
+              nama_kelas: namaKelas,
+              bukti_pembayaran: buktiPembayaranUrl,
+              created_at: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            await db.collection("pendaftaran_member").add(payload);
+
+            const waNumber = "6285162992597";
+            const waText = `Halo Dialogika, saya sudah mengisi form pendaftaran member.
+
+*Data Pendaftaran*
+Nama: ${nama}
+No HP: ${whatsapp}
+Kelas: ${namaKelas}
+
+Mohon konfirmasi, terima kasih.`;
+
+            const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
+
+            form.reset();
+            renderFilePreview(null);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="bi bi-whatsapp me-2"></i> Simpan & Konfirmasi ke WhatsApp';
+            showSuccessToast();
+            
+            setTimeout(() => {
+              window.location.href = waUrl;
+            }, 1500);
+
+          } catch (err) {
+            console.error("Error saving registration data:", err);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="bi bi-whatsapp me-2"></i> Simpan & Konfirmasi ke WhatsApp';
+            alertError.classList.remove("d-none");
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
