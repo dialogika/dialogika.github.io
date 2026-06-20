@@ -169,28 +169,6 @@
       object-fit: cover;
     }
 
-    .member-radio-group {
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 10px 12px;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .char-counter {
-      font-size: 11px;
-      color: #64748b;
-      text-align: right;
-      margin-top: 4px;
-    }
-
-    .char-counter.over-limit {
-      color: #b91c1c;
-    }
-
     @media (max-width: 575.98px) {
       body.member-body {
         padding-top: 24px;
@@ -225,131 +203,89 @@
         <form id="memberForm" class="card member-form-card p-4 needs-validation" novalidate>
           <div class="row g-3">
             <div class="col-12 col-sm-6">
-              <label for="nama" class="form-label">Nama</label>
-              <input type="text" class="form-control" id="nama" name="nama" maxlength="100" required aria-describedby="nama_error">
-              <div id="nama_error" class="invalid-feedback">Nama wajib diisi (maksimal 100 karakter).</div>
+              <label for="nama" class="form-label">Nama Lengkap</label>
+              <input type="text" class="form-control" id="nama" name="nama" maxlength="150" required aria-describedby="nama_error">
+              <div id="nama_error" class="invalid-feedback">Nama lengkap wajib diisi (maksimal 150 karakter).</div>
             </div>
 
             <div class="col-12 col-sm-6">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" name="email" required aria-describedby="email_error">
-              <div id="email_error" class="invalid-feedback">Email wajib valid sesuai format.</div>
-            </div>
-
-            <div class="col-12 col-sm-6">
-              <label for="whatsapp" class="form-label">WhatsApp</label>
+              <label for="whatsapp" class="form-label">Nomor WhatsApp</label>
               <input type="tel" class="form-control" id="whatsapp" name="whatsapp" required pattern="^\+62\d{8,15}$" placeholder="+628123456789" aria-describedby="whatsapp_hint whatsapp_error">
               <small id="whatsapp_hint" class="text-muted">Format: +62 diikuti 8-15 digit.</small>
               <div id="whatsapp_error" class="invalid-feedback">Nomor WhatsApp harus format +62xxxxxxxx.</div>
             </div>
 
             <div class="col-12 col-sm-6">
-              <label for="instagram" class="form-label">Instagram</label>
-              <input type="text" class="form-control" id="instagram" name="instagram" placeholder="@username atau link profil" aria-describedby="instagram_hint">
-              <small id="instagram_hint" class="text-muted">Contoh: @namapengguna atau https://instagram.com/username.</small>
+              <label for="tanggal_mulai_kelas" class="form-label">Tanggal Mulai Kelas</label>
+              <input type="date" class="form-control" id="tanggal_mulai_kelas" name="tanggal_mulai_kelas" required aria-describedby="tanggal_mulai_kelas_error">
+              <div id="tanggal_mulai_kelas_error" class="invalid-feedback">Tanggal mulai kelas wajib diisi.</div>
             </div>
 
             <div class="col-12 col-sm-6">
-              <label for="tanggal_pembayaran" class="form-label">Tanggal Pembayaran</label>
-              <input type="date" class="form-control" id="tanggal_pembayaran" name="tanggal_pembayaran" required aria-describedby="tanggal_pembayaran_error">
-              <div id="tanggal_pembayaran_error" class="invalid-feedback">Tanggal pembayaran wajib diisi dan tidak boleh melebihi hari ini.</div>
+              <label for="program_kelas" class="form-label">Program/Kelas yang Diikuti</label>
+              <input type="text" class="form-control" id="program_kelas" name="program_kelas" required placeholder="Contoh: Basic Plus Mei #3" aria-describedby="program_kelas_error">
+              <div id="program_kelas_error" class="invalid-feedback">Program/kelas wajib diisi.</div>
             </div>
 
             <div class="col-12 col-sm-6">
-              <label for="tipe_payment" class="form-label">Tipe Payment</label>
-              <select class="form-select" id="tipe_payment" name="tipe_payment" required aria-describedby="tipe_payment_error">
-                <option value="">Pilih</option>
-                <option value="Down Payment">Down Payment</option>
-                <option value="Full Payment">Full Payment</option>
-              </select>
-              <div id="tipe_payment_error" class="invalid-feedback">Pilih tipe payment.</div>
-            </div>
-
-            <div class="col-12 col-sm-6">
-              <label class="form-label" for="jenis_kelamin_laki_laki">Jenis Kelamin</label>
-              <div class="member-radio-group" aria-describedby="jenis_kelamin_error">
-                <div class="form-check mb-0">
-                  <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_laki_laki" value="Laki-laki" required aria-describedby="jenis_kelamin_error">
-                  <label class="form-check-label" for="jenis_kelamin_laki_laki">Laki-laki</label>
-                </div>
-                <div class="form-check mb-0">
-                  <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_perempuan" value="Perempuan" required aria-describedby="jenis_kelamin_error">
-                  <label class="form-check-label" for="jenis_kelamin_perempuan">Perempuan</label>
-                </div>
+              <label for="harga_dibayarkan" class="form-label">Harga yang Dibayarkan (Rp)</label>
+              <div class="input-group">
+                <span class="input-group-text" id="harga_prefix">Rp</span>
+                <input type="number" class="form-control" id="harga_dibayarkan" name="harga_dibayarkan" min="1" required aria-describedby="harga_prefix harga_error">
               </div>
-              <div id="jenis_kelamin_error" class="invalid-feedback d-none">Pilih jenis kelamin.</div>
+              <div id="harga_error" class="invalid-feedback">Harga wajib berupa angka positif.</div>
             </div>
 
             <div class="col-12 col-sm-6">
-              <label for="tahu_dari" class="form-label">Tahu Dialogika Dari?</label>
-              <select class="form-select" id="tahu_dari" name="tahu_dari" required aria-describedby="tahu_dari_error">
+              <label for="metode_pembayaran" class="form-label">Metode Pembayaran</label>
+              <select class="form-select" id="metode_pembayaran" name="metode_pembayaran" required aria-describedby="metode_pembayaran_error">
+                <option value="">Pilih</option>
+                <option value="Full Payment">Full Payment</option>
+                <option value="Down Payment (DP)">Down Payment (DP)</option>
+              </select>
+              <div id="metode_pembayaran_error" class="invalid-feedback">Pilih metode pembayaran.</div>
+            </div>
+
+            <div class="col-12 col-sm-6">
+              <label for="sumber_informasi" class="form-label">Mengetahui Dialogika Dari Mana?</label>
+              <select class="form-select" id="sumber_informasi" name="sumber_informasi" required aria-describedby="sumber_informasi_error">
                 <option value="">Pilih</option>
                 <option value="Instagram">Instagram</option>
-                <option value="Facebook">Facebook</option>
                 <option value="TikTok">TikTok</option>
-                <option value="Google">Google</option>
+                <option value="Website">Website</option>
+                <option value="Google Search">Google Search</option>
                 <option value="Teman">Teman</option>
+                <option value="Alumni">Alumni</option>
+                <option value="Webinar">Webinar</option>
                 <option value="Lainnya">Lainnya</option>
               </select>
-              <div id="tahu_dari_error" class="invalid-feedback">Pilih sumber informasi.</div>
-            </div>
-
-            <div class="col-12 col-sm-6" id="tahu_dari_lainnya_group" style="display: none;">
-              <label for="tahu_dari_lainnya" class="form-label">Lainnya</label>
-              <input type="text" class="form-control" id="tahu_dari_lainnya" name="tahu_dari_lainnya" placeholder="Tulis sumber lain" aria-describedby="tahu_dari_lainnya_error">
-              <div id="tahu_dari_lainnya_error" class="invalid-feedback">Mohon isi sumber lainnya.</div>
+              <div id="sumber_informasi_error" class="invalid-feedback">Pilih sumber informasi.</div>
             </div>
 
             <div class="col-12 col-sm-6">
-              <label for="status_pernikahan" class="form-label">Status Pernikahan</label>
-              <select class="form-select" id="status_pernikahan" name="status_pernikahan" required aria-describedby="status_pernikahan_error">
-                <option value="">Pilih</option>
-                <option value="Belum Menikah">Belum Menikah</option>
-                <option value="Sudah Menikah">Sudah Menikah</option>
-              </select>
-              <div id="status_pernikahan_error" class="invalid-feedback">Pilih status pernikahan.</div>
+              <label for="kota" class="form-label">Kota / Kabupaten</label>
+              <input type="text" class="form-control" id="kota" name="kota" maxlength="100" required placeholder="Contoh: Yogyakarta, Sleman, Jakarta Selatan" aria-describedby="kota_error">
+              <div id="kota_error" class="invalid-feedback">Kota / Kabupaten wajib diisi.</div>
+            </div>
+
+            <div class="col-12 col-sm-6" id="sumber_lainnya_group" style="display: none;">
+              <label for="sumber_lainnya" class="form-label">Lainnya</label>
+              <input type="text" class="form-control" id="sumber_lainnya" name="sumber_lainnya" placeholder="Tulis sumber lain" aria-describedby="sumber_lainnya_error">
+              <div id="sumber_lainnya_error" class="invalid-feedback">Mohon isi sumber lainnya.</div>
             </div>
 
             <div class="col-12 col-sm-6">
-              <label for="usia" class="form-label">Usia</label>
-              <div class="input-group">
-                <input type="number" class="form-control" id="usia" name="usia" min="1" max="100" required aria-describedby="usia_suffix usia_error">
-                <span class="input-group-text" id="usia_suffix">tahun</span>
-              </div>
-              <div id="usia_error" class="invalid-feedback">Usia wajib 1 sampai 100.</div>
+              <label for="bukti_transfer" class="form-label">Bukti Transfer</label>
+              <input type="file" class="form-control" id="bukti_transfer" name="bukti_transfer" required accept=".jpg,.jpeg,.png,.pdf" aria-describedby="bukti_hint bukti_error">
+              <small id="bukti_hint" class="text-muted">Format: JPG, JPEG, PNG, PDF. Maksimal 3 MB.</small>
+              <div id="bukti_error" class="invalid-feedback">Bukti transfer wajib diunggah sesuai format dan ukuran (maks. 3 MB).</div>
+              <div id="bukti_preview" class="member-file-preview" aria-live="polite">Preview bukti transfer belum tersedia.</div>
             </div>
 
             <div class="col-12 col-sm-6">
-              <label for="domisili" class="form-label">Domisili</label>
-              <input type="text" class="form-control" id="domisili" name="domisili" placeholder="Contoh: Yogyakarta" aria-describedby="domisili_hint">
-              <small id="domisili_hint" class="text-muted">Kota domisili peserta saat ini.</small>
-            </div>
-
-            <div class="col-12 col-sm-6">
-              <label for="profesi" class="form-label">Profesi</label>
-              <input type="text" class="form-control" id="profesi" name="profesi" required placeholder="Contoh: Digital Marketing" aria-describedby="profesi_error">
-              <div id="profesi_error" class="invalid-feedback">Profesi wajib diisi.</div>
-            </div>
-
-            <div class="col-12 col-sm-6">
-              <label for="program_diambil" class="form-label">Program yang Diambil</label>
-              <input type="text" class="form-control" id="program_diambil" name="program_diambil" required placeholder="Contoh: First Class" aria-describedby="program_diambil_error">
-              <div id="program_diambil_error" class="invalid-feedback">Program yang diambil wajib diisi.</div>
-            </div>
-
-            <div class="col-12 col-sm-6">
-              <label for="bukti_pembayaran" class="form-label">Bukti Pembayaran</label>
-              <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" required accept=".jpg,.jpeg,.png,.pdf" aria-describedby="bukti_hint bukti_error">
-              <small id="bukti_hint" class="text-muted">Format: JPG, JPEG, PNG, PDF. Maksimal 2 MB.</small>
-              <div id="bukti_error" class="invalid-feedback">Bukti pembayaran wajib diunggah sesuai format dan ukuran.</div>
-              <div id="bukti_preview" class="member-file-preview" aria-live="polite">Preview bukti pembayaran belum tersedia.</div>
-            </div>
-
-            <div class="col-12">
-              <label for="kebutuhan_kesulitan" class="form-label">Kebutuhan/Kesulitan yang Dirasakan</label>
-              <textarea class="form-control" id="kebutuhan_kesulitan" name="kebutuhan_kesulitan" rows="5" maxlength="500" aria-describedby="kebutuhan_counter kebutuhan_error"></textarea>
-              <div id="kebutuhan_counter" class="char-counter">0/500 karakter</div>
-              <div id="kebutuhan_error" class="invalid-feedback">Maksimal 500 karakter.</div>
+              <label class="form-label">Tanggal &amp; Waktu Pengisian Form</label>
+              <div class="form-control bg-light" id="waktu_pengisian_display" style="font-size:13px;cursor:default;" aria-live="polite">-</div>
+              <small class="text-muted">Otomatis terisi saat form dikirim.</small>
             </div>
 
             <div class="col-12 pt-2">
@@ -393,27 +329,38 @@
       return "MBR-" + y + m + d + "-" + rand;
     }
 
+    function formatDateTime(date) {
+      const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+      const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+      const day = days[date.getDay()];
+      const dd = String(date.getDate()).padStart(2, "0");
+      const mm = months[date.getMonth()];
+      const yyyy = date.getFullYear();
+      const hh = String(date.getHours()).padStart(2, "0");
+      const min = String(date.getMinutes()).padStart(2, "0");
+      const ss = String(date.getSeconds()).padStart(2, "0");
+      return day + ", " + dd + " " + mm + " " + yyyy + " " + hh + ":" + min + ":" + ss + " WIB";
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
       const form = document.getElementById("memberForm");
       const submitBtn = document.getElementById("memberSubmitBtn");
       const alertError = document.getElementById("memberAlertError");
       const successToast = document.getElementById("memberSuccessToast");
-      const sourceSelect = document.getElementById("tahu_dari");
-      const sourceOtherGroup = document.getElementById("tahu_dari_lainnya_group");
-      const sourceOtherInput = document.getElementById("tahu_dari_lainnya");
-      const whatsappInput = document.getElementById("whatsapp");
-      const emailInput = document.getElementById("email");
-      const paymentDateInput = document.getElementById("tanggal_pembayaran");
-      const buktiInput = document.getElementById("bukti_pembayaran");
-      const buktiPreview = document.getElementById("bukti_preview");
-      const kebutuhanInput = document.getElementById("kebutuhan_kesulitan");
-      const kebutuhanCounter = document.getElementById("kebutuhan_counter");
-      const genderInputs = Array.from(document.querySelectorAll('input[name="jenis_kelamin"]'));
-      const genderError = document.getElementById("jenis_kelamin_error");
 
-      const MAX_FILE_SIZE_BYTES = 2 * 1024 * 1024;
+      const sumberSelect = document.getElementById("sumber_informasi");
+      const sumberLainnyaGroup = document.getElementById("sumber_lainnya_group");
+      const sumberLainnyaInput = document.getElementById("sumber_lainnya");
+
+      const whatsappInput = document.getElementById("whatsapp");
+      const classStartInput = document.getElementById("tanggal_mulai_kelas");
+      const hargaInput = document.getElementById("harga_dibayarkan");
+      const buktiInput = document.getElementById("bukti_transfer");
+      const buktiPreview = document.getElementById("bukti_preview");
+      const waktuDisplay = document.getElementById("waktu_pengisian_display");
+
+      const MAX_FILE_SIZE_BYTES = 3 * 1024 * 1024; // 3 MB
       const ALLOWED_FILE_TYPES = ["image/jpeg", "image/jpg", "image/png", "application/pdf"];
-      const RFC5322_EMAIL_REGEX = /^(?:[a-zA-Z0-9!'#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!'#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\[(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)\])$/;
 
       function isValidWhatsappNumber(value) {
         return /^\+62\d{8,15}$/.test(String(value || "").trim());
@@ -422,10 +369,6 @@
       function isValidProofFile(file) {
         if (!file) return false;
         return file.size <= MAX_FILE_SIZE_BYTES && ALLOWED_FILE_TYPES.includes(file.type);
-      }
-
-      function calculateRemainingCharacters(value, maxChars) {
-        return Math.max(0, maxChars - String(value || "").length);
       }
 
       async function uploadProofToStorage(file, memberId) {
@@ -438,26 +381,24 @@
         return await snapshot.ref.getDownloadURL();
       }
 
-      function runMemberFormUnitTests() {
-        console.assert(isValidWhatsappNumber("+62812345678"), "UT WhatsApp valid gagal");
-        console.assert(!isValidWhatsappNumber("0812345678"), "UT WhatsApp invalid gagal");
-        console.assert(
-          isValidProofFile({ size: 1024, type: "image/png" }) &&
-          !isValidProofFile({ size: MAX_FILE_SIZE_BYTES + 1, type: "image/png" }),
-          "UT ukuran file gagal"
-        );
-        console.assert(
-          calculateRemainingCharacters("abc", 10) === 7 &&
-          calculateRemainingCharacters("1234567890", 10) === 0,
-          "UT counter karakter gagal"
-        );
+      function validateClassStartField() {
+        if (!classStartInput) return true;
+        const value = classStartInput.value;
+        if (!value) {
+          classStartInput.setCustomValidity("Tanggal mulai kelas wajib diisi.");
+        } else {
+          classStartInput.setCustomValidity("");
+        }
+        return classStartInput.checkValidity();
       }
 
-      runMemberFormUnitTests();
-
-      if (paymentDateInput) {
-        paymentDateInput.max = new Date().toISOString().split("T")[0];
+      function updateWaktuDisplay() {
+        if (waktuDisplay) {
+          waktuDisplay.textContent = formatDateTime(new Date());
+        }
       }
+      updateWaktuDisplay();
+      window.setInterval(updateWaktuDisplay, 1000);
 
       function showSuccessToast() {
         if (!successToast) return;
@@ -467,14 +408,14 @@
         }, 2200);
       }
 
-      function toggleSourceOtherField() {
-        const isOther = sourceSelect && sourceSelect.value === "Lainnya";
-        if (!sourceOtherGroup || !sourceOtherInput) return;
-        sourceOtherGroup.style.display = isOther ? "block" : "none";
-        sourceOtherInput.required = !!isOther;
-        if (!isOther) {
-          sourceOtherInput.value = "";
-          sourceOtherInput.setCustomValidity("");
+      function toggleSumberLainnya() {
+        const isLainnya = sumberSelect && sumberSelect.value === "Lainnya";
+        if (!sumberLainnyaGroup || !sumberLainnyaInput) return;
+        sumberLainnyaGroup.style.display = isLainnya ? "block" : "none";
+        sumberLainnyaInput.required = !!isLainnya;
+        if (!isLainnya) {
+          sumberLainnyaInput.value = "";
+          sumberLainnyaInput.setCustomValidity("");
         }
       }
 
@@ -491,19 +432,6 @@
         whatsappInput.value = raw;
       }
 
-      function validateEmailField() {
-        if (!emailInput) return true;
-        const value = String(emailInput.value || "").trim();
-        if (!value) {
-          emailInput.setCustomValidity("Email wajib diisi.");
-        } else if (!RFC5322_EMAIL_REGEX.test(value)) {
-          emailInput.setCustomValidity("Format email belum valid.");
-        } else {
-          emailInput.setCustomValidity("");
-        }
-        return emailInput.checkValidity();
-      }
-
       function validateWhatsappField() {
         if (!whatsappInput) return true;
         normalizeWhatsappInput();
@@ -515,38 +443,27 @@
         return whatsappInput.checkValidity();
       }
 
-      function validateDateField() {
-        if (!paymentDateInput) return true;
-        const value = paymentDateInput.value;
-        const max = paymentDateInput.max;
-        if (!value) {
-          paymentDateInput.setCustomValidity("Tanggal pembayaran wajib diisi.");
-        } else if (max && value > max) {
-          paymentDateInput.setCustomValidity("Tanggal pembayaran tidak boleh melebihi hari ini.");
+      function validateHargaField() {
+        if (!hargaInput) return true;
+        const value = Number(hargaInput.value);
+        if (!hargaInput.value || isNaN(value) || value <= 0) {
+          hargaInput.setCustomValidity("Harga wajib berupa angka positif.");
         } else {
-          paymentDateInput.setCustomValidity("");
+          hargaInput.setCustomValidity("");
         }
-        return paymentDateInput.checkValidity();
-      }
-
-      function validateGenderField() {
-        const valid = genderInputs.some(function (input) { return input.checked; });
-        if (genderError) {
-          genderError.classList.toggle("d-none", valid);
-        }
-        return valid;
+        return hargaInput.checkValidity();
       }
 
       function renderFilePreview(file) {
         if (!buktiPreview) return;
         if (!file) {
-          buktiPreview.innerHTML = "Preview bukti pembayaran belum tersedia.";
+          buktiPreview.innerHTML = "Preview bukti transfer belum tersedia.";
           return;
         }
         if (file.type.startsWith("image/")) {
           const reader = new FileReader();
           reader.onload = function (event) {
-            buktiPreview.innerHTML = '<img src="' + event.target.result + '" alt="Preview bukti pembayaran">';
+            buktiPreview.innerHTML = '<img src="' + event.target.result + '" alt="Preview bukti transfer">';
           };
           reader.readAsDataURL(file);
           return;
@@ -558,10 +475,10 @@
         if (!buktiInput) return true;
         const file = buktiInput.files && buktiInput.files[0];
         if (!file) {
-          buktiInput.setCustomValidity("Bukti pembayaran wajib diunggah.");
+          buktiInput.setCustomValidity("Bukti transfer wajib diunggah.");
           renderFilePreview(null);
         } else if (!isValidProofFile(file)) {
-          buktiInput.setCustomValidity("Bukti pembayaran harus JPG/JPEG/PNG/PDF maksimal 2 MB.");
+          buktiInput.setCustomValidity("Bukti transfer harus JPG/JPEG/PNG/PDF maksimal 3 MB.");
           renderFilePreview(file);
         } else {
           buktiInput.setCustomValidity("");
@@ -570,45 +487,31 @@
         return buktiInput.checkValidity();
       }
 
-      function updateCounter() {
-        if (!kebutuhanInput || !kebutuhanCounter) return;
-        const maxChars = Number(kebutuhanInput.maxLength || 500);
-        const used = String(kebutuhanInput.value || "").length;
-        kebutuhanCounter.textContent = used + "/" + maxChars + " karakter";
-        kebutuhanCounter.classList.toggle("over-limit", used > maxChars);
-      }
-
-      if (sourceSelect) sourceSelect.addEventListener("change", toggleSourceOtherField);
+      if (sumberSelect) sumberSelect.addEventListener("change", toggleSumberLainnya);
       if (whatsappInput) {
         whatsappInput.addEventListener("focus", function () {
           if (!String(whatsappInput.value || "").trim()) whatsappInput.value = "+62";
         });
         whatsappInput.addEventListener("input", validateWhatsappField);
       }
-      if (emailInput) emailInput.addEventListener("input", validateEmailField);
-      if (paymentDateInput) paymentDateInput.addEventListener("change", validateDateField);
+      if (classStartInput) classStartInput.addEventListener("change", validateClassStartField);
+      if (hargaInput) hargaInput.addEventListener("input", validateHargaField);
       if (buktiInput) buktiInput.addEventListener("change", validateProofFileField);
-      if (kebutuhanInput) kebutuhanInput.addEventListener("input", updateCounter);
-      genderInputs.forEach(function (input) {
-        input.addEventListener("change", validateGenderField);
-      });
 
-      toggleSourceOtherField();
-      updateCounter();
+      toggleSumberLainnya();
 
       if (form) {
         form.addEventListener("submit", async function (e) {
           e.preventDefault();
 
           alertError.classList.add("d-none");
-          const isEmailValid = validateEmailField();
           const isWhatsappValid = validateWhatsappField();
-          const isDateValid = validateDateField();
-          const isGenderValid = validateGenderField();
+          const isClassStartValid = validateClassStartField();
+          const isHargaValid = validateHargaField();
           const isFileValid = validateProofFileField();
           const html5Valid = form.checkValidity();
 
-          if (!html5Valid || !isEmailValid || !isWhatsappValid || !isDateValid || !isGenderValid || !isFileValid) {
+          if (!html5Valid || !isWhatsappValid || !isClassStartValid || !isHargaValid || !isFileValid) {
             form.classList.add("was-validated");
             return;
           }
@@ -616,36 +519,32 @@
           form.classList.remove("was-validated");
 
           const formData = new FormData(form);
-          const source = formData.get("tahu_dari") || "";
-          const customSource = formData.get("tahu_dari_lainnya") || "";
-          const finalSource = source === "Lainnya" ? customSource : source;
+          const sumber = formData.get("sumber_informasi") || "";
+          const customSumber = formData.get("sumber_lainnya") || "";
+          const finalSumber = sumber === "Lainnya" ? customSumber : sumber;
           const proofFile = buktiInput && buktiInput.files ? buktiInput.files[0] : null;
           const memberId = generateMemberId();
+          const waktuPengisian = new Date();
 
-          let buktiPembayaranUrl = "";
+          let buktiTransferUrl = "";
           if (proofFile) {
-            buktiPembayaranUrl = await uploadProofToStorage(proofFile, memberId);
+            buktiTransferUrl = await uploadProofToStorage(proofFile, memberId);
           }
 
           const payload = {
             member_id: memberId,
             nama: formData.get("nama") || "",
             whatsapp: formData.get("whatsapp") || "",
-            email: formData.get("email") || "",
-            instagram: formData.get("instagram") || "",
-            tanggal_pembayaran: formData.get("tanggal_pembayaran") || "",
-            tipe_payment: formData.get("tipe_payment") || "",
-            jenis_kelamin: formData.get("jenis_kelamin") || "",
-            tahu_dari: source || "",
-            tahu_dari_lainnya: source === "Lainnya" ? (customSource || "") : "",
-            sumber_informasi_final: finalSource || "",
-            status_pernikahan: formData.get("status_pernikahan") || "",
-            usia: formData.get("usia") ? Number(formData.get("usia")) : null,
-            domisili: formData.get("domisili") || "",
-            profesi: formData.get("profesi") || "",
-            program_diambil: formData.get("program_diambil") || "",
-            kebutuhan_kesulitan: formData.get("kebutuhan_kesulitan") || "",
-            bukti_pembayaran: buktiPembayaranUrl,
+            tanggal_mulai_kelas: formData.get("tanggal_mulai_kelas") || "",
+            program_kelas: formData.get("program_kelas") || "",
+            harga_dibayarkan: formData.get("harga_dibayarkan") ? Number(formData.get("harga_dibayarkan")) : null,
+            metode_pembayaran: formData.get("metode_pembayaran") || "",
+            sumber_informasi: sumber || "",
+            sumber_informasi_lainnya: sumber === "Lainnya" ? (customSumber || "") : "",
+            sumber_informasi_final: finalSumber || "",
+            kota: formData.get("kota") || "",
+            bukti_transfer: buktiTransferUrl,
+            waktu_pengisian: firebase.firestore.Timestamp.fromDate(waktuPengisian),
             created_at: firebase.firestore.FieldValue.serverTimestamp()
           };
 
@@ -657,10 +556,9 @@
 
             form.reset();
             form.classList.remove("was-validated");
-            toggleSourceOtherField();
-            updateCounter();
+            toggleSumberLainnya();
             renderFilePreview(null);
-            validateGenderField();
+            updateWaktuDisplay();
             submitBtn.disabled = false;
             submitBtn.textContent = "Simpan Data Member";
             showSuccessToast();
