@@ -216,15 +216,27 @@
             </div>
 
             <div class="col-12 col-sm-6">
-              <label for="tanggal_mulai_kelas" class="form-label">Tanggal Mulai Kelas</label>
-              <input type="date" class="form-control" id="tanggal_mulai_kelas" name="tanggal_mulai_kelas" required aria-describedby="tanggal_mulai_kelas_error">
-              <div id="tanggal_mulai_kelas_error" class="invalid-feedback">Tanggal mulai kelas wajib diisi.</div>
-            </div>
-
-            <div class="col-12 col-sm-6">
-              <label for="program_kelas" class="form-label">Program/Kelas yang Diikuti</label>
-              <input type="text" class="form-control" id="program_kelas" name="program_kelas" required placeholder="Contoh: Basic Plus Mei #3" aria-describedby="program_kelas_error">
-              <div id="program_kelas_error" class="invalid-feedback">Program/kelas wajib diisi.</div>
+              <label for="produk_dibeli" class="form-label">Produk yang Dibeli</label>
+              <input type="text" class="form-control" id="produk_dibeli" name="produk_dibeli" list="produk_list" required placeholder="Ketik atau pilih produk..." aria-describedby="produk_dibeli_error">
+              <datalist id="produk_list">
+                <option value="First Class">
+                <option value="First Kids">
+                <option value="Private First Class">
+                <option value="Private First Kids">
+                <option value="Master Class">
+                <option value="MC Class">
+                <option value="Premium Class">
+                <option value="First Play">
+                <option value="Basic Plus">
+                <option value="Kids Plus">
+                <option value="Private Basic Plus">
+                <option value="Private Kids Plus">
+                <option value="Basic Play">
+                <option value="Private Level 02">
+                <option value="Private Level 03">
+                <option value="Public Speaking Class">
+              </datalist>
+              <div id="produk_dibeli_error" class="invalid-feedback">Pilih produk yang dibeli dari daftar.</div>
             </div>
 
             <div class="col-12 col-sm-6">
@@ -353,7 +365,13 @@
       const sumberLainnyaInput = document.getElementById("sumber_lainnya");
 
       const whatsappInput = document.getElementById("whatsapp");
-      const classStartInput = document.getElementById("tanggal_mulai_kelas");
+      const produkInput = document.getElementById("produk_dibeli");
+      const ALLOWED_PRODUK = [
+        "First Class", "First Kids", "Private First Class", "Private First Kids",
+        "Master Class", "MC Class", "Premium Class", "First Play",
+        "Basic Plus", "Kids Plus", "Private Basic Plus", "Private Kids Plus",
+        "Basic Play", "Private Level 02", "Private Level 03", "Public Speaking Class"
+      ];
       const hargaInput = document.getElementById("harga_dibayarkan");
       const buktiInput = document.getElementById("bukti_transfer");
       const buktiPreview = document.getElementById("bukti_preview");
@@ -381,15 +399,17 @@
         return await snapshot.ref.getDownloadURL();
       }
 
-      function validateClassStartField() {
-        if (!classStartInput) return true;
-        const value = classStartInput.value;
+      function validateProdukField() {
+        if (!produkInput) return true;
+        const value = String(produkInput.value || "").trim();
         if (!value) {
-          classStartInput.setCustomValidity("Tanggal mulai kelas wajib diisi.");
+          produkInput.setCustomValidity("Pilih produk yang dibeli dari daftar.");
+        } else if (!ALLOWED_PRODUK.includes(value)) {
+          produkInput.setCustomValidity("Produk tidak tersedia dalam daftar.");
         } else {
-          classStartInput.setCustomValidity("");
+          produkInput.setCustomValidity("");
         }
-        return classStartInput.checkValidity();
+        return produkInput.checkValidity();
       }
 
       function updateWaktuDisplay() {
@@ -494,7 +514,7 @@
         });
         whatsappInput.addEventListener("input", validateWhatsappField);
       }
-      if (classStartInput) classStartInput.addEventListener("change", validateClassStartField);
+      if (produkInput) produkInput.addEventListener("change", validateProdukField);
       if (hargaInput) hargaInput.addEventListener("input", validateHargaField);
       if (buktiInput) buktiInput.addEventListener("change", validateProofFileField);
 
@@ -506,12 +526,12 @@
 
           alertError.classList.add("d-none");
           const isWhatsappValid = validateWhatsappField();
-          const isClassStartValid = validateClassStartField();
+          const isProdukValid = validateProdukField();
           const isHargaValid = validateHargaField();
           const isFileValid = validateProofFileField();
           const html5Valid = form.checkValidity();
 
-          if (!html5Valid || !isWhatsappValid || !isClassStartValid || !isHargaValid || !isFileValid) {
+          if (!html5Valid || !isWhatsappValid || !isProdukValid || !isHargaValid || !isFileValid) {
             form.classList.add("was-validated");
             return;
           }
@@ -535,8 +555,7 @@
             member_id: memberId,
             nama: formData.get("nama") || "",
             whatsapp: formData.get("whatsapp") || "",
-            tanggal_mulai_kelas: formData.get("tanggal_mulai_kelas") || "",
-            program_kelas: formData.get("program_kelas") || "",
+            produk_dibeli: formData.get("produk_dibeli") || "",
             harga_dibayarkan: formData.get("harga_dibayarkan") ? Number(formData.get("harga_dibayarkan")) : null,
             metode_pembayaran: formData.get("metode_pembayaran") || "",
             sumber_informasi: sumber || "",
