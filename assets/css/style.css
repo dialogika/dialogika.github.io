@@ -564,6 +564,7 @@ h6 {
 }
 
 #hero .container {
+  padding: 0;
   position: relative;
   z-index: 3;
   max-width: 1200px;
@@ -625,6 +626,7 @@ h6 {
   }
 
   #hero .container {
+    padding: 0;
     text-align: center;
     margin-bottom: 50px;
   }
