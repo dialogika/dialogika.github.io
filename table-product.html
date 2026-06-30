@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Daftar Program - Dialogika</title>
+    <meta
+      content="Tabel perbandingan program Public Speaking Dialogika"
+      name="description"
+    />
+    <meta
+      content="product table, program public speaking, dialogika"
+      name="keywords"
+    />
+
+    <link href="assets/img/favicon.webp" rel="icon" />
+    <link href="assets/img/apple-touch-icon.webp" rel="apple-touch-icon" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/swiper/swiper-bundle.css" rel="stylesheet" />
+
+    <link href="assets/css/style.css" rel="stylesheet" />
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      :root {
+        --primary: #0b2f7a;
+        --primary-light: #1d4ed8;
+        --primary-ultra-light: #eff6ff;
+        --accent: #1d4ed8;
+        --success: #10b981;
+        --danger: #ef4444;
+        --surface: #ffffff;
+        --surface-2: #f8fbff;
+        --border: #e2e8f0;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --label-col-width: 170px;
+        --shadow-card: 0 18px 44px -30px rgba(15, 23, 42, 0.35);
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(11, 47, 122, 0.08),
+            transparent 30%
+          ),
+          linear-gradient(180deg, #f8fbff 0%, #f8fafc 100%);
+        color: var(--text-main);
+      }
+
+      #main {
+        padding-top: 120px;
+        padding-bottom: 72px;
+      }
+
+      /* ─── Page hero ─── */
+      .page-hero {
+        position: relative;
+        overflow: hidden;
+        border-radius: 32px 32px 0 0;
+        padding: 36px 32px 28px;
+        background: linear-gradient(
+          135deg,
+          #050d24 0%,
+          #0b2f7a 55%,
+          #1d4ed8 100%
+        );
+        color: #fff;
+        box-shadow: 0 20px 60px -32px rgba(15, 23, 42, 0.55);
+        margin-bottom: 0;
+      }
+
+      .page-hero::before,
+      .page-hero::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        pointer-events: none;
+      }
+
+      .page-hero::before {
+        width: 260px;
+        height: 260px;
+        top: -120px;
+        right: -80px;
+      }
+
+      .page-hero::after {
+        width: 180px;
+        height: 180px;
+        bottom: -90px;
+        left: -50px;
+      }
+
+      .hero-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+
+      .page-hero h1 {
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-hero p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.97rem;
+        font-weight: 500;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ─── Product selector bar ─── */
+      .surface-card {
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(226, 232, 240, 0.95);
+        border-radius: 28px;
+        box-shadow: var(--shadow-card);
+        backdrop-filter: blur(10px);
+      }
+
+      .product-selector-wrap {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 80px;
+        z-index: 100;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0 4px 24px rgba(11, 47, 122, 0.12);
+        overflow: hidden;
+        margin-bottom: 0;
+      }
+
+      .product-selector {
+        display: flex;
+        overflow-x: auto;
+        gap: 0;
+        padding: 0;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-light) var(--border);
+      }
+
+      .product-selector::-webkit-scrollbar {
+        height: 4px;
+      }
+
+      .product-selector::-webkit-scrollbar-track {
+        background: var(--border);
+      }
+
+      .product-selector::-webkit-scrollbar-thumb {
+        background: var(--primary-light);
+        border-radius: 4px;
+      }
+
+      .product-tab {
+        flex-shrink: 0;
+        padding: 25px 28px 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        white-space: nowrap;
+        transition:
+          color 0.2s,
+          border-color 0.2s,
+          background 0.2s;
+        user-select: none;
+        background: transparent;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        outline: none;
+        position: relative;
+        letter-spacing: 0.01em;
+      }
+
+      .product-tab:hover {
+        color: var(--primary);
+        background: var(--primary-ultra-light);
+      }
+
+      .product-tab.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+        background: var(--primary-ultra-light);
+        font-weight: 700;
+      }
+
+      .product-tab .tab-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        margin-right: 8px;
+        vertical-align: middle;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+
+      .product-tab.active .tab-dot {
+        opacity: 1;
+      }
+
+      /* ─── Loading / empty state ─── */
+      .state-box {
+        padding: 60px 20px;
+        text-align: center;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      .state-box i {
+        font-size: 2.5rem;
+        margin-bottom: 16px;
+        display: block;
+        opacity: 0.5;
+      }
+
+      .spinner-ring {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 4px solid var(--border);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ─── Detail panel & table ─── */
+      .detail-section {
+        margin-top: 0;
+      }
+
+      .product-detail-card {
+        background: var(--surface);
+        border-radius: 0 0 28px 28px;
+        box-shadow: var(--shadow-card);
+        overflow: hidden;
+        border: 1px solid rgba(226, 232, 240, 0.95);
+        border-top: none;
+      }
+
+      /* The detail table */
+      .detail-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .detail-table tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+
+      .detail-table tr:last-child {
+        border-bottom: none;
+      }
+
+      .detail-table tr:hover {
+        background: #f8fbff;
+      }
+
+      .detail-table .label-cell {
+        width: var(--label-col-width);
+        min-width: var(--label-col-width);
+        padding: 24px 24px;
+        font-weight: 700;
+        font-size: 0.82rem;
+        color: var(--primary);
+        vertical-align: top;
+        background: var(--primary-ultra-light);
+        border-right: 2px solid #dbeafe;
+        white-space: nowrap;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      .detail-table .label-cell .label-icon {
+        display: block;
+        font-size: 1.15rem;
+        margin-bottom: 6px;
+        color: var(--primary-light);
+      }
+
+      .detail-table .value-cell {
+        padding: 24px 28px;
+        font-size: 0.94rem;
+        color: var(--text-main);
+        vertical-align: top;
+      }
+
+      /* product name row */
+      .detail-table .name-value {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        letter-spacing: -0.02em;
+      }
+
+      /* description */
+      .detail-table .desc-value {
+        color: var(--text-muted);
+        line-height: 1.8;
+        font-weight: 500;
+      }
+
+      /* materials list */
+      .material-item {
+        display: flex;
+        gap: 14px;
+        padding: 14px 0;
+        border-bottom: 1px dashed var(--border);
+      }
+
+      .material-item:last-child {
+        border-bottom: none;
+      }
+
+      .material-index {
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #0b2f7a, #1d4ed8);
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2px;
+        box-shadow: 0 4px 12px rgba(11, 47, 122, 0.3);
+      }
+
+      .material-body .material-title {
+        font-weight: 700;
+        font-size: 0.92rem;
+        margin-bottom: 4px;
+        color: var(--text-main);
+      }
+
+      .material-body .material-desc {
+        color: var(--text-muted);
+        font-size: 0.84rem;
+        line-height: 1.65;
+        font-weight: 500;
+      }
+
+      /* benefits list */
+      .benefit-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px dashed var(--border);
+        gap: 16px;
+      }
+
+      .benefit-item:last-child {
+        border-bottom: none;
+      }
+
+      .benefit-label {
+        font-size: 0.92rem;
+        color: var(--text-main);
+        font-weight: 600;
+      }
+
+      .benefit-value-text {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .badge-yes {
+        background: #d1fae5;
+        color: #065f46;
+        padding: 5px 14px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .badge-no {
+        background: #fee2e2;
+        color: #991b1b;
+        padding: 5px 14px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      /* outcomes list */
+      .outcome-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 0;
+      }
+
+      .outcome-item i {
+        color: var(--success);
+        font-size: 1.05rem;
+        margin-top: 1px;
+        flex-shrink: 0;
+      }
+
+      .outcome-item span {
+        font-size: 0.92rem;
+        line-height: 1.65;
+        font-weight: 500;
+      }
+
+      /* Fade-in animation for panel */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-up {
+        animation: fadeUp 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+
+      /* Scroll hint arrow */
+      .scroll-hint {
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        padding: 6px 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border-left: 1px solid var(--border);
+        flex-shrink: 0;
+        white-space: nowrap;
+        background: var(--surface);
+      }
+
+      @media (max-width: 600px) {
+        #main {
+          padding-top: 100px;
+        }
+
+        .page-hero {
+          border-radius: 24px;
+          padding: 24px 20px;
+        }
+
+        .page-hero h1 {
+          font-size: 1.4rem;
+        }
+
+        .detail-table .label-cell {
+          width: 100px;
+          min-width: 100px;
+          padding: 16px 12px;
+          font-size: 0.72rem;
+        }
+
+        .detail-table .value-cell {
+          padding: 16px 14px;
+        }
+
+        .detail-table .name-value {
+          font-size: 1.15rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <main-header></main-header>
+    <!-- ======= End Header ======= -->
+
+    <main id="main">
+      <!-- Hero (inside container, rounded top) -->
+      <div class="container">
+        <section>
+          <div class="page-hero">
+            <div class="hero-pill">
+              <i class="bi bi-collection-fill"></i> Program Dialogika
+            </div>
+            <h1>Daftar Program</h1>
+            <p>
+              Pilih program Public Speaking yang sesuai dengan kebutuhan Anda
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Product selector: full-width, menempel langsung di bawah hero -->
+      <div class="product-selector-wrap">
+        <div class="container-fluid px-0 d-flex align-items-stretch">
+          <div class="product-selector" id="productSelector">
+            <!-- tabs injected by JS -->
+            <div class="state-box w-100" id="tabLoading">
+              <div class="spinner-ring"></div>
+            </div>
+          </div>
+          <div class="" id="scrollHint" style="display: none"></div>
+        </div>
+      </div>
+
+      <!-- Detail panel -->
+      <div class="container">
+        <section class="detail-section">
+          <!-- empty / prompt state -->
+          <div class="state-box" id="emptyState">
+            <i class="bi bi-hand-index"></i>
+            <div>Klik nama produk di atas untuk melihat detail.</div>
+          </div>
+
+          <!-- actual detail card -->
+          <div
+            class="product-detail-card"
+            id="detailCard"
+            style="display: none"
+          >
+            <table class="detail-table" id="detailTable">
+              <!-- rows injected by JS -->
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <main-footer></main-footer>
+    <footer-modal></footer-modal>
+    <!-- ======= End Footer ======= -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/js/headerfooter.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+      /* ── Firebase ── */
+      const firebaseConfig = {
+        apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
+        authDomain: "pre-dialogika.firebaseapp.com",
+        projectId: "pre-dialogika",
+        storageBucket: "pre-dialogika.firebasestorage.app",
+        messagingSenderId: "343771410480",
+        appId: "1:343771410480:web:32881c9868522090237df5",
+        measurementId: "G-SXN811P3N0",
+      };
+
+      if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      /* ── State ── */
+      let productsData = [];
+      let activeProductId = null;
+
+      /* ── Helpers ── */
+      function esc(v) {
+        return String(v || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+      function pad(n) {
+        return String(n).padStart(2, "0");
+      }
+
+      /* ── Load products ── */
+      async function loadProducts() {
+        const selector = document.getElementById("productSelector");
+        const tabLoading = document.getElementById("tabLoading");
+        const scrollHint = document.getElementById("scrollHint");
+
+        try {
+          const snapshot = await db.collection("products").get();
+          tabLoading.remove();
+
+          if (snapshot.empty) {
+            selector.innerHTML =
+              '<div class="state-box py-3 px-4 text-muted small">Belum ada produk tersedia.</div>';
+            return;
+          }
+
+          productsData = [];
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.name) productsData.push({ id: doc.id, ...data });
+          });
+
+          productsData.forEach((product) => {
+            const btn = document.createElement("button");
+            btn.className = "product-tab";
+            btn.id = "tab-" + product.id;
+            btn.setAttribute("data-id", product.id);
+            btn.innerHTML = `<span class="tab-dot"></span>${esc(product.name)}`;
+            btn.addEventListener("click", () => showProductDetail(product.id));
+            selector.appendChild(btn);
+          });
+
+          // Show scroll hint if tabs overflow
+          if (selector.scrollWidth > selector.clientWidth) {
+            scrollHint.style.display = "flex";
+          }
+
+          // Auto-select first product
+          if (productsData.length > 0) showProductDetail(productsData[0].id);
+        } catch (err) {
+          console.error("Error loading products:", err);
+          tabLoading.remove();
+          selector.innerHTML =
+            '<div class="state-box py-3 px-4 text-danger small"><i class="bi bi-exclamation-triangle me-1"></i>Gagal memuat produk.</div>';
+        }
+      }
+
+      /* ── Render detail ── */
+      function showProductDetail(productId) {
+        const product = productsData.find((p) => p.id === productId);
+        if (!product) return;
+
+        // Update active tab
+        document
+          .querySelectorAll(".product-tab")
+          .forEach((t) => t.classList.remove("active"));
+        const activeTab = document.getElementById("tab-" + productId);
+        if (activeTab) {
+          activeTab.classList.add("active");
+          activeTab.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "nearest",
+          });
+        }
+
+        activeProductId = productId;
+
+        // Hide empty state, show card
+        document.getElementById("emptyState").style.display = "none";
+        const card = document.getElementById("detailCard");
+        card.style.display = "block";
+        card.classList.remove("animate-fade-up");
+        void card.offsetWidth; // reflow to restart animation
+        card.classList.add("animate-fade-up");
+
+        // Build table rows
+        const table = document.getElementById("detailTable");
+        table.innerHTML = "";
+
+        /* ── Row: Nama Product ── */
+        table.innerHTML += `
+        <tr>
+          <td class="label-cell">
+            <i class="bi bi-tag-fill label-icon"></i>
+            Nama Program
+          </td>
+          <td class="value-cell">
+            <div class="name-value">${esc(product.name)}</div>
+          </td>
+        </tr>`;
+
+        /* ── Row: Description ── */
+        // Render description as HTML (Firestore may store HTML markup)
+        // Strip inline font/color/face attrs so it inherits page typography
+        const rawDesc = product.description || "-";
+        const cleanDesc = rawDesc
+          .replace(/<font[^>]*>/gi, "<span>")
+          .replace(/<\/font>/gi, "</span>")
+          .replace(/\s*style="[^"]*"/gi, "")
+          .replace(/\s*face="[^"]*"/gi, "")
+          .replace(/\s*color="[^"]*"/gi, "");
+        table.innerHTML += `
+        <tr>
+          <td class="label-cell">
+            <i class="bi bi-info-circle-fill label-icon"></i>
+            Deskripsi
+          </td>
+          <td class="value-cell">
+            <div class="desc-value">${cleanDesc}</div>
+          </td>
+        </tr>`;
+
+        /* ── Row: Materi ── */
+        let materialsHtml = "";
+        if (
+          product.materials &&
+          Array.isArray(product.materials) &&
+          product.materials.length > 0
+        ) {
+          const sorted = [...product.materials].sort((a, b) => {
+            const ao = parseInt(String(a.order || "").replace(/\D/g, ""), 10);
+            const bo = parseInt(String(b.order || "").replace(/\D/g, ""), 10);
+            if (isNaN(ao) && isNaN(bo)) return 0;
+            if (isNaN(ao)) return 1;
+            if (isNaN(bo)) return -1;
+            return ao - bo;
+          });
+          sorted.forEach((item, idx) => {
+            const order =
+              String(item.order || String(idx + 1)).replace(/\D/g, "") ||
+              String(idx + 1);
+            materialsHtml += `
+            <div class="material-item">
+              <div class="material-index">${pad(order)}</div>
+              <div class="material-body">
+                <div class="material-title">${esc(item.title || "-")}</div>
+                <div class="material-desc">${esc(item.description || "-")}</div>
+              </div>
+            </div>`;
+          });
+        } else {
+          materialsHtml = '<span class="text-muted">-</span>';
+        }
+        table.innerHTML += `
+        <tr>
+          <td class="label-cell">
+            <i class="bi bi-book-fill label-icon"></i>
+            Materi
+          </td>
+          <td class="value-cell">${materialsHtml}</td>
+        </tr>`;
+
+        /* ── Row: Benefit ── */
+        let benefitsHtml = "";
+        if (
+          product.features &&
+          Array.isArray(product.features) &&
+          product.features.length > 0
+        ) {
+          product.features.forEach((feature) => {
+            if (feature && typeof feature === "object") {
+              const rawLabel = String(feature.label || "").trim();
+              // Skip items with no label
+              if (!rawLabel) return;
+              const label = esc(rawLabel);
+              const type = String(feature.type || "")
+                .trim()
+                .toLowerCase();
+              const value = feature.value;
+              if (type === "boolean") {
+                const isTrue =
+                  value === true || String(value).toLowerCase() === "true";
+                // Skip boolean items that are false (✗ Tidak)
+                if (!isTrue) return;
+                benefitsHtml += `
+                <div class="benefit-item">
+                  <span class="benefit-label">${label}</span>
+                  <span class="badge-yes">✓ Bisa</span>
+                </div>`;
+              } else {
+                const displayVal = String(value || "").trim();
+                // Skip items with no value
+                if (!displayVal) return;
+                benefitsHtml += `
+                <div class="benefit-item">
+                  <span class="benefit-label">${label}</span>
+                  <span class="benefit-value-text">${esc(displayVal)}</span>
+                </div>`;
+              }
+            } else {
+              const rawStr = String(feature || "").trim();
+              if (!rawStr) return;
+              benefitsHtml += `<div class="benefit-item"><span class="benefit-label">${esc(rawStr)}</span></div>`;
+            }
+          });
+        }
+        if (!benefitsHtml) {
+          benefitsHtml = '<span class="text-muted">-</span>';
+        }
+        table.innerHTML += `
+        <tr>
+          <td class="label-cell">
+            <i class="bi bi-star-fill label-icon"></i>
+            Benefit
+          </td>
+          <td class="value-cell">${benefitsHtml}</td>
+        </tr>`;
+
+        /* ── Row: Target Outcomes ── */
+        let outcomesHtml = "";
+        if (
+          product.targetOutcomes &&
+          Array.isArray(product.targetOutcomes) &&
+          product.targetOutcomes.length > 0
+        ) {
+          product.targetOutcomes.forEach((outcome) => {
+            outcomesHtml += `
+            <div class="outcome-item">
+              <i class="bi bi-check-circle-fill"></i>
+              <span>${esc(String(outcome || "-"))}</span>
+            </div>`;
+          });
+        } else {
+          outcomesHtml = '<span class="text-muted">-</span>';
+        }
+        table.innerHTML += `
+        <tr>
+          <td class="label-cell">
+            <i class="bi bi-bullseye label-icon"></i>
+            Target Outcomes
+          </td>
+          <td class="value-cell">${outcomesHtml}</td>
+        </tr>`;
+      }
+
+      /* ── Init ── */
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadProducts);
+      } else {
+        loadProducts();
+      }
+    </script>
+  </body>
+</html>
