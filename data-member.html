@@ -1,595 +1,876 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Form Data Member | Dialogika</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Form Data Member | Dialogika</title>
 
-  <link href="assets/img/favicon.webp" rel="icon">
-  <link href="assets/img/apple-touch-icon.webp" rel="apple-touch-icon">
+    <link href="assets/img/favicon.webp" rel="icon" />
+    <link href="assets/img/apple-touch-icon.webp" rel="apple-touch-icon" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
-  <style>
-    body.member-body {
-      min-height: 100vh;
-      margin: 0;
-      padding: 40px 15px;
-      background: radial-gradient(circle at top left, #e0f2fe 0, #f9fafb 45%, #e5f6ff 100%);
-      font-family: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-
-    .member-shell {
-      max-width: 1100px;
-    }
-
-    .member-header-title {
-      font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      letter-spacing: 0.03em;
-    }
-
-    .member-header-subtitle {
-      font-size: 13px;
-      color: #6b7280;
-    }
-
-    .member-form-card {
-      border-radius: 20px;
-      border: 1px solid rgba(15, 23, 42, 0.06);
-      box-shadow: 0 18px 40px -24px rgba(15, 23, 42, 0.4);
-      background: #ffffff;
-    }
-
-    .member-form-card .form-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #111827;
-      margin-bottom: 4px;
-    }
-
-    .member-form-card .form-control,
-    .member-form-card .form-select,
-    .member-form-card textarea {
-      border-radius: 10px;
-      border-color: #e5e7eb;
-      font-size: 13px;
-      padding: 0.55rem 0.75rem;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-    }
-
-    .member-form-card .form-control:focus,
-    .member-form-card .form-select:focus,
-    .member-form-card textarea:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.15);
-      background-color: #f9fafb;
-    }
-
-    .member-form-card small.text-muted {
-      font-size: 11px;
-    }
-
-    .member-alert {
-      border-radius: 999px;
-      padding: 0.5rem 1rem;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .member-alert i {
-      font-size: 16px;
-    }
-
-    #memberAlertSuccess {
-      border: none;
-      background: rgba(16, 185, 129, 0.08);
-      color: #065f46;
-    }
-
-    #memberAlertError {
-      border: none;
-      background: rgba(239, 68, 68, 0.08);
-      color: #7f1d1d;
-    }
-
-    #memberSubmitBtn {
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.7rem 1rem;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      border: none;
-      box-shadow: 0 12px 24px -12px rgba(37, 99, 235, 0.6);
-    }
-
-    #memberSubmitBtn:hover {
-      background: linear-gradient(135deg, #1d4ed8, #1e40af);
-      box-shadow: 0 16px 32px -16px rgba(30, 64, 175, 0.7);
-    }
-
-    #memberSubmitBtn:disabled {
-      box-shadow: none;
-      opacity: 0.8;
-    }
-
-    .member-toast {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 1080;
-      min-width: 240px;
-      max-width: 320px;
-      background: #065f46;
-      color: #fff;
-      border-radius: 12px;
-      padding: 12px 14px;
-      box-shadow: 0 16px 32px -16px rgba(6, 95, 70, 0.8);
-      opacity: 0;
-      transform: translateY(-8px);
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .member-toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .member-file-preview {
-      margin-top: 8px;
-      border: 1px dashed #cbd5e1;
-      border-radius: 10px;
-      padding: 8px;
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f8fafc;
-      color: #64748b;
-      font-size: 12px;
-      text-align: center;
-    }
-
-    .member-file-preview img {
-      max-height: 120px;
-      width: auto;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-
-    @media (max-width: 575.98px) {
+    <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <style>
       body.member-body {
-        padding-top: 24px;
-        padding-bottom: 24px;
+        min-height: 100vh;
+        margin: 0;
+        padding: 40px 15px;
+        background: radial-gradient(
+          circle at top left,
+          #e0f2fe 0,
+          #f9fafb 45%,
+          #e5f6ff 100%
+        );
+        font-family:
+          "Open Sans",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      .member-shell {
+        max-width: 1100px;
+      }
+
+      .member-header-title {
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        letter-spacing: 0.03em;
+      }
+
+      .member-header-subtitle {
+        font-size: 13px;
+        color: #6b7280;
       }
 
       .member-form-card {
-        padding: 1.25rem !important;
+        border-radius: 20px;
+        border: 1px solid rgba(15, 23, 42, 0.06);
+        box-shadow: 0 18px 40px -24px rgba(15, 23, 42, 0.4);
+        background: #ffffff;
       }
-    }
-  </style>
-</head>
-<body class="member-body">
-  <div id="memberSuccessToast" class="member-toast" role="status" aria-live="polite">
-    <i class="bi bi-check-circle-fill"></i>
-    <span>Data berhasil disimpan</span>
-  </div>
-  <main class="container member-shell">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <div class="text-center mb-4">
-          <img src="assets/img/logo.webp" alt="Dialogika" style="height: 48px;" class="mb-3">
-          <h1 class="h4 fw-bold mb-1 member-header-title">Form Data Member</h1>
-          <p class="member-header-subtitle mb-0">Lengkapi data di bawah ini untuk pendataan member Dialogika.</p>
-        </div>
 
-        <div id="memberAlertError" class="alert member-alert d-none" role="alert">
-          <i class="bi bi-exclamation-triangle-fill"></i>
-          <span>Terjadi kesalahan saat menyimpan data. Silakan coba lagi.</span>
-        </div>
+      .member-form-card .form-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 4px;
+      }
 
-        <form id="memberForm" class="card member-form-card p-4 needs-validation" novalidate>
-          <div class="row g-3">
-            <div class="col-12 col-sm-6">
-              <label for="nama" class="form-label">Nama Lengkap</label>
-              <input type="text" class="form-control" id="nama" name="nama" maxlength="150" required aria-describedby="nama_error">
-              <div id="nama_error" class="invalid-feedback">Nama lengkap wajib diisi (maksimal 150 karakter).</div>
-            </div>
+      .member-form-card .form-control,
+      .member-form-card .form-select,
+      .member-form-card textarea {
+        border-radius: 10px;
+        border-color: #e5e7eb;
+        font-size: 13px;
+        padding: 0.55rem 0.75rem;
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.15s ease,
+          background-color 0.15s ease;
+      }
 
-            <div class="col-12 col-sm-6">
-              <label for="whatsapp" class="form-label">Nomor WhatsApp</label>
-              <input type="tel" class="form-control" id="whatsapp" name="whatsapp" required pattern="^\+62\d{8,15}$" placeholder="+628123456789" aria-describedby="whatsapp_hint whatsapp_error">
-              <small id="whatsapp_hint" class="text-muted">Format: +62 diikuti 8-15 digit.</small>
-              <div id="whatsapp_error" class="invalid-feedback">Nomor WhatsApp harus format +62xxxxxxxx.</div>
-            </div>
+      .member-form-card .form-control:focus,
+      .member-form-card .form-select:focus,
+      .member-form-card textarea:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.15);
+        background-color: #f9fafb;
+      }
 
-            <div class="col-12 col-sm-6">
-              <label for="produk_dibeli" class="form-label">Produk yang Dibeli</label>
-              <input type="text" class="form-control" id="produk_dibeli" name="produk_dibeli" list="produk_list" required placeholder="Ketik atau pilih produk..." aria-describedby="produk_dibeli_error">
-              <datalist id="produk_list">
-                <option value="First Class">
-                <option value="First Kids">
-                <option value="Private First Class">
-                <option value="Private First Kids">
-                <option value="Master Class">
-                <option value="MC Class">
-                <option value="Premium Class">
-                <option value="First Play">
-                <option value="Basic Plus">
-                <option value="Kids Plus">
-                <option value="Private Basic Plus">
-                <option value="Private Kids Plus">
-                <option value="Basic Play">
-                <option value="Private Level 02">
-                <option value="Private Level 03">
-                <option value="Public Speaking Class">
-              </datalist>
-              <div id="produk_dibeli_error" class="invalid-feedback">Pilih produk yang dibeli dari daftar.</div>
-            </div>
+      .member-form-card small.text-muted {
+        font-size: 11px;
+      }
 
-            <div class="col-12 col-sm-6">
-              <label for="harga_dibayarkan" class="form-label">Harga yang Dibayarkan (Rp)</label>
-              <div class="input-group">
-                <span class="input-group-text" id="harga_prefix">Rp</span>
-                <input type="number" class="form-control" id="harga_dibayarkan" name="harga_dibayarkan" min="1" required aria-describedby="harga_prefix harga_error">
-              </div>
-              <div id="harga_error" class="invalid-feedback">Harga wajib berupa angka positif.</div>
-            </div>
+      .member-alert {
+        border-radius: 999px;
+        padding: 0.5rem 1rem;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
 
-            <div class="col-12 col-sm-6">
-              <label for="metode_pembayaran" class="form-label">Metode Pembayaran</label>
-              <select class="form-select" id="metode_pembayaran" name="metode_pembayaran" required aria-describedby="metode_pembayaran_error">
-                <option value="">Pilih</option>
-                <option value="Full Payment">Full Payment</option>
-                <option value="Down Payment (DP)">Down Payment (DP)</option>
-              </select>
-              <div id="metode_pembayaran_error" class="invalid-feedback">Pilih metode pembayaran.</div>
-            </div>
+      .member-alert i {
+        font-size: 16px;
+      }
 
-            <div class="col-12 col-sm-6">
-              <label for="sumber_informasi" class="form-label">Mengetahui Dialogika Dari Mana?</label>
-              <select class="form-select" id="sumber_informasi" name="sumber_informasi" required aria-describedby="sumber_informasi_error">
-                <option value="">Pilih</option>
-                <option value="Instagram">Instagram</option>
-                <option value="TikTok">TikTok</option>
-                <option value="Website">Website</option>
-                <option value="Google Search">Google Search</option>
-                <option value="Teman">Teman</option>
-                <option value="Alumni">Alumni</option>
-                <option value="Webinar">Webinar</option>
-                <option value="Lainnya">Lainnya</option>
-              </select>
-              <div id="sumber_informasi_error" class="invalid-feedback">Pilih sumber informasi.</div>
-            </div>
+      #memberAlertSuccess {
+        border: none;
+        background: rgba(16, 185, 129, 0.08);
+        color: #065f46;
+      }
 
-            <div class="col-12 col-sm-6">
-              <label for="kota" class="form-label">Kota / Kabupaten</label>
-              <input type="text" class="form-control" id="kota" name="kota" maxlength="100" required placeholder="Contoh: Yogyakarta, Sleman, Jakarta Selatan" aria-describedby="kota_error">
-              <div id="kota_error" class="invalid-feedback">Kota / Kabupaten wajib diisi.</div>
-            </div>
+      #memberAlertError {
+        border: none;
+        background: rgba(239, 68, 68, 0.08);
+        color: #7f1d1d;
+      }
 
-            <div class="col-12 col-sm-6" id="sumber_lainnya_group" style="display: none;">
-              <label for="sumber_lainnya" class="form-label">Lainnya</label>
-              <input type="text" class="form-control" id="sumber_lainnya" name="sumber_lainnya" placeholder="Tulis sumber lain" aria-describedby="sumber_lainnya_error">
-              <div id="sumber_lainnya_error" class="invalid-feedback">Mohon isi sumber lainnya.</div>
-            </div>
+      #memberSubmitBtn {
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.7rem 1rem;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        border: none;
+        box-shadow: 0 12px 24px -12px rgba(37, 99, 235, 0.6);
+      }
 
-            <div class="col-12 col-sm-6">
-              <label for="bukti_transfer" class="form-label">Bukti Transfer</label>
-              <input type="file" class="form-control" id="bukti_transfer" name="bukti_transfer" required accept=".jpg,.jpeg,.png,.pdf" aria-describedby="bukti_hint bukti_error">
-              <small id="bukti_hint" class="text-muted">Format: JPG, JPEG, PNG, PDF. Maksimal 3 MB.</small>
-              <div id="bukti_error" class="invalid-feedback">Bukti transfer wajib diunggah sesuai format dan ukuran (maks. 3 MB).</div>
-              <div id="bukti_preview" class="member-file-preview" aria-live="polite">Preview bukti transfer belum tersedia.</div>
-            </div>
+      #memberSubmitBtn:hover {
+        background: linear-gradient(135deg, #1d4ed8, #1e40af);
+        box-shadow: 0 16px 32px -16px rgba(30, 64, 175, 0.7);
+      }
 
-            <div class="col-12 col-sm-6">
-              <label class="form-label">Tanggal &amp; Waktu Pengisian Form</label>
-              <div class="form-control bg-light" id="waktu_pengisian_display" style="font-size:13px;cursor:default;" aria-live="polite">-</div>
-              <small class="text-muted">Otomatis terisi saat form dikirim.</small>
-            </div>
+      #memberSubmitBtn:disabled {
+        box-shadow: none;
+        opacity: 0.8;
+      }
 
-            <div class="col-12 pt-2">
-              <button type="submit" id="memberSubmitBtn" class="btn btn-primary w-100">
-                Simpan Data Member
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
+      .member-toast {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 1080;
+        min-width: 240px;
+        max-width: 320px;
+        background: #065f46;
+        color: #fff;
+        border-radius: 12px;
+        padding: 12px 14px;
+        box-shadow: 0 16px 32px -16px rgba(6, 95, 70, 0.8);
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .member-toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .member-file-preview {
+        margin-top: 8px;
+        border: 1px dashed #cbd5e1;
+        border-radius: 10px;
+        padding: 8px;
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8fafc;
+        color: #64748b;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .member-file-preview img {
+        max-height: 120px;
+        width: auto;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      @media (max-width: 575.98px) {
+        body.member-body {
+          padding-top: 24px;
+          padding-bottom: 24px;
+        }
+
+        .member-form-card {
+          padding: 1.25rem !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="member-body">
+    <div
+      id="memberSuccessToast"
+      class="member-toast"
+      role="status"
+      aria-live="polite"
+    >
+      <i class="bi bi-check-circle-fill"></i>
+      <span>Data berhasil disimpan</span>
     </div>
-  </main>
+    <main class="container member-shell">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="text-center mb-4">
+            <img
+              src="assets/img/logo.webp"
+              alt="Dialogika"
+              style="height: 48px"
+              class="mb-3"
+            />
+            <h1 class="h4 fw-bold mb-1 member-header-title">
+              Form Data Member
+            </h1>
+            <p class="member-header-subtitle mb-0">
+              Lengkapi data di bawah ini untuk pendataan member Dialogika.
+            </p>
+          </div>
 
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
+          <div
+            id="memberAlertError"
+            class="alert member-alert d-none"
+            role="alert"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <span
+              >Terjadi kesalahan saat menyimpan data. Silakan coba lagi.</span
+            >
+          </div>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
-      authDomain: "pre-dialogika.firebaseapp.com",
-      projectId: "pre-dialogika",
-      storageBucket: "pre-dialogika.firebasestorage.app",
-      messagingSenderId: "343771410480",
-      appId: "1:343771410480:web:32881c9868522090237df5",
-      measurementId: "G-SXN811P3N0"
-    };
+          <form
+            id="memberForm"
+            class="card member-form-card p-4 needs-validation"
+            novalidate
+          >
+            <div class="row g-3">
+              <div class="col-12 col-sm-6">
+                <label for="nama" class="form-label">Nama Lengkap</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nama"
+                  name="nama"
+                  maxlength="150"
+                  required
+                  aria-describedby="nama_error"
+                />
+                <div id="nama_error" class="invalid-feedback">
+                  Nama lengkap wajib diisi (maksimal 150 karakter).
+                </div>
+              </div>
 
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-    const db = firebase.firestore();
-    const storage = firebase.storage();
+              <div class="col-12 col-sm-6">
+                <label for="whatsapp" class="form-label">Nomor WhatsApp</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="whatsapp"
+                  name="whatsapp"
+                  required
+                  pattern="^\+62\d{8,15}$"
+                  placeholder="+628123456789"
+                  aria-describedby="whatsapp_hint whatsapp_error"
+                />
+                <small id="whatsapp_hint" class="text-muted"
+                  >Format: +62 diikuti 8-15 digit.</small
+                >
+                <div id="whatsapp_error" class="invalid-feedback">
+                  Nomor WhatsApp harus format +62xxxxxxxx.
+                </div>
+              </div>
 
-    function generateMemberId() {
-      const now = new Date();
-      const y = String(now.getFullYear());
-      const m = String(now.getMonth() + 1).padStart(2, "0");
-      const d = String(now.getDate()).padStart(2, "0");
-      const rand = Math.floor(Math.random() * 9000) + 1000;
-      return "MBR-" + y + m + d + "-" + rand;
-    }
+              <div class="col-12 col-sm-6">
+                <label for="produk_dibeli" class="form-label"
+                  >Produk yang Dibeli</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="produk_dibeli"
+                  name="produk_dibeli"
+                  list="produk_list"
+                  required
+                  placeholder="Ketik atau pilih produk..."
+                  aria-describedby="produk_dibeli_error"
+                />
+                <datalist id="produk_list">
+                  <option value="First Class"></option>
+                  <option value="First Kids"></option>
+                  <option value="Private First Class"></option>
+                  <option value="Private First Kids"></option>
+                  <option value="Master Class"></option>
+                  <option value="MC Class"></option>
+                  <option value="Premium Class"></option>
+                  <option value="First Play"></option>
+                  <option value="Basic Plus"></option>
+                  <option value="Kids Plus"></option>
+                  <option value="Private Basic Plus"></option>
+                  <option value="Private Kids Plus"></option>
+                  <option value="Basic Play"></option>
+                  <option value="Private Level 02"></option>
+                  <option value="Private Level 03"></option>
+                  <option value="Public Speaking Class"></option>
+                </datalist>
+                <div id="produk_dibeli_error" class="invalid-feedback">
+                  Pilih produk yang dibeli dari daftar.
+                </div>
+              </div>
 
-    function formatDateTime(date) {
-      const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-      const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-      const day = days[date.getDay()];
-      const dd = String(date.getDate()).padStart(2, "0");
-      const mm = months[date.getMonth()];
-      const yyyy = date.getFullYear();
-      const hh = String(date.getHours()).padStart(2, "0");
-      const min = String(date.getMinutes()).padStart(2, "0");
-      const ss = String(date.getSeconds()).padStart(2, "0");
-      return day + ", " + dd + " " + mm + " " + yyyy + " " + hh + ":" + min + ":" + ss + " WIB";
-    }
+              <div class="col-12 col-sm-6">
+                <label for="harga_dibayarkan" class="form-label"
+                  >Harga yang Dibayarkan (Rp)</label
+                >
+                <div class="input-group">
+                  <span class="input-group-text" id="harga_prefix">Rp</span>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="harga_dibayarkan"
+                    name="harga_dibayarkan"
+                    min="1"
+                    required
+                    aria-describedby="harga_prefix harga_error"
+                  />
+                </div>
+                <div id="harga_error" class="invalid-feedback">
+                  Harga wajib berupa angka positif.
+                </div>
+              </div>
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("memberForm");
-      const submitBtn = document.getElementById("memberSubmitBtn");
-      const alertError = document.getElementById("memberAlertError");
-      const successToast = document.getElementById("memberSuccessToast");
+              <div class="col-12 col-sm-6">
+                <label for="metode_pembayaran" class="form-label"
+                  >Metode Pembayaran</label
+                >
+                <select
+                  class="form-select"
+                  id="metode_pembayaran"
+                  name="metode_pembayaran"
+                  required
+                  aria-describedby="metode_pembayaran_error"
+                >
+                  <option value="">Pilih</option>
+                  <option value="Full Payment">Full Payment</option>
+                  <option value="Down Payment (DP)">Down Payment (DP)</option>
+                </select>
+                <div id="metode_pembayaran_error" class="invalid-feedback">
+                  Pilih metode pembayaran.
+                </div>
+              </div>
 
-      const sumberSelect = document.getElementById("sumber_informasi");
-      const sumberLainnyaGroup = document.getElementById("sumber_lainnya_group");
-      const sumberLainnyaInput = document.getElementById("sumber_lainnya");
+              <div class="col-12 col-sm-6">
+                <label for="sumber_informasi" class="form-label"
+                  >Mengetahui Dialogika Dari Mana?</label
+                >
+                <select
+                  class="form-select"
+                  id="sumber_informasi"
+                  name="sumber_informasi"
+                  required
+                  aria-describedby="sumber_informasi_error"
+                >
+                  <option value="">Pilih</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="TikTok">TikTok</option>
+                  <option value="Website">Website</option>
+                  <option value="Google Search">Google Search</option>
+                  <option value="Teman">Teman</option>
+                  <option value="Alumni">Alumni</option>
+                  <option value="Webinar">Webinar</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+                <div id="sumber_informasi_error" class="invalid-feedback">
+                  Pilih sumber informasi.
+                </div>
+              </div>
 
-      const whatsappInput = document.getElementById("whatsapp");
-      const produkInput = document.getElementById("produk_dibeli");
-      const ALLOWED_PRODUK = [
-        "First Class", "First Kids", "Private First Class", "Private First Kids",
-        "Master Class", "MC Class", "Premium Class", "First Play",
-        "Basic Plus", "Kids Plus", "Private Basic Plus", "Private Kids Plus",
-        "Basic Play", "Private Level 02", "Private Level 03", "Public Speaking Class"
-      ];
-      const hargaInput = document.getElementById("harga_dibayarkan");
-      const buktiInput = document.getElementById("bukti_transfer");
-      const buktiPreview = document.getElementById("bukti_preview");
-      const waktuDisplay = document.getElementById("waktu_pengisian_display");
+              <div class="col-12 col-sm-6">
+                <label for="kota" class="form-label">Kota / Kabupaten</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="kota"
+                  name="kota"
+                  maxlength="100"
+                  required
+                  placeholder="Contoh: Yogyakarta, Sleman, Jakarta Selatan"
+                  aria-describedby="kota_error"
+                />
+                <div id="kota_error" class="invalid-feedback">
+                  Kota / Kabupaten wajib diisi.
+                </div>
+              </div>
 
-      const MAX_FILE_SIZE_BYTES = 3 * 1024 * 1024; // 3 MB
-      const ALLOWED_FILE_TYPES = ["image/jpeg", "image/jpg", "image/png", "application/pdf"];
+              <div
+                class="col-12 col-sm-6"
+                id="sumber_lainnya_group"
+                style="display: none"
+              >
+                <label for="sumber_lainnya" class="form-label">Lainnya</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="sumber_lainnya"
+                  name="sumber_lainnya"
+                  placeholder="Tulis sumber lain"
+                  aria-describedby="sumber_lainnya_error"
+                />
+                <div id="sumber_lainnya_error" class="invalid-feedback">
+                  Mohon isi sumber lainnya.
+                </div>
+              </div>
 
-      function isValidWhatsappNumber(value) {
-        return /^\+62\d{8,15}$/.test(String(value || "").trim());
+              <div class="col-12 col-sm-6">
+                <label for="bukti_transfer" class="form-label"
+                  >Bukti Transfer</label
+                >
+                <input
+                  type="file"
+                  class="form-control"
+                  id="bukti_transfer"
+                  name="bukti_transfer"
+                  required
+                  accept=".jpg,.jpeg,.png,.pdf"
+                  aria-describedby="bukti_hint bukti_error"
+                />
+                <small id="bukti_hint" class="text-muted"
+                  >Format: JPG, JPEG, PNG, PDF. Maksimal 3 MB.</small
+                >
+                <div id="bukti_error" class="invalid-feedback">
+                  Bukti transfer wajib diunggah sesuai format dan ukuran (maks.
+                  3 MB).
+                </div>
+                <div
+                  id="bukti_preview"
+                  class="member-file-preview"
+                  aria-live="polite"
+                >
+                  Preview bukti transfer belum tersedia.
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <label class="form-label"
+                  >Tanggal &amp; Waktu Pengisian Form</label
+                >
+                <div
+                  class="form-control bg-light"
+                  id="waktu_pengisian_display"
+                  style="font-size: 13px; cursor: default"
+                  aria-live="polite"
+                >
+                  -
+                </div>
+                <small class="text-muted"
+                  >Otomatis terisi saat form dikirim.</small
+                >
+              </div>
+
+              <div class="col-12 pt-2">
+                <button
+                  type="submit"
+                  id="memberSubmitBtn"
+                  class="btn btn-primary w-100"
+                >
+                  Simpan Data Member
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
+        authDomain: "pre-dialogika.firebaseapp.com",
+        projectId: "pre-dialogika",
+        storageBucket: "pre-dialogika.firebasestorage.app",
+        messagingSenderId: "343771410480",
+        appId: "1:343771410480:web:32881c9868522090237df5",
+        measurementId: "G-SXN811P3N0",
+      };
+
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+      const db = firebase.firestore();
+      const storage = firebase.storage();
+
+      function generateMemberId() {
+        const now = new Date();
+        const y = String(now.getFullYear());
+        const m = String(now.getMonth() + 1).padStart(2, "0");
+        const d = String(now.getDate()).padStart(2, "0");
+        const rand = Math.floor(Math.random() * 9000) + 1000;
+        return "MBR-" + y + m + d + "-" + rand;
       }
 
-      function isValidProofFile(file) {
-        if (!file) return false;
-        return file.size <= MAX_FILE_SIZE_BYTES && ALLOWED_FILE_TYPES.includes(file.type);
+      function formatDateTime(date) {
+        const days = [
+          "Minggu",
+          "Senin",
+          "Selasa",
+          "Rabu",
+          "Kamis",
+          "Jumat",
+          "Sabtu",
+        ];
+        const months = [
+          "Januari",
+          "Februari",
+          "Maret",
+          "April",
+          "Mei",
+          "Juni",
+          "Juli",
+          "Agustus",
+          "September",
+          "Oktober",
+          "November",
+          "Desember",
+        ];
+        const day = days[date.getDay()];
+        const dd = String(date.getDate()).padStart(2, "0");
+        const mm = months[date.getMonth()];
+        const yyyy = date.getFullYear();
+        const hh = String(date.getHours()).padStart(2, "0");
+        const min = String(date.getMinutes()).padStart(2, "0");
+        const ss = String(date.getSeconds()).padStart(2, "0");
+        return (
+          day +
+          ", " +
+          dd +
+          " " +
+          mm +
+          " " +
+          yyyy +
+          " " +
+          hh +
+          ":" +
+          min +
+          ":" +
+          ss +
+          " WIB"
+        );
       }
 
-      async function uploadProofToStorage(file, memberId) {
-        if (!file) return "";
-        const ext = (String(file.name || "").split(".").pop() || "bin").toLowerCase();
-        const safeMemberId = String(memberId || "member").replace(/[^\w-]/g, "_");
-        const filePath = "member-proofs/" + safeMemberId + "_" + Date.now() + "." + ext;
-        const proofRef = storage.ref().child(filePath);
-        const snapshot = await proofRef.put(file);
-        return await snapshot.ref.getDownloadURL();
-      }
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("memberForm");
+        const submitBtn = document.getElementById("memberSubmitBtn");
+        const alertError = document.getElementById("memberAlertError");
+        const successToast = document.getElementById("memberSuccessToast");
 
-      function validateProdukField() {
-        if (!produkInput) return true;
-        const value = String(produkInput.value || "").trim();
-        if (!value) {
-          produkInput.setCustomValidity("Pilih produk yang dibeli dari daftar.");
-        } else if (!ALLOWED_PRODUK.includes(value)) {
-          produkInput.setCustomValidity("Produk tidak tersedia dalam daftar.");
-        } else {
-          produkInput.setCustomValidity("");
+        const sumberSelect = document.getElementById("sumber_informasi");
+        const sumberLainnyaGroup = document.getElementById(
+          "sumber_lainnya_group",
+        );
+        const sumberLainnyaInput = document.getElementById("sumber_lainnya");
+
+        const whatsappInput = document.getElementById("whatsapp");
+        const produkInput = document.getElementById("produk_dibeli");
+        const ALLOWED_PRODUK = [
+          "First Class",
+          "First Kids",
+          "Private First Class",
+          "Private First Kids",
+          "Master Class",
+          "MC Class",
+          "Premium Class",
+          "First Play",
+          "Basic Plus",
+          "Kids Plus",
+          "Private Basic Plus",
+          "Private Kids Plus",
+          "Basic Play",
+          "Private Level 02",
+          "Private Level 03",
+          "Public Speaking Class",
+        ];
+        const hargaInput = document.getElementById("harga_dibayarkan");
+        const buktiInput = document.getElementById("bukti_transfer");
+        const buktiPreview = document.getElementById("bukti_preview");
+        const waktuDisplay = document.getElementById("waktu_pengisian_display");
+
+        const MAX_FILE_SIZE_BYTES = 3 * 1024 * 1024; // 3 MB
+        const ALLOWED_FILE_TYPES = [
+          "image/jpeg",
+          "image/jpg",
+          "image/png",
+          "application/pdf",
+        ];
+
+        function isValidWhatsappNumber(value) {
+          return /^\+62\d{8,15}$/.test(String(value || "").trim());
         }
-        return produkInput.checkValidity();
-      }
 
-      function updateWaktuDisplay() {
-        if (waktuDisplay) {
-          waktuDisplay.textContent = formatDateTime(new Date());
+        function isValidProofFile(file) {
+          if (!file) return false;
+          return (
+            file.size <= MAX_FILE_SIZE_BYTES &&
+            ALLOWED_FILE_TYPES.includes(file.type)
+          );
         }
-      }
-      updateWaktuDisplay();
-      window.setInterval(updateWaktuDisplay, 1000);
 
-      function showSuccessToast() {
-        if (!successToast) return;
-        successToast.classList.add("show");
-        window.setTimeout(function () {
-          successToast.classList.remove("show");
-        }, 2200);
-      }
-
-      function toggleSumberLainnya() {
-        const isLainnya = sumberSelect && sumberSelect.value === "Lainnya";
-        if (!sumberLainnyaGroup || !sumberLainnyaInput) return;
-        sumberLainnyaGroup.style.display = isLainnya ? "block" : "none";
-        sumberLainnyaInput.required = !!isLainnya;
-        if (!isLainnya) {
-          sumberLainnyaInput.value = "";
-          sumberLainnyaInput.setCustomValidity("");
+        async function uploadProofToStorage(file, memberId) {
+          if (!file) return "";
+          const ext = (
+            String(file.name || "")
+              .split(".")
+              .pop() || "bin"
+          ).toLowerCase();
+          const safeMemberId = String(memberId || "member").replace(
+            /[^\w-]/g,
+            "_",
+          );
+          const filePath =
+            "member-proofs/" + safeMemberId + "_" + Date.now() + "." + ext;
+          const proofRef = storage.ref().child(filePath);
+          const snapshot = await proofRef.put(file);
+          return await snapshot.ref.getDownloadURL();
         }
-      }
 
-      function normalizeWhatsappInput() {
-        if (!whatsappInput) return;
-        let raw = String(whatsappInput.value || "").replace(/[^\d+]/g, "");
-        raw = raw.replace(/^\+{2,}/, "+");
-        if (!raw.startsWith("+62")) {
-          raw = raw.replace(/^\+/, "");
-          raw = raw.replace(/^62/, "");
-          raw = raw.replace(/^0+/, "");
-          raw = "+62" + raw;
+        function validateProdukField() {
+          if (!produkInput) return true;
+          const value = String(produkInput.value || "").trim();
+          if (!value) {
+            produkInput.setCustomValidity(
+              "Pilih produk yang dibeli dari daftar.",
+            );
+          } else if (!ALLOWED_PRODUK.includes(value)) {
+            produkInput.setCustomValidity(
+              "Produk tidak tersedia dalam daftar.",
+            );
+          } else {
+            produkInput.setCustomValidity("");
+          }
+          return produkInput.checkValidity();
         }
-        whatsappInput.value = raw;
-      }
 
-      function validateWhatsappField() {
-        if (!whatsappInput) return true;
-        normalizeWhatsappInput();
-        if (!isValidWhatsappNumber(whatsappInput.value)) {
-          whatsappInput.setCustomValidity("Nomor WhatsApp harus format +62xxxxxxxx.");
-        } else {
-          whatsappInput.setCustomValidity("");
+        function updateWaktuDisplay() {
+          if (waktuDisplay) {
+            waktuDisplay.textContent = formatDateTime(new Date());
+          }
         }
-        return whatsappInput.checkValidity();
-      }
+        updateWaktuDisplay();
+        window.setInterval(updateWaktuDisplay, 1000);
 
-      function validateHargaField() {
-        if (!hargaInput) return true;
-        const value = Number(hargaInput.value);
-        if (!hargaInput.value || isNaN(value) || value <= 0) {
-          hargaInput.setCustomValidity("Harga wajib berupa angka positif.");
-        } else {
-          hargaInput.setCustomValidity("");
+        function showSuccessToast() {
+          if (!successToast) return;
+          successToast.classList.add("show");
+          window.setTimeout(function () {
+            successToast.classList.remove("show");
+          }, 2200);
         }
-        return hargaInput.checkValidity();
-      }
 
-      function renderFilePreview(file) {
-        if (!buktiPreview) return;
-        if (!file) {
-          buktiPreview.innerHTML = "Preview bukti transfer belum tersedia.";
-          return;
+        function toggleSumberLainnya() {
+          const isLainnya = sumberSelect && sumberSelect.value === "Lainnya";
+          if (!sumberLainnyaGroup || !sumberLainnyaInput) return;
+          sumberLainnyaGroup.style.display = isLainnya ? "block" : "none";
+          sumberLainnyaInput.required = !!isLainnya;
+          if (!isLainnya) {
+            sumberLainnyaInput.value = "";
+            sumberLainnyaInput.setCustomValidity("");
+          }
         }
-        if (file.type.startsWith("image/")) {
-          const reader = new FileReader();
-          reader.onload = function (event) {
-            buktiPreview.innerHTML = '<img src="' + event.target.result + '" alt="Preview bukti transfer">';
-          };
-          reader.readAsDataURL(file);
-          return;
+
+        function normalizeWhatsappInput() {
+          if (!whatsappInput) return;
+          let raw = String(whatsappInput.value || "").replace(/[^\d+]/g, "");
+          raw = raw.replace(/^\+{2,}/, "+");
+          if (!raw.startsWith("+62")) {
+            raw = raw.replace(/^\+/, "");
+            raw = raw.replace(/^62/, "");
+            raw = raw.replace(/^0+/, "");
+            raw = "+62" + raw;
+          }
+          whatsappInput.value = raw;
         }
-        buktiPreview.innerHTML = '<div><i class="bi bi-file-earmark-pdf-fill"></i><br>' + file.name + "</div>";
-      }
 
-      function validateProofFileField() {
-        if (!buktiInput) return true;
-        const file = buktiInput.files && buktiInput.files[0];
-        if (!file) {
-          buktiInput.setCustomValidity("Bukti transfer wajib diunggah.");
-          renderFilePreview(null);
-        } else if (!isValidProofFile(file)) {
-          buktiInput.setCustomValidity("Bukti transfer harus JPG/JPEG/PNG/PDF maksimal 3 MB.");
-          renderFilePreview(file);
-        } else {
-          buktiInput.setCustomValidity("");
-          renderFilePreview(file);
+        function validateWhatsappField() {
+          if (!whatsappInput) return true;
+          normalizeWhatsappInput();
+          if (!isValidWhatsappNumber(whatsappInput.value)) {
+            whatsappInput.setCustomValidity(
+              "Nomor WhatsApp harus format +62xxxxxxxx.",
+            );
+          } else {
+            whatsappInput.setCustomValidity("");
+          }
+          return whatsappInput.checkValidity();
         }
-        return buktiInput.checkValidity();
-      }
 
-      if (sumberSelect) sumberSelect.addEventListener("change", toggleSumberLainnya);
-      if (whatsappInput) {
-        whatsappInput.addEventListener("focus", function () {
-          if (!String(whatsappInput.value || "").trim()) whatsappInput.value = "+62";
-        });
-        whatsappInput.addEventListener("input", validateWhatsappField);
-      }
-      if (produkInput) produkInput.addEventListener("change", validateProdukField);
-      if (hargaInput) hargaInput.addEventListener("input", validateHargaField);
-      if (buktiInput) buktiInput.addEventListener("change", validateProofFileField);
+        function validateHargaField() {
+          if (!hargaInput) return true;
+          const value = Number(hargaInput.value);
+          if (!hargaInput.value || isNaN(value) || value <= 0) {
+            hargaInput.setCustomValidity("Harga wajib berupa angka positif.");
+          } else {
+            hargaInput.setCustomValidity("");
+          }
+          return hargaInput.checkValidity();
+        }
 
-      toggleSumberLainnya();
-
-      if (form) {
-        form.addEventListener("submit", async function (e) {
-          e.preventDefault();
-
-          alertError.classList.add("d-none");
-          const isWhatsappValid = validateWhatsappField();
-          const isProdukValid = validateProdukField();
-          const isHargaValid = validateHargaField();
-          const isFileValid = validateProofFileField();
-          const html5Valid = form.checkValidity();
-
-          if (!html5Valid || !isWhatsappValid || !isProdukValid || !isHargaValid || !isFileValid) {
-            form.classList.add("was-validated");
+        function renderFilePreview(file) {
+          if (!buktiPreview) return;
+          if (!file) {
+            buktiPreview.innerHTML = "Preview bukti transfer belum tersedia.";
             return;
           }
-
-          form.classList.remove("was-validated");
-
-          const formData = new FormData(form);
-          const sumber = formData.get("sumber_informasi") || "";
-          const customSumber = formData.get("sumber_lainnya") || "";
-          const finalSumber = sumber === "Lainnya" ? customSumber : sumber;
-          const proofFile = buktiInput && buktiInput.files ? buktiInput.files[0] : null;
-          const memberId = generateMemberId();
-          const waktuPengisian = new Date();
-
-          let buktiTransferUrl = "";
-          if (proofFile) {
-            buktiTransferUrl = await uploadProofToStorage(proofFile, memberId);
+          if (file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              buktiPreview.innerHTML =
+                '<img src="' +
+                event.target.result +
+                '" alt="Preview bukti transfer">';
+            };
+            reader.readAsDataURL(file);
+            return;
           }
+          buktiPreview.innerHTML =
+            '<div><i class="bi bi-file-earmark-pdf-fill"></i><br>' +
+            file.name +
+            "</div>";
+        }
 
-          const payload = {
-            member_id: memberId,
-            nama: formData.get("nama") || "",
-            whatsapp: formData.get("whatsapp") || "",
-            produk_dibeli: formData.get("produk_dibeli") || "",
-            harga_dibayarkan: formData.get("harga_dibayarkan") ? Number(formData.get("harga_dibayarkan")) : null,
-            metode_pembayaran: formData.get("metode_pembayaran") || "",
-            sumber_informasi: sumber || "",
-            sumber_informasi_lainnya: sumber === "Lainnya" ? (customSumber || "") : "",
-            sumber_informasi_final: finalSumber || "",
-            kota: formData.get("kota") || "",
-            bukti_transfer: buktiTransferUrl,
-            waktu_pengisian: firebase.firestore.Timestamp.fromDate(waktuPengisian),
-            created_at: firebase.firestore.FieldValue.serverTimestamp()
-          };
+        function validateProofFileField() {
+          if (!buktiInput) return true;
+          const file = buktiInput.files && buktiInput.files[0];
+          if (!file) {
+            buktiInput.setCustomValidity("Bukti transfer wajib diunggah.");
+            renderFilePreview(null);
+          } else if (!isValidProofFile(file)) {
+            buktiInput.setCustomValidity(
+              "Bukti transfer harus JPG/JPEG/PNG/PDF maksimal 3 MB.",
+            );
+            renderFilePreview(file);
+          } else {
+            buktiInput.setCustomValidity("");
+            renderFilePreview(file);
+          }
+          return buktiInput.checkValidity();
+        }
 
-          try {
+        if (sumberSelect)
+          sumberSelect.addEventListener("change", toggleSumberLainnya);
+        if (whatsappInput) {
+          whatsappInput.addEventListener("focus", function () {
+            if (!String(whatsappInput.value || "").trim())
+              whatsappInput.value = "+62";
+          });
+          whatsappInput.addEventListener("input", validateWhatsappField);
+        }
+        if (produkInput)
+          produkInput.addEventListener("change", validateProdukField);
+        if (hargaInput)
+          hargaInput.addEventListener("input", validateHargaField);
+        if (buktiInput)
+          buktiInput.addEventListener("change", validateProofFileField);
+
+        toggleSumberLainnya();
+
+        if (form) {
+          form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            if (submitBtn.disabled) return;
+
+            alertError.classList.add("d-none");
+            const isWhatsappValid = validateWhatsappField();
+            const isProdukValid = validateProdukField();
+            const isHargaValid = validateHargaField();
+            const isFileValid = validateProofFileField();
+            const html5Valid = form.checkValidity();
+
+            if (
+              !html5Valid ||
+              !isWhatsappValid ||
+              !isProdukValid ||
+              !isHargaValid ||
+              !isFileValid
+            ) {
+              form.classList.add("was-validated");
+              return;
+            }
+
+            form.classList.remove("was-validated");
+
             submitBtn.disabled = true;
             submitBtn.textContent = "Menyimpan...";
 
-            await db.collection("data_member").add(payload);
+            const formData = new FormData(form);
+            const sumber = formData.get("sumber_informasi") || "";
+            const customSumber = formData.get("sumber_lainnya") || "";
+            const finalSumber = sumber === "Lainnya" ? customSumber : sumber;
+            const proofFile =
+              buktiInput && buktiInput.files ? buktiInput.files[0] : null;
+            const memberId = generateMemberId();
+            const waktuPengisian = new Date();
 
-            form.reset();
-            form.classList.remove("was-validated");
-            toggleSumberLainnya();
-            renderFilePreview(null);
-            updateWaktuDisplay();
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Simpan Data Member";
-            showSuccessToast();
-          } catch (err) {
-            console.error("Error saving member data:", err);
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Simpan Data Member";
-            alertError.classList.remove("d-none");
-          }
-        });
-      }
-    });
-  </script>
-</body>
+            let buktiTransferUrl = "";
+            if (proofFile) {
+              buktiTransferUrl = await uploadProofToStorage(
+                proofFile,
+                memberId,
+              );
+            }
+
+            const payload = {
+              member_id: memberId,
+              nama: formData.get("nama") || "",
+              whatsapp: formData.get("whatsapp") || "",
+              produk_dibeli: formData.get("produk_dibeli") || "",
+              harga_dibayarkan: formData.get("harga_dibayarkan")
+                ? Number(formData.get("harga_dibayarkan"))
+                : null,
+              metode_pembayaran: formData.get("metode_pembayaran") || "",
+              sumber_informasi: sumber || "",
+              sumber_informasi_lainnya:
+                sumber === "Lainnya" ? customSumber || "" : "",
+              sumber_informasi_final: finalSumber || "",
+              kota: formData.get("kota") || "",
+              bukti_transfer: buktiTransferUrl,
+              waktu_pengisian:
+                firebase.firestore.Timestamp.fromDate(waktuPengisian),
+              created_at: firebase.firestore.FieldValue.serverTimestamp(),
+            };
+
+            try {
+              await db.collection("data_member").add(payload);
+
+              form.reset();
+              form.classList.remove("was-validated");
+              toggleSumberLainnya();
+              renderFilePreview(null);
+              updateWaktuDisplay();
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Simpan Data Member";
+              showSuccessToast();
+            } catch (err) {
+              console.error("Error saving member data:", err);
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Simpan Data Member";
+              alertError.classList.remove("d-none");
+            }
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
