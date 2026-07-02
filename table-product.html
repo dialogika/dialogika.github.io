@@ -4,14 +4,10 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Daftar Program - Dialogika</title>
+    <title>Tabel Produk - Dialogika</title>
     <meta
       content="Tabel perbandingan program Public Speaking Dialogika"
       name="description"
-    />
-    <meta
-      content="product table, program public speaking, dialogika"
-      name="keywords"
     />
 
     <link href="assets/img/favicon.webp" rel="icon" />
@@ -47,15 +43,12 @@
         --primary: #0b2f7a;
         --primary-light: #1d4ed8;
         --primary-ultra-light: #eff6ff;
-        --accent: #1d4ed8;
         --success: #10b981;
-        --danger: #ef4444;
         --surface: #ffffff;
-        --surface-2: #f8fbff;
         --border: #e2e8f0;
         --text-main: #0f172a;
         --text-muted: #64748b;
-        --label-col-width: 170px;
+        --label-col-width: 190px;
         --shadow-card: 0 18px 44px -30px rgba(15, 23, 42, 0.35);
       }
 
@@ -80,7 +73,7 @@
       .page-hero {
         position: relative;
         overflow: hidden;
-        border-radius: 32px 32px 0 0;
+        border-radius: 32px;
         padding: 36px 32px 28px;
         background: linear-gradient(
           135deg,
@@ -90,9 +83,8 @@
         );
         color: #fff;
         box-shadow: 0 20px 60px -32px rgba(15, 23, 42, 0.55);
-        margin-bottom: 0;
+        margin-bottom: 24px;
       }
-
       .page-hero::before,
       .page-hero::after {
         content: "";
@@ -101,21 +93,18 @@
         background: rgba(255, 255, 255, 0.1);
         pointer-events: none;
       }
-
       .page-hero::before {
         width: 260px;
         height: 260px;
         top: -120px;
         right: -80px;
       }
-
       .page-hero::after {
         width: 180px;
         height: 180px;
         bottom: -90px;
         left: -50px;
       }
-
       .hero-pill {
         display: inline-flex;
         align-items: center;
@@ -130,7 +119,6 @@
         text-transform: uppercase;
         margin-bottom: 16px;
       }
-
       .page-hero h1 {
         color: #fff;
         font-size: 2rem;
@@ -139,7 +127,6 @@
         position: relative;
         z-index: 1;
       }
-
       .page-hero p {
         color: rgba(255, 255, 255, 0.8);
         font-size: 0.97rem;
@@ -149,115 +136,19 @@
         z-index: 1;
       }
 
-      /* ─── Product selector bar ─── */
-      .surface-card {
-        background: rgba(255, 255, 255, 0.92);
-        border: 1px solid rgba(226, 232, 240, 0.95);
-        border-radius: 28px;
-        box-shadow: var(--shadow-card);
-        backdrop-filter: blur(10px);
-      }
-
-      .product-selector-wrap {
-        background: var(--surface);
-        border-bottom: 1px solid var(--border);
-        position: sticky;
-        top: 80px;
-        z-index: 100;
-        border-radius: 0 0 20px 20px;
-        box-shadow: 0 4px 24px rgba(11, 47, 122, 0.12);
-        overflow: hidden;
-        margin-bottom: 0;
-      }
-
-      .product-selector {
-        display: flex;
-        overflow-x: auto;
-        gap: 0;
-        padding: 0;
-        scrollbar-width: thin;
-        scrollbar-color: var(--primary-light) var(--border);
-      }
-
-      .product-selector::-webkit-scrollbar {
-        height: 4px;
-      }
-
-      .product-selector::-webkit-scrollbar-track {
-        background: var(--border);
-      }
-
-      .product-selector::-webkit-scrollbar-thumb {
-        background: var(--primary-light);
-        border-radius: 4px;
-      }
-
-      .product-tab {
-        flex-shrink: 0;
-        padding: 25px 28px 20px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--text-muted);
-        cursor: pointer;
-        border-bottom: 3px solid transparent;
-        white-space: nowrap;
-        transition:
-          color 0.2s,
-          border-color 0.2s,
-          background 0.2s;
-        user-select: none;
-        background: transparent;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        outline: none;
-        position: relative;
-        letter-spacing: 0.01em;
-      }
-
-      .product-tab:hover {
-        color: var(--primary);
-        background: var(--primary-ultra-light);
-      }
-
-      .product-tab.active {
-        color: var(--primary);
-        border-bottom-color: var(--primary);
-        background: var(--primary-ultra-light);
-        font-weight: 700;
-      }
-
-      .product-tab .tab-dot {
-        display: inline-block;
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--primary-light);
-        margin-right: 8px;
-        vertical-align: middle;
-        opacity: 0;
-        transition: opacity 0.2s;
-      }
-
-      .product-tab.active .tab-dot {
-        opacity: 1;
-      }
-
-      /* ─── Loading / empty state ─── */
+      /* ─── State box ─── */
       .state-box {
         padding: 60px 20px;
         text-align: center;
         color: var(--text-muted);
         font-weight: 600;
       }
-
       .state-box i {
         font-size: 2.5rem;
         margin-bottom: 16px;
         display: block;
         opacity: 0.5;
       }
-
       .spinner-ring {
         display: inline-block;
         width: 40px;
@@ -267,50 +158,104 @@
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
       }
-
       @keyframes spin {
         to {
           transform: rotate(360deg);
         }
       }
 
-      /* ─── Detail panel & table ─── */
-      .detail-section {
-        margin-top: 0;
-      }
-
-      .product-detail-card {
+      /* ─── Product table wrap ─── */
+      .pt-wrap {
         background: var(--surface);
-        border-radius: 0 0 28px 28px;
+        border-radius: 28px;
         box-shadow: var(--shadow-card);
-        overflow: hidden;
         border: 1px solid rgba(226, 232, 240, 0.95);
-        border-top: none;
+        overflow: hidden;
       }
 
-      /* The detail table */
-      .detail-table {
+      /* Row 1: Nama Product — horizontally scrollable */
+      .pt-name-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-bottom: 2px solid var(--border);
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-light) var(--border);
+      }
+      .pt-name-scroll::-webkit-scrollbar {
+        height: 6px;
+      }
+      .pt-name-scroll::-webkit-scrollbar-track {
+        background: var(--border);
+      }
+      .pt-name-scroll::-webkit-scrollbar-thumb {
+        background: var(--primary-light);
+        border-radius: 4px;
+      }
+      .pt-name-row {
+        display: flex;
+        align-items: stretch;
+        min-width: max-content;
+      }
+      .pt-label-cell {
+        width: var(--label-col-width);
+        min-width: var(--label-col-width);
+        flex-shrink: 0;
+        padding: 20px;
+        font-weight: 700;
+        font-size: 0.78rem;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: var(--primary-ultra-light);
+        border-right: 2px solid #dbeafe;
+        display: flex;
+        align-items: center;
+        position: sticky;
+        left: 0;
+        z-index: 3;
+      }
+      .pt-name-cell {
+        flex-shrink: 0;
+        min-width: 200px;
+        padding: 20px 24px;
+        font-weight: 700;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        border-right: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        transition:
+          background 0.2s,
+          color 0.2s;
+        user-select: none;
+      }
+      .pt-name-cell:hover {
+        background: var(--primary-ultra-light);
+        color: var(--primary);
+      }
+      .pt-name-cell.active {
+        background: var(--primary-ultra-light);
+        color: var(--primary);
+        box-shadow: inset 0 -3px 0 var(--primary);
+      }
+
+      /* Row 2+: Detail panel — fixed, not scrollable */
+      .pt-detail-table {
         width: 100%;
         border-collapse: collapse;
       }
-
-      .detail-table tr {
+      .pt-detail-table tr {
         border-bottom: 1px solid var(--border);
-        transition: background 0.15s;
       }
-
-      .detail-table tr:last-child {
+      .pt-detail-table tr:last-child {
         border-bottom: none;
       }
-
-      .detail-table tr:hover {
-        background: #f8fbff;
-      }
-
-      .detail-table .label-cell {
+      .pt-detail-table .pt-row-label {
         width: var(--label-col-width);
         min-width: var(--label-col-width);
-        padding: 24px 24px;
+        padding: 24px 20px;
         font-weight: 700;
         font-size: 0.82rem;
         color: var(--primary);
@@ -321,48 +266,34 @@
         letter-spacing: 0.03em;
         text-transform: uppercase;
       }
-
-      .detail-table .label-cell .label-icon {
+      .pt-detail-table .pt-row-label .label-icon {
         display: block;
         font-size: 1.15rem;
         margin-bottom: 6px;
         color: var(--primary-light);
       }
-
-      .detail-table .value-cell {
+      .pt-detail-table .pt-row-value {
         padding: 24px 28px;
         font-size: 0.94rem;
         color: var(--text-main);
         vertical-align: top;
       }
-
-      /* product name row */
-      .detail-table .name-value {
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: var(--primary);
-        letter-spacing: -0.02em;
-      }
-
-      /* description */
-      .detail-table .desc-value {
+      .desc-value {
         color: var(--text-muted);
         line-height: 1.8;
         font-weight: 500;
       }
 
-      /* materials list */
+      /* materials / specifications list */
       .material-item {
         display: flex;
         gap: 14px;
         padding: 14px 0;
         border-bottom: 1px dashed var(--border);
       }
-
       .material-item:last-child {
         border-bottom: none;
       }
-
       .material-index {
         flex-shrink: 0;
         width: 34px;
@@ -378,14 +309,12 @@
         margin-top: 2px;
         box-shadow: 0 4px 12px rgba(11, 47, 122, 0.3);
       }
-
       .material-body .material-title {
         font-weight: 700;
         font-size: 0.92rem;
         margin-bottom: 4px;
         color: var(--text-main);
       }
-
       .material-body .material-desc {
         color: var(--text-muted);
         font-size: 0.84rem;
@@ -402,36 +331,22 @@
         border-bottom: 1px dashed var(--border);
         gap: 16px;
       }
-
       .benefit-item:last-child {
         border-bottom: none;
       }
-
       .benefit-label {
         font-size: 0.92rem;
         color: var(--text-main);
         font-weight: 600;
       }
-
       .benefit-value-text {
         font-size: 0.88rem;
         color: var(--text-muted);
         font-weight: 500;
       }
-
       .badge-yes {
         background: #d1fae5;
         color: #065f46;
-        padding: 5px 14px;
-        border-radius: 999px;
-        font-size: 0.76rem;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-      }
-
-      .badge-no {
-        background: #fee2e2;
-        color: #991b1b;
         padding: 5px 14px;
         border-radius: 999px;
         font-size: 0.76rem;
@@ -446,78 +361,43 @@
         gap: 10px;
         padding: 10px 0;
       }
-
       .outcome-item i {
         color: var(--success);
         font-size: 1.05rem;
         margin-top: 1px;
         flex-shrink: 0;
       }
-
       .outcome-item span {
         font-size: 0.92rem;
         line-height: 1.65;
         font-weight: 500;
       }
 
-      /* Fade-in animation for panel */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .animate-fade-up {
-        animation: fadeUp 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      }
-
-      /* Scroll hint arrow */
-      .scroll-hint {
-        color: var(--text-muted);
-        font-size: 0.78rem;
-        padding: 6px 14px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        border-left: 1px solid var(--border);
-        flex-shrink: 0;
-        white-space: nowrap;
-        background: var(--surface);
-      }
-
       @media (max-width: 600px) {
         #main {
           padding-top: 100px;
         }
-
         .page-hero {
           border-radius: 24px;
           padding: 24px 20px;
         }
-
         .page-hero h1 {
           font-size: 1.4rem;
         }
-
-        .detail-table .label-cell {
-          width: 100px;
-          min-width: 100px;
-          padding: 16px 12px;
-          font-size: 0.72rem;
+        :root {
+          --label-col-width: 120px;
         }
-
-        .detail-table .value-cell {
+        .pt-label-cell,
+        .pt-row-label {
+          padding: 14px 12px;
+          font-size: 0.7rem;
+        }
+        .pt-name-cell {
+          padding: 14px 16px;
+          min-width: 150px;
+        }
+        .pt-row-value {
           padding: 16px 14px;
-        }
-
-        .detail-table .name-value {
-          font-size: 1.15rem;
         }
       }
     </style>
@@ -529,51 +409,75 @@
     <!-- ======= End Header ======= -->
 
     <main id="main">
-      <!-- Hero (inside container, rounded top) -->
       <div class="container">
         <section>
           <div class="page-hero">
             <div class="hero-pill">
               <i class="bi bi-collection-fill"></i> Program Dialogika
             </div>
-            <h1>Daftar Program</h1>
-            <p>
-              Pilih program Public Speaking yang sesuai dengan kebutuhan Anda
-            </p>
+            <h1>Tabel Produk</h1>
+            <p>Klik nama program pada baris di atas untuk melihat detailnya</p>
           </div>
         </section>
-      </div>
 
-      <!-- Product selector: full-width, menempel langsung di bawah hero -->
-      <div class="product-selector-wrap">
-        <div class="container-fluid px-0 d-flex align-items-stretch">
-          <div class="product-selector" id="productSelector">
-            <!-- tabs injected by JS -->
-            <div class="state-box w-100" id="tabLoading">
-              <div class="spinner-ring"></div>
+        <section>
+          <div class="state-box" id="tabLoading">
+            <div class="spinner-ring"></div>
+          </div>
+
+          <div class="state-box" id="emptyState" style="display: none">
+            <i class="bi bi-inbox"></i>
+            <div>Belum ada produk tersedia.</div>
+          </div>
+
+          <div class="pt-wrap" id="ptWrap" style="display: none">
+            <!-- Row: Nama Product (scrollable horizontally) -->
+            <div class="pt-name-scroll">
+              <div class="pt-name-row" id="ptNameRow">
+                <div class="pt-label-cell">Nama Product</div>
+                <!-- name cells injected by JS -->
+              </div>
             </div>
-          </div>
-          <div class="" id="scrollHint" style="display: none"></div>
-        </div>
-      </div>
 
-      <!-- Detail panel -->
-      <div class="container">
-        <section class="detail-section">
-          <!-- empty / prompt state -->
-          <div class="state-box" id="emptyState">
-            <i class="bi bi-hand-index"></i>
-            <div>Klik nama produk di atas untuk melihat detail.</div>
-          </div>
-
-          <!-- actual detail card -->
-          <div
-            class="product-detail-card"
-            id="detailCard"
-            style="display: none"
-          >
-            <table class="detail-table" id="detailTable">
-              <!-- rows injected by JS -->
+            <!-- Detail panel (fixed, not scrollable) -->
+            <table class="pt-detail-table">
+              <tbody>
+                <tr>
+                  <td class="pt-row-label">
+                    <i class="bi bi-info-circle-fill label-icon"></i>
+                    Deskripsi
+                  </td>
+                  <td class="pt-row-value" id="ptDesc">-</td>
+                </tr>
+                <tr>
+                  <td class="pt-row-label">
+                    <i class="bi bi-book-fill label-icon"></i>
+                    Materi
+                  </td>
+                  <td class="pt-row-value" id="ptMateri">-</td>
+                </tr>
+                <tr>
+                  <td class="pt-row-label">
+                    <i class="bi bi-list-task label-icon"></i>
+                    Spesifikasi
+                  </td>
+                  <td class="pt-row-value" id="ptSpesifikasi">-</td>
+                </tr>
+                <tr>
+                  <td class="pt-row-label">
+                    <i class="bi bi-star-fill label-icon"></i>
+                    Benefit
+                  </td>
+                  <td class="pt-row-value" id="ptBenefit">-</td>
+                </tr>
+                <tr>
+                  <td class="pt-row-label">
+                    <i class="bi bi-bullseye label-icon"></i>
+                    Target Outcomes
+                  </td>
+                  <td class="pt-row-value" id="ptOutcomes">-</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </section>
@@ -610,7 +514,6 @@
 
       /* ── State ── */
       let productsData = [];
-      let activeProductId = null;
 
       /* ── Helpers ── */
       function esc(v) {
@@ -627,19 +530,14 @@
 
       /* ── Load products ── */
       async function loadProducts() {
-        const selector = document.getElementById("productSelector");
         const tabLoading = document.getElementById("tabLoading");
-        const scrollHint = document.getElementById("scrollHint");
+        const emptyState = document.getElementById("emptyState");
+        const ptWrap = document.getElementById("ptWrap");
+        const nameRow = document.getElementById("ptNameRow");
 
         try {
           const snapshot = await db.collection("products").get();
-          tabLoading.remove();
-
-          if (snapshot.empty) {
-            selector.innerHTML =
-              '<div class="state-box py-3 px-4 text-muted small">Belum ada produk tersedia.</div>';
-            return;
-          }
+          tabLoading.style.display = "none";
 
           productsData = [];
           snapshot.forEach((doc) => {
@@ -647,28 +545,31 @@
             if (data.name) productsData.push({ id: doc.id, ...data });
           });
 
-          productsData.forEach((product) => {
-            const btn = document.createElement("button");
-            btn.className = "product-tab";
-            btn.id = "tab-" + product.id;
-            btn.setAttribute("data-id", product.id);
-            btn.innerHTML = `<span class="tab-dot"></span>${esc(product.name)}`;
-            btn.addEventListener("click", () => showProductDetail(product.id));
-            selector.appendChild(btn);
-          });
-
-          // Show scroll hint if tabs overflow
-          if (selector.scrollWidth > selector.clientWidth) {
-            scrollHint.style.display = "flex";
+          if (productsData.length === 0) {
+            emptyState.style.display = "block";
+            return;
           }
 
+          productsData.forEach((product) => {
+            const cell = document.createElement("div");
+            cell.className = "pt-name-cell";
+            cell.id = "ptname-" + product.id;
+            cell.dataset.id = product.id;
+            cell.textContent = product.name;
+            cell.addEventListener("click", () => showProductDetail(product.id));
+            nameRow.appendChild(cell);
+          });
+
+          ptWrap.style.display = "block";
+
           // Auto-select first product
-          if (productsData.length > 0) showProductDetail(productsData[0].id);
+          showProductDetail(productsData[0].id);
         } catch (err) {
           console.error("Error loading products:", err);
-          tabLoading.remove();
-          selector.innerHTML =
-            '<div class="state-box py-3 px-4 text-danger small"><i class="bi bi-exclamation-triangle me-1"></i>Gagal memuat produk.</div>';
+          tabLoading.style.display = "none";
+          emptyState.style.display = "block";
+          emptyState.innerHTML =
+            '<i class="bi bi-exclamation-triangle"></i><div>Gagal memuat produk.</div>';
         }
       }
 
@@ -677,49 +578,21 @@
         const product = productsData.find((p) => p.id === productId);
         if (!product) return;
 
-        // Update active tab
+        // Highlight active name cell
         document
-          .querySelectorAll(".product-tab")
-          .forEach((t) => t.classList.remove("active"));
-        const activeTab = document.getElementById("tab-" + productId);
-        if (activeTab) {
-          activeTab.classList.add("active");
-          activeTab.scrollIntoView({
+          .querySelectorAll(".pt-name-cell")
+          .forEach((c) => c.classList.remove("active"));
+        const activeCell = document.getElementById("ptname-" + productId);
+        if (activeCell) {
+          activeCell.classList.add("active");
+          activeCell.scrollIntoView({
             behavior: "smooth",
             block: "nearest",
             inline: "nearest",
           });
         }
 
-        activeProductId = productId;
-
-        // Hide empty state, show card
-        document.getElementById("emptyState").style.display = "none";
-        const card = document.getElementById("detailCard");
-        card.style.display = "block";
-        card.classList.remove("animate-fade-up");
-        void card.offsetWidth; // reflow to restart animation
-        card.classList.add("animate-fade-up");
-
-        // Build table rows
-        const table = document.getElementById("detailTable");
-        table.innerHTML = "";
-
-        /* ── Row: Nama Product ── */
-        table.innerHTML += `
-        <tr>
-          <td class="label-cell">
-            <i class="bi bi-tag-fill label-icon"></i>
-            Nama Program
-          </td>
-          <td class="value-cell">
-            <div class="name-value">${esc(product.name)}</div>
-          </td>
-        </tr>`;
-
-        /* ── Row: Description ── */
-        // Render description as HTML (Firestore may store HTML markup)
-        // Strip inline font/color/face attrs so it inherits page typography
+        /* Deskripsi */
         const rawDesc = product.description || "-";
         const cleanDesc = rawDesc
           .replace(/<font[^>]*>/gi, "<span>")
@@ -727,24 +600,12 @@
           .replace(/\s*style="[^"]*"/gi, "")
           .replace(/\s*face="[^"]*"/gi, "")
           .replace(/\s*color="[^"]*"/gi, "");
-        table.innerHTML += `
-        <tr>
-          <td class="label-cell">
-            <i class="bi bi-info-circle-fill label-icon"></i>
-            Deskripsi
-          </td>
-          <td class="value-cell">
-            <div class="desc-value">${cleanDesc}</div>
-          </td>
-        </tr>`;
+        document.getElementById("ptDesc").innerHTML =
+          `<div class="desc-value">${cleanDesc || "-"}</div>`;
 
-        /* ── Row: Materi ── */
+        /* Materi */
         let materialsHtml = "";
-        if (
-          product.materials &&
-          Array.isArray(product.materials) &&
-          product.materials.length > 0
-        ) {
+        if (Array.isArray(product.materials) && product.materials.length > 0) {
           const sorted = [...product.materials].sort((a, b) => {
             const ao = parseInt(String(a.order || "").replace(/\D/g, ""), 10);
             const bo = parseInt(String(b.order || "").replace(/\D/g, ""), 10);
@@ -758,65 +619,45 @@
               String(item.order || String(idx + 1)).replace(/\D/g, "") ||
               String(idx + 1);
             materialsHtml += `
-            <div class="material-item">
-              <div class="material-index">${pad(order)}</div>
-              <div class="material-body">
-                <div class="material-title">${esc(item.title || "-")}</div>
-                <div class="material-desc">${esc(item.description || "-")}</div>
-              </div>
-            </div>`;
+              <div class="material-item">
+                <div class="material-index">${pad(order)}</div>
+                <div class="material-body">
+                  <div class="material-title">${esc(item.title || "-")}</div>
+                  <div class="material-desc">${esc(item.description || "-")}</div>
+                </div>
+              </div>`;
           });
         } else {
           materialsHtml = '<span class="text-muted">-</span>';
         }
-        table.innerHTML += `
-        <tr>
-          <td class="label-cell">
-            <i class="bi bi-book-fill label-icon"></i>
-            Materi
-          </td>
-          <td class="value-cell">${materialsHtml}</td>
-        </tr>`;
+        document.getElementById("ptMateri").innerHTML = materialsHtml;
 
-        /* ── Row: Specifications ── */
+        /* Spesifikasi */
         let specificationsHtml = "";
         if (
-          product.specifications &&
           Array.isArray(product.specifications) &&
           product.specifications.length > 0
         ) {
           product.specifications.forEach((spec, idx) => {
             specificationsHtml += `
-            <div class="material-item">
-              <div class="material-index">${pad(idx + 1)}</div>
-              <div class="material-body">
-                <div class="material-title">${esc(String(spec || "-"))}</div>
-              </div>
-            </div>`;
+              <div class="material-item">
+                <div class="material-index">${pad(idx + 1)}</div>
+                <div class="material-body">
+                  <div class="material-title">${esc(String(spec || "-"))}</div>
+                </div>
+              </div>`;
           });
         } else {
           specificationsHtml = '<span class="text-muted">-</span>';
         }
-        table.innerHTML += `
-        <tr>
-          <td class="label-cell">
-            <i class="bi bi-list-task label-icon"></i>
-            Spesifikasi
-          </td>
-          <td class="value-cell">${specificationsHtml}</td>
-        </tr>`;
+        document.getElementById("ptSpesifikasi").innerHTML = specificationsHtml;
 
-        /* ── Row: Benefit ── */
+        /* Benefit */
         let benefitsHtml = "";
-        if (
-          product.features &&
-          Array.isArray(product.features) &&
-          product.features.length > 0
-        ) {
+        if (Array.isArray(product.features) && product.features.length > 0) {
           product.features.forEach((feature) => {
             if (feature && typeof feature === "object") {
               const rawLabel = String(feature.label || "").trim();
-              // Skip items with no label
               if (!rawLabel) return;
               const label = esc(rawLabel);
               const type = String(feature.type || "")
@@ -826,22 +667,20 @@
               if (type === "boolean") {
                 const isTrue =
                   value === true || String(value).toLowerCase() === "true";
-                // Skip boolean items that are false (✗ Tidak)
                 if (!isTrue) return;
                 benefitsHtml += `
-                <div class="benefit-item">
-                  <span class="benefit-label">${label}</span>
-                  <span class="badge-yes">✓ Bisa</span>
-                </div>`;
+                  <div class="benefit-item">
+                    <span class="benefit-label">${label}</span>
+                    <span class="badge-yes">✓ Bisa</span>
+                  </div>`;
               } else {
                 const displayVal = String(value || "").trim();
-                // Skip items with no value
                 if (!displayVal) return;
                 benefitsHtml += `
-                <div class="benefit-item">
-                  <span class="benefit-label">${label}</span>
-                  <span class="benefit-value-text">${esc(displayVal)}</span>
-                </div>`;
+                  <div class="benefit-item">
+                    <span class="benefit-label">${label}</span>
+                    <span class="benefit-value-text">${esc(displayVal)}</span>
+                  </div>`;
               }
             } else {
               const rawStr = String(feature || "").trim();
@@ -850,43 +689,26 @@
             }
           });
         }
-        if (!benefitsHtml) {
-          benefitsHtml = '<span class="text-muted">-</span>';
-        }
-        table.innerHTML += `
-        <tr>
-          <td class="label-cell">
-            <i class="bi bi-star-fill label-icon"></i>
-            Benefit
-          </td>
-          <td class="value-cell">${benefitsHtml}</td>
-        </tr>`;
+        if (!benefitsHtml) benefitsHtml = '<span class="text-muted">-</span>';
+        document.getElementById("ptBenefit").innerHTML = benefitsHtml;
 
-        /* ── Row: Target Outcomes ── */
+        /* Target Outcomes */
         let outcomesHtml = "";
         if (
-          product.targetOutcomes &&
           Array.isArray(product.targetOutcomes) &&
           product.targetOutcomes.length > 0
         ) {
           product.targetOutcomes.forEach((outcome) => {
             outcomesHtml += `
-            <div class="outcome-item">
-              <i class="bi bi-check-circle-fill"></i>
-              <span>${esc(String(outcome || "-"))}</span>
-            </div>`;
+              <div class="outcome-item">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>${esc(String(outcome || "-"))}</span>
+              </div>`;
           });
         } else {
           outcomesHtml = '<span class="text-muted">-</span>';
         }
-        table.innerHTML += `
-        <tr>
-          <td class="label-cell">
-            <i class="bi bi-bullseye label-icon"></i>
-            Target Outcomes
-          </td>
-          <td class="value-cell">${outcomesHtml}</td>
-        </tr>`;
+        document.getElementById("ptOutcomes").innerHTML = outcomesHtml;
       }
 
       /* ── Init ── */
