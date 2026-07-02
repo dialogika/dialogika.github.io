@@ -778,6 +778,34 @@
           <td class="value-cell">${materialsHtml}</td>
         </tr>`;
 
+        /* ── Row: Specifications ── */
+        let specificationsHtml = "";
+        if (
+          product.specifications &&
+          Array.isArray(product.specifications) &&
+          product.specifications.length > 0
+        ) {
+          product.specifications.forEach((spec, idx) => {
+            specificationsHtml += `
+            <div class="material-item">
+              <div class="material-index">${pad(idx + 1)}</div>
+              <div class="material-body">
+                <div class="material-title">${esc(String(spec || "-"))}</div>
+              </div>
+            </div>`;
+          });
+        } else {
+          specificationsHtml = '<span class="text-muted">-</span>';
+        }
+        table.innerHTML += `
+        <tr>
+          <td class="label-cell">
+            <i class="bi bi-list-task label-icon"></i>
+            Spesifikasi
+          </td>
+          <td class="value-cell">${specificationsHtml}</td>
+        </tr>`;
+
         /* ── Row: Benefit ── */
         let benefitsHtml = "";
         if (
