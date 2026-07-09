@@ -1,662 +1,679 @@
 <!doctype html>
 <html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tabel Produk - Dialogika</title>
+    <meta
+      content="Tabel perbandingan program Public Speaking Dialogika"
+      name="description"
+    />
 
-  <title>Tabel Produk - Dialogika</title>
-  <meta content="Tabel perbandingan program Public Speaking Dialogika" name="description" />
+    <link href="assets/img/favicon.webp" rel="icon" />
+    <link href="assets/img/apple-touch-icon.webp" rel="apple-touch-icon" />
 
-  <link href="assets/img/favicon.webp" rel="icon" />
-  <link href="assets/img/apple-touch-icon.webp" rel="apple-touch-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet" />
+    <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/swiper/swiper-bundle.css" rel="stylesheet" />
 
-  <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
-  <link href="assets/vendor/swiper/swiper-bundle.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
 
-  <link href="assets/css/style.css" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
+    <style>
+      :root {
+        --primary: #0b2f7a;
+        --primary-light: #1d4ed8;
+        --primary-ultra-light: #eff6ff;
+        --success: #10b981;
+        --surface: #ffffff;
+        --border: #e2e8f0;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --label-col-width: 190px;
+        --shadow-card: 0 18px 44px -30px rgba(15, 23, 42, 0.35);
+      }
 
-  <style>
-    :root {
-      --primary: #0b2f7a;
-      --primary-light: #1d4ed8;
-      --primary-ultra-light: #eff6ff;
-      --success: #10b981;
-      --surface: #ffffff;
-      --border: #e2e8f0;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --label-col-width: 190px;
-      --shadow-card: 0 18px 44px -30px rgba(15, 23, 42, 0.35);
-    }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(11, 47, 122, 0.08),
+            transparent 30%
+          ),
+          linear-gradient(180deg, #f8fbff 0%, #f8fafc 100%);
+        color: var(--text-main);
+      }
 
-    body {
-      font-family: "Plus Jakarta Sans", sans-serif;
-      background:
-        radial-gradient(circle at top left,
-          rgba(11, 47, 122, 0.08),
-          transparent 30%),
-        linear-gradient(180deg, #f8fbff 0%, #f8fafc 100%);
-      color: var(--text-main);
-    }
+      #main {
+        padding-top: 120px;
+        padding-bottom: 72px;
+      }
 
-    #main {
-      padding-top: 120px;
-      padding-bottom: 72px;
-    }
-
-    /* ─── Page hero ─── */
-    .page-hero {
-      position: relative;
-      overflow: hidden;
-      border-radius: 32px;
-      padding: 36px 32px 28px;
-      background: linear-gradient(135deg,
+      /* ─── Page hero ─── */
+      .page-hero {
+        position: relative;
+        overflow: hidden;
+        border-radius: 32px;
+        padding: 36px 32px 28px;
+        background: linear-gradient(
+          135deg,
           #050d24 0%,
           #0b2f7a 55%,
-          #1d4ed8 100%);
-      color: #fff;
-      box-shadow: 0 20px 60px -32px rgba(15, 23, 42, 0.55);
-      margin-bottom: 24px;
-    }
-
-    .page-hero::before,
-    .page-hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.1);
-      pointer-events: none;
-    }
-
-    .page-hero::before {
-      width: 260px;
-      height: 260px;
-      top: -120px;
-      right: -80px;
-    }
-
-    .page-hero::after {
-      width: 180px;
-      height: 180px;
-      bottom: -90px;
-      left: -50px;
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .page-hero h1 {
-      color: #fff;
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .page-hero p {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.97rem;
-      font-weight: 500;
-      margin: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ─── State box ─── */
-    .state-box {
-      padding: 60px 20px;
-      text-align: center;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .state-box i {
-      font-size: 2.5rem;
-      margin-bottom: 16px;
-      display: block;
-      opacity: 0.5;
-    }
-
-    .spinner-ring {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      border: 4px solid var(--border);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* ─── Product table wrap ─── */
-    .pt-wrap {
-      background: var(--surface);
-      border-radius: 28px;
-      box-shadow: var(--shadow-card);
-      border: 1px solid rgba(226, 232, 240, 0.95);
-      overflow: hidden;
-    }
-
-    /* Row 1: Nama Product — horizontally scrollable */
-    .pt-name-scroll {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      border-bottom: 2px solid var(--border);
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary-light) var(--border);
-    }
-
-    .pt-name-scroll::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .pt-name-scroll::-webkit-scrollbar-track {
-      background: var(--border);
-    }
-
-    .pt-name-scroll::-webkit-scrollbar-thumb {
-      background: var(--primary-light);
-      border-radius: 4px;
-    }
-
-    .pt-name-row {
-      display: flex;
-      align-items: stretch;
-      min-width: max-content;
-    }
-
-    .pt-label-cell {
-      width: var(--label-col-width);
-      min-width: var(--label-col-width);
-      flex-shrink: 0;
-      padding: 20px;
-      font-weight: 700;
-      font-size: 0.78rem;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      background: var(--primary-ultra-light);
-      border-right: 2px solid #dbeafe;
-      display: flex;
-      align-items: center;
-      position: sticky;
-      left: 0;
-      z-index: 3;
-    }
-
-    .pt-name-cell {
-      flex-shrink: 0;
-      min-width: 200px;
-      padding: 20px 24px;
-      font-weight: 700;
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      cursor: pointer;
-      border-right: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-      transition:
-        background 0.2s,
-        color 0.2s;
-      user-select: none;
-    }
-
-    .pt-name-cell:hover {
-      background: var(--primary-ultra-light);
-      color: var(--primary);
-    }
-
-    .pt-name-cell.active {
-      background: var(--primary-ultra-light);
-      color: var(--primary);
-      box-shadow: inset 0 -3px 0 var(--primary);
-    }
-
-    /* Row 2+: Detail panel — fixed, not scrollable */
-    .pt-detail-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .pt-detail-table tr {
-      border-bottom: 1px solid var(--border);
-    }
-
-    .pt-detail-table tr:last-child {
-      border-bottom: none;
-    }
-
-    .pt-detail-table tr:nth-child(odd) .pt-row-value {
-      background: #f8fbff;
-    }
-
-    .pt-detail-table tr:nth-child(even) .pt-row-value {
-      background: #ffffff;
-    }
-
-    .pt-detail-table tr:nth-child(odd) .pt-row-label {
-      background: #e8f0fe;
-    }
-
-    .pt-detail-table tr:nth-child(even) .pt-row-label {
-      background: var(--primary-ultra-light);
-    }
-
-    .pt-detail-table .pt-row-label {
-      width: var(--label-col-width);
-      min-width: var(--label-col-width);
-      padding: 24px 20px;
-      font-weight: 700;
-      font-size: 0.82rem;
-      color: var(--primary);
-      vertical-align: top;
-      background: var(--primary-ultra-light);
-      border-right: 2px solid #dbeafe;
-      white-space: nowrap;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    .pt-detail-table .pt-row-label .label-icon {
-      display: block;
-      font-size: 1.15rem;
-      margin-bottom: 6px;
-      color: var(--primary-light);
-    }
-
-    .pt-detail-table .pt-row-value {
-      padding: 24px 28px;
-      font-size: 0.94rem;
-      color: var(--text-main);
-      vertical-align: top;
-    }
-
-    .desc-value {
-      color: var(--text-muted);
-      line-height: 1.8;
-      font-weight: 500;
-    }
-
-    /* materials / specifications list */
-    .material-item {
-      display: flex;
-      gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px dashed var(--border);
-    }
-
-    .material-item:last-child {
-      border-bottom: none;
-    }
-
-    .material-index {
-      flex-shrink: 0;
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #0b2f7a, #1d4ed8);
-      color: #fff;
-      font-size: 0.75rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2px;
-      box-shadow: 0 4px 12px rgba(11, 47, 122, 0.3);
-    }
-
-    .material-body .material-title {
-      font-weight: 700;
-      font-size: 0.92rem;
-      margin-bottom: 4px;
-      color: var(--text-main);
-    }
-
-    .material-body .material-desc {
-      color: var(--text-muted);
-      font-size: 0.84rem;
-      line-height: 1.65;
-      font-weight: 500;
-    }
-
-    /* benefits list */
-    .benefit-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px dashed var(--border);
-      gap: 16px;
-    }
-
-    .benefit-item:last-child {
-      border-bottom: none;
-    }
-
-    .benefit-label {
-      font-size: 0.92rem;
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
-    .benefit-value-text {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .badge-yes {
-      background: #d1fae5;
-      color: #065f46;
-      padding: 5px 14px;
-      border-radius: 999px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    /* outcomes list */
-    .outcome-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px 0;
-    }
-
-    .outcome-item i {
-      color: var(--success);
-      font-size: 1.05rem;
-      margin-top: 1px;
-      flex-shrink: 0;
-    }
-
-    .outcome-item span {
-      font-size: 0.92rem;
-      line-height: 1.65;
-      font-weight: 500;
-    }
-
-    @media (max-width: 600px) {
-      #main {
-        padding-top: 100px;
+          #1d4ed8 100%
+        );
+        color: #fff;
+        box-shadow: 0 20px 60px -32px rgba(15, 23, 42, 0.55);
+        margin-bottom: 24px;
       }
 
-      .page-hero {
-        border-radius: 24px;
-        padding: 24px 20px;
+      .page-hero::before,
+      .page-hero::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        pointer-events: none;
+      }
+
+      .page-hero::before {
+        width: 260px;
+        height: 260px;
+        top: -120px;
+        right: -80px;
+      }
+
+      .page-hero::after {
+        width: 180px;
+        height: 180px;
+        bottom: -90px;
+        left: -50px;
+      }
+
+      .hero-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
       }
 
       .page-hero h1 {
-        font-size: 1.4rem;
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
       }
 
-      :root {
-        --label-col-width: 120px;
+      .page-hero p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.97rem;
+        font-weight: 500;
+        margin: 0;
+        position: relative;
+        z-index: 1;
       }
 
-      .pt-label-cell,
-      .pt-row-label {
-        padding: 14px 12px;
-        font-size: 0.7rem;
+      /* ─── State box ─── */
+      .state-box {
+        padding: 60px 20px;
+        text-align: center;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      .state-box i {
+        font-size: 2.5rem;
+        margin-bottom: 16px;
+        display: block;
+        opacity: 0.5;
+      }
+
+      .spinner-ring {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 4px solid var(--border);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ─── Product table wrap ─── */
+      .pt-wrap {
+        background: var(--surface);
+        border-radius: 28px;
+        box-shadow: var(--shadow-card);
+        border: 1px solid rgba(226, 232, 240, 0.95);
+        overflow: hidden;
+      }
+
+      /* Row 1: Nama Product — horizontally scrollable */
+      .pt-name-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-bottom: 2px solid var(--border);
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-light) var(--border);
+      }
+
+      .pt-name-scroll::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .pt-name-scroll::-webkit-scrollbar-track {
+        background: var(--border);
+      }
+
+      .pt-name-scroll::-webkit-scrollbar-thumb {
+        background: var(--primary-light);
+        border-radius: 4px;
+      }
+
+      .pt-name-row {
+        display: flex;
+        align-items: stretch;
+        min-width: max-content;
+      }
+
+      .pt-label-cell {
+        width: var(--label-col-width);
+        min-width: var(--label-col-width);
+        flex-shrink: 0;
+        padding: 20px;
+        font-weight: 700;
+        font-size: 0.78rem;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: var(--primary-ultra-light);
+        border-right: 2px solid #dbeafe;
+        display: flex;
+        align-items: center;
+        position: sticky;
+        left: 0;
+        z-index: 3;
       }
 
       .pt-name-cell {
-        padding: 14px 16px;
-        min-width: 150px;
+        flex-shrink: 0;
+        min-width: 200px;
+        padding: 20px 24px;
+        font-weight: 700;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        border-right: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        transition:
+          background 0.2s,
+          color 0.2s;
+        user-select: none;
       }
 
-      .pt-row-value {
-        padding: 16px 14px;
+      .pt-name-cell:hover {
+        background: var(--primary-ultra-light);
+        color: var(--primary);
       }
-    }
-  </style>
-</head>
 
-<body>
-  <!-- ======= Header ======= -->
-  <main-header></main-header>
-  <!-- ======= End Header ======= -->
+      .pt-name-cell.active {
+        background: var(--primary-ultra-light);
+        color: var(--primary);
+        box-shadow: inset 0 -3px 0 var(--primary);
+      }
 
-  <main id="main">
-    <div class="container">
-      <section>
-        <div class="page-hero">
-          <div class="hero-pill">
-            <i class="bi bi-collection-fill"></i> Program Dialogika
-          </div>
-          <h1>Tabel Produk</h1>
-          <p>Klik nama program pada baris di atas untuk melihat detailnya</p>
-        </div>
-      </section>
+      /* Row 2+: Detail panel — fixed, not scrollable */
+      .pt-detail-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
 
-      <section>
-        <div class="state-box" id="tabLoading">
-          <div class="spinner-ring"></div>
-        </div>
+      .pt-detail-table tr {
+        border-bottom: 1px solid var(--border);
+      }
 
-        <div class="state-box" id="emptyState" style="display: none">
-          <i class="bi bi-inbox"></i>
-          <div>Belum ada produk tersedia.</div>
-        </div>
+      .pt-detail-table tr:last-child {
+        border-bottom: none;
+      }
 
-        <div class="pt-wrap" id="ptWrap" style="display: none">
-          <!-- Row: Nama Product (scrollable horizontally) -->
-          <div class="pt-name-scroll">
-            <div class="pt-name-row" id="ptNameRow">
-              <div class="pt-label-cell">Nama Product</div>
-              <!-- name cells injected by JS -->
-            </div>
-          </div>
+      .pt-detail-table tr:nth-child(odd) .pt-row-value {
+        background: #f8fbff;
+      }
 
-          <!-- Detail panel (fixed, not scrollable) -->
-          <table class="pt-detail-table">
-            <tbody>
-              <tr>
-                <td class="pt-row-label">
-                  <i class="bi bi-info-circle-fill label-icon"></i>
-                  Deskripsi
-                </td>
-                <td class="pt-row-value" id="ptDesc">-</td>
-              </tr>
-              <tr>
-                <td class="pt-row-label">
-                  <i class="bi bi-book-fill label-icon"></i>
-                  Materi
-                </td>
-                <td class="pt-row-value" id="ptMateri">-</td>
-              </tr>
-              <tr>
-                <td class="pt-row-label">
-                  <i class="bi bi-list-task label-icon"></i>
-                  Spesifikasi
-                </td>
-                <td class="pt-row-value" id="ptSpesifikasi">-</td>
-              </tr>
-              <tr>
-                <td class="pt-row-label">
-                  <i class="bi bi-star-fill label-icon"></i>
-                  Benefit
-                </td>
-                <td class="pt-row-value" id="ptBenefit">-</td>
-              </tr>
-              <tr>
-                <td class="pt-row-label">
-                  <i class="bi bi-bullseye label-icon"></i>
-                  Target Outcomes
-                </td>
-                <td class="pt-row-value" id="ptOutcomes">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
-  </main>
+      .pt-detail-table tr:nth-child(even) .pt-row-value {
+        background: #ffffff;
+      }
 
-  <!-- ======= Footer ======= -->
-  <main-footer></main-footer>
-  <footer-modal></footer-modal>
-  <!-- ======= End Footer ======= -->
+      .pt-detail-table tr:nth-child(odd) .pt-row-label {
+        background: #e8f0fe;
+      }
 
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/js/headerfooter.js"></script>
-  <script src="assets/js/main.js"></script>
+      .pt-detail-table tr:nth-child(even) .pt-row-label {
+        background: var(--primary-ultra-light);
+      }
 
-  <script>
-    /* ── Firebase ── */
-    const firebaseConfig = {
-      apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
-      authDomain: "pre-dialogika.firebaseapp.com",
-      projectId: "pre-dialogika",
-      storageBucket: "pre-dialogika.firebasestorage.app",
-      messagingSenderId: "343771410480",
-      appId: "1:343771410480:web:32881c9868522090237df5",
-      measurementId: "G-SXN811P3N0",
-    };
+      .pt-detail-table .pt-row-label {
+        width: var(--label-col-width);
+        min-width: var(--label-col-width);
+        padding: 24px 20px;
+        font-weight: 700;
+        font-size: 0.82rem;
+        color: var(--primary);
+        vertical-align: top;
+        background: var(--primary-ultra-light);
+        border-right: 2px solid #dbeafe;
+        white-space: nowrap;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
 
-    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+      .pt-detail-table .pt-row-label .label-icon {
+        display: block;
+        font-size: 1.15rem;
+        margin-bottom: 6px;
+        color: var(--primary-light);
+      }
 
-    /* ── State ── */
-    let productsData = [];
+      .pt-detail-table .pt-row-value {
+        padding: 24px 28px;
+        font-size: 0.94rem;
+        color: var(--text-main);
+        vertical-align: top;
+      }
 
-    /* ── Helpers ── */
-    function esc(v) {
-      return String(v || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
-    function pad(n) {
-      return String(n).padStart(2, "0");
-    }
+      .desc-value {
+        color: var(--text-muted);
+        line-height: 1.8;
+        font-weight: 500;
+      }
 
-    /* ── Load products ── */
-    async function loadProducts() {
-      const tabLoading = document.getElementById("tabLoading");
-      const emptyState = document.getElementById("emptyState");
-      const ptWrap = document.getElementById("ptWrap");
-      const nameRow = document.getElementById("ptNameRow");
+      /* materials / specifications list */
+      .material-item {
+        display: flex;
+        gap: 14px;
+        padding: 14px 0;
+        border-bottom: 1px dashed var(--border);
+      }
 
-      try {
-        const snapshot = await db.collection("products").get();
-        tabLoading.style.display = "none";
+      .material-item:last-child {
+        border-bottom: none;
+      }
 
-        productsData = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          if (data.name) productsData.push({ id: doc.id, ...data });
-        });
+      .material-index {
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #0b2f7a, #1d4ed8);
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2px;
+        box-shadow: 0 4px 12px rgba(11, 47, 122, 0.3);
+      }
 
-        if (productsData.length === 0) {
-          emptyState.style.display = "block";
-          return;
+      .material-body .material-title {
+        font-weight: 700;
+        font-size: 0.92rem;
+        margin-bottom: 4px;
+        color: var(--text-main);
+      }
+
+      .material-body .material-desc {
+        color: var(--text-muted);
+        font-size: 0.84rem;
+        line-height: 1.65;
+        font-weight: 500;
+      }
+
+      /* benefits list */
+      .benefit-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px dashed var(--border);
+        gap: 16px;
+      }
+
+      .benefit-item:last-child {
+        border-bottom: none;
+      }
+
+      .benefit-label {
+        font-size: 0.92rem;
+        color: var(--text-main);
+        font-weight: 600;
+      }
+
+      .benefit-value-text {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .badge-yes {
+        background: #d1fae5;
+        color: #065f46;
+        padding: 5px 14px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      /* outcomes list */
+      .outcome-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 0;
+      }
+
+      .outcome-item i {
+        color: var(--success);
+        font-size: 1.05rem;
+        margin-top: 1px;
+        flex-shrink: 0;
+      }
+
+      .outcome-item span {
+        font-size: 0.92rem;
+        line-height: 1.65;
+        font-weight: 500;
+      }
+
+      @media (max-width: 600px) {
+        #main {
+          padding-top: 100px;
         }
 
-        productsData.forEach((product) => {
-          const cell = document.createElement("div");
-          cell.className = "pt-name-cell";
-          cell.id = "ptname-" + product.id;
-          cell.dataset.id = product.id;
-          cell.textContent = product.name;
-          cell.addEventListener("click", () => showProductDetail(product.id));
-          nameRow.appendChild(cell);
-        });
+        .page-hero {
+          border-radius: 24px;
+          padding: 24px 20px;
+        }
 
-        ptWrap.style.display = "block";
+        .page-hero h1 {
+          font-size: 1.4rem;
+        }
 
-        // Auto-select first product
-        showProductDetail(productsData[0].id);
-      } catch (err) {
-        console.error("Error loading products:", err);
-        tabLoading.style.display = "none";
-        emptyState.style.display = "block";
-        emptyState.innerHTML =
-          '<i class="bi bi-exclamation-triangle"></i><div>Gagal memuat produk.</div>';
+        :root {
+          --label-col-width: 120px;
+        }
+
+        .pt-label-cell,
+        .pt-row-label {
+          padding: 14px 12px;
+          font-size: 0.7rem;
+        }
+
+        .pt-name-cell {
+          padding: 14px 16px;
+          min-width: 150px;
+        }
+
+        .pt-row-value {
+          padding: 16px 14px;
+        }
       }
-    }
+    </style>
+  </head>
 
-    /* ── Render detail ── */
-    function showProductDetail(productId) {
-      const product = productsData.find((p) => p.id === productId);
-      if (!product) return;
+  <body>
+    <!-- ======= Header ======= -->
+    <main-header></main-header>
+    <!-- ======= End Header ======= -->
 
-      // Highlight active name cell
-      document
-        .querySelectorAll(".pt-name-cell")
-        .forEach((c) => c.classList.remove("active"));
-      const activeCell = document.getElementById("ptname-" + productId);
-      if (activeCell) {
-        activeCell.classList.add("active");
-        activeCell.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "nearest",
-        });
+    <main id="main">
+      <div class="container">
+        <section>
+          <div class="page-hero">
+            <div class="hero-pill">
+              <i class="bi bi-collection-fill"></i> Program Dialogika
+            </div>
+            <h1>Tabel Produk</h1>
+            <p>Klik nama program pada baris di atas untuk melihat detailnya</p>
+          </div>
+        </section>
+
+        <section>
+          <div class="state-box" id="tabLoading">
+            <div class="spinner-ring"></div>
+          </div>
+
+          <div class="state-box" id="emptyState" style="display: none">
+            <i class="bi bi-inbox"></i>
+            <div>Belum ada produk tersedia.</div>
+          </div>
+
+          <div class="pt-wrap" id="ptWrap" style="display: none">
+            <!-- Row: Nama Product (scrollable horizontally) -->
+            <div class="pt-name-scroll">
+              <div class="pt-name-row" id="ptNameRow">
+                <div class="pt-label-cell">Nama Product</div>
+                <!-- name cells injected by JS -->
+              </div>
+            </div>
+
+            <!-- Detail panel (fixed, not scrollable) -->
+            <table class="pt-detail-table">
+              <tbody>
+                <tr>
+                  <td class="pt-row-label">
+                    <i class="bi bi-info-circle-fill label-icon"></i>
+                    Deskripsi
+                  </td>
+                  <td class="pt-row-value" id="ptDesc">-</td>
+                </tr>
+                <tr>
+                  <td class="pt-row-label">
+                    <i class="bi bi-book-fill label-icon"></i>
+                    Materi
+                  </td>
+                  <td class="pt-row-value" id="ptMateri">-</td>
+                </tr>
+                <tr>
+                  <td class="pt-row-label">
+                    <i class="bi bi-list-task label-icon"></i>
+                    Spesifikasi
+                  </td>
+                  <td class="pt-row-value" id="ptSpesifikasi">-</td>
+                </tr>
+                <tr>
+                  <td class="pt-row-label">
+                    <i class="bi bi-star-fill label-icon"></i>
+                    Benefit
+                  </td>
+                  <td class="pt-row-value" id="ptBenefit">-</td>
+                </tr>
+                <tr>
+                  <td class="pt-row-label">
+                    <i class="bi bi-bullseye label-icon"></i>
+                    Target Outcomes
+                  </td>
+                  <td class="pt-row-value" id="ptOutcomes">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <main-footer></main-footer>
+    <footer-modal></footer-modal>
+    <!-- ======= End Footer ======= -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/js/headerfooter.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+      /* ── Firebase ── */
+      const firebaseConfig = {
+        apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
+        authDomain: "pre-dialogika.firebaseapp.com",
+        projectId: "pre-dialogika",
+        storageBucket: "pre-dialogika.firebasestorage.app",
+        messagingSenderId: "343771410480",
+        appId: "1:343771410480:web:32881c9868522090237df5",
+        measurementId: "G-SXN811P3N0",
+      };
+
+      if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      /* ── State ── */
+      let productsData = [];
+
+      /* ── Helpers ── */
+      function esc(v) {
+        return String(v || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+      function pad(n) {
+        return String(n).padStart(2, "0");
       }
 
-      /* Deskripsi */
-      const rawDesc = product.description || "-";
-      const cleanDesc = rawDesc
-        .replace(/<font[^>]*>/gi, "<span>")
-        .replace(/<\/font>/gi, "</span>")
-        .replace(/\s*style="[^"]*"/gi, "")
-        .replace(/\s*face="[^"]*"/gi, "")
-        .replace(/\s*color="[^"]*"/gi, "");
-      document.getElementById("ptDesc").innerHTML =
-        `<div class="desc-value">${cleanDesc || "-"}</div>`;
+      /* ── Load products ── */
+      async function loadProducts() {
+        const tabLoading = document.getElementById("tabLoading");
+        const emptyState = document.getElementById("emptyState");
+        const ptWrap = document.getElementById("ptWrap");
+        const nameRow = document.getElementById("ptNameRow");
 
-      /* Materi */
-      let materialsHtml = "";
-      if (Array.isArray(product.materials) && product.materials.length > 0) {
-        const sorted = [...product.materials].sort((a, b) => {
-          const ao = parseInt(String(a.order || "").replace(/\D/g, ""), 10);
-          const bo = parseInt(String(b.order || "").replace(/\D/g, ""), 10);
-          if (isNaN(ao) && isNaN(bo)) return 0;
-          if (isNaN(ao)) return 1;
-          if (isNaN(bo)) return -1;
-          return ao - bo;
-        });
-        sorted.forEach((item, idx) => {
-          const order =
-            String(item.order || String(idx + 1)).replace(/\D/g, "") ||
-            String(idx + 1);
-          materialsHtml += `
+        try {
+          const snapshot = await db.collection("products").get();
+          tabLoading.style.display = "none";
+
+          productsData = [];
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.name) productsData.push({ id: doc.id, ...data });
+          });
+
+          if (productsData.length === 0) {
+            emptyState.style.display = "block";
+            return;
+          }
+
+          productsData.forEach((product) => {
+            const cell = document.createElement("div");
+            cell.className = "pt-name-cell";
+            cell.id = "ptname-" + product.id;
+            cell.dataset.id = product.id;
+            cell.textContent = product.name;
+            cell.addEventListener("click", () => showProductDetail(product.id));
+            nameRow.appendChild(cell);
+          });
+
+          ptWrap.style.display = "block";
+
+          // Auto-select first product
+          showProductDetail(productsData[0].id);
+        } catch (err) {
+          console.error("Error loading products:", err);
+          tabLoading.style.display = "none";
+          emptyState.style.display = "block";
+          emptyState.innerHTML =
+            '<i class="bi bi-exclamation-triangle"></i><div>Gagal memuat produk.</div>';
+        }
+      }
+
+      /* ── Render detail ── */
+      function showProductDetail(productId) {
+        const product = productsData.find((p) => p.id === productId);
+        if (!product) return;
+
+        // Highlight active name cell
+        document
+          .querySelectorAll(".pt-name-cell")
+          .forEach((c) => c.classList.remove("active"));
+        const activeCell = document.getElementById("ptname-" + productId);
+        if (activeCell) {
+          activeCell.classList.add("active");
+          activeCell.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "nearest",
+          });
+        }
+
+        /* Deskripsi */
+        const rawDesc = product.description || "-";
+        const cleanDesc = rawDesc
+          .replace(/<font[^>]*>/gi, "<span>")
+          .replace(/<\/font>/gi, "</span>")
+          .replace(/\s*style="[^"]*"/gi, "")
+          .replace(/\s*face="[^"]*"/gi, "")
+          .replace(/\s*color="[^"]*"/gi, "");
+        document.getElementById("ptDesc").innerHTML =
+          `<div class="desc-value">${cleanDesc || "-"}</div>`;
+
+        /* Materi */
+        let materialsHtml = "";
+        if (Array.isArray(product.materials) && product.materials.length > 0) {
+          const sorted = [...product.materials].sort((a, b) => {
+            const ao = parseInt(String(a.order || "").replace(/\D/g, ""), 10);
+            const bo = parseInt(String(b.order || "").replace(/\D/g, ""), 10);
+            if (isNaN(ao) && isNaN(bo)) return 0;
+            if (isNaN(ao)) return 1;
+            if (isNaN(bo)) return -1;
+            return ao - bo;
+          });
+          sorted.forEach((item, idx) => {
+            const order =
+              String(item.order || String(idx + 1)).replace(/\D/g, "") ||
+              String(idx + 1);
+            materialsHtml += `
               <div class="material-item">
                 <div class="material-index">${pad(order)}</div>
                 <div class="material-body">
@@ -664,98 +681,97 @@
                   <div class="material-desc">${esc(item.description || "-")}</div>
                 </div>
               </div>`;
-        });
-      } else {
-        materialsHtml = '<span class="text-muted">-</span>';
-      }
-      document.getElementById("ptMateri").innerHTML = materialsHtml;
+          });
+        } else {
+          materialsHtml = '<span class="text-muted">-</span>';
+        }
+        document.getElementById("ptMateri").innerHTML = materialsHtml;
 
-      /* Spesifikasi */
-      let specificationsHtml = "";
-      if (
-        Array.isArray(product.specifications) &&
-        product.specifications.length > 0
-      ) {
-        product.specifications.forEach((spec, idx) => {
-          specificationsHtml += `
+        /* Spesifikasi */
+        let specificationsHtml = "";
+        if (
+          Array.isArray(product.specifications) &&
+          product.specifications.length > 0
+        ) {
+          product.specifications.forEach((spec, idx) => {
+            specificationsHtml += `
               <div class="material-item">
                 <div class="material-index">${pad(idx + 1)}</div>
                 <div class="material-body">
                   <div class="material-title">${esc(String(spec || "-"))}</div>
                 </div>
               </div>`;
-        });
-      } else {
-        specificationsHtml = '<span class="text-muted">-</span>';
-      }
-      document.getElementById("ptSpesifikasi").innerHTML = specificationsHtml;
+          });
+        } else {
+          specificationsHtml = '<span class="text-muted">-</span>';
+        }
+        document.getElementById("ptSpesifikasi").innerHTML = specificationsHtml;
 
-      /* Benefit */
-      let benefitsHtml = "";
-      if (Array.isArray(product.features) && product.features.length > 0) {
-        product.features.forEach((feature) => {
-          if (feature && typeof feature === "object") {
-            const rawLabel = String(feature.label || "").trim();
-            if (!rawLabel) return;
-            const label = esc(rawLabel);
-            const type = String(feature.type || "")
-              .trim()
-              .toLowerCase();
-            const value = feature.value;
-            if (type === "boolean") {
-              const isTrue =
-                value === true || String(value).toLowerCase() === "true";
-              if (!isTrue) return;
-              benefitsHtml += `
+        /* Benefit */
+        let benefitsHtml = "";
+        if (Array.isArray(product.features) && product.features.length > 0) {
+          product.features.forEach((feature) => {
+            if (feature && typeof feature === "object") {
+              const rawLabel = String(feature.label || "").trim();
+              if (!rawLabel) return;
+              const label = esc(rawLabel);
+              const type = String(feature.type || "")
+                .trim()
+                .toLowerCase();
+              const value = feature.value;
+              if (type === "boolean") {
+                const isTrue =
+                  value === true || String(value).toLowerCase() === "true";
+                if (!isTrue) return;
+                benefitsHtml += `
                   <div class="benefit-item">
                     <span class="benefit-label">${label}</span>
                     <span class="badge-yes">✓ Bisa</span>
                   </div>`;
-            } else {
-              const displayVal = String(value || "").trim();
-              if (!displayVal) return;
-              benefitsHtml += `
+              } else {
+                const displayVal = String(value || "").trim();
+                if (!displayVal) return;
+                benefitsHtml += `
                   <div class="benefit-item">
                     <span class="benefit-label">${label}</span>
                     <span class="benefit-value-text">${esc(displayVal)}</span>
                   </div>`;
+              }
+            } else {
+              const rawStr = String(feature || "").trim();
+              if (!rawStr) return;
+              benefitsHtml += `<div class="benefit-item"><span class="benefit-label">${esc(rawStr)}</span></div>`;
             }
-          } else {
-            const rawStr = String(feature || "").trim();
-            if (!rawStr) return;
-            benefitsHtml += `<div class="benefit-item"><span class="benefit-label">${esc(rawStr)}</span></div>`;
-          }
-        });
-      }
-      if (!benefitsHtml) benefitsHtml = '<span class="text-muted">-</span>';
-      document.getElementById("ptBenefit").innerHTML = benefitsHtml;
+          });
+        }
+        if (!benefitsHtml) benefitsHtml = '<span class="text-muted">-</span>';
+        document.getElementById("ptBenefit").innerHTML = benefitsHtml;
 
-      /* Target Outcomes */
-      let outcomesHtml = "";
-      if (
-        Array.isArray(product.targetOutcomes) &&
-        product.targetOutcomes.length > 0
-      ) {
-        product.targetOutcomes.forEach((outcome) => {
-          outcomesHtml += `
+        /* Target Outcomes */
+        let outcomesHtml = "";
+        if (
+          Array.isArray(product.targetOutcomes) &&
+          product.targetOutcomes.length > 0
+        ) {
+          product.targetOutcomes.forEach((outcome) => {
+            outcomesHtml += `
               <div class="outcome-item">
                 <i class="bi bi-check-circle-fill"></i>
                 <span>${esc(String(outcome || "-"))}</span>
               </div>`;
-        });
-      } else {
-        outcomesHtml = '<span class="text-muted">-</span>';
+          });
+        } else {
+          outcomesHtml = '<span class="text-muted">-</span>';
+        }
+        document.getElementById("ptOutcomes").innerHTML = outcomesHtml;
       }
-      document.getElementById("ptOutcomes").innerHTML = outcomesHtml;
-    }
 
-    /* ── Init ── */
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", loadProducts);
-    } else {
-      loadProducts();
-    }
-  </script>
-</body>
-
+      /* ── Init ── */
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadProducts);
+      } else {
+        loadProducts();
+      }
+    </script>
+  </body>
 </html>
