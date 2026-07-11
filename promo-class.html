@@ -9,36 +9,35 @@
     <link href="assets/img/apple-touch-icon.webp" rel="apple-touch-icon" />
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
-                    <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
-                    <link
-                      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-                      rel="stylesheet"
-                    />
-                    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-                    <link href="assets/css/style.css" rel="stylesheet" />
-                    <style>
-                      .date-filter-wrapper {
-                        display: flex;
-                        align-items: center;
-                        gap: 8px;
-                      }
-                      
-                      .date-filter-wrapper .form-control {
-                        max-width: 280px;
-                        background: #fff;
-                        cursor: pointer;
-                      }
-                      
-                      .date-filter-wrapper label {
-                        font-size: 14px;
-                        margin-bottom: 0;
-                      }
-                    </style>
+    <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+
     <style>
+      :root {
+        --primary: #0b2f7a;
+        --primary-light: #1d4ed8;
+        --primary-ultra-light: #eff6ff;
+        --success: #16a34a;
+        --success-bg: #dcfce7;
+        --warning: #b45309;
+        --warning-bg: #fef3c7;
+        --muted-bg: #f1f5f9;
+        --surface: #ffffff;
+        --border: #e2e8f0;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --shadow-card: 0 18px 44px -30px rgba(15, 23, 42, 0.35);
+      }
+
       body {
         font-family:
           "Open Sans",
@@ -47,25 +46,209 @@
           BlinkMacSystemFont,
           "Segoe UI",
           sans-serif;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(11, 47, 122, 0.08),
+            transparent 30%
+          ),
+          linear-gradient(180deg, #f8fbff 0%, #f8fafc 100%);
+        color: var(--text-main);
       }
 
       .page-container {
-        padding: 60px 15px;
+        padding: 120px 15px 72px;
       }
 
-      .table-container {
-        border-radius: 20px;
-        border: 1px solid rgba(15, 23, 42, 0.06);
-        box-shadow: 0 18px 40px -24px rgba(15, 23, 42, 0.4);
-        background: #ffffff;
+      /* ─── Page hero ─── */
+      .page-hero {
+        position: relative;
         overflow: hidden;
-        margin-top: 20vh;
+        border-radius: 32px;
+        padding: 36px 32px 28px;
+        background: linear-gradient(
+          135deg,
+          #050d24 0%,
+          #0b2f7a 55%,
+          #1d4ed8 100%
+        );
+        color: #fff;
+        box-shadow: 0 20px 60px -32px rgba(15, 23, 42, 0.55);
+        margin-bottom: 28px;
       }
 
-      .table-header {
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        color: white;
-        padding: 24px;
+      .page-hero::before,
+      .page-hero::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        pointer-events: none;
+      }
+
+      .page-hero::before {
+        width: 260px;
+        height: 260px;
+        top: -120px;
+        right: -80px;
+      }
+
+      .page-hero::after {
+        width: 180px;
+        height: 180px;
+        bottom: -90px;
+        left: -50px;
+      }
+
+      .hero-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .page-hero h1 {
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-hero p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.97rem;
+        font-weight: 500;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+      }
+
+      /* ─── State box ─── */
+      .state-box {
+        padding: 60px 20px;
+        text-align: center;
+        color: var(--text-muted);
+        font-weight: 600;
+        background: var(--surface);
+        border-radius: 28px;
+        box-shadow: var(--shadow-card);
+        border: 1px solid rgba(226, 232, 240, 0.95);
+      }
+
+      .state-box i {
+        font-size: 2.5rem;
+        margin-bottom: 16px;
+        display: block;
+        opacity: 0.5;
+      }
+
+      .spinner-ring {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 4px solid var(--border);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ─── Batch sections ─── */
+      .batch-section {
+        background: var(--surface);
+        border-radius: 28px;
+        box-shadow: var(--shadow-card);
+        border: 1px solid rgba(226, 232, 240, 0.95);
+        overflow: hidden;
+        margin-bottom: 24px;
+      }
+
+      .batch-section-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 22px 26px;
+        background: var(--primary-ultra-light);
+        border-bottom: 2px solid #dbeafe;
+      }
+
+      .batch-title-group {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .batch-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #0b2f7a, #1d4ed8);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        box-shadow: 0 8px 20px rgba(11, 47, 122, 0.3);
+      }
+
+      .batch-title-text .batch-label {
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-size: 1.02rem;
+        color: var(--primary);
+      }
+
+      .batch-title-text .batch-sub {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .batch-status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .batch-status-pill.ongoing {
+        background: var(--success-bg);
+        color: #166534;
+      }
+
+      .batch-status-pill.upcoming {
+        background: var(--warning-bg);
+        color: var(--warning);
+      }
+
+      .batch-status-pill.ended {
+        background: var(--muted-bg);
+        color: var(--text-muted);
       }
 
       .table-wrapper {
@@ -87,10 +270,6 @@
         font-size: 13px;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        white-space: nowrap;
-      }
-
-      .table-header h1 {
         white-space: nowrap;
       }
 
@@ -118,14 +297,23 @@
         border-radius: 999px;
       }
 
-      .loading-container {
-        text-align: center;
-        padding: 60px 20px;
-      }
+      @media (max-width: 600px) {
+        .page-container {
+          padding-top: 100px;
+        }
 
-      .spinner-border {
-        width: 3rem;
-        height: 3rem;
+        .page-hero {
+          border-radius: 24px;
+          padding: 24px 20px;
+        }
+
+        .page-hero h1 {
+          font-size: 1.4rem;
+        }
+
+        .batch-section-header {
+          padding: 18px 18px;
+        }
       }
     </style>
   </head>
@@ -136,54 +324,27 @@
 
     <main id="main" class="page-container">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-12">
-            <div class="table-container">
-              <div class="table-header">
-                <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center gap-3">
-                  <h1><i class="bi bi-tags me-2"></i>Daftar Promo Class</h1>
-                  <div class="date-filter-wrapper">
-                    <label for="promoDateRange" class="form-label mb-0">Durasi Promo:</label>
-                    <input
-                      type="text"
-                      id="promoDateRange"
-                      class="form-control"
-                      value="1 Juni 2026 - 31 Juli 2026"
-                      readonly
-                      style="cursor: pointer;"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="table-wrapper">
-                <div id="loadingContainer" class="loading-container">
-                  <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
-                  <p class="mt-3 text-muted">Memuat data...</p>
-                </div>
-                <div id="tableContainer" class="d-none">
-                  <table
-                    id="promoTable"
-                    class="table table-striped table-hover promo-table"
-                  >
-                    <thead>
-                      <tr>
-                        <th>Produk</th>
-                        <th>Lokasi</th>
-                        <th>Harga Normal</th>
-                        <th>Harga Promo</th>
-                        <th>Nama Lokasi</th>
-                        <th>Link Google Maps</th>
-                      </tr>
-                    </thead>
-                    <tbody id="promoTableBody"></tbody>
-                  </table>
-                </div>
-              </div>
+        <section>
+          <div class="page-hero">
+            <div class="hero-pill">
+              <i class="bi bi-tags-fill"></i> Promo Aktif
             </div>
+            <h1>Daftar Promo Class</h1>
+            <p>promo kelas yang sesuai dengan kebutuhan!</p>
           </div>
+        </section>
+
+        <div id="loadingContainer" class="state-box">
+          <div class="spinner-ring"></div>
+          <p class="mt-3 mb-0">Memuat data promo...</p>
         </div>
+
+        <div id="emptyState" class="state-box" style="display: none">
+          <i class="bi bi-inbox"></i>
+          <div>Belum ada promo class tersedia.</div>
+        </div>
+
+        <div id="batchesContainer"></div>
       </div>
     </main>
 
@@ -192,8 +353,8 @@
     <footer-modal></footer-modal>
     <!-- ======= End Footer ======= -->
 
-                    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-                    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 
     <script>
       const firebaseConfig = {
@@ -211,13 +372,137 @@
       }
       const db = firebase.firestore();
 
-      let allData = [];
+      /* ── Date helpers (mirrors admin batch logic) ── */
+      const monthNames = [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+      ];
 
-      function renderTable(data) {
-        const tableBody = document.getElementById("promoTableBody");
-        tableBody.innerHTML = "";
+      function parseIndonesianDate(dateStr) {
+        if (!dateStr) return null;
+        const parts = dateStr.trim().split(" ");
+        if (parts.length < 3) return null;
 
-        data.forEach((item) => {
+        const day = parseInt(parts[0], 10);
+        const monthName = parts[1];
+        const year = parseInt(parts[2], 10);
+
+        if (!day || !monthName || !year) return null;
+
+        const monthIndex = monthNames.indexOf(monthName);
+        if (monthIndex === -1) return null;
+
+        return new Date(year, monthIndex, day);
+      }
+
+      function parseDurationDateRange(durationStr) {
+        if (!durationStr || !durationStr.includes("-")) return null;
+        const parts = durationStr.split("-").map((s) => s.trim());
+        if (parts.length < 2) return null;
+
+        const start = parseIndonesianDate(parts[0]);
+        const end = parseIndonesianDate(parts[1]);
+        if (!start || !end) return null;
+
+        return { start, end };
+      }
+
+      function getBatchStatus(range) {
+        if (!range) return null;
+        const now = new Date();
+        const startOfToday = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate(),
+        );
+        // Include the whole end day.
+        const endInclusive = new Date(
+          range.end.getFullYear(),
+          range.end.getMonth(),
+          range.end.getDate(),
+          23,
+          59,
+          59,
+        );
+
+        if (startOfToday >= range.start && startOfToday <= endInclusive) {
+          return "ongoing";
+        }
+        if (startOfToday < range.start) return "upcoming";
+        return "ended";
+      }
+
+      function statusBadge(status) {
+        if (status === "ongoing") {
+          return '<span class="batch-status-pill ongoing"><i class="bi bi-lightning-charge-fill"></i>Sedang Berlangsung</span>';
+        }
+        if (status === "upcoming") {
+          return '<span class="batch-status-pill upcoming"><i class="bi bi-hourglass-split"></i>Segera Hadir</span>';
+        }
+        if (status === "ended") {
+          return '<span class="batch-status-pill ended"><i class="bi bi-check2-circle"></i>Telah Berakhir</span>';
+        }
+        return "";
+      }
+
+      function esc(v) {
+        return String(v || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      /* ── Render one batch as its own table ── */
+      function renderBatchSection(batch) {
+        const section = document.createElement("div");
+        section.className = "batch-section";
+
+        const range = parseDurationDateRange(batch.label);
+        const status = getBatchStatus(range);
+
+        section.innerHTML = `
+          <div class="batch-section-header">
+            <div class="batch-title-group">
+              <div class="batch-icon"><i class="bi bi-calendar-range"></i></div>
+              <div class="batch-title-text">
+                <div class="batch-label">${esc(batch.label)}</div>
+                <div class="batch-sub">${batch.items.length} promo class tersedia</div>
+              </div>
+            </div>
+            ${statusBadge(status)}
+          </div>
+          <div class="table-wrapper">
+            <table class="table table-striped table-hover promo-table">
+              <thead>
+                <tr>
+                  <th>Produk</th>
+                  <th>Lokasi</th>
+                  <th>Harga Normal</th>
+                  <th>Harga Promo</th>
+                  <th>Nama Lokasi</th>
+                  <th>Link Google Maps</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        `;
+
+        const tbody = section.querySelector("tbody");
+
+        batch.items.forEach((item) => {
           const row = document.createElement("tr");
 
           const productCell = document.createElement("td");
@@ -237,13 +522,13 @@
 
           const normalPriceCell = document.createElement("td");
           normalPriceCell.innerHTML = item.normalPrice
-            ? `<span class="price-normal">${item.normalPrice}</span>`
+            ? `<span class="price-normal">${esc(item.normalPrice)}</span>`
             : "-";
           row.appendChild(normalPriceCell);
 
           const promoPriceCell = document.createElement("td");
           promoPriceCell.innerHTML = item.promoPrice
-            ? `<span class="price-promo">${item.promoPrice}</span>`
+            ? `<span class="price-promo">${esc(item.promoPrice)}</span>`
             : "-";
           row.appendChild(promoPriceCell);
 
@@ -265,62 +550,82 @@
           }
           row.appendChild(mapsLinkCell);
 
-          tableBody.appendChild(row);
+          tbody.appendChild(row);
         });
+
+        return section;
       }
 
-      function updateDisplay() {
-        renderTable(allData);
+      /* ── Group flat promo_classes docs into batches by promoDuration ── */
+      function groupIntoBatches(items) {
+        const buckets = new Map();
+
+        items.forEach((item) => {
+          const label =
+            String(item.promoDuration || "").trim() || "Tanpa Durasi";
+          if (!buckets.has(label)) buckets.set(label, []);
+          buckets.get(label).push(item);
+        });
+
+        const batches = Array.from(buckets.entries()).map(
+          ([label, batchItems]) => {
+            batchItems.sort((a, b) =>
+              String(a.product || "").localeCompare(String(b.product || "")),
+            );
+            return { label, items: batchItems };
+          },
+        );
+
+        batches.sort((a, b) => {
+          const rangeA = parseDurationDateRange(a.label);
+          const rangeB = parseDurationDateRange(b.label);
+          if (!rangeA && !rangeB) return 0;
+          if (!rangeA) return 1;
+          if (!rangeB) return -1;
+          return rangeA.start - rangeB.start;
+        });
+
+        return batches;
       }
 
+      /* ── Load & render ── */
       async function loadData() {
+        const loadingContainer = document.getElementById("loadingContainer");
+        const emptyState = document.getElementById("emptyState");
+        const batchesContainer = document.getElementById("batchesContainer");
+
         try {
-          const snapshot = await db
-            .collection("promo_classes")
-            .orderBy("location")
-            .get();
-          allData = snapshot.docs.map((doc) => doc.data());
+          const snapshot = await db.collection("promo_classes").get();
+          const allData = snapshot.docs.map((doc) => doc.data());
 
-          document.getElementById("loadingContainer").classList.add("d-none");
-          document.getElementById("tableContainer").classList.remove("d-none");
+          loadingContainer.style.display = "none";
 
-          updateDisplay();
+          if (allData.length === 0) {
+            emptyState.style.display = "block";
+            return;
+          }
+
+          const batches = groupIntoBatches(allData);
+          batchesContainer.innerHTML = "";
+          batches.forEach((batch) => {
+            batchesContainer.appendChild(renderBatchSection(batch));
+          });
         } catch (error) {
           console.error("Error loading data:", error);
-          document.getElementById("loadingContainer").innerHTML = `
-          <div class="alert alert-danger" role="alert">
-            <i class="bi bi-exclamation-triangle me-2"></i>
-            Terjadi kesalahan saat memuat data. Silakan refresh halaman.
-          </div>
-        `;
+          loadingContainer.innerHTML = `
+            <div class="alert alert-danger mb-0" role="alert">
+              <i class="bi bi-exclamation-triangle me-2"></i>
+              Terjadi kesalahan saat memuat data. Silakan refresh halaman.
+            </div>
+          `;
         }
       }
 
-      function filterByDateRange(dateRangeString) {
-        const filteredData = allData.filter((item) => {
-          if (!item.promoDuration) return false;
-          return item.promoDuration === dateRangeString;
-        });
-        renderTable(filteredData);
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const dateRangeInput = document.getElementById("promoDateRange");
-        
-        dateRangeInput.addEventListener("click", function () {
-          const dateRange = prompt(
-            "Masukkan durasi promo (contoh: 1 Juni 2026 - 31 Juli 2026):",
-            "1 Juni 2026 - 31 Juli 2026"
-          );
-          
-          if (dateRange !== null && dateRange.trim() !== "") {
-            dateRangeInput.value = dateRange.trim();
-            filterByDateRange(dateRange.trim());
-          }
-        });
-
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadData);
+      } else {
         loadData();
-      });
+      }
     </script>
 
     <script src="assets/js/headerfooter.js"></script>
