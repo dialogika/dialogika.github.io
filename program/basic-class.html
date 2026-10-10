@@ -2282,406 +2282,885 @@
     <!-- ======= Pricing Section ======= -->
     <section class="section bg-light pricing custom-pricing" id="pricing">
       <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-4">
+        
+        <style>
+          /* Basic Class Pricing UI/UX Custom Styling (Identical to First Class Standard) */
+          .basic-type-switcher-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 28px;
+          }
+          .basic-type-pill {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 50px;
+            padding: 5px;
+            display: inline-flex;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 2px 6px rgba(11, 43, 106, 0.06);
+          }
+          .basic-type-btn {
+            flex: 1;
+            border: none;
+            border-radius: 50px;
+            padding: 9px 18px;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #64748b;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+          }
+          .basic-type-btn:hover {
+            color: #0b2b6a;
+          }
+          .basic-type-btn.active {
+            background: linear-gradient(135deg, #0b2b6a 0%, #1a4a9e 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 3px 12px rgba(11, 43, 106, 0.25);
+          }
+          .basic-pricing-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 32px 26px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 100%;
+          }
+          .basic-pricing-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(11, 43, 106, 0.12);
+          }
+          .basic-card-featured {
+            border: 2.5px solid #0073e6 !important;
+            box-shadow: 0 12px 30px rgba(0, 115, 230, 0.18) !important;
+            transform: scale(1.02);
+            z-index: 2;
+          }
+          .basic-card-featured:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 115, 230, 0.24) !important;
+          }
+          .basic-card-signature {
+            border: 2px solid #0b2b6a !important;
+            box-shadow: 0 8px 24px rgba(11, 43, 106, 0.1) !important;
+          }
+          .basic-spec-box {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-size: 13px;
+            border: 1px solid #edf2f7;
+          }
+          .basic-spec-box.spec-featured {
+            background: #eef6ff;
+            border: 1px solid rgba(0, 115, 230, 0.2);
+          }
+          .basic-spec-box.spec-signature {
+            background: #fdfbee;
+            border: 1px solid rgba(255, 193, 7, 0.35);
+          }
+          .basic-spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 14px;
+          }
+          .basic-spec-col {
+            display: flex;
+            flex-direction: column;
+          }
+          .basic-spec-label {
+            font-size: 11px;
+            color: #64748b;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+          }
+          .basic-spec-label i {
+            font-size: 13.5px;
+          }
+          .basic-spec-val {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.3;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+          }
+          .basic-benefit-item {
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+          }
+          .basic-benefit-item i {
+            font-size: 16px;
+            margin-right: 8px;
+            margin-top: 2px;
+            flex-shrink: 0;
+          }
+          .basic-fade-in {
+            animation: basicFadeIn 0.35s ease-in-out;
+          }
+          @keyframes basicFadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+
+          /* Desktop View (>= 992px): STANDARD 3-COLUMN GRID */
+          @media (min-width: 992px) {
+            .basic-cards-slider {
+              display: flex;
+              flex-wrap: wrap;
+            }
+            .basic-slide-item {
+              flex: 0 0 auto;
+              width: 33.33333333%;
+            }
+            .basic-slider-controls {
+              display: none !important;
+            }
+          }
+
+          /* Mobile & Tablet View (< 992px): SLIDABLE / SWIPEABLE CAROUSEL */
+          @media (max-width: 991px) {
+            .basic-cards-slider {
+              display: flex !important;
+              flex-wrap: nowrap !important;
+              justify-content: flex-start !important;
+              overflow-x: auto !important;
+              scroll-snap-type: x mandatory !important;
+              -webkit-overflow-scrolling: touch !important;
+              scroll-behavior: smooth !important;
+              padding-top: 12px !important;
+              padding-bottom: 16px !important;
+              padding-left: 6% !important;
+              padding-right: 6% !important;
+              scroll-padding: 0 6% !important;
+              margin-left: -12px !important;
+              margin-right: -12px !important;
+              gap: 16px !important;
+              scrollbar-width: none !important;
+              position: relative;
+            }
+            .basic-cards-slider::-webkit-scrollbar {
+              display: none !important;
+            }
+            .basic-slide-item {
+              flex: 0 0 88% !important;
+              max-width: 88% !important;
+              scroll-snap-align: center !important;
+              scroll-snap-stop: always !important;
+              margin-top: 0 !important;
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+            }
+            @media (min-width: 576px) and (max-width: 991px) {
+              .basic-cards-slider {
+                padding-left: 12.5% !important;
+                padding-right: 12.5% !important;
+                scroll-padding: 0 12.5% !important;
+              }
+              .basic-slide-item {
+                flex: 0 0 75% !important;
+                max-width: 75% !important;
+              }
+            }
+            .basic-pricing-card {
+              padding: 22px 18px 20px !important;
+              border-radius: 18px !important;
+            }
+            .basic-card-desc {
+              font-size: 12px !important;
+              margin-bottom: 8px !important;
+              line-height: 1.4 !important;
+            }
+            .basic-spec-box {
+              padding: 10px 12px !important;
+              margin-bottom: 12px !important;
+              border-radius: 12px !important;
+            }
+            .basic-spec-grid {
+              gap: 8px 10px !important;
+            }
+            .basic-spec-label {
+              font-size: 10.5px !important;
+            }
+            .basic-spec-val {
+              font-size: 12px !important;
+            }
+            .basic-benefit-item {
+              font-size: 12px !important;
+              margin-bottom: 6px !important;
+              line-height: 1.4 !important;
+            }
+            .basic-benefit-item i {
+              font-size: 15px !important;
+              margin-right: 6px !important;
+              margin-top: 1px !important;
+            }
+            .basic-benefit-disabled {
+              display: none !important;
+            }
+            .basic-card-featured {
+              transform: none !important;
+              margin-top: 0 !important;
+              margin-bottom: 0 !important;
+            }
+            .basic-slider-controls {
+              display: flex !important;
+              align-items: center;
+              justify-content: center;
+              gap: 18px;
+              margin-top: 8px;
+              margin-bottom: 24px;
+            }
+            .basic-slider-arrow {
+              width: 44px;
+              height: 44px;
+              border-radius: 50%;
+              background: #ffffff;
+              border: 1.5px solid #cbd5e1;
+              color: #0b2b6a;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 24px;
+              transition: all 0.2s ease;
+              box-shadow: 0 4px 10px rgba(11, 43, 106, 0.08);
+              cursor: pointer;
+            }
+            .basic-slider-arrow:active {
+              background: #0b2b6a;
+              color: #ffffff;
+              transform: scale(0.92);
+            }
+            .basic-slider-arrow:disabled {
+              opacity: 0.35;
+              cursor: not-allowed;
+              box-shadow: none;
+            }
+            .basic-slider-dots {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .basic-dot {
+              width: 10px;
+              height: 10px;
+              border-radius: 10px;
+              background: #cbd5e1;
+              border: none;
+              padding: 0;
+              cursor: pointer;
+              transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .basic-dot.active {
+              width: 28px;
+              background: linear-gradient(135deg, #0b2b6a 0%, #0073e6 100%);
+              border-radius: 6px;
+            }
+          }
+
+          /* Action Button Styles - Active on ALL viewports (Desktop & Mobile) */
+          .basic-pricing-card .btn-green {
+            background: linear-gradient(135deg, #009961 0%, #006a4e 100%) !important;
+            color: #ffffff !important;
+            border: 1px solid #006a4e !important;
+            border-radius: 10px !important;
+            font-weight: 700 !important;
+            font-size: 13.5px !important;
+            box-shadow: 0 4px 12px rgba(0, 106, 78, 0.22) !important;
+            transition: all 0.25s ease !important;
+            text-decoration: none !important;
+            display: block !important;
+          }
+          .basic-pricing-card .btn-green:hover {
+            background: linear-gradient(135deg, #006a4e 0%, #009961 100%) !important;
+            color: #ffffff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 106, 78, 0.32);
+          }
+          .basic-pricing-card .btn-admin-secondary {
+            background: transparent !important;
+            color: #0b2b6a !important;
+            border: 1.5px solid #0b2b6a !important;
+            border-radius: 10px !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            transition: all 0.25s ease !important;
+            text-decoration: none !important;
+            display: block !important;
+          }
+          .basic-pricing-card .btn-admin-secondary:hover {
+            background: rgba(11, 43, 106, 0.06) !important;
+            color: #0b2b6a !important;
+            border-color: #0b2b6a !important;
+          }
+        </style>
+
+        <!-- Section Heading -->
+        <div class="row justify-content-center text-center mb-4">
+          <div class="col-lg-8">
             <div class="heading-box">
               <div class="title-box">
                 <h6 class="title-sub-title mb-0 text-primary">Pricing</h6>
-                <h3 class="title-heading mt-3 ms-0">Harga Kelas & Perbandingan Paket</h3>
+                <h3 class="title-heading mt-2">Harga Kelas Basic Class</h3>
               </div>
+              <p class="title-desc text-muted mt-2 mb-0">Program online intensif fondasi komunikasi &amp; public speaking bersama Dialogika.</p>
+            </div>
+          </div>
+        </div>
 
-              <p class="title-desc text-muted mt-3">Ambil paket Basic Plus (hemat)
-                <span class="badge text-bg-success">lebih hemat</span> dengan value lebih banyak!
-              </p>
+        <!-- Toggle Button: Basic Class (Regular) vs Private -->
+        <div class="basic-type-switcher-container">
+          <div class="basic-type-pill">
+            <button type="button" class="basic-type-btn active" id="btn-basic-regular" onclick="switchBasicClassType('regular')">
+              <i class='bx bx-group me-1 fs-5'></i> Basic Class
+            </button>
+            <button type="button" class="basic-type-btn" id="btn-basic-private" onclick="switchBasicClassType('private')">
+              <i class='bx bx-user me-1 fs-5'></i> Private
+            </button>
+          </div>
+        </div>
 
-              <!-- Untuk script ganti pricing box berada di part/pricing/switch-price.js -->
-              <div class="pricing-tabs my-4 mb-xl-0 custom-pricing">
-                <ul class="nav nav-pills rounded justify-content-center d-inline-block my-1 flex-nowrap flex gap-1"
-                  id="pills-tab" role="tablist">
-                  <li class="nav-item d-inline-block">
-                    <button type="button" class="nav-link px-3 rounded custom-price-button active" role="tab"
-                      id="basic-package-tab" data-target="basic-plus-content">
-                      Basic
-                    </button>
-                  </li>
-                  <li class="nav-item d-inline-block">
-                    <button type="button" class="nav-link px-3 rounded custom-price-button" id="basicplus-package-tab" role="tab"
-                      data-target="basic-class-content">
-                      Basic Plus
-                      <span class="badge-plus-icon"></span>
-                    </button>
-                  </li>
-                </ul>
+        <!-- VIEW 1: REGULAR BASIC CLASS (3 PILIHAN) -->
+        <div id="basic-regular-view" class="basic-fade-in">
+          <!-- Cards Container: 3-column on Desktop, Slidable Carousel on Mobile -->
+          <div class="row g-4 align-items-stretch justify-content-lg-center basic-cards-slider" id="basic-cards-container">
+            
+            <!-- 1. BASIC CLASS (ENTRY - 659K) -->
+            <div class="col-lg-4 col-md-6 col-12 d-flex basic-slide-item" data-slide-index="0">
+              <div class="basic-pricing-card w-100">
+                <div class="d-flex justify-content-between align-items-center mb-2 gap-2">
+                  <span class="badge px-3 py-1.5 rounded-pill" style="background: #eef2f6; color: #475569; font-size: 11px; font-weight: 600; white-space: nowrap;">Basic Class</span>
+                  <small class="text-muted text-nowrap" style="font-size: 11px;"><i class='bx bx-video text-primary'></i> Online Zoom</small>
+                </div>
+
+                <h4 class="fw-bold mb-1 basic-card-title" style="color: #0b2b6a;">Basic Class</h4>
+                <p class="text-muted small mb-2 basic-card-desc">Fondasi esensial public speaking online dengan investasi paling terjangkau.</p>
+
+                <!-- Price Section -->
+                <div class="py-2 mb-2 border-bottom border-top">
+                  <span class="text-muted small d-block" style="font-size: 10.5px; line-height: 1.1;">Investasi</span>
+                  <h2 class="pricing-title mb-0 fw-bold" id="price-basic-class" style="color: #0b2b6a; font-size: 23px;">IDR 659.000</h2>
+                </div>
+
+                <!-- Key Specs Box -->
+                <div class="basic-spec-box mb-3">
+                  <div class="basic-spec-grid">
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-user text-muted'></i> Kapasitas</span>
+                      <span class="basic-spec-val text-dark">5 – 10 Orang</span>
+                    </div>
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-calendar text-muted'></i> Pertemuan</span>
+                      <span class="basic-spec-val text-dark">7x <small class="text-muted fw-normal">(2x/mgg)</small></span>
+                    </div>
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-time text-muted'></i> Durasi Sesi</span>
+                      <span class="basic-spec-val text-dark">90 Menit</span>
+                    </div>
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-credit-card text-muted'></i> Pembayaran</span>
+                      <span class="basic-spec-val"><span class="badge bg-secondary-subtle text-secondary" style="font-size: 10px; padding: 3px 6px;">Bayar Penuh</span></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Features Checklist -->
+                <div class="flex-grow-1">
+                  <h6 class="fw-bold text-uppercase text-muted mb-2" style="font-size: 11px; letter-spacing: 0.5px;">Benefit &amp; Fasilitas:</h6>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Garansi Remedial <strong>1x</strong> <small class="text-muted">(Expired 2 Minggu)</small></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>Praktik Langsung</strong> setiap pertemuan</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Mendapatkan <strong>Certificate Completion</strong></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>Manual eBook &amp; Modul</strong> (Mindset &amp; Practice)</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Akses <strong>WAG Support &amp; Komunitas Alumni</strong></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Akses <strong>Completion Program</strong> resmi</span>
+                  </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-3 pt-2">
+                  <a data-program="*Basic Class Online senilai 659K*."
+                    class="btn btn-green w-100 py-2 fw-bold title-change-registration"
+                    style="background: linear-gradient(135deg, #009961 0%, #006a4e 100%) !important; color: #ffffff !important; border: 1px solid #006a4e !important; border-radius: 10px !important; font-weight: 700 !important; font-size: 13.5px !important; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.22) !important; display: block;"
+                    onclick="sendWhatsAppMessage(this)">Daftar Sekarang</a>
+                  <a onclick="askAdminMessage(this)"
+                    data-program="Basic Class Online"
+                    class="btn btn-admin-secondary w-100 py-2 mt-2 title-change-consultation"
+                    style="background: transparent !important; color: #0b2b6a !important; border: 1.5px solid #0b2b6a !important; border-radius: 10px !important; font-weight: 500 !important; font-size: 13px !important; display: block;">Tanya Admin</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. BASIC PLUS (BEST VALUE - 859K) -->
+            <div class="col-lg-4 col-md-6 col-12 d-flex basic-slide-item" data-slide-index="1">
+              <div class="basic-pricing-card basic-card-featured w-100">
+                
+                <!-- Best Value Floating Ribbon -->
+                <div class="position-absolute" style="top: -13px; left: 50%; transform: translateX(-50%); width: 85%; text-align: center;">
+                  <span class="badge px-3 py-1.5 rounded-pill shadow-sm"
+                    style="background: linear-gradient(135deg, #0073e6 0%, #0b2b6a 100%); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.5px;">
+                    ⭐ REKOMENDASI TERBAIK
+                  </span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-2 gap-2 mt-1">
+                  <span class="badge px-2.5 py-1.5 rounded-pill bg-primary-subtle text-primary" style="font-size: 11px; font-weight: 700;">Basic Plus</span>
+                  <small class="text-muted text-nowrap" style="font-size: 11px;"><i class='bx bx-video text-primary'></i> Online Zoom</small>
+                </div>
+
+                <h4 class="fw-bold mb-1 basic-card-title" style="color: #0b2b6a;">Basic Plus</h4>
+                <p class="text-muted small mb-2 basic-card-desc">Kelas lebih intensif dengan evaluasi awal, rekaman sesi &amp; coaching kelulusan.</p>
+
+                <!-- Price Section -->
+                <div class="py-2 mb-2 border-bottom border-top" style="background: rgba(0, 115, 230, 0.04); margin-left: -10px; margin-right: -10px; padding-left: 10px; padding-right: 10px; border-radius: 8px;">
+                  <span class="text-muted small d-block" style="font-size: 10.5px; line-height: 1.1;">Investasi</span>
+                  <h2 class="pricing-title mb-0 fw-bold" id="price-basic-plus" style="color: #0073e6; font-size: 24px;">IDR 859.000</h2>
+                </div>
+
+                <!-- Key Specs Box -->
+                <div class="basic-spec-box spec-featured mb-3">
+                  <div class="basic-spec-grid">
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-user text-primary'></i> Kapasitas</span>
+                      <span class="basic-spec-val text-dark">4 – 8 Orang</span>
+                    </div>
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-calendar text-primary'></i> Pertemuan</span>
+                      <span class="basic-spec-val text-primary">7x <small class="text-primary fw-normal">(2x/mgg)</small></span>
+                    </div>
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-time text-primary'></i> Durasi Sesi</span>
+                      <span class="basic-spec-val text-dark">90 Menit</span>
+                    </div>
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-credit-card text-primary'></i> Pembayaran</span>
+                      <span class="basic-spec-val"><span class="badge bg-success text-white" style="font-size: 10px; padding: 3px 6px;"><i class='bx bx-check'></i> Bisa Dicicil</span></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Features Checklist -->
+                <div class="flex-grow-1">
+                  <h6 class="fw-bold text-uppercase text-primary mb-2" style="font-size: 11px; letter-spacing: 0.5px;">Semua Benefit Basic, Ditambah:</h6>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Garansi Remedial <strong>3x</strong> <small class="text-muted">(Expired 1 Bulan)</small></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Didampingi <strong>Certified Internal Mentor</strong></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>Meeting Notify</strong> <small class="text-muted">(Reminder jadwal kelas)</small></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>Pre-Analyze</strong> <small class="text-muted">(Evaluasi kemampuan awal)</small></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>Recording Class</strong> <small class="text-muted">(Akses rekaman kelas)</small></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>1x Graduation Coaching</strong> saat kelulusan</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Akses <strong>Referral Program &amp; Diskon Next Level</strong></span>
+                  </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-3 pt-2">
+                  <a data-program="*Basic Plus Online senilai 859K*."
+                    class="btn btn-green w-100 py-2 fw-bold title-change-registration"
+                    style="background: linear-gradient(135deg, #009961 0%, #006a4e 100%) !important; color: #ffffff !important; border: 1px solid #006a4e !important; border-radius: 10px !important; font-weight: 700 !important; font-size: 13.5px !important; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.22) !important; display: block;"
+                    onclick="sendWhatsAppMessage(this)">Daftar Sekarang</a>
+                  <a onclick="askAdminMessage(this)"
+                    data-program="Basic Plus Online"
+                    class="btn btn-admin-secondary w-100 py-2 mt-2 title-change-consultation"
+                    style="background: transparent !important; color: #0b2b6a !important; border: 1.5px solid #0b2b6a !important; border-radius: 10px !important; font-weight: 500 !important; font-size: 13px !important; display: block;">Tanya Admin</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. BASIC CLASS SIGNATURE (VIP ALL-IN - 999K) -->
+            <div class="col-lg-4 col-md-6 col-12 d-flex basic-slide-item" data-slide-index="2">
+              <div class="basic-pricing-card basic-card-signature w-100">
+                <div class="d-flex justify-content-between align-items-center mb-2 gap-2">
+                  <span class="badge px-2.5 py-1.5 rounded-pill" style="background: linear-gradient(135deg, #0b2b6a 0%, #1a4a9e 100%); color: #ffc107; font-size: 11px; font-weight: 700; white-space: nowrap;">
+                    👑 VIP Signature
+                  </span>
+                  <small class="text-muted text-nowrap" style="font-size: 11px;"><i class='bx bx-video text-primary'></i> Online Zoom</small>
+                </div>
+
+                <h4 class="fw-bold mb-1 basic-card-title" style="color: #0b2b6a;">Basic Class Signature</h4>
+                <p class="text-muted small mb-2 basic-card-desc">Paket terlengkap all-in &amp; garansi unlimited 1 tahun.</p>
+
+                <!-- Price Section -->
+                <div class="py-2 mb-2 border-bottom border-top">
+                  <span class="text-muted small d-block" style="font-size: 10.5px; line-height: 1.1;">Investasi</span>
+                  <h2 class="pricing-title mb-0 fw-bold" id="price-basic-signature" style="color: #0b2b6a; font-size: 23px;">IDR 999.000</h2>
+                </div>
+
+                <!-- Key Specs Box -->
+                <div class="basic-spec-box spec-signature mb-3">
+                  <div class="basic-spec-grid">
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-user text-warning'></i> Kapasitas</span>
+                      <span class="basic-spec-val text-dark">3 – 7 Orang</span>
+                    </div>
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-calendar text-warning'></i> Pertemuan</span>
+                      <span class="basic-spec-val text-dark">7x <small class="text-muted fw-normal">(2x/mgg)</small></span>
+                    </div>
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-time text-warning'></i> Durasi Sesi</span>
+                      <span class="basic-spec-val text-dark">90 Menit</span>
+                    </div>
+                    <div class="basic-spec-col">
+                      <span class="basic-spec-label"><i class='bx bx-credit-card text-warning'></i> Pembayaran</span>
+                      <span class="basic-spec-val"><span class="badge bg-success text-white" style="font-size: 10px; padding: 3px 6px;"><i class='bx bx-check'></i> Bisa Dicicil</span></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Features Checklist -->
+                <div class="flex-grow-1">
+                  <!-- Special Highlight Box for Signature -->
+                  <div class="p-2 px-2.5 rounded-3 mb-2" style="background: #eef4ff; border: 1px solid #d0e2ff; border-left: 3.5px solid #0073e6;">
+                    <strong style="color: #0b2b6a; font-size: 11.5px;"><i class='bx bxs-badge-check me-1' style="color: #0073e6;"></i> Termasuk Personal Assessment &amp; Evaluasi Lengkap</strong>
+                    <div style="color: #475569; font-size: 10.5px; line-height: 1.35; margin-top: 2px;">Dilengkapi Post-Analyze, Personal Recording &amp; 3x Coaching.</div>
+                  </div>
+
+                  <h6 class="fw-bold text-uppercase text-dark mb-2" style="font-size: 11px; letter-spacing: 0.5px;">Fasilitas Signature Lengkap:</h6>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Garansi Remedial <strong>UNLIMITED</strong> <small class="text-muted">(Expired 1 Tahun)</small></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>Pre-Analyze &amp; Post-Analyze</strong> lengkap</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>Personal Assessment Khusus</strong> mentor</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>Personal Recording</strong> sesi individu</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>3x Graduation Coaching</strong> kelulusan</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Akses <strong>Recording Class</strong> lengkap</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Completion Program, Modul, eBook, Sertifikat &amp; WAG</span>
+                  </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-3 pt-2">
+                  <a data-program="*Basic Signature Online senilai 999K*."
+                    class="btn btn-green w-100 py-2 fw-bold title-change-registration"
+                    style="background: linear-gradient(135deg, #009961 0%, #006a4e 100%) !important; color: #ffffff !important; border: 1px solid #006a4e !important; border-radius: 10px !important; font-weight: 700 !important; font-size: 13.5px !important; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.22) !important; display: block;"
+                    onclick="sendWhatsAppMessage(this)">Daftar Sekarang</a>
+                  <a onclick="askAdminMessage(this)"
+                    data-program="Basic Signature Online"
+                    class="btn btn-admin-secondary w-100 py-2 mt-2 title-change-consultation"
+                    style="background: transparent !important; color: #0b2b6a !important; border: 1.5px solid #0b2b6a !important; border-radius: 10px !important; font-weight: 500 !important; font-size: 13px !important; display: block;">Tanya Admin</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Mobile Navigation Controls (Arrows & Pagination Dots) -->
+          <div class="basic-slider-controls">
+            <button type="button" class="basic-slider-arrow btn shadow-sm" id="basic-prev-card" aria-label="Paket Sebelumnya" onclick="slideBasicCards('prev')">
+              <i class='bx bx-chevron-left'></i>
+            </button>
+            <div class="basic-slider-dots">
+              <button type="button" class="basic-dot active" data-index="0" onclick="goToBasicCard(0)" aria-label="Basic"></button>
+              <button type="button" class="basic-dot" data-index="1" onclick="goToBasicCard(1)" aria-label="Plus"></button>
+              <button type="button" class="basic-dot" data-index="2" onclick="goToBasicCard(2)" aria-label="Signature"></button>
+            </div>
+            <button type="button" class="basic-slider-arrow btn shadow-sm" id="basic-next-card" aria-label="Paket Selanjutnya" onclick="slideBasicCards('next')">
+              <i class='bx bx-chevron-right'></i>
+            </button>
+          </div>
+
+          <!-- Bottom Banner: Switch to Private -->
+          <div class="row mt-2">
+            <div class="col-12">
+              <div class="card border-0 rounded-4 shadow-sm p-3 p-md-4" 
+                style="background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%); border-left: 5px solid #0b2b6a !important; border-radius: 16px;">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+                  <div class="d-flex align-items-center gap-3 text-start">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" 
+                      style="width: 48px; height: 48px; background: linear-gradient(135deg, #0b2b6a 0%, #1a4a9e 100%); box-shadow: 0 4px 10px rgba(11, 43, 106, 0.25);">
+                      <i class='bx bxs-user-pin' style="font-size: 24px;"></i>
+                    </div>
+                    <div>
+                      <h6 class="fw-bold mb-1" style="color: #0b2b6a;">Mencari Kelas yang Lebih Fleksibel &amp; Privat?</h6>
+                      <p class="text-muted small mb-0">Tersedia pilihan <strong>Basic Private Online</strong> dengan pendampingan personal 1-on-1 dan jadwal yang menyesuaikan kebutuhan Anda.</p>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-sm px-4 py-2 rounded-pill fw-bold text-nowrap flex-shrink-0 shadow-sm"
+                    onclick="switchBasicClassType('private')">
+                    Buka Basic Private <i class='bx bx-right-arrow-alt ms-1'></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
+        </div>
 
-          <div class="col-lg-7 g-0 offset-lg-1">
-            <!-- Untuk script ganti pricing box berada di part/pricing/switch-price.js -->
-            <div class="tab-content" id="pills-tabContent">
-
-
-              <div class="tab-pane custom-price-content fade" id="basic-class-content" role="tabpanel">
-                <div class="row g-0 align-items-center">
-
-                  <div class="col-lg-6">
-                    <div class="pricing-box active bg-white rounded mt-4">
-                      <div class="pricing-badge">
-                        <span class="badge">Best Buy</span>
-                      </div>
-
-                      <h5 class="fw-normal">Basic Plus</h5>
-                      <div style="white-space: nowrap; margin-top: 12px; position: relative; z-index: 2;">
-                        <h1 id="price-basic-plus" class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 1.500.000</h1>
-                        <button id="basic-claim-discount-btn-main" class="btn btn-warning btn-sm claim-discount-btn"
-                          onclick="triggerBasicPromoModal()"
-                          style="display: none; font-size: 9px; padding: 3px 10px; border-radius: 18px; transition: all 0.3s ease; vertical-align: middle; margin-left: 6px; position: relative; z-index: 3;">
-                          <i class='bx bxs-discount'></i> Claim Diskon
-                        </button>
-                      </div>
-                      <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa persiapan dan teratur
-                        didalam berbicara</p>
-
-                      <hr class="mt-4">
-
-                      <style>
-                        .claim-discount-btn:hover {
-                          transform: scale(1.05);
-                          box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
-                        }
-                        .basic-excluded {
-                          opacity: 0.65;
-                        }
-                        .basic-excluded span {
-                          text-decoration: line-through;
-                        }
-                        .basic-excluded i {
-                          color: #dc3545 !important;
-                        }
-                        #basicplus-package-tab {
-                          display: inline-flex;
-                          align-items: center;
-                          justify-content: center;
-                          gap: 6px;
-                        }
-                        .badge-plus-icon {
-                          position: relative;
-                          display: inline-flex;
-                          align-items: center;
-                          justify-content: center;
-                          width: 18px;
-                          height: 18px;
-                          border-radius: 999px;
-                          background-color: #028532;
-                          box-shadow: 0 2px 6px rgba(21, 128, 61, 0.45);
-                        }
-                        .badge-plus-icon::before,
-                        .badge-plus-icon::after {
-                          content: '';
-                          position: absolute;
-                          background-color: #ffffff;
-                        }
-                        .badge-plus-icon::before {
-                          width: 10px;
-                          height: 2px;
-                        }
-                        .badge-plus-icon::after {
-                          width: 2px;
-                          height: 10px;
-                        }
-                      </style>
-                      <div class="mt-4 pt-1">
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-1">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          <b>Garansi</b> mengulang kelas (1 Kali)
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-2">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          <b>7x pertemuan</b> dalam sebulan
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-3">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Maksimal peserta <b>9 orang</b>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-5">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Durasi kelas <b>90 menit</b>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-7">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Bayar bisa <b>DP dan Dicicil</b>
-                        </p>
-                        <p class="mb-3 f-16">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Hari & Jam <b>FIXED</b>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-6">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          eCertificate
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-9">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          eModule & eBook
-                        </p>
-                        <p class="mb-3 f-16">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Recording Kelas
-                        </p>
-                         
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-8">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Free <b>webinar</b> setiap bulan
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-15">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Free <b>materi</b> setiap minggu
-                        </p>
-                      </div>
-                      <div class="mt-4 pt-2 text-center">
-                        <a onclick="sendWhatsAppMessage(this)" data-program="*Basic Plus senilai 499K*."
-                          class="btn btn-green w-100 title-change-registration">Daftar
-                          Sekarang</a>
-                        <a onclick="askAdminMessage(this)" data-program="Basic Plus"
-                          class="btn btn-primary w-100 title-change-consultation">Tanya
-                          Admin</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="pricing-box bg-white rounded mt-4">
-                      <h5 class="fw-normal">Basic Private</h5>
-                      <div style="white-space: nowrap; margin-top: 12px; position: relative; z-index: 2;">
-                        <h1 id="price-basic-plus-private" class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 2.000.000</h1>
-                        <button id="basic-claim-discount-btn" class="btn btn-warning btn-sm claim-discount-btn"
-                          onclick="triggerBasicPromoModal()"
-                          style="display: none; font-size: 9px; padding: 3px 10px; border-radius: 18px; transition: all 0.3s ease; vertical-align: middle; margin-left: 6px; position: relative; z-index: 3;">
-                          <i class='bx bxs-discount'></i> Claim Diskon
-                        </button>
-                      </div>
-                      <p class="text-muted f-15 mt-3">Fokus pembelajaran: Bisa berbicara tanpa persiapan dan teratur
-                        didalam berbicara</p>
-                      <div class="mt-4 pt-1">
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-1">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          <b>Garansi</b> mengulang kelas gratis
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-2">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          <b>7x pertemuan</b> hingga selesai
-                        </p>
-                        <p class="mb-3 f-16">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Maksimal peserta <b>1-3 orang</b>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-5">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Durasi kelas <b>90 menit</b>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-7">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Bayar bisa <b>DP dan Dicicil</b>
-                        </p>
-                        <p class="mb-3 f-16">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Hari & Jam <b>Flexible</b>
-                        </p>
-
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-6">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          eCertificate
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-9">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          eModule & eBook
-                        </p>
-                        <p class="mb-3 f-16">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Recording Kelas
-                        </p>
-                         
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-8">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Free <b>webinar</b> setiap bulan
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-15">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Free <b>materi</b> setiap minggu
-                        </p>
-                      </div>
-                      <div class="mt-4 pt-2 text-center">
-                        <a data-program="*Basic Plus Private senilai 987K*."
-                          class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
-                          data-program="Basic Plus Private">Daftar Sekarang</a>
-                        <a onclick="askAdminMessage(this)" data-program="Basic Plus Private"
-                          class="btn btn-primary w-100 title-change-consultation">Tanya
-                          Admin</a>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
+        <!-- VIEW 2: BASIC PRIVATE (HIDDEN BY DEFAULT) -->
+        <div id="basic-private-view" class="d-none basic-fade-in">
+          <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-12">
+              
+              <!-- Back Button Link -->
+              <div class="mb-3 text-start">
+                <button type="button" class="btn btn-sm btn-link text-decoration-none p-0 fw-bold d-inline-flex align-items-center" 
+                  style="color: #0b2b6a; font-size: 13.5px;" onclick="switchBasicClassType('regular')">
+                  <i class='bx bx-left-arrow-alt fs-5 me-1'></i> Kembali ke Pilihan Basic Class
+                </button>
               </div>
 
+              <div class="basic-pricing-card basic-card-signature">
+                
+                <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center rounded-3"
+                  style="font-size: 11px;">
+                  <i class='bx bx-info-circle fs-6 me-2'></i>
+                  <span>Kontak Admin untuk request jadwal kelas private</span>
+                </div>
 
-              <div class="tab-pane custom-price-content fade show active" id="basic-plus-content" role="tabpanel">
-                <div class="row g-0 align-items-center">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="badge px-3 py-2 rounded-pill text-white" style="background: #0b2b6a; font-size: 11px; font-weight: 600;">Private 1-on-1 / Small Group</span>
+                  <small class="text-muted"><i class='bx bx-video text-primary'></i> Online Zoom</small>
+                </div>
 
-                  <div class="col-lg-6">
-                      <div class="pricing-box active bg-white rounded mt-4">
-                      <div class="pricing-badge">
-                        <span class="badge">Best Choice</span>
-                      </div>
+                <h4 class="fw-bold mb-1" style="color: #0b2b6a;">Basic Private : Online</h4>
+                
+                <!-- Price Section -->
+                <div class="py-2 mb-3 border-bottom border-top">
+                  <span class="text-muted small d-block" style="font-size: 11px;">Investasi</span>
+                  <h2 class="pricing-title mb-0 fw-bold" id="price-basic-plus-private" style="color: #0b2b6a; font-size: 26px;">IDR 2.000.000</h2>
+                </div>
 
-                      <h5 class="fw-normal">Basic Class</h5>
-                      <div style="white-space: nowrap; margin-top: 12px; position: relative; z-index: 2;">
-                        <h1 id="price-basic-class" class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 1.000.000</h1>
-                        <button class="btn btn-warning btn-sm claim-discount-btn"
-                          onclick="triggerBasicPromoModal()"
-                          style="display: none; font-size: 9px; padding: 3px 10px; border-radius: 18px; transition: all 0.3s ease; vertical-align: middle; margin-left: 6px; position: relative; z-index: 3;">
-                          <i class='bx bxs-discount'></i> Claim Diskon
-                        </button>
-                      </div>
-                      <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa persiapan dan teratur
-                        didalam berbicara</p>
+                <p class="text-muted small mb-3">
+                  Seperti Basic Class dengan jumlah 7x pertemuan, materi difokuskan secara mendalam 1-on-1 dengan jadwal fleksibel menyesuaikan waktu Anda.
+                </p>
 
-                      <hr class="mt-4">
-
-                      <div class="mt-4 pt-1">
-                        <p class="mb-3 f-16 basic-excluded" data-feat-key="fc-feat-1">
-                          <i class='bx bxs-x-circle'></i>
-                          <span><b>Garansi</b> mengulang kelas</span>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-2">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          <b>7x pertemuan</b> dalam sebulan
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-3">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Maksimal peserta <b>9 orang</b>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-5">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Durasi kelas <b>90 menit</b>
-                        </p>
-                        <p class="mb-3 f-16 basic-excluded" data-feat-key="fc-feat-7">
-                          <i class='bx bxs-x-circle'></i>
-                          <span>Bayar bisa <b>DP dan Dicicil</b></span>
-                        </p>
-                        <p class="mb-3 f-16">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Hari & Jam <b>FIXED</b>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-6">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          eCertificate
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-9">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          eModule & eBook
-                        </p>
-                        <p class="mb-3 f-16 basic-excluded">
-                          <i class='bx bxs-x-circle'></i>
-                          <span>Recording Kelas</span>
-                        </p>
-                         
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-8">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Free <b>webinar</b> setiap bulan
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-15">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Free <b>materi</b> setiap minggu
-                        </p>
-                      </div>
-                      <div class="mt-4 pt-2 text-center">
-                        <a data-program="*Basic senilai 599K*."
-                          class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
-                          data-program="Basic">Daftar Sekarang</a>
-                        <a onclick="askAdminMessage(this)" data-program="Basic"
-                          class="btn btn-primary w-100 title-change-consultation">Tanya
-                          Admin</a>
-                      </div>
-                    </div>
+                <!-- Features Checklist -->
+                <div class="flex-grow-1">
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Garansi mengulang kelas</span>
                   </div>
-
-                  <div class="col-lg-6">
-                    <div class="pricing-box bg-white rounded mt-4">
-                      <h5 class="fw-normal">Basic Private</h5>
-                      <div style="white-space: nowrap; margin-top: 12px; position: relative; z-index: 2;">
-                        <h1 class="pricing-title mb-0" style="display: inline; vertical-align: middle;">IDR 2.000.000</h1>
-                        <button class="btn btn-warning btn-sm claim-discount-btn"
-                          onclick="triggerBasicPromoModal()"
-                          style="display: none; font-size: 9px; padding: 3px 10px; border-radius: 18px; transition: all 0.3s ease; vertical-align: middle; margin-left: 6px; position: relative; z-index: 3;">
-                          <i class='bx bxs-discount'></i> Claim Diskon
-                        </button>
-                      </div>
-                      <p class="text-muted f-15 mt-3">Fokus pembelajaran: Bisa berbicara tanpa persiapan dan teratur
-                        didalam berbicara</p>
-                      <div class="mt-4 pt-1">
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-1">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          <b>Garansi</b> mengulang kelas gratis
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-2">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          <b>7x pertemuan</b> hingga selesai
-                        </p>
-                        <p class="mb-3 f-16">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Maksimal peserta <b>1-3 orang</b>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-5">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Durasi kelas <b>90 menit</b>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-7">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Bayar bisa <b>DP dan Dicicil</b>
-                        </p>
-                        <p class="mb-3 f-16">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Hari & Jam <b>Flexible</b>
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-6">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          eCertificate
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-9">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          eModule & eBook
-                        </p>
-                        <p class="mb-3 f-16">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Recording Kelas
-                        </p>
-                         
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-8">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Free <b>webinar</b> setiap bulan
-                        </p>
-                        <p class="mb-3 f-16" data-feat-key="fc-feat-15">
-                          <i class='bx bxs-check-circle' style="color:#009961"></i>
-                          Free <b>materi</b> setiap minggu
-                        </p>
-                      </div>
-                      <div class="mt-4 pt-2 text-center">
-                        <a data-program="*Basic Private senilai 987K*."
-                          class="btn btn-green w-100 title-change-registration" onclick="sendWhatsAppMessage(this)"
-                          data-program="Basic Private">Daftar Sekarang</a>
-                        <a onclick="askAdminMessage(this)" data-program="Basic Private"
-                          class="btn btn-primary w-100 title-change-consultation">Tanya
-                          Admin</a>
-                      </div>
-                    </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>Waktu Fleksibel:</strong> Menyesuaikan jadwal kesibukan Anda</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span><strong>7x pertemuan:</strong> Hingga selesai</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Maksimal peserta <strong>1 – 3 orang</strong></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Durasi kelas <strong>90 menit</strong> per sesi</span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Dapat <strong>Certificate &amp; Modul/eBook</strong></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Bisa <strong>DP dan Dicicil</strong></span>
+                  </div>
+                  <div class="basic-benefit-item">
+                    <i class='bx bxs-check-circle text-success'></i>
+                    <span>Gratis <strong>webinar &amp; materi</strong> setiap bulan</span>
                   </div>
                 </div>
-              </div>
 
+                <!-- Action Buttons -->
+                <div class="mt-4 pt-2 text-center">
+                  <a data-program="*Basic Private Online senilai 2.000K*."
+                    class="btn btn-green w-100 py-2 fw-bold title-change-registration"
+                    style="background: linear-gradient(135deg, #009961 0%, #006a4e 100%) !important; color: #ffffff !important; border: 1px solid #006a4e !important; border-radius: 10px !important; font-weight: 700 !important; font-size: 13.5px !important; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.22) !important; display: block;"
+                    onclick="sendWhatsAppMessage(this)">Daftar Sekarang</a>
+                  <a onclick="askAdminMessage(this)"
+                    data-program="Basic Private Online"
+                    class="btn btn-admin-secondary w-100 py-2 mt-2 title-change-consultation"
+                    style="background: transparent !important; color: #0b2b6a !important; border: 1.5px solid #0b2b6a !important; border-radius: 10px !important; font-weight: 500 !important; font-size: 13px !important; display: block;">Tanya Admin</a>
+                </div>
+              </div>
 
             </div>
           </div>
         </div>
+
+        <!-- JavaScript for Basic Class Type Switching & Mobile Card Slider -->
+        <script>
+          function switchBasicClassType(type) {
+            var regBtn = document.getElementById('btn-basic-regular');
+            var privBtn = document.getElementById('btn-basic-private');
+            var regView = document.getElementById('basic-regular-view');
+            var privView = document.getElementById('basic-private-view');
+            if (!regBtn || !privBtn || !regView || !privView) return;
+
+            if (type === 'private') {
+              regBtn.classList.remove('active');
+              privBtn.classList.add('active');
+              regView.classList.add('d-none');
+              privView.classList.remove('d-none');
+            } else {
+              privBtn.classList.remove('active');
+              regBtn.classList.add('active');
+              privView.classList.add('d-none');
+              regView.classList.remove('d-none');
+            }
+          }
+
+          var currentBasicCard = 0;
+
+          function getBasicSliderEl() {
+            return document.getElementById('basic-cards-container');
+          }
+
+          function getBasicSlides() {
+            var slider = getBasicSliderEl();
+            return slider ? slider.querySelectorAll('.basic-slide-item') : [];
+          }
+
+          function updateBasicSliderUI(index) {
+            var slides = getBasicSlides();
+            if (!slides.length) return;
+            currentBasicCard = Math.max(0, Math.min(index, slides.length - 1));
+
+            var dots = document.querySelectorAll('.basic-dot');
+            dots.forEach(function (dot, i) {
+              if (i === currentBasicCard) {
+                dot.classList.add('active');
+              } else {
+                dot.classList.remove('active');
+              }
+            });
+
+            var prevBtn = document.getElementById('basic-prev-card');
+            var nextBtn = document.getElementById('basic-next-card');
+            if (prevBtn) prevBtn.disabled = currentBasicCard === 0;
+            if (nextBtn) nextBtn.disabled = currentBasicCard === slides.length - 1;
+          }
+
+          function goToBasicCard(index) {
+            var slider = getBasicSliderEl();
+            var slides = getBasicSlides();
+            if (!slider || !slides[index]) return;
+
+            var targetSlide = slides[index];
+            var targetScroll = targetSlide.offsetLeft - (slider.clientWidth - targetSlide.clientWidth) / 2;
+            slider.scrollTo({
+              left: Math.max(0, targetScroll),
+              behavior: 'smooth'
+            });
+            updateBasicSliderUI(index);
+          }
+
+          function slideBasicCards(dir) {
+            var slides = getBasicSlides();
+            var target = currentBasicCard;
+            if (dir === 'next' && target < slides.length - 1) {
+              target++;
+            } else if (dir === 'prev' && target > 0) {
+              target--;
+            }
+            goToBasicCard(target);
+          }
+
+          document.addEventListener('DOMContentLoaded', function () {
+            var slider = getBasicSliderEl();
+            if (!slider) return;
+
+            var scrollDebounce = null;
+            slider.addEventListener('scroll', function () {
+              clearTimeout(scrollDebounce);
+              scrollDebounce = setTimeout(function () {
+                var slides = getBasicSlides();
+                if (!slides.length) return;
+                var sliderRect = slider.getBoundingClientRect();
+                var sliderCenter = sliderRect.left + (sliderRect.width / 2);
+                var closestIndex = 0;
+                var closestDist = Infinity;
+
+                slides.forEach(function (slide, i) {
+                  var slideRect = slide.getBoundingClientRect();
+                  var slideCenter = slideRect.left + (slideRect.width / 2);
+                  var dist = Math.abs(sliderCenter - slideCenter);
+                  if (dist < closestDist) {
+                    closestDist = dist;
+                    closestIndex = i;
+                  }
+                });
+
+                updateBasicSliderUI(closestIndex);
+              }, 50);
+            }, { passive: true });
+
+            slider.scrollLeft = 0;
+            updateBasicSliderUI(0);
+          });
+        </script>
+
       </div>
     </section><!-- End Pricing -->
 
@@ -2807,20 +3286,20 @@
                 <div class="col-md-6">
                   <div class="position-relative">
                     <input type="text" class="form-control" name="ReferralCode" id="referral-code"
-                      placeholder="Masukkan Kode Promo (Opsional)" style="padding-right: 85px;">
+                      placeholder="Kode Promo (Dinonaktifkan sementara)"
+                      disabled
+                      style="padding-right: 85px; background-color: #f1f5f9; cursor: not-allowed; opacity: 0.75;">
                     <span id="referral-status-icon"
                       style="position: absolute; right: 55px; top: 50%; transform: translateY(-50%); display: none;"></span>
-                    <button type="button" id="referral-promo-trigger" onclick="triggerBasicPromoModal()"
-                      title="Lihat promo tersedia"
-                      style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: #ffc107; border: none; color: #212529; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 11px; font-weight: 600; padding: 0 10px; gap: 3px; transition: background 0.2s ease, transform 0.2s ease; white-space: nowrap;"
-                      onmouseover="this.style.background='#e0a800'; this.style.transform='translateY(-50%) scale(1.05)'"
-                      onmouseout="this.style.background='#ffc107'; this.style.transform='translateY(-50%) scale(1)'">
+                    <button type="button" id="referral-promo-trigger"
+                      title="Kode promo sementara tidak aktif"
+                      disabled
+                      style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: #cbd5e1; border: none; color: #64748b; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: not-allowed; font-size: 11px; font-weight: 600; padding: 0 10px; gap: 3px; opacity: 0.7; white-space: nowrap; pointer-events: none;">
                       <i class='bx bxs-discount' style="font-size: 14px;"></i> Promo
                     </button>
                   </div>
                   <small id="referral-helper-text" class="text-muted"
-                    style="font-size: 11px; display: block; margin-top: 2px;">Masukkan kode referral
-                    Anda, atau akan terisi otomatis saat menggunakan kupon diskon</small>
+                    style="font-size: 11px; display: block; margin-top: 2px;">Fitur kode promo sedang dinonaktifkan sementara.</small>
                 </div>
 
                 <div class="col-md-6" id="schedule-button-container">
@@ -3385,6 +3864,9 @@
 
         const formatter = new Intl.NumberFormat('id-ID');
 
+        // Latest rates: Basic 659K, Plus 859K, Signature 999K, Private 2000K
+        // Firestore automatic overwrite disabled to preserve specified rates
+        /*
         if (basicPlusPrice > 0) {
           const el = document.getElementById('price-basic-plus');
           if (el) {
@@ -3405,6 +3887,7 @@
             el.textContent = 'IDR ' + formatter.format(basicPrivatePrice);
           }
         }
+        */
       } catch (e) {
         console.error('Error loadBasicCardPrices', e);
       }
@@ -4480,6 +4963,8 @@
         });
       }
 
+      // Promo auto-modal and auto-referral temporarily disabled
+      /*
       loadBasicAutoReferral().then(function(ref) {
         if (!ref) return;
         const pricingSection = document.getElementById('pricing');
@@ -4500,6 +4985,7 @@
           observer.observe(pricingSection);
         }
       });
+      */
 
       // 4. Schedule Selection Button Logic
       const programSelect = document.getElementById('programs');

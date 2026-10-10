@@ -4006,21 +4006,20 @@
                                 <div class="col-md-6">
                                     <div class="position-relative">
                                         <input type="text" class="form-control" name="ReferralCode" id="referral-code"
-                                            placeholder="Masukkan Kode Promo (Opsional)"
-                                            style="padding-right: 85px;">
+                                            placeholder="Kode Promo (Dinonaktifkan sementara)"
+                                            disabled
+                                            style="padding-right: 85px; background-color: #f1f5f9; cursor: not-allowed; opacity: 0.75;">
                                         <span id="referral-status-icon"
                                             style="position: absolute; right: 55px; top: 50%; transform: translateY(-50%); display: none;"></span>
-                                        <button type="button" id="referral-promo-trigger" onclick="triggerPromoModal()"
-                                            title="Lihat promo tersedia"
-                                            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: #ffc107; border: none; color: #212529; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 11px; font-weight: 600; padding: 0 10px; gap: 3px; transition: background 0.2s ease, transform 0.2s ease; white-space: nowrap;"
-                                            onmouseover="this.style.background='#e0a800'; this.style.transform='translateY(-50%) scale(1.05)'"
-                                            onmouseout="this.style.background='#ffc107'; this.style.transform='translateY(-50%) scale(1)'">
+                                        <button type="button" id="referral-promo-trigger"
+                                            title="Kode promo sementara tidak aktif"
+                                            disabled
+                                            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: #cbd5e1; border: none; color: #64748b; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: not-allowed; font-size: 11px; font-weight: 600; padding: 0 10px; gap: 3px; opacity: 0.7; white-space: nowrap; pointer-events: none;">
                                             <i class='bx bxs-discount' style="font-size: 14px;"></i> Promo
                                         </button>
                                     </div>
                                     <small id="referral-helper-text" class="text-muted"
-                                        style="font-size: 11px; display: block; margin-top: 2px;">Masukkan kode referral
-                                        Anda, atau akan terisi otomatis saat menggunakan kupon diskon</small>
+                                        style="font-size: 11px; display: block; margin-top: 2px;">Fitur kode promo sedang dinonaktifkan sementara.</small>
                                 </div>
 
                                 <div class="col-md-6" id="schedule-button-container">
@@ -5056,8 +5055,9 @@
 
             // Update referral code field in contact form
             function updateReferralCodeField() {
-                const referralCode = sessionStorage.getItem(PROMO_CODE_KEY);
                 const referralInput = document.getElementById('referral-code');
+                if (referralInput && referralInput.disabled) return;
+                const referralCode = sessionStorage.getItem(PROMO_CODE_KEY);
 
                 // Only auto-fill if user hasn't manually entered a code
                 if (referralInput && referralCode && !referralInput.value.trim()) {
