@@ -2315,294 +2315,984 @@
             <!-- /end container -->
         </section><!-- End Mentor Section -->
 
-        <!-- ======= Pricing Section ======= -->
         <section class="section bg-light pricing custom-pricing" id="pricing">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-4">
+                <div class="row align-items-center mb-4">
+                    <div class="col-lg-7">
                         <div class="heading-box">
                             <div class="title-box">
                                 <h6 class="title-sub-title mb-0 text-primary">Pricing</h6>
-                                <h3 class="title-heading mt-3 ms-0">Harga Kelas First Class</h3>
+                                <h3 class="title-heading mt-2 ms-0">Harga Kelas First Class</h3>
                             </div>
-
-                            <p class="title-desc text-muted mt-3">Saran kami ambil program First Class hanya tersedia di
-                                beberapa kota
-                                diharuskan untuk berbicara secara professional dihadapan orang-orang penting.</p>
-
-                            <!-- Untuk script ganti pricing box berada di part/pricing/switch-price.js -->
-                            <div class="pricing-tabs my-4 mb-xl-0 custom-pricing">
-                                <label for="location-select" class="fw-bold mb-2 d-block"
-                                    style="font-size: 14px; color: #0b2b6a;">
-                                    <i class='bx bxs-map'></i> Pilih Lokasi
-                                </label>
-                                <div class="d-flex align-items-center flex-wrap gap-3">
-                                    <!-- Single location badge -->
-                                    <span id="location-badge"
-                                        style="display: inline-block; padding: 10px 20px; border-radius: 8px; background: linear-gradient(135deg, #0b2b6a 0%, #1a4a9e 100%); color: #fff; font-size: 14px; font-weight: 600; white-space: nowrap; box-shadow: 0 3px 10px rgba(11, 43, 106, 0.3);">
-                                        Yogyakarta
-                                    </span>
-
-                                    <!-- Location dropdown -->
-                                    <select id="location-select" class="form-select"
-                                        style="width: auto; min-width: 160px; border: 2px solid rgba(0, 115, 230, 0.6); border-radius: 8px; padding: 10px 15px; font-size: 14px; font-weight: 600; color: #0b2b6a; cursor: pointer; transition: all 0.3s ease;">
-                                        <option value="first-class-jogja-content" selected>Yogyakarta</option>
-                                        <option value="first-class-surabaya-content">Surabaya</option>
-                                        <option value="first-class-jakarta-content">Jakarta</option>
-                                        <option value="first-class-tangsel-content">Tangsel</option>
-                                        <option value="first-class-pontianak-content">Pontianak</option>
-                                    </select>
-                                </div>
-                                <style>
-                                    #location-select:focus {
-                                        border-color: #0b2b6a;
-                                        box-shadow: 0 0 0 3px rgba(11, 43, 106, 0.15);
-                                    }
-
-                                    #location-select:hover {
-                                        border-color: #0b2b6a;
-                                    }
-                                </style>
-                            </div>
-
-
-                            <!-- <div class="pricing-tabs mt-4 mb-4 mb-xl-0">
-                                    <ul class="nav nav-pills rounded justify-content-center d-inline-block pricing-tab-border py-1 px-2"
-                                        id="pills-tab" role="tablist">
-                                        <li class="nav-item d-inline-block ">
-                                            <a class="nav-link px-3 rounded active jogja" id="jogja" data-bs-toggle="pill"
-                                                href="#jogjas" role="tab" aria-controls="jogjas" aria-selected="true">
-                                                Yogyakarta atau Solo
-                                            </a>
-                                        </li>
-                                        <li class="nav-item d-inline-block ">
-                                        <li class="nav-item d-inline-block">
-                                            <a class="nav-link px-3 rounded tangsel" id="tangsel" data-bs-toggle="pill"
-                                                href="#tangsels" role="tab" aria-controls="Year" aria-selected="false">
-                                                Tangerang atau Surabaya
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div> -->
-
+                            <p class="title-desc text-muted mt-2 mb-0">Saran kami ambil program First Class hanya tersedia di beberapa kota diharuskan untuk berbicara secara professional dihadapan orang-orang penting.</p>
                         </div>
                     </div>
 
-                    <div class="col-lg-7 g-0 offset-lg-1">
+                    <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+                        <div class="pricing-tabs custom-pricing d-inline-block text-start">
+                            <label for="location-select" class="fw-bold mb-2 d-block" style="font-size: 14px; color: #0b2b6a;">
+                                <i class='bx bxs-map'></i> Pilih Lokasi
+                            </label>
+                            <div class="d-flex align-items-center flex-wrap gap-2">
+                                <!-- Single location badge -->
+                                <span id="location-badge"
+                                    style="display: inline-block; padding: 10px 20px; border-radius: 8px; background: linear-gradient(135deg, #0b2b6a 0%, #1a4a9e 100%); color: #fff; font-size: 14px; font-weight: 600; white-space: nowrap; box-shadow: 0 3px 10px rgba(11, 43, 106, 0.3);">
+                                    Yogyakarta
+                                </span>
+
+                                <!-- Location dropdown -->
+                                <select id="location-select" class="form-select"
+                                    style="width: auto; min-width: 160px; border: 2px solid rgba(0, 115, 230, 0.6); border-radius: 8px; padding: 10px 15px; font-size: 14px; font-weight: 600; color: #0b2b6a; cursor: pointer; transition: all 0.3s ease;">
+                                    <option value="first-class-jogja-content" selected>Yogyakarta</option>
+                                    <option value="first-class-surabaya-content">Surabaya</option>
+                                    <option value="first-class-jakarta-content">Jakarta</option>
+                                    <option value="first-class-tangsel-content">Tangsel</option>
+                                    <option value="first-class-pontianak-content">Pontianak</option>
+                                </select>
+                            </div>
+                            <style>
+                                #location-select:focus {
+                                    border-color: #0b2b6a;
+                                    box-shadow: 0 0 0 3px rgba(11, 43, 106, 0.15);
+                                }
+
+                                #location-select:hover {
+                                    border-color: #0b2b6a;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
                         <div class="tab-content" id="pills-tabContent">
-                            <!-- First Class : Jogja atau Solo -->
-                            <div class="tab-pane custom-price-content fade active show" id="first-class-jogja-content"
-                                role="tabpanel">
-                                <div class="row g-0 align-items-center">
-                                    <div class="col-lg-6">
+                            <!-- First Class : Yogyakarta (3 Tiers & Interactive Private) -->
+                            <div class="tab-pane custom-price-content fade active show" id="first-class-jogja-content" role="tabpanel">
+                                
+                                <style>
+                                    /* Yogyakarta Pricing UI/UX Custom Styling */
+                                    .jogja-type-switcher-container {
+                                        display: flex;
+                                        justify-content: center;
+                                        margin-bottom: 28px;
+                                    }
+                                    .jogja-type-pill {
+                                        background: #f1f5f9;
+                                        border: 1px solid #cbd5e1;
+                                        border-radius: 50px;
+                                        padding: 5px;
+                                        display: inline-flex;
+                                        max-width: 440px;
+                                        width: 100%;
+                                        box-shadow: 0 2px 6px rgba(11, 43, 106, 0.06);
+                                    }
+                                    .jogja-type-btn {
+                                        flex: 1;
+                                        border: none;
+                                        border-radius: 50px;
+                                        padding: 9px 18px;
+                                        font-size: 13.5px;
+                                        font-weight: 700;
+                                        color: #64748b;
+                                        background: transparent;
+                                        cursor: pointer;
+                                        transition: all 0.25s ease;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        text-decoration: none;
+                                    }
+                                    .jogja-type-btn:hover {
+                                        color: #0b2b6a;
+                                    }
+                                    .jogja-type-btn.active {
+                                        background: linear-gradient(135deg, #0b2b6a 0%, #1a4a9e 100%) !important;
+                                        color: #ffffff !important;
+                                        box-shadow: 0 3px 12px rgba(11, 43, 106, 0.25);
+                                    }
+                                    .jogja-pricing-card {
+                                        background: #ffffff;
+                                        border-radius: 20px;
+                                        padding: 32px 26px;
+                                        border: 1px solid #e2e8f0;
+                                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+                                        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                                        display: flex;
+                                        flex-direction: column;
+                                        position: relative;
+                                        height: 100%;
+                                    }
+                                    .jogja-pricing-card:hover {
+                                        transform: translateY(-6px);
+                                        box-shadow: 0 16px 32px rgba(11, 43, 106, 0.12);
+                                    }
+                                    .jogja-card-featured {
+                                        border: 2.5px solid #0073e6 !important;
+                                        box-shadow: 0 12px 30px rgba(0, 115, 230, 0.18) !important;
+                                        transform: scale(1.02);
+                                        z-index: 2;
+                                    }
+                                    .jogja-card-featured:hover {
+                                        transform: translateY(-8px) scale(1.02);
+                                        box-shadow: 0 20px 40px rgba(0, 115, 230, 0.24) !important;
+                                    }
+                                    .jogja-card-signature {
+                                        border: 2px solid #0b2b6a !important;
+                                        box-shadow: 0 8px 24px rgba(11, 43, 106, 0.1) !important;
+                                    }
+                                    .jogja-spec-box {
+                                        background: #f8fafc;
+                                        border-radius: 14px;
+                                        padding: 12px 14px;
+                                        font-size: 13px;
+                                        border: 1px solid #edf2f7;
+                                    }
+                                    .jogja-spec-box.spec-featured {
+                                        background: #eef6ff;
+                                        border: 1px solid rgba(0, 115, 230, 0.2);
+                                    }
+                                    .jogja-spec-box.spec-signature {
+                                        background: #fdfbee;
+                                        border: 1px solid rgba(255, 193, 7, 0.35);
+                                    }
+                                    .jogja-spec-grid {
+                                        display: grid;
+                                        grid-template-columns: 1fr 1fr;
+                                        gap: 10px 14px;
+                                    }
+                                    .jogja-spec-col {
+                                        display: flex;
+                                        flex-direction: column;
+                                    }
+                                    .jogja-spec-label {
+                                        font-size: 11px;
+                                        color: #64748b;
+                                        margin-bottom: 2px;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 4px;
+                                        white-space: nowrap;
+                                    }
+                                    .jogja-spec-label i {
+                                        font-size: 13.5px;
+                                    }
+                                    .jogja-spec-val {
+                                        font-size: 12.5px;
+                                        font-weight: 700;
+                                        color: #1e293b;
+                                        line-height: 1.3;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 4px;
+                                        flex-wrap: wrap;
+                                    }
+                                    .jogja-benefit-item {
+                                        font-size: 13px;
+                                        line-height: 1.5;
+                                        margin-bottom: 8px;
+                                        display: flex;
+                                        align-items: flex-start;
+                                    }
+                                    .jogja-benefit-item i {
+                                        font-size: 16px;
+                                        margin-right: 8px;
+                                        margin-top: 2px;
+                                        flex-shrink: 0;
+                                    }
+                                    .jogja-fade-in {
+                                        animation: jogjaFadeIn 0.35s ease-in-out;
+                                    }
+                                    @keyframes jogjaFadeIn {
+                                        from { opacity: 0; transform: translateY(8px); }
+                                        to { opacity: 1; transform: translateY(0); }
+                                    }
 
+                                    /* Desktop View (>= 992px): STANDARD 3-COLUMN GRID AS USUAL */
+                                    @media (min-width: 992px) {
+                                        .jogja-cards-slider {
+                                            display: flex;
+                                            flex-wrap: wrap;
+                                        }
+                                        .jogja-slide-item {
+                                            flex: 0 0 auto;
+                                            width: 33.33333333%;
+                                        }
+                                        .jogja-slider-controls {
+                                            display: none !important;
+                                        }
+                                    }
 
-                                        <div class="pricing-box active bg-white rounded mt-4">
-                                            <div class="pricing-badge">
-                                                <span class="badge">Best Buy</span>
+                                    /* Mobile & Tablet View (< 992px): SLIDABLE / SWIPEABLE CAROUSEL */
+                                    @media (max-width: 991px) {
+                                        .jogja-cards-slider {
+                                            display: flex !important;
+                                            flex-wrap: nowrap !important;
+                                            justify-content: flex-start !important;
+                                            overflow-x: auto !important;
+                                            scroll-snap-type: x mandatory !important;
+                                            -webkit-overflow-scrolling: touch !important;
+                                            scroll-behavior: smooth !important;
+                                            padding-top: 12px !important;
+                                            padding-bottom: 16px !important;
+                                            padding-left: 6% !important;
+                                            padding-right: 6% !important;
+                                            scroll-padding: 0 6% !important;
+                                            margin-left: -12px !important;
+                                            margin-right: -12px !important;
+                                            gap: 16px !important;
+                                            scrollbar-width: none !important;
+                                            position: relative;
+                                        }
+                                        .jogja-cards-slider::-webkit-scrollbar {
+                                            display: none !important;
+                                        }
+                                        .jogja-slide-item {
+                                            flex: 0 0 88% !important;
+                                            max-width: 88% !important;
+                                            scroll-snap-align: center !important;
+                                            scroll-snap-stop: always !important;
+                                            margin-top: 0 !important;
+                                            padding-left: 0 !important;
+                                            padding-right: 0 !important;
+                                        }
+                                        @media (min-width: 576px) and (max-width: 991px) {
+                                            .jogja-cards-slider {
+                                                padding-left: 12.5% !important;
+                                                padding-right: 12.5% !important;
+                                                scroll-padding: 0 12.5% !important;
+                                            }
+                                            .jogja-slide-item {
+                                                flex: 0 0 75% !important;
+                                                max-width: 75% !important;
+                                            }
+                                        }
+                                        .jogja-pricing-card {
+                                            padding: 22px 18px 20px !important;
+                                            border-radius: 18px !important;
+                                        }
+                                        .jogja-card-desc {
+                                            font-size: 12px !important;
+                                            margin-bottom: 8px !important;
+                                            line-height: 1.4 !important;
+                                        }
+                                        .jogja-spec-box {
+                                            padding: 10px 12px !important;
+                                            margin-bottom: 12px !important;
+                                            border-radius: 12px !important;
+                                        }
+                                        .jogja-spec-grid {
+                                            gap: 8px 10px !important;
+                                        }
+                                        .jogja-spec-label {
+                                            font-size: 10.5px !important;
+                                        }
+                                        .jogja-spec-val {
+                                            font-size: 12px !important;
+                                        }
+                                        .jogja-benefit-item {
+                                            font-size: 12px !important;
+                                            margin-bottom: 6px !important;
+                                            line-height: 1.4 !important;
+                                        }
+                                        .jogja-benefit-item i {
+                                            font-size: 15px !important;
+                                            margin-right: 6px !important;
+                                            margin-top: 1px !important;
+                                        }
+                                        .jogja-benefit-disabled {
+                                            display: none !important;
+                                        }
+                                        .jogja-card-featured {
+                                            transform: none !important;
+                                            margin-top: 0 !important;
+                                            margin-bottom: 0 !important;
+                                        }
+                                        .jogja-slider-controls {
+                                            display: flex !important;
+                                            align-items: center;
+                                            justify-content: center;
+                                            gap: 18px;
+                                            margin-top: 8px;
+                                            margin-bottom: 24px;
+                                        }
+                                        .jogja-slider-arrow {
+                                            width: 44px;
+                                            height: 44px;
+                                            border-radius: 50%;
+                                            background: #ffffff;
+                                            border: 1.5px solid #cbd5e1;
+                                            color: #0b2b6a;
+                                            display: inline-flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            font-size: 24px;
+                                            transition: all 0.2s ease;
+                                            box-shadow: 0 4px 10px rgba(11, 43, 106, 0.08);
+                                            cursor: pointer;
+                                        }
+                                        .jogja-slider-arrow:active {
+                                            background: #0b2b6a;
+                                            color: #ffffff;
+                                            transform: scale(0.92);
+                                        }
+                                        .jogja-slider-arrow:disabled {
+                                            opacity: 0.35;
+                                            cursor: not-allowed;
+                                            box-shadow: none;
+                                        }
+                                        .jogja-slider-dots {
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 8px;
+                                        }
+                                        .jogja-dot {
+                                            width: 10px;
+                                            height: 10px;
+                                            border-radius: 10px;
+                                            background: #cbd5e1;
+                                            border: none;
+                                            padding: 0;
+                                            cursor: pointer;
+                                            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                                        }
+                                        .jogja-dot.active {
+                                            width: 28px;
+                                            background: linear-gradient(135deg, #0b2b6a 0%, #0073e6 100%);
+                                            border-radius: 6px;
+                                        }
+                                    }
+
+                                    /* Action Button Styles - Active on ALL viewports (Desktop & Mobile) */
+                                    .jogja-pricing-card .btn-green {
+                                        background: linear-gradient(135deg, #009961 0%, #006a4e 100%) !important;
+                                        color: #ffffff !important;
+                                        border: 1px solid #006a4e !important;
+                                        border-radius: 10px !important;
+                                        font-weight: 700 !important;
+                                        font-size: 13.5px !important;
+                                        box-shadow: 0 4px 12px rgba(0, 106, 78, 0.22) !important;
+                                        transition: all 0.25s ease !important;
+                                        text-decoration: none !important;
+                                        display: block !important;
+                                    }
+                                    .jogja-pricing-card .btn-green:hover {
+                                        background: linear-gradient(135deg, #006a4e 0%, #009961 100%) !important;
+                                        color: #ffffff !important;
+                                        transform: translateY(-2px);
+                                        box-shadow: 0 6px 16px rgba(0, 106, 78, 0.32) !important;
+                                    }
+                                    .jogja-pricing-card .btn-admin-secondary {
+                                        background: transparent !important;
+                                        color: #0b2b6a !important;
+                                        border: 1.5px solid #0b2b6a !important;
+                                        border-radius: 10px !important;
+                                        font-size: 13px !important;
+                                        font-weight: 500 !important;
+                                        transition: all 0.25s ease !important;
+                                        text-decoration: none !important;
+                                        display: block !important;
+                                    }
+                                    .jogja-pricing-card .btn-admin-secondary:hover {
+                                        background: rgba(11, 43, 106, 0.06) !important;
+                                        color: #0b2b6a !important;
+                                        border-color: #0b2b6a !important;
+                                    }
+                                </style>
+
+                                <!-- Toggle Button: First Class (Regular) vs First Private -->
+                                <div class="jogja-type-switcher-container">
+                                    <div class="jogja-type-pill">
+                                        <button type="button" class="jogja-type-btn active" id="btn-jogja-regular" onclick="switchJogjaClassType('regular')">
+                                            <i class='bx bx-group me-1 fs-5'></i> First Class
+                                        </button>
+                                        <button type="button" class="jogja-type-btn" id="btn-jogja-private" onclick="switchJogjaClassType('private')">
+                                            <i class='bx bx-user me-1 fs-5'></i> Private
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- VIEW 1: REGULAR FIRST CLASS (3 PILIHAN) -->
+                                <div id="jogja-regular-view" class="jogja-fade-in">
+                                    <!-- Cards Container: 3-column on Desktop, Slidable Carousel on Mobile -->
+                                    <div class="row g-4 align-items-stretch justify-content-lg-center jogja-cards-slider" id="jogja-cards-container">
+                                        
+                                        <!-- 1. FIRST CLASS BASIC -->
+                                        <div class="col-lg-4 col-md-6 col-12 d-flex jogja-slide-item" data-slide-index="0">
+                                            <div class="jogja-pricing-card w-100">
+                                                <div class="d-flex justify-content-between align-items-center mb-2 gap-2">
+                                                    <span class="badge px-3 py-1.5 rounded-pill" style="background: #eef2f6; color: #475569; font-size: 11px; font-weight: 600; white-space: nowrap;">Basic Class</span>
+                                                    <small class="text-muted text-nowrap" style="font-size: 11px;"><i class='bx bx-map text-primary'></i> Offline Yogyakarta</small>
+                                                </div>
+
+                                                <h4 class="fw-bold mb-1 jogja-card-title" style="color: #0b2b6a;">First Class Basic</h4>
+                                                <p class="text-muted small mb-2 jogja-card-desc">Fondasi esensial public speaking dengan investasi paling terjangkau.</p>
+
+                                                <!-- Price Section -->
+                                                <div class="py-2 mb-2 border-bottom border-top">
+                                                    <div class="d-flex align-items-center justify-content-between gap-2">
+                                                        <div>
+                                                            <span class="text-muted small d-block" style="font-size: 10.5px; line-height: 1.1;">Investasi</span>
+                                                            <h2 class="pricing-title mb-0 fw-bold" id="price-fc-jogja-basic" style="color: #0b2b6a; font-size: 23px;">IDR 1.799.000</h2>
+                                                        </div>
+                                                        <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                            onclick="triggerPromoModal()"
+                                                            style="font-size: 11px; padding: 5px 12px; border-radius: 20px; font-weight: 600; white-space: nowrap;">
+                                                            <i class='bx bxs-discount'></i> Claim Diskon
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Key Specs Box -->
+                                                <div class="jogja-spec-box mb-3">
+                                                    <div class="jogja-spec-grid">
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-user'></i> Kapasitas</span>
+                                                            <span class="jogja-spec-val">5 – 7 Orang</span>
+                                                        </div>
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-calendar'></i> Pertemuan</span>
+                                                            <span class="jogja-spec-val">10x <small class="text-muted fw-normal">(1x/mgg)</small></span>
+                                                        </div>
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-time'></i> Durasi Sesi</span>
+                                                            <span class="jogja-spec-val">90 Menit</span>
+                                                        </div>
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-credit-card'></i> Pembayaran</span>
+                                                            <span class="jogja-spec-val"><span class="badge bg-secondary-subtle text-secondary" style="font-size: 10px; padding: 3px 6px;">Bayar Penuh</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Features Checklist -->
+                                                <div class="flex-grow-1">
+                                                    <h6 class="fw-bold text-uppercase text-muted mb-2" style="font-size: 11px; letter-spacing: 0.5px;">Benefit & Fasilitas:</h6>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Garansi Remedial <strong>1x</strong> <small class="text-muted">(Expired 2 Minggu)</small></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>Praktik Langsung</strong> setiap pertemuan</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Didampingi oleh <strong>Veteran Mentor</strong></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Mendapatkan <strong>Certificate Completion</strong></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>Manual eBook & Modul</strong> (Mindset & Practice)</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Akses <strong>WAG Support & Komunitas Alumni</strong></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item text-muted jogja-benefit-disabled" style="opacity: 0.45;">
+                                                        <i class='bx bx-minus text-secondary'></i>
+                                                        <span><strike>Bisa DP & Dicicil</strike></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item text-muted jogja-benefit-disabled" style="opacity: 0.45;">
+                                                        <i class='bx bx-minus text-secondary'></i>
+                                                        <span><strike>Pre-Analyze & Meeting Reminder</strike></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item text-muted jogja-benefit-disabled" style="opacity: 0.45;">
+                                                        <i class='bx bx-minus text-secondary'></i>
+                                                        <span><strike>Tes STIFIn & Graduation Coaching</strike></span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Action Buttons -->
+                                                <div class="mt-3 pt-2">
+                                                    <a data-program="*First Class Basic : Yogyakarta senilai 1.799K*."
+                                                        class="btn btn-green w-100 py-2 fw-bold title-change-registration"
+                                                        style="background: linear-gradient(135deg, #009961 0%, #006a4e 100%) !important; color: #ffffff !important; border: 1px solid #006a4e !important; border-radius: 10px !important; font-weight: 700 !important; font-size: 13.5px !important; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.22) !important; display: block;"
+                                                        onclick="sendWhatsAppMessage(this)">Daftar Sekarang</a>
+                                                    <a onclick="askAdminMessage(this)"
+                                                        data-program="First Class Basic : Yogyakarta"
+                                                        class="btn btn-admin-secondary w-100 py-2 mt-2 title-change-consultation"
+                                                        style="background: transparent !important; color: #0b2b6a !important; border: 1.5px solid #0b2b6a !important; border-radius: 10px !important; font-weight: 500 !important; font-size: 13px !important; display: block;">Tanya Admin</a>
+                                                </div>
                                             </div>
+                                        </div>
 
-                                            <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
-                                                style="font-size: 10px;">
-                                                <span>Kontak Admin untuk request jadwal</span>
+                                        <!-- 2. FIRST CLASS PREMIUM (BEST VALUE) -->
+                                        <div class="col-lg-4 col-md-6 col-12 d-flex jogja-slide-item" data-slide-index="1">
+                                            <div class="jogja-pricing-card jogja-card-featured w-100">
+                                                
+                                                <!-- Best Value Floating Ribbon -->
+                                                <div class="position-absolute" style="top: -13px; left: 50%; transform: translateX(-50%); width: 85%; text-align: center;">
+                                                    <span class="badge px-3 py-1.5 rounded-pill shadow-sm"
+                                                        style="background: linear-gradient(135deg, #ff9900 0%, #e65100 100%); color: #fff; font-size: 10.5px; font-weight: 800; letter-spacing: 0.8px; box-shadow: 0 4px 12px rgba(230, 81, 0, 0.35); white-space: nowrap;">
+                                                        <i class='bx bxs-star me-1'></i> BEST VALUE / PALING FAVORIT
+                                                    </span>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between align-items-center mb-2 mt-2 gap-2">
+                                                    <span class="badge px-3 py-1.5 rounded-pill text-white" style="background: #0073e6; font-size: 11px; font-weight: 600; white-space: nowrap;">Premium Class</span>
+                                                    <small class="text-muted text-nowrap" style="font-size: 11px;"><i class='bx bx-map text-primary'></i> Offline Yogyakarta</small>
+                                                </div>
+
+                                                <h4 class="fw-bold mb-1 jogja-card-title" style="color: #0b2b6a;">First Class Premium</h4>
+                                                <p class="text-muted small mb-2 jogja-card-desc">Kelas lebih intensif 2x seminggu dengan evaluasi awal & coaching kelulusan.</p>
+
+                                                <!-- Price Section -->
+                                                <div class="py-2 mb-2 border-bottom border-top" style="background: rgba(0, 115, 230, 0.04); margin-left: -10px; margin-right: -10px; padding-left: 10px; padding-right: 10px; border-radius: 8px;">
+                                                    <div class="d-flex align-items-center justify-content-between gap-2">
+                                                        <div>
+                                                            <span class="text-muted small d-block" style="font-size: 10.5px; line-height: 1.1;">Investasi</span>
+                                                            <h2 class="pricing-title mb-0 fw-bold" id="price-fc-jogja-premium" style="color: #0073e6; font-size: 24px;">IDR 2.679.000</h2>
+                                                        </div>
+                                                        <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                            onclick="triggerPromoModal()"
+                                                            style="font-size: 11px; padding: 5px 12px; border-radius: 20px; font-weight: 600; white-space: nowrap;">
+                                                            <i class='bx bxs-discount'></i> Claim Diskon
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Key Specs Box -->
+                                                <div class="jogja-spec-box spec-featured mb-3">
+                                                    <div class="jogja-spec-grid">
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-user text-primary'></i> Kapasitas</span>
+                                                            <span class="jogja-spec-val text-dark">4 – 6 Orang</span>
+                                                        </div>
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-calendar text-primary'></i> Pertemuan</span>
+                                                            <span class="jogja-spec-val text-primary">10x <small class="text-primary fw-normal">(2x/mgg)</small></span>
+                                                        </div>
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-time text-primary'></i> Durasi Sesi</span>
+                                                            <span class="jogja-spec-val text-dark">90 Menit</span>
+                                                        </div>
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-credit-card text-primary'></i> Pembayaran</span>
+                                                            <span class="jogja-spec-val"><span class="badge bg-success text-white" style="font-size: 10px; padding: 3px 6px;"><i class='bx bx-check'></i> Bisa Dicicil</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Features Checklist -->
+                                                <div class="flex-grow-1">
+                                                    <h6 class="fw-bold text-uppercase text-primary mb-2" style="font-size: 11px; letter-spacing: 0.5px;">Semua Benefit Basic, Ditambah:</h6>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Garansi Remedial <strong>3x</strong> <small class="text-muted">(Expired 1 Bulan)</small></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>Pre-Analyze</strong> <small class="text-muted">(Evaluasi kemampuan awal)</small></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>Meeting Notify</strong> <small class="text-muted">(Reminder jadwal kelas)</small></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>1x Graduation Coaching</strong> saat kelulusan</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Akses <strong>Referral Program & Diskon Next Level</strong></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Manual eBook, Mindset & Practice Module</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Praktik Setiap Pertemuan & Veteran Mentor</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item text-muted jogja-benefit-disabled" style="opacity: 0.45;">
+                                                        <i class='bx bx-minus text-secondary'></i>
+                                                        <span><strike>Tes STIFIn & Post-Analyze</strike></span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Action Buttons -->
+                                                <div class="mt-3 pt-2">
+                                                    <a data-program="*First Class Premium : Yogyakarta senilai 2.679K*."
+                                                        class="btn btn-green w-100 py-2 fw-bold title-change-registration"
+                                                        style="background: linear-gradient(135deg, #009961 0%, #006a4e 100%) !important; color: #ffffff !important; border: 1px solid #006a4e !important; border-radius: 10px !important; font-weight: 700 !important; font-size: 13.5px !important; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.22) !important; display: block;"
+                                                        onclick="sendWhatsAppMessage(this)">Daftar Sekarang</a>
+                                                    <a onclick="askAdminMessage(this)"
+                                                        data-program="First Class Premium : Yogyakarta"
+                                                        class="btn btn-admin-secondary w-100 py-2 mt-2 title-change-consultation"
+                                                        style="background: transparent !important; color: #0b2b6a !important; border: 1.5px solid #0b2b6a !important; border-radius: 10px !important; font-weight: 500 !important; font-size: 13px !important; display: block;">Tanya Admin</a>
+                                                </div>
                                             </div>
+                                        </div>
 
-                                            <h5 class="fw-normal">First Class : Yogyakarta </h5>
+                                        <!-- 3. FIRST CLASS SIGNATURE (VIP ALL-IN) -->
+                                        <div class="col-lg-4 col-md-6 col-12 d-flex jogja-slide-item" data-slide-index="2">
+                                            <div class="jogja-pricing-card jogja-card-signature w-100">
+                                                <div class="d-flex justify-content-between align-items-center mb-2 gap-2">
+                                                    <span class="badge px-2.5 py-1.5 rounded-pill" style="background: linear-gradient(135deg, #0b2b6a 0%, #1a4a9e 100%); color: #ffc107; font-size: 11px; font-weight: 700; white-space: nowrap;">
+                                                        👑 VIP Signature
+                                                    </span>
+                                                    <small class="text-muted text-nowrap" style="font-size: 11px;"><i class='bx bx-map text-primary'></i> Offline Yogyakarta</small>
+                                                </div>
 
-                                            <!-- Price and Button Container -->
-                                            <div style="white-space: nowrap; margin-top: 12px;">
-                                                <h1 class="pricing-title mb-0" id="price-first-class"
-                                                    style="display: inline; vertical-align: middle;">IDR 3.000.000</h1>
-                                                <button class="btn btn-warning btn-sm claim-discount-btn"
-                                                    onclick="triggerPromoModal()"
-                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
-                                                    <i class='bx bxs-discount'></i> Claim Diskon
-                                                </button>
-                                            </div>
+                                                <h4 class="fw-bold mb-1 jogja-card-title" style="color: #0b2b6a;">First Class Signature</h4>
+                                                <p class="text-muted small mb-2 jogja-card-desc">Paket terlengkap all-in & garansi unlimited 1 tahun.</p>
 
-                                            <style>
-                                                .claim-discount-btn:hover {
-                                                    transform: scale(1.05);
-                                                    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
-                                                }
-                                            </style>
-                                            <p class="text-muted f-15 mt-3">Fokus pembelajaran: bisa bicara tanpa
-                                                persiapan dan teratur
-                                                didalam berbicara</p>
-                                            <hr class="mt-4">
-                                            <div class="mt-4 pt-1" id="fc-feat-list-yogya">
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-1">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Garansi mengulang kelas
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-2">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    <b>10x pertemuan:</b> 2 Bulan*
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-3">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Maksimal peserta <b>7 orang</b>
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-4">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Minimal peserta <b>3 orang</b>
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-5">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Durasi kelas <b>90 menit</b>
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-6">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Dapat Certificate
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-7">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Bisa <b>DP dan Dicicil</b>
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-8">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Gratis <b>webinar</b> setiap bulan
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-9">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    E-book & E-module
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-10">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Komunitas alumni
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-11">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Jumlah peserta sedikit
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-12">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Evaluasi tiap sesi
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-13">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Ada WAG support
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-14">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Ada reminder kelas
-                                                </p>
-                                                <p class="mb-3 f-16 fc-feat-item" data-feat-key="fc-feat-15">
-                                                    <i class='bx bxs-check-circle fc-feat-icon'></i>
-                                                    Dapat <b>materi</b> setiap minggu
-                                                </p>
+                                                <!-- Price Section -->
+                                                <div class="py-2 mb-2 border-bottom border-top">
+                                                    <div class="d-flex align-items-center justify-content-between gap-2">
+                                                        <div>
+                                                            <span class="text-muted small d-block" style="font-size: 10.5px; line-height: 1.1;">Investasi</span>
+                                                            <h2 class="pricing-title mb-0 fw-bold" id="price-fc-jogja-signature" style="color: #0b2b6a; font-size: 23px;">IDR 3.000.000</h2>
+                                                        </div>
+                                                        <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                            onclick="triggerPromoModal()"
+                                                            style="font-size: 11px; padding: 5px 12px; border-radius: 20px; font-weight: 600; white-space: nowrap;">
+                                                            <i class='bx bxs-discount'></i> Claim Diskon
+                                                        </button>
+                                                    </div>
+                                                </div>
 
-                                                <p class="mb-1 f-14" style="color:#888;">
-                                                    <i>Catatan: Harga bisa berubah. Tersedia juga kelas
-                                                        <b>PRIVATE</b>.</i>
-                                                </p>
-                                            </div>
-                                            <div class="mt-4 pt-2 text-center">
-                                                <a data-program="*First Class : Jogja atau Solo senilai 1.579K*."
-                                                    class="btn btn-green w-100 title-change-registration"
-                                                    onclick="sendWhatsAppMessage(this)"
-                                                    data-program="First Class : Jogja atau Solo">Daftar Sekarang</a>
-                                                <a onclick="askAdminMessage(this)"
-                                                    data-program="First Class : Jogja atau Solo"
-                                                    class="btn btn-primary w-100 title-change-consultation">Tanya
-                                                    Admin</a>
+                                                <!-- Key Specs Box -->
+                                                <div class="jogja-spec-box spec-signature mb-3">
+                                                    <div class="jogja-spec-grid">
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-user text-warning'></i> Kapasitas</span>
+                                                            <span class="jogja-spec-val text-dark">3 – 5 Orang</span>
+                                                        </div>
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-calendar text-warning'></i> Pertemuan</span>
+                                                            <span class="jogja-spec-val text-dark">10x <small class="text-muted fw-normal">(2x/mgg)</small></span>
+                                                        </div>
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-time text-warning'></i> Durasi Sesi</span>
+                                                            <span class="jogja-spec-val text-dark">90 Menit</span>
+                                                        </div>
+                                                        <div class="jogja-spec-col">
+                                                            <span class="jogja-spec-label"><i class='bx bx-credit-card text-warning'></i> Pembayaran</span>
+                                                            <span class="jogja-spec-val"><span class="badge bg-success text-white" style="font-size: 10px; padding: 3px 6px;"><i class='bx bx-check'></i> Bisa Dicicil</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Features Checklist -->
+                                                <div class="flex-grow-1">
+                                                    <!-- Special Highlight Box for STIFIn -->
+                                                    <div class="p-2 px-2.5 rounded-3 mb-2" style="background: #eef4ff; border: 1px solid #d0e2ff; border-left: 3.5px solid #0073e6;">
+                                                        <strong style="color: #0b2b6a; font-size: 11.5px;"><i class='bx bxs-badge-check me-1' style="color: #0073e6;"></i> Termasuk Tes STIFIn Resmi</strong>
+                                                        <div style="color: #475569; font-size: 10.5px; line-height: 1.35; margin-top: 2px;">Pemetaan genetik &amp; karakter gaya komunikasi alami.</div>
+                                                    </div>
+
+                                                    <h6 class="fw-bold text-uppercase text-dark mb-2" style="font-size: 11px; letter-spacing: 0.5px;">Fasilitas Signature Lengkap:</h6>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Garansi Remedial <strong>UNLIMITED</strong> <small class="text-muted">(Expired 1 Tahun)</small></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>Pre-Analyze & Post-Analyze</strong> lengkap</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>Pre-Test & Post-Test</strong> evaluasi terukur</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>Personal Assessment Khusus</strong> mentor</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>3x Graduation Coaching</strong> kelulusan</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Completion Program, Modul, eBook, Sertifikat & WAG</span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Action Buttons -->
+                                                <div class="mt-3 pt-2">
+                                                    <a data-program="*First Class Signature : Yogyakarta senilai 3.000K*."
+                                                        class="btn btn-green w-100 py-2 fw-bold title-change-registration"
+                                                        style="background: linear-gradient(135deg, #009961 0%, #006a4e 100%) !important; color: #ffffff !important; border: 1px solid #006a4e !important; border-radius: 10px !important; font-weight: 700 !important; font-size: 13.5px !important; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.22) !important; display: block;"
+                                                        onclick="sendWhatsAppMessage(this)">Daftar Sekarang</a>
+                                                    <a onclick="askAdminMessage(this)"
+                                                        data-program="First Class Signature : Yogyakarta"
+                                                        class="btn btn-admin-secondary w-100 py-2 mt-2 title-change-consultation"
+                                                        style="background: transparent !important; color: #0b2b6a !important; border: 1.5px solid #0b2b6a !important; border-radius: 10px !important; font-weight: 500 !important; font-size: 13px !important; display: block;">Tanya Admin</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="pricing-box bg-white rounded mt-4">
-                                            <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center"
-                                                style="font-size: 10px;">
-                                                <span>Kontak Admin untuk request jadwal</span>
-                                            </div>
-                                            <h5 class="fw-normal">First Private : Yogyakarta</h5>
+                                    <!-- Mobile Navigation Controls (Arrows & Pagination Dots) -->
+                                    <div class="jogja-slider-controls">
+                                        <button type="button" class="jogja-slider-arrow btn shadow-sm" id="jogja-prev-card" aria-label="Paket Sebelumnya" onclick="slideJogjaCards('prev')">
+                                            <i class='bx bx-chevron-left'></i>
+                                        </button>
+                                        <div class="jogja-slider-dots">
+                                            <button type="button" class="jogja-dot active" data-index="0" onclick="goToJogjaCard(0)" aria-label="Basic"></button>
+                                            <button type="button" class="jogja-dot" data-index="1" onclick="goToJogjaCard(1)" aria-label="Premium"></button>
+                                            <button type="button" class="jogja-dot" data-index="2" onclick="goToJogjaCard(2)" aria-label="Signature"></button>
+                                        </div>
+                                        <button type="button" class="jogja-slider-arrow btn shadow-sm" id="jogja-next-card" aria-label="Paket Selanjutnya" onclick="slideJogjaCards('next')">
+                                            <i class='bx bx-chevron-right'></i>
+                                        </button>
+                                    </div>
 
-                                            <!-- Price and Button Container -->
-                                            <div style="white-space: nowrap; margin-top: 12px;">
-                                                <h1 class="pricing-title mb-0" id="price-first-private"
-                                                    style="display: inline; vertical-align: middle;">IDR 5.000.000</h1>
-                                                <button class="btn btn-warning btn-sm claim-discount-btn"
-                                                    onclick="triggerPromoModal()"
-                                                    style="font-size: 11px; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; vertical-align: middle; margin-left: 8px;">
-                                                    <i class='bx bxs-discount'></i> Claim Diskon
+                                    <!-- INTERACTIVE CALLOUT CARD (TRIGGER FIRST PRIVATE) -->
+                                    <div class="row">
+                                        <div class="col-12 mt-2">
+                                            <div class="card border-0 rounded-4 shadow-sm p-3 p-md-4" 
+                                                style="background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%); border-left: 5px solid #0b2b6a !important; border-radius: 16px;">
+                                                <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+                                                    <div class="d-flex align-items-center gap-3 text-start">
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" 
+                                                            style="width: 48px; height: 48px; background: linear-gradient(135deg, #0b2b6a 0%, #1a4a9e 100%); box-shadow: 0 4px 10px rgba(11, 43, 106, 0.25);">
+                                                            <i class='bx bxs-user-pin' style="font-size: 24px;"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="fw-bold mb-1" style="color: #0b2b6a;">Mencari Kelas yang Lebih Fleksibel & Privat?</h6>
+                                                            <p class="text-muted small mb-0">Tersedia pilihan <strong>First Private Yogyakarta</strong> dengan pendampingan personal 1-on-1 dan jadwal yang menyesuaikan kebutuhan Anda.</p>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-sm px-4 py-2 rounded-pill fw-bold text-nowrap flex-shrink-0 shadow-sm"
+                                                        onclick="switchJogjaClassType('private')">
+                                                        Buka First Private <i class='bx bx-right-arrow-alt ms-1'></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- VIEW 2: FIRST PRIVATE (HIDDEN BY DEFAULT, SHOWN ON CLICK) -->
+                                <div id="jogja-private-view" class="d-none jogja-fade-in">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-6 col-md-8 col-12">
+                                            
+                                            <!-- Back Button Link -->
+                                            <div class="mb-3 text-start">
+                                                <button type="button" class="btn btn-sm btn-link text-decoration-none p-0 fw-bold d-inline-flex align-items-center" 
+                                                    style="color: #0b2b6a; font-size: 13.5px;" onclick="switchJogjaClassType('regular')">
+                                                    <i class='bx bx-left-arrow-alt fs-5 me-1'></i> Kembali ke Pilihan First Class
                                                 </button>
                                             </div>
-                                            <p class="text-muted f-15 mt-3">Seperti First Class dengan jumlah 10x
-                                                pertemuan, materi
-                                                hanya terfokus ke body language, tidak sampai kepada konten pembicaraan
-                                            </p>
-                                            <div class="mt-4 pt-1">
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Garansi mengulang kelas
+
+                                            <div class="jogja-pricing-card jogja-card-signature">
+                                                
+                                                <div class="alert alert-warning referral-alert py-2 px-3 mb-3 d-flex align-items-center rounded-3"
+                                                    style="font-size: 11px;">
+                                                    <i class='bx bx-info-circle fs-6 me-2'></i>
+                                                    <span>Kontak Admin untuk request jadwal kelas private</span>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="badge px-3 py-2 rounded-pill text-white" style="background: #0b2b6a; font-size: 11px; font-weight: 600;">Private 1-on-1 / Small Group</span>
+                                                    <small class="text-muted"><i class='bx bx-map text-primary'></i> Offline Yogyakarta</small>
+                                                </div>
+
+                                                <h4 class="fw-bold mb-1" style="color: #0b2b6a;">First Private : Yogyakarta</h4>
+                                                
+                                                <!-- Price Section -->
+                                                <div class="py-2 mb-3 border-bottom border-top">
+                                                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                                        <div>
+                                                            <span class="text-muted small d-block" style="font-size: 11px;">Investasi</span>
+                                                            <h2 class="pricing-title mb-0 fw-bold" id="price-fc-jogja-private" style="color: #0b2b6a; font-size: 26px;">IDR 5.000.000</h2>
+                                                        </div>
+                                                        <button class="btn btn-warning btn-sm claim-discount-btn"
+                                                            onclick="triggerPromoModal()"
+                                                            style="font-size: 11px; padding: 5px 12px; border-radius: 20px; font-weight: 600;">
+                                                            <i class='bx bxs-discount'></i> Claim Diskon
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="text-muted small mb-3">
+                                                    Seperti First Class dengan jumlah 10x pertemuan, materi hanya terfokus ke body language, tidak sampai kepada konten pembicaraan.
                                                 </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Waktu flexible
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    <b>10x pertemuan:</b> hingga selesai
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Maksimal peserta <b>1-3 orang</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Durasi kelas <b>90 menit</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Dapat Certificate
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Bisa <b>DP dan Dicicil</b>
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Gratis <b>webinar</b> setiap bulan
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Komunitas alumni
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Jumlah peserta sedikit
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Evaluasi tiap sesi
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Ada WAG support
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Ada reminder kelas
-                                                </p>
-                                                <p class="mb-3 f-16">
-                                                    <i class='bx bxs-check-circle'></i>
-                                                    Dapat <b>materi</b> setiap minggu
-                                                </p>
+
+                                                <!-- Features Checklist -->
+                                                <div class="flex-grow-1">
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Garansi mengulang kelas</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>Waktu Fleksibel:</strong> Menyesuaikan jadwal kesibukan Anda</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span><strong>10x pertemuan:</strong> Hingga selesai</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Maksimal peserta <strong>1 – 3 orang</strong></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Durasi kelas <strong>90 menit</strong> per sesi</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Dapat <strong>Certificate</strong></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Bisa <strong>DP dan Dicicil</strong></span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Gratis <strong>webinar</strong> setiap bulan</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Komunitas alumni & Evaluasi tiap sesi</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Ada WAG support & Ada reminder kelas</span>
+                                                    </div>
+                                                    <div class="jogja-benefit-item">
+                                                        <i class='bx bxs-check-circle text-success'></i>
+                                                        <span>Dapat <strong>materi</strong> setiap minggu</span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Action Buttons -->
+                                                <div class="mt-4 pt-2 text-center">
+                                                    <a data-program="*First Private : Yogyakarta senilai 5.000K*."
+                                                        class="btn btn-green w-100 py-2 fw-bold title-change-registration"
+                                                        style="background: linear-gradient(135deg, #009961 0%, #006a4e 100%) !important; color: #ffffff !important; border: 1px solid #006a4e !important; border-radius: 10px !important; font-weight: 700 !important; font-size: 13.5px !important; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.22) !important; display: block;"
+                                                        onclick="sendWhatsAppMessage(this)">Daftar Sekarang</a>
+                                                    <a onclick="askAdminMessage(this)"
+                                                        data-program="First Private : Yogyakarta"
+                                                        class="btn btn-admin-secondary w-100 py-2 mt-2 title-change-consultation"
+                                                        style="background: transparent !important; color: #0b2b6a !important; border: 1.5px solid #0b2b6a !important; border-radius: 10px !important; font-weight: 500 !important; font-size: 13px !important; display: block;">Tanya Admin</a>
+                                                </div>
                                             </div>
-                                            <div class="mt-4 pt-2 text-center">
-                                                <a data-program="*First Private Jogja atau Solo senilai 2.579K*."
-                                                    class="btn btn-green w-100 title-change-registration"
-                                                    onclick="sendWhatsAppMessage(this)"
-                                                    data-program="First Private Jogja atau Solo">Daftar Sekarang</a>
-                                                <a onclick="askAdminMessage(this)"
-                                                    data-program="First Private Jogja atau Solo"
-                                                    class="btn btn-primary w-100 title-change-consultation">Tanya
-                                                    Admin</a>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- JavaScript for Yogyakarta Class Type Switching & Mobile Card Slider -->
+                                <script>
+                                    function switchJogjaClassType(type) {
+                                        var regBtn = document.getElementById('btn-jogja-regular');
+                                        var privBtn = document.getElementById('btn-jogja-private');
+                                        var regView = document.getElementById('jogja-regular-view');
+                                        var privView = document.getElementById('jogja-private-view');
+                                        if (!regBtn || !privBtn || !regView || !privView) return;
+
+                                        if (type === 'private') {
+                                            regBtn.classList.remove('active');
+                                            privBtn.classList.add('active');
+                                            regView.classList.add('d-none');
+                                            privView.classList.remove('d-none');
+                                        } else {
+                                            privBtn.classList.remove('active');
+                                            regBtn.classList.add('active');
+                                            privView.classList.add('d-none');
+                                            regView.classList.remove('d-none');
+                                        }
+                                    }
+
+                                    var currentJogjaCard = 0;
+
+                                    function getJogjaSliderEl() {
+                                        return document.getElementById('jogja-cards-container');
+                                    }
+
+                                    function getJogjaSlides() {
+                                        var slider = getJogjaSliderEl();
+                                        return slider ? slider.querySelectorAll('.jogja-slide-item') : [];
+                                    }
+
+                                    function updateJogjaSliderUI(index) {
+                                        var slides = getJogjaSlides();
+                                        if (!slides.length) return;
+                                        currentJogjaCard = Math.max(0, Math.min(index, slides.length - 1));
+
+                                        var dots = document.querySelectorAll('.jogja-dot');
+                                        dots.forEach(function (dot, i) {
+                                            if (i === currentJogjaCard) {
+                                                dot.classList.add('active');
+                                            } else {
+                                                dot.classList.remove('active');
+                                            }
+                                        });
+
+                                        var prevBtn = document.getElementById('jogja-prev-card');
+                                        var nextBtn = document.getElementById('jogja-next-card');
+                                        if (prevBtn) prevBtn.disabled = currentJogjaCard === 0;
+                                        if (nextBtn) nextBtn.disabled = currentJogjaCard === slides.length - 1;
+                                    }
+
+                                    function goToJogjaCard(index) {
+                                        var slider = getJogjaSliderEl();
+                                        var slides = getJogjaSlides();
+                                        if (!slider || !slides[index]) return;
+
+                                        var targetSlide = slides[index];
+                                        var targetScroll = targetSlide.offsetLeft - (slider.clientWidth - targetSlide.clientWidth) / 2;
+                                        slider.scrollTo({
+                                            left: Math.max(0, targetScroll),
+                                            behavior: 'smooth'
+                                        });
+                                        updateJogjaSliderUI(index);
+                                    }
+
+                                    function slideJogjaCards(dir) {
+                                        var slides = getJogjaSlides();
+                                        var target = currentJogjaCard;
+                                        if (dir === 'next' && target < slides.length - 1) {
+                                            target++;
+                                        } else if (dir === 'prev' && target > 0) {
+                                            target--;
+                                        }
+                                        goToJogjaCard(target);
+                                    }
+
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        var slider = getJogjaSliderEl();
+                                        if (!slider) return;
+
+                                        var scrollDebounce = null;
+                                        slider.addEventListener('scroll', function () {
+                                            clearTimeout(scrollDebounce);
+                                            scrollDebounce = setTimeout(function () {
+                                                var slides = getJogjaSlides();
+                                                if (!slides.length) return;
+                                                var sliderRect = slider.getBoundingClientRect();
+                                                var sliderCenter = sliderRect.left + (sliderRect.width / 2);
+                                                var closestIndex = 0;
+                                                var closestDist = Infinity;
+
+                                                slides.forEach(function (slide, i) {
+                                                    var slideRect = slide.getBoundingClientRect();
+                                                    var slideCenter = slideRect.left + (slideRect.width / 2);
+                                                    var dist = Math.abs(sliderCenter - slideCenter);
+                                                    if (dist < closestDist) {
+                                                        closestDist = dist;
+                                                        closestIndex = i;
+                                                    }
+                                                });
+
+                                                updateJogjaSliderUI(closestIndex);
+                                            }, 50);
+                                        }, { passive: true });
+
+                                        slider.scrollLeft = 0;
+                                        updateJogjaSliderUI(0);
+                                    });
+                                </script>
                             </div>
 
                             <!-- First Class : Surabaya -->
@@ -5025,6 +5715,9 @@
                     const badge = document.getElementById('location-badge');
                     if (badge) {
                         badge.textContent = this.options[this.selectedIndex].text;
+                    }
+                    if (val === 'first-class-jogja-content' && typeof switchJogjaClassType === 'function') {
+                        switchJogjaClassType('regular');
                     }
                 });
 
