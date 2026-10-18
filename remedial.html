@@ -24,10 +24,16 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.1.0/build/css/intlTelInput.css" />
   <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.1.0/build/js/intlTelInput.min.js"></script>
 
+  <!-- Bootstrap Icons for Header & Footer -->
+  <link rel="stylesheet" href="assets/vendor/bootstrap-icons/bootstrap-icons.css" />
+
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background-color: #f8fafc;
+      background-color: #e2e8f0;
+      background-image: 
+        radial-gradient(ellipse at 15% 10%, rgba(2, 132, 199, 0.08) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 90%, rgba(15, 23, 42, 0.06) 0%, transparent 45%);
       color: #1e293b;
     }
 
@@ -42,9 +48,9 @@
       width: 100%;
       font-size: 0.875rem;
       border-radius: 0.75rem;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #cbd5e1;
       padding: 0.625rem 0.875rem;
-      background-color: #ffffff;
+      background-color: #f8fafc;
       color: #0f172a;
       transition: all 0.2s ease;
     }
@@ -52,7 +58,8 @@
     .form-input-control:focus {
       outline: none;
       border-color: #0284c7;
-      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.16);
+      background-color: #ffffff;
     }
 
     .form-input-control::placeholder {
@@ -185,48 +192,392 @@
       color: #64748b;
       font-size: 0.775rem;
     }
+
+    /* Dialogika Topbar & Header Styles (Image 1) */
+    .dlg-topbar {
+      background: #ffffff;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 13px;
+      color: #475569;
+      position: relative;
+      z-index: 40;
+    }
+    .dlg-topbar a {
+      color: #475569;
+      transition: color 0.2s ease;
+    }
+    .dlg-topbar a:hover {
+      color: #0b2b6a;
+    }
+    .dlg-topbar .social-link {
+      color: #0b2b6a;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      font-size: 14px;
+    }
+    .dlg-topbar .social-link:hover {
+      color: #2563eb;
+      background-color: #f1f5f9;
+    }
+
+    .dlg-header-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: #ffffff;
+      box-shadow: 0 2px 14px -2px rgba(11, 43, 106, 0.08);
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .dlg-header {
+      background: #ffffff;
+    }
+    .dlg-nav-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: #0b2b6a;
+      padding: 10px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .dlg-nav-link:hover,
+    .dlg-nav-link.active {
+      color: #0b2b6a;
+      border-bottom-color: #0b2b6a;
+      font-weight: 600;
+    }
+
+    /* Dropdown Menu styling */
+    .dlg-dropdown {
+      position: relative;
+    }
+    .dlg-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 8px;
+      box-shadow: 0 14px 35px -5px rgba(11, 43, 106, 0.15), 0 0 0 1px rgba(11, 43, 106, 0.05);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: all 0.2s ease;
+      z-index: 50;
+    }
+    .dlg-dropdown:hover .dlg-dropdown-menu,
+    .dlg-dropdown:focus-within .dlg-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dlg-dropdown-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #1e293b;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+    .dlg-dropdown-item:hover {
+      background-color: #f0f7ff;
+      color: #0b2b6a;
+      padding-left: 15px;
+    }
+
+    /* Submenu dropdown */
+    .dlg-has-submenu {
+      position: relative;
+    }
+    .dlg-submenu {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      min-width: 200px;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 8px;
+      box-shadow: 0 14px 35px -5px rgba(11, 43, 106, 0.15), 0 0 0 1px rgba(11, 43, 106, 0.05);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(6px);
+      transition: all 0.2s ease;
+      z-index: 51;
+    }
+    .dlg-has-submenu:hover .dlg-submenu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    /* Appointment / Daftar Sekarang Button matching Image 1 */
+    .dlg-btn-daftar {
+      background: linear-gradient(180deg, #0f61a8 0%, #0b2b6a 100%);
+      color: #ffffff !important;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 24px;
+      border-radius: 9999px;
+      box-shadow: 0 5px 16px -4px rgba(114, 4, 207, 0.65);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+    .dlg-btn-daftar:hover {
+      background: linear-gradient(180deg, #0b2b6a 0%, #0f61a8 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 7px 20px -3px rgba(114, 4, 207, 0.85);
+      color: #ffffff !important;
+    }
+
+    /* Footer matching Image 2 */
+    .dlg-footer {
+      background-color: #00173d;
+      color: #ffffff;
+      padding: 22px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .dlg-footer-social {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #0b2b6a;
+      font-size: 17px;
+      box-shadow: 0px -10px 15px -6px rgba(114, 4, 207, 0.75) inset;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .dlg-footer-social:hover {
+      background: #7204cf;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0px 0px 8px 2px rgba(114, 4, 207, 0.75);
+    }
+
+    /* Floating WhatsApp Button (Image 2 corner) */
+    .dlg-float-wa {
+      position: fixed;
+      bottom: 20px;
+      right: 16px;
+      width: 48px;
+      height: 48px;
+      background-color: #25D366;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 8px 20px -3px rgba(37, 211, 102, 0.5);
+      z-index: 40;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    @media (min-width: 640px) {
+      .dlg-float-wa {
+        bottom: 24px;
+        right: 24px;
+        width: 52px;
+        height: 52px;
+        font-size: 28px;
+      }
+    }
+    .dlg-float-wa:hover {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 14px 30px -3px rgba(37, 211, 102, 0.65);
+      color: #ffffff;
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
-  <!-- Minimal Top Header -->
-  <header class="bg-white border-b border-slate-200/80 sticky top-0 z-30">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 font-extrabold text-sm border border-amber-500/20">
-          <i data-lucide="sparkles" class="w-4 h-4"></i>
+<body class="min-h-screen flex flex-col bg-slate-200 text-slate-800 antialiased overflow-x-hidden">
+  <!-- ======= Header & Navigation (Official Dialogika) ======= -->
+  <header class="dlg-header-wrapper">
+    <!-- Top Bar -->
+    <div class="dlg-topbar py-1.5 sm:py-2 border-b border-slate-100">
+      <div class="max-w-6xl mx-auto px-3 sm:px-6 flex items-center justify-between text-xs sm:text-sm">
+        <div class="flex items-center justify-between w-full lg:w-auto gap-2 sm:gap-6">
+          <a href="mailto:admin@dialogika.co" class="flex items-center gap-1.5 hover:text-sky-700 transition whitespace-nowrap text-[11px] sm:text-xs">
+            <i class="bi bi-envelope text-sky-800 text-xs sm:text-sm"></i>
+            <span>admin@dialogika.co</span>
+          </a>
+          <a href="https://wa.me/6285162992597" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-sky-700 transition whitespace-nowrap text-[11px] sm:text-xs">
+            <i class="bi bi-phone text-sky-800 text-xs sm:text-sm"></i>
+            <span>+62 851 6299 2597</span>
+          </a>
         </div>
-        <div>
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Report</span>
-          <span class="text-xs text-slate-300 mx-1">/</span>
-          <span class="text-xs font-semibold text-slate-700">Remedial Class</span>
+        <!-- Social links hidden on mobile, visible on desktop (lg) matching Dialogika official -->
+        <div class="hidden lg:flex items-center gap-1.5">
+          <a href="https://x.com/dialogika_co" target="_blank" rel="noopener noreferrer" class="social-link" title="Twitter / X">
+            <i class="bi bi-twitter"></i>
+          </a>
+          <a href="https://www.facebook.com/dialogika.co" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/dialogika.co" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/dialogika" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+            <i class="bi bi-linkedin"></i>
+          </a>
         </div>
       </div>
-      <a href="https://dialogika.co" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-sky-600 transition">
-        <span>dialogika.co</span>
-        <i data-lucide="external-link" class="w-3 h-3"></i>
-      </a>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="dlg-header">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-[68px] flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center">
+          <img src="assets/img/logo.webp" alt="Dialogika Logo" class="h-8 sm:h-9 w-auto object-contain" />
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+          <a href="index.html" class="dlg-nav-link active">Home</a>
+
+          <!-- Program Dropdown -->
+          <div class="dlg-dropdown">
+            <a href="program/" class="dlg-nav-link cursor-pointer">
+              <span>Program</span>
+              <i class="bi bi-chevron-down text-[11px] ml-0.5"></i>
+            </a>
+            <div class="dlg-dropdown-menu">
+              <!-- Online Submenu -->
+              <div class="dlg-has-submenu">
+                <a href="javascript:void(0)" class="dlg-dropdown-item">
+                  <span>Online</span>
+                  <i class="bi bi-chevron-right text-[11px] text-slate-400"></i>
+                </a>
+                <div class="dlg-submenu">
+                  <a href="program/basic-play.html" class="dlg-dropdown-item">Basic Play</a>
+                  <a href="program/basic-class.html" class="dlg-dropdown-item">
+                    <span>Basic Class</span>
+                    <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">Best Buy</span>
+                  </a>
+                  <div class="my-1 border-t border-slate-100"></div>
+                  <a href="program/kids-play.html" class="dlg-dropdown-item">Kids Play</a>
+                  <a href="program/kids-class.html" class="dlg-dropdown-item">
+                    <span>Kids Class</span>
+                    <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">Best Buy</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Offline Submenu -->
+              <div class="dlg-has-submenu">
+                <a href="javascript:void(0)" class="dlg-dropdown-item">
+                  <span>Offline</span>
+                  <i class="bi bi-chevron-right text-[11px] text-slate-400"></i>
+                </a>
+                <div class="dlg-submenu">
+                  <a href="program/first-class.html" class="dlg-dropdown-item">
+                    <span>First Class</span>
+                    <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">Best Buy</span>
+                  </a>
+                  <a href="program/first-lite.html" class="dlg-dropdown-item">First Lite</a>
+                  <a href="program/first-kids.html" class="dlg-dropdown-item">First Kids</a>
+                  <div class="my-1 border-t border-slate-100"></div>
+                  <a href="program/first-private.html" class="dlg-dropdown-item">First Private</a>
+                </div>
+              </div>
+
+              <div class="my-1 border-t border-slate-100"></div>
+
+              <!-- Area Submenu -->
+              <div class="dlg-has-submenu">
+                <a href="javascript:void(0)" class="dlg-dropdown-item">
+                  <span>Area</span>
+                  <i class="bi bi-chevron-right text-[11px] text-slate-400"></i>
+                </a>
+                <div class="dlg-submenu">
+                  <a href="program/index-jogja.html" class="dlg-dropdown-item">Yogyakarta</a>
+                  <a href="program/index-tangsel.html" class="dlg-dropdown-item">Bintaro</a>
+                  <a href="program/index-solo.html" class="dlg-dropdown-item">Solo</a>
+                  <a href="program/index-surabaya.html" class="dlg-dropdown-item">Surabaya</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="https://www.dialogika.co/sertifikasi/" class="dlg-nav-link">Sertifikasi</a>
+          <a href="https://www.dialogika.co/corporate/" class="dlg-nav-link">Corporate</a>
+
+          <!-- More Dropdown -->
+          <div class="dlg-dropdown">
+            <a href="javascript:void(0)" class="dlg-nav-link cursor-pointer">
+              <span>More</span>
+              <i class="bi bi-chevron-down text-[11px] ml-0.5"></i>
+            </a>
+            <div class="dlg-dropdown-menu">
+              <a href="https://www.dialogika.co/about/" class="dlg-dropdown-item">About Us</a>
+              <a href="https://www.dialogika.co/event/" class="dlg-dropdown-item">Event</a>
+              <a href="https://www.dialogika.co/intern/" class="dlg-dropdown-item">Internship</a>
+              <a href="https://www.dialogika.co/shop/" class="dlg-dropdown-item">Shop</a>
+              <a href="https://www.dialogika.co/blog/" class="dlg-dropdown-item">Blog</a>
+              <a href="https://www.dialogika.co/service/" class="dlg-dropdown-item">Service</a>
+            </div>
+          </div>
+
+          <!-- Daftar Sekarang Button (Image 1) -->
+          <div class="ml-4">
+            <a href="https://www.dialogika.co/pendaftaran-member.html" class="dlg-btn-daftar">
+              Daftar Sekarang
+            </a>
+          </div>
+        </nav>
+
+        <!-- Mobile Controls (Matching Dialogika Official: "Daftar Sekarang" + Hamburger) -->
+        <div class="flex items-center gap-2 sm:gap-3 lg:hidden">
+          <a href="https://www.dialogika.co/pendaftaran-member.html" class="dlg-btn-daftar !py-1.5 !px-3 sm:!px-4 !text-xs sm:!text-sm font-bold shadow-md">
+            Daftar Sekarang
+          </a>
+          <button type="button" id="btnToggleMobileMenu" class="p-1 sm:p-1.5 rounded-lg text-slate-700 hover:text-sky-700 hover:bg-slate-100 transition cursor-pointer" aria-label="Toggle Menu">
+            <i class="bi bi-list text-2xl sm:text-3xl leading-none"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 
   <!-- Main Content Wrapper -->
-  <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10">
+  <main class="flex-1 max-w-4xl w-full mx-auto px-3.5 sm:px-6 py-4 sm:py-6 pb-12 sm:pb-8">
     <!-- Banner Card matching ClickUp form -->
-    <div class="banner-pattern rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden shadow-xl border border-zinc-800 mb-6">
+    <div class="banner-pattern rounded-2xl p-4 sm:p-5 text-white relative overflow-hidden shadow-lg border border-zinc-800 mb-3 sm:mb-4">
       <!-- Decorative Chevron Accents -->
-      <div class="absolute -left-4 top-1/2 -translate-y-1/2 text-zinc-700/30 text-5xl font-black select-none pointer-events-none hidden sm:block tracking-tighter">
+      <div class="absolute -left-4 top-1/2 -translate-y-1/2 text-zinc-700/25 text-5xl font-black select-none pointer-events-none hidden sm:block tracking-tighter">
         &gt;&gt;&gt;&gt;&gt;
       </div>
-      <div class="absolute -right-4 top-1/2 -translate-y-1/2 text-amber-500/20 text-5xl font-black select-none pointer-events-none hidden sm:block tracking-tighter">
+      <div class="absolute -right-4 top-1/2 -translate-y-1/2 text-amber-500/15 text-5xl font-black select-none pointer-events-none hidden sm:block tracking-tighter">
         &lt;&lt;&lt;&lt;&lt;
       </div>
 
-      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-[11px] font-bold uppercase tracking-wider mb-2">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-1 sm:mb-1.5">
             <i data-lucide="rotate-ccw" class="w-3 h-3"></i>
             Claim Garansi Mengulang Kelas
           </div>
-          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1">
+          <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight text-white mb-0.5">
             REMEDIAL FORM
           </h1>
           <p class="text-xs sm:text-sm text-amber-200/90 font-medium">
@@ -234,14 +585,14 @@
           </p>
         </div>
 
-        <div class="flex items-center self-start sm:self-center bg-zinc-900/80 px-4 py-2.5 rounded-2xl border border-zinc-700/60 backdrop-blur-sm">
-          <span class="text-amber-400 font-black tracking-widest text-base sm:text-lg">DIALOGIKA</span>
+        <div class="flex items-center self-start sm:self-center bg-zinc-900/80 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-zinc-700/60 backdrop-blur-sm">
+          <span class="text-amber-400 font-black tracking-widest text-xs sm:text-sm">DIALOGIKA</span>
         </div>
       </div>
     </div>
 
     <!-- Explanatory note -->
-    <div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-4 sm:p-5 mb-8 text-xs sm:text-[13px] text-amber-950/90 leading-relaxed space-y-2">
+    <div class="bg-amber-100/70 border border-amber-300/80 rounded-xl p-3 sm:p-4 mb-4 sm:mb-5 text-xs sm:text-[13px] text-amber-950 leading-relaxed space-y-1 shadow-xs">
       <p>
         Terima kasih sudah menghubungi Admin Kelas untuk melakukan <strong>claim garansi mengulang kelas</strong>, silahkan isikan form dibawah ini agar kami mudah melakukan pendataan.
       </p>
@@ -251,7 +602,7 @@
     </div>
 
     <!-- Main Card with Form & Feedback -->
-    <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-9">
+    <div class="bg-white rounded-2xl border border-slate-300/90 shadow-xl shadow-slate-400/15 p-4 sm:p-7">
       <!-- Success View (Hidden by default) -->
       <div id="successCard" class="hidden text-center py-8 px-4">
         <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center mb-4 ring-8 ring-emerald-50">
@@ -290,8 +641,8 @@
       </div>
 
       <!-- The Form -->
-      <form id="remedialForm" class="space-y-5">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <form id="remedialForm" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <!-- Nama Anda -->
           <div class="md:col-span-2">
             <label class="field-label" for="memberName">
@@ -376,7 +727,7 @@
               <button
                 type="button"
                 id="meetingDropdownToggle"
-                class="w-full text-left rounded-xl border border-slate-200 px-3.5 py-2.5 bg-white hover:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500/20 transition flex items-center justify-between cursor-pointer shadow-xs"
+                class="w-full text-left rounded-xl border border-slate-300 px-3.5 py-2.5 bg-slate-50 hover:bg-white hover:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500/20 transition flex items-center justify-between cursor-pointer shadow-xs"
                 aria-haspopup="true"
                 aria-expanded="false"
               >
@@ -580,10 +931,112 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-slate-200 py-6 text-center text-xs text-slate-400">
-    <p>&copy; 2026 PT Dialogika Persona Indonesia. All rights reserved.</p>
+  <!-- ======= Footer Bar (Image 2) ======= -->
+  <footer class="dlg-footer mt-auto">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <!-- Copyright text -->
+      <div class="text-xs sm:text-sm text-slate-200 text-center md:text-left">
+        &copy; Copyright <strong class="text-white font-semibold">Dialogika</strong> | PT. Dialogika Persona Indonesia
+      </div>
+
+      <!-- Social Links (Image 2) -->
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <a href="https://x.com/dialogika_co" target="_blank" rel="noopener noreferrer" class="dlg-footer-social" title="Twitter / X">
+          <i class="bi bi-twitter"></i>
+        </a>
+        <a href="https://www.facebook.com/dialogika.co" target="_blank" rel="noopener noreferrer" class="dlg-footer-social" title="Facebook">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/dialogika.co" target="_blank" rel="noopener noreferrer" class="dlg-footer-social" title="Instagram">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://wa.me/6285162992597" target="_blank" rel="noopener noreferrer" class="dlg-footer-social" title="WhatsApp">
+          <i class="bi bi-whatsapp"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/dialogika" target="_blank" rel="noopener noreferrer" class="dlg-footer-social" title="LinkedIn">
+          <i class="bi bi-linkedin"></i>
+        </a>
+      </div>
+    </div>
   </footer>
+
+  <!-- Floating WhatsApp Action Button (Image 2 corner) -->
+  <a
+    href="https://wa.me/6285162992597?text=Halo%20Admin%20Dialogika,%20saya%20ingin%20bertanya%20tentang%20remedial"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="dlg-float-wa"
+    title="Hubungi Admin WhatsApp"
+    aria-label="WhatsApp Admin"
+  >
+    <i class="bi bi-whatsapp"></i>
+  </a>
+
+  <!-- Mobile Drawer / Offcanvas -->
+  <div id="dlgMobileDrawer" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden transition-opacity">
+    <div class="fixed top-0 bottom-0 left-0 w-4/5 max-w-sm bg-white shadow-2xl flex flex-col justify-between overflow-y-auto p-5">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+          <img src="assets/img/logo.webp" alt="Logo" class="h-8 w-auto object-contain" />
+          <button type="button" id="btnCloseMobileMenu" class="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 text-xl font-bold cursor-pointer">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+
+        <nav class="mt-4 space-y-1 text-sm font-medium">
+          <a href="index.html" class="block px-3 py-2.5 rounded-xl text-sky-900 bg-sky-50 font-bold">Home</a>
+          
+          <div class="py-1">
+            <button type="button" id="btnMobileProgramToggle" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 font-medium cursor-pointer">
+              <span>Program</span>
+              <i class="bi bi-chevron-down text-xs"></i>
+            </button>
+            <div id="mobileProgramList" class="hidden pl-4 pr-2 py-1 space-y-1 text-xs">
+              <span class="block px-3 pt-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Online</span>
+              <a href="program/basic-play.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Basic Play</a>
+              <a href="program/basic-class.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50 font-semibold text-sky-700">Basic Class (Best Buy)</a>
+              <a href="program/kids-play.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Kids Play</a>
+              <a href="program/kids-class.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50 font-semibold text-sky-700">Kids Class (Best Buy)</a>
+              <span class="block px-3 pt-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Offline</span>
+              <a href="program/first-class.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50 font-semibold text-sky-700">First Class (Best Buy)</a>
+              <a href="program/first-lite.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">First Lite</a>
+              <a href="program/first-kids.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">First Kids</a>
+              <a href="program/first-private.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">First Private</a>
+              <span class="block px-3 pt-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Area</span>
+              <a href="program/index-jogja.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Yogyakarta</a>
+              <a href="program/index-tangsel.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Bintaro</a>
+              <a href="program/index-solo.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Solo</a>
+              <a href="program/index-surabaya.html" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Surabaya</a>
+            </div>
+          </div>
+
+          <a href="https://www.dialogika.co/sertifikasi/" class="block px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50">Sertifikasi</a>
+          <a href="https://www.dialogika.co/corporate/" class="block px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50">Corporate</a>
+
+          <div class="py-1">
+            <button type="button" id="btnMobileMoreToggle" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 font-medium cursor-pointer">
+              <span>More</span>
+              <i class="bi bi-chevron-down text-xs"></i>
+            </button>
+            <div id="mobileMoreList" class="hidden pl-4 pr-2 py-1 space-y-1 text-xs">
+              <a href="https://www.dialogika.co/about/" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">About Us</a>
+              <a href="https://www.dialogika.co/event/" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Event</a>
+              <a href="https://www.dialogika.co/intern/" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Internship</a>
+              <a href="https://www.dialogika.co/shop/" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Shop</a>
+              <a href="https://www.dialogika.co/blog/" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Blog</a>
+              <a href="https://www.dialogika.co/service/" class="block px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">Service</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div class="pt-4 border-t border-slate-100">
+        <a href="https://www.dialogika.co/pendaftaran-member.html" class="dlg-btn-daftar w-full !text-center">
+          Daftar Sekarang
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- Firebase Integration -->
   <script type="module">
@@ -967,6 +1420,32 @@
         form.classList.remove("hidden");
         window.scrollTo({ top: form.offsetTop - 100, behavior: "smooth" });
       });
+    }
+
+    // Mobile Navigation Drawer Toggle Handlers
+    const btnToggleMobile = document.getElementById("btnToggleMobileMenu");
+    const btnCloseMobile = document.getElementById("btnCloseMobileMenu");
+    const mobileDrawer = document.getElementById("dlgMobileDrawer");
+    if (btnToggleMobile && mobileDrawer) {
+      btnToggleMobile.addEventListener("click", () => mobileDrawer.classList.remove("hidden"));
+    }
+    if (btnCloseMobile && mobileDrawer) {
+      btnCloseMobile.addEventListener("click", () => mobileDrawer.classList.add("hidden"));
+    }
+    if (mobileDrawer) {
+      mobileDrawer.addEventListener("click", (e) => {
+        if (e.target === mobileDrawer) mobileDrawer.classList.add("hidden");
+      });
+    }
+    const btnMobileProg = document.getElementById("btnMobileProgramToggle");
+    const listMobileProg = document.getElementById("mobileProgramList");
+    if (btnMobileProg && listMobileProg) {
+      btnMobileProg.addEventListener("click", () => listMobileProg.classList.toggle("hidden"));
+    }
+    const btnMobileMore = document.getElementById("btnMobileMoreToggle");
+    const listMobileMore = document.getElementById("mobileMoreList");
+    if (btnMobileMore && listMobileMore) {
+      btnMobileMore.addEventListener("click", () => listMobileMore.classList.toggle("hidden"));
     }
   </script>
 </body>
