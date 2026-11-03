@@ -27,7 +27,7 @@ class Header extends HTMLElement {
     <header id="header" class="fixed-top">
       <div class="container d-flex align-items-center">
 
-        <a href="../index.html" class="logo me-auto"><img src="../assets/img/logo.webp" alt="" class="img-fluid"></a>
+        <a href="../index.html" class="logo me-auto"><img src="https://www.dialogika.co/assets/img/logo.webp" alt="" class="img-fluid"></a>
 
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul class="navbar-desktop-list">
@@ -75,9 +75,9 @@ class Header extends HTMLElement {
               <li><a href="../about">About Us</a></li>
               <li><a href="../event/">Event</a></li>
                 <li><a href="../intern">Internship</a></li>
-                <li><a href="../shop">Shop</a></li> 
+                <li><a href="javascript:void(0)" onclick="return false;">Shop</a></li> 
                 <li><a href="../blog">Blog</a></li>
-                <li><a href="../service/">Service</a></li> 
+                <li><a href="javascript:void(0)" onclick="return false;">Service</a></li> 
               </ul>
             </li>
             
@@ -192,7 +192,7 @@ class Header extends HTMLElement {
                 </div>
               </div>
             </a>
-            <a href="../service/">
+            <a href="javascript:void(0)" onclick="return false;">
               <div class="card card-body">
                 <div class="justify-content-between d-flex">
                   <span>Service</span>
@@ -200,7 +200,7 @@ class Header extends HTMLElement {
               </div>
             </a>
             <a href="../blog/"><div class="card card-body">Blog</div></a>
-            <a href="https://www.dialogika.co/shop/" onclick="return false;">
+            <a href="javascript:void(0)" onclick="return false;">
               <div class="card card-body">
                 <div class="justify-content-between d-flex">
                   <span>Shop</span>
@@ -239,7 +239,7 @@ class Footer extends HTMLElement {
       <div class="row justify-content-between">
 
         <div class="col-lg-3 col-md-6 footer-contact">
-          <h3><img src="../assets/img/white-logo.webp" class="footer-logo" alt="Kelas Public Speaking Jogja" /></h3>
+          <h3><img src="https://www.dialogika.co/assets/img/white-logo.webp" class="footer-logo" alt="Kelas Public Speaking Jogja" /></h3>
           <p>
             Wadah pengembangan diri membangun aura positif sekaligus meningkatkan kualitas skill, karir hingga level
             kehidupan Anda.
@@ -379,7 +379,7 @@ class Footer extends HTMLElement {
               <h4>Instagram Post <i class='bx bx-chevron-down d-md-none'></i></h4>
               <ul>
                 <li class="clearfix">
-                  <img loading="lazy" src="../assets/img/ig/1.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                  <img loading="lazy" src="https://www.dialogika.co/assets/img/ig/1.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                   <div class="post float-left">
                     <a target="__blank" href="https://www.instagram.com/p/Claa6CPISTB/">Gambaran kelas praktek public speaking secara offline</a>
                     <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Nov 26, 2022</div>
@@ -387,7 +387,7 @@ class Footer extends HTMLElement {
                 </li>
                 <hr/>
                 <li class="clearfix">
-                  <img loading="lazy" src="../assets/img/ig/2.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                  <img loading="lazy" src="https://www.dialogika.co/assets/img/ig/2.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                   <div class="post float-left">
                     <a target="__blank" href="https://www.instagram.com/p/CyXfjtkrJe7/">Tips-tips agar di notice dosen didalam kelas dan latihan membangun persona.</a>
                     <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 14, 2023</div>
@@ -395,7 +395,7 @@ class Footer extends HTMLElement {
                 </li>
                 <hr/>
                 <li class="clearfix">
-                  <img loading="lazy" src="../assets/img/ig/3.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                  <img loading="lazy" src="https://www.dialogika.co/assets/img/ig/3.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
                   <div class="post float-left">
                     <a target="__blank" href="https://www.instagram.com/p/CzAf73qr2mj/">5 tips jitu atasi otak yang ngeblank saat berbicara di depan umum</a>
                     <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 30, 2023</div>
@@ -403,10 +403,10 @@ class Footer extends HTMLElement {
                 </li>
                 <hr/>
                 <li class="clearfix">
-                  <img loading="lazy" src="../assets/img/ig/4.jpg" alt="" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; border-radius: 10px;">
+                  <img loading="lazy" src="https://i.pinimg.com/736x/c6/f9/78/c6f978feb7a8f99fb4df7753983d7e63.jpg" alt="3 Kemampuan Komunikasi Dalam Dunia Kerja" class="rounded ig-post float-left" style="margin-right: 10px;width: 70px;height: 70px; object-fit: cover; border-radius: 10px;">
                   <div class="post float-left">
-                    <a target="__blank" href="blog-details.html">5 trik untuk para newbie agar viral di depan umum. (Cocok untuk konten creator)</a>
-                    <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Nov 2, 2023</div>
+                    <a target="__blank" href="https://www.dialogika.co/blog-dialogika/blog/3-kemampuan-komunikasi-dalam-dunia-kerja-yang-paling-diperlukan-rugi-kalau-gak-tahu-teori-komunikasi-organisasi.html">3 Kemampuan Komunikasi Dalam Dunia Kerja yang Paling Diperlukan, Rugi Kalau Gak Tahu!</a>
+                    <div class="date"><i class="bx bx-calendar" aria-hidden="true"></i> Oct 25, 2026</div>
                   </div>
                 </li>
               </ul>
@@ -438,15 +438,15 @@ class Footer extends HTMLElement {
           <br><br>
           <h4 class="d-flex justify-content-between">Payment Method<i class='bx bx-chevron-down d-md-none'></i></h4>
           <p><i class="bx bx-chevron-down"></i> Bank Transfer</p>
-          <img loading="lazy" src="../assets/img/bank.webp" style="width:100%;"/>
+          <img loading="lazy" src="https://www.dialogika.co/assets/img/bank.webp" style="width:100%;"/>
           <br><br>
           <p><i class="bx bx-chevron-down"></i> E-Wallet</p>
-          <img loading="lazy" src="../assets/img/wallet.webp" style="width:100%;"/>
+          <img loading="lazy" src="https://www.dialogika.co/assets/img/wallet.webp" style="width:100%;"/>
 
           <ul class="list-group border-warning" style="background: transparent;">
             <li class="list-group-item">
               <b>Telah Terdaftar Oleh</b><br>
-              <img loading="lazy" src="../assets/img/ham.webp" class="" /><br>
+              <img loading="lazy" src="https://www.dialogika.co/assets/img/ham.webp" class="" /><br>
               <strong>Nomor:</strong> AHU-0118640.AH.01.11.TAHUN 2022<br>
               <strong>Registrasi: </strong>4022062334106037<br />
             </li>
