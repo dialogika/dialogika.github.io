@@ -1168,7 +1168,7 @@
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDYrzxyQloGaVRIdnFfYvjydWZz3xdxpTs",
+      apiKey: "AIzaSyDYrzxyQ1oGaVRIdnFfYvjydWZz3xdxpTs",
       authDomain: "dialogika-co.firebaseapp.com",
       projectId: "dialogika-co",
       storageBucket: "dialogika-co.firebasestorage.app",
@@ -1186,13 +1186,20 @@
 
     // Default Mentors fallback if Firestore offline / loading
     const defaultMentors = [
-      { id: "m1", name: "Afra Habibi" },
-      { id: "m2", name: "Dian Pertiwi" },
-      { id: "m3", name: "Bella Ababil" },
-      { id: "m4", name: "Faris Izzatur" },
-      { id: "m5", name: "Wanda Aprilia" },
-      { id: "m6", name: "Jonathan Aditya" },
-      { id: "m7", name: "Nurallah" }
+      { id: "m1", name: "Fanny Carolina" },
+      { id: "m2", name: "Maria Saraswati Kinasih Hapsari" },
+      { id: "m3", name: "Ahmad Sofari" },
+      { id: "m4", name: "Rio Fariza" },
+      { id: "m5", name: "Coach Aris" },
+      { id: "m6", name: "Coach Devi" },
+      { id: "m7", name: "Coach Taufan" },
+      { id: "m8", name: "Coach Susi" },
+      { id: "m9", name: "Aditya Dyah" },
+      { id: "m10", name: "Pitta Sekar" },
+      { id: "m11", name: "Muhammad Fajar" },
+      { id: "m12", name: "Husnul Fatiya" },
+      { id: "m13", name: "Audie Ihza" },
+      { id: "m14", name: "Panji Putra" }
     ];
 
     let mentorsList = [];
@@ -1202,12 +1209,25 @@
       if (!select) return;
 
       try {
-        const snap = await getDocs(collection(db, "mentor"));
+        let snap = await getDocs(collection(db, "mentors"));
+        if (snap.empty) {
+          snap = await getDocs(collection(db, "mentors_public"));
+        }
+        if (snap.empty) {
+          snap = await getDocs(collection(db, "mentor"));
+        }
+
         const loaded = [];
+        const seenNames = new Set();
         snap.forEach((doc) => {
           const d = doc.data() || {};
-          const name = d.name || d.mentor_name || d.fullName || "";
-          if (name) {
+          const status = String(d.status || "").toLowerCase();
+          if (status === "inactive" || status === "nonaktif") return;
+
+          const name = (d.fullName || d.name || d.nama_lengkap || d.mentor_name || d.displayName || "").trim();
+          const lower = name.toLowerCase();
+          if (name && name !== "Unknown" && !seenNames.has(lower)) {
+            seenNames.add(lower);
             loaded.push({ id: doc.id, name: name });
           }
         });
@@ -1220,7 +1240,7 @@
 
       // Populate dropdown
       select.innerHTML = '<option value="">Select option..</option>';
-      mentorsList.sort((a, b) => a.name.localeCompare(b.name)).forEach((m) => {
+      mentorsList.sort((a, b) => a.name.localeCompare(b.name, "id")).forEach((m) => {
         const opt = document.createElement("option");
         opt.value = m.name;
         opt.dataset.id = m.id;
