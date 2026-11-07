@@ -563,7 +563,7 @@ function getFirestoreInstance() {
   return loadFirebaseScripts().then(function () {
     if (!window.dialogikaFirebaseApp) {
       var firebaseConfig = {
-        apiKey: "AIzaSyDYrzxyQloGaVRIdnFfYvjydWZz3xdxpTs",
+        apiKey: "AIzaSyDYrzxyQ1oGaVRIdnFfYvjydWZz3xdxpTs",
         authDomain: "dialogika-co.firebaseapp.com",
         projectId: "dialogika-co",
         storageBucket: "dialogika-co.firebasestorage.app",

@@ -403,7 +403,7 @@
         import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyDYrzxyQloGaVRIdnFfYvjydWZz3xdxpTs",
+            apiKey: "AIzaSyDYrzxyQ1oGaVRIdnFfYvjydWZz3xdxpTs",
             authDomain: "dialogika-co.firebaseapp.com",
             projectId: "dialogika-co",
             storageBucket: "dialogika-co.firebasestorage.app",
@@ -548,14 +548,7 @@
                 },
                 
                 useFallbackData() {
-                    // Data dummy agar tabel tidak kosong saat Preview/Offline
-                    this.classes = [
-                        { id: 1, name: "First Class Offline - Jakarta (Preview Mode)", type: "Offline", max_seat: 7, current_joined: 6, start_date: "10 Nov 2023", mentor_name: "Coach Aris" },
-                        { id: 2, name: "Basic Plus Online - Batch 42 (Preview Mode)", type: "Online", max_seat: 10, current_joined: 10, start_date: "12 Nov 2023", mentor_name: "Coach Devi" },
-                        { id: 3, name: "Private Class - Public Speaking", type: "Private", max_seat: 1, current_joined: 0, start_date: "Flexible", mentor_name: "Coach Taufan" },
-                        { id: 4, name: "Advanced Presentation - Online", type: "Online", max_seat: 12, current_joined: 4, start_date: "15 Nov 2023", mentor_name: "Coach Aris" },
-                        { id: 5, name: "Kids Public Speaking - Offline", type: "Offline", max_seat: 7, current_joined: 2, start_date: "20 Nov 2023", mentor_name: "Coach Susi" }
-                    ];
+                    this.classes = [];
                 },
                 async loadProducts() {
                     if (!(window.db && window.collection && window.getDocs)) {
