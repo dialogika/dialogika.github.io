@@ -814,44 +814,49 @@
             submitBtn.disabled = true;
             submitBtn.textContent = "Menyimpan...";
 
-            const formData = new FormData(form);
-            const sumber = formData.get("sumber_informasi") || "";
-            const customSumber = formData.get("sumber_lainnya") || "";
-            const finalSumber = sumber === "Lainnya" ? customSumber : sumber;
-            const proofFile =
-              buktiInput && buktiInput.files ? buktiInput.files[0] : null;
-            const memberId = generateMemberId();
-            const waktuPengisian = new Date();
-
-            let buktiTransferUrl = "";
-            if (proofFile) {
-              buktiTransferUrl = await uploadProofToStorage(
-                proofFile,
-                memberId,
-              );
-            }
-
-            const payload = {
-              member_id: memberId,
-              nama: formData.get("nama") || "",
-              whatsapp: formData.get("whatsapp") || "",
-              produk_dibeli: formData.get("produk_dibeli") || "",
-              harga_dibayarkan: formData.get("harga_dibayarkan")
-                ? Number(formData.get("harga_dibayarkan"))
-                : null,
-              metode_pembayaran: formData.get("metode_pembayaran") || "",
-              sumber_informasi: sumber || "",
-              sumber_informasi_lainnya:
-                sumber === "Lainnya" ? customSumber || "" : "",
-              sumber_informasi_final: finalSumber || "",
-              kota: formData.get("kota") || "",
-              bukti_transfer: buktiTransferUrl,
-              waktu_pengisian:
-                firebase.firestore.Timestamp.fromDate(waktuPengisian),
-              created_at: firebase.firestore.FieldValue.serverTimestamp(),
-            };
-
             try {
+              const formData = new FormData(form);
+              const sumber = formData.get("sumber_informasi") || "";
+              const customSumber = formData.get("sumber_lainnya") || "";
+              const finalSumber = sumber === "Lainnya" ? customSumber : sumber;
+              const proofFile =
+                buktiInput && buktiInput.files ? buktiInput.files[0] : null;
+              const memberId = generateMemberId();
+              const waktuPengisian = new Date();
+
+              let buktiTransferUrl = "";
+              if (proofFile) {
+                try {
+                  buktiTransferUrl = await uploadProofToStorage(
+                    proofFile,
+                    memberId,
+                  );
+                } catch (storageErr) {
+                  console.warn("Storage upload failed, proceeding with fallback:", storageErr);
+                  buktiTransferUrl = "upload_pending:" + (proofFile.name || "bukti");
+                }
+              }
+
+              const payload = {
+                member_id: memberId,
+                nama: formData.get("nama") || "",
+                whatsapp: formData.get("whatsapp") || "",
+                produk_dibeli: formData.get("produk_dibeli") || "",
+                harga_dibayarkan: formData.get("harga_dibayarkan")
+                  ? Number(formData.get("harga_dibayarkan"))
+                  : null,
+                metode_pembayaran: formData.get("metode_pembayaran") || "",
+                sumber_informasi: sumber || "",
+                sumber_informasi_lainnya:
+                  sumber === "Lainnya" ? customSumber || "" : "",
+                sumber_informasi_final: finalSumber || "",
+                kota: formData.get("kota") || "",
+                bukti_transfer: buktiTransferUrl,
+                waktu_pengisian:
+                  firebase.firestore.Timestamp.fromDate(waktuPengisian),
+                created_at: firebase.firestore.FieldValue.serverTimestamp(),
+              };
+
               await db.collection("data_member").add(payload);
 
               form.reset();
@@ -866,7 +871,15 @@
               console.error("Error saving member data:", err);
               submitBtn.disabled = false;
               submitBtn.textContent = "Simpan Data Member";
-              alertError.classList.remove("d-none");
+              if (alertError) {
+                const span = alertError.querySelector("span");
+                if (span) {
+                  span.textContent = err && err.message
+                    ? "Terjadi kendala saat menyimpan: " + err.message
+                    : "Terjadi kesalahan saat menyimpan data. Silakan coba lagi.";
+                }
+                alertError.classList.remove("d-none");
+              }
             }
           });
         }
