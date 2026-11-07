@@ -3,483 +3,841 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Availability - Team Dialogika</title>
+    <title>Jadwal & Ketersediaan Kelas - Dialogika</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="../assets/css/style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+
     <style>
-        .modal-content {
-            border-radius: 12px;
-            border: none;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        .modal-header { border-bottom: 1px solid #f3f4f6; padding: 20px 30px; }
-        .modal-body { padding: 30px; }
-        .modal-title { font-weight: 800; color: #111; font-size: 1.5rem; }
-        .form-label { font-weight: 700; color: #374151; margin-bottom: 8px; font-size: 0.95rem; }
-        .form-control, .form-select {
-            padding: 10px 15px; border-radius: 6px; border: 1px solid #d1d5db;
-            font-size: 0.95rem;
-        }
-        .form-control:focus, .form-select:focus { border-color: var(--dlg-blue); box-shadow: 0 0 0 3px rgba(11, 43, 106, 0.1); }
-        body { font-family: 'Inter', sans-serif; letter-spacing: -0.01em; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.01em; }
         .mono { font-family: 'JetBrains Mono', monospace; }
         [x-cloak] { display: none !important; }
-        .row-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        .calendar-cell {
+            min-height: 100px;
+            transition: all 0.15s ease-in-out;
+        }
+        @media (max-width: 768px) {
+            .calendar-cell {
+                min-height: 52px;
+                padding: 4px 2px !important;
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .bottom-sheet-backdrop {
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(2px);
+        }
     </style>
 </head>
-<body class="bg-[#F8FAFC] text-slate-900">
+<body class="bg-[#F8FAFC] text-slate-900 min-h-screen">
 
-    <div id="topbarContainer"></div>
-    
-    <div class="dashboard-container">
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-7" x-data="calendarManager()" x-init="init()">
         
-        <div id="sidebarContainer"></div>
+        <!-- Header -->
+        <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-4 sm:mb-6">
+            <div>
+                <nav class="flex items-center gap-1.5 text-[11px] font-bold text-blue-600 uppercase tracking-widest mb-1.5">
+                    <a href="../index.html" class="hover:underline flex items-center gap-1">
+                        <i class="bi bi-house-fill"></i> Home
+                    </a>
+                    <span>/</span>
+                    <span class="text-slate-400">Class Availability</span>
+                </nav>
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    Kalender Ketersediaan Kelas
+                </h1>
+                <p class="text-slate-500 mt-0.5 font-medium text-xs sm:text-sm">
+                    Cek jadwal kelas, jam pelaksanaan, dan ketersediaan kursi secara real-time.
+                </p>
+            </div>
 
-        <main class="main-content" x-data="classManager()" x-init="init()">
-            
+            <!-- View Switcher (Bulan / Minggu / Hari) -->
+            <div class="flex items-center gap-1 bg-slate-200/80 p-1 rounded-2xl shrink-0 self-start lg:self-auto">
+                <button 
+                    type="button"
+                    @click="setViewMode('month')" 
+                    :class="timeView === 'month' ? 'bg-white text-slate-900 shadow-sm font-bold' : 'text-slate-600 hover:text-slate-900 font-semibold'"
+                    class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer"
+                >
+                    <i class="bi bi-calendar3 text-[11px]"></i>
+                    <span>Bulan</span>
+                </button>
+                <button 
+                    type="button"
+                    @click="setViewMode('week')" 
+                    :class="timeView === 'week' ? 'bg-white text-slate-900 shadow-sm font-bold' : 'text-slate-600 hover:text-slate-900 font-semibold'"
+                    class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer"
+                >
+                    <i class="bi bi-calendar-week text-[11px]"></i>
+                    <span>Minggu</span>
+                </button>
+                <button 
+                    type="button"
+                    @click="setViewMode('day')" 
+                    :class="timeView === 'day' ? 'bg-white text-slate-900 shadow-sm font-bold' : 'text-slate-600 hover:text-slate-900 font-semibold'"
+                    class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer"
+                >
+                    <i class="bi bi-calendar-day text-[11px]"></i>
+                    <span>Hari</span>
+                </button>
+            </div>
+        </header>
 
-            <main class="max-w-7xl mx-auto px-6 py-6">
-                <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
-                    <div>
-                        <nav class="flex gap-2 text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">
-                            <a href="../index.html"><span><i class="bi bi-house-fill"></i></span></a>
-                            <span>/</span>
-                            <span>Rebuy</span>
-                            <span>/</span>
-                            <span class="text-slate-400">Quota Class</span>
-                        </nav>
-                        <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Class Availability</h1>
-                        <p class="text-slate-500 mt-1 font-medium text-lg">Cek ketersediaan kursi real-time untuk penutupan penjualan.</p>
-                    </div>
-                    
-                    <div class="flex items-center gap-3">
+        <!-- Compact Navigation & Filter Toolbar -->
+        <div class="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl p-3 sm:p-4 shadow-sm mb-4 sm:mb-6">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                
+                <!-- Period Navigator (< Previous, Title, Next >, Dynamic Reset Period Button) -->
+                <div class="flex items-center justify-between sm:justify-start gap-2 sm:gap-2.5">
+                    <div class="flex items-center bg-slate-100 rounded-2xl p-1 gap-1 shrink-0">
                         <button 
                             type="button"
-                            class="flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition font-bold text-sm text-slate-700"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editCapacityModal"
+                            @click="prevPeriod()" 
+                            class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-slate-600 hover:bg-white hover:shadow-sm transition cursor-pointer shrink-0"
+                            title="Periode Sebelumnya"
                         >
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                            Edit Capacity
+                            <i class="bi bi-chevron-left text-xs font-bold"></i>
                         </button>
                         <button 
                             type="button"
-                            class="flex items-center gap-2 px-5 py-2.5 btn-dlg-blue text-white rounded-xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition font-bold text-sm"
-                            data-bs-toggle="modal"
-                            data-bs-target="#addBatchModal"
+                            @click="goToToday()" 
+                            class="px-2.5 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs font-bold rounded-xl transition cursor-pointer whitespace-nowrap shrink-0"
+                            :class="isCurrentPeriod ? 'text-slate-700 hover:bg-white' : 'bg-[#0163ea] text-white shadow-sm hover:opacity-95'"
+                            :title="periodResetLabel"
                         >
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-                            Add Batch
+                            <span x-text="periodResetLabel"></span>
+                        </button>
+                        <button 
+                            type="button"
+                            @click="nextPeriod()" 
+                            class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-slate-600 hover:bg-white hover:shadow-sm transition cursor-pointer shrink-0"
+                            title="Periode Berikutnya"
+                        >
+                            <i class="bi bi-chevron-right text-xs font-bold"></i>
                         </button>
                     </div>
-                </header>
 
-                <div class="flex flex-col md:flex-row gap-4 mb-3">
-                    <div class="relative flex-grow group">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                        </div>
-                        <input x-model="search" @input="currentPage = 1" type="text" placeholder="Cari nama kelas, mentor, atau product..." class="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-50/50 focus:border-indigo-500 transition-all outline-none font-medium text-slate-600 shadow-sm">
+                    <h2 class="text-sm sm:text-lg lg:text-xl font-black text-slate-900 tracking-tight ml-1 truncate" x-text="periodTitle"></h2>
+                </div>
+
+                <!-- Filters & Search -->
+                <div class="flex items-center gap-2">
+                    <!-- Search Input -->
+                    <div class="relative flex-grow sm:min-w-[220px]">
+                        <i class="bi bi-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input 
+                            type="text" 
+                            x-model="search" 
+                            placeholder="Cari kelas, mentor, kota..." 
+                            class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition outline-none"
+                        >
                     </div>
-                    
-                    <div class="flex items-center gap-3 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm">
-                        <select x-model="filterType" @change="currentPage = 1" class="bg-transparent pl-3 pr-8 py-2 text-sm font-bold text-slate-600 outline-none border-none">
-                            <option value="All">All Types</option>
+
+                    <!-- Filter Toggle Button on Mobile -->
+                    <button 
+                        type="button"
+                        @click="showMobileFilters = !showMobileFilters"
+                        class="lg:hidden flex items-center gap-1.5 px-3 py-2 rounded-xl border text-xs font-bold transition shrink-0 cursor-pointer"
+                        :class="(filterType !== 'All' || filterStatus !== 'All') ? 'bg-indigo-50 border-indigo-200 text-indigo-600' : 'bg-slate-50 border-slate-200 text-slate-700'"
+                    >
+                        <i class="bi bi-funnel text-xs"></i>
+                        <span>Filter</span>
+                        <span x-show="filterType !== 'All' || filterStatus !== 'All'" class="w-2 h-2 rounded-full bg-indigo-600"></span>
+                    </button>
+
+                    <!-- Desktop Filter Dropdowns -->
+                    <div 
+                        class="hidden lg:flex items-center gap-2"
+                        :class="{'flex flex-col sm:flex-row': showMobileFilters}"
+                    >
+                        <select 
+                            x-model="filterType" 
+                            class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition outline-none cursor-pointer"
+                        >
+                            <option value="All">Semua Tipe</option>
                             <option value="Offline">Offline</option>
                             <option value="Online">Online</option>
                             <option value="Private">Private</option>
                         </select>
-                        <div class="w-[1px] h-6 bg-slate-200"></div>
-                        <select x-model="filterStatus" @change="currentPage = 1" class="bg-transparent pl-3 pr-8 py-2 text-sm font-bold text-slate-600 outline-none border-none">
-                            <option value="All">All Status</option>
+
+                        <select 
+                            x-model="filterStatus" 
+                            class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition outline-none cursor-pointer"
+                        >
+                            <option value="All">Semua Status</option>
                             <option value="Open">Available</option>
                             <option value="Almost Full">Almost Full</option>
                             <option value="Full">Sold Out</option>
                             <option value="Closed">Kelas Ditutup</option>
                         </select>
                     </div>
+                </div>
+            </div>
 
-                    <div class="flex items-center gap-2 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm">
-                        <select x-model="sortBy" @change="currentPage = 1" class="bg-transparent pl-3 pr-8 py-2 text-sm font-bold text-slate-600 outline-none border-none cursor-pointer">
-                            <option value="priority_sales">Sort: Prioritas Penjualan</option>
-                            <option value="name">Sort: Nama Kelas</option>
-                            <option value="schedule">Sort: Jadwal</option>
-                            <option value="seats_left">Sort: Kursi Tersisa</option>
-                            <option value="mentor">Sort: Mentor</option>
-                            <option value="product">Sort: Product</option>
-                        </select>
-                        <button
-                            type="button"
-                            @click="sortDirection = sortDirection === 'asc' ? 'desc' : 'asc'; currentPage = 1"
-                            class="w-10 h-10 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition flex items-center justify-center cursor-pointer"
-                            title="Ubah arah pengurutan"
-                        >
-                            <svg x-show="sortDirection === 'asc'" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 17V7m0 0l-3 3m3-3l3 3M17 7v10m0 0l3-3m-3 3l-3-3"/></svg>
-                            <svg x-show="sortDirection === 'desc'" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 7v10m0 0l-3-3m3 3l3-3M17 17V7m0 0l3 3m-3-3l-3 3"/></svg>
-                        </button>
+            <!-- Mobile Expanded Filter Row -->
+            <div 
+                x-show="showMobileFilters" 
+                class="lg:hidden grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-slate-100"
+                x-cloak
+            >
+                <select 
+                    x-model="filterType" 
+                    class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-xs font-bold text-slate-700 outline-none"
+                >
+                    <option value="All">Semua Tipe</option>
+                    <option value="Offline">Offline</option>
+                    <option value="Online">Online</option>
+                    <option value="Private">Private</option>
+                </select>
+
+                <select 
+                    x-model="filterStatus" 
+                    class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-xs font-bold text-slate-700 outline-none"
+                >
+                    <option value="All">Semua Status</option>
+                    <option value="Open">Available</option>
+                    <option value="Almost Full">Almost Full</option>
+                    <option value="Full">Sold Out</option>
+                    <option value="Closed">Kelas Ditutup</option>
+                </select>
+            </div>
+
+            <!-- Legend Bar -->
+            <div class="flex items-center justify-between gap-2 mt-2.5 pt-2.5 border-t border-slate-100 text-[10px] sm:text-[11px] font-semibold text-slate-500">
+                <div class="flex items-center gap-3">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-orange-500"></span> Offline</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Online</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-500"></span> Private</span>
+                </div>
+                <span class="text-slate-400 hidden sm:inline" x-text="timeView === 'month' ? 'Klik tanggal untuk melihat daftar kelas hari itu' : 'Klik kelas untuk detail lengkap'"></span>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div x-show="loading" class="text-center py-20 bg-white rounded-3xl border border-slate-200/80 shadow-sm" x-cloak>
+            <div class="spinner-border text-indigo-600 w-8 h-8 mb-2" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="text-slate-500 font-semibold text-xs sm:text-sm">Menghubungkan & memuat jadwal kelas real-time...</p>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- 1. MONTH VIEW (DESKTOP: SPLIT-VIEW | MOBILE: BOTTOM SHEET) -->
+        <!-- ======================================================== -->
+        <div x-show="!loading && timeView === 'month'" x-cloak>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+                
+                <!-- Left Column (Desktop 68%): Month Calendar Grid -->
+                <div class="lg:col-span-8 bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-sm overflow-hidden">
+                    
+                    <!-- Day Names Header (7 Columns) -->
+                    <div class="grid grid-cols-7 border-b border-slate-200 bg-slate-50/75 text-center text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-500 py-2.5">
+                        <div>Sen</div>
+                        <div>Sel</div>
+                        <div>Rab</div>
+                        <div>Kam</div>
+                        <div>Jum</div>
+                        <div>Sab</div>
+                        <div>Min</div>
+                    </div>
+
+                    <!-- Calendar Grid (Dates) -->
+                    <div class="grid grid-cols-7 divide-x divide-y divide-slate-100">
+                        <template x-for="day in calendarDays" :key="day.dateKey">
+                            <div 
+                                @click="selectDay(day)"
+                                :class="{
+                                    'bg-slate-50/60 text-slate-400': !day.isCurrentMonth,
+                                    'bg-white text-slate-900': day.isCurrentMonth,
+                                    'ring-2 ring-indigo-500 ring-inset bg-indigo-50/40 z-10': selectedDate === day.dateKey
+                                }"
+                                class="calendar-cell p-1 sm:p-2 flex flex-col justify-between hover:bg-slate-50/90 cursor-pointer relative group transition"
+                            >
+                                <!-- Date Number & Day Badges -->
+                                <div class="flex items-center justify-between">
+                                    <span 
+                                        :class="{
+                                            'bg-indigo-600 text-white font-bold shadow-sm': day.isToday,
+                                            'text-slate-900 font-bold': !day.isToday && day.isCurrentMonth,
+                                            'text-slate-400 font-normal': !day.isCurrentMonth
+                                        }"
+                                        class="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[11px] sm:text-xs"
+                                        x-text="day.dayNumber"
+                                    ></span>
+
+                                    <!-- Class Count Pill (desktop) -->
+                                    <span 
+                                        x-show="day.classes.length > 0" 
+                                        class="hidden md:inline-block text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-600"
+                                        x-text="day.classes.length + ' kls'"
+                                    ></span>
+                                </div>
+
+                                <!-- Mobile Colored Dots -->
+                                <div class="flex md:hidden items-center justify-center gap-1 mt-1 flex-wrap min-h-[10px]">
+                                    <template x-for="cls in day.classes.slice(0, 3)" :key="'dot-'+cls.id">
+                                        <span 
+                                            class="w-1.5 h-1.5 rounded-full"
+                                            :class="{
+                                                'bg-orange-500': cls.type === 'Offline',
+                                                'bg-blue-500': cls.type === 'Online',
+                                                'bg-purple-500': cls.type === 'Private'
+                                            }"
+                                        ></span>
+                                    </template>
+                                    <span x-show="day.classes.length > 3" class="text-[8px] font-bold text-slate-400 leading-none">+</span>
+                                </div>
+
+                                <!-- Desktop Events List -->
+                                <div class="hidden md:flex flex-col gap-1 overflow-hidden flex-grow custom-scrollbar mt-1">
+                                    <template x-for="cls in day.classes.slice(0, 2)" :key="cls.id">
+                                        <button 
+                                            type="button"
+                                            @click.stop="openClassDetail(cls)"
+                                            :class="{
+                                                'bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100': cls.type === 'Offline' && !isBatchClosed(cls) && (cls.max_seat - cls.current_joined) > 0,
+                                                'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100': cls.type === 'Online' && !isBatchClosed(cls) && (cls.max_seat - cls.current_joined) > 0,
+                                                'bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100': cls.type === 'Private' && !isBatchClosed(cls) && (cls.max_seat - cls.current_joined) > 0,
+                                                'bg-slate-100 text-slate-500 border-slate-200 opacity-60': isBatchClosed(cls) || (cls.max_seat - cls.current_joined) <= 0
+                                            }"
+                                            class="w-full text-left px-1.5 py-0.5 rounded border text-[10px] leading-tight transition shadow-sm truncate flex items-center justify-between gap-1 cursor-pointer"
+                                        >
+                                            <div class="truncate flex items-center gap-1">
+                                                <span class="font-bold shrink-0 mono" x-text="getTimeShort(cls)"></span>
+                                                <span class="font-semibold truncate" x-text="cls.name"></span>
+                                            </div>
+                                            <span class="text-[9px] font-bold px-1 rounded bg-white/70 shrink-0" x-text="(cls.max_seat - cls.current_joined) + 'k'"></span>
+                                        </button>
+                                    </template>
+
+                                    <!-- More Classes Pill if > 2 -->
+                                    <button 
+                                        type="button"
+                                        x-show="day.classes.length > 2" 
+                                        @click.stop="selectDay(day)"
+                                        class="text-[9px] font-bold text-indigo-600 hover:text-indigo-800 text-left pl-0.5 cursor-pointer"
+                                        x-text="'+' + (day.classes.length - 2) + ' lainnya'"
+                                    ></button>
+                                </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
 
-                <p class="text-[11px] text-slate-500 mb-6">
-                    Default sorting menggunakan <span class="font-bold text-slate-700">Prioritas Penjualan</span>:
-                    kursi tersisa paling sedikit ditampilkan lebih dulu, sedangkan kelas sold out/closed dipindah ke bawah agar tim cepat fokus ke batch yang hampir penuh.
-                </p>
-
-                <div class="flex flex-col gap-3">
-                    <!-- Loading State -->
-                    <div x-show="loading" class="text-center py-12" style="display: none;">
-                        <div class="spinner-border text-indigo-600" role="status">
-                            <span class="visually-hidden">Loading...</span>
+                <!-- Right Column (Desktop 32% Side-by-Side Panel): Instant Schedule for Selected Day -->
+                <div class="hidden lg:block lg:col-span-4 bg-white border border-slate-200/80 rounded-3xl p-5 shadow-sm sticky top-6">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                        <div>
+                            <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 block">Jadwal Kelas Terpilih</span>
+                            <h3 class="text-base font-extrabold text-slate-900" x-text="selectedDayData ? selectedDayData.fullDateFormatted : 'Pilih Tanggal'"></h3>
                         </div>
-                        <p class="mt-2 text-slate-500 font-medium">Sedang memuat data dari Firebase...</p>
+                        <span 
+                            x-show="selectedDayData && selectedDayData.classes.length > 0" 
+                            class="text-xs font-bold px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700" 
+                            x-text="selectedDayData ? selectedDayData.classes.length + ' Kelas' : ''"
+                        ></span>
                     </div>
 
-                    <!-- Empty State -->
-                    <div x-show="!loading && filteredClasses.length === 0" class="text-center py-12 bg-white rounded-[24px] border-2 border-dashed border-slate-200" style="display: none;">
-                        <div class="mb-3">
-                            <svg class="w-12 h-12 text-slate-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+                    <!-- Cards List on Desktop Right Sidebar -->
+                    <div class="space-y-3 max-h-[580px] overflow-y-auto pr-1 custom-scrollbar">
+                        <template x-for="cls in (selectedDayData ? selectedDayData.classes : [])" :key="'desk-side-'+cls.id">
+                            <div 
+                                @click="openClassDetail(cls)"
+                                class="p-3.5 rounded-2xl border border-slate-200 hover:border-indigo-300 hover:shadow-md transition cursor-pointer bg-white group flex flex-col justify-between"
+                            >
+                                <div>
+                                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                                        <span 
+                                            class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider"
+                                            :class="{
+                                                'bg-orange-50 text-orange-600 border border-orange-200': cls.type === 'Offline',
+                                                'bg-blue-50 text-blue-600 border border-blue-200': cls.type === 'Online',
+                                                'bg-purple-50 text-purple-600 border border-purple-200': cls.type === 'Private'
+                                            }"
+                                            x-text="cls.type"
+                                        ></span>
+                                        <span class="text-xs font-bold text-slate-700 mono flex items-center gap-1">
+                                            <i class="bi bi-clock text-slate-400 text-[11px]"></i>
+                                            <span x-text="getTimeString(cls)"></span>
+                                        </span>
+                                    </div>
+                                    <h4 class="font-extrabold text-slate-900 text-sm mb-1 group-hover:text-indigo-600 transition" x-text="cls.name"></h4>
+                                    <div class="text-xs text-slate-500 mb-1 flex items-center gap-1.5">
+                                        <i class="bi bi-person text-slate-400"></i>
+                                        <span x-text="cls.mentor_name"></span>
+                                    </div>
+                                    <div class="text-[11px] text-slate-400 mb-2 flex items-center gap-1.5" x-show="cls.location">
+                                        <i class="bi bi-geo-alt text-slate-400"></i>
+                                        <span x-text="cls.location"></span>
+                                    </div>
+                                </div>
+
+                                <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs">
+                                    <span class="font-bold text-[11px]" :class="isBatchClosed(cls) ? 'text-slate-400' : 'text-emerald-600'" x-text="isBatchClosed(cls) ? 'Kelas Ditutup' : ((cls.max_seat - cls.current_joined) + ' Kursi Tersisa')"></span>
+                                    <span class="text-indigo-600 font-bold text-[11px] group-hover:underline flex items-center gap-0.5">
+                                        Detail <i class="bi bi-chevron-right text-[10px]"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Empty State in Right Sidebar -->
+                        <div x-show="!selectedDayData || selectedDayData.classes.length === 0" class="text-center py-12 px-3">
+                            <i class="bi bi-calendar-check text-3xl text-slate-300 mb-2 block"></i>
+                            <p class="text-xs font-bold text-slate-700">Tidak ada jadwal kelas pada tanggal ini.</p>
+                            <p class="text-[11px] text-slate-400 mt-1">
+                                Klik tanggal yang memiliki titik penanda (seperti 8, 14, 15, 22 Nov) di kalender sebelah kiri.
+                            </p>
                         </div>
-                        <p class="text-slate-500 font-medium">Belum ada data kelas yang tersedia.</p>
-                        <p class="text-slate-400 text-sm mb-4">Silakan tambahkan batch baru untuk memulai.</p>
                     </div>
+                </div>
 
-                    <div class="px-8 py-3 flex items-center text-[11px] font-black uppercase tracking-[0.2em] text-slate-400" x-show="!loading && filteredClasses.length > 0">
-                        <div class="w-32 text-center">Available</div>
-                        <div class="flex-grow ml-4">Class Details</div>
-                        <div class="w-32 text-center">Type</div>
-                        <div class="w-48 text-center">Registration</div>
-                        <div class="w-32 text-right">Status</div>
-                        <div class="w-24 text-center">Action</div>
+            </div>
+
+            <!-- Mobile Inline Schedule (Visible on < lg screens) -->
+            <div class="lg:hidden bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm mt-4">
+                <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 block">Jadwal Kelas Terpilih</span>
+                        <h3 class="text-sm font-extrabold text-slate-900" x-text="selectedDayData ? selectedDayData.fullDateFormatted : 'Pilih Tanggal'"></h3>
                     </div>
+                    <span 
+                        x-show="selectedDayData && selectedDayData.classes.length > 0" 
+                        class="text-xs font-bold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700" 
+                        x-text="selectedDayData ? selectedDayData.classes.length + ' Kelas' : ''"
+                    ></span>
+                </div>
 
-                    <template x-for="item in pagedClasses" :key="item.id">
+                <div x-show="selectedDayData && selectedDayData.classes.length > 0" class="space-y-2.5">
+                    <template x-for="cls in (selectedDayData ? selectedDayData.classes : [])" :key="'mob-inline-'+cls.id">
                         <div 
-                            class="row-transition bg-white border border-slate-200 rounded-[24px] p-2 flex items-center shadow-sm hover:shadow-xl hover:border-indigo-200 group"
-                            :class="(isBatchClosed(item) || item.current_joined >= item.max_seat) ? 'opacity-50 grayscale bg-slate-50' : ''"
+                            @click="openClassDetail(cls)"
+                            class="p-3 rounded-2xl border border-slate-200 hover:border-indigo-300 transition bg-white flex flex-col justify-between"
                         >
-                            <div class="w-32 h-24 flex flex-col items-center justify-center rounded-[20px] transition group-hover:scale-105"
-                                :class="{
-                                    'bg-emerald-50 text-emerald-600': (item.max_seat - item.current_joined) > 2 && !isBatchClosed(item),
-                                    'bg-rose-50 text-rose-600': (item.max_seat - item.current_joined) <= 2 && (item.max_seat - item.current_joined) > 0 && !isBatchClosed(item),
-                                    'bg-slate-100 text-slate-400': (item.max_seat - item.current_joined) <= 0 || isBatchClosed(item)
-                                }">
-                                <span class="mono text-5xl leading-none font-bold" x-text="item.max_seat - item.current_joined"></span>
-                                <span class="text-[10px] font-black uppercase mt-1 tracking-widest">Seats</span>
-                            </div>
-
-                            <div class="flex-grow px-6">
-                                <div class="text-xl font-extrabold text-slate-800 mb-1 group-hover:text-indigo-600 transition" x-text="item.name"></div>
-                                <div class="flex items-center gap-4 text-sm font-semibold">
-                                    <div class="flex items-center gap-1.5 text-slate-500">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                        <span x-text="formatDate(item.start_date)"></span>
-                                    </div>
-                                    <div class="flex items-center gap-1.5 text-indigo-500/80">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                                        <span x-text="item.mentor_name"></span>
-                                    </div>
-                                </div>
-                                <div class="mt-1 flex items-center gap-2 flex-wrap">
-                                    <div class="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5" x-show="item.product_name || item.product_id">
-                                        <span class="uppercase tracking-[0.16em]">Product</span>
-                                        <span class="mono text-[10px] text-slate-500" x-text="item.product_name || item.product_id"></span>
-                                    </div>
-                                    <span x-show="item.is_planned" class="inline-block px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-600 border border-indigo-100">Sudah Masuk Perencanaan</span>
-                                </div>
-                            </div>
-
-                            <div class="w-32 text-center">
-                                <span class="px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-wider shadow-sm border"
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <span 
+                                    class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider"
                                     :class="{
-                                        'bg-orange-50 text-orange-600 border-orange-100': item.type === 'Offline',
-                                        'bg-blue-50 text-blue-600 border-blue-100': item.type === 'Online',
-                                        'bg-purple-50 text-purple-600 border-purple-100': item.type === 'Private'
-                                    }" x-text="item.type"></span>
+                                        'bg-orange-50 text-orange-600 border border-orange-200': cls.type === 'Offline',
+                                        'bg-blue-50 text-blue-600 border border-blue-200': cls.type === 'Online',
+                                        'bg-purple-50 text-purple-600 border border-purple-200': cls.type === 'Private'
+                                    }"
+                                    x-text="cls.type"
+                                ></span>
+                                <span class="text-xs font-bold text-slate-700 mono flex items-center gap-1">
+                                    <i class="bi bi-clock text-slate-400 text-[10px]"></i>
+                                    <span x-text="getTimeString(cls)"></span>
+                                </span>
+                            </div>
+                            <h4 class="font-extrabold text-slate-900 text-xs mb-1" x-text="cls.name"></h4>
+                            <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
+                                <span class="text-xs text-slate-500 truncate" x-text="cls.mentor_name"></span>
+                                <span class="font-bold text-indigo-600 shrink-0">Lihat Detail →</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div x-show="!selectedDayData || selectedDayData.classes.length === 0" class="text-center py-6">
+                    <i class="bi bi-calendar-check text-2xl text-slate-300 mb-1 block"></i>
+                    <p class="text-xs font-bold text-slate-700">Tidak ada jadwal kelas pada tanggal ini.</p>
+                    <p class="text-[10px] text-slate-400 mt-0.5">Ketuk tanggal bertitik di kalender untuk melihat jadwal.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- 2. WEEK VIEW (SPACIOUS 7-COLUMN WEEKLY SCHEDULE)         -->
+        <!-- ======================================================== -->
+        <div x-show="!loading && timeView === 'week'" x-cloak class="space-y-4">
+            <div class="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-sm overflow-hidden p-3 sm:p-5">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3">
+                    <template x-for="day in weekDays" :key="'week-col-'+day.dateKey">
+                        <div 
+                            class="rounded-2xl border p-2.5 sm:p-3 flex flex-col justify-between transition min-h-[160px] sm:min-h-[260px]"
+                            :class="day.isToday ? 'border-indigo-300 bg-indigo-50/20 shadow-sm' : 'border-slate-200/80 bg-slate-50/40'"
+                        >
+                            <!-- Day Header -->
+                            <div class="flex items-center justify-between pb-2 border-b border-slate-200/60 mb-2">
+                                <div>
+                                    <span class="text-[10px] font-extrabold uppercase text-slate-400 block" x-text="day.dayName"></span>
+                                    <span class="text-sm sm:text-base font-black text-slate-900" x-text="day.dayNumber"></span>
+                                </div>
+                                <span 
+                                    x-show="day.classes.length > 0"
+                                    class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-slate-200 text-slate-700" 
+                                    x-text="day.classes.length"
+                                ></span>
                             </div>
 
-                            <div class="w-48 px-4 flex flex-col items-center gap-2">
-                                <div class="flex items-center bg-slate-100 p-1 rounded-xl">
-                                    <button @click="updateJoined(item.id, -1)" class="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm hover:bg-rose-500 hover:text-white transition group/btn">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"/></svg>
-                                    </button>
-                                    <div class="px-4 text-center">
-                                        <span class="mono font-bold text-slate-800" x-text="item.current_joined"></span>
-                                        <span class="text-slate-400 font-bold">/</span>
-                                        <span class="text-slate-400 font-bold text-xs" x-text="item.max_seat"></span>
+                            <!-- Classes list inside this day -->
+                            <div class="space-y-2 flex-grow overflow-y-auto max-h-[300px] custom-scrollbar">
+                                <template x-for="cls in day.classes" :key="'week-cls-'+cls.id">
+                                    <div 
+                                        @click="openClassDetail(cls)"
+                                        class="p-2.5 rounded-xl border bg-white shadow-xs hover:shadow-md hover:border-indigo-300 transition cursor-pointer group"
+                                        :class="isBatchClosed(cls) ? 'opacity-60 border-slate-200' : 'border-slate-200/90'"
+                                    >
+                                        <div class="flex items-center justify-between gap-1 mb-1">
+                                            <span 
+                                                class="px-1.5 py-0.2 rounded text-[9px] font-extrabold uppercase"
+                                                :class="{
+                                                    'bg-orange-50 text-orange-600': cls.type === 'Offline',
+                                                    'bg-blue-50 text-blue-600': cls.type === 'Online',
+                                                    'bg-purple-50 text-purple-600': cls.type === 'Private'
+                                                }"
+                                                x-text="cls.type"
+                                            ></span>
+                                            <span class="text-[10px] font-bold text-slate-700 mono" x-text="getTimeShort(cls)"></span>
+                                        </div>
+                                        <h5 class="font-extrabold text-slate-900 text-xs leading-tight mb-1 group-hover:text-indigo-600 transition truncate" x-text="cls.name"></h5>
+                                        <div class="text-[10px] text-slate-500 truncate" x-text="cls.mentor_name"></div>
+                                        <div class="pt-1.5 mt-1 border-t border-slate-100 flex items-center justify-between text-[10px]">
+                                            <span class="font-bold" :class="isBatchClosed(cls) ? 'text-slate-400' : 'text-emerald-600'" x-text="isBatchClosed(cls) ? 'Closed' : ((cls.max_seat - cls.current_joined) + ' Kursi')"></span>
+                                        </div>
                                     </div>
-                                    <button @click="updateJoined(item.id, 1)" class="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm hover:bg-emerald-500 hover:text-white transition">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/></svg>
-                                    </button>
+                                </template>
+
+                                <div x-show="day.classes.length === 0" class="text-center py-6 text-slate-300 text-xs">
+                                    <i class="bi bi-dash-lg"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- 3. DAY VIEW (DEEP SINGLE-DAY TIMELINE SCHEDULE)          -->
+        <!-- ======================================================== -->
+        <div x-show="!loading && timeView === 'day'" x-cloak class="space-y-4">
+            <div class="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-sm p-4 sm:p-6">
+                
+                <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 block">Tampilan Harian</span>
+                        <h2 class="text-lg sm:text-2xl font-black text-slate-900" x-text="selectedDayData ? selectedDayData.fullDateFormatted : ''"></h2>
+                    </div>
+                    <span 
+                        class="text-xs sm:text-sm font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700" 
+                        x-text="selectedDayData ? selectedDayData.classes.length + ' Kelas Terjadwal' : '0 Kelas'"
+                    ></span>
+                </div>
+
+                <!-- Day View Classes Feed -->
+                <div x-show="selectedDayData && selectedDayData.classes.length > 0" class="space-y-3">
+                    <template x-for="cls in (selectedDayData ? selectedDayData.classes : [])" :key="'day-feed-'+cls.id">
+                        <div 
+                            @click="openClassDetail(cls)"
+                            class="p-4 sm:p-5 rounded-2xl border border-slate-200/80 hover:border-indigo-300 hover:shadow-md transition bg-white flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer group"
+                        >
+                            <div class="flex items-start gap-4">
+                                <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-700 flex flex-col items-center justify-center shrink-0 border border-indigo-100/80">
+                                    <i class="bi bi-clock-fill text-sm"></i>
+                                    <span class="text-xs font-black mono mt-0.5" x-text="getTimeShort(cls)"></span>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1 flex-wrap">
+                                        <span 
+                                            class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider"
+                                            :class="{
+                                                'bg-orange-50 text-orange-600 border border-orange-200': cls.type === 'Offline',
+                                                'bg-blue-50 text-blue-600 border border-blue-200': cls.type === 'Online',
+                                                'bg-purple-50 text-purple-600 border border-purple-200': cls.type === 'Private'
+                                            }"
+                                            x-text="cls.type"
+                                        ></span>
+                                        <span 
+                                            class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider"
+                                            :class="{
+                                                'bg-emerald-50 text-emerald-600': !isBatchClosed(cls) && (cls.max_seat - cls.current_joined) > 2,
+                                                'bg-rose-50 text-rose-600': !isBatchClosed(cls) && (cls.max_seat - cls.current_joined) <= 2 && (cls.max_seat - cls.current_joined) > 0,
+                                                'bg-slate-100 text-slate-400': isBatchClosed(cls) || (cls.max_seat - cls.current_joined) <= 0
+                                            }"
+                                            x-text="getBatchStatus(cls)"
+                                        ></span>
+                                        <span class="text-xs text-slate-500 mono font-bold" x-text="getTimeString(cls)"></span>
+                                    </div>
+                                    <h4 class="text-base sm:text-lg font-black text-slate-900 group-hover:text-indigo-600 transition" x-text="cls.name"></h4>
+                                    <div class="flex items-center gap-4 text-xs text-slate-500 mt-1 flex-wrap">
+                                        <span class="flex items-center gap-1.5"><i class="bi bi-person text-slate-400"></i> <span x-text="cls.mentor_name"></span></span>
+                                        <span class="flex items-center gap-1.5" x-show="cls.location"><i class="bi bi-geo-alt text-slate-400"></i> <span x-text="cls.location"></span></span>
+                                        <span class="flex items-center gap-1.5 text-slate-400"><i class="bi bi-box text-slate-400"></i> <span x-text="cls.product_name || cls.product_id"></span></span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="w-32 pr-8 text-right">
-                                <template x-if="isBatchClosed(item)">
-                                    <div class="flex flex-col items-end uppercase leading-tight">
-                                        <span class="text-[10px] font-black text-slate-400 tracking-[0.15em]">Closed</span>
-                                        <span class="text-[11px] font-black text-slate-500 tracking-widest">Kelas Ditutup</span>
-                                    </div>
-                                </template>
-                                <template x-if="!isBatchClosed(item) && (item.max_seat - item.current_joined) <= 0">
-                                    <div class="text-xs font-black text-slate-400 uppercase tracking-widest leading-tight">Sold Out</div>
-                                </template>
-                                <template x-if="!isBatchClosed(item) && (item.max_seat - item.current_joined) > 0 && (item.max_seat - item.current_joined) <= 2">
-                                    <div class="flex flex-col items-end uppercase leading-tight">
-                                        <span class="text-[10px] font-black text-rose-500 tracking-[0.15em] animate-pulse italic">Hot Alert</span>
-                                        <span class="text-[11px] font-black text-slate-800 tracking-widest">Hampir Habis</span>
-                                    </div>
-                                </template>
-                                <template x-if="!isBatchClosed(item) && (item.max_seat - item.current_joined) > 2">
-                                    <div class="flex flex-col items-end uppercase leading-tight">
-                                        <span class="text-[10px] font-black text-emerald-500 tracking-[0.15em]">Ready to Sell</span>
-                                        <span class="text-[11px] font-black text-slate-800 tracking-widest">Open Batch</span>
-                                    </div>
-                                </template>
-                            </div>
-
-                            <div class="w-24 flex items-center justify-center gap-2 border-l border-slate-100 pl-2">
-                                <button @click="editBatch(item)" class="p-2 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition" title="Edit Batch">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                </button>
-                                <button @click="deleteBatch(item)" class="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition" title="Delete Batch">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            <div class="flex items-center justify-between md:justify-end gap-5 pt-3 md:pt-0 border-t md:border-t-0 border-slate-100 shrink-0">
+                                <div class="text-left md:text-right">
+                                    <span class="text-sm font-black mono" :class="isBatchClosed(cls) ? 'text-slate-400' : 'text-emerald-600'" x-text="isBatchClosed(cls) ? 'Kelas Ditutup' : ((cls.max_seat - cls.current_joined) + ' Kursi Tersisa')"></span>
+                                    <span class="text-xs text-slate-400 block" x-text="'Kapasitas: ' + cls.max_seat + ' Orang'"></span>
+                                </div>
+                                <button type="button" class="px-4 py-2 rounded-xl bg-indigo-50 group-hover:bg-indigo-600 text-indigo-600 group-hover:text-white font-bold text-xs transition flex items-center gap-1">
+                                    <span>Detail</span>
+                                    <i class="bi bi-chevron-right text-[10px]"></i>
                                 </button>
                             </div>
                         </div>
                     </template>
                 </div>
 
-                <!-- Pagination Bar -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full pt-4 pb-2 border-t border-slate-200 mt-4" x-show="filteredClasses.length > 0">
-                    <div class="flex items-center gap-3">
-                        <div class="text-xs text-slate-500 font-medium">
-                            Menampilkan <span class="font-bold text-slate-800" x-text="(currentPage - 1) * pageSize + 1"></span> - <span class="font-bold text-slate-800" x-text="Math.min(currentPage * pageSize, filteredClasses.length)"></span> dari <span class="font-bold text-slate-800" x-text="filteredClasses.length"></span> kelas
+                <!-- Empty Day State -->
+                <div x-show="!selectedDayData || selectedDayData.classes.length === 0" class="text-center py-16">
+                    <i class="bi bi-calendar-x text-4xl text-slate-300 mb-2 block"></i>
+                    <h4 class="font-extrabold text-slate-800 text-base">Tidak ada jadwal kelas pada hari ini.</h4>
+                    <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
+                        Gunakan tombol navigasi di atas untuk berpindah hari, atau alihkan ke tampilan <b>Bulan</b> untuk melihat semua jadwal aktif.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- MOBILE SLIDE-UP BOTTOM SHEET (Instant Day Classes Popup)  -->
+        <!-- ======================================================== -->
+        <div 
+            x-show="showMobileBottomSheet" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 z-50 lg:hidden bottom-sheet-backdrop flex flex-col justify-end"
+            x-cloak
+            @click.self="showMobileBottomSheet = false"
+        >
+            <div 
+                x-show="showMobileBottomSheet"
+                x-transition:enter="transition ease-out duration-300 transform"
+                x-transition:enter-start="translate-y-full"
+                x-transition:enter-end="translate-y-0"
+                x-transition:leave="transition ease-in duration-200 transform"
+                x-transition:leave-start="translate-y-0"
+                x-transition:leave-end="translate-y-full"
+                class="bg-white rounded-t-3xl p-5 shadow-2xl max-h-[80vh] flex flex-col overflow-hidden"
+            >
+                <!-- Drag Handle Bar -->
+                <div class="w-10 h-1 bg-slate-300 rounded-full mx-auto mb-3"></div>
+
+                <!-- Sheet Header -->
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 block">Jadwal Kelas</span>
+                        <h3 class="text-base font-extrabold text-slate-900" x-text="selectedDayData ? selectedDayData.fullDateFormatted : ''"></h3>
+                    </div>
+                    <button 
+                        type="button" 
+                        @click="showMobileBottomSheet = false" 
+                        class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-sm font-bold"
+                    >
+                        ✕
+                    </button>
+                </div>
+
+                <!-- Classes Feed inside Sheet -->
+                <div class="overflow-y-auto space-y-2.5 flex-grow pr-1 custom-scrollbar">
+                    <template x-for="cls in (selectedDayData ? selectedDayData.classes : [])" :key="'sheet-'+cls.id">
+                        <div 
+                            @click="openClassDetail(cls)"
+                            class="p-3.5 rounded-2xl border border-slate-200 bg-white hover:border-indigo-300 transition"
+                        >
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <span 
+                                    class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider"
+                                    :class="{
+                                        'bg-orange-50 text-orange-600 border border-orange-200': cls.type === 'Offline',
+                                        'bg-blue-50 text-blue-600 border border-blue-200': cls.type === 'Online',
+                                        'bg-purple-50 text-purple-600 border border-purple-200': cls.type === 'Private'
+                                    }"
+                                    x-text="cls.type"
+                                ></span>
+                                <span class="text-xs font-bold text-slate-700 mono flex items-center gap-1">
+                                    <i class="bi bi-clock text-slate-400 text-[10px]"></i>
+                                    <span x-text="getTimeString(cls)"></span>
+                                </span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs mb-1" x-text="cls.name"></h4>
+                            <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
+                                <span class="text-xs text-slate-500 truncate" x-text="cls.mentor_name"></span>
+                                <span class="font-bold text-indigo-600 shrink-0">Lihat Detail →</span>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-1.5 text-xs text-slate-500">
-                            <span>Baris per halaman:</span>
-                            <select x-model.number="pageSize" @change="currentPage = 1" class="py-1 px-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-700 focus:ring-2 focus:ring-indigo-500/20 cursor-pointer shadow-sm">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
+                    </template>
+
+                    <div x-show="!selectedDayData || selectedDayData.classes.length === 0" class="text-center py-8">
+                        <i class="bi bi-calendar-check text-2xl text-slate-300 mb-1 block"></i>
+                        <p class="text-xs font-bold text-slate-700">Tidak ada jadwal kelas pada tanggal ini.</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">Ketuk tanggal bertitik di kalender untuk melihat jadwal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- MODAL POP-UP DETAIL KELAS LENGKAP (READ-ONLY)            -->
+        <!-- ======================================================== -->
+        <div 
+            class="modal fade" 
+            id="classDetailModal" 
+            tabindex="-1" 
+            aria-labelledby="classDetailModalLabel" 
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-none shadow-2xl rounded-3xl overflow-hidden" x-show="selectedClass">
+                    
+                    <!-- Modal Header -->
+                    <div class="p-5 sm:p-6 bg-gradient-to-r from-slate-900 to-indigo-950 text-white flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-1.5 mb-1.5 flex-wrap">
+                                <span 
+                                    class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider"
+                                    :class="{
+                                        'bg-orange-500/20 text-orange-300 border border-orange-400/30': selectedClass?.type === 'Offline',
+                                        'bg-blue-500/20 text-blue-300 border border-blue-400/30': selectedClass?.type === 'Online',
+                                        'bg-purple-500/20 text-purple-300 border border-purple-400/30': selectedClass?.type === 'Private'
+                                    }"
+                                    x-text="selectedClass?.type"
+                                ></span>
+
+                                <span 
+                                    class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider"
+                                    :class="{
+                                        'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30': !isBatchClosed(selectedClass) && (selectedClass?.max_seat - selectedClass?.current_joined) > 2,
+                                        'bg-rose-500/20 text-rose-300 border border-rose-400/30': !isBatchClosed(selectedClass) && (selectedClass?.max_seat - selectedClass?.current_joined) <= 2 && (selectedClass?.max_seat - selectedClass?.current_joined) > 0,
+                                        'bg-slate-500/20 text-slate-300 border border-slate-400/30': isBatchClosed(selectedClass) || (selectedClass?.max_seat - selectedClass?.current_joined) <= 0
+                                    }"
+                                    x-text="getBatchStatus(selectedClass)"
+                                ></span>
+                            </div>
+                            <h3 class="text-lg sm:text-2xl font-black text-white" x-text="selectedClass?.name"></h3>
+                            <p class="text-slate-300 text-xs mt-0.5" x-text="selectedClass?.product_name || selectedClass?.product_id || 'Program Dialogika'"></p>
+                        </div>
+                        <button type="button" class="text-slate-400 hover:text-white text-lg p-1.5 rounded-xl transition" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Modal Body: Detailed Info -->
+                    <div class="p-5 sm:p-7 space-y-4 sm:space-y-5 bg-white">
+                        
+                        <!-- Highlights Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            
+                            <!-- Card Jam Pelaksanaan -->
+                            <div class="p-3.5 rounded-2xl bg-indigo-50/70 border border-indigo-100 flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0">
+                                    <i class="bi bi-clock-fill text-base"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-wider block">Jam Pelaksanaan</span>
+                                    <span class="text-base font-black text-slate-900 mono block mt-0.5" x-text="getTimeString(selectedClass)"></span>
+                                    <span class="text-xs text-slate-500" x-text="getFullDateString(selectedClass)"></span>
+                                </div>
+                            </div>
+
+                            <!-- Card Mentor / Coach -->
+                            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-slate-800 text-white flex items-center justify-center shrink-0">
+                                    <i class="bi bi-person-badge-fill text-base"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Mentor / Coach</span>
+                                    <span class="text-sm sm:text-base font-bold text-slate-900 block mt-0.5" x-text="selectedClass?.mentor_name || 'Unknown'"></span>
+                                    <span class="text-xs text-slate-500">Instruktur Resmi Dialogika</span>
+                                </div>
+                            </div>
+
+                            <!-- Card Lokasi / Platform -->
+                            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-slate-800 text-white flex items-center justify-center shrink-0">
+                                    <i class="bi bi-geo-alt-fill text-base"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Lokasi / Platform</span>
+                                    <span class="text-sm sm:text-base font-bold text-slate-900 block mt-0.5" x-text="selectedClass?.location || (selectedClass?.type === 'Online' ? 'Online via Zoom' : 'Yogyakarta / Venue')"></span>
+                                    <span class="text-xs text-slate-500" x-text="'Tipe: ' + (selectedClass?.type || 'Offline')"></span>
+                                </div>
+                            </div>
+
+                            <!-- Card Ketersediaan Kursi -->
+                            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-slate-800 text-white flex items-center justify-center shrink-0">
+                                    <i class="bi bi-people-fill text-base"></i>
+                                </div>
+                                <div class="w-full">
+                                    <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Ketersediaan Kursi</span>
+                                    <div class="flex items-baseline gap-1 mt-0.5">
+                                        <span class="text-base font-black text-slate-900 mono" x-text="selectedClass ? (selectedClass.max_seat - selectedClass.current_joined) : 0"></span>
+                                        <span class="text-xs text-slate-500 font-semibold" x-text="'/ ' + (selectedClass?.max_seat || 0) + ' Kursi Tersedia'"></span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden mt-2">
+                                        <div 
+                                            class="h-full bg-indigo-600 rounded-full transition-all"
+                                            :style="'width: ' + (selectedClass ? Math.min(100, (selectedClass.current_joined / selectedClass.max_seat) * 100) : 0) + '%'"
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Down Payment info if available -->
+                        <div x-show="selectedClass?.down_payment > 0" class="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-100 flex items-center justify-between">
+                            <div class="flex items-center gap-2 text-emerald-800 text-xs font-bold">
+                                <i class="bi bi-wallet2 text-emerald-600 text-base"></i>
+                                <span>Down Payment (DP) Kelas:</span>
+                            </div>
+                            <span class="font-black text-emerald-700 mono text-xs sm:text-sm" x-text="'Rp ' + formatCurrency(selectedClass?.down_payment)"></span>
+                        </div>
+
+                        <!-- Information Note -->
+                        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 leading-relaxed">
+                            <span class="font-bold text-slate-800 block mb-0.5">Informasi Ketersediaan:</span>
+                            Data kuota kursi diperbarui secara real-time dari database Dialogika. Silakan klik tombol di bawah untuk konsultasi langsung dengan admin via WhatsApp mengenai jadwal dan registrasi.
                         </div>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <button 
-                            type="button" 
-                            @click="if (currentPage > 1) currentPage--" 
-                            :disabled="currentPage === 1"
-                            :class="currentPage === 1 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-slate-100 cursor-pointer'"
-                            class="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-600 flex items-center justify-center text-xs font-bold transition"
-                            title="Halaman Sebelumnya"
-                        >
-                            <i class="bi bi-chevron-left text-[11px]"></i>
+
+                    <!-- Modal Footer -->
+                    <div class="p-4 sm:p-5 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                        <button type="button" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-white transition" data-bs-dismiss="modal">
+                            Tutup
                         </button>
                         
-                        <template x-for="p in pageNumbers" :key="'page-'+p">
-                            <button
-                                type="button"
-                                @click="if (p !== '...') currentPage = p"
-                                :disabled="p === '...'"
-                                :class="p === currentPage ? 'bg-indigo-600 text-white border-indigo-600 font-bold' : (p === '...' ? 'cursor-default text-slate-400 border-transparent' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 cursor-pointer')"
-                                class="w-8 h-8 rounded-lg border flex items-center justify-center text-xs font-semibold transition"
-                                x-text="p"
-                            ></button>
-                        </template>
-
-                        <button 
-                            type="button" 
-                            @click="if (currentPage < totalPages) currentPage++" 
-                            :disabled="currentPage === totalPages"
-                            :class="currentPage === totalPages ? 'opacity-40 cursor-not-allowed' : 'hover:bg-slate-100 cursor-pointer'"
-                            class="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-600 flex items-center justify-center text-xs font-bold transition"
-                            title="Halaman Berikutnya"
+                        <a 
+                            :href="getWhatsAppUrl(selectedClass)"
+                            target="_blank" 
+                            class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md shadow-emerald-200 transition flex items-center justify-center gap-2"
                         >
-                            <i class="bi bi-chevron-right text-[11px]"></i>
-                        </button>
+                            <i class="bi bi-whatsapp text-sm"></i>
+                            <span>Daftar / Tanya Admin via WhatsApp</span>
+                        </a>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Edit Batch Modal -->
-                <div class="modal fade" id="editCapacityModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Edit Batch</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Nama Class</label>
-                                        <input type="text" class="form-control" x-model="editBatchName">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Product</label>
-                                        <select class="form-select" x-model="editBatchProductId">
-                                            <option value="">Pilih product</option>
-                                            <template x-for="p in products" :key="'edit-product-'+p.id">
-                                                <option :value="p.productId" x-text="p.name || p.productId"></option>
-                                            </template>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Type</label>
-                                        <select class="form-select" x-model="editBatchType">
-                                            <option value="Offline">Offline</option>
-                                            <option value="Online">Online</option>
-                                            <option value="Private">Private</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Max Seat</label>
-                                        <input type="number" class="form-control" min="1" x-model.number="editBatchMaxSeat">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Kota</label>
-                                        <select class="form-select" x-model="editBatchLocation">
-                                            <option value="">Pilih Kota</option>
-                                            <option value="Yogyakarta">Yogyakarta</option>
-                                            <option value="Jakarta">Jakarta</option>
-                                            <option value="Surabaya">Surabaya</option>
-                                            <option value="Pontianak">Pontianak</option>
-                                            <option value="Tangsel">Tangsel</option>
-                                            <option value="Lainnya">Lainnya</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Mentor</label>
-                                        <input type="text" class="form-control" x-model="editBatchMentor">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Start Date</label>
-                                        <input type="datetime-local" class="form-control" x-model="editBatchStartDate">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Down Payment (IDR)</label>
-                                        <input type="text" class="form-control text-primary fw-bold" 
-                                            :value="formatCurrency(editBatchDp)"
-                                            @input="editBatchDp = parseCurrency($event.target.value)"
-                                            placeholder="e.g. 500.000">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                                <button type="button" class="btn btn-primary" @click="confirmEditBatch()">Simpan</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Delete Batch Modal -->
-                <div class="modal fade" id="deleteBatchModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Konfirmasi Hapus Batch</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p x-text="selectedBatch ? `Apakah Anda yakin ingin menghapus batch '${selectedBatch.name}'?` : 'Apakah Anda yakin ingin menghapus batch ini?'"></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                                <button type="button" class="btn btn-danger" @click="confirmDeleteBatch()">Hapus</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Add Batch Modal -->
-                <div class="modal fade" id="addBatchModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Add New Batch</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Nama Class</label>
-                                        <input type="text" class="form-control" placeholder="Contoh: First Class Offline - Jakarta" x-model="newBatchName">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Product</label>
-                                        <select class="form-select" x-model="newBatchProductId">
-                                            <option value="">Pilih product</option>
-                                            <template x-for="p in products" :key="p.id">
-                                                <option :value="p.productId" x-text="p.name || p.productId"></option>
-                                            </template>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Type</label>
-                                        <select class="form-select" x-model="newBatchType">
-                                            <option value="Offline">Offline</option>
-                                            <option value="Online">Online</option>
-                                            <option value="Private">Private</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Max Seat</label>
-                                        <input type="number" class="form-control" min="1" placeholder="Kapasitas" x-model.number="newBatchMaxSeat">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Kota</label>
-                                        <select class="form-select" x-model="newBatchLocation">
-                                            <option value="">Pilih Kota</option>
-                                            <option value="Yogyakarta">Yogyakarta</option>
-                                            <option value="Jakarta">Jakarta</option>
-                                            <option value="Surabaya">Surabaya</option>
-                                            <option value="Bandung">Tangsel</option>
-                                            <option value="Bali">Pontianak</option>
-                                            <option value="Lainnya">Lainnya</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Mentor</label>
-                                        <input type="text" class="form-control" placeholder="Nama mentor" x-model="newBatchMentor">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Start Date</label>
-                                        <input type="datetime-local" class="form-control" x-model="newBatchStartDate">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Down Payment (IDR)</label>
-                                        <input type="text" class="form-control text-primary fw-bold" 
-                                            :value="formatCurrency(newBatchDp)"
-                                            @input="newBatchDp = parseCurrency($event.target.value)"
-                                            placeholder="e.g. 500.000">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" @click="addBatch()">Add Batch</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </main>
-        </main>
-
-    </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDYrzxyQ1oGaVRIdnFfYvjydWZz3xdxpTs",
@@ -492,102 +850,48 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
         const db = getFirestore(app);
 
-        window.auth = auth;
         window.db = db;
         window.collection = collection;
         window.getDocs = getDocs;
-        window.addDoc = addDoc;
-        window.deleteDoc = deleteDoc;
-        window.doc = doc;
-        window.updateDoc = updateDoc;
-
-        window.toggleSidebar = () => {
-            const sidebar = document.getElementById('sidebarNav');
-            if (!sidebar) return;
-            const isMobile = window.innerWidth <= 991;
-            if (isMobile) {
-                sidebar.classList.toggle('show');
-            } else {
-                document.body.classList.toggle('sidebar-collapsed');
-            }
-        };
-
-        window.logout = async () => {
-            try {
-                await signOut(auth);
-            } catch (e) {}
-            try {
-                localStorage.removeItem("userData");
-            } catch (e) {}
-            window.location.href = "/index.html";
-        };
     </script>
 
     <script>
-        window.classManager = function () {
+        window.calendarManager = function () {
+            const now = new Date();
             return {
+                timeView: 'month', // 'month' | 'week' | 'day'
+                activeDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
+                selectedDate: null,
+                selectedClass: null,
                 search: "",
                 filterType: "All",
                 filterStatus: "All",
-                sortBy: "priority_sales",
-                sortDirection: "asc",
-                currentPage: 1,
-                pageSize: 10,
+                showMobileFilters: false,
+                showMobileBottomSheet: false,
                 loading: false,
-                newBatchName: "",
-                newBatchProductId: "",
-                newBatchType: "Offline",
-                newBatchMaxSeat: 1,
-                newBatchMentor: "",
-                newBatchStartDate: "",
-                newBatchLocation: "",
-                selectedBatch: null,
-                editBatchId: null,
-                editBatchName: "",
-                editBatchProductId: "",
-                editBatchType: "Offline",
-                editBatchMaxSeat: 1,
-                editBatchMentor: "",
-                editBatchStartDate: "",
-                editBatchLocation: "",
-                newBatchDp: 0,
-                editBatchDp: 0,
                 classes: [],
-                products: [],
+
                 async init() {
-                    // Tunggu Firebase siap (polling 10x @ 500ms)
                     let attempts = 0;
                     while (!(window.db && window.collection && window.getDocs) && attempts < 10) {
-                        console.log("Menunggu inisialisasi Firebase...", attempts + 1);
                         await new Promise(r => setTimeout(r, 500));
                         attempts++;
                     }
 
-                    // Cek dependensi
                     if (!(window.db && window.collection && window.getDocs)) {
-                        console.error("Firebase tidak tersedia setelah menunggu.");
-                        this.useFallbackData();
+                        console.error("Firebase tidak tersedia.");
                         return;
                     }
 
                     this.loading = true;
                     try {
-                        console.log("Memulai pengambilan data Firestore...");
                         const snap = await window.getDocs(window.collection(window.db, "class_availability"));
-                        console.log("Data Firestore berhasil diambil. Jumlah dokumen:", snap.size);
-                        
-                        if (snap.empty) {
-                            console.warn("Firestore terhubung tapi collection 'class_availability' kosong.");
-                        }
-
                         const items = [];
                         let idx = 1;
-                        snap.forEach(function (docSnap) {
+                        snap.forEach((docSnap) => {
                             const d = docSnap.data() || {};
-                            console.log("Loaded doc:", d);
                             items.push({
                                 id: d.id || idx++,
                                 docId: docSnap.id,
@@ -596,6 +900,7 @@
                                 max_seat: Number(d.max_seat || 0),
                                 current_joined: Number(d.current_joined || 0),
                                 start_date: d.start_date || "Flexible",
+                                time: d.time || "",
                                 mentor_name: d.mentor_name || "Unknown",
                                 product_id: d.productId || d.product_id || null,
                                 product_name: d.productName || d.product_name || null,
@@ -606,320 +911,404 @@
                         });
                         this.classes = items;
 
-                        await this.loadProducts();
+                        this.autoSelectActiveDate();
                     } catch (e) {
-                        console.error("Gagal memuat class_availability dari Firestore (Network Error/Aborted):", e);
-                        this.useFallbackData();
-                        console.log("Menggunakan data fallback/local karena koneksi Firestore terputus.");
+                        console.error("Gagal mengambil data kelas:", e);
                     } finally {
                         this.loading = false;
                     }
                 },
-                
-                useFallbackData() {
-                    this.classes = [];
+
+                setViewMode(mode) {
+                    this.timeView = mode;
                 },
-                async loadProducts() {
-                    if (!(window.db && window.collection && window.getDocs)) {
-                        this.products = [];
-                        return;
-                    }
-                    try {
-                        const snap = await window.getDocs(window.collection(window.db, "products"));
-                        const list = [];
-                        snap.forEach((docSnap) => {
-                            const d = docSnap.data() || {};
-                            const id = docSnap.id;
-                            list.push({
-                                id,
-                                productId: d.productId || id,
-                                name: d.name || d.internalName || id
-                            });
-                        });
-                        this.products = list;
-                        console.log("Loaded products for batch dropdown:", list.length);
-                    } catch (e) {
-                        console.error("Gagal memuat products untuk dropdown batch:", e);
-                        this.products = [];
-                    }
-                },
-                formatCurrency(val) {
-                    if (!val && val !== 0) return "";
-                    return new Intl.NumberFormat('id-ID').format(val);
-                },
-                parseCurrency(val) {
-                    if (!val) return 0;
-                    const digits = val.replace(/[^\d]/g, '');
-                    return digits ? parseInt(digits, 10) : 0;
-                },
-                formatDate(dateStr) {
-                    if (!dateStr || dateStr === 'Flexible') return dateStr || 'Flexible';
-                    try {
-                        let date = null;
-                        if (typeof dateStr === 'object' && dateStr && dateStr.toDate) {
-                            date = dateStr.toDate();
-                        } else if (typeof dateStr === 'object' && dateStr && dateStr.seconds) {
-                            date = new Date(dateStr.seconds * 1000);
-                        } else {
-                            date = new Date(dateStr);
+
+                autoSelectActiveDate() {
+                    const today = new Date();
+                    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+                    
+                    const currentPrefix = `${this.activeDate.getFullYear()}-${String(this.activeDate.getMonth() + 1).padStart(2, '0')}`;
+                    const datesWithClasses = [];
+
+                    this.classes.forEach(c => {
+                        const k = this.getDateKey(c);
+                        if (k && k.startsWith(currentPrefix)) {
+                            if (!datesWithClasses.includes(k)) datesWithClasses.push(k);
                         }
-                        if (!date || isNaN(date.getTime())) return String(dateStr);
-                        
-                        const day = date.getDate();
-                        const month = date.toLocaleString('id-ID', { month: 'short' });
-                        const hour = date.getHours().toString().padStart(2, '0');
-                        const minute = date.getMinutes().toString().padStart(2, '0');
-                        const ampm = date.getHours() >= 12 ? 'PM' : 'AM';
-                        return `${day} ${month}, ${hour}:${minute} ${ampm}`;
-                    } catch (e) {
-                        return String(dateStr);
+                    });
+
+                    datesWithClasses.sort();
+
+                    const upcoming = datesWithClasses.find(d => d >= todayStr);
+                    if (upcoming) {
+                        this.selectedDate = upcoming;
+                        const parts = upcoming.split('-');
+                        this.activeDate = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+                    } else if (datesWithClasses.length > 0) {
+                        this.selectedDate = datesWithClasses[0];
+                        const parts = datesWithClasses[0].split('-');
+                        this.activeDate = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+                    } else {
+                        this.selectedDate = todayStr;
                     }
                 },
+
+                // Period Navigation based on active timeView
+                nextPeriod() {
+                    if (this.timeView === 'month') {
+                        this.activeDate = new Date(this.activeDate.getFullYear(), this.activeDate.getMonth() + 1, 1);
+                        this.autoSelectActiveDate();
+                    } else if (this.timeView === 'week') {
+                        const d = new Date(this.activeDate);
+                        d.setDate(d.getDate() + 7);
+                        this.activeDate = d;
+                        this.updateSelectedDateToActive();
+                    } else if (this.timeView === 'day') {
+                        const d = new Date(this.activeDate);
+                        d.setDate(d.getDate() + 1);
+                        this.activeDate = d;
+                        this.updateSelectedDateToActive();
+                    }
+                },
+
+                prevPeriod() {
+                    if (this.timeView === 'month') {
+                        this.activeDate = new Date(this.activeDate.getFullYear(), this.activeDate.getMonth() - 1, 1);
+                        this.autoSelectActiveDate();
+                    } else if (this.timeView === 'week') {
+                        const d = new Date(this.activeDate);
+                        d.setDate(d.getDate() - 7);
+                        this.activeDate = d;
+                        this.updateSelectedDateToActive();
+                    } else if (this.timeView === 'day') {
+                        const d = new Date(this.activeDate);
+                        d.setDate(d.getDate() - 1);
+                        this.activeDate = d;
+                        this.updateSelectedDateToActive();
+                    }
+                },
+
+                goToToday() {
+                    const today = new Date();
+                    this.activeDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                    const y = today.getFullYear();
+                    const m = String(today.getMonth() + 1).padStart(2, '0');
+                    const d = String(today.getDate()).padStart(2, '0');
+                    this.selectedDate = `${y}-${m}-${d}`;
+                    if (this.timeView === 'month') {
+                        this.autoSelectActiveDate();
+                    }
+                },
+
+                get periodResetLabel() {
+                    if (this.timeView === 'month') return 'Bulan Ini';
+                    if (this.timeView === 'week') return 'Minggu Ini';
+                    return 'Hari Ini';
+                },
+
+                get isCurrentPeriod() {
+                    const now = new Date();
+                    if (this.timeView === 'month') {
+                        return this.activeDate.getFullYear() === now.getFullYear() && 
+                               this.activeDate.getMonth() === now.getMonth();
+                    } else if (this.timeView === 'week') {
+                        const ws = this.getWeekStart(this.activeDate);
+                        const we = new Date(ws);
+                        we.setDate(we.getDate() + 6);
+                        we.setHours(23, 59, 59, 999);
+                        return now >= ws && now <= we;
+                    } else if (this.timeView === 'day') {
+                        return this.activeDate.getFullYear() === now.getFullYear() &&
+                               this.activeDate.getMonth() === now.getMonth() &&
+                               this.activeDate.getDate() === now.getDate();
+                    }
+                    return true;
+                },
+
+                updateSelectedDateToActive() {
+                    const y = this.activeDate.getFullYear();
+                    const m = String(this.activeDate.getMonth() + 1).padStart(2, '0');
+                    const d = String(this.activeDate.getDate()).padStart(2, '0');
+                    this.selectedDate = `${y}-${m}-${d}`;
+                },
+
+                get periodTitle() {
+                    if (this.timeView === 'month') {
+                        return new Intl.DateTimeFormat('id-ID', { month: 'long', year: 'numeric' }).format(this.activeDate);
+                    } else if (this.timeView === 'week') {
+                        const ws = this.getWeekStart(this.activeDate);
+                        const we = new Date(ws);
+                        we.setDate(we.getDate() + 6);
+
+                        const startDay = ws.getDate();
+                        const endDay = we.getDate();
+                        const startMonth = new Intl.DateTimeFormat('id-ID', { month: 'short' }).format(ws);
+                        const endMonth = new Intl.DateTimeFormat('id-ID', { month: 'short' }).format(we);
+                        const year = we.getFullYear();
+
+                        if (ws.getMonth() === we.getMonth()) {
+                            return `${startDay} - ${endDay} ${startMonth} ${year}`;
+                        } else {
+                            return `${startDay} ${startMonth} - ${endDay} ${endMonth} ${year}`;
+                        }
+                    } else if (this.timeView === 'day') {
+                        return new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(this.activeDate);
+                    }
+                    return "";
+                },
+
+                // Month Grid Days
+                get calendarDays() {
+                    const year = this.activeDate.getFullYear();
+                    const month = this.activeDate.getMonth();
+                    
+                    const firstDayOfMonth = new Date(year, month, 1);
+                    const lastDayOfMonth = new Date(year, month + 1, 0);
+                    const totalDays = lastDayOfMonth.getDate();
+
+                    let startDayIndex = firstDayOfMonth.getDay() - 1;
+                    if (startDayIndex === -1) startDayIndex = 6;
+
+                    const days = [];
+                    const today = new Date();
+                    const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+                    // Previous month padding
+                    const prevMonthLastDay = new Date(year, month, 0).getDate();
+                    for (let i = startDayIndex - 1; i >= 0; i--) {
+                        const d = prevMonthLastDay - i;
+                        const prevDate = new Date(year, month - 1, d);
+                        const dateKey = `${prevDate.getFullYear()}-${String(prevDate.getMonth() + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                        days.push({
+                            dateKey,
+                            dayNumber: d,
+                            isCurrentMonth: false,
+                            isToday: dateKey === todayKey,
+                            classes: this.getClassesForDate(dateKey)
+                        });
+                    }
+
+                    // Current month days
+                    for (let d = 1; d <= totalDays; d++) {
+                        const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                        days.push({
+                            dateKey,
+                            dayNumber: d,
+                            isCurrentMonth: true,
+                            isToday: dateKey === todayKey,
+                            classes: this.getClassesForDate(dateKey)
+                        });
+                    }
+
+                    // Next month padding
+                    const remaining = 7 - (days.length % 7);
+                    if (remaining < 7) {
+                        for (let d = 1; d <= remaining; d++) {
+                            const nextDate = new Date(year, month + 1, d);
+                            const dateKey = `${nextDate.getFullYear()}-${String(nextDate.getMonth() + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                            days.push({
+                                dateKey,
+                                dayNumber: d,
+                                isCurrentMonth: false,
+                                isToday: dateKey === todayKey,
+                                classes: this.getClassesForDate(dateKey)
+                            });
+                        }
+                    }
+
+                    return days;
+                },
+
+                // Week View Days Calculation
+                getWeekStart(d) {
+                    const date = new Date(d);
+                    const day = date.getDay();
+                    const diff = (day === 0 ? -6 : 1) - day;
+                    date.setDate(date.getDate() + diff);
+                    date.setHours(0, 0, 0, 0);
+                    return date;
+                },
+
+                get weekDays() {
+                    const ws = this.getWeekStart(this.activeDate);
+                    const days = [];
+                    const today = new Date();
+                    const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+                    for (let i = 0; i < 7; i++) {
+                        const cur = new Date(ws);
+                        cur.setDate(cur.getDate() + i);
+                        const y = cur.getFullYear();
+                        const m = String(cur.getMonth() + 1).padStart(2, '0');
+                        const d = String(cur.getDate()).padStart(2, '0');
+                        const dateKey = `${y}-${m}-${d}`;
+
+                        days.push({
+                            dateKey,
+                            dayNumber: cur.getDate(),
+                            dayName: new Intl.DateTimeFormat('id-ID', { weekday: 'short' }).format(cur),
+                            isToday: dateKey === todayKey,
+                            classes: this.getClassesForDate(dateKey)
+                        });
+                    }
+
+                    return days;
+                },
+
+                getClassesForDate(dateKey) {
+                    const query = (this.search || "").trim().toLowerCase();
+                    return this.classes.filter(c => {
+                        const classDateKey = this.getDateKey(c);
+                        if (classDateKey !== dateKey) return false;
+
+                        const status = this.getBatchStatus(c);
+                        const typeMatch = this.filterType === "All" || c.type === this.filterType;
+                        const statusMatch = this.filterStatus === "All" || status === this.filterStatus;
+                        const searchMatch = !query ||
+                            (c.name && c.name.toLowerCase().includes(query)) ||
+                            (c.mentor_name && c.mentor_name.toLowerCase().includes(query)) ||
+                            (c.location && c.location.toLowerCase().includes(query)) ||
+                            (c.product_name && c.product_name.toLowerCase().includes(query));
+
+                        return typeMatch && statusMatch && searchMatch;
+                    });
+                },
+
+                selectDay(day) {
+                    this.selectedDate = day.dateKey;
+                    const parts = day.dateKey.split('-');
+                    this.activeDate = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+
+                    // If mobile view, trigger the slide-up bottom sheet
+                    if (window.innerWidth < 1024) {
+                        this.showMobileBottomSheet = true;
+                    }
+                },
+
+                get selectedDayData() {
+                    if (!this.selectedDate) return null;
+                    const parts = this.selectedDate.split('-');
+                    const dateObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+                    const fullDateFormatted = new Intl.DateTimeFormat('id-ID', {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    }).format(dateObj);
+
+                    return {
+                        dateKey: this.selectedDate,
+                        fullDateFormatted,
+                        classes: this.getClassesForDate(this.selectedDate)
+                    };
+                },
+
+                // Date & Time Helpers
+                getDateKey(item) {
+                    if (!item || !item.start_date || item.start_date === 'Flexible') return null;
+                    try {
+                        let d = null;
+                        if (typeof item.start_date === 'object' && item.start_date && item.start_date.toDate) {
+                            d = item.start_date.toDate();
+                        } else if (typeof item.start_date === 'object' && item.start_date && item.start_date.seconds) {
+                            d = new Date(item.start_date.seconds * 1000);
+                        } else {
+                            d = new Date(item.start_date);
+                        }
+                        if (!d || isNaN(d.getTime())) return null;
+                        const y = d.getFullYear();
+                        const m = String(d.getMonth() + 1).padStart(2, '0');
+                        const day = String(d.getDate()).padStart(2, '0');
+                        return `${y}-${m}-${day}`;
+                    } catch (e) {
+                        return null;
+                    }
+                },
+
+                getTimeShort(item) {
+                    if (!item) return "";
+                    if (item.time && String(item.time).trim()) {
+                        return String(item.time).trim().split(' ')[0];
+                    }
+                    if (!item.start_date || item.start_date === "Flexible") return "";
+                    try {
+                        const d = new Date(item.start_date);
+                        if (isNaN(d.getTime())) return "";
+                        return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+                    } catch (e) {
+                        return "";
+                    }
+                },
+
+                getTimeString(item) {
+                    if (!item) return "Waktu Fleksibel";
+                    if (item.time && String(item.time).trim()) {
+                        const t = String(item.time).trim();
+                        return t.toLowerCase().includes("wib") ? t : `${t} WIB`;
+                    }
+                    if (!item.start_date || item.start_date === "Flexible") return "Waktu Fleksibel";
+                    try {
+                        let d = null;
+                        if (typeof item.start_date === 'object' && item.start_date && item.start_date.toDate) {
+                            d = item.start_date.toDate();
+                        } else if (typeof item.start_date === 'object' && item.start_date && item.start_date.seconds) {
+                            d = new Date(item.start_date.seconds * 1000);
+                        } else {
+                            d = new Date(item.start_date);
+                        }
+                        if (!d || isNaN(d.getTime())) return "Waktu Fleksibel";
+                        const h = d.getHours();
+                        const m = d.getMinutes();
+                        if (h === 0 && m === 0) {
+                            return "00:00 WIB (Fleksibel / Hubungi Admin)";
+                        }
+                        return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')} WIB`;
+                    } catch (e) {
+                        return "Waktu Fleksibel";
+                    }
+                },
+
+                getFullDateString(item) {
+                    if (!item || !item.start_date || item.start_date === "Flexible") return "Jadwal Fleksibel";
+                    try {
+                        let d = null;
+                        if (typeof item.start_date === 'object' && item.start_date && item.start_date.toDate) {
+                            d = item.start_date.toDate();
+                        } else if (typeof item.start_date === 'object' && item.start_date && item.start_date.seconds) {
+                            d = new Date(item.start_date.seconds * 1000);
+                        } else {
+                            d = new Date(item.start_date);
+                        }
+                        if (!d || isNaN(d.getTime())) return String(item.start_date);
+                        return new Intl.DateTimeFormat('id-ID', {
+                            weekday: 'long',
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        }).format(d);
+                    } catch (e) {
+                        return String(item.start_date);
+                    }
+                },
+
                 isBatchClosed(item) {
                     if (!item || !item.start_date || item.start_date === 'Flexible') return false;
                     try {
-                        let date = null;
+                        let d = null;
                         if (typeof item.start_date === 'object' && item.start_date && item.start_date.toDate) {
-                            date = item.start_date.toDate();
+                            d = item.start_date.toDate();
                         } else if (typeof item.start_date === 'object' && item.start_date && item.start_date.seconds) {
-                            date = new Date(item.start_date.seconds * 1000);
+                            d = new Date(item.start_date.seconds * 1000);
                         } else {
-                            date = new Date(item.start_date);
+                            d = new Date(item.start_date);
                         }
-                        if (!date || isNaN(date.getTime())) return false;
-                        const now = new Date();
-                        return date.getTime() < now.getTime();
+                        if (!d || isNaN(d.getTime())) return false;
+                        return d.getTime() < Date.now();
                     } catch (e) {
                         return false;
                     }
                 },
-                async updateJoined(id, delta) {
-                    const cls = this.classes.find(c => c.id === id);
-                    if (!cls) return;
-                    const nextVal = cls.current_joined + delta;
-                    if (nextVal < 0 || nextVal > cls.max_seat) return;
-                    cls.current_joined = nextVal;
 
-                    if (cls.docId && window.db && window.doc && window.updateDoc) {
-                        try {
-                            await window.updateDoc(
-                                window.doc(window.db, "class_availability", cls.docId),
-                                { current_joined: cls.current_joined }
-                            );
-                        } catch (e) {
-                            console.error("Gagal mengupdate current_joined di Firestore:", e);
-                        }
-                    }
-                },
-                async deleteBatch(item) {
-                    this.selectedBatch = item;
-                    const modalEl = document.getElementById("deleteBatchModal");
-                    if (modalEl && typeof bootstrap !== "undefined" && bootstrap.Modal) {
-                        bootstrap.Modal.getOrCreateInstance(modalEl).show();
-                    }
-                },
-                async confirmDeleteBatch() {
-                    if (!this.selectedBatch) return;
-                    const item = this.selectedBatch;
-
-                    const modalEl = document.getElementById("deleteBatchModal");
-                    if (modalEl && typeof bootstrap !== "undefined" && bootstrap.Modal) {
-                        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-                    }
-
-                    try {
-                        this.classes = this.classes.filter(c => c.id !== item.id);
-
-                        if (item.docId && window.db && window.deleteDoc && window.doc) {
-                            await window.deleteDoc(window.doc(window.db, "class_availability", item.docId));
-                            console.log("Deleted doc:", item.docId);
-                        } else {
-                            console.warn("Delete skipped (no docId or Firebase not ready)");
-                        }
-                    } catch (e) {
-                        console.error("Error deleting batch:", e);
-                        alert("Gagal menghapus data dari server.");
-                    } finally {
-                        this.selectedBatch = null;
-                    }
-                },
-                editBatch(item) {
-                    this.selectedBatch = item;
-                    this.editBatchId = item.id;
-                    this.editBatchName = item.name || "";
-                    this.editBatchProductId = item.product_id || "";
-                    this.editBatchType = item.type || "Offline";
-                    this.editBatchMaxSeat = Number(item.max_seat || 1);
-                    this.editBatchMentor = item.mentor_name || "";
-                    this.editBatchStartDate = item.start_date && item.start_date !== "Flexible" ? item.start_date : "";
-                    this.editBatchLocation = item.location || "";
-                    this.editBatchDp = Number(item.down_payment || 0);
-
-                    const modalEl = document.getElementById("editCapacityModal");
-                    if (modalEl && typeof bootstrap !== "undefined" && bootstrap.Modal) {
-                        bootstrap.Modal.getOrCreateInstance(modalEl).show();
-                    }
-                },
-                async confirmEditBatch() {
-                    if (!this.selectedBatch) return;
-
-                    const name = (this.editBatchName || "").trim();
-                    const productId = (this.editBatchProductId || "").trim();
-                    const type = this.editBatchType || "Offline";
-                    const maxSeat = Number(this.editBatchMaxSeat) || 0;
-                    const mentor = (this.editBatchMentor || "").trim();
-                    const startDate = (this.editBatchStartDate || "").trim() || "Flexible";
-                    const location = (this.editBatchLocation || "").trim();
-                    const downPayment = Number(this.editBatchDp) || 0;
-
-                    if (!name || maxSeat <= 0) {
-                        alert("Nama class dan Max Seat wajib diisi.");
-                        return;
-                    }
-
-                    if (!productId) {
-                        alert("Product wajib dipilih.");
-                        return;
-                    }
-
-                    const productRef = this.products.find(p => p.productId === productId);
-
-                    this.selectedBatch.name = name;
-                    this.selectedBatch.type = type;
-                    this.selectedBatch.max_seat = maxSeat;
-                    if (this.selectedBatch.current_joined > maxSeat) {
-                        this.selectedBatch.current_joined = maxSeat;
-                    }
-                    this.selectedBatch.start_date = startDate;
-                    this.selectedBatch.mentor_name = mentor || "Unknown";
-                    this.selectedBatch.product_id = productId;
-                    this.selectedBatch.product_name = productRef ? productRef.name : null;
-                    this.selectedBatch.location = location;
-                    this.selectedBatch.down_payment = downPayment;
-
-                    if (this.selectedBatch.docId && window.db && window.doc && window.updateDoc) {
-                        try {
-                            await window.updateDoc(
-                                window.doc(window.db, "class_availability", this.selectedBatch.docId),
-                                {
-                                    name: this.selectedBatch.name,
-                                    type: this.selectedBatch.type,
-                                    max_seat: this.selectedBatch.max_seat,
-                                    current_joined: this.selectedBatch.current_joined,
-                                    start_date: this.selectedBatch.start_date,
-                                    mentor_name: this.selectedBatch.mentor_name,
-                                    productId: this.selectedBatch.product_id,
-                                    productName: this.selectedBatch.product_name,
-                                    location: this.selectedBatch.location || "",
-                                    down_payment: this.selectedBatch.down_payment || 0
-                                }
-                            );
-                        } catch (e) {
-                            console.error("Gagal mengupdate batch di Firestore:", e);
-                            alert("Perubahan gagal disimpan ke server.\nCek console untuk detail error.");
-                        }
-                    } else {
-                        console.warn("Update batch diabaikan (docId atau Firebase belum siap).");
-                    }
-
-                    const modalEl = document.getElementById("editCapacityModal");
-                    if (modalEl && typeof bootstrap !== "undefined" && bootstrap.Modal) {
-                        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-                    }
-
-                    this.editBatchId = null;
-                    this.editBatchName = "";
-                    this.editBatchProductId = "";
-                    this.editBatchType = "Offline";
-                    this.editBatchMaxSeat = 1;
-                    this.editBatchMentor = "";
-                    this.editBatchStartDate = "";
-                    this.editBatchLocation = "";
-                    this.editBatchDp = 0;
-                    this.selectedBatch = null;
-                },
-                async addBatch() {
-                    const name = (this.newBatchName || "").trim();
-                    const productId = (this.newBatchProductId || "").trim();
-                    const type = this.newBatchType || "Offline";
-                    const maxSeat = Number(this.newBatchMaxSeat) || 0;
-                    const mentor = (this.newBatchMentor || "").trim();
-                    const startDate = (this.newBatchStartDate || "").trim() || "Flexible";
-                    const location = (this.newBatchLocation || "").trim();
-                    const downPayment = Number(this.newBatchDp) || 0;
-
-                    if (!name || maxSeat <= 0) {
-                        alert("Nama class dan Max Seat wajib diisi.");
-                        return;
-                    }
-
-                    if (!productId) {
-                        alert("Product wajib dipilih.");
-                        return;
-                    }
-
-                    const nextId = this.classes.length
-                        ? Math.max.apply(null, this.classes.map(c => Number(c.id) || 0)) + 1
-                        : 1;
-
-                    const productRef = this.products.find(p => p.productId === productId);
-
-                    const newItem = {
-                        id: nextId,
-                        name,
-                        type,
-                        max_seat: maxSeat,
-                        current_joined: 0,
-                        start_date: startDate,
-                        mentor_name: mentor || "Unknown",
-                        product_id: productId,
-                        product_name: productRef ? productRef.name : null,
-                        location,
-                        down_payment: downPayment
-                    };
-
-                    this.classes.push(newItem);
-
-                    if (window.db && window.collection && window.addDoc) {
-                        try {
-                            await window.addDoc(
-                                window.collection(window.db, "class_availability"),
-                                {
-                                    name: newItem.name,
-                                    type: newItem.type,
-                                    max_seat: newItem.max_seat,
-                                    current_joined: newItem.current_joined,
-                                    start_date: newItem.start_date,
-                                    mentor_name: newItem.mentor_name,
-                                    productId: newItem.product_id,
-                                    productName: newItem.product_name,
-                                    location: newItem.location || "",
-                                    down_payment: newItem.down_payment || 0,
-                                    created_at: new Date()
-                                }
-                            );
-                        } catch (e) {
-                            console.error("Gagal menyimpan batch ke Firestore:", e);
-                            alert("Data batch sudah muncul di tabel, tapi gagal disimpan ke Firebase.\nCek console untuk detail error (misal rules / network).");
-                        }
-                    } else {
-                        console.error("Firestore belum terinisialisasi dengan benar (db/collection/addDoc tidak tersedia).");
-                    }
-
-                    this.newBatchName = "";
-                    this.newBatchProductId = "";
-                    this.newBatchType = "Offline";
-                    this.newBatchMaxSeat = 1;
-                    this.newBatchMentor = "";
-                    this.newBatchStartDate = "";
-                    this.newBatchLocation = "";
-                    this.newBatchDp = 0;
-
-                    const modalEl = document.getElementById("addBatchModal");
-                    if (modalEl && typeof bootstrap !== "undefined" && bootstrap.Modal) {
-                        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-                    }
-                },
                 getBatchStatus(item) {
                     if (!item) return "Open";
                     if (this.isBatchClosed(item)) return "Closed";
@@ -928,95 +1317,33 @@
                     if (seatsLeft <= 2) return "Almost Full";
                     return "Open";
                 },
-                getScheduleTs(item) {
-                    if (!item || !item.start_date || item.start_date === "Flexible") return Number.POSITIVE_INFINITY;
-                    let date = null;
-                    if (typeof item.start_date === 'object' && item.start_date && item.start_date.toDate) {
-                        date = item.start_date.toDate();
-                    } else if (typeof item.start_date === 'object' && item.start_date && item.start_date.seconds) {
-                        date = new Date(item.start_date.seconds * 1000);
-                    } else {
-                        date = new Date(item.start_date);
-                    }
-                    if (!date || isNaN(date.getTime())) return Number.POSITIVE_INFINITY;
-                    return date.getTime();
-                },
-                get totalPages() {
-                    return Math.ceil(this.filteredClasses.length / this.pageSize) || 1;
-                },
-                get pagedClasses() {
-                    const start = (this.currentPage - 1) * this.pageSize;
-                    return this.filteredClasses.slice(start, start + this.pageSize);
-                },
-                get pageNumbers() {
-                    const total = this.totalPages;
-                    const current = this.currentPage;
-                    if (total <= 7) {
-                        return Array.from({ length: total }, (_, i) => i + 1);
-                    }
-                    const pages = [];
-                    pages.push(1);
-                    if (current > 3) pages.push('...');
-                    const start = Math.max(2, current - 1);
-                    const end = Math.min(total - 1, current + 1);
-                    for (let i = start; i <= end; i++) {
-                        pages.push(i);
-                    }
-                    if (current < total - 2) pages.push('...');
-                    pages.push(total);
-                    return pages;
-                },
-                get filteredClasses() {
-                    const query = (this.search || "").trim().toLowerCase();
-                    return this.classes
-                        .filter(c => {
-                            const status = this.getBatchStatus(c);
-                            const typeMatch = this.filterType === "All" || c.type === this.filterType;
-                            const statusMatch = this.filterStatus === "All" || status === this.filterStatus;
-                            const searchMatch = !query ||
-                                (c.name && c.name.toLowerCase().includes(query)) ||
-                                (c.mentor_name && c.mentor_name.toLowerCase().includes(query)) ||
-                                (c.product_name && c.product_name.toLowerCase().includes(query));
-                            return typeMatch && statusMatch && searchMatch;
-                        })
-                        .sort((a, b) => {
-                            let result = 0;
-                            const seatsA = Math.max(0, a.max_seat - a.current_joined);
-                            const seatsB = Math.max(0, b.max_seat - b.current_joined);
 
-                            const compareText = (txt1, txt2) => String(txt1 || "").localeCompare(String(txt2 || ""), "id", { sensitivity: "base" });
+                formatCurrency(val) {
+                    if (!val && val !== 0) return "-";
+                    return new Intl.NumberFormat('id-ID').format(val);
+                },
 
-                            if (this.sortBy === "name") {
-                                result = compareText(a.name, b.name);
-                            } else if (this.sortBy === "schedule") {
-                                result = this.getScheduleTs(a) - this.getScheduleTs(b);
-                                if (result === 0) result = compareText(a.name, b.name);
-                            } else if (this.sortBy === "seats_left") {
-                                result = seatsA - seatsB;
-                                if (result === 0) result = compareText(a.name, b.name);
-                            } else if (this.sortBy === "mentor") {
-                                result = compareText(a.mentor_name, b.mentor_name);
-                                if (result === 0) result = compareText(a.name, b.name);
-                            } else if (this.sortBy === "product") {
-                                const prodA = a.product_name || a.product_id || "";
-                                const prodB = b.product_name || b.product_id || "";
-                                result = compareText(prodA, prodB);
-                                if (result === 0) result = compareText(a.name, b.name);
-                            } else {
-                                // Default: Prioritas Penjualan (Exact match with Pilot)
-                                const soldOutA = seatsA <= 0 || this.isBatchClosed(a);
-                                const soldOutB = seatsB <= 0 || this.isBatchClosed(b);
-                                if (soldOutA !== soldOutB) {
-                                    result = soldOutA ? 1 : -1;
-                                } else {
-                                    result = seatsA - seatsB;
-                                }
-                                if (result === 0) result = this.getScheduleTs(a) - this.getScheduleTs(b);
-                                if (result === 0) result = compareText(a.name, b.name);
-                            }
+                openClassDetail(item) {
+                    this.selectedClass = item;
+                    const modalEl = document.getElementById("classDetailModal");
+                    if (modalEl && typeof bootstrap !== "undefined" && bootstrap.Modal) {
+                        bootstrap.Modal.getOrCreateInstance(modalEl).show();
+                    }
+                },
 
-                            return this.sortDirection === "asc" ? result : -result;
-                        });
+                getWhatsAppUrl(item) {
+                    if (!item) return "https://wa.me/6285162992597";
+                    const time = this.getTimeString(item);
+                    const date = this.getFullDateString(item);
+                    const text = encodeURIComponent(
+                        `Halo Admin Dialogika, saya ingin tanya dan mendaftar untuk kelas:\n` +
+                        `*${item.name}*\n` +
+                        `• Jadwal: ${date} (${time})\n` +
+                        `• Tipe: ${item.type}\n` +
+                        `• Lokasi: ${item.location || '-'}\n` +
+                        `Apakah masih tersedia kuota kursi? Terima kasih.`
+                    );
+                    return `https://wa.me/6285162992597?text=${text}`;
                 }
             };
         };
