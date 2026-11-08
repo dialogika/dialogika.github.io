@@ -5,14 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jadwal & Ketersediaan Kelas - Dialogika</title>
     
+    <!-- Favicon -->
+    <link href="../assets/img/favicon.webp" rel="icon">
+    <link href="../assets/img/apple-touch-icon.webp" rel="apple-touch-icon">
+
+    <!-- Stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Template Style -->
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+    <!-- Tailwind & Alpine -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.01em; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            letter-spacing: -0.01em; 
+            background-color: #F8FAFC;
+        }
         .mono { font-family: 'JetBrains Mono', monospace; }
         [x-cloak] { display: none !important; }
         
@@ -38,14 +54,241 @@
             background-color: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(2px);
         }
+
+        /* Footer Custom Polish matching Dialogika Brand */
+        .footer-heading-gold {
+            color: #f9c72e !important;
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            margin-bottom: 14px !important;
+            position: relative;
+        }
+        .footer-square-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9c62e;
+            color: #fff !important;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .footer-square-btn:hover {
+            background-color: #ffb13b;
+            color: #231f20 !important;
+            transform: translateY(-2px);
+        }
+        #footer .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #footer .footer-links ul li {
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+        }
+        #footer .footer-links ul li i {
+            color: #f9c72e;
+            margin-right: 6px;
+            font-size: 15px;
+        }
+        #footer .footer-links ul a {
+            color: rgba(255, 255, 255, 0.85);
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        #footer .footer-links ul a:hover {
+            color: #f9c72e;
+        }
+
+        .sosmed-container {
+            background-color: transparent !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 0 !important;
+        }
+        #footer {
+            margin-bottom: 0 !important;
+        }
     </style>
 </head>
 <body class="bg-[#F8FAFC] text-slate-900 min-h-screen">
 
-    <main class="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-7" x-data="calendarManager()" x-init="init()">
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-flex align-items-center fixed-top bg-white border-b border-slate-100">
+        <div class="container d-flex justify-content-between">
+            <div class="contact-info d-flex align-items-center text-xs">
+                <i class="bi bi-envelope text-[#0b2b6a]"></i> 
+                <a href="mailto:admin@dialogika.co" class="text-slate-600 hover:text-[#0b2b6a] transition">admin@dialogika.co</a>
+                <i class="bi bi-phone text-[#0b2b6a] ms-3"></i> 
+                <a href="tel:+6285162992597" class="text-slate-600 hover:text-[#0b2b6a] transition">+62 851 6299 2597</a>
+            </div>
+            <div class="d-none d-lg-flex social-links align-items-center gap-3 text-xs">
+                <a href="https://x.com/dialogika_co" target="_blank" class="text-[#0b2b6a] hover:opacity-80 transition" title="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+                <a href="https://www.facebook.com/dialogika.co" target="_blank" class="text-[#0b2b6a] hover:opacity-80 transition" title="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/dialogika.co" target="_blank" class="text-[#0b2b6a] hover:opacity-80 transition" title="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/dialogika" target="_blank" class="text-[#0b2b6a] hover:opacity-80 transition" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top bg-white border-b border-slate-200/80 shadow-sm">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <!-- Logo -->
+            <a href="../index.html" class="logo me-auto flex items-center">
+                <img src="../assets/img/logo.webp" alt="Dialogika" class="img-fluid" style="max-height: 42px;">
+            </a>
+
+            <!-- Desktop Navigation Menu -->
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul class="d-none d-lg-flex">
+                    <li><a class="nav-link scrollto" href="../index.html">Home</a></li>
+                    
+                    <li class="dropdown"><a href="index.html"><span>Program</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li class="dropdown"><a href="#"><span>Online</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="basic-play.html">Basic Play</a></li>
+                                    <li><a href="basic-class.html">Basic Class <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                                    <li><hr class="dropdown-divider"/></li>
+                                    <li><a href="kids-play.html">Kids Play</a></li>
+                                    <li><a href="kids-class.html">Kids Class <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#"><span>Offline</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="first-class.html">First Class <span class="badge rounded-pill text-bg-success">Best Buy</span></a></li>
+                                    <li><a href="first-lite.html">First Lite</a></li>
+                                    <li><a href="first-kids.html">First Kids</a></li>
+                                    <li><hr class="dropdown-divider"/></li>
+                                    <li><a href="first-private.html">First Private</a></li>
+                                </ul>
+                            </li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li class="dropdown"><a href="#"><span>Area</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="index-jogja.html">Yogyakarta</a></li>
+                                    <li><a href="index-tangsel.html">Bintaro</a></li>
+                                    <li><a href="index-solo.html">Solo</a></li>
+                                    <li><a href="index-banjarbaru.html">Pontianak</a></li>
+                                    <li><a href="index-surabaya.html">Surabaya</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a class="nav-link scrollto" href="https://www.dialogika.co/sertifikasi/">Sertifikasi</a></li>
+                    <li><a class="nav-link scrollto" href="https://www.dialogika.co/corporate/">Corporate</a></li>
+
+                    <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="https://www.dialogika.co/about">About Us</a></li>
+                            <li><a href="https://www.dialogika.co/event/">Event</a></li>
+                            <li><a href="https://www.dialogika.co/intern">Internship</a></li>
+                            <li><a href="https://www.dialogika.co/blog">Blog</a></li>
+                            <li><a href="https://www.dialogika.co/help/">Service</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Actions (Daftar Sekarang Button & Mobile Toggle) -->
+            <div class="d-flex align-items-center gap-2">
+                <a href="https://api.whatsapp.com/send?phone=6285162992597&text=Halo%20Admin%20Dialogika,%20saya%20tertarik%20dengan%20jadwal%20ketersediaan%20kelas%20Dialogika" target="_blank" class="appointment-btn">
+                    Daftar <span class="d-none d-sm-inline">Sekarang</span>
+                </a>
+                <button type="button" class="btn p-1 d-lg-none text-slate-800 focus:outline-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-label="Toggle Navigation">
+                    <i class="bi bi-list fs-2"></i>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ======= Mobile Nav Drawer (Offcanvas) ======= -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header border-b border-slate-100">
+            <a href="../index.html">
+                <img src="../assets/img/logo.webp" alt="Dialogika" style="max-height: 34px;"/>
+            </a>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-3">
+            <div class="list-group list-group-flush space-y-1">
+                <a href="../index.html" class="list-group-item list-group-item-action border-0 rounded-xl font-bold text-sm py-2.5">
+                    <i class="bi bi-house-door me-2 text-primary"></i> Home
+                </a>
+
+                <!-- Collapsible Program -->
+                <div class="border-0">
+                    <button class="w-100 list-group-item list-group-item-action border-0 rounded-xl font-bold text-sm py-2.5 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#mobileProgramCollapse">
+                        <span><i class="bi bi-grid me-2 text-primary"></i> Program</span>
+                        <i class="bi bi-chevron-down text-xs"></i>
+                    </button>
+                    <div class="collapse ps-3 pe-1 pt-1" id="mobileProgramCollapse">
+                        <div class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider mt-2 mb-1">Online</div>
+                        <a href="basic-class.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Basic Class</a>
+                        <a href="basic-play.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Basic Play</a>
+                        <a href="kids-class.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Kids Class</a>
+                        <a href="kids-play.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Kids Play</a>
+
+                        <div class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider mt-3 mb-1">Offline</div>
+                        <a href="first-class.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">First Class</a>
+                        <a href="first-lite.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">First Lite</a>
+                        <a href="first-kids.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">First Kids</a>
+                        <a href="first-private.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">First Private</a>
+
+                        <div class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider mt-3 mb-1">Area</div>
+                        <a href="index-jogja.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Yogyakarta</a>
+                        <a href="index-tangsel.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Bintaro</a>
+                        <a href="index-solo.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Solo</a>
+                        <a href="index-banjarbaru.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Pontianak</a>
+                        <a href="index-surabaya.html" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Surabaya</a>
+                    </div>
+                </div>
+
+                <a href="https://www.dialogika.co/sertifikasi/" class="list-group-item list-group-item-action border-0 rounded-xl font-bold text-sm py-2.5">
+                    <i class="bi bi-award me-2 text-primary"></i> Sertifikasi
+                </a>
+                <a href="https://www.dialogika.co/corporate/" class="list-group-item list-group-item-action border-0 rounded-xl font-bold text-sm py-2.5">
+                    <i class="bi bi-briefcase me-2 text-primary"></i> Corporate
+                </a>
+
+                <!-- Collapsible More -->
+                <div class="border-0">
+                    <button class="w-100 list-group-item list-group-item-action border-0 rounded-xl font-bold text-sm py-2.5 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMoreCollapse">
+                        <span><i class="bi bi-three-dots me-2 text-primary"></i> More</span>
+                        <i class="bi bi-chevron-down text-xs"></i>
+                    </button>
+                    <div class="collapse ps-3 pe-1 pt-1" id="mobileMoreCollapse">
+                        <a href="https://www.dialogika.co/about" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">About Us</a>
+                        <a href="https://www.dialogika.co/event/" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Event</a>
+                        <a href="https://www.dialogika.co/intern" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Internship</a>
+                        <a href="https://www.dialogika.co/blog" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Blog</a>
+                        <a href="https://www.dialogika.co/help/" class="list-group-item list-group-item-action border-0 text-xs py-1.5 rounded-lg">Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-4 mt-3 border-t border-slate-100">
+                <a href="https://api.whatsapp.com/send?phone=6285162992597&text=Halo%20Admin%20Dialogika,%20saya%20tertarik%20dengan%20jadwal%20ketersediaan%20kelas%20Dialogika" target="_blank" class="w-100 btn py-2.5 rounded-xl font-bold text-xs text-white shadow" style="background: linear-gradient(to bottom, #0f61a8 5%, #0b2b6a 100%);">
+                    <i class="bi bi-whatsapp me-1.5"></i> Daftar Sekarang
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container with offset padding for fixed header -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 pt-44 sm:pt-48 lg:pt-[175px] pb-12 sm:pb-16" x-data="calendarManager()" x-init="init()">
         
-        <!-- Header -->
-        <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-4 sm:mb-6">
+        <!-- Page Title & Navigation Bar -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-4 sm:mb-6">
             <div>
                 <nav class="flex items-center gap-1.5 text-[11px] font-bold text-blue-600 uppercase tracking-widest mb-1.5">
                     <a href="../index.html" class="hover:underline flex items-center gap-1">
@@ -92,7 +335,7 @@
                     <span>Hari</span>
                 </button>
             </div>
-        </header>
+        </div>
 
         <!-- Compact Navigation & Filter Toolbar -->
         <div class="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl p-3 sm:p-4 shadow-sm mb-4 sm:mb-6">
@@ -834,6 +1077,201 @@
 
     </main>
 
+    <!-- ======= Footer (Canonical Dialogika Footer) ======= -->
+    <footer id="footer">
+        <div class="footer-top py-12" style="background-color: #001138;">
+            <div class="container">
+                <div class="row justify-content-between gy-4">
+
+                    <!-- Col 1: Brand Info & Contact Us -->
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3 class="font-extrabold tracking-tight text-2xl mb-3 text-warning font-sans">DIALOGIKA</h3>
+                        <p class="text-white text-xs leading-relaxed mb-3">
+                            Wadah pengembangan diri membangun aura positif sekaligus meningkatkan kualitas skill, karir hingga level kehidupan Anda.
+                        </p>
+                        <p class="text-white text-xs leading-relaxed mb-4">
+                            Kami memberikan pelatihan Kelas Public Speaking karena dengan menguasai Public Speaking, mental, perilaku, penampilan hingga sikap Anda terbentuk.
+                        </p>
+                        
+                        <h4 class="footer-heading-gold">Contact Us</h4>
+                        <div class="d-flex gap-2 mb-3">
+                            <a href="https://wa.me/6285162992597" target="_blank" class="footer-square-btn" title="WhatsApp Dialogika">
+                                <i class="bx bxl-whatsapp text-lg"></i>
+                            </a>
+                            <a href="mailto:hello@dialogika.co" class="footer-square-btn" title="Email Dialogika">
+                                <i class="bi bi-envelope-at-fill text-base"></i>
+                            </a>
+                        </div>
+                        <p class="text-white text-xs leading-relaxed mb-1">Punya pertanyaan mengenai Dialogika?</p>
+                        <p class="text-white text-xs leading-relaxed mb-4">
+                            <strong>Phone:</strong> <a href="tel:+6285162992597" class="text-white hover:underline">+62 851-6299-2597</a><br>
+                            <strong>Whatsapp:</strong> <a href="https://wa.me/6285780007799" target="_blank" class="text-white hover:underline">+62 857-8000-7799</a><br>
+                            <strong>Email:</strong> <a href="mailto:hello@dialogika.co" class="text-white hover:underline">hello@dialogika.co</a>
+                        </p>
+
+                        <h4 class="footer-heading-gold">Follow Us</h4>
+                        <div class="d-flex gap-2">
+                            <a href="https://x.com/dialogika_co" target="_blank" class="footer-square-btn" title="Twitter/X">
+                                <i class="bi bi-twitter-x"></i>
+                            </a>
+                            <a href="https://www.facebook.com/dialogika.co" target="_blank" class="footer-square-btn" title="Facebook">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="https://instagram.com/dialogika.co" target="_blank" class="footer-square-btn" title="Instagram">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/company/dialogika" target="_blank" class="footer-square-btn" title="LinkedIn">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Col 2: Online Program, Offline Program, About, Useful Links -->
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4 class="footer-heading-gold">Online Program</h4>
+                        <ul class="mb-4">
+                            <li>
+                                <i class="bx bx-chevron-right"></i>
+                                <a href="basic-class.html" class="d-inline-flex items-center gap-1.5">
+                                    Basic Class <span class="badge rounded-pill text-bg-info text-white font-bold text-[10px]">Best Selling</span>
+                                </a>
+                            </li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="kids-class.html">Kids Class</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="kids-private.html">Kids Private</a></li>
+                        </ul>
+
+                        <h4 class="footer-heading-gold">Offline Program</h4>
+                        <ul class="mb-4">
+                            <li>
+                                <i class="bx bx-chevron-right"></i>
+                                <a href="index-jogja.html" class="d-inline-flex items-center gap-1.5">
+                                    Yogyakarta <span class="badge rounded-pill text-bg-info text-white font-bold text-[10px]">Best Selling</span>
+                                </a>
+                            </li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="index.html">Jakarta</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="index-tangsel.html">Bintaro</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="index-surabaya.html">Surabaya</a></li>
+                        </ul>
+
+                        <h4 class="footer-heading-gold">About</h4>
+                        <ul class="mb-4">
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.dialogika.co/about" target="_blank">About</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.dialogika.co/help/payment" target="_blank">FAQ</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.dialogika.co/help/" target="_blank">Help Center</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.dialogika.co/about/terms.html" target="_blank">Terms & Agreement</a></li>
+                        </ul>
+
+                        <h4 class="footer-heading-gold">Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.dialogika.co/blog/" target="_blank">Blog</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.dialogika.co/mentor/" target="_blank">Mentor</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Corporate Program & Instagram Post -->
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4 class="footer-heading-gold">Corporate Program</h4>
+                        <ul class="mb-4">
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.dialogika.co/corporate/" target="_blank">Effective Communication</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.dialogika.co/corporate/" target="_blank">Service Excellence</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.dialogika.co/corporate/" target="_blank">Sales Training</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.dialogika.co/corporate/" target="_blank">Tour Guide Training</a></li>
+                        </ul>
+
+                        <div class="footer-recent-post">
+                            <h4 class="footer-heading-gold">Instagram Post</h4>
+                            <ul class="space-y-3">
+                                <li class="d-flex align-items-center gap-2.5">
+                                    <img src="../assets/img/ig/1.jpg" alt="Instagram Post 1" class="rounded ig-post shrink-0" style="width: 58px; height: 58px; object-fit: cover; border-radius: 8px;">
+                                    <div class="post text-xs">
+                                        <a target="_blank" href="https://www.instagram.com/p/Claa6CPISTB/" class="text-white hover:text-warning leading-snug line-clamp-2 transition font-medium">Gambaran kelas praktek public speaking secara offline</a>
+                                        <div class="date text-[11px] text-slate-400 mt-1"><i class="bx bx-calendar me-1"></i>Nov 26, 2022</div>
+                                    </div>
+                                </li>
+                                <hr class="border-white/10 my-2">
+                                <li class="d-flex align-items-center gap-2.5">
+                                    <img src="../assets/img/ig/2.jpg" alt="Instagram Post 2" class="rounded ig-post shrink-0" style="width: 58px; height: 58px; object-fit: cover; border-radius: 8px;">
+                                    <div class="post text-xs">
+                                        <a target="_blank" href="https://www.instagram.com/p/CyXfjtkrJe7/" class="text-white hover:text-warning leading-snug line-clamp-2 transition font-medium">Tips-tips agar di notice dosen didalam kelas dan latihan membangun persona.</a>
+                                        <div class="date text-[11px] text-slate-400 mt-1"><i class="bx bx-calendar me-1"></i>Oct 14, 2023</div>
+                                    </div>
+                                </li>
+                                <hr class="border-white/10 my-2">
+                                <li class="d-flex align-items-center gap-2.5">
+                                    <img src="../assets/img/ig/3.jpg" alt="Instagram Post 3" class="rounded ig-post shrink-0" style="width: 58px; height: 58px; object-fit: cover; border-radius: 8px;">
+                                    <div class="post text-xs">
+                                        <a target="_blank" href="https://www.instagram.com/p/CzAf73qr2mj/" class="text-white hover:text-warning leading-snug line-clamp-2 transition font-medium">5 tips jitu atasi otak yang ngeblank saat berbicara di depan umum</a>
+                                        <div class="date text-[11px] text-slate-400 mt-1"><i class="bx bx-calendar me-1"></i>Oct 30, 2023</div>
+                                    </div>
+                                </li>
+                                <hr class="border-white/10 my-2">
+                                <li class="d-flex align-items-center gap-2.5">
+                                    <img src="https://i.pinimg.com/736x/c6/f9/78/c6f978feb7a8f99fb4df7753983d7e63.jpg" alt="Instagram Post 4" class="rounded ig-post shrink-0" style="width: 58px; height: 58px; object-fit: cover; border-radius: 8px;">
+                                    <div class="post text-xs">
+                                        <a target="_blank" href="https://www.dialogika.co/blog-dialogika/blog/3-kemampuan-komunikasi-dalam-dunia-kerja-yang-paling-diperlukan-rugi-kalau-gak-tahu-teori-komunikasi-organisasi.html" class="text-white hover:text-warning leading-snug line-clamp-2 transition font-medium">3 Kemampuan Komunikasi Dalam Dunia Kerja yang Paling Diperlukan, Rugi Kalau Gak Tahu!</a>
+                                        <div class="date text-[11px] text-slate-400 mt-1"><i class="bx bx-calendar me-1"></i>Oct 25, 2026</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Col 4: Subscribe, Payment Method, & Legalitas HAM -->
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4 class="footer-heading-gold">Subscribe</h4>
+                        <p class="text-white text-xs leading-relaxed mb-3">
+                            Dapatkan update program, tips public speaking, dan info promo terbaru dari Dialogika melalui email.
+                        </p>
+                        
+                        <form action="javascript:void(0)" role="form" id="subscriptionForm" class="d-flex items-center bg-white rounded-full p-1.5 mb-4 shadow-sm">
+                            <input type="email" id="footerEmail" name="email" class="form-control border-0 text-xs px-3 focus:ring-0 text-slate-800" placeholder="Masukkan email kamu" style="box-shadow: none;">
+                            <button type="button" class="btn px-4 py-2 rounded-full font-bold text-xs text-white shrink-0 shadow" style="background: linear-gradient(to bottom, #0f61a8 5%, #0b2b6a 100%);">
+                                Subscribe
+                            </button>
+                        </form>
+
+                        <h4 class="footer-heading-gold">Payment Method</h4>
+                        <p class="text-xs text-slate-300 mb-1.5"><i class="bx bx-chevron-down text-warning"></i> Bank Transfer</p>
+                        <img src="../assets/img/bank.webp" alt="Bank Transfer" class="img-fluid rounded bg-white/5 p-1 mb-3" style="max-height: 40px;">
+                        
+                        <p class="text-xs text-slate-300 mb-1.5"><i class="bx bx-chevron-down text-warning"></i> E-Wallet</p>
+                        <img src="../assets/img/wallet.webp" alt="E-Wallet" class="img-fluid rounded bg-white/5 p-1 mb-4" style="max-height: 40px;">
+
+                        <!-- Box Telah Terdaftar Oleh (Kemenkumham) -->
+                        <div class="p-3 rounded-2xl border border-warning" style="background: rgba(255, 255, 255, 0.03);">
+                            <b class="text-white text-xs block mb-2">Telah Terdaftar Oleh</b>
+                            <div class="d-flex align-items-center gap-3">
+                                <img src="../assets/img/ham.webp" alt="Kemenkumham" style="max-height: 48px;">
+                                <div class="text-[11px] text-slate-200 leading-tight">
+                                    <strong>Nomor:</strong> AHU-0118640.AH.01.11.TAHUN 2022<br>
+                                    <strong>Registrasi:</strong> 4022062334106037
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright Bottom Bar -->
+        <div class="border-t border-white/10" style="background-color: #0b2b6a; padding: 10px 0;">
+            <div class="container d-md-flex align-items-center justify-content-between">
+                <div class="text-center text-md-start mb-2 mb-md-0 text-xs text-slate-300">
+                    &copy; Copyright <strong><span>Dialogika</span></strong> | PT. Dialogika Persona Indonesia
+                </div>
+                <div class="social-links text-center text-md-right">
+                    <a href="https://x.com/dialogika_co" class="twitter" target="_blank" rel="noopener noreferrer" title="Twitter/X"><i class="bi bi-twitter"></i></a>
+                    <a href="https://www.facebook.com/dialogika.co" class="facebook" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="https://instagram.com/dialogika.co" class="instagram" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://wa.me/6285162992597" class="google-plus" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="bx bxl-whatsapp"></i></a>
+                    <a href="https://linkedin.com/company/dialogika" class="linkedin" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="bx bxl-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -1347,6 +1785,46 @@
                 }
             };
         };
+
+        // Header Scroll Animation Handler
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            const topbar = document.getElementById('topbar');
+            if (header) {
+                if (window.scrollY > 40) {
+                    header.classList.add('header-scrolled');
+                    if (topbar) topbar.classList.add('topbar-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                    if (topbar) topbar.classList.remove('topbar-scrolled');
+                }
+            }
+        });
     </script>
+
+    <!-- Floating Social Media Button (Canonical Dialogika) -->
+    <div class="sosmed-container">
+        <button type="button" class="btn-sosmed btn-trigger-sosmed" aria-label="Sosmed Menu">
+            <i class="bi bi-phone-fill bx-tada" id="icon-trigger"></i>
+        </button>
+        <button type="button" class="btn-sosmed btn-wa" onclick="location.href='https://wa.me/6285162992597';" aria-label="WhatsApp">
+            <i class="bx bxl-whatsapp bx-tada"></i>
+        </button>
+        <button type="button" class="btn-sosmed btn-linkedin" onclick="location.href='https://linkedin.com/company/dialogika';" aria-label="LinkedIn">
+            <i class="bi bi-linkedin"></i>
+        </button>
+        <button type="button" class="btn-sosmed btn-x" onclick="location.href='https://x.com/dialogika_co';" aria-label="Twitter">
+            <i class="bi bi-twitter-x"></i>
+        </button>
+        <button type="button" class="btn-sosmed btn-ig" onclick="location.href='https://instagram.com/dialogika.co';" aria-label="Instagram">
+            <i class="bi bi-instagram"></i>
+        </button>
+        <button type="button" class="btn-sosmed btn-tiktok" onclick="location.href='https://tiktok.com/@dialogika.co';" aria-label="TikTok">
+            <i class="bi bi-tiktok"></i>
+        </button>
+    </div>
+
+    <!-- Sosmed JS -->
+    <script src="../assets/js/sosmed.js"></script>
 </body>
 </html>
