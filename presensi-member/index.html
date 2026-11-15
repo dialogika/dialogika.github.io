@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Presensi Member - Dialogika</title>
+  <link rel="icon" type="image/webp" href="./assets/img/favicon.webp" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ExcelJS for Spreadsheet Export (Dialogika Standard) -->
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+
+  <!-- Theme & Foundation CSS -->
+  <link rel="stylesheet" href="./assets/css/theme.css" />
+  <link rel="stylesheet" href="./assets/css/member-attendance.css?v=102.0" />
+</head>
+
+<body>
+  <!-- Clean Brand Header -->
+  <header class="dlg-unified-header">
+    <!-- Clean White Main Navbar with Dialogika Colorful Logo -->
+    <div class="attendance-navbar">
+      <div class="attendance-navbar-content flex justify-center items-center">
+        <div class="brand-badge-wrap flex items-center justify-center gap-3 mx-auto">
+          <a href="./" class="flex items-center gap-3 no-underline">
+            <img src="./assets/img/logo.webp" alt="Dialogika" class="h-8 md:h-9 w-auto object-contain" />
+            <div class="border-l border-slate-200 pl-3 hidden sm:block text-left">
+              <p class="text-xs font-bold text-slate-800 leading-tight">Portal Presensi</p>
+              <p class="text-[11px] text-slate-400 font-medium leading-tight">Siswa &amp; Member</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Admin Mode Navigation Tabs (Kept for compatibility) -->
+        <nav class="nav-mode-tabs hidden" id="navModeTabs">
+          <button type="button" id="tabCheckin" class="nav-tab-btn active">
+            <i class="bi bi-qr-code-scan"></i> Portal Member
+          </button>
+          <button type="button" id="tabRecap" class="nav-tab-btn">
+            <i class="bi bi-card-checklist"></i> Rekap Hari Ini
+          </button>
+          <button type="button" id="tabRepeat" class="nav-tab-btn">
+            <i class="bi bi-arrow-repeat"></i> Data Mengulang
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View: Member Check-in Form & Dashboard -->
+  <main id="viewCheckin" class="attendance-main-wrapper">
+    <!-- Status / Error Alert Container -->
+    <div id="alertContainer" class="hidden"></div>
+
+    <!-- Step 1: Login / Input Nomor HP Siswa (Unified Master Card with Integrated Illustration) -->
+    <section id="sectionInputPhone" class="dlg-modern-login-container">
+      <div class="dlg-auth-unified-card">
+        <!-- Visual Panel: Clean Illustration & Brand Tagline -->
+        <div class="dlg-auth-visual-side">
+          <div class="dlg-visual-inner">
+            <img src="/assets/img/student-hero.jpg" alt="Ilustrasi Siswa Dialogika" class="dlg-visual-img"
+              loading="eager" />
+            <div class="dlg-visual-caption">
+              <h4 class="dlg-visual-caption-title">Portal Presensi Member</h4>
+              <p class="dlg-visual-caption-desc">Pantau kehadiran, sesi mengulang, dan sertifikat resmi Anda.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Panel: Streamlined Sign-In -->
+        <div class="dlg-auth-form-side">
+          <div class="dlg-auth-form-inner">
+            <div class="dlg-modern-card-header">
+              <h2 class="dlg-modern-card-title">
+                Presensi <span class="dlg-title-gradient">Member</span>
+              </h2>
+
+              <p class="dlg-modern-card-subtitle">
+                Masukkan nomor WhatsApp yang terdaftar untuk membuka dashboard presensi Anda.
+              </p>
+            </div>
+
+            <!-- Form Body (Semua ID & Attribute Asli Dipertahankan Penuh) -->
+            <form id="formCheckPhone" class="dlg-modern-form-body">
+              <div class="form-group mb-3">
+                <label for="inputPhoneNumber" class="dlg-field-label">
+                  <i class="bi bi-whatsapp text-emerald-500"></i> Nomor WhatsApp Member
+                </label>
+                <div class="phone-input-group dlg-modern-phone-group">
+                  <div class="country-code-pill">
+                    <span>🇮🇩 +62</span>
+                  </div>
+                  <input type="tel" id="inputPhoneNumber" class="phone-input-control" placeholder="812-3456-7890"
+                    autocomplete="tel" maxlength="16" required />
+                </div>
+                <p class="dlg-input-hint">
+                  <i class="bi bi-info-circle text-blue-500"></i> Awalan 0 atau 62 akan otomatis disesuaikan oleh
+                  sistem.
+                </p>
+              </div>
+
+              <button type="submit" id="btnCheckPhone" class="dlg-btn-primary w-100 dlg-modern-submit-btn group">
+                <span id="btnCheckPhoneText" class="inline-flex items-center justify-center gap-2">
+                  <span>Masuk ke Dashboard</span>
+                  <i
+                    class="bi bi-arrow-right text-base transition-transform duration-200 group-hover:translate-x-1"></i>
+                </span>
+                <span id="btnCheckPhoneSpinner" class="hidden">
+                  <i class="bi bi-arrow-repeat animate-spin"></i> Memeriksa data...
+                </span>
+              </button>
+            </form>
+
+            <!-- Bantuan Cepat / CS Support Link -->
+            <div class="dlg-modern-card-footer">
+              <p class="dlg-help-text">
+                Nomor belum terdaftar atau berganti?
+                <a href="https://wa.me/6285162992597?text=Halo%20Admin%20Dialogika%2C%20nomor%20WhatsApp%20saya%20belum%20bisa%20masuk%20ke%20portal%20presensi"
+                  target="_blank" rel="noopener noreferrer" class="dlg-help-link">
+                  Hubungi Admin Support <i class="bi bi-arrow-up-right"></i>
+                </a>
+              </p>
+            </div>
+
+            <!-- Security Trust Footnote -->
+            <div class="dlg-security-footnote">
+              <i class="bi bi-shield-lock-fill"></i>
+              <span>Koneksi aman &amp; data terverifikasi oleh Dialogika</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 1b: Multiple Profiles Selector Mount (1 Nomor, Banyak Member) -->
+    <section id="sectionSelectProfileMount" class="dlg-modern-login-container hidden"></section>
+
+    <!-- Step 2: Member Dashboard View (Profile, Action Cards, Personal History) -->
+    <section id="sectionDashboardMount" class="hidden"></section>
+
+    <!-- Legacy / Alternate Mount Container for Compatibility -->
+    <section id="sectionDetectedMount" class="hidden"></section>
+
+    <!-- Step 3: Success Confirmation Ticket (Dynamic Mount) -->
+    <section id="sectionSuccessMount" class="hidden"></section>
+  </main>
+
+  <!-- Alternate View: Daily Recap Table -->
+  <section id="viewRecap" class="recap-mode-wrapper hidden">
+    <div class="recap-table-card">
+      <div class="recap-toolbar flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div>
+          <h2 id="recapTitle" class="text-lg font-bold text-slate-800">Daftar Kehadiran Member</h2>
+          <p id="recapDateSubtitle" class="text-xs text-slate-400">Memuat tanggal...</p>
+        </div>
+
+        <div class="flex items-center flex-wrap gap-2.5">
+          <div
+            class="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-600 transition-colors">
+            <i class="bi bi-calendar3 text-blue-600"></i>
+            <input type="date" id="inputRecapDate"
+              class="bg-transparent border-none text-xs font-medium text-slate-700 outline-none cursor-pointer"
+              title="Pilih tanggal presensi" />
+          </div>
+
+          <button type="button" id="btnExportRecap"
+            class="dlg-btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5 hover:border-emerald-400 hover:text-emerald-700 transition-colors"
+            title="Export Data Presensi (.xlsx / .csv)">
+            <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600"></i>
+            <span>Export Data</span>
+          </button>
+
+          <button type="button" id="btnRefreshRecap"
+            class="dlg-btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5">
+            <i class="bi bi-arrow-clockwise"></i> Segarkan Data
+          </button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-slate-600">
+          <thead class="bg-slate-50 text-xs uppercase text-slate-400 font-semibold border-b border-slate-200">
+            <tr>
+              <th class="py-3 px-4 text-center w-12">#</th>
+              <th class="py-3 px-4">Nama & Kontak</th>
+              <th class="py-3 px-4">Program / Kelas</th>
+              <th class="py-3 px-4 text-center">Tipe Kelas</th>
+              <th class="py-3 px-4">Mentor</th>
+              <th class="py-3 px-4 text-center">Pertemuan Ke</th>
+              <th class="py-3 px-4 text-center">Status Kehadiran</th>
+              <th class="py-3 px-4 text-center">Jam Hadir</th>
+              <th class="py-3 px-4 text-center">Status</th>
+            </tr>
+          </thead>
+          <tbody id="recapTableBody" class="divide-y divide-slate-100">
+            <!-- Dynamic Rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alternate View: Dedicated Repeat / Remedial Members Table -->
+  <section id="viewRepeat" class="recap-mode-wrapper hidden">
+    <div class="recap-table-card">
+      <div class="recap-toolbar">
+        <div>
+          <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <i class="bi bi-arrow-repeat text-amber-500"></i> Daftar Member Mengulang & Remedial
+          </h2>
+          <p id="repeatDateSubtitle" class="text-xs text-slate-400">Pantau seluruh catatan siswa yang sedang mengulang
+            materi atau sesi perbaikan kelas.</p>
+        </div>
+
+        <div class="flex items-center flex-wrap gap-2.5">
+          <div
+            class="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-600 transition-colors">
+            <i class="bi bi-calendar3 text-amber-500"></i>
+            <input type="date" id="inputRepeatDate"
+              class="bg-transparent border-none text-xs font-medium text-slate-700 outline-none cursor-pointer"
+              title="Pilih tanggal data mengulang" />
+          </div>
+
+          <button type="button" id="btnResetRepeatDate"
+            class="dlg-btn-secondary py-1.5 px-2.5 text-xs flex items-center gap-1 text-slate-500 hover:text-slate-800"
+            title="Tampilkan semua data mengulang">
+            <i class="bi bi-globe"></i> Semua
+          </button>
+
+          <button type="button" id="btnExportRepeat"
+            class="dlg-btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5 hover:border-emerald-400 hover:text-emerald-700 transition-colors"
+            title="Export Data Mengulang (.xlsx / .csv)">
+            <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600"></i>
+            <span>Export Data</span>
+          </button>
+
+          <button type="button" id="btnRefreshRepeat"
+            class="dlg-btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5">
+            <i class="bi bi-arrow-clockwise"></i> Segarkan Data
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick KPI Summary for Repeaters -->
+      <div id="repeatStatsMount" class="repeat-kpi-grid mb-4">
+        <!-- Rendered by UI -->
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-slate-600">
+          <thead class="bg-slate-50 text-xs uppercase text-slate-400 font-semibold border-b border-slate-200">
+            <tr>
+              <th class="py-3 px-4 text-center w-12">#</th>
+              <th class="py-3 px-4">Nama Siswa & Kontak</th>
+              <th class="py-3 px-4">Program / Kelas</th>
+              <th class="py-3 px-4 text-center">Tipe Kelas</th>
+              <th class="py-3 px-4">Mentor</th>
+              <th class="py-3 px-4 text-center">Sesi yang Diulang</th>
+              <th class="py-3 px-4 text-center">Frekuensi Mengulang</th>
+              <th class="py-3 px-4 text-center">Tanggal & Jam</th>
+              <th class="py-3 px-4 text-center">Status</th>
+            </tr>
+          </thead>
+          <tbody id="repeatTableBody" class="divide-y divide-slate-100">
+            <!-- Dynamic Repeat Rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Official Dialogika Corporate Footer -->
+  <footer id="footer" class="dlg-corporate-footer">
+    <div class="dlg-footer-container">
+      <div class="dlg-footer-left">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Dialogika</span></strong> | PT. Dialogika Persona Indonesia
+        </div>
+        <a href="/member?admin=true" id="linkToggleAdminMode" class="footer-admin-link hidden">
+          <i class="bi bi-shield-lock"></i> Mode Rekap Internal
+        </a>
+      </div>
+
+      <div class="social-links dlg-footer-social">
+        <a href="https://link.dialogika.co/twitter" target="_blank" rel="noopener noreferrer"
+          class="social-circle twitter" title="Twitter"><i class="bi bi-twitter"></i></a>
+        <a href="https://link.dialogika.co/facebook" target="_blank" rel="noopener noreferrer"
+          class="social-circle facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://link.dialogika.co/instagram" target="_blank" rel="noopener noreferrer"
+          class="social-circle instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://wa.me/6285162992597" target="_blank" rel="noopener noreferrer" class="social-circle whatsapp"
+          title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        <a href="https://link.dialogika.co/linkedin" target="_blank" rel="noopener noreferrer"
+          class="social-circle linkedin" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 4. Floating WhatsApp Quick Support Widget with Interactive Pill (Option A) -->
+  <a href="https://wa.me/6285162992597?text=Halo%20Admin%20Dialogika%2C%20saya%20butuh%20bantuan%20terkait%20Portal%20Presensi%20Member"
+    class="dlg-floating-wa" target="_blank" rel="noopener noreferrer" title="Bantuan WhatsApp Dialogika">
+    <span class="dlg-floating-wa-pill">
+      <span class="status-live-dot"></span>
+      <span class="dlg-floating-wa-label">Butuh Bantuan? Tanya Admin</span>
+    </span>
+    <span class="dlg-floating-wa-icon-box">
+      <i class="bi bi-whatsapp"></i>
+    </span>
+    <span class="dlg-floating-wa-pulse"></span>
+  </a>
+
+  <!-- ===================================================================== -->
+  <!-- EXPORT ATTENDANCE MODAL (Universal Dialogika Pilot Design)            -->
+  <!-- ===================================================================== -->
+  <div class="modal-backdrop-custom hidden" id="exportModalBackdrop"></div>
+  <div class="export-modal-container hidden" id="exportAttendanceModal" role="dialog" aria-modal="true"
+    aria-labelledby="exportAttendanceModalLabel">
+    <div class="export-modal-dialog">
+      <div class="export-modal-content">
+        <div class="export-modal-header">
+          <h5 class="export-modal-title" id="exportAttendanceModalLabel">
+            <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600"></i>
+            <span>Export Data Presensi</span>
+          </h5>
+          <button type="button" class="export-modal-close-btn" id="btnCloseExportModal" aria-label="Close">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+
+        <form id="exportAttendanceForm">
+          <div class="export-modal-body">
+            <p class="export-modal-desc">Pilih format file dan rentang tanggal presensi yang ingin Anda unduh.</p>
+
+            <!-- Format Selection -->
+            <div class="mb-4">
+              <label class="export-form-label">FORMAT FILE</label>
+              <div class="export-segmented-control" id="exportFormatSegmented">
+                <button type="button" class="export-segmented-btn active" data-format="xlsx">
+                  <i class="bi bi-file-earmark-excel-fill text-emerald-600"></i> Excel (.xlsx)
+                </button>
+                <button type="button" class="export-segmented-btn" data-format="csv">
+                  <i class="bi bi-file-earmark-text-fill text-blue-600"></i> CSV (.csv)
+                </button>
+              </div>
+              <input type="hidden" id="exportFormatInput" value="xlsx" />
+            </div>
+
+            <!-- Date Range Selection -->
+            <div class="mb-3">
+              <label class="export-form-label">RENTANG WAKTU (TANGGAL PRESENSI)</label>
+              <div class="export-range-btns-grid mb-3" id="exportRangeButtonsGroup">
+                <button type="button" class="export-range-btn active" data-range="today">Hari Ini</button>
+                <button type="button" class="export-range-btn" data-range="7">7 Hari</button>
+                <button type="button" class="export-range-btn" data-range="30">30 Hari</button>
+                <button type="button" class="export-range-btn" data-range="month">Bulan Ini</button>
+                <button type="button" class="export-range-btn" data-range="all">Semua Data</button>
+                <button type="button" class="export-range-btn" data-range="custom">Custom</button>
+              </div>
+              <input type="hidden" id="exportRangeInput" value="today" />
+
+              <!-- Custom Date Inputs (collapsible) -->
+              <div id="exportCustomDateContainer" class="export-custom-dates-grid hidden">
+                <div>
+                  <label class="text-xs text-slate-500 mb-1 block">Tanggal Mulai</label>
+                  <input type="date" class="export-date-input" id="exportStartDate" />
+                </div>
+                <div>
+                  <label class="text-xs text-slate-500 mb-1 block">Tanggal Selesai</label>
+                  <input type="date" class="export-date-input" id="exportEndDate" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="export-modal-footer">
+            <button type="button" class="btn-cancel-export" id="btnCancelExportModal">Batal</button>
+            <button type="submit" class="btn-download-export" id="btnSubmitExport">
+              <span class="spinner-border-custom hidden" id="exportSpinner"></span>
+              <i class="bi bi-download" id="exportDownloadIcon"></i>
+              <span id="exportSubmitText">Unduh File</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature Logic Orchestrator (ES Module) -->
+  <script type="module" src="./assets/js/member-attendance.js?v=102.0"></script>
+</body>
+
+</html>
