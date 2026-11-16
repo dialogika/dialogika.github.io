@@ -742,8 +742,40 @@ body {
     box-sizing: border-box;
   }
 
-  /* Visual Showcase: Hide on mobile for a clean, distraction-free modern sign-in card */
+  /* Visual Showcase on Mobile: Seamlessly Integrated Illustration */
   .dlg-auth-visual-side {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 1.35rem 1rem 0.2rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .dlg-visual-inner {
+    width: 100% !important;
+    max-width: 160px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .dlg-visual-img {
+    width: 100% !important;
+    max-width: 140px !important;
+    height: auto !important;
+    max-height: 110px !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  .dlg-visual-caption {
     display: none !important;
   }
 
@@ -751,7 +783,7 @@ body {
   .dlg-auth-form-side {
     width: 100%;
     max-width: 100%;
-    padding: 1.65rem 1.35rem 1.5rem;
+    padding: 0.65rem 1.35rem 1.5rem;
     text-align: center;
     display: flex;
     flex-direction: column;
