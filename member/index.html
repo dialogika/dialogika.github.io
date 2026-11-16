@@ -19,12 +19,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- ExcelJS for Spreadsheet Export (Dialogika Standard) -->
-  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 
   <!-- Theme & Foundation CSS -->
   <link rel="stylesheet" href="./assets/css/theme.css" />
-  <link rel="stylesheet" href="./assets/css/member-attendance.css?v=107.0" />
+  <link rel="stylesheet" href="./assets/css/member-attendance.css?v=108.0" />
 </head>
 
 <body>
@@ -176,12 +174,6 @@
               title="Pilih tanggal presensi" />
           </div>
 
-          <button type="button" id="btnExportRecap"
-            class="dlg-btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5 hover:border-emerald-400 hover:text-emerald-700 transition-colors"
-            title="Export Data Presensi (.xlsx / .csv)">
-            <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600"></i>
-            <span>Export Data</span>
-          </button>
 
           <button type="button" id="btnRefreshRecap"
             class="dlg-btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5">
@@ -240,12 +232,6 @@
             <i class="bi bi-globe"></i> Semua
           </button>
 
-          <button type="button" id="btnExportRepeat"
-            class="dlg-btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5 hover:border-emerald-400 hover:text-emerald-700 transition-colors"
-            title="Export Data Mengulang (.xlsx / .csv)">
-            <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600"></i>
-            <span>Export Data</span>
-          </button>
 
           <button type="button" id="btnRefreshRepeat"
             class="dlg-btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5">
@@ -322,84 +308,8 @@
     <span class="dlg-floating-wa-pulse"></span>
   </a>
 
-  <!-- ===================================================================== -->
-  <!-- EXPORT ATTENDANCE MODAL (Universal Dialogika Pilot Design)            -->
-  <!-- ===================================================================== -->
-  <div class="modal-backdrop-custom hidden" id="exportModalBackdrop"></div>
-  <div class="export-modal-container hidden" id="exportAttendanceModal" role="dialog" aria-modal="true"
-    aria-labelledby="exportAttendanceModalLabel">
-    <div class="export-modal-dialog">
-      <div class="export-modal-content">
-        <div class="export-modal-header">
-          <h5 class="export-modal-title" id="exportAttendanceModalLabel">
-            <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600"></i>
-            <span>Export Data Presensi</span>
-          </h5>
-          <button type="button" class="export-modal-close-btn" id="btnCloseExportModal" aria-label="Close">
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </div>
-
-        <form id="exportAttendanceForm">
-          <div class="export-modal-body">
-            <p class="export-modal-desc">Pilih format file dan rentang tanggal presensi yang ingin Anda unduh.</p>
-
-            <!-- Format Selection -->
-            <div class="mb-4">
-              <label class="export-form-label">FORMAT FILE</label>
-              <div class="export-segmented-control" id="exportFormatSegmented">
-                <button type="button" class="export-segmented-btn active" data-format="xlsx">
-                  <i class="bi bi-file-earmark-excel-fill text-emerald-600"></i> Excel (.xlsx)
-                </button>
-                <button type="button" class="export-segmented-btn" data-format="csv">
-                  <i class="bi bi-file-earmark-text-fill text-blue-600"></i> CSV (.csv)
-                </button>
-              </div>
-              <input type="hidden" id="exportFormatInput" value="xlsx" />
-            </div>
-
-            <!-- Date Range Selection -->
-            <div class="mb-3">
-              <label class="export-form-label">RENTANG WAKTU (TANGGAL PRESENSI)</label>
-              <div class="export-range-btns-grid mb-3" id="exportRangeButtonsGroup">
-                <button type="button" class="export-range-btn active" data-range="today">Hari Ini</button>
-                <button type="button" class="export-range-btn" data-range="7">7 Hari</button>
-                <button type="button" class="export-range-btn" data-range="30">30 Hari</button>
-                <button type="button" class="export-range-btn" data-range="month">Bulan Ini</button>
-                <button type="button" class="export-range-btn" data-range="all">Semua Data</button>
-                <button type="button" class="export-range-btn" data-range="custom">Custom</button>
-              </div>
-              <input type="hidden" id="exportRangeInput" value="today" />
-
-              <!-- Custom Date Inputs (collapsible) -->
-              <div id="exportCustomDateContainer" class="export-custom-dates-grid hidden">
-                <div>
-                  <label class="text-xs text-slate-500 mb-1 block">Tanggal Mulai</label>
-                  <input type="date" class="export-date-input" id="exportStartDate" />
-                </div>
-                <div>
-                  <label class="text-xs text-slate-500 mb-1 block">Tanggal Selesai</label>
-                  <input type="date" class="export-date-input" id="exportEndDate" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="export-modal-footer">
-            <button type="button" class="btn-cancel-export" id="btnCancelExportModal">Batal</button>
-            <button type="submit" class="btn-download-export" id="btnSubmitExport">
-              <span class="spinner-border-custom hidden" id="exportSpinner"></span>
-              <i class="bi bi-download" id="exportDownloadIcon"></i>
-              <span id="exportSubmitText">Unduh File</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
   <!-- Feature Logic Orchestrator (ES Module) -->
-  <script type="module" src="./assets/js/member-attendance.js?v=102.0"></script>
+  <script type="module" src="./assets/js/member-attendance.js?v=103.0"></script>
 </body>
 
 </html>

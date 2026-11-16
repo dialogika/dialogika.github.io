@@ -4,7 +4,7 @@
 // Handles Firestore collections: `data_member`, `class_planning`, `member_attendance`.
 // =====================================================================
 
-import { db } from "./firebase-config.js";
+import { db } from "/assets/js/firebase-config.js";
 import {
   collection,
   getDocs,
@@ -15,8 +15,7 @@ import {
   limit,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getMentors } from "./mentor-management.repository.js";
-import { downloadExportFile } from "./utils/export-helper.js";
+import { getMentors } from "/assets/js/mentor-management.repository.js";
 
 const COLLECTION_MEMBERS = "data_member";
 const COLLECTION_CLASSES = "class_planning";
@@ -1474,196 +1473,6 @@ export async function fetchProductCurriculum(productName = "", productId = "", m
   }
 
   return FALLBACK_CURRICULUMS["first class"];
-}
-
-/**
- * Universal attendance data exporter matching Dialogika Pilot standard
- * @param {Object} options
- * @param {'recap'|'repeat'} [options.source='recap']
- * @param {'xlsx'|'csv'} [options.format='xlsx']
- * @param {'today'|'7'|'30'|'month'|'all'|'custom'} [options.dateRange='today']
- * @param {string} [options.startDate='']
- * @param {string} [options.endDate='']
- * @returns {Promise<{ total: number }>}
- */
-export async function exportAttendanceData({
-  source = "recap",
-  format = "xlsx",
-  dateRange = "today",
-  startDate = "",
-  endDate = "",
-}) {
-  let records = [];
-  if (source === "repeat") {
-    records = await fetchRepeatAttendances("");
-  } else {
-    records = await fetchDailyAttendances("");
-  }
-
-  // Helper to extract YYYY-MM-DD from record
-  const getRecordYmd = (r) => {
-    if (r.attendance_date && typeof r.attendance_date === "string" && r.attendance_date.length >= 10) {
-      return r.attendance_date.slice(0, 10);
-    }
-    if (r.client_timestamp) {
-      const d = new Date(r.client_timestamp);
-      if (!isNaN(d.getTime())) {
-        const y = d.getFullYear();
-        const m = String(d.getMonth() + 1).padStart(2, "0");
-        const dt = String(d.getDate()).padStart(2, "0");
-        return `${y}-${m}-${dt}`;
-      }
-    }
-    return "";
-  };
-
-  const now = new Date();
-  const formatYmd = (d) => {
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, "0");
-    const dt = String(d.getDate()).padStart(2, "0");
-    return `${y}-${m}-${dt}`;
-  };
-
-  const todayYmd = formatYmd(now);
-
-  const filtered = records.filter((r) => {
-    if (dateRange === "all") return true;
-
-    const recDate = getRecordYmd(r);
-    if (!recDate) return true; // Keep if date cannot be parsed
-
-    if (dateRange === "today") {
-      return recDate === todayYmd;
-    } else if (dateRange === "7") {
-      const past = new Date(now.getTime() - 7 * 86400000);
-      return recDate >= formatYmd(past) && recDate <= todayYmd;
-    } else if (dateRange === "30") {
-      const past = new Date(now.getTime() - 30 * 86400000);
-      return recDate >= formatYmd(past) && recDate <= todayYmd;
-    } else if (dateRange === "month") {
-      const yearMonth = todayYmd.slice(0, 7);
-      return recDate.startsWith(yearMonth);
-    } else if (dateRange === "custom") {
-      if (startDate && endDate) {
-        return recDate >= startDate && recDate <= endDate;
-      }
-      if (startDate) return recDate >= startDate;
-      if (endDate) return recDate <= endDate;
-      return true;
-    }
-    return true;
-  });
-
-  if (filtered.length === 0) {
-    if (source === "repeat" && dateRange === "today") {
-      throw new Error(
-        "Tidak ada data siswa mengulang pada rentang 'Hari Ini'. Silakan pilih rentang 'Semua Data' untuk mengunduh seluruh data mengulang."
-      );
-    }
-    throw new Error(
-      "Tidak ada data presensi pada rentang waktu yang dipilih. Silakan pilih 'Semua Data' atau rentang lain."
-    );
-  }
-
-  const activeClasses = await fetchActiveClasses();
-
-  let columns = [];
-  let rows = [];
-
-  if (source === "repeat") {
-    columns = [
-      { key: "no", header: "No", width: 6 },
-      { key: "nama", header: "Nama Siswa", width: 24 },
-      { key: "whatsapp", header: "No. WhatsApp", width: 18 },
-      { key: "kelas", header: "Program / Kelas", width: 26 },
-      { key: "tipe", header: "Tipe Kelas", width: 14 },
-      { key: "mentor", header: "Mentor", width: 22 },
-      { key: "sesi", header: "Sesi yang Diulang", width: 18 },
-      { key: "alasan", header: "Alasan Mengulang", width: 22 },
-      { key: "frekuensi", header: "Frekuensi", width: 16 },
-      { key: "tanggal", header: "Tanggal & Jam", width: 22 },
-      { key: "status", header: "Status", width: 14 },
-    ];
-
-    rows = filtered.map((r, idx) => {
-      const isOnline = String(r.class_type || "").toLowerCase().includes("online");
-      let mentor = r.mentor_name || "-";
-      if (!mentor || mentor === "-" || mentor.toLowerCase().includes("unknown")) {
-        const matched = activeClasses.find((c) => c.id === r.class_id || c.name === r.class_name);
-        if (matched?.mentorName) mentor = matched.mentorName;
-      }
-      return {
-        no: idx + 1,
-        nama: r.member_name || "-",
-        whatsapp: r.member_phone ? String(r.member_phone) : "-",
-        kelas: r.class_name || "-",
-        tipe: isOnline ? "Online" : "Offline",
-        mentor: mentor || "-",
-        sesi: r.session_number ? `Pertemuan ${r.session_number} / ${r.meeting_total || 8}` : "-",
-        alasan: r.repeat_reason || "-",
-        frekuensi: `Mengulang ke-${r.repeat_count || 1}`,
-        tanggal: r.client_timestamp || r.attendance_date || "-",
-        status: r.status || "Mengulang",
-      };
-    });
-  } else {
-    columns = [
-      { key: "no", header: "No", width: 6 },
-      { key: "nama", header: "Nama Siswa", width: 24 },
-      { key: "whatsapp", header: "No. WhatsApp", width: 18 },
-      { key: "kelas", header: "Program / Kelas", width: 26 },
-      { key: "tipe", header: "Tipe Kelas", width: 14 },
-      { key: "mentor", header: "Mentor", width: 22 },
-      { key: "sesi", header: "Pertemuan Ke", width: 18 },
-      { key: "status_kehadiran", header: "Status Kehadiran", width: 26 },
-      { key: "tanggal", header: "Tanggal", width: 16 },
-      { key: "jam", header: "Jam Hadir", width: 14 },
-      { key: "status", header: "Status", width: 12 },
-    ];
-
-    rows = filtered.map((r, idx) => {
-      const isOnline = String(r.class_type || "").toLowerCase().includes("online");
-      let mentor = r.mentor_name || "-";
-      if (!mentor || mentor === "-" || mentor.toLowerCase().includes("unknown")) {
-        const matched = activeClasses.find((c) => c.id === r.class_id || c.name === r.class_name);
-        if (matched?.mentorName) mentor = matched.mentorName;
-      }
-      const attStatus = r.attendance_label || (r.is_repeat ? `Mengulang ke-${r.repeat_count}` : "Kehadiran Reguler");
-      const dt = r.client_timestamp ? new Date(r.client_timestamp) : null;
-      const timeStr = dt && !isNaN(dt.getTime())
-        ? `${String(dt.getHours()).padStart(2, "0")}:${String(dt.getMinutes()).padStart(2, "0")} WIB`
-        : "-";
-      const dateStr = r.attendance_date || (dt && !isNaN(dt.getTime()) ? dt.toISOString().slice(0, 10) : "-");
-
-      return {
-        no: idx + 1,
-        nama: r.member_name || "-",
-        whatsapp: r.member_phone ? String(r.member_phone) : "-",
-        kelas: r.class_name || "-",
-        tipe: isOnline ? "Online" : "Offline",
-        mentor: mentor || "-",
-        sesi: r.session_number ? `Pertemuan ${r.session_number} / ${r.meeting_total || 8}` : "Pertemuan 1 / 8",
-        status_kehadiran: attStatus,
-        tanggal: dateStr,
-        jam: timeStr,
-        status: r.status || "Hadir",
-      };
-    });
-  }
-
-  const filename = `${source === "repeat" ? "Presensi_Member_Mengulang" : "Presensi_Member"}_${new Date().toISOString().slice(0, 10)}`;
-
-  await downloadExportFile({
-    filename,
-    sheetName: source === "repeat" ? "Data Mengulang" : "Presensi Member",
-    columns,
-    rowsData: rows,
-    rows: rows,
-    format,
-  });
-
-  return { total: rows.length };
 }
 
 /**

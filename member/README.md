@@ -19,7 +19,7 @@ member/
 │
 ├── assets/
 │   ├── css/
-│   │   ├── member-attendance.css        # Styling UI portal presensi, badge, dan modal
+│   │   ├── member-attendance.css        # Styling UI portal presensi, badge, dan modal sertifikat
 │   │   └── theme.css                    # Variabel tema, warna brand, dan font Dialogika
 │   ├── img/
 │   │   ├── favicon.webp                 # Favicon resmi Dialogika
@@ -29,10 +29,8 @@ member/
 │       ├── firebase-config.js           # Inisialisasi Firebase SDK & Cloud Firestore
 │       ├── member-attendance.js         # Orchestrator logika presensi, view switching, & check-in
 │       ├── member-attendance.repository.js # Jembatan Firestore (data_member, attendance, certificates)
-│       ├── member-attendance.ui.js      # Komponen tampilan: kartu kelas, rekap, & modal ekspor
-│       ├── mentor-management.repository.js # Integrasi data master coach/mentor
-│       └── utils/
-│           └── export-helper.js         # Helper export spreadsheet Excel (.xlsx) & CSV
+│       ├── member-attendance.ui.js      # Komponen tampilan: kartu kelas, rekap, & sertifikat
+│       └── mentor-management.repository.js # Integrasi data master coach/mentor
 │
 └── docs/
     └── MEMBER-ATTENDANCE-ARCHITECTURE.md # Dokumentasi teknis & arsitektur database lengkap
@@ -57,16 +55,13 @@ Portal presensi siswa live di alamat resmi **`https://dialogika.co/member`** yan
 > ⚠️ **Catatan Penting Path Aset (Relative Path):**  
 > Semua tag referensi aset di `index.html` (gambar, CSS, script JS) **wajib menggunakan path relatif** (`./assets/...`), bukan path absolut (`/assets/...`). Hal ini agar aset terpanggil dengan benar dari subfolder `/member/` dan tidak memicu error 404 saat dibuka maupun di-refresh.
 
-### 2. Standalone Development & Firebase Emulators
+### 2. Firebase Emulators
 Untuk keperluan pengujian lokal menggunakan Firebase Emulator Suite:
 ```bash
 # Menjalankan emulator lokal (Hosting port 5001 & Firestore)
 firebase emulators:start
 ```
-Jika ingin mendeploy instance standalone ke Firebase Hosting project `dialogika-co`:
-```bash
-firebase deploy --only hosting
-```
+
 
 ### 3. Database & Keamanan
 * **Database:** Terhubung otomatis ke Google Cloud Firestore project `dialogika-co`.
@@ -86,7 +81,7 @@ firebase deploy --only hosting
 | **Rekap Presensi** | `index.html` (Tab Rekap) | Panel rekap kehadiran harian untuk admin/resepsionis di lokasi kelas (`/member?admin=true`). |
 | **Data Mengulang** | `index.html` (Tab Mengulang) | Pantauan khusus daftar siswa yang hadir mengulang/remedial kelas. |
 | **Download Sertifikat** | `member-attendance.js` | Siswa yang sudah lulus dapat langsung mengunduh sertifikat resmi (format PDF/SVG). |
-| **Ekspor Excel** | `export-helper.js` | Mengunduh data rekap kehadiran dan data remedial ke file spreadsheet Excel (.xlsx). |
+
 
 ---
 
@@ -118,5 +113,4 @@ firebase deploy --only hosting
 
 * **Frontend:** Vanilla JavaScript (Modern ES Modules), Tailwind CSS, Bootstrap Icons
 * **Database & Cloud:** Google Cloud Firestore (Real-Time Database), Firebase Hosting / GitHub Pages
-* **Spreadsheet Engine:** ExcelJS v4.4.0 (Export Excel berformat rapi & CSV)
 * **Design & Typography:** Google Fonts (Montserrat & Poppins)

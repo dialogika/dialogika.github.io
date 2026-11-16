@@ -5,9 +5,8 @@
 // Follows Pilot architecture guidelines: No direct Firestore, no raw DOM HTML.
 // =====================================================================
 
-import * as repo from "./member-attendance.repository.js?v=101.0";
-import * as ui from "./member-attendance.ui.js?v=101.0";
-import { downloadExportFile } from "./utils/export-helper.js";
+import * as repo from "/assets/js/member-attendance.repository.js?v=103.0";
+import * as ui from "/assets/js/member-attendance.ui.js?v=103.0";
 
 /* ── State ── */
 let currentMember = null;
@@ -49,8 +48,6 @@ let btnResetRepeatDate;
 let currentRepeatDate = "";
 
 let inputRecapDate;
-let btnExportRecap;
-let btnExportRepeat;
 let recapTitle;
 let currentRecapDate = "";
 let currentRecapRecords = [];
@@ -146,429 +143,7 @@ function init() {
   cacheDom();
   applyAdminModeVisibility();
   bindEvents();
-  initExportModalControls();
   loadInitialData();
-}
-
-let currentExportSource = "recap";
-let exportModalEl;
-let exportBackdropEl;
-let exportFormEl;
-let exportFormatInput;
-let exportRangeInput;
-let exportCustomDateContainer;
-let exportStartDate;
-let exportEndDate;
-let exportSpinner;
-let exportDownloadIcon;
-let exportSubmitBtn;
-let btnCloseExportModal;
-let btnCancelExportModal;
-
-function ensureExportModalDom() {
-  if (!document.getElementById("exportAttendanceModal")) {
-    const wrap = document.createElement("div");
-    wrap.id = "exportAttendanceModalRoot";
-    wrap.innerHTML = `
-      <div class="modal-backdrop-custom hidden" id="exportModalBackdrop"></div>
-      <div class="export-modal-container hidden" id="exportAttendanceModal" role="dialog" aria-modal="true" aria-labelledby="exportAttendanceModalLabel">
-        <div class="export-modal-dialog">
-          <div class="export-modal-content">
-            <div class="export-modal-header">
-              <h5 class="export-modal-title" id="exportAttendanceModalLabel">
-                <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600"></i>
-                <span>Export Data Presensi</span>
-              </h5>
-              <button type="button" class="export-modal-close-btn" id="btnCloseExportModal" aria-label="Close">
-                <i class="bi bi-x-lg"></i>
-              </button>
-            </div>
-
-            <form id="exportAttendanceForm">
-              <div class="export-modal-body">
-                <p class="export-modal-desc">Pilih format file dan rentang tanggal presensi yang ingin Anda unduh.</p>
-
-                <!-- Format Selection -->
-                <div class="mb-4">
-                  <label class="export-form-label">FORMAT FILE</label>
-                  <div class="export-segmented-control" id="exportFormatSegmented">
-                    <button type="button" class="export-segmented-btn active" data-format="xlsx">
-                      <i class="bi bi-file-earmark-excel-fill text-emerald-600"></i> Excel (.xlsx)
-                    </button>
-                    <button type="button" class="export-segmented-btn" data-format="csv">
-                      <i class="bi bi-file-earmark-text-fill text-blue-600"></i> CSV (.csv)
-                    </button>
-                  </div>
-                  <input type="hidden" id="exportFormatInput" value="xlsx" />
-                </div>
-
-                <!-- Date Range Selection -->
-                <div class="mb-3">
-                  <label class="export-form-label">RENTANG WAKTU (TANGGAL PRESENSI)</label>
-                  <div class="export-range-btns-grid mb-3" id="exportRangeButtonsGroup">
-                    <button type="button" class="export-range-btn active" data-range="today">Hari Ini</button>
-                    <button type="button" class="export-range-btn" data-range="7">7 Hari</button>
-                    <button type="button" class="export-range-btn" data-range="30">30 Hari</button>
-                    <button type="button" class="export-range-btn" data-range="month">Bulan Ini</button>
-                    <button type="button" class="export-range-btn" data-range="all">Semua Data</button>
-                    <button type="button" class="export-range-btn" data-range="custom">Custom</button>
-                  </div>
-                  <input type="hidden" id="exportRangeInput" value="today" />
-
-                  <!-- Custom Date Inputs (collapsible) -->
-                  <div id="exportCustomDateContainer" class="export-custom-dates-grid hidden">
-                    <div>
-                      <label class="text-xs text-slate-500 mb-1 block">Tanggal Mulai</label>
-                      <input type="date" class="export-date-input" id="exportStartDate" />
-                    </div>
-                    <div>
-                      <label class="text-xs text-slate-500 mb-1 block">Tanggal Selesai</label>
-                      <input type="date" class="export-date-input" id="exportEndDate" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="export-modal-footer">
-                <button type="button" class="btn-cancel-export" id="btnCancelExportModal">Batal</button>
-                <button type="submit" class="btn-download-export" id="btnSubmitExport">
-                  <span class="spinner-border-custom hidden" id="exportSpinner"></span>
-                  <i class="bi bi-download" id="exportDownloadIcon"></i>
-                  <span id="exportSubmitText">Unduh File</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(wrap);
-  }
-  initExportModalControls();
-}
-
-function openExportModal(source = "recap") {
-  ensureExportModalDom();
-  currentExportSource = source;
-  const modalTitle = document.getElementById("exportAttendanceModalLabel");
-  const modalDesc = document.querySelector(".export-modal-desc");
-
-  if (modalTitle) {
-    modalTitle.innerHTML = `
-      <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600"></i>
-      <span>${source === "repeat" ? "Export Data Mengulang & Remedial" : "Export Data Presensi Member"}</span>
-    `;
-  }
-
-  if (modalDesc) {
-    modalDesc.textContent = source === "repeat"
-      ? "Pilih format file dan rentang data siswa mengulang yang ingin Anda unduh."
-      : "Pilih format file dan rentang tanggal presensi yang ingin Anda unduh.";
-  }
-
-  // Set default range: for repeat, default to "all" (Semua Data) unless filtered by date
-  const defaultRange = (source === "repeat" && !currentRepeatDate) ? "all" : (currentRecapDate ? "today" : "all");
-  const rangeButtons = document.querySelectorAll("#exportRangeButtonsGroup .export-range-btn");
-  rangeButtons.forEach((b) => {
-    b.classList.toggle("active", b.dataset.range === defaultRange);
-  });
-  if (exportRangeInput) exportRangeInput.value = defaultRange;
-  if (exportCustomDateContainer) exportCustomDateContainer.classList.add("hidden");
-
-  // Ensure elements are cached
-  if (!exportBackdropEl) exportBackdropEl = document.getElementById("exportModalBackdrop");
-  if (!exportModalEl) exportModalEl = document.getElementById("exportAttendanceModal");
-
-  if (exportBackdropEl) {
-    exportBackdropEl.classList.remove("hidden");
-    exportBackdropEl.style.display = "block";
-  }
-  if (exportModalEl) {
-    exportModalEl.classList.remove("hidden");
-    exportModalEl.style.display = "flex";
-  }
-}
-
-function closeExportModal() {
-  if (exportBackdropEl) {
-    exportBackdropEl.classList.add("hidden");
-    exportBackdropEl.style.display = "none";
-  }
-  if (exportModalEl) {
-    exportModalEl.classList.add("hidden");
-    exportModalEl.style.display = "none";
-  }
-}
-
-function initExportModalControls() {
-  exportModalEl = document.getElementById("exportAttendanceModal");
-  exportBackdropEl = document.getElementById("exportModalBackdrop");
-  exportFormEl = document.getElementById("exportAttendanceForm");
-  exportFormatInput = document.getElementById("exportFormatInput");
-  exportRangeInput = document.getElementById("exportRangeInput");
-  exportCustomDateContainer = document.getElementById("exportCustomDateContainer");
-  exportStartDate = document.getElementById("exportStartDate");
-  exportEndDate = document.getElementById("exportEndDate");
-  exportSpinner = document.getElementById("exportSpinner");
-  exportDownloadIcon = document.getElementById("exportDownloadIcon");
-  exportSubmitBtn = document.getElementById("btnSubmitExport");
-  btnCloseExportModal = document.getElementById("btnCloseExportModal");
-  btnCancelExportModal = document.getElementById("btnCancelExportModal");
-
-  // Format Segmented Buttons (.xlsx vs .csv)
-  const formatButtons = document.querySelectorAll("#exportFormatSegmented .export-segmented-btn");
-  formatButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      formatButtons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      if (exportFormatInput) exportFormatInput.value = btn.dataset.format || "xlsx";
-    });
-  });
-
-  // Range Buttons (Hari Ini, 7 Hari, 30 Hari, Bulan Ini, Semua Data, Custom)
-  const rangeButtons = document.querySelectorAll("#exportRangeButtonsGroup .export-range-btn");
-  rangeButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      rangeButtons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const rVal = btn.dataset.range || "today";
-      if (exportRangeInput) exportRangeInput.value = rVal;
-      if (exportCustomDateContainer) {
-        if (rVal === "custom") {
-          exportCustomDateContainer.classList.remove("hidden");
-        } else {
-          exportCustomDateContainer.classList.add("hidden");
-        }
-      }
-    });
-  });
-
-  // Close triggers
-  if (btnCloseExportModal) btnCloseExportModal.addEventListener("click", closeExportModal);
-  if (btnCancelExportModal) btnCancelExportModal.addEventListener("click", closeExportModal);
-  if (exportBackdropEl) exportBackdropEl.addEventListener("click", closeExportModal);
-
-  // Form Submit
-  if (exportFormEl) {
-    exportFormEl.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const format = exportFormatInput?.value || "xlsx";
-      const dateRange = exportRangeInput?.value || "today";
-      const startDate = exportStartDate?.value || "";
-      const endDate = exportEndDate?.value || "";
-
-      if (dateRange === "custom" && (!startDate || !endDate)) {
-        alert("Silakan pilih Tanggal Mulai dan Tanggal Selesai untuk rentang custom.");
-        return;
-      }
-
-      setExportLoading(true);
-
-      try {
-        if (typeof repo.exportAttendanceData === "function") {
-          await repo.exportAttendanceData({
-            source: currentExportSource,
-            format,
-            dateRange,
-            startDate,
-            endDate,
-          });
-        } else {
-          console.warn("[member-attendance] repo.exportAttendanceData not found on cached module. Using built-in exporter fallback.");
-          await exportAttendanceDataFallback({
-            source: currentExportSource,
-            format,
-            dateRange,
-            startDate,
-            endDate,
-          });
-        }
-        closeExportModal();
-      } catch (err) {
-        console.error("[member-attendance] Export error:", err);
-        alert(err.message || "Gagal mengekspor data presensi.");
-      } finally {
-        setExportLoading(false);
-      }
-    });
-  }
-}
-
-/**
- * Built-in fallback exporter if repository module was loaded from older browser cache.
- */
-async function exportAttendanceDataFallback({
-  source = "recap",
-  format = "xlsx",
-  dateRange = "all",
-  startDate = "",
-  endDate = "",
-}) {
-  let records = [];
-  if (source === "repeat") {
-    records = currentRepeatRecords.length > 0 ? currentRepeatRecords : await repo.fetchRepeatAttendances("");
-  } else {
-    records = currentRecapRecords.length > 0 ? currentRecapRecords : await repo.fetchDailyAttendances("");
-  }
-
-  const now = new Date();
-  const formatYmd = (d) => {
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, "0");
-    const dt = String(d.getDate()).padStart(2, "0");
-    return `${y}-${m}-${dt}`;
-  };
-  const todayYmd = formatYmd(now);
-
-  const getRecordYmd = (r) => {
-    if (r.attendance_date && typeof r.attendance_date === "string" && r.attendance_date.length >= 10) {
-      return r.attendance_date.slice(0, 10);
-    }
-    if (r.client_timestamp) {
-      const d = new Date(r.client_timestamp);
-      if (!isNaN(d.getTime())) {
-        return formatYmd(d);
-      }
-    }
-    return "";
-  };
-
-  const filtered = records.filter((r) => {
-    if (dateRange === "all") return true;
-    const recDate = getRecordYmd(r);
-    if (!recDate) return true;
-    if (dateRange === "today") return recDate === todayYmd;
-    if (dateRange === "7") {
-      const past = new Date(now.getTime() - 7 * 86400000);
-      return recDate >= formatYmd(past) && recDate <= todayYmd;
-    }
-    if (dateRange === "30") {
-      const past = new Date(now.getTime() - 30 * 86400000);
-      return recDate >= formatYmd(past) && recDate <= todayYmd;
-    }
-    if (dateRange === "month") {
-      return recDate.startsWith(todayYmd.slice(0, 7));
-    }
-    if (dateRange === "custom") {
-      if (startDate && endDate) return recDate >= startDate && recDate <= endDate;
-      if (startDate) return recDate >= startDate;
-      if (endDate) return recDate <= endDate;
-      return true;
-    }
-    return true;
-  });
-
-  if (filtered.length === 0) {
-    if (source === "repeat" && dateRange === "today") {
-      throw new Error("Tidak ada data siswa mengulang pada rentang 'Hari Ini'. Silakan pilih rentang 'Semua Data'.");
-    }
-    throw new Error("Tidak ada data presensi pada rentang waktu yang dipilih. Silakan pilih 'Semua Data'.");
-  }
-
-  if (activeClasses.length === 0) {
-    activeClasses = await repo.fetchActiveClasses();
-  }
-
-  let columns = [];
-  let rows = [];
-
-  if (source === "repeat") {
-    columns = [
-      { key: "no", header: "No", width: 6 },
-      { key: "nama", header: "Nama Siswa", width: 24 },
-      { key: "whatsapp", header: "No. WhatsApp", width: 18 },
-      { key: "kelas", header: "Program / Kelas", width: 26 },
-      { key: "tipe", header: "Tipe Kelas", width: 14 },
-      { key: "mentor", header: "Mentor", width: 22 },
-      { key: "sesi", header: "Sesi yang Diulang", width: 18 },
-      { key: "alasan", header: "Alasan Mengulang", width: 22 },
-      { key: "frekuensi", header: "Frekuensi", width: 16 },
-      { key: "tanggal", header: "Tanggal & Jam", width: 22 },
-      { key: "status", header: "Status", width: 14 },
-    ];
-
-    rows = filtered.map((r, idx) => {
-      const isOnline = String(r.class_type || "").toLowerCase().includes("online");
-      let mentor = r.mentor_name || "-";
-      if (!mentor || mentor === "-" || mentor.toLowerCase().includes("unknown")) {
-        const matched = activeClasses.find((c) => c.id === r.class_id || c.name === r.class_name);
-        if (matched?.mentorName) mentor = matched.mentorName;
-      }
-      return {
-        no: idx + 1,
-        nama: r.member_name || "-",
-        whatsapp: r.member_phone ? String(r.member_phone) : "-",
-        kelas: r.class_name || "-",
-        tipe: isOnline ? "Online" : "Offline",
-        mentor: mentor || "-",
-        sesi: r.session_number ? `Pertemuan ${r.session_number} / ${r.meeting_total || 8}` : "-",
-        alasan: r.repeat_reason || "-",
-        frekuensi: `Mengulang ke-${r.repeat_count || 1}`,
-        tanggal: r.client_timestamp || r.attendance_date || "-",
-        status: r.status || "Mengulang",
-      };
-    });
-  } else {
-    columns = [
-      { key: "no", header: "No", width: 6 },
-      { key: "nama", header: "Nama Siswa", width: 24 },
-      { key: "whatsapp", header: "No. WhatsApp", width: 18 },
-      { key: "kelas", header: "Program / Kelas", width: 26 },
-      { key: "tipe", header: "Tipe Kelas", width: 14 },
-      { key: "mentor", header: "Mentor", width: 22 },
-      { key: "sesi", header: "Pertemuan Ke", width: 18 },
-      { key: "status_kehadiran", header: "Status Kehadiran", width: 26 },
-      { key: "tanggal", header: "Tanggal", width: 16 },
-      { key: "jam", header: "Jam Hadir", width: 14 },
-      { key: "status", header: "Status", width: 12 },
-    ];
-
-    rows = filtered.map((r, idx) => {
-      const isOnline = String(r.class_type || "").toLowerCase().includes("online");
-      let mentor = r.mentor_name || "-";
-      if (!mentor || mentor === "-" || mentor.toLowerCase().includes("unknown")) {
-        const matched = activeClasses.find((c) => c.id === r.class_id || c.name === r.class_name);
-        if (matched?.mentorName) mentor = matched.mentorName;
-      }
-      const attStatus = r.attendance_label || (r.is_repeat ? `Mengulang ke-${r.repeat_count}` : "Kehadiran Reguler");
-      const dt = r.client_timestamp ? new Date(r.client_timestamp) : null;
-      const timeStr = dt && !isNaN(dt.getTime())
-        ? `${String(dt.getHours()).padStart(2, "0")}:${String(dt.getMinutes()).padStart(2, "0")} WIB`
-        : "-";
-      const dateStr = r.attendance_date || (dt && !isNaN(dt.getTime()) ? dt.toISOString().slice(0, 10) : "-");
-
-      return {
-        no: idx + 1,
-        nama: r.member_name || "-",
-        whatsapp: r.member_phone ? String(r.member_phone) : "-",
-        kelas: r.class_name || "-",
-        tipe: isOnline ? "Online" : "Offline",
-        mentor: mentor || "-",
-        sesi: r.session_number ? `Pertemuan ${r.session_number} / ${r.meeting_total || 8}` : "Pertemuan 1 / 8",
-        status_kehadiran: attStatus,
-        tanggal: dateStr,
-        jam: timeStr,
-        status: r.status || "Hadir",
-      };
-    });
-  }
-
-  const filename = `${source === "repeat" ? "Presensi_Member_Mengulang" : "Presensi_Member"}_${todayYmd}`;
-
-  await downloadExportFile({
-    filename,
-    sheetName: source === "repeat" ? "Data Mengulang" : "Presensi Member",
-    columns,
-    rowsData: rows,
-    rows: rows,
-    format,
-  });
-}
-
-function setExportLoading(loading) {
-  if (exportSubmitBtn) exportSubmitBtn.disabled = loading;
-  if (exportSpinner) exportSpinner.classList.toggle("hidden", !loading);
-  if (exportDownloadIcon) exportDownloadIcon.classList.toggle("hidden", loading);
 }
 
 function ensureToolbarControls() {
@@ -577,7 +152,7 @@ function ensureToolbarControls() {
   if (brandWrap && (!brandWrap.querySelector("img") || brandWrap.querySelector("img[src*='white-logo']"))) {
     brandWrap.innerHTML = `
       <a href="/member" class="flex items-center gap-3 no-underline">
-        <img src="./assets/img/logo.webp" alt="Dialogika" class="h-8 md:h-9 w-auto object-contain" />
+        <img src="/assets/img/logo.webp" alt="Dialogika" class="h-8 md:h-9 w-auto object-contain" />
         <div class="border-l border-slate-200 pl-3 hidden sm:block">
           <p class="text-xs font-bold text-slate-800 leading-tight">Portal Presensi</p>
           <p class="text-[11px] text-slate-400 font-medium leading-tight">Siswa &amp; Member</p>
@@ -586,7 +161,7 @@ function ensureToolbarControls() {
     `;
   }
 
-  // 2. Ensure Recap Toolbar has Date Picker and Export Button
+  // 2. Ensure Recap Toolbar has Date Picker
   const refreshRecap = document.getElementById("btnRefreshRecap");
   if (refreshRecap && !document.getElementById("inputRecapDate")) {
     const parent = refreshRecap.parentElement;
@@ -604,19 +179,7 @@ function ensureToolbarControls() {
       `;
       parent.insertBefore(dateWrapper, refreshRecap);
 
-      const exportBtn = document.createElement("button");
-      exportBtn.type = "button";
-      exportBtn.id = "btnExportRecap";
-      exportBtn.className = "dlg-btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5 hover:border-emerald-400 hover:text-emerald-700 transition-colors";
-      exportBtn.title = "Export Data Presensi (.xlsx / .csv)";
-      exportBtn.innerHTML = `
-        <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600"></i>
-        <span>Export Data</span>
-      `;
-      parent.insertBefore(exportBtn, refreshRecap);
-
       inputRecapDate = document.getElementById("inputRecapDate");
-      btnExportRecap = document.getElementById("btnExportRecap");
 
       if (inputRecapDate) {
         inputRecapDate.value = currentRecapDate || ui.getTodayDateString();
@@ -625,14 +188,10 @@ function ensureToolbarControls() {
           loadRecapData(currentRecapDate);
         });
       }
-
-      if (btnExportRecap) {
-        btnExportRecap.addEventListener("click", () => openExportModal("recap"));
-      }
     }
   }
 
-  // 3. Ensure Repeat Toolbar has Calendar and Export Button
+  // 3. Ensure Repeat Toolbar has Calendar
   const refreshRepeat = document.getElementById("btnRefreshRepeat");
   if (refreshRepeat) {
     const parent = refreshRepeat.parentElement;
@@ -678,24 +237,6 @@ function ensureToolbarControls() {
           });
         }
       }
-
-      if (!document.getElementById("btnExportRepeat")) {
-        const exportRepeatBtn = document.createElement("button");
-        exportRepeatBtn.type = "button";
-        exportRepeatBtn.id = "btnExportRepeat";
-        exportRepeatBtn.className = "dlg-btn-secondary py-1.5 px-3 text-xs flex items-center gap-1.5 hover:border-emerald-400 hover:text-emerald-700 transition-colors";
-        exportRepeatBtn.title = "Export Data Mengulang (.xlsx / .csv)";
-        exportRepeatBtn.innerHTML = `
-          <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600"></i>
-          <span>Export Data</span>
-        `;
-        parent.insertBefore(exportRepeatBtn, refreshRepeat);
-
-        btnExportRepeat = document.getElementById("btnExportRepeat");
-        if (btnExportRepeat) {
-          btnExportRepeat.addEventListener("click", () => openExportModal("repeat"));
-        }
-      }
     }
   }
 }
@@ -733,8 +274,6 @@ function cacheDom() {
   btnResetRepeatDate = document.getElementById("btnResetRepeatDate");
 
   inputRecapDate = document.getElementById("inputRecapDate");
-  btnExportRecap = document.getElementById("btnExportRecap");
-  btnExportRepeat = document.getElementById("btnExportRepeat");
   recapTitle = document.getElementById("recapTitle");
 
   currentRecapDate = ui.getTodayDateString();
@@ -827,30 +366,6 @@ function bindEvents() {
       loadRepeatData("");
     });
   }
-
-  if (btnExportRecap) {
-    btnExportRecap.addEventListener("click", () => openExportModal("recap"));
-  }
-
-  if (btnExportRepeat) {
-    btnExportRepeat.addEventListener("click", () => openExportModal("repeat"));
-  }
-
-  // Global delegation for export triggers to ensure 100% reliability
-  document.addEventListener("click", (e) => {
-    const exportRecapTarget = e.target.closest("#btnExportRecap");
-    if (exportRecapTarget) {
-      e.preventDefault();
-      openExportModal("recap");
-      return;
-    }
-    const exportRepeatTarget = e.target.closest("#btnExportRepeat");
-    if (exportRepeatTarget) {
-      e.preventDefault();
-      openExportModal("repeat");
-      return;
-    }
-  });
 
   // Auto clean phone formatting on typing
   if (inputPhoneNumber) {
