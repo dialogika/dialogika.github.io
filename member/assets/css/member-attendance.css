@@ -679,24 +679,28 @@ body {
    RESPONSIVE TABLET & MOBILE (Sleek, App-like Single Screen Experience)
    ===================================================================== */
 @media (max-width: 768px) {
-  html, body {
+  html {
+    height: 100% !important;
     overflow-x: hidden !important;
     max-width: 100vw !important;
   }
 
-  /* Lock viewport to 100dvh on mobile login screen (Zero-Scroll "Mentok Rapi") */
+  /* Lock viewport to exact 100% visible height on mobile login screen (Zero-Scroll "Mentok Rapi") */
   body:not(.dlg-dashboard-mode) {
     height: 100% !important;
-    height: 100dvh !important;
-    max-height: 100dvh !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
     overflow: hidden !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   body.dlg-dashboard-mode {
     height: auto !important;
+    min-height: 100% !important;
     max-height: none !important;
     overflow-y: auto !important;
   }
@@ -710,7 +714,7 @@ body {
     top: 0 !important;
     z-index: 100 !important;
     padding: 0 !important;
-    flex-shrink: 0 !important;
+    flex: 0 0 auto !important;
   }
 
   .attendance-navbar {
@@ -725,15 +729,16 @@ body {
     height: 28px !important;
   }
 
-  /* Main Content Area: Centered, Compact, No Scroll */
+  /* Main Content Area: Centered, Flex-Grow with min-height 0 so footer is NEVER pushed out */
   body:not(.dlg-dashboard-mode) .attendance-main-wrapper {
-    flex: 1 1 auto !important;
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
     margin: 0 auto !important;
-    padding: 0.25rem 1rem !important;
+    padding: 0.2rem 1rem !important;
     overflow: hidden !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -757,17 +762,17 @@ body {
     flex-direction: column !important;
     width: 100% !important;
     max-width: 100% !important;
-    border-radius: 18px !important;
+    border-radius: 20px !important;
     border: 1px solid rgba(226, 232, 240, 0.95) !important;
     box-shadow: 
-      0 4px 16px -2px rgba(11, 43, 106, 0.08),
+      0 4px 18px -2px rgba(11, 43, 106, 0.08),
       0 1px 3px rgba(15, 23, 42, 0.04) !important;
     background: #FFFFFF !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
   }
 
-  /* Visual Showcase on Mobile: Clean, Seamless Hero Illustration without Awkward Line */
+  /* Visual Showcase on Mobile: Clean, Natural Square Aspect Ratio (Proporsional & Tidak Gepeng) */
   .dlg-auth-visual-side {
     display: flex !important;
     justify-content: center !important;
@@ -781,7 +786,7 @@ body {
 
   .dlg-visual-inner {
     width: 100% !important;
-    max-width: 110px !important;
+    max-width: 150px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -789,10 +794,11 @@ body {
   }
 
   .dlg-visual-img {
-    width: auto !important;
-    max-width: 85px !important;
-    height: auto !important;
-    max-height: 55px !important;
+    width: 115px !important;
+    height: 115px !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
+    aspect-ratio: 1 / 1 !important;
     object-fit: contain !important;
     display: block !important;
     margin: 0 auto !important;
@@ -809,7 +815,7 @@ body {
   .dlg-auth-form-side {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 0.45rem 1.25rem 0.65rem !important;
+    padding: 0.35rem 1.25rem 0.65rem !important;
     text-align: center !important;
     display: flex !important;
     flex-direction: column !important;
@@ -988,13 +994,14 @@ body {
     line-height: 1.25 !important;
   }
 
-  /* Compact Corporate Footer for Zero-Scroll Fit */
+  /* Compact Corporate Footer Pinned at Bottom of Visible Screen */
   .dlg-corporate-footer {
-    flex-shrink: 0 !important;
+    flex: 0 0 auto !important;
     padding: 0.45rem 1rem 0.55rem !important;
     margin-top: auto !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    background: linear-gradient(135deg, #071C44 0%, #0B2B6A 100%) !important;
   }
 
   .dlg-footer-container {
