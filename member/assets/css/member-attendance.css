@@ -621,11 +621,11 @@ body {
   padding: 0.95rem 1.5rem;
   font-size: 0.96rem;
   font-weight: 600;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #0B2B6A 0%, #1D4ED8 100%);
+  border-radius: 12px;
+  background: #0D2E6F;
   color: #FFFFFF;
   border: none;
-  box-shadow: 0 8px 24px -4px rgba(29, 78, 216, 0.35);
+  box-shadow: 0 4px 16px rgba(11, 43, 106, 0.25);
   margin-top: 0.85rem;
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
@@ -636,9 +636,9 @@ body {
 }
 
 .dlg-modern-submit-btn:hover {
-  background: linear-gradient(135deg, #071C44 0%, #1E40AF 100%);
+  background: #071C44;
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px -4px rgba(29, 78, 216, 0.45);
+  box-shadow: 0 8px 22px rgba(11, 43, 106, 0.35);
 }
 
 .dlg-modern-submit-btn:active {
@@ -686,6 +686,7 @@ body {
 
   /* Lock viewport to 100dvh on mobile login screen (Zero-Scroll "Mentok Rapi") */
   body:not(.dlg-dashboard-mode) {
+    height: 100% !important;
     height: 100dvh !important;
     max-height: 100dvh !important;
     overflow: hidden !important;
@@ -732,7 +733,7 @@ body {
     justify-content: center !important;
     align-items: center !important;
     margin: 0 auto !important;
-    padding: 0.35rem 1rem !important;
+    padding: 0.25rem 1rem !important;
     overflow: hidden !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -750,6 +751,7 @@ body {
     display: none !important;
   }
 
+  /* Unified Master Card: Seamless, Clean, No Dividing Line */
   .dlg-auth-unified-card {
     display: flex !important;
     flex-direction: column !important;
@@ -765,21 +767,21 @@ body {
     box-sizing: border-box !important;
   }
 
-  /* Visual Showcase on Mobile: Consistent Soft Blue Stage & Caption */
+  /* Visual Showcase on Mobile: Clean, Seamless Hero Illustration without Awkward Line */
   .dlg-auth-visual-side {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    background: linear-gradient(180deg, #EFF6FF 0%, #F8FAFC 100%) !important;
-    border-bottom: 1px solid #E2E8F0 !important;
-    padding: 0.65rem 1rem 0.5rem !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0.85rem 1rem 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
 
   .dlg-visual-inner {
     width: 100% !important;
-    max-width: 180px !important;
+    max-width: 110px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -788,9 +790,9 @@ body {
 
   .dlg-visual-img {
     width: auto !important;
-    max-width: 110px !important;
+    max-width: 85px !important;
     height: auto !important;
-    max-height: 72px !important;
+    max-height: 55px !important;
     object-fit: contain !important;
     display: block !important;
     margin: 0 auto !important;
@@ -800,27 +802,14 @@ body {
   }
 
   .dlg-visual-caption {
-    display: block !important;
-    margin-top: 0.25rem !important;
-  }
-
-  .dlg-visual-caption-title {
-    font-size: 0.76rem !important;
-    font-weight: 700 !important;
-    color: #0B2B6A !important;
-    margin: 0 !important;
-    line-height: 1.2 !important;
-  }
-
-  .dlg-visual-caption-desc {
-    display: none !important; /* Disembunyikan agar hemat vertikal */
+    display: none !important; /* Hapus teks dobel agar bersih & hemat ruang vertikal */
   }
 
   /* Form Area on Mobile: Compact, Elegant & Balanced */
   .dlg-auth-form-side {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 0.65rem 1.25rem 0.75rem !important;
+    padding: 0.45rem 1.25rem 0.65rem !important;
     text-align: center !important;
     display: flex !important;
     flex-direction: column !important;
@@ -836,12 +825,12 @@ body {
 
   .dlg-modern-card-header {
     text-align: center !important;
-    margin-bottom: 0.45rem !important;
+    margin-bottom: 0.35rem !important;
   }
 
   .dlg-modern-card-title {
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 1.22rem !important;
+    font-size: 1.25rem !important;
     font-weight: 800 !important;
     color: #0B2B6A !important;
     line-height: 1.2 !important;
@@ -895,7 +884,7 @@ body {
     align-items: center !important;
     justify-content: center !important;
     gap: 5px !important;
-    padding: 0.45rem 0.65rem !important;
+    padding: 0.42rem 0.65rem !important;
     font-size: 0.85rem !important;
     background: #F8FAFC !important;
     border-right: 1.5px solid #E2E8F0 !important;
@@ -918,7 +907,7 @@ body {
     flex: 1 1 0% !important;
     min-width: 0 !important;
     width: 100% !important;
-    padding: 0.45rem 0.65rem !important;
+    padding: 0.42rem 0.65rem !important;
     font-size: 0.95rem !important;
     font-weight: 600 !important;
     color: #0F172A !important;
@@ -929,34 +918,39 @@ body {
   }
 
   .dlg-input-hint {
-    font-size: 0.64rem !important;
+    font-size: 0.62rem !important;
     color: #64748B !important;
     text-align: left !important;
     justify-content: flex-start !important;
-    margin-top: 0.25rem !important;
+    margin-top: 0.2rem !important;
     display: flex !important;
     align-items: flex-start !important;
     gap: 4px !important;
     line-height: 1.25 !important;
   }
 
+  /* Solid Dark Corporate Navy Button - Exactly Matching Image 3 */
   .dlg-modern-submit-btn {
     width: 100% !important;
     box-sizing: border-box !important;
-    padding: 0.6rem 1rem !important;
+    padding: 0.65rem 1rem !important;
     font-size: 0.88rem !important;
     font-weight: 600 !important;
-    border-radius: 10px !important;
-    background: linear-gradient(135deg, #0B2B6A 0%, #1D4ED8 100%) !important;
+    border-radius: 12px !important;
+    background: #0D2E6F !important;
     color: #FFFFFF !important;
     border: none !important;
-    box-shadow: 0 4px 14px -3px rgba(29, 78, 216, 0.35) !important;
+    box-shadow: 0 4px 14px rgba(11, 43, 106, 0.25) !important;
     margin-top: 0.45rem !important;
     cursor: pointer !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 7px !important;
+  }
+
+  .dlg-modern-submit-btn:hover {
+    background: #071C44 !important;
   }
 
   .dlg-modern-card-footer {
@@ -974,7 +968,7 @@ body {
   }
 
   .dlg-help-link {
-    color: #1D4ED8 !important;
+    color: #0D2E6F !important;
     font-weight: 600 !important;
     text-decoration: underline !important;
     text-underline-offset: 2px !important;
@@ -984,7 +978,7 @@ body {
   }
 
   .dlg-security-footnote {
-    margin-top: 0.35rem !important;
+    margin-top: 0.3rem !important;
     font-size: 0.62rem !important;
     color: #94A3B8 !important;
     display: flex !important;
@@ -997,7 +991,7 @@ body {
   /* Compact Corporate Footer for Zero-Scroll Fit */
   .dlg-corporate-footer {
     flex-shrink: 0 !important;
-    padding: 0.4rem 1rem 0.5rem !important;
+    padding: 0.45rem 1rem 0.55rem !important;
     margin-top: auto !important;
     width: 100% !important;
     box-sizing: border-box !important;
