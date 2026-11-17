@@ -957,24 +957,10 @@ export async function fetchActiveClasses() {
   }
 }
 
-const LOCAL_ATTENDANCE_KEY = "dlg_member_attendance_cache";
-
-function getLocalAttendances() {
-  try {
-    const raw = localStorage.getItem(LOCAL_ATTENDANCE_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch (_) {
-    return [];
-  }
-}
-
-function saveLocalAttendance(docItem) {
-  try {
-    const list = getLocalAttendances();
-    list.unshift(docItem);
-    localStorage.setItem(LOCAL_ATTENDANCE_KEY, JSON.stringify(list));
-  } catch (_) {}
-}
+// Auto-purge any legacy local attendance cache so Firestore is always the single source of truth
+try {
+  localStorage.removeItem("dlg_member_attendance_cache");
+} catch (_) {}
 
 /**
  * Retrieves attendance history for a given member to calculate how many times
@@ -1009,10 +995,6 @@ export async function getMemberAttendanceStats(memberId, classId = "") {
   } catch (err) {
     console.warn("[member-attendance.repository] getMemberAttendanceStats Firestore read warning:", err);
   }
-
-  // Include local records
-  const localList = getLocalAttendances();
-  localList.forEach((item) => countRecord(item));
 
   return {
     totalAttendance: total,
@@ -1051,54 +1033,28 @@ export async function checkExistingAttendanceToday(memberId, classId, todayDateS
     console.warn("[member-attendance.repository] checkExistingAttendanceToday Firestore warning:", err);
   }
 
-  // Check local cache
-  const localList = getLocalAttendances();
-  const localExisting = localList.find(
-    (d) =>
-      d.member_id === memberId &&
-      d.class_id === classId &&
-      d.attendance_date === todayDateStr
-  );
-
-  return localExisting || null;
+  return null;
 }
 
 /**
  * Saves a new member attendance document into `member_attendance`.
- * Falls back to local storage if Firestore write is blocked by pending Security Rules.
  * @param {Object} payload
  * @returns {Promise<string>} created document ID
  */
 export async function saveAttendance(payload) {
   const clientTime = new Date().toISOString();
-  const localDoc = {
-    id: "local_att_" + Date.now(),
-    ...payload,
-    client_timestamp: clientTime,
-  };
 
-  try {
-    const docRef = await addDoc(collection(db, COLLECTION_ATTENDANCE), {
-      ...payload,
-      created_at: serverTimestamp(),
-      client_timestamp: clientTime,
-    });
-    // Also mirror to local cache for instant recap availability
-    saveLocalAttendance({ id: docRef.id, ...payload, client_timestamp: clientTime });
-    return docRef.id;
-  } catch (err) {
-    console.warn(
-      "[member-attendance.repository] Firestore write blocked (likely Firestore rules pending deploy). Saving to local store gracefully:",
-      err
-    );
-    saveLocalAttendance(localDoc);
-    return localDoc.id;
-  }
+  const docRef = await addDoc(collection(db, COLLECTION_ATTENDANCE), {
+    ...payload,
+    created_at: serverTimestamp(),
+    client_timestamp: clientTime,
+  });
+  return docRef.id;
 }
 
 /**
  * Fetches attendance records for a given date (for recap view)
- * Combines Firestore collection and local store.
+ * Reads directly from Firestore `member_attendance`.
  * @param {string} dateStr YYYY-MM-DD
  * @returns {Promise<Array<Object>>}
  */
@@ -1119,15 +1075,6 @@ export async function fetchDailyAttendances(dateStr) {
   } catch (err) {
     console.warn("[member-attendance.repository] fetchDailyAttendances Firestore warning:", err);
   }
-
-  // Merge local records
-  const localList = getLocalAttendances();
-  localList.forEach((d) => {
-    if (!seenIds.has(d.id) && (!dateStr || d.attendance_date === dateStr)) {
-      list.push(d);
-      seenIds.add(d.id);
-    }
-  });
 
   // Sort descending by client_timestamp
   list.sort((a, b) => {

@@ -5,8 +5,8 @@
 // Follows Pilot architecture guidelines: No direct Firestore, no raw DOM HTML.
 // =====================================================================
 
-import * as repo from "./member-attendance.repository.js?v=104.0";
-import * as ui from "./member-attendance.ui.js?v=104.0";
+import * as repo from "./member-attendance.repository.js?v=105.0";
+import * as ui from "./member-attendance.ui.js?v=105.0";
 
 /* ── State ── */
 let currentMember = null;
@@ -76,9 +76,13 @@ function normalizeUrlPath() {
       changed = true;
     }
 
-    if (changed) {
-      const cleanSearch = url.searchParams.toString() ? `?${url.searchParams.toString()}` : "";
-      window.history.replaceState(null, "", url.pathname + cleanSearch + (url.hash || ""));
+    // Strip trailing '?' or empty query string (e.g. /member/? -> /member)
+    const hasEmptyQuery = window.location.search === "?" || (url.search && !url.searchParams.toString());
+    const cleanSearch = url.searchParams.toString() ? `?${url.searchParams.toString()}` : "";
+
+    if (changed || hasEmptyQuery || window.location.href.includes("?")) {
+      const cleanPath = url.pathname.endsWith("/member/") ? "/member" : url.pathname;
+      window.history.replaceState(null, "", cleanPath + cleanSearch + (url.hash || ""));
     }
   } catch (_e) {
     if (window.location.pathname.includes("/pages/product/member-attendance")) {
