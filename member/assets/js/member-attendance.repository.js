@@ -1415,6 +1415,10 @@ export async function fetchProductCurriculum(productName = "", productId = "", m
             }
           }
         }
+      } else if (isLevel2) {
+        if (dId.includes("level 2") || dName.includes("level 02") || dName.includes("level 2")) {
+          score = 85;
+        }
       }
 
       if (score > 0 && hasSessions) {
