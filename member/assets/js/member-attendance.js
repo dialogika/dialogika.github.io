@@ -1063,7 +1063,7 @@ function bindDashboardEvents(member, memberClasses = [], history = []) {
         (activeClasses.length > 0 ? activeClasses[0] : null);
     }
 
-    const prodName = defaultClass?.productName || member.produk_dibeli || defaultClass?.name || "";
+    const prodName = defaultClass?.name || defaultClass?.productName || member.produk_dibeli || "";
     const prodId = defaultClass?.productId || "";
     const memberLvl = member.level || member.raw?.member_level || "";
     let sessions = await repo.fetchProductCurriculum(prodName, prodId, memberLvl);

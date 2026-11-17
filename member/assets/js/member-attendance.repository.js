@@ -593,6 +593,9 @@ export async function fetchMemberClasses(member, activeClasses = [], history = [
       .trim();
 
     if (matchedClass) {
+      const clsTotal = Number(
+        matchedClass.meetingTotal || matchedClass.sessionsTotal || matchedClass.meeting_total || 0
+      );
       classMap.set(matchedClass.id, {
         id: matchedClass.id,
         name: matchedClass.name,
@@ -602,9 +605,13 @@ export async function fetchMemberClasses(member, activeClasses = [], history = [
         status: member.status === "alumni" ? "Selesai" : "Berjalan",
         dates: matchedClass.dates || [],
         type: pPriv ? "Private" : pKids ? "Kids Class" : (matchedClass.type || "Offline"),
+        meetingTotal: clsTotal > 0 ? clsTotal : (pLower.includes("basic") || pLower.includes("level 2") || pLower.includes("level 02") ? 7 : 10),
+        sessionsTotal: clsTotal > 0 ? clsTotal : (pLower.includes("basic") || pLower.includes("level 2") || pLower.includes("level 02") ? 7 : 10),
+        productName: matchedClass.productName || matchedClass.name,
       });
     } else {
       const fallbackKey = `cls_prod_${pLower.replace(/[^a-z0-9]/g, "_")}`;
+      const defaultTotal = pLower.includes("basic") || pLower.includes("level 2") || pLower.includes("level 02") ? 7 : 10;
       classMap.set(fallbackKey, {
         id: fallbackKey,
         name: `${cleanDisplayProd} Dialogika`,
@@ -614,6 +621,9 @@ export async function fetchMemberClasses(member, activeClasses = [], history = [
         status: member.status === "alumni" ? "Selesai" : "Berjalan",
         dates: [],
         type: pPriv ? "Private (Online/Offline)" : pKids ? "Kids Class" : "Offline",
+        meetingTotal: defaultTotal,
+        sessionsTotal: defaultTotal,
+        productName: cleanDisplayProd,
       });
     }
   });
@@ -679,6 +689,9 @@ export async function fetchMemberClasses(member, activeClasses = [], history = [
       type: classType,
       startDate: startDateStr,
       endDate: endDateStr,
+      meetingTotal: totalSesi,
+      sessionsTotal: totalSesi,
+      productName: c.productName || c.name,
     });
   });
 
@@ -1290,14 +1303,14 @@ export async function fetchProductCurriculum(productName = "", productId = "", m
     normId.includes("fk") ||
     normId.includes("kp");
 
-  const isFirstClass =
-    !isKids &&
-    (normName.includes("first class") || normId.includes("fc") || normName.includes("fc_"));
-
   const isBasicPlus =
     !isKids &&
-    !isFirstClass &&
     (normName.includes("basic") || normId.includes("bp") || normName.includes("bp_"));
+
+  const isFirstClass =
+    !isKids &&
+    !isBasicPlus &&
+    (normName.includes("first class") || normId.includes("fc") || normName.includes("fc_"));
 
   // Check if specific Level is indicated
   const isLevel2 =
@@ -1327,10 +1340,13 @@ export async function fetchProductCurriculum(productName = "", productId = "", m
     rawLvl.includes("level 4") ||
     rawLvl === "4";
 
+  // Generic Level 2/3 (e.g. "Private Class Level 2" or "private level 02") without basic/kids keyword maps to First Class track
+  const effectiveIsFirstClass = isFirstClass || (!isKids && !isBasicPlus && (isLevel2 || isLevel3));
+
   try {
     const snap = await getDocs(collection(db, COLLECTION_PRODUCTS));
     let matchedDoc = null;
-    let highestScore = -1;
+    let highestScore = 0;
 
     snap.forEach((docSnap) => {
       const d = docSnap.data() || {};
@@ -1370,8 +1386,8 @@ export async function fetchProductCurriculum(productName = "", productId = "", m
             }
           }
         }
-      } else if (isFirstClass) {
-        const isDocFC = (dName.includes("first class") || dId.startsWith("fc")) && !(dName.includes("kid") || dId.startsWith("fk"));
+      } else if (effectiveIsFirstClass) {
+        const isDocFC = (dName.includes("first class") || dId.startsWith("fc") || dId.includes("level 2") || dId.includes("level 3")) && !(dName.includes("kid") || dId.startsWith("fk") || dName.includes("basic") || dId.startsWith("bp"));
         if (isDocFC) {
           if (isLevel2) {
             if (dId.includes("level 2") || dName.includes("level 02") || dName.includes("level 2")) {
