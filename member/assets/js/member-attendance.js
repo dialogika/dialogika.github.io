@@ -5,8 +5,8 @@
 // Follows Pilot architecture guidelines: No direct Firestore, no raw DOM HTML.
 // =====================================================================
 
-import * as repo from "/assets/js/member-attendance.repository.js?v=103.0";
-import * as ui from "/assets/js/member-attendance.ui.js?v=103.0";
+import * as repo from "./member-attendance.repository.js?v=104.0";
+import * as ui from "./member-attendance.ui.js?v=104.0";
 
 /* ── State ── */
 let currentMember = null;
@@ -151,8 +151,8 @@ function ensureToolbarControls() {
   const brandWrap = document.querySelector(".brand-badge-wrap");
   if (brandWrap && (!brandWrap.querySelector("img") || brandWrap.querySelector("img[src*='white-logo']"))) {
     brandWrap.innerHTML = `
-      <a href="/member" class="flex items-center gap-3 no-underline">
-        <img src="/assets/img/logo.webp" alt="Dialogika" class="h-8 md:h-9 w-auto object-contain" />
+      <a href="./" class="flex items-center gap-3 no-underline">
+        <img src="./assets/img/logo.webp" alt="Dialogika" class="h-8 md:h-9 w-auto object-contain" />
         <div class="border-l border-slate-200 pl-3 hidden sm:block">
           <p class="text-xs font-bold text-slate-800 leading-tight">Portal Presensi</p>
           <p class="text-[11px] text-slate-400 font-medium leading-tight">Siswa &amp; Member</p>

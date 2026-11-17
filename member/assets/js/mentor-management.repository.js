@@ -5,7 +5,7 @@
 // Strictly NO DOM manipulation or UI rendering here.
 // =====================================================================
 
-import { db } from "/assets/js/firebase-config.js";
+import { db } from "./firebase-config.js";
 import {
   collection,
   getDocs,

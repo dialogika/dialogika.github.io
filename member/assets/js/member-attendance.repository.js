@@ -4,7 +4,7 @@
 // Handles Firestore collections: `data_member`, `class_planning`, `member_attendance`.
 // =====================================================================
 
-import { db } from "/assets/js/firebase-config.js";
+import { db } from "./firebase-config.js";
 import {
   collection,
   getDocs,
@@ -15,7 +15,7 @@ import {
   limit,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getMentors } from "/assets/js/mentor-management.repository.js";
+import { getMentors } from "./mentor-management.repository.js";
 
 const COLLECTION_MEMBERS = "data_member";
 const COLLECTION_CLASSES = "class_planning";
