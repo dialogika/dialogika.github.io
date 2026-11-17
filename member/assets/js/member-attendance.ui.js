@@ -283,14 +283,16 @@ export function renderMemberCard(
 }
 
 export const STANDARD_SESSIONS = [
-  { no: 1, title: "Pertemuan 1 - Basic Foundation & Mindset Bicara" },
-  { no: 2, title: "Pertemuan 2 - Systematic Structuring & Pola Pikir" },
-  { no: 3, title: "Pertemuan 3 - Vocal Dynamics, Artikulasi & Intonasi" },
-  { no: 4, title: "Pertemuan 4 - Non-Verbal & Body Language Mastery" },
-  { no: 5, title: "Pertemuan 5 - Storytelling & Hook Techniques" },
-  { no: 6, title: "Pertemuan 6 - Impromptu Speaking & QnA Spontan" },
-  { no: 7, title: "Pertemuan 7 - Persuasive Speaking & Pitching" },
-  { no: 8, title: "Pertemuan 8 - Final Performance & Graduation Speech" },
+  { no: 1, title: "Pertemuan 1 - Bonding with Mentor" },
+  { no: 2, title: "Pertemuan 2 - Self Confidence" },
+  { no: 3, title: "Pertemuan 3 - Profiling" },
+  { no: 4, title: "Pertemuan 4 - Smiling Voice" },
+  { no: 5, title: "Pertemuan 5 - Outlining" },
+  { no: 6, title: "Pertemuan 6 - Body Language" },
+  { no: 7, title: "Pertemuan 7 - Persuasive" },
+  { no: 8, title: "Pertemuan 8 - Handling QnA" },
+  { no: 9, title: "Pertemuan 9 - Storytelling" },
+  { no: 10, title: "Pertemuan 10 - Final Practice" },
 ];
 
 /**

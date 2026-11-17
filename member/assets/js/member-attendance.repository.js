@@ -901,7 +901,7 @@ export async function fetchActiveClasses() {
       }
 
       const meetingTotal = Number(
-        d.meeting?.total || d.meeting_total || d.total_sessions || d.sessions || 8
+        d.meeting?.total || d.meeting_total || d.total_sessions || d.sessions || 10
       );
       const classType = d.type || d.class_type || "Offline";
 
@@ -1257,14 +1257,16 @@ const FALLBACK_CURRICULUMS = {
     },
   ],
   "first class": [
-    { no: 1, title: "Pertemuan 1 - Basic Foundation & Mindset Bicara" },
-    { no: 2, title: "Pertemuan 2 - Systematic Structuring & Pola Pikir" },
-    { no: 3, title: "Pertemuan 3 - Vocal Dynamics, Artikulasi & Intonasi" },
-    { no: 4, title: "Pertemuan 4 - Non-Verbal & Body Language Mastery" },
-    { no: 5, title: "Pertemuan 5 - Storytelling & Hook Techniques" },
-    { no: 6, title: "Pertemuan 6 - Impromptu Speaking & QnA Spontan" },
-    { no: 7, title: "Pertemuan 7 - Persuasive Speaking & Pitching" },
-    { no: 8, title: "Pertemuan 8 - Final Performance & Graduation Speech" },
+    { no: 1, title: "Pertemuan 1 - Bonding with Mentor", description: "Proses perkenalan dan asesmen awal mentor" },
+    { no: 2, title: "Pertemuan 2 - Self Confidence", description: "Membangun mindset percaya diri dan latihan impromptu" },
+    { no: 3, title: "Pertemuan 3 - Profiling", description: "Analisis kelebihan diri dan perkenalan di depan umum" },
+    { no: 4, title: "Pertemuan 4 - Smiling Voice", description: "Pengaturan vokal menyenangkan, artikulasi, dan intonasi" },
+    { no: 5, title: "Pertemuan 5 - Outlining", description: "Menyusun pembicaraan runut dan bercerita menarik" },
+    { no: 6, title: "Pertemuan 6 - Body Language", description: "Postur tubuh, kontak mata, dan bahasa tubuh terbuka" },
+    { no: 7, title: "Pertemuan 7 - Persuasive", description: "Teknik meyakinkan audiens dengan data dan struktur" },
+    { no: 8, title: "Pertemuan 8 - Handling QnA", description: "Strategi diplomatis menjawab berbagai pertanyaan audiens" },
+    { no: 9, title: "Pertemuan 9 - Storytelling", description: "Menyusun cerita emosional dan memikat pendengar" },
+    { no: 10, title: "Pertemuan 10 - Final Practice", description: "Showcase penampilan utuh dan evaluasi akhir" },
   ],
 };
 
@@ -1279,7 +1281,7 @@ const FALLBACK_CURRICULUMS = {
 export async function fetchProductCurriculum(productName = "", productId = "", memberLevel = "") {
   const normName = String(productName || "").trim().toLowerCase();
   const normId = String(productId || "").trim().toLowerCase();
-  const rawLvl = String(memberLevel || "").toLowerCase();
+  const rawLvl = String(memberLevel || "").trim().toLowerCase();
 
   // Categorize member program clearly
   const isKids =
@@ -1297,14 +1299,33 @@ export async function fetchProductCurriculum(productName = "", productId = "", m
     !isFirstClass &&
     (normName.includes("basic") || normId.includes("bp") || normName.includes("bp_"));
 
-  // Check if Level 2 is explicitly indicated
+  // Check if specific Level is indicated
   const isLevel2 =
     normName.includes("level 2") ||
     normName.includes("lvl 2") ||
     normName.includes("level 02") ||
+    normName.includes("lvl 02") ||
     normId.includes("level 2") ||
     rawLvl.includes("level 2") ||
     rawLvl === "2";
+
+  const isLevel3 =
+    normName.includes("level 3") ||
+    normName.includes("lvl 3") ||
+    normName.includes("level 03") ||
+    normName.includes("lvl 03") ||
+    normId.includes("level 3") ||
+    rawLvl.includes("level 3") ||
+    rawLvl === "3";
+
+  const isLevel4 =
+    normName.includes("level 4") ||
+    normName.includes("lvl 4") ||
+    normName.includes("level 04") ||
+    normName.includes("lvl 04") ||
+    normId.includes("level 4") ||
+    rawLvl.includes("level 4") ||
+    rawLvl === "4";
 
   try {
     const snap = await getDocs(collection(db, COLLECTION_PRODUCTS));
@@ -1313,9 +1334,10 @@ export async function fetchProductCurriculum(productName = "", productId = "", m
 
     snap.forEach((docSnap) => {
       const d = docSnap.data() || {};
-      const dId = String(docSnap.id || "").toLowerCase();
-      const dProdId = String(d.productId || d.product_id || "").toLowerCase();
-      const dName = String(d.name || d.productName || "").toLowerCase();
+      const dId = String(docSnap.id || "").trim().toLowerCase();
+      const dProdId = String(d.productId || d.product_id || "").trim().toLowerCase();
+      const rawName = String(d.name || d.productName || "").toLowerCase();
+      const dName = rawName.replace(/\s+/g, " ").trim();
       const hasMaterials = Array.isArray(d.materials) && d.materials.length > 0;
       const hasCurriculum = Array.isArray(d.curriculum) && d.curriculum.length > 0;
       const hasSessions = hasMaterials || hasCurriculum;
@@ -1328,35 +1350,69 @@ export async function fetchProductCurriculum(productName = "", productId = "", m
       } else if (normName && (dId === normName || dName === normName)) {
         score = 90;
       } else if (isKids) {
-        // First Kids matching: strictly match FK_LVL1 or kids docs, NEVER match bp_lvl1
-        if (dId === "fk_lvl1" || dProdId === "fk_lvl1" || dName.includes("first kids")) {
-          score = 95;
-        } else if (dId.includes("kid") || dId.startsWith("fk_") || dId.startsWith("kp_")) {
-          score = 80;
+        const isDocKids = dName.includes("kid") || dId.startsWith("fk") || dId.startsWith("kp");
+        if (isDocKids) {
+          if (isLevel2) {
+            if (dId === "fk_lvl2" || dName.includes("level 02") || dName.includes("level 2")) {
+              score = 95;
+            }
+          } else if (isLevel3) {
+            if (dId === "fk_lvl3" || dName.includes("level 03") || dName.includes("level 3")) {
+              score = 95;
+            }
+          } else {
+            if (dId === "fk_lvl1" || dProdId === "fk_lvl1" || dName.includes("level 01") || dName.includes("level 1")) {
+              score = 98;
+            } else if (!dName.includes("level 2") && !dName.includes("level 02") && !dName.includes("level 3") && !dName.includes("level 03")) {
+              score = 90;
+            } else if (dId.startsWith("fk_") || dId.startsWith("kp_")) {
+              score = 80;
+            }
+          }
         }
       } else if (isFirstClass) {
-        // First Class matching
-        if (dId === "fc_lvl1" || dProdId === "fc_lvl1" || dName.includes("first class")) {
-          score = 95;
-        } else if (dId.startsWith("fc_")) {
-          score = 80;
+        const isDocFC = (dName.includes("first class") || dId.startsWith("fc")) && !(dName.includes("kid") || dId.startsWith("fk"));
+        if (isDocFC) {
+          if (isLevel2) {
+            if (dId.includes("level 2") || dName.includes("level 02") || dName.includes("level 2")) {
+              score = 95;
+            }
+          } else if (isLevel3) {
+            if (dId.includes("level 3") || dId.includes("level - 03") || dName.includes("level 03") || dName.includes("level 3")) {
+              score = 95;
+            }
+          } else {
+            // First Class Level 01 / Standard
+            if (dId === "fc_lvl1" || dProdId === "fc_lvl1" || dName.includes("level 01") || dName.includes("level 1")) {
+              score = 98;
+            } else if (!dName.includes("level 2") && !dName.includes("level 02") && !dName.includes("level 3") && !dName.includes("level 03")) {
+              score = 90;
+            } else if (dId.startsWith("fc_")) {
+              score = 80;
+            }
+          }
         }
       } else if (isBasicPlus) {
-        // Basic Plus matching
-        if (isLevel2) {
-          if (dId.includes("level 2") || dId.includes("level 02") || dName.includes("level 2")) {
-            score = 95;
-          }
-        } else {
-          if (dId === "bp_lvl1" || dProdId === "bp_lvl1" || dName.includes("basic plus - level 01")) {
-            score = 95;
-          } else if (
-            dId.includes("basic") &&
-            !dId.includes("level 2") &&
-            !dId.includes("level 3") &&
-            !dId.includes("level 4")
-          ) {
-            score = 60;
+        const isDocBP = (dName.includes("basic") || dId.startsWith("bp") || dId.startsWith("bc")) && !(dName.includes("kid") || dId.startsWith("fk"));
+        if (isDocBP) {
+          if (isLevel2) {
+            if (dId.includes("level 2") || dName.includes("level 02") || dName.includes("level 2")) {
+              score = 95;
+            }
+          } else if (isLevel3) {
+            if (dId.includes("lvl_3") || dName.includes("level 03") || dName.includes("level 3")) {
+              score = 95;
+            }
+          } else if (isLevel4) {
+            if (dName.includes("level 04") || dName.includes("level 4") || dId.includes("level 4")) {
+              score = 95;
+            }
+          } else {
+            if (dId === "bp_lvl1" || dProdId === "bp_lvl1" || dName.includes("level 01") || dName.includes("level 1")) {
+              score = 98;
+            } else if (!dName.includes("level 2") && !dName.includes("level 02") && !dName.includes("level 3") && !dName.includes("level 03") && !dName.includes("level 4") && !dName.includes("level 04")) {
+              score = 90;
+            }
           }
         }
       }
